@@ -1,25 +1,18 @@
 package me.parsa.aas.Commands;
 
-import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Commands.Manager.SubCommand;
-import me.parsa.aas.Configs.ArmorStands;
-import me.parsa.aas.Events.ArmorStandDeleteEvent;
 import me.parsa.aas.Player.IPlayer;
 import me.parsa.aas.Player.PlayerManager;
+import me.parsa.aas.Utils.ArmorStandUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.*;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
-import java.util.UUID;
 
 public class ListCommand extends SubCommand {
     @Override
@@ -39,7 +32,7 @@ public class ListCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        ArrayList<String> armorStandList = getArmorStandList();
+        ArrayList<String> armorStandList = ArmorStandUtils.getArmorStandList();
 
         IPlayer player1 = PlayerManager.getCustomPlayerByBukkit(player);
         player1.playSound("NOTE_BASS");
@@ -83,73 +76,7 @@ public class ListCommand extends SubCommand {
         return false;
     }
 
-    public static void teleportToArmorStand(Player player, String name) {
-        FileConfiguration config = ArmorStands.get();
-        String path = "armorstands." + name;
 
-        if (!config.contains(path)) {
-            player.sendMessage(ChatColor.RED + "ArmorStand not found!");
-            return;
-        }
-
-        World world = Bukkit.getWorld(config.getString(path + ".World"));
-        double x = config.getDouble(path + ".X");
-        double y = config.getDouble(path + ".Y");
-        double z = config.getDouble(path + ".Z");
-
-        if (world == null) {
-            player.sendMessage(ChatColor.RED + "World not found!");
-            return;
-        }
-
-        player.teleport(new Location(world, x, y, z));
-        player.sendMessage(ChatColor.GREEN + "Teleported to ArmorStand: " + name);
-    }
-
-    public static ArrayList<String> getArmorStandList() {
-        FileConfiguration config = ArmorStands.get();
-        Set<String> keys = config.getConfigurationSection("armorstands").getKeys(false);
-        return new ArrayList<>(keys);
-    }
-
-    public static void deleteArmorStand(String name, Player player) {
-        FileConfiguration config = ArmorStands.get();
-        String path = "armorstands." + name;
-
-        if (!config.contains(path)) {
-            player.sendMessage(ChatColor.RED + "ArmorStand not found!");
-            return;
-        }
-
-        UUID uuid = UUID.fromString(config.getString(path + ".UUID"));
-        World world = Bukkit.getWorld(config.getString(path + ".World"));
-
-        if (world == null) {
-            player.sendMessage(ChatColor.RED + "World not found!");
-            return;
-        }
-
-
-
-        // Find and remove the ArmorStand
-        for (Entity entity : world.getEntities()) {
-            if (entity instanceof ArmorStand && entity.getUniqueId().equals(uuid)) {
-                ArmorStandDeleteEvent armorStandDeleteEvent = new ArmorStandDeleteEvent(player,(ArmorStand) entity);
-                Bukkit.getPluginManager().callEvent(armorStandDeleteEvent);
-                if (armorStandDeleteEvent.isCancelled()) {
-                    return;
-                }
-                entity.remove();
-                break;
-            }
-        }
-
-        // Remove from config
-        config.set(path, null);
-        ArmorStands.save();
-
-        player.sendMessage(ChatColor.GREEN + "Deleted ArmorStand: " + name);
-    }
 
 
 }

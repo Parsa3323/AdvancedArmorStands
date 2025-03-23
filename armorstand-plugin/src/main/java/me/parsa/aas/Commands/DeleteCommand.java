@@ -1,6 +1,7 @@
 package me.parsa.aas.Commands;
 
 import me.parsa.aas.Commands.Manager.SubCommand;
+import me.parsa.aas.Utils.ArmorStandUtils;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Deletes a armor stand";
+        return "Delete an armor stand";
     }
 
 
@@ -29,7 +30,7 @@ public class DeleteCommand extends SubCommand {
             return;
         }
 
-        ListCommand.deleteArmorStand(args[1], player);
+        ArmorStandUtils.deleteArmorStand(args[1], player);
 
     }
 

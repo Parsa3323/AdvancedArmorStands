@@ -1,6 +1,6 @@
 package me.parsa.aas.Player;
 
-import me.parsa.aas.AdvancedArmorStands;
+import me.parsa.aas.Utils.VersionSupportUtil;
 import org.bukkit.entity.Player;
 
 public class CustomPlayer implements IPlayer{
@@ -18,6 +18,11 @@ public class CustomPlayer implements IPlayer{
 
     @Override
     public void playSound(String s) {
-        AdvancedArmorStands.plugin.playVersionSpecificSound(bukkitPlayer, bukkitPlayer.getLocation(), s, 1, 1);
+        VersionSupportUtil.playVersionSpecificSound(bukkitPlayer, bukkitPlayer.getLocation(), s, 1, 1);
+    }
+
+    @Override
+    public boolean isAdmin() {
+        return this.bukkitPlayer.hasPermission("advanced-armorstands.admin");
     }
 }

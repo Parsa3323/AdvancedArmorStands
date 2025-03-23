@@ -5,15 +5,18 @@ import me.parsa.aas.Commands.Manager.CommandManager;
 import me.parsa.aas.Commands.Manager.TabComp;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
+import me.parsa.aas.Listener.PlayerIntractListener;
+import me.parsa.aas.Menus.Manager.MenuListener;
+import me.parsa.aas.Utils.PlayerMenuUtility;
 import me.parsa.aas.Utils.VersionSupportUtil;
 import me.parsa.aas.VersionSupport.IVersionSupport;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +25,9 @@ public final class AdvancedArmorStands extends JavaPlugin {
     private static Logger logger;
     public static Level logLevel;
 
-    private IVersionSupport versionSupport;
+    private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
+
+    public IVersionSupport versionSupport;
 
     public static ArmorstandApi api;
 
@@ -61,6 +66,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
         info("Registering events");
         PluginManager ev = getServer().getPluginManager();
         ev.registerEvents(new CreateCommand(), this);
+        ev.registerEvents(new PlayerIntractListener(), this);
+        ev.registerEvents(new MenuListener(), this);
 
         info("Loading configs");
         TypesConfig.setup();
@@ -135,8 +142,19 @@ public final class AdvancedArmorStands extends JavaPlugin {
             logger.severe("[ERROR] " + message);
         }
     }
-    public void playVersionSpecificSound(Player player, Location location, String soundName, float volume, float pitch) {
-        versionSupport.playSound(player, location, soundName, volume, pitch);
-        debug(soundName);
+
+    public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
+        PlayerMenuUtility playerMenuUtility;
+        if (playerMenuUtilityMap.containsKey(p)) {
+            return playerMenuUtilityMap.get(p);
+        } else {
+            playerMenuUtility = new PlayerMenuUtility(p);
+
+            playerMenuUtilityMap.put(p, playerMenuUtility);
+            return playerMenuUtility;
+        }
     }
+
+
+
 }

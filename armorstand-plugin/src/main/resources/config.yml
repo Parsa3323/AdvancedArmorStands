@@ -1,7 +1,2 @@
 debug: false
 
-main:
-  s: "s"
-
-lil:
-  s: "ds"

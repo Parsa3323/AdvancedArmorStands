@@ -1,9 +1,13 @@
 package me.parsa.aas.Utils;
 
+import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.VersionSupport.IVersionSupport;
 import me.parsa.aas.VersionSupport_1_16_5;
 import me.parsa.aas.VersionSupprt_1_8;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 public class VersionSupportUtil {
 
@@ -54,6 +58,15 @@ public class VersionSupportUtil {
         }
 
         return versionSupport;
+    }
+
+    public static Material getMaterialForCurrentVersion(String s) {
+        return AdvancedArmorStands.plugin.versionSupport.getMaterialForVersion(s);
+    }
+
+    public static void playVersionSpecificSound(Player player, Location location, String soundName, float volume, float pitch) {
+        AdvancedArmorStands.plugin.versionSupport.playSound(player, location, soundName, volume, pitch);
+        AdvancedArmorStands.debug(soundName);
     }
 
 }

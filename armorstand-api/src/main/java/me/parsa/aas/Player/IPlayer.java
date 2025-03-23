@@ -7,4 +7,6 @@ public interface IPlayer {
     Player getBukkitPlayer();
 
     void playSound(String s);
+
+    boolean isAdmin();
 }
