@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.parsa</groupId>
-    <artifactId>armorstand-plugin</artifactId>
+    <artifactId>VersionSupport_1_16_5</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>armorstand-plugin</name>
+    <name>VersionSupport_1_12</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -51,34 +51,20 @@
 
     <repositories>
         <repository>
-            <id>placeholderapi</id>
-            <url>https://repo.extendedclip.com/releases/</url>
-        </repository>
-        <repository>
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.extendedclip.com/releases/</url>
         </repository>
         <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>codemc-repo</id>
-            <url>https://repo.codemc.io/repository/maven-public/</url>
-        </repository>
     </repositories>
 
     <dependencies>
-        <dependency>
-            <groupId>me.parsa</groupId>
-            <artifactId>VersionSupport_1_16_5</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>me.parsa</groupId>
-            <artifactId>VersionSupport_1_8</artifactId>
-            <version>1.0.0</version>
-        </dependency>
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
@@ -93,20 +79,8 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.8.8-R0.1-SNAPSHOT</version>
+            <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>me.filoghost.holographicdisplays</groupId>
-            <artifactId>holographicdisplays-api</artifactId>
-            <version>3.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>24.1.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

@@ -5,7 +5,11 @@ import me.parsa.aas.Commands.Manager.CommandManager;
 import me.parsa.aas.Commands.Manager.TabComp;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
+import me.parsa.aas.Utils.VersionSupportUtil;
+import me.parsa.aas.VersionSupport.IVersionSupport;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,6 +21,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     private static Logger logger;
     public static Level logLevel;
+
+    private IVersionSupport versionSupport;
 
     public static ArmorstandApi api;
 
@@ -32,6 +38,14 @@ public final class AdvancedArmorStands extends JavaPlugin {
         getServer().getServicesManager().register(ArmorstandApi.class, api, this, ServicePriority.Normal);
 
         getLogger().info("Loading " + getDescription().getName() + " v" + getDescription().getVersion());
+
+        versionSupport = VersionSupportUtil.getVersionSupport();
+
+        if (versionSupport == null) {
+            getLogger().severe("Could not find a version support for " + VersionSupportUtil.getVersion());
+            setEnabled(false);
+            return;
+        }
 
         if (!getDataFolder().exists()) {
             getDataFolder().mkdirs();
@@ -120,5 +134,9 @@ public final class AdvancedArmorStands extends JavaPlugin {
         if (logLevel.intValue() <= Level.SEVERE.intValue()) {
             logger.severe("[ERROR] " + message);
         }
+    }
+    public void playVersionSpecificSound(Player player, Location location, String soundName, float volume, float pitch) {
+        versionSupport.playSound(player, location, soundName, volume, pitch);
+        debug(soundName);
     }
 }

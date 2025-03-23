@@ -17,4 +17,14 @@ public interface ArmorstandApi  {
 
     }
 
+    LogsManager getLogManager();
+
+    interface LogsManager {
+
+        void debug(String args);
+
+        void info(String args);
+
+    }
+
 }

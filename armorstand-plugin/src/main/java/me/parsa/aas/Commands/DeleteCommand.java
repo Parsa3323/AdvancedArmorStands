@@ -16,6 +16,7 @@ public class DeleteCommand extends SubCommand {
         return "Deletes a armor stand";
     }
 
+
     @Override
     public String getSyntax() {
         return "/as delete <name>";

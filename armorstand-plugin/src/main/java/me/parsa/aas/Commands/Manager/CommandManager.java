@@ -1,9 +1,8 @@
 package me.parsa.aas.Commands.Manager;
 
-import me.parsa.aas.Commands.CreateCommand;
-import me.parsa.aas.Commands.DeleteCommand;
-import me.parsa.aas.Commands.ListCommand;
-import me.parsa.aas.Commands.TeleportCommand;
+import me.parsa.aas.AdvancedArmorStands;
+import me.parsa.aas.Commands.*;
+import me.parsa.aas.Player.PlayerManager;
 import me.parsa.aas.Utils.ColorUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -26,6 +25,7 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new CreateCommand());
         subCommands.add(new ListCommand());
         subCommands.add(new TeleportCommand());
+        subCommands.add(new MoveCommand());
         subCommands.add(new DeleteCommand());
     }
 
@@ -51,9 +51,6 @@ public class CommandManager implements CommandExecutor {
                         }
                     }
                 } else if (args.length == 0) {
-
-                   // player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
-
 
                     player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
                     player.sendMessage("   " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands");
@@ -83,7 +80,8 @@ public class CommandManager implements CommandExecutor {
 
 
                     player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
-                    player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1, 1.5f);
+                 //   player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1, 1.5f);
+                    PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
 
                 }
             } else {

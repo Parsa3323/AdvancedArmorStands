@@ -72,6 +72,7 @@ public class CreateCommand extends SubCommand implements Listener {
             armorStand.setItemInHand(new ItemStack(Material.valueOf(TypesConfig.get().getString(args[1] + ".itemInHandMaterial"))));
 
             armorStand.setHeadPose(new EulerAngle(
+
                     Math.toRadians(getConfigDouble(args[1] + ".HeadPos.x")),
                     Math.toRadians(getConfigDouble(args[1] + ".HeadPos.y")),
                     Math.toRadians(getConfigDouble(args[1] + ".HeadPos.z")) // <-- Fixed missing dot

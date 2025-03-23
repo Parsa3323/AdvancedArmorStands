@@ -24,4 +24,19 @@ public class API implements ArmorstandApi{
             }
         };
     }
+
+    @Override
+    public LogsManager getLogManager() {
+        return new LogsManager() {
+            @Override
+            public void debug(String args) {
+                AdvancedArmorStands.debug(args);
+            }
+
+            @Override
+            public void info(String args) {
+                AdvancedArmorStands.info(args);
+            }
+        };
+    }
 }

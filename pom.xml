@@ -11,6 +11,8 @@
     <modules>
         <module>armorstand-plugin</module>
         <module>armorstand-api</module>
+        <module>VersionSupport_1_16_5</module>
+        <module>VersionSupport_1_8</module>
     </modules>
 
 

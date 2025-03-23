@@ -1,8 +1,11 @@
 package me.parsa.aas.Commands;
 
+import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Commands.Manager.SubCommand;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Events.ArmorStandDeleteEvent;
+import me.parsa.aas.Player.IPlayer;
+import me.parsa.aas.Player.PlayerManager;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -38,11 +41,12 @@ public class ListCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         ArrayList<String> armorStandList = getArmorStandList();
 
-        player.playSound(player.getLocation(), Sound.NOTE_BASS, 1.0f, 0.5f); // Play a sound when checking
+        IPlayer player1 = PlayerManager.getCustomPlayerByBukkit(player);
+        player1.playSound("NOTE_BASS");
 
         if (armorStandList.isEmpty()) {
             player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "✖ No ArmorStands found! ✖");
-            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1.0f, 1.0f); // Sad sound
+            player1.playSound("VILLAGER_NO");
         } else {
             player.sendMessage(ChatColor.DARK_GRAY + "§m----------------------------------");
             player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "  ✦ Saved ArmorStands ✦");
@@ -50,7 +54,7 @@ public class ListCommand extends SubCommand {
 
             for (String name : armorStandList) {
 
-                TextComponent textComponent = new TextComponent(ChatColor.YELLOW + "➤ " + ChatColor.GREEN + name);
+                TextComponent textComponent = new TextComponent(ChatColor.DARK_PURPLE + "➤ " + ChatColor.GREEN + name);
                 textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + name).create()));
                 TextComponent deleteButton = new TextComponent(ChatColor.RED + "" + ChatColor.BOLD + " [DELETE] ");
                 deleteButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.RED + "Delete armorstand").create()));
@@ -63,7 +67,7 @@ public class ListCommand extends SubCommand {
             }
 
             player.sendMessage(ChatColor.DARK_GRAY + "§m----------------------------------");
-            player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1.0f, 1.5f); // Success sound
+            player1.playSound("ORB_PICKUP");
         }
 
 
