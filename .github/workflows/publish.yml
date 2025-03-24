@@ -29,13 +29,13 @@ jobs:
       - name: Ensure .m2 directory exists
         run: mkdir -p $HOME/.m2
 
-      - name: Create Maven settings.xml
-        run: cp .github/workflows/maven-settings.xml $HOME/.m2/settings.xml
+      - name: Create Maven maven-settings.xml
+        run: cp .github/workflows/maven-maven-settings.xml $HOME/.m2/maven-settings.xml
 
       - name: Build API module
         run: mvn -pl armorstand-api clean install
 
       - name: Publish API module to GitHub Packages
-        run: mvn -pl armorstand-api deploy --settings $HOME/.m2/settings.xml
+        run: mvn -pl armorstand-api deploy --settings $HOME/.m2/maven-settings.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
