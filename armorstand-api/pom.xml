@@ -48,6 +48,12 @@
             </resource>
         </resources>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
+        </repository>
+    </distributionManagement>
 
     <repositories>
         <repository>
