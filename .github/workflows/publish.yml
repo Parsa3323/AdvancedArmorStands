@@ -1,0 +1,34 @@
+name: Publish API to GitHub Packages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build API module
+        run: mvn -pl api clean install
+
+      - name: Publish API module to GitHub Packages
+        run: mvn -pl api deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
