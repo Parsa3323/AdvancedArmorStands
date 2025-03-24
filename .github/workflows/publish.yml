@@ -17,25 +17,36 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '11'
-          server-id: github
+          server-id: armorstand-api # This value should match the id in your pom.xml
           settings-path: ${{ github.workspace }}
 
+      - name: Configure Maven settings
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<EOF
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+            https://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${env.GITHUB_ACTOR}</username>
+                <password>${env.GITHUB_TOKEN}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
 
-      - name: Ensure .m2 directory exists
-        run: mkdir -p $HOME/.m2
-
-      - name: Create Maven maven-settings.xml
-        run: cp .github/workflows/maven-settings.xml $HOME/.m2/maven-settings.xml
-#fd
       - name: Build API module
         run: mvn -pl armorstand-api clean install
 
       - name: Publish API module to GitHub Packages
-        run: mvn -pl armorstand-api deploy --settings $HOME/.m2/maven-settings.xml
+        run: mvn -pl armorstand-api deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
