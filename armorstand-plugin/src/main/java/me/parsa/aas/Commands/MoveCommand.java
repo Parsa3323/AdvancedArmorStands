@@ -11,6 +11,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -86,7 +87,9 @@ public class MoveCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return Collections.emptyList();
+        ArrayList<String> list = new ArrayList<>(ArmorStands.get().getConfigurationSection("armorstands").getKeys(false));
+
+        return list;
     }
 
     @Override
