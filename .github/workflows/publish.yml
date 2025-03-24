@@ -26,9 +26,9 @@ jobs:
           settings-path: ${{ github.workspace }}
 
       - name: Build API module
-        run: mvn -pl api clean install
+        run: mvn -pl armorstand-api clean install
 
       - name: Publish API module to GitHub Packages
-        run: mvn -pl api deploy
+        run: mvn -pl armorstand-api deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
