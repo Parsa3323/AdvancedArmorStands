@@ -62,10 +62,10 @@ public class CreateCommand extends SubCommand implements Listener {
             armorStand.setArms(TypesConfig.get().getBoolean(args[1] + ".Arms"));
             armorStand.setGravity(TypesConfig.get().getBoolean(args[1] + ".Gravity"));
             armorStand.setBasePlate(TypesConfig.get().getBoolean(args[1] + ".BasePlate"));
-            String path = args[1] + ".CustomName"; // Ensure args[1] is a valid key
-            String rawName = TypesConfig.get().getString(path, "&cDefault Name"); // Default in case key doesn't exist
-            String replacedName = PlaceholderAPI.setPlaceholders(player, rawName); // Apply PlaceholderAPI replacements
-            String coloredName = ChatColor.translateAlternateColorCodes('&', replacedName); // Convert color codes
+            String path = args[1] + ".CustomName";
+            String rawName = TypesConfig.get().getString(path, "&cDefault Name");
+            String replacedName = PlaceholderAPI.setPlaceholders(player, rawName);
+            String coloredName = ChatColor.translateAlternateColorCodes('&', replacedName);
             armorStand.setCustomName(coloredName);
 
             armorStand.setCustomNameVisible(TypesConfig.get().getBoolean(args[1] + ".isCustomNameVisible"));
@@ -202,15 +202,15 @@ public class CreateCommand extends SubCommand implements Listener {
 
     public static void saveArmorStand(String name, ArmorStand armorStand) {
         FileConfiguration config = ArmorStands.get();
-        String path = "armorstands." + name; // Unique name for each ArmorStand
+        String path = "armorstands." + name;
 
-        config.set(path + ".UUID", armorStand.getUniqueId().toString()); // Store UUID
+        config.set(path + ".UUID", armorStand.getUniqueId().toString());
         config.set(path + ".World", armorStand.getLocation().getWorld().getName());
         config.set(path + ".X", armorStand.getLocation().getX());
         config.set(path + ".Y", armorStand.getLocation().getY());
         config.set(path + ".Z", armorStand.getLocation().getZ());
 
-        ArmorStands.save(); // Save config
+        ArmorStands.save();
     }
 
     @EventHandler
@@ -227,13 +227,13 @@ public class CreateCommand extends SubCommand implements Listener {
             return;
         }
 
-        config.set(path + ".UUID", armorStand.getUniqueId().toString()); // Store UUID
+        config.set(path + ".UUID", armorStand.getUniqueId().toString());
         config.set(path + ".World", armorStand.getLocation().getWorld().getName());
         config.set(path + ".X", armorStand.getLocation().getX());
         config.set(path + ".Y", armorStand.getLocation().getY());
         config.set(path + ".Z", armorStand.getLocation().getZ());
 
-        ArmorStands.save(); // Save config
+        ArmorStands.save();
     }
 
 
