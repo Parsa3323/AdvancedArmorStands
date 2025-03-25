@@ -6,7 +6,7 @@
 
     <groupId>me.parsa</groupId>
     <artifactId>VersionSupport_1_16_5</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>VersionSupport_1_12</name>
