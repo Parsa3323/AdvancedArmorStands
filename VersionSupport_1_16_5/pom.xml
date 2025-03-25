@@ -6,7 +6,7 @@
 
     <groupId>me.parsa</groupId>
     <artifactId>VersionSupport_1_16_5</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>VersionSupport_1_12</name>
@@ -48,13 +48,7 @@
             </resource>
         </resources>
     </build>
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
-        </repository>
-    </distributionManagement>
+
     <repositories>
         <repository>
             <id>spigotmc-repo</id>
@@ -80,7 +74,7 @@
         <dependency>
             <groupId>me.parsa</groupId>
             <artifactId>armorstand-api</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>

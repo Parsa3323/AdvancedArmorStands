@@ -6,7 +6,7 @@
 
     <groupId>me.parsa</groupId>
     <artifactId>VersionSupport_1_8</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>VersionSupprt_1_8</name>
@@ -59,18 +59,12 @@
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
     </repositories>
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
-        </repository>
-    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>me.parsa</groupId>
             <artifactId>armorstand-api</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
