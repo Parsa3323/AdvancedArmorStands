@@ -4,7 +4,7 @@
     <servers>
         <server>
             <id>github</id>
-            <username>${{ github.actor }}</username>
+            <username>Parsa3323</username>
             <password>${{ secrets.REPO_TOKEN }}</password>
         </server>
     </servers>
