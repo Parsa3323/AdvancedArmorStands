@@ -31,6 +31,14 @@ jobs:
                 <id>github</id>
                 <username>${env.GITHUB_ACTOR}</username>
                 <password>${env.GITHUB_TOKEN}</password>
+                <configuration>
+                  <httpHeaders>
+                    <property>
+                      <name>Authorization</name>
+                      <value>Bearer ${env.GITHUB_TOKEN}</value>
+                    </property>
+                  </httpHeaders>
+                </configuration>
               </server>
             </servers>
           </settings>
@@ -39,7 +47,9 @@ jobs:
       - name: Build and deploy
         run: |
           mvn -B clean install
-          mvn -B deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands
+          mvn -B deploy \
+            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands \
+            -DrepositoryId=github
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
