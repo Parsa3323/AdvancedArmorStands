@@ -1,3 +1,22 @@
+
+/*
+ * .
+ * Copyright
+ * 2025 AdvancedArmorStands, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.Q
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package me.parsa.aas.Commands.Manager;
 
 import me.parsa.aas.Commands.*;
@@ -35,8 +54,10 @@ public class CommandManager implements CommandExecutor {
                 Player player = (Player) sender;
 
                 if (args.length > 0) {
+                    int count = 0;
                     for (int i = 0; i < getSubCommands().size(); i++) {
                         if (args[0].equalsIgnoreCase(getSubCommands().get(i).getName())) {
+                            count++;
                             if (getSubCommands().get(i).isForOps()) {
                                 if (player.hasPermission("advanced-armorstands.admin")) {
                                     getSubCommands().get(i).perform(player, args);
@@ -48,6 +69,9 @@ public class CommandManager implements CommandExecutor {
                             }
 
                         }
+                    }
+                    if (count == 0) {
+                        player.sendMessage(ChatColor.RED + "Invalid subcommand '" + args[0] + "' ");
                     }
                 } else if (args.length == 0) {
 
@@ -68,7 +92,7 @@ public class CommandManager implements CommandExecutor {
                             continue;
                         }
 
-                        // Styled command format
+
                         TextComponent commandComponent = new TextComponent(ChatColor.GOLD + "➤ " + commands + ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + description);
                         commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "⚡ Click to suggest this command ⚡").create()));
                         commandComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, commands));
