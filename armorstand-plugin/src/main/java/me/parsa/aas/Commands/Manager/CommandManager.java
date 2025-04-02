@@ -1,6 +1,6 @@
 
 /*
- * .
+ *
  * Copyright
  * 2025 AdvancedArmorStands, Inc.
  *
