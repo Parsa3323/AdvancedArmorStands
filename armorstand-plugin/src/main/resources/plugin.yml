@@ -1,0 +1,10 @@
+name: AdvancedArmorStands
+version: '${project.version}'
+main: me.parsa.aas.AdvancedArmorStands
+permissions:
+  advanced-armorstands.admin:
+    description: Admin access for aas
+    default: op
+commands:
+  as:
+    usage: /as
