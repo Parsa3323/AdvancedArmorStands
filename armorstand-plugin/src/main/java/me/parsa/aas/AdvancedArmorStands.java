@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package me.parsa.aas;
+package me.whisbers.me;
 
 import me.parsa.aas.Commands.CreateCommand;
 import me.parsa.aas.Commands.Manager.CommandManager;
