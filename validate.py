@@ -1,6 +1,8 @@
 import os
 import re
 
+EXPECTED_PACKAGE_PREFIX = "me.parsa.aas"
+
 def check_package_name(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
@@ -8,8 +10,11 @@ def check_package_name(file_path):
     match = re.search(r'package\s+([a-zA-Z0-9_.]+);', content)
     if match:
         package_name = match.group(1)
-        if package_name.startswith("me.parsa.aas"):
+        if package_name.startswith(EXPECTED_PACKAGE_PREFIX):
             return True
+        else:
+            print(f"Package name error in {file_path}: {package_name} does not start with {EXPECTED_PACKAGE_PREFIX}")
+            return False
     return False
 
 def validate_java_files():
