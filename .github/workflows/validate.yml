@@ -1,73 +1,53 @@
-name: Java Package Validation
+name: Resource Validation
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request_target:
-    branches: [ "*" ]
+    branches: ["*"]
 
 jobs:
-  changes:
-    runs-on: ubuntu-latest
-    outputs:
-      java_files: ${{ steps.filter.outputs.java }}
-      java_files_json: ${{ steps.filter.outputs.java_files }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Find changed Java files
-        uses: dorny/paths-filter@v3
-        id: filter
-        with:
-          list-files: json
-          filters: |
-            java:
-              - added|modified: 'src/main/java/**/*.java'
-
-  validate:
-    name: Validate Package Names
-    needs: changes
+  validate-resources:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write
       contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout PR code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+          path: pr-code
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: Run validation
+      - name: Find resource folders
+        id: find-resources
         run: |
-          python validate.py \
-          --changed-files '${{ needs.changes.outputs.java_files_json }}' \
-          --base-package "me.parsa.aas"
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          echo "Checking these resource folders:"
+          find pr-code -type d -path "*/src/main/resources" | tee resource_dirs.txt
+          echo "::set-output name=resource_dirs::$(cat resource_dirs.txt | jq -R -s -c 'split("\n")[:-1]')"
 
-      - name: Create PR comment if validation failed
-        if: failure()
+      - name: Validate resources
+        run: |
+          echo "Found resource directories:"
+          echo '${{ steps.find-resources.outputs.resource_dirs }}' | jq -r '.[]'
+          
+          # Basic validation - just check plugin.yml exists
+          for dir in $(echo '${{ steps.find-resources.outputs.resource_dirs }}' | jq -r '.[]'); do
+            if [ ! -f "$dir/plugin.yml" ]; then
+              echo "::error::Missing plugin.yml in $dir"
+              echo "validation_failed=true" >> $GITHUB_ENV
+            fi
+          done
+
+      - name: Post validation result
+        if: ${{ env.validation_failed == 'true' }}
         uses: actions/github-script@v6
         with:
           script: |
-            const fs = require('fs');
-            const errorMessage = fs.existsSync('validation_errors.md') 
-              ? fs.readFileSync('validation_errors.md', 'utf8') 
-              : 'Package validation failed';
-            
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `❌ Package validation failed:\n\n${errorMessage}`
-            });
+              body: '❌ Resource validation failed: Missing plugin.yml in some resource folders'
+            })
+            core.setFailed('Resource validation failed')
