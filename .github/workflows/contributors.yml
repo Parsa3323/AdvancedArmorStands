@@ -20,4 +20,4 @@ jobs:
           FONT_SIZE: '14'
           PATH: '/README.md'
           COMMIT_MESSAGE: 'README: update contributors'
-          AVATAR_SHAPE: 'square'
+          AVATAR_SHAPE: 'round'
