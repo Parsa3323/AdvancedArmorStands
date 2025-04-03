@@ -1,17 +1,33 @@
 import os
 import re
 import sys
-import json
-import argparse
 from pathlib import Path
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--changed-files', help='JSON list of changed files')
-    parser.add_argument('--base-package', required=True, help='Base Java package name')
-    return parser.parse_args()
+def find_java_base_path(file_path):
+    """Determine the correct base path for package calculation"""
+    path = Path(file_path)
+    # Look for src/main/java in the path
+    for parent in path.parents:
+        if parent.name == 'java' and parent.parent.name == 'main' and parent.parent.parent.name == 'src':
+            return parent.parent.parent
+    return None
 
-def validate_package_structure(file_path, base_package):
+def get_expected_package(file_path, base_package):
+    """Calculate the expected package name based on file path"""
+    java_base = find_java_base_path(file_path)
+    if not java_base:
+        return None
+
+    rel_path = Path(file_path).relative_to(java_base).parent
+    package_path = str(rel_path).replace(os.sep, '.')
+
+    # For multi-module projects, remove duplicate base package
+    if package_path.startswith(base_package):
+        return package_path
+    return f"{base_package}.{package_path}" if package_path else base_package
+
+def check_package_name(file_path, base_package):
+    """Validate the package declaration in a Java file"""
     try:
         content = Path(file_path).read_text(encoding='utf-8')
         match = re.search(r'^\s*package\s+([a-zA-Z0-9_.]+)\s*;', content, re.MULTILINE)
@@ -20,47 +36,46 @@ def validate_package_structure(file_path, base_package):
             return False, "No package declaration found"
 
         actual_package = match.group(1)
-        expected_package = calculate_expected_package(file_path, base_package)
+        expected_package = get_expected_package(file_path, base_package)
+
+        if not expected_package:
+            return False, "File not in standard Java source structure"
 
         if actual_package != expected_package:
-            return False, f"Package mismatch. Expected: {expected_package}, Found: {actual_package}"
+            return False, f"Expected: {expected_package}"
 
         return True, ""
-
     except Exception as e:
-        return False, f"Validation error: {str(e)}"
+        return False, f"Error: {str(e)}"
 
-def calculate_expected_package(file_path, base_package):
-    rel_path = Path(file_path).relative_to('src/main/java')
-    dir_structure = str(rel_path.parent).replace(os.sep, '.')
-    return dir_structure
-
-def main():
-    args = parse_args()
-    base_package = args.base_package
+def validate_project(base_package="me.parsa.aas"):
+    """Main validation function"""
     errors = []
+    java_files = list(Path('.').rglob('src/main/java/**/*.java'))
 
-    if args.changed_files:
-        changed_files = json.loads(args.changed_files)
-    else:
-        changed_files = list(Path('src/main/java').rglob('*.java'))
+    if not java_files:
+        print("Error: No Java files found in src/main/java")
+        return 1
 
-    for file_path in changed_files:
-        file_path = str(file_path)
-        if not file_path.endswith('.java'):
-            continue
+    print(f"Validating {len(java_files)} Java files...")
 
-        is_valid, message = validate_package_structure(file_path, base_package)
+    for java_file in java_files:
+        file_path = str(java_file)
+        is_valid, message = check_package_name(file_path, base_package)
         if not is_valid:
-            errors.append(f"### {file_path}\n{message}\n")
+            errors.append(f"{file_path}\n  {message}\n")
 
     if errors:
-        error_message = "## Package Validation Errors\n\n" + "\n".join(errors)
-        Path("validation_errors.md").write_text(error_message)
-        print(error_message)
-        sys.exit(1)
-    else:
-        print("All package declarations are valid")
+        print("\nValidation failed with errors:")
+        print("="*50)
+        print("\n".join(errors))
+        print("\nTotal errors:", len(errors))
+        return 1
+
+    print("✓ All package declarations are valid")
+    return 0
 
 if __name__ == "__main__":
-    main()
+    # Try to get base package from environment variable or use default
+    base_package = os.getenv("BASE_PACKAGE", "me.parsa.aas")
+    sys.exit(validate_project(base_package))
