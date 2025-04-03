@@ -1,17 +1,22 @@
-name: Update Contributors
+name: Update Contributor Avatars
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight
+  workflow_dispatch:     # Allows manual triggering
+
 jobs:
-  update-contributors:
+  update-avatars:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Generate Contributor List
-        uses: bobheadxi/contributors-action@v2
+      - name: Generate contributor avatars
+        uses: varunsridharan/action-contributors@1.2.0
         with:
-          token: ${{ github.token }}
-          path: "README.md"
+          REPO: "Parsa3323/AdvancedArmorStands"  # Replace with your repo
+          AVATAR_TYPE: "round"  # or "square"
+          AVATAR_SIZE: "60"    # pixel size
+          COLUMNS: "10"         # avatars per row
+          COMMIT: "true"        # auto-commit changes
+          COMMIT_MESSAGE: "chore: update contributor avatars"
+          GITHUB_TOKEN: ${{ github.token }}
