@@ -1,39 +1,23 @@
-name: Update Contributor Photos
+name: Add contributors
 on:
   schedule:
-    - cron: '0 0 * * *'  # Daily update
-  workflow_dispatch:     # Manual trigger option
+    - cron:  '20 20 * * *'
+# push:
+#   branches:
+#     - master
 
 jobs:
-  update-contributors:
+  add-contributors:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Generate contributor photos
-        uses: jasonlong/gha-contributors-svg@main
+      - uses: actions/checkout@v2
+      - uses: BobAnkh/add-contributors@master
         with:
-          repo: "Parsa3323/AdvancedArmorStands"  # Replace with your repo
-          width: 800                       # SVG width
-          columns: 10                      # Photos per row
-          size: 60                         # Photo size in px
-          radius: 30                       # Roundness (30 for circle)
-          output: contributors.svg         # Output file
-
-      - name: Update README
-        run: |
-          # Clear old section
-          sed -i '/<!-- CONTRIBUTORS-START -->/,/<!-- CONTRIBUTORS-END -->/d' README.md
-          # Add new section
-          echo '<!-- CONTRIBUTORS-START -->' >> README.md
-          echo '## Contributors' >> README.md
-          echo '![Contributors](data:image/svg+xml;base64,'$(base64 -w 0 contributors.svg)')' >> README.md
-          echo '<!-- CONTRIBUTORS-END -->' >> README.md
-
-      - name: Commit changes
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "chore: update contributor photos"
-          git push
+          CONTRIBUTOR: '### Contributors'
+          COLUMN_PER_ROW: '6'
+          ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          IMG_WIDTH: '100'
+          FONT_SIZE: '14'
+          PATH: '/README.md'
+          COMMIT_MESSAGE: 'docs(README): update contributors'
+          AVATAR_SHAPE: 'round'
