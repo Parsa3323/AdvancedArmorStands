@@ -1,23 +1,37 @@
 import os
 import re
 
-EXPECTED_PACKAGE_PREFIX = "me.parsa.aas"
+BASE_PACKAGE = "me.parsa.aas"
+
+def get_expected_package(file_path):
+    """
+    Given the file path, return the expected package name based on its directory.
+    """
+    relative_path = os.path.relpath(file_path, start="src/main/java")
+    directory_structure = os.path.dirname(relative_path).replace(os.sep, ".")
+    return f"{BASE_PACKAGE}.{directory_structure}"
 
 def check_package_name(file_path):
+    """
+    Check the package name in the Java file to see if it matches the expected one based on its directory structure.
+    """
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     match = re.search(r'package\s+([a-zA-Z0-9_.]+);', content)
     if match:
-        package_name = match.group(1)
-        if package_name.startswith(EXPECTED_PACKAGE_PREFIX):
-            return True
-        else:
-            print(f"Package name error in {file_path}: {package_name} does not start with {EXPECTED_PACKAGE_PREFIX}")
+        actual_package_name = match.group(1)
+        expected_package_name = get_expected_package(file_path)
+
+        if actual_package_name != expected_package_name:
+            print(f"Package name error in {file_path}: Expected {expected_package_name}, but found {actual_package_name}")
             return False
-    return False
+    return True
 
 def validate_java_files():
+    """
+    Walk through the project directory and validate package names for all Java files.
+    """
     src_path = "src/main/java/me/parsa/aas"
     errors = []
 
