@@ -5,7 +5,8 @@ EXPECTED_PACKAGE = "me.parsa.aas"
 PLUGIN_YML_RELATIVE_PATH = "src/main/resources/plugin.yml"
 
 def check_package(file_path):
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding="utf-8") as file:
+
         content = file.read()
         match = re.search(r'package\s+([a-zA-Z0-9\.]+);', content)
         if match:
