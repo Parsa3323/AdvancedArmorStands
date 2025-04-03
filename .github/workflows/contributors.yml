@@ -1,0 +1,17 @@
+name: Update Contributors
+on:
+  push:
+    branches:
+      - master
+jobs:
+  update-contributors:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Generate Contributor List
+        uses: bobheadxi/contributors-action@v2
+        with:
+          token: ${{ github.token }}
+          path: "README.md"
