@@ -8,7 +8,7 @@ def check_package(file_path):
     with open(file_path, 'r', encoding="utf-8") as file:
 
         content = file.read()
-        match = re.search(r'package\s+([a-zA-Z0-9\.]+);', content)
+        match = re.search(r'^\s*/\*.*?\*/\s*package\s+([a-zA-Z0-9\.]+);', content, re.DOTALL)
         if match:
             return match.group(1) == EXPECTED_PACKAGE
         return False
