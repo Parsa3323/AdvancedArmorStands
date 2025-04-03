@@ -1,20 +1,16 @@
 name: "Bug Report"
 description: "Report a bug in the project"
-title: "[Bug]: "
+title: "Bug Report: "
 labels: ["bug"]
 assignees: []
 
 body:
-  - type: markdown
-    attributes:
-      value: "## Please fill out this form to report a bug"
-
   - type: input
     id: bug_title
     attributes:
-      label: "Bug Title"
+      label: "Short Title"
       description: "A brief summary of the bug"
-      placeholder: "e.g., Game crashes on startup"
+      placeholder: "e.g., Plugin crashes on startup"
     validations:
       required: true
 
@@ -33,9 +29,9 @@ body:
       label: "Steps to Reproduce"
       description: "List the steps needed to reproduce this issue."
       placeholder: |
-        1. Start the game
-        2. Click on 'Start'
-        3. Game crashes
+        1. Run the plugin
+        2. Run command 'as create'
+        3. Server crashes
     validations:
       required: true
 
