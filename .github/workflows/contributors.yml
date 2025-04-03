@@ -1,8 +1,10 @@
 name: Update Contributor Avatars
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight
-  workflow_dispatch:     # Allows manual triggering
+    - cron: '0 0 * * *'  # Runs daily
+  push:
+    branches: [ main ]   # Runs on push to main
+  workflow_dispatch:     # Manual trigger
 
 jobs:
   update-avatars:
@@ -10,13 +12,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate contributor avatars
-        uses: varunsridharan/action-contributors@1.2.0
+      - name: Generate photo-only contributors
+        uses: contributors-img/contributors-img@main
         with:
-          REPO: "Parsa3323/AdvancedArmorStands"  # Replace with your repo
-          AVATAR_TYPE: "round"  # or "square"
-          AVATAR_SIZE: "60"    # pixel size
-          COLUMNS: "10"         # avatars per row
-          COMMIT: "true"        # auto-commit changes
-          COMMIT_MESSAGE: "chore: update contributor avatars"
-          GITHUB_TOKEN: ${{ github.token }}
+          owners: Parsa3323  # Replace this
+          repo: AdvancedArmorStands          # Replace this
+          columns: 10                   # Photos per row
+          img_size: 60                  # Pixel size
+          border_size: 2                # Border thickness
+          border_color: 'ffffff'        # Border color (white)
+          format: 'svg'                 # Output format
+          out_file: 'contributors.svg'  # Output file
+
+      - name: Update README
+        run: |
+          # Remove old contributors section
+          sed -i '/<!-- CONTRIBUTORS-START -->/,/<!-- CONTRIBUTORS-END -->/d' README.md
+          # Add new section
+          echo '<!-- CONTRIBUTORS-START -->' >> README.md
+          echo '## Contributors' >> README.md
+          echo '![]('$(cat contributors.svg | base64 -w 0 | sed 's/^/data:image\/svg+xml;base64,/')')' >> README.md
+          echo '<!-- CONTRIBUTORS-END -->' >> README.md
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: update contributor photos"
+          git push
