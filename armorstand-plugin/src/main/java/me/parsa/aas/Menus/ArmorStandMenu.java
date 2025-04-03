@@ -57,15 +57,9 @@ public class ArmorStandMenu extends Menu {
 
         ItemStack mainItem = e.getCursor();
 
-        if (e.getCurrentItem() == null) {
-            e.setCancelled(true);
-        }
+        if (e.getCurrentItem() == null) e.setCancelled(true);
         if (e.getAction() == InventoryAction.PLACE_ALL) e.setCancelled(true);
-
-        if (e.getSlot() != 4 && e.getSlot() != 13 && e.getSlot() != 22 && e.getSlot() != 31 && e.getSlot() != 40) {
-            e.setCancelled(true);
-            System.out.println("CAMC:");
-        }
+        if (e.getSlot() != 4 && e.getSlot() != 13 && e.getSlot() != 22 && e.getSlot() != 31 && e.getSlot() != 40) e.setCancelled(true);
 
 
         switch (e.getSlot()) {
