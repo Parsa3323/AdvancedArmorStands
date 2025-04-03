@@ -1,0 +1,86 @@
+name: "Bug Report"
+description: "Report a bug in the project"
+title: "[Bug]: "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: "## Please fill out this form to report a bug"
+
+  - type: input
+    id: bug_title
+    attributes:
+      label: "Bug Title"
+      description: "A brief summary of the bug"
+      placeholder: "e.g., Game crashes on startup"
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: "Describe the bug"
+      description: "A clear and concise description of what the bug is."
+      placeholder: "Explain the bug here..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: "Steps to Reproduce"
+      description: "List the steps needed to reproduce this issue."
+      placeholder: |
+        1. Start the game
+        2. Click on 'Start'
+        3. Game crashes
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "Expected Behavior"
+      description: "What should have happened instead?"
+      placeholder: "Describe the expected behavior here..."
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: "Device / Platform"
+      description: "On what platform did the bug occur?"
+      options:
+        - "Windows"
+        - "MacOS"
+        - "Linux"
+        - "Other"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: "Version"
+      description: "What version of the software are you using?"
+      placeholder: "e.g., v1.2.3"
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots or Videos (Optional)"
+      description: "If applicable, add screenshots or videos to help explain the problem."
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: "Confirmation"
+      description: "Please confirm you have checked the following:"
+      options:
+        - label: "I have checked for duplicate issues"
+          required: true
+        - label: "I have tested on the latest version"
+          required: true
