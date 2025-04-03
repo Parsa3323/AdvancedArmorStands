@@ -1,37 +1,33 @@
-name: Update Contributor Avatars
+name: Update Contributor Photos
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily
-  push:
-    branches: [ main ]   # Runs on push to main
-  workflow_dispatch:     # Manual trigger
+    - cron: '0 0 * * *'  # Daily update
+  workflow_dispatch:     # Manual trigger option
 
 jobs:
-  update-avatars:
+  update-contributors:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate photo-only contributors
-        uses: contributors-img/contributors-img@main
+      - name: Generate contributor photos
+        uses: jasonlong/gha-contributors-svg@main
         with:
-          owners: Parsa3323  # Replace this
-          repo: AdvancedArmorStands          # Replace this
-          columns: 10                   # Photos per row
-          img_size: 60                  # Pixel size
-          border_size: 2                # Border thickness
-          border_color: 'ffffff'        # Border color (white)
-          format: 'svg'                 # Output format
-          out_file: 'contributors.svg'  # Output file
+          repo: "Parsa3323/AdvancedArmorStands"  # Replace with your repo
+          width: 800                       # SVG width
+          columns: 10                      # Photos per row
+          size: 60                         # Photo size in px
+          radius: 30                       # Roundness (30 for circle)
+          output: contributors.svg         # Output file
 
       - name: Update README
         run: |
-          # Remove old contributors section
+          # Clear old section
           sed -i '/<!-- CONTRIBUTORS-START -->/,/<!-- CONTRIBUTORS-END -->/d' README.md
           # Add new section
           echo '<!-- CONTRIBUTORS-START -->' >> README.md
           echo '## Contributors' >> README.md
-          echo '![]('$(cat contributors.svg | base64 -w 0 | sed 's/^/data:image\/svg+xml;base64,/')')' >> README.md
+          echo '![Contributors](data:image/svg+xml;base64,'$(base64 -w 0 contributors.svg)')' >> README.md
           echo '<!-- CONTRIBUTORS-END -->' >> README.md
 
       - name: Commit changes
