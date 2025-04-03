@@ -6,5 +6,5 @@
 ![GitHub issues](https://img.shields.io/github/issues/Parsa3323/AdvancedArmorStands?label=Open%20Issues&logo=GitHub)
 
 
-## Contributors ✨
+### Contributors
 
