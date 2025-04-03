@@ -12,10 +12,10 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Parsa3323/AdvancedArmorStands?color=yellow&logo=github)
 ![GitHub license](https://img.shields.io/github/license/Parsa3323/AdvancedArmorStands?color=purple&logo=github)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Parsa3323/AdvancedArmorStands/contributors.yml?logo=github)
-![Spigot Downloads](https://img.shields.io/spiget/downloads/PLUGIN_ID?color=blue&logo=spigot)
 ![Forks](https://img.shields.io/github/forks/Parsa3323/AdvancedArmorStands?style=)
 </div>
 
+[//]: # (![Spigot Downloads]&#40;https://img.shields.io/spiget/downloads/PLUGIN_ID?color=blue&logo=spigot&#41;)
 [//]: # (![GitHub Activity Graph]&#40;https://github-readme-activity-graph.vercel.app/graph?username=Parsa3323&theme=github-dark&#41;)
 
 
