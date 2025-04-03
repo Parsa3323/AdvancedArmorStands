@@ -13,10 +13,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: BobAnkh/add-contributors@master
         with:
-          persist-credentials: true
           CONTRIBUTOR: '# Contributors'
           COLUMN_PER_ROW: '6'
-          ACCESS_TOKEN: ${{github.token}}
+          ACCESS_TOKEN: ${{secrets.KNOW_TICKET}}
           IMG_WIDTH: '100'
           FONT_SIZE: '14'
           PATH: '/README.md'
