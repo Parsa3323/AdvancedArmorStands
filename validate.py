@@ -4,38 +4,31 @@ import re
 BASE_PACKAGE = "me.parsa.aas"
 
 def get_expected_package(file_path):
-    # Find the index where the base package path starts
-    base_path = os.path.join("src", "main", "java") + os.sep
-    base_path_parts = BASE_PACKAGE.split('.')
-    base_java_path = os.sep.join(base_path_parts)
-
-    # Get the full path after src/main/java
-    full_java_path = os.path.join("src", "main", "java", base_java_path)
-
-    # Get the relative path from the base package directory
-    relative_path = os.path.relpath(file_path, start=full_java_path)
+    relative_path = os.path.relpath(file_path, start="src/main/java")
     directory_structure = os.path.dirname(relative_path).replace(os.sep, ".")
-
-    if directory_structure == '.':
-        return BASE_PACKAGE
-    return f"{BASE_PACKAGE}.{directory_structure}"
+    return directory_structure
 
 def check_package_name(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    match = re.search(r'package\s+([a-zA-Z0-9_.]+);', content)
+    match = re.search(r'^\s*package\s+([a-zA-Z0-9_.]+)\s*;', content, re.MULTILINE)
     if match:
         actual_package_name = match.group(1)
         expected_package_name = get_expected_package(file_path)
 
         if actual_package_name != expected_package_name:
-            print(f"Package name error in {file_path}: Expected {expected_package_name}, but found {actual_package_name}")
+            print(f"Package name error in {file_path}:")
+            print(f"Expected: {expected_package_name}")
+            print(f"Found:    {actual_package_name}")
             return False
+    else:
+        print(f"No package declaration found in {file_path}")
+        return False
     return True
 
 def validate_java_files():
-    src_path = os.path.join("src", "main", "java", *BASE_PACKAGE.split('.'))
+    src_path = "src/main/java"
     errors = []
 
     for root, _, files in os.walk(src_path):
@@ -46,11 +39,12 @@ def validate_java_files():
                     errors.append(file_path)
 
     if errors:
-        print("Package name errors found in:")
-        print("\n".join(errors))
-        print("Validation failed.")
+        print("\nFound package name errors in these files:")
+        for error in errors:
+            print(f" - {error}")
+        print(f"\nTotal errors: {len(errors)}")
         exit(1)
     else:
-        print("Validation passed.")
+        print("All package declarations are correct.")
 
 validate_java_files()
