@@ -20,8 +20,6 @@
 
 
 <div align="center">
-> [!NOTE]  
-> Highlights information that users should take into account, even when skimming.
 
 [![Repo Stats](https://github-readme-stats.vercel.app/api/pin/?username=Parsa3323&repo=AdvancedArmorStands&theme=dark)
 ](https://github.com/Parsa3323/AdvancedArmorStands)
@@ -88,7 +86,7 @@ running: # <====== Name of the type
 > Players can create as many types as they want (e.g., up to 80 types), but they must change the names and </br> each type can be used in the game using the `create` command
 
 > [!CAUTION]
-> Don't touch cash yaml files.
+> Don't touch cache yaml files.
 
 <div align="center">
 
