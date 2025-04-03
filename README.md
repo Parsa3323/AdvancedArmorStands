@@ -20,25 +20,84 @@
 
 
 <div align="center">
+> [!NOTE]  
+> Highlights information that users should take into account, even when skimming.
 
 [![Repo Stats](https://github-readme-stats.vercel.app/api/pin/?username=Parsa3323&repo=AdvancedArmorStands&theme=dark)
 ](https://github.com/Parsa3323/AdvancedArmorStands)
 </div>
 
 
+
 <div align="center">
+
+# Configs
+
+This document contains the configuration details for AAS.
+
+## Main Configuration
+
+The `main.yml` configuration file allows you to enable or disable debugging.
+
+</div>
+
+```yaml
+# Main configuration
+
+debug: false # <========== Enable & Disable debug
+```
+
+<div align="center">
+
+## Types Configuration
+
+The `types.yml` file defines different entity types with their properties.
+
+</div>
+
+```yaml
+running: # <====== Name of the type
+  Arms: true # <====== Has arms?
+  Gravity: false # <====== Has gravity?
+  BasePlate: false # <====== Does it have a baseplate?
+  CustomName: '&cMade with aas' # <====== Custom name for the entity
+  isCustomNameVisible: false # <====== Should the custom name be visible?
+  itemInHandMaterial: WOOD_SWORD # <====== Item held in the hand
+  HeadPos: {} # <====== Head position (empty by default)
+  rightArmPose: # <====== Right arm pose
+    x: -45
+    y: 0
+    z: 0
+  leftArmPose: # <====== Left arm pose
+    x: 45
+    y: 0
+    z: 0
+  rightLegPose: # <====== Right leg pose
+    x: 45
+    y: 0
+    z: 0
+  leftLegPose: # <====== Left leg pose
+    x: -45
+    y: 0
+    z: 0
+```
+> [!IMPORTANT]  
+> Modify `itemInHandMaterial` to any valid Minecraft material.
+
+> [!NOTE]  
+> Players can create as many types as they want (e.g., up to 80 types), but they must change the names and </br> each type can be used in the game using the `create` command
+
+> [!CAUTION]
+> Don't touch cash yaml files.
+
+<div align="center">
+
+
+
+For more details, refer to the official documentation or community guides.
+
 
 # Contributors
 
-<table>
-<tr>
-    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
-        <a href=https://github.com/Parsa3323>
-            <img src=https://avatars.githubusercontent.com/u/124880821?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Parsa3323/>
-            <br />
-            <sub style="font-size:14px"><b>Parsa3323</b></sub>
-        </a>
-    </td>
-</tr>
-</table>
+
 
