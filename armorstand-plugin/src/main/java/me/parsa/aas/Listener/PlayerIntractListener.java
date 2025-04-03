@@ -19,16 +19,16 @@
 package me.parsa.aas.Listener;
 
 
+import me.parsa.aas.Menus.ArmorStandMenu;
 import me.parsa.aas.Player.IPlayer;
 import me.parsa.aas.Player.PlayerManager;
 import me.parsa.aas.Utils.ArmorStandUtils;
+import me.parsa.aas.Utils.PlayerMenuUtility;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 
 public class PlayerIntractListener implements Listener {
 
@@ -37,6 +37,10 @@ public class PlayerIntractListener implements Listener {
         IPlayer player = PlayerManager.getCustomPlayerByBukkit(e.getPlayer());
         if (e.getRightClicked() instanceof ArmorStand) {
             if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
+                if (e.getPlayer().isSneaking()) {
+                    ArmorStandMenu test = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), "TEST", (ArmorStand) e.getRightClicked());
+                    test.open();
+                }
                 e.setCancelled(true);
             }
         }
