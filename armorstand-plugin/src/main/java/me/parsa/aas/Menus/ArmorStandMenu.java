@@ -18,19 +18,29 @@
 
 package me.parsa.aas.Menus;
 
+import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Menus.Manager.Menu;
 import me.parsa.aas.Utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffectType;
+
+import java.util.HashMap;
+import java.util.UUID;
+
 //TEST
 public class ArmorStandMenu extends Menu {
+
+    private final HashMap<UUID, Long> map = new HashMap<>();
 
     private final String name;
 
@@ -54,49 +64,73 @@ public class ArmorStandMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
+        Player p = (Player) e.getWhoClicked();
 
-        ItemStack mainItem = e.getCursor();
+        if (p == null || e.getInventory() == null || e.getInventory().getHolder() == null) return;
 
-        if (e.getCurrentItem() == null) e.setCancelled(true);
-        if (e.getAction() == InventoryAction.PLACE_ALL) e.setCancelled(true);
-        if (e.getSlot() != 4 && e.getSlot() != 13 && e.getSlot() != 22 && e.getSlot() != 31 && e.getSlot() != 40) e.setCancelled(true);
+        InventoryAction action = e.getAction();
+        ClickType click = e.getClick();
 
-
-        switch (e.getSlot()) {
-            case 4:
-                if (mainItem != null) {
-                    armorStand.setHelmet(mainItem);
-                }
-                break;
-            case 13:
-                if (mainItem != null) {
-                    armorStand.setChestplate(mainItem);
-                }
-                break;
-            case 22:
-                if (mainItem != null) {
-                    armorStand.setLeggings(mainItem);
-                }
-                break;
-            case 31:
-                if (mainItem != null) {
-                    armorStand.setBoots(mainItem);
-                }
-                break;
-            case 40:
-                if (mainItem != null) {
-                    armorStand.setItemInHand(mainItem);
-                }
-                break;
-
-
+        if (action == InventoryAction.DROP_ALL_CURSOR || action == InventoryAction.DROP_ONE_CURSOR
+                || action == InventoryAction.DROP_ONE_SLOT || action == InventoryAction.DROP_ALL_SLOT) {
+            e.setCancelled(true);
+            return;
         }
 
+        e.setCancelled(true);
 
+        int slot = e.getSlot();
+        ItemStack cursorItem = e.getCursor();
 
+        if (cursorItem == null) {
+            cursorItem = new ItemStack(Material.AIR);
+        }
 
+        if (slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40) return;
 
+        UUID uuid = p.getUniqueId();
+        long now = System.currentTimeMillis();
+        if (map.containsKey(uuid) && (now - map.get(uuid)) < 5000) {
+            int rem = (int) Math.ceil((5000 - (now - map.get(uuid))) / 1000.0);
+            p.sendMessage(ChatColor.RED + "You must wait " + rem + " seconds before placing an item");
+            return;
+        }
+
+        map.put(uuid, now);
+
+        ItemStack placed = cursorItem.clone();
+        placed.setAmount(1);
+
+        ItemStack itemTaken = e.getCurrentItem();
+        if (itemTaken == null) itemTaken = new ItemStack(Material.AIR);
+
+        e.getInventory().setItem(slot, placed);
+        p.setItemOnCursor(new ItemStack(Material.AIR));
+
+        if (itemTaken.getType() != Material.AIR) {
+            p.getInventory().addItem(itemTaken);
+        }
+
+        switch (slot) {
+            case 4:
+                armorStand.setHelmet(placed);
+                break;
+            case 13:
+                armorStand.setChestplate(placed);
+                break;
+            case 22:
+                armorStand.setLeggings(placed);
+                break;
+            case 31:
+                armorStand.setBoots(placed);
+                break;
+            case 40:
+                armorStand.setItemInHand(placed);
+                break;
+        }
     }
+
+
 
     @Override
     public void setMenuItems() {
