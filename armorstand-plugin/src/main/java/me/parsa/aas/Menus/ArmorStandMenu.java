@@ -20,6 +20,7 @@ package me.parsa.aas.Menus;
 
 import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Menus.Manager.Menu;
+import me.parsa.aas.Player.PlayerManager;
 import me.parsa.aas.Utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -34,13 +35,16 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 //TEST
 public class ArmorStandMenu extends Menu {
 
-    private final HashMap<UUID, Long> map = new HashMap<>();
+    private final HashMap<UUID, Long> cooldownMap = new HashMap<>();
+
+    private final ArrayList<UUID> coolDownList = new ArrayList<>();
 
     private final String name;
 
@@ -54,7 +58,7 @@ public class ArmorStandMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.GOLD + "AAS" + ChatColor.YELLOW + "»" + ChatColor.GOLD + " Settings";
+        return ChatColor.GOLD + "AdvancedArmorStands " + ChatColor.YELLOW + "»" + ChatColor.GOLD + " Settings";
     }
 
     @Override
@@ -65,6 +69,22 @@ public class ArmorStandMenu extends Menu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
+
+        switch (e.getSlot()) {
+            case 20:
+                p.closeInventory();
+                break;
+            case 24:
+                if (coolDownList.contains(p.getUniqueId())) {
+                    coolDownList.remove(p.getUniqueId());
+                } else {
+                    coolDownList.add(p.getUniqueId());
+                }
+                PlayerManager.getCustomPlayerByBukkit(p).playSound("NOTE_PLING");
+                setMenuItems();
+                p.updateInventory();
+                break;
+        }
 
         if (p == null || e.getInventory() == null || e.getInventory().getHolder() == null) return;
 
@@ -86,17 +106,22 @@ public class ArmorStandMenu extends Menu {
             cursorItem = new ItemStack(Material.AIR);
         }
 
+
+
         if (slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40) return;
 
         UUID uuid = p.getUniqueId();
         long now = System.currentTimeMillis();
-        if (map.containsKey(uuid) && (now - map.get(uuid)) < 5000) {
-            int rem = (int) Math.ceil((5000 - (now - map.get(uuid))) / 1000.0);
+        if (cooldownMap.containsKey(uuid) && (now - cooldownMap.get(uuid)) < 5000) {
+            int rem = (int) Math.ceil((5000 - (now - cooldownMap.get(uuid))) / 1000.0);
             p.sendMessage(ChatColor.RED + "You must wait " + rem + " seconds before placing an item");
             return;
         }
 
-        map.put(uuid, now);
+        if (!coolDownList.contains(p.getUniqueId())) {
+            cooldownMap.put(uuid, now);
+        }
+
 
         ItemStack placed = cursorItem.clone();
         placed.setAmount(1);
@@ -128,6 +153,7 @@ public class ArmorStandMenu extends Menu {
                 armorStand.setItemInHand(placed);
                 break;
         }
+        PlayerManager.getCustomPlayerByBukkit(p).playSound("NOTE_BASS");
     }
 
 
@@ -142,20 +168,40 @@ public class ArmorStandMenu extends Menu {
 
         Inventory inv = inventory;
         setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 7, new int[]{
-                0, 1, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 43, 44
+                0, 1, 7, 8, 9, 17, 18, 27 , 26, 35, 36, 37, 43, 44
         });
 
         setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 0, new int[]{
                 2, 3, 5, 6, 38, 39, 41, 42
         });
 
-        setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 10, new int[]{
+        setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 0, new int[]{
                 10, 11, 12, 19, 20, 21, 28, 29, 30
         });
 
-        setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 2, new int[]{
-                14, 15, 16, 23, 24, 25, 32, 33, 34
+        setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 0, new int[]{
+                14, 15, 16, 23, 25, 32, 33, 34
         });
+
+        ItemStack close = new ItemStack(Material.BARRIER, 1);
+        ItemMeta cMeta = close.getItemMeta();
+
+        cMeta.setDisplayName(ChatColor.RED + "Close");
+        close.setItemMeta(cMeta);
+        inventory.setItem(20, close);
+
+
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ChatColor.GRAY + "Disabling cooldown");
+        lore.add(ChatColor.GRAY + "isn't recommended");
+
+        ItemStack toggle = new ItemStack(Material.ARROW) ;
+        ItemMeta tMeta = toggle.getItemMeta();
+        tMeta.setDisplayName((coolDownList.contains(playerMenuUtility.getOwner().getUniqueId())) ? ChatColor.GREEN + "Enable Cooldown" : ChatColor.RED + "Disable Cooldown");
+        tMeta.setLore(lore);
+        toggle.setItemMeta(tMeta);
+        inventory.setItem(24, toggle);
 
         ItemStack head = (armorStand.getHelmet() != null) ? new ItemStack(armorStand.getHelmet().getType()) : new ItemStack(Material.AIR);
         ItemMeta headMeta = head.getItemMeta();

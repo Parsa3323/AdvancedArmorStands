@@ -42,8 +42,8 @@ public abstract class SubCommand {
     public abstract boolean isForOps();
 
     public void sendUsage(Player player) {
-        TextComponent textComponent = new TextComponent(AdvancedArmorStands.prefix + ChatColor.GRAY + "Usage: ");
-        TextComponent main = new TextComponent(ChatColor.GOLD + getSyntax());
+        TextComponent textComponent = new TextComponent(ChatColor.RED + "Usage: ");
+        TextComponent main = new TextComponent(ChatColor.RED + getSyntax());
         main.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, getSyntax()));
         main.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to suggest").create()));
         player.spigot().sendMessage(textComponent, main);

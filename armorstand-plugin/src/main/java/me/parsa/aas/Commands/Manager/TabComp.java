@@ -33,33 +33,71 @@ public class TabComp implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         mainCommand = new CommandManager();
+
         if (strings.length > 1) {
             Player player = (Player) commandSender;
 
             for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
                 if (strings[0].equalsIgnoreCase(mainCommand.getSubCommands().get(i).getName())) {
-                    List<String> list = mainCommand.getSubCommands().get(i).getTabComplete(player, strings);
-                    return list;
+                    List<String> subTab = mainCommand.getSubCommands().get(i).getTabComplete(player, strings);
+
+                    if (subTab == null || subTab.isEmpty()) return new ArrayList<>();
+
+                    String currentArg = strings[strings.length - 1].toLowerCase();
+
+                    if (currentArg.isEmpty()) return subTab;
+
+                    List<String> filtered = new ArrayList<>();
+
+                    for (String suggestion : subTab) {
+                        if (suggestion.toLowerCase().startsWith(currentArg)) {
+                            filtered.add(suggestion);
+                        }
+                    }
+
+                    if (filtered.size() == 1) return filtered;
+
+                    return new ArrayList<>();
                 }
             }
         } else if (strings.length == 1) {
             ArrayList<String> list = new ArrayList<>();
+            String currentInput = strings[0].toLowerCase();
+
+
             for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
-                if (mainCommand.getSubCommands().get(i).isForOps()) {
-                    if (commandSender.hasPermission("advanced-armorstands.admin")) {
+                String subName = mainCommand.getSubCommands().get(i).getName().toLowerCase();
+
+                if (subName.startsWith(currentInput)) {
+                    if (mainCommand.getSubCommands().get(i).isForOps()) {
+                        if (commandSender.hasPermission("advanced-armorstands.admin")) {
+                            list.add(mainCommand.getSubCommands().get(i).getName());
+                        }
+                    } else {
                         list.add(mainCommand.getSubCommands().get(i).getName());
                     }
-                } else {
-                    list.add(mainCommand.getSubCommands().get(i).getName());
                 }
-
             }
 
+            if (currentInput.isEmpty()) {
+                for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
+                    if (mainCommand.getSubCommands().get(i).isForOps()) {
+                        if (commandSender.hasPermission("advanced-armorstands.admin")) {
+                            list.add(mainCommand.getSubCommands().get(i).getName());
+                        }
+                    } else {
+                        list.add(mainCommand.getSubCommands().get(i).getName());
+                    }
+                }
+                return list;
+            }
+
+            if (list.size() == 1) return list;
             return list;
         }
 
-
-        return null;
+        return new ArrayList<>();
     }
+
 }
 

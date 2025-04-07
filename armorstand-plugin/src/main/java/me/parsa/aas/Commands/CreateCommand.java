@@ -24,6 +24,7 @@ import me.parsa.aas.Commands.Manager.SubCommand;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
 import me.parsa.aas.Events.ArmorStandCreateEvent;
+import me.parsa.aas.Player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
@@ -131,10 +132,14 @@ public class CreateCommand extends SubCommand implements Listener {
             AdvancedArmorStands.debug("leftLegPose.x = " + getConfigDouble(args[1] + ".leftLegPose.x"));
             AdvancedArmorStands.debug("leftLegPose.y = " + getConfigDouble(args[1] + ".leftLegPose.y"));
             AdvancedArmorStands.debug("leftLegPose.z = " + getConfigDouble(args[1] + ".leftLegPose.z"));
+
+            PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
+            player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
+            player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");
           //  saveArmorStand(args[2], armorStand);
         } else {
             if (args.length <= 7) {
-                player.sendMessage(AdvancedArmorStands.prefix + ChatColor.GRAY + "Usage: " + ChatColor.BOLD + ChatColor.YELLOW + "/as create custom <rightArm> <leftArm> <rightLeg> <leftLeg> <Headpos> <Name>");
+                player.sendMessage(ChatColor.RED + "Usage: " + "/as create custom <rightArm> <leftArm> <rightLeg> <leftLeg> <Headpos> <Name>");
                 return;
             }
 
@@ -207,6 +212,9 @@ public class CreateCommand extends SubCommand implements Listener {
         armorStand.setLeftArmPose(leftArmPose);
         armorStand.setRightLegPose(rightLegPose);
         armorStand.setLeftLegPose(leftLegPose);
+        PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
+        player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
+        player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");
         return armorStand;
     }
 

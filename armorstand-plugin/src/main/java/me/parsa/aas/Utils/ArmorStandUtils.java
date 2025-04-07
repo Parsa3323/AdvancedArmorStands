@@ -21,6 +21,7 @@ package me.parsa.aas.Utils;
 import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Events.ArmorStandDeleteEvent;
+import me.parsa.aas.Events.PlayerMoveArmorStandEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -151,6 +152,39 @@ public class ArmorStandUtils {
 
         AdvancedArmorStands.debug("No match found. Entity is NOT a configured armor stand.");
         return false;
+    }
+
+    public static ArmorStand getArmorStandByName(String s, Player player) {
+
+        String name = s;
+        FileConfiguration config = ArmorStands.get();
+        String path = "armorstands." + name;
+
+        if (!config.contains(path)) {
+            player.sendMessage(ChatColor.RED + "ArmorStand not found!");
+            return null;
+        }
+
+        UUID uuid = UUID.fromString(config.getString(path + ".UUID"));
+        World world = Bukkit.getWorld(config.getString(path + ".World"));
+
+        if (world == null) {
+            player.sendMessage(ChatColor.RED + "World not found!");
+            return null;
+        }
+
+
+        for (Entity entity : world.getEntities()) {
+            if (entity instanceof ArmorStand && entity.getUniqueId().equals(uuid)) {
+                ArmorStand armorStand = (ArmorStand) entity;
+
+
+
+                return armorStand;
+            }
+        }
+
+        return null;
     }
 
 

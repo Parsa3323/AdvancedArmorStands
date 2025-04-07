@@ -44,6 +44,7 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new TeleportCommand());
         subCommands.add(new ReloadCommand());
         subCommands.add(new MoveCommand());
+        subCommands.add(new EditCommand());
         subCommands.add(new DeleteCommand());
     }
 
