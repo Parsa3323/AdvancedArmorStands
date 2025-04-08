@@ -48,6 +48,9 @@ public final class VersionSupport_1_16_5 implements IVersionSupport {
                 case "ITEM_PICKUP":
                     sound = Sound.ENTITY_ITEM_PICKUP;
                     break;
+                case "CLICK":
+                    sound = Sound.UI_BUTTON_CLICK;
+                    break;
                 default:
                     player.sendMessage(ChatColor.RED + "Unknown sound: " + soundName);
                     return;

@@ -153,7 +153,7 @@ public class ArmorStandMenu extends Menu {
                 armorStand.setItemInHand(placed);
                 break;
         }
-        PlayerManager.getCustomPlayerByBukkit(p).playSound("NOTE_BASS");
+        PlayerManager.getCustomPlayerByBukkit(p).playSound("CLICK");
     }
 
 

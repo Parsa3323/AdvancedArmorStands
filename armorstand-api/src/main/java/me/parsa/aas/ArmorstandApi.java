@@ -20,6 +20,7 @@ package me.parsa.aas;
 
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
 
 public interface ArmorstandApi  {
 
@@ -42,6 +43,18 @@ public interface ArmorstandApi  {
         void debug(String args);
 
         void info(String args);
+
+    }
+
+    ArmorStandManager getArmorStandManager();
+
+    interface ArmorStandManager {
+
+        ArmorStand getArmorStandByName(String s);
+
+        void removeArmorStand(ArmorStand armorStand);
+
+        void removeArmorStand(String s);
 
     }
 

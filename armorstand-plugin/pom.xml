@@ -90,12 +90,12 @@
         <dependency>
             <groupId>me.parsa</groupId>
             <artifactId>VersionSupport_1_16_5</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>me.parsa</groupId>
             <artifactId>VersionSupport_1_8</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>

@@ -200,13 +200,13 @@ public class CreateCommand extends SubCommand implements Listener {
 
         armorStand.setItemInHand(new ItemStack(Material.IRON_PICKAXE));
 
-        EulerAngle rightArmPose = new EulerAngle(Math.toRadians(rightArmPoseint), 0, 0);  // Right arm back
-        EulerAngle leftArmPose = new EulerAngle(Math.toRadians(leftArmPoseint), 0, 0); // Left arm forward
+        EulerAngle rightArmPose = new EulerAngle(Math.toRadians(rightArmPoseint), 0, 0);  
+        EulerAngle leftArmPose = new EulerAngle(Math.toRadians(leftArmPoseint), 0, 0);
 
-        EulerAngle rightLegPose = new EulerAngle(Math.toRadians(rightLegPoseint), 0, 0);  // Right leg forward
-        EulerAngle leftLegPose = new EulerAngle(Math.toRadians(leftLegPoseint), 0, 0); // Left leg backward
+        EulerAngle rightLegPose = new EulerAngle(Math.toRadians(rightLegPoseint), 0, 0);
+        EulerAngle leftLegPose = new EulerAngle(Math.toRadians(leftLegPoseint), 0, 0);
 
-        armorStand.setHeadPose(new EulerAngle(Math.toRadians(0), Math.toRadians(Headpos), 0)); // Head facing forward
+        armorStand.setHeadPose(new EulerAngle(Math.toRadians(0), Math.toRadians(Headpos), 0));
 
         armorStand.setRightArmPose(rightArmPose);
         armorStand.setLeftArmPose(leftArmPose);

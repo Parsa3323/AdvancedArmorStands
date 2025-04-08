@@ -25,6 +25,7 @@ import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
 import me.parsa.aas.Listener.PlayerIntractListener;
 import me.parsa.aas.Menus.Manager.MenuListener;
+import me.parsa.aas.PlaceHolderApi.PapiExpansion;
 import me.parsa.aas.Utils.PlayerMenuUtility;
 import me.parsa.aas.Utils.VersionSupportUtil;
 import me.parsa.aas.VersionSupport.IVersionSupport;
@@ -91,7 +92,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         TypesConfig.setup();
 
 
-        // Add default types
         TypesConfig.get().addDefault("running.Arms", true);
         TypesConfig.get().addDefault("running.Gravity", false);
         TypesConfig.get().addDefault("running.BasePlate", false);
@@ -125,7 +125,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         getCommand("as").setExecutor(new CommandManager());
 
         info("Registering papi expansion");
-        // TODO: Register expansions
+        new PapiExpansion().register();
 
         info("Load done");
 

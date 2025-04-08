@@ -154,14 +154,14 @@ public class ArmorStandUtils {
         return false;
     }
 
-    public static ArmorStand getArmorStandByName(String s, Player player) {
+    public static ArmorStand getArmorStandByName(String s) {
 
         String name = s;
         FileConfiguration config = ArmorStands.get();
         String path = "armorstands." + name;
 
         if (!config.contains(path)) {
-            player.sendMessage(ChatColor.RED + "ArmorStand not found!");
+            AdvancedArmorStands.error(ChatColor.RED + "ArmorStand not found!");
             return null;
         }
 
@@ -169,7 +169,7 @@ public class ArmorStandUtils {
         World world = Bukkit.getWorld(config.getString(path + ".World"));
 
         if (world == null) {
-            player.sendMessage(ChatColor.RED + "World not found!");
+            AdvancedArmorStands.error(ChatColor.RED + "World not found!");
             return null;
         }
 
@@ -186,6 +186,14 @@ public class ArmorStandUtils {
 
         return null;
     }
+
+    public static int getTotalArmorStands() {
+        FileConfiguration config = ArmorStands.get();
+        Set<String> keys = config.getConfigurationSection("armorstands").getKeys(false);
+
+        return keys.size();
+    }
+
 
 
 

@@ -20,7 +20,9 @@ package me.parsa.aas;
 
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
+import me.parsa.aas.Utils.ArmorStandUtils;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
 
 public class API implements ArmorstandApi{
     @Override
@@ -54,6 +56,34 @@ public class API implements ArmorstandApi{
             @Override
             public void info(String args) {
                 AdvancedArmorStands.info(args);
+            }
+        };
+    }
+
+    @Override
+    public ArmorStandManager getArmorStandManager() {
+        return new ArmorStandManager() {
+            @Override
+            public ArmorStand getArmorStandByName(String s) {
+                return ArmorStandUtils.getArmorStandByName(s);
+            }
+
+            @Override
+            public void removeArmorStand(ArmorStand armorStand) {
+
+                armorStand.remove();
+
+            }
+
+            @Override
+            public void removeArmorStand(String s) {
+
+                ArmorStand as = ArmorStandUtils.getArmorStandByName(s);
+
+                if (as == null) return;
+
+                as.remove();
+
             }
         };
     }

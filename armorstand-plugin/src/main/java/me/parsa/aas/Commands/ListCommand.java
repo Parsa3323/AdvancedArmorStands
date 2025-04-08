@@ -65,7 +65,7 @@ public class ListCommand extends SubCommand {
 
             for (String name : armorStandList) {
 
-                TextComponent textComponent = new TextComponent(ChatColor.DARK_PURPLE + "➤ " + ChatColor.GREEN + name);
+                TextComponent textComponent = new TextComponent(ChatColor.DARK_GREEN + "➤ " + ChatColor.GREEN + name);
                 textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + name).create()));
                 TextComponent deleteButton = new TextComponent(ChatColor.RED + "" + ChatColor.BOLD + " [DELETE] ");
                 deleteButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.RED + "Delete armorstand").create()));

@@ -76,6 +76,10 @@
 
   <repositories>
       <repository>
+          <id>placeholderapi</id>
+          <url>https://repo.extendedclip.com/releases/</url>
+      </repository>
+      <repository>
           <id>spigotmc-repo</id>
           <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
       </repository>
@@ -83,19 +87,11 @@
           <id>sonatype</id>
           <url>https://oss.sonatype.org/content/groups/public/</url>
       </repository>
-      <repository>
-          <id>placeholderapi</id>
-          <url>https://repo.extendedclip.com/releases/</url>
-      </repository>
+
   </repositories>
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
-        </repository>
-    </distributionManagement>
+
   <dependencies>
+
       <dependency>
           <groupId>me.clip</groupId>
           <artifactId>placeholderapi</artifactId>
