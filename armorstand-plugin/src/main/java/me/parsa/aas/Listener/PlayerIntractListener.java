@@ -36,13 +36,16 @@ public class PlayerIntractListener implements Listener {
     public void intractWIthE(PlayerInteractAtEntityEvent e) {
         IPlayer player = PlayerManager.getCustomPlayerByBukkit(e.getPlayer());
         if (e.getRightClicked() instanceof ArmorStand) {
-            if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
-                if (e.getPlayer().isSneaking()) {
-                    ArmorStandMenu test = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), "TEST", (ArmorStand) e.getRightClicked());
-                    test.open();
+            if (player.isAdmin()) {
+                if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
+                    if (e.getPlayer().isSneaking()) {
+                        ArmorStandMenu test = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), "TEST", (ArmorStand) e.getRightClicked());
+                        test.open();
+                    }
+                    e.setCancelled(true);
                 }
-                e.setCancelled(true);
             }
+
         }
     }
 
