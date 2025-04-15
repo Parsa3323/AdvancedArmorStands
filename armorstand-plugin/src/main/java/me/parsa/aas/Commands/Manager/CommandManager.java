@@ -56,10 +56,16 @@ public class CommandManager implements CommandExecutor {
 
                 if (args.length > 0) {
                     int count = 0;
+                    int opCommands = 0;
+
+
                     for (int i = 0; i < getSubCommands().size(); i++) {
+
                         if (args[0].equalsIgnoreCase(getSubCommands().get(i).getName())) {
+
                             count++;
                             if (getSubCommands().get(i).isForOps()) {
+                                opCommands++;
                                 if (player.hasPermission("advanced-armorstands.admin")) {
                                     getSubCommands().get(i).perform(player, args);
                                 } else {
@@ -74,6 +80,11 @@ public class CommandManager implements CommandExecutor {
                     if (count == 0) {
                         player.sendMessage(ChatColor.RED + "Invalid subcommand '" + args[0] + "' ");
                     }
+
+                    if (opCommands == count) {
+                        //TODO : ADD THINGS
+                    }
+
                 } else if (args.length == 0) {
 
                     player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");

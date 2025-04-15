@@ -21,7 +21,9 @@ package me.parsa.aas.Menus;
 import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Menus.Manager.Menu;
 import me.parsa.aas.Player.PlayerManager;
+import me.parsa.aas.Utils.InventoryUtils;
 import me.parsa.aas.Utils.PlayerMenuUtility;
+import me.parsa.aas.inventory.manager.InventoryManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -43,6 +45,8 @@ import java.util.UUID;
 public class ArmorStandMenu extends Menu {
 
     private final HashMap<UUID, Long> cooldownMap = new HashMap<>();
+
+    public static InventoryManager inventoryManager;
 
     private final ArrayList<UUID> coolDownList = new ArrayList<>();
 
@@ -68,9 +72,17 @@ public class ArmorStandMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
+        inventoryManager = new InventoryManager(armorStand);
+        AdvancedArmorStands.plugin.getServer().getPluginManager().registerEvents(inventoryManager, AdvancedArmorStands.plugin);
+
         Player p = (Player) e.getWhoClicked();
 
         switch (e.getSlot()) {
+            case 8:
+                InventoryUtils.save(p);
+                InventoryUtils.setItems(p);
+                p.closeInventory();
+                break;
             case 20:
                 p.closeInventory();
                 break;
@@ -168,7 +180,7 @@ public class ArmorStandMenu extends Menu {
 
         Inventory inv = inventory;
         setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 7, new int[]{
-                0, 1, 7, 8, 9, 17, 18, 27 , 26, 35, 36, 37, 43, 44
+                0, 1, 7, 9, 17, 18, 27 , 26, 35, 36, 37, 43, 44
         });
 
         setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 0, new int[]{
@@ -195,6 +207,19 @@ public class ArmorStandMenu extends Menu {
 
         lore.add(ChatColor.GRAY + "Disabling cooldown");
         lore.add(ChatColor.GRAY + "isn't recommended");
+
+        ItemStack edit = new ItemStack(Material.REDSTONE_BLOCK, 1);
+        ItemMeta editMeta= edit.getItemMeta();
+        editMeta.setDisplayName(ChatColor.GREEN + "Edit!");
+
+        ArrayList<String> editLore = new ArrayList<>();
+        editLore.add(ChatColor.GRAY + "gives you some");
+        editLore.add(ChatColor.GRAY + "items that");
+        editLore.add(ChatColor.GRAY + "you can edit as");
+        editLore.add(ChatColor.GRAY + "positions with it");
+        editMeta.setLore(editLore);
+        edit.setItemMeta(editMeta);
+        inventory.setItem(8, edit);
 
         ItemStack toggle = new ItemStack(Material.ARROW) ;
         ItemMeta tMeta = toggle.getItemMeta();

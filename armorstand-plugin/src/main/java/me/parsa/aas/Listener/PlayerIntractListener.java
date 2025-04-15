@@ -26,20 +26,21 @@ import me.parsa.aas.Utils.ArmorStandUtils;
 import me.parsa.aas.Utils.PlayerMenuUtility;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
 public class PlayerIntractListener implements Listener {
 
-    @EventHandler
-    public void intractWIthE(PlayerInteractAtEntityEvent e) {
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void playerInteractAtEntityEvent(PlayerInteractAtEntityEvent e) {
         IPlayer player = PlayerManager.getCustomPlayerByBukkit(e.getPlayer());
         if (e.getRightClicked() instanceof ArmorStand) {
             if (player.isAdmin()) {
                 if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
                     if (e.getPlayer().isSneaking()) {
-                        ArmorStandMenu test = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), "TEST", (ArmorStand) e.getRightClicked());
+                        ArmorStandMenu test = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), "", (ArmorStand) e.getRightClicked());
                         test.open();
                     }
                     e.setCancelled(true);
@@ -50,8 +51,8 @@ public class PlayerIntractListener implements Listener {
     }
 
 
-    @EventHandler
-    public void damge(EntityDamageByEntityEvent e) {
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void entityDamageByEntityEvent(EntityDamageByEntityEvent e) {
 
         if (e.getEntity() instanceof ArmorStand) {
             if (ArmorStandUtils.isConfiguredArmorStand(e.getEntity())) {

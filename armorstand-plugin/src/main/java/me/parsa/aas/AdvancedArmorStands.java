@@ -24,11 +24,14 @@ import me.parsa.aas.Commands.Manager.TabComp;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
 import me.parsa.aas.Listener.PlayerIntractListener;
+import me.parsa.aas.Menus.ArmorStandMenu;
 import me.parsa.aas.Menus.Manager.MenuListener;
 import me.parsa.aas.PlaceHolderApi.PapiExpansion;
 import me.parsa.aas.Utils.PlayerMenuUtility;
+import me.parsa.aas.Utils.UpdateChecker;
 import me.parsa.aas.Utils.VersionSupportUtil;
 import me.parsa.aas.VersionSupport.IVersionSupport;
+import me.parsa.aas.inventory.manager.InventoryManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -56,6 +59,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         logger = getLogger();
         api = new API();
 
@@ -84,6 +88,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         info("Registering events");
         PluginManager ev = getServer().getPluginManager();
+
         ev.registerEvents(new CreateCommand(), this);
         ev.registerEvents(new PlayerIntractListener(), this);
         ev.registerEvents(new MenuListener(), this);
@@ -126,6 +131,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         info("Registering papi expansion");
         new PapiExpansion().register();
+
+        info("Checking for updates");
+        UpdateChecker updateChecker = new UpdateChecker(this, "Parsa3323", "AdvancedArmorStands");
+        updateChecker.checkForUpdates();
 
         info("Load done");
 
