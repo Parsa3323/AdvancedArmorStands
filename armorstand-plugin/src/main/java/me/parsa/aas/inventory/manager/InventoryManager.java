@@ -21,7 +21,7 @@ package me.parsa.aas.inventory.manager;
 import me.parsa.aas.Menus.ArmorStandMenu;
 import me.parsa.aas.Utils.InventoryUtils;
 import me.parsa.aas.Utils.PlayerMenuUtility;
-import me.parsa.aas.inventory.Test;
+import me.parsa.aas.inventory.*;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -31,6 +31,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class InventoryManager implements Listener {
 
@@ -39,18 +41,22 @@ public class InventoryManager implements Listener {
     private final ArmorStand armorStand;
 
     public InventoryManager(ArmorStand armorStand) {
-        inventoryItems.add(new Test());
         this.armorStand = armorStand;
+        inventoryItems.add(new RotateItem());
+        inventoryItems.add(new HeadItem());
+        inventoryItems.add(new RightHandItem());
+        inventoryItems.add(new SaveItem());
+        inventoryItems.add(new LeftHandItem());
+
     }
 
     @EventHandler
     public void onPlayerUse(PlayerInteractEvent event) {
         Action action = event.getAction();
         Player player = event.getPlayer();
-
         if (event.getItem() != null && event.getItem().hasItemMeta()) {
             String name = ChatColor.stripColor(event.getItem().getItemMeta().getDisplayName());
-            if ("EXIT".equalsIgnoreCase(name)) {
+            if ("(Right Click) EXIT".equalsIgnoreCase(name)) {
                 InventoryUtils.restore(player);
                 new ArmorStandMenu(new PlayerMenuUtility(player), "menu", armorStand).open();
 
