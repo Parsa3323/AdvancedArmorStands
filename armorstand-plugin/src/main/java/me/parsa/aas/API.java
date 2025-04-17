@@ -48,11 +48,6 @@ public class API implements ArmorstandApi{
     }
 
     @Override
-    public boolean isInEditSession(UUID s) {
-        return false;
-    }
-
-    @Override
     public LogsManager getLogManager() {
         return new LogsManager() {
             @Override

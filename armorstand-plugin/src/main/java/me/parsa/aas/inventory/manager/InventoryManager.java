@@ -47,6 +47,8 @@ public class InventoryManager implements Listener {
         inventoryItems.add(new RightHandItem());
         inventoryItems.add(new SaveItem());
         inventoryItems.add(new LeftHandItem());
+        inventoryItems.add(new RightLegItem());
+        inventoryItems.add(new LeftLegItem());
 
     }
 
@@ -66,7 +68,7 @@ public class InventoryManager implements Listener {
         }
 
 
-        if (player.hasPermission("advanced-armorstands.admin")) {
+        if (player.hasPermission("advanced-armorstands.admin") && event.getItem() != null) {
             for (int i = 0; i < getInventoryItems().size(); i++) {
 
                 if (event.getItem().equals(getInventoryItems().get(i).getItemStack())) {

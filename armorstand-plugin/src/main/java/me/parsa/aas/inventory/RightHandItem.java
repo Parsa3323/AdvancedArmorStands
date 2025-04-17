@@ -43,7 +43,7 @@ public class RightHandItem extends InventoryItem {
         lore.add(ChatColor.GOLD + "RIGHT CLICK " + ChatColor.GRAY + "To rotate right hand to right");
         lore.add(ChatColor.GOLD + "LEFT CLICK " + ChatColor.GRAY + "To rotate right hand to left");
         lore.add(ChatColor.GOLD + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move right arm up");
-        lore.add(ChatColor.GOLD + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move left arm down");
+        lore.add(ChatColor.GOLD + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move left arm down");
 
         ItemStack itemStack = new ItemStack(Material.GOLD_INGOT);
         ItemMeta itemMeta = itemStack.getItemMeta();

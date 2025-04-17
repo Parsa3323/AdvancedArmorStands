@@ -44,7 +44,7 @@ public class SaveItem extends InventoryItem {
         lore.add(ChatColor.GRAY + "Click to save the armor stand setting ");
         lore.add(ChatColor.GRAY + "as a type, that you can use it later");
 
-        ItemStack itemStack = new ItemStack(Material.IRON_INGOT);
+        ItemStack itemStack = new ItemStack(Material.NETHER_STAR);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GRAY + "(Right Click) " + ChatColor.GREEN + "Save");
         itemMeta.setLore(lore);

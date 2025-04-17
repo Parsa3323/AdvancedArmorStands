@@ -30,24 +30,24 @@ import org.bukkit.util.EulerAngle;
 
 import java.util.ArrayList;
 
-public class LeftHandItem extends InventoryItem {
+public class LeftLegItem extends InventoryItem {
     @Override
     public String getName() {
-        return "RightHandItem";
+        return "LeftLegItem";
     }
 
     @Override
     public ItemStack getItemStack() {
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GOLD + "RIGHT CLICK " + ChatColor.GRAY + "To rotate left hand to right");
-        lore.add(ChatColor.GOLD + "LEFT CLICK " + ChatColor.GRAY + "To rotate left hand to left");
-        lore.add(ChatColor.GOLD + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move left arm up");
-        lore.add(ChatColor.GOLD + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move left arm down");
+        lore.add(ChatColor.GOLD + "RIGHT CLICK " + ChatColor.GRAY + "To rotate left leg to right");
+        lore.add(ChatColor.GOLD + "LEFT CLICK " + ChatColor.GRAY + "To rotate left leg to left");
+        lore.add(ChatColor.GOLD + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move left leg up");
+        lore.add(ChatColor.GOLD + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move left leg down");
 
-        ItemStack itemStack = new ItemStack(Material.IRON_INGOT);
+        ItemStack itemStack = new ItemStack(Material.MAP);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.RED + "LeftHand");
+        itemMeta.setDisplayName(ChatColor.RED + "LeftLeg");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 
@@ -56,33 +56,33 @@ public class LeftHandItem extends InventoryItem {
 
     @Override
     public int getSlot() {
-        return 2;
+        return 5;
     }
 
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
         armorStand.setArms(true);
 
-        EulerAngle currentPose = armorStand.getLeftArmPose();
+        EulerAngle currentPose = armorStand.getLeftLegPose();
 
         double step = Math.toRadians(5);
 
         if (p.isSneaking()) {
             if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
                 EulerAngle newPose = new EulerAngle(currentPose.getX() - step, currentPose.getY(), currentPose.getZ());
-                armorStand.setLeftArmPose(newPose);
+                armorStand.setLeftLegPose(newPose);
             } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
                 EulerAngle newPose = new EulerAngle(currentPose.getX() + step, currentPose.getY(), currentPose.getZ());
-                armorStand.setLeftArmPose(newPose);
+                armorStand.setLeftLegPose(newPose);
             }
         }
         else {
             if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
                 EulerAngle newPose = new EulerAngle(currentPose.getX(), currentPose.getY() + step, currentPose.getZ());
-                armorStand.setLeftArmPose(newPose);
+                armorStand.setLeftLegPose(newPose);
             } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
                 EulerAngle newPose = new EulerAngle(currentPose.getX(), currentPose.getY() - step, currentPose.getZ());
-                armorStand.setLeftArmPose(newPose);
+                armorStand.setLeftLegPose(newPose);
             }
         }
     }

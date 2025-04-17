@@ -43,7 +43,7 @@ public class HeadItem extends InventoryItem {
         lore.add(ChatColor.GOLD + "RIGHT CLICK " + ChatColor.GRAY + "To rotate head to right");
         lore.add(ChatColor.GOLD + "LEFT CLICK " + ChatColor.GRAY + "To rotate head hand to left");
         lore.add(ChatColor.GOLD + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move head up");
-        lore.add(ChatColor.GOLD + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move head down");
+        lore.add(ChatColor.GOLD + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move head down");
 
         ItemStack itemStack = new ItemStack(Material.NOTE_BLOCK, 1);
         ItemMeta itemMeta = itemStack.getItemMeta();

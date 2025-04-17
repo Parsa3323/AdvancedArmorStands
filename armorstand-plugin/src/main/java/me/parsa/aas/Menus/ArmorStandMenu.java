@@ -58,6 +58,7 @@ public class ArmorStandMenu extends Menu {
         super(playerMenuUtility);
         this.name = name1;
         this.armorStand = armorStand;
+        this.inventoryManager = new InventoryManager(armorStand);
     }
 
     @Override
@@ -72,7 +73,6 @@ public class ArmorStandMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
-        inventoryManager = new InventoryManager(armorStand);
         AdvancedArmorStands.plugin.getServer().getPluginManager().registerEvents(inventoryManager, AdvancedArmorStands.plugin);
 
         Player p = (Player) e.getWhoClicked();
@@ -226,36 +226,22 @@ public class ArmorStandMenu extends Menu {
         tMeta.setDisplayName((coolDownList.contains(playerMenuUtility.getOwner().getUniqueId())) ? ChatColor.GREEN + "Enable Cooldown" : ChatColor.RED + "Disable Cooldown");
         tMeta.setLore(lore);
         toggle.setItemMeta(tMeta);
-        inventory.setItem(24, toggle);
 
-        ItemStack head = (armorStand.getHelmet() != null) ? new ItemStack(armorStand.getHelmet().getType()) : new ItemStack(Material.AIR);
-        ItemMeta headMeta = head.getItemMeta();
-    //    headMeta.setDisplayName(ChatColor.GREEN + "Helmet");
-        head.setItemMeta(headMeta);
+
+        inventory.setItem(24, toggle);
+        ItemStack head = (armorStand.getHelmet() != null) ? armorStand.getHelmet().clone() : new ItemStack(Material.AIR);
         inventory.setItem(4, head);
 
-        ItemStack chest = (armorStand.getChestplate() != null) ? new ItemStack(armorStand.getChestplate().getType()) : new ItemStack(Material.AIR);
-        ItemMeta chestMeta = chest.getItemMeta();
-     //   chestMeta.setDisplayName(ChatColor.GREEN + "ChestPlate");
-        chest.setItemMeta(chestMeta);
+        ItemStack chest = (armorStand.getChestplate() != null) ? armorStand.getChestplate().clone() : new ItemStack(Material.AIR);
         inventory.setItem(13, chest);
 
-        ItemStack leg = (armorStand.getLeggings() != null) ? new ItemStack(armorStand.getLeggings().getType()) : new ItemStack(Material.AIR);
-        ItemMeta legMeta = leg.getItemMeta();
-     //   legMeta.setDisplayName(ChatColor.GREEN + "Leggings");
-        leg.setItemMeta(legMeta);
+        ItemStack leg = (armorStand.getLeggings() != null) ? armorStand.getLeggings().clone() : new ItemStack(Material.AIR);
         inventory.setItem(22, leg);
 
-        ItemStack boots = (armorStand.getBoots() != null) ? new ItemStack(armorStand.getBoots().getType()) : new ItemStack(Material.AIR);
-        ItemMeta bootMeta = boots.getItemMeta();
-     //   bootMeta.setDisplayName(ChatColor.GREEN + "Boots");
-        boots.setItemMeta(bootMeta);
+        ItemStack boots = (armorStand.getBoots() != null) ? armorStand.getBoots().clone() : new ItemStack(Material.AIR);
         inventory.setItem(31, boots);
 
-        ItemStack itemInHand = (armorStand.getItemInHand() != null) ? new ItemStack(armorStand.getItemInHand().getType()) : new ItemStack(Material.AIR);
-        ItemMeta iihMeta = boots.getItemMeta();
-        //   iihMeta.setDisplayName(ChatColor.GREEN + "itemInHand");
-        boots.setItemMeta(iihMeta);
+        ItemStack itemInHand = (armorStand.getItemInHand() != null) ? armorStand.getItemInHand().clone() : new ItemStack(Material.AIR);
         inventory.setItem(40, itemInHand);
 
     }

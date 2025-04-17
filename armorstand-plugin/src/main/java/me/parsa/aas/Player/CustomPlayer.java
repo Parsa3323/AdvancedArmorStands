@@ -46,8 +46,4 @@ public class CustomPlayer implements IPlayer{
         return this.bukkitPlayer.hasPermission("advanced-armorstands.admin");
     }
 
-    @Override
-    public boolean isInSetupSession(UUID s) {
-        return false;
-    }
 }
