@@ -4,6 +4,8 @@
 
 # Advanced Armor Stands
 
+`1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.20.6, 1.21`
+
 ![GitHub Sponsors](https://img.shields.io/github/sponsors/Parsa3323?label=Sponsor&logo=GitHub)
 ![GitHub contributors](https://img.shields.io/github/contributors/Parsa3323/AdvancedArmorStands?label=Contributors&logo=GitHub)
 ![GitHub Releases](https://img.shields.io/github/downloads/Parsa3323/AdvancedArmorStands/total?label=Downloads&logo=GitHub)
@@ -97,24 +99,6 @@ For more details, refer to the official documentation or community guides.
 
 # Contributors
 
-<table>
-<tr>
-    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
-        <a href=https://github.com/Parsa3323>
-            <img src=https://avatars.githubusercontent.com/u/124880821?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Parsa3323/>
-            <br />
-            <sub style="font-size:14px"><b>Parsa3323</b></sub>
-        </a>
-    </td>
-    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
-        <a href=https://github.com/Whisbers>
-            <img src=https://avatars.githubusercontent.com/u/192603192?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Whisbers/>
-            <br />
-            <sub style="font-size:14px"><b>Whisbers</b></sub>
-        </a>
-    </td>
-</tr>
-</table>
 
 
 

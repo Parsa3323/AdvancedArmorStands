@@ -64,7 +64,7 @@ public class SaveMenu extends PaginatedMenu {
 
         String itemName = ChatColor.stripColor(clickedItem.getItemMeta().getDisplayName());
 
-        if (clickedItem.getType() == Material.WOOD_BUTTON) {
+        if (clickedItem.getType() == Material.ARROW) {
             if (itemName.equalsIgnoreCase("Left")) {
                 if (page > 0) {
                     page--;

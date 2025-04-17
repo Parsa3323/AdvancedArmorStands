@@ -19,6 +19,7 @@
 
 package me.parsa.aas.Commands.Manager;
 
+import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Commands.*;
 import me.parsa.aas.Player.PlayerManager;
 import me.parsa.aas.Utils.ColorUtils;
@@ -56,7 +57,6 @@ public class CommandManager implements CommandExecutor {
 
                 if (args.length > 0) {
                     int count = 0;
-                    int opCommands = 0;
 
 
                     for (int i = 0; i < getSubCommands().size(); i++) {
@@ -65,7 +65,6 @@ public class CommandManager implements CommandExecutor {
 
                             count++;
                             if (getSubCommands().get(i).isForOps()) {
-                                opCommands++;
                                 if (player.hasPermission("advanced-armorstands.admin")) {
                                     getSubCommands().get(i).perform(player, args);
                                 } else {
@@ -81,11 +80,19 @@ public class CommandManager implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "Invalid subcommand '" + args[0] + "' ");
                     }
 
-                    if (opCommands == count) {
-                        //TODO : ADD THINGS
+                } else if (args.length == 0) {
+
+                    if (subCommands.stream().allMatch(SubCommand::isForOps)) {
+                        if (!PlayerManager.getCustomPlayerByBukkit(player).isAdmin()) {
+                            TextComponent textComponent = new TextComponent(ChatColor.GRAY + "Running " + ChatColor.GOLD + "AdvancedArmorStands " + ChatColor.GRAY + "v" + AdvancedArmorStands.plugin.getDescription().getVersion() + " by " + ChatColor.GOLD + "Parsa3323");
+                            textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GREEN + "Click to view github").create()));
+                            textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/Parsa3323/AdvancedArmorStands/"));
+                            player.spigot().sendMessage(textComponent);
+                            return true;
+                        }
                     }
 
-                } else if (args.length == 0) {
+
 
                     player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
                     player.sendMessage("   " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands");
