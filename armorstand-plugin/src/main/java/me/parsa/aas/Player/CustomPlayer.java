@@ -4,7 +4,7 @@
  * 2025 AdvancedArmorStands, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.Q
@@ -20,6 +20,8 @@ package me.parsa.aas.Player;
 
 import me.parsa.aas.Utils.VersionSupportUtil;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class CustomPlayer implements IPlayer{
 
@@ -42,5 +44,10 @@ public class CustomPlayer implements IPlayer{
     @Override
     public boolean isAdmin() {
         return this.bukkitPlayer.hasPermission("advanced-armorstands.admin");
+    }
+
+    @Override
+    public boolean isInSetupSession(UUID s) {
+        return false;
     }
 }

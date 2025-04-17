@@ -4,7 +4,7 @@
  * 2025 AdvancedArmorStands, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.Q
@@ -23,6 +23,8 @@ import me.parsa.aas.Configs.TypesConfig;
 import me.parsa.aas.Utils.ArmorStandUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
+
+import java.util.UUID;
 
 public class API implements ArmorstandApi{
     @Override
@@ -43,6 +45,11 @@ public class API implements ArmorstandApi{
                 return TypesConfig.get();
             }
         };
+    }
+
+    @Override
+    public boolean isInEditSession(UUID s) {
+        return false;
     }
 
     @Override
