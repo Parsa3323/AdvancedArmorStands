@@ -4,12 +4,12 @@
 
 It's best to use the latest version of AAS, as older versions may contain security vulnerabilities.
 
-| Version       | Supported          |
-|---------------| ------------------ |
-| 1.0.0 #Beta 8 | :white_check_mark: |
-| 1.0.0 #Beta 7 | :white_check_mark: |
-| 1.0.0 #Beta 6       | :white_check_mark: |
-| < 0.1.0       | :x:                |
+| Version             | Supported          |
+|---------------------|--------------------|
+| 1.0.0 **_Beta 14_** | :white_check_mark: |
+| 1.0.0 **_Beta 7_**  | :x:                |
+| 1.0.0 **_Beta 6_**  | :x:                |
+| < 0.1.0             | :x:                |
 
 ## Reporting a Vulnerability
 
