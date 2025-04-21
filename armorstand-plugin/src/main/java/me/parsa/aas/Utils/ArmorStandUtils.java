@@ -21,21 +21,49 @@ package me.parsa.aas.Utils;
 import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Events.ArmorStandDeleteEvent;
-import me.parsa.aas.Events.PlayerMoveArmorStandEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
 public class ArmorStandUtils {
+    public static String getNameByArmorStand(ArmorStand armorStand) {
+        FileConfiguration config = ArmorStands.get();
+        if (!config.contains("armorstands")) {
+            return null;
+        }
+
+        Set<String> keys = config.getConfigurationSection("armorstands").getKeys(false);
+        for (String key : keys) {
+            String path = "armorstands." + key;
+            UUID uuid = UUID.fromString(config.getString(path + ".UUID"));
+
+            if (armorStand.getUniqueId().equals(uuid)) {
+                return key;
+            }
+
+            World world = Bukkit.getWorld(config.getString(path + ".World"));
+            if (world == null) continue;
+
+            double x = config.getDouble(path + ".X");
+            double y = config.getDouble(path + ".Y");
+            double z = config.getDouble(path + ".Z");
+            Location configLocation = new Location(world, x, y, z);
+
+            if (armorStand.getLocation().distanceSquared(configLocation) < 0.01) {
+                return key;
+            }
+        }
+
+        return null;
+    }
+
     public static void teleportToArmorStand(Player player, String name) {
         FileConfiguration config = ArmorStands.get();
         String path = "armorstands." + name;
@@ -195,6 +223,34 @@ public class ArmorStandUtils {
     }
 
 
+    public static boolean isValidEquipmentForSlot(ItemStack item, int slot) {
+        Material mat = item.getType();
+        switch (slot) {
+            case 4: return mat == Material.AIR || canBeHelmet(mat);
+            case 13: return mat == Material.AIR || canBeChestplate(mat);
+            case 22: return mat == Material.AIR || canBeLeggings(mat);
+            case 31: return mat == Material.AIR || canBeBoots(mat);
+            case 40: return true;
+            default: return false;
+        }
+    }
 
+    public static boolean canBeHelmet(Material mat) {
+        return mat.name().endsWith("_HELMET") ||
+                mat == Material.PUMPKIN ||
+                mat == Material.SKULL_ITEM;
+    }
+
+    public static boolean canBeChestplate(Material mat) {
+        return mat.name().endsWith("_CHESTPLATE");
+    }
+
+    public static boolean canBeLeggings(Material mat) {
+        return mat.name().endsWith("_LEGGINGS");
+    }
+
+    public static boolean canBeBoots(Material mat) {
+        return mat.name().endsWith("_BOOTS");
+    }
 
 }

@@ -21,8 +21,6 @@ package me.parsa.aas.Player;
 import me.parsa.aas.Utils.VersionSupportUtil;
 import org.bukkit.entity.Player;
 
-import java.util.UUID;
-
 public class CustomPlayer implements IPlayer{
 
     private final Player bukkitPlayer;

@@ -45,7 +45,7 @@ public class LeftLegItem extends InventoryItem {
         lore.add(ChatColor.GOLD + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move left leg up");
         lore.add(ChatColor.GOLD + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move left leg down");
 
-        ItemStack itemStack = new ItemStack(Material.MAP);
+        ItemStack itemStack = new ItemStack(Material.BED);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ChatColor.RED + "LeftLeg");
         itemMeta.setLore(lore);
@@ -61,7 +61,6 @@ public class LeftLegItem extends InventoryItem {
 
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
-        armorStand.setArms(true);
 
         EulerAngle currentPose = armorStand.getLeftLegPose();
 

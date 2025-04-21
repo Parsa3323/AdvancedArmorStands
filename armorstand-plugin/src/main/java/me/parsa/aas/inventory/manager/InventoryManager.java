@@ -19,11 +19,11 @@
 package me.parsa.aas.inventory.manager;
 
 import me.parsa.aas.Menus.ArmorStandMenu;
+import me.parsa.aas.Utils.ArmorStandSelectionCache;
 import me.parsa.aas.Utils.InventoryUtils;
 import me.parsa.aas.Utils.PlayerMenuUtility;
 import me.parsa.aas.inventory.*;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,17 +31,13 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
 
 public class InventoryManager implements Listener {
 
     public ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
 
-    private final ArmorStand armorStand;
+    public InventoryManager() {
 
-    public InventoryManager(ArmorStand armorStand) {
-        this.armorStand = armorStand;
         inventoryItems.add(new RotateItem());
         inventoryItems.add(new HeadItem());
         inventoryItems.add(new RightHandItem());
@@ -60,7 +56,7 @@ public class InventoryManager implements Listener {
             String name = ChatColor.stripColor(event.getItem().getItemMeta().getDisplayName());
             if ("(Right Click) EXIT".equalsIgnoreCase(name)) {
                 InventoryUtils.restore(player);
-                new ArmorStandMenu(new PlayerMenuUtility(player), "menu", armorStand).open();
+                new ArmorStandMenu(new PlayerMenuUtility(player), "menu", ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId())).open();
 
                 return;
             }
@@ -73,7 +69,7 @@ public class InventoryManager implements Listener {
 
                 if (event.getItem().equals(getInventoryItems().get(i).getItemStack())) {
 
-                    getInventoryItems().get(i).execute(player, armorStand , action);
+                    getInventoryItems().get(i).execute(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), action);
 
                 }
 

@@ -25,7 +25,6 @@ import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
 import me.parsa.aas.Listener.PlayerIntractListener;
 import me.parsa.aas.Listener.PlayerLeaveEvent;
-import me.parsa.aas.Menus.ArmorStandMenu;
 import me.parsa.aas.Menus.Manager.MenuListener;
 import me.parsa.aas.PlaceHolderApi.PapiExpansion;
 import me.parsa.aas.Utils.PlayerMenuUtility;
@@ -89,13 +88,14 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         info("Registering events");
         PluginManager ev = getServer().getPluginManager();
-
+        ev.registerEvents(new InventoryManager(), this);
         ev.registerEvents(new PlayerLeaveEvent(), this);
         ev.registerEvents(new CreateCommand(), this);
         ev.registerEvents(new PlayerIntractListener(), this);
         ev.registerEvents(new MenuListener(), this);
 
         info("Loading configs");
+
         TypesConfig.setup();
 
 

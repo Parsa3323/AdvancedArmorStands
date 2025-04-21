@@ -61,7 +61,6 @@ public class LeftHandItem extends InventoryItem {
 
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
-        armorStand.setArms(true);
 
         EulerAngle currentPose = armorStand.getLeftArmPose();
 

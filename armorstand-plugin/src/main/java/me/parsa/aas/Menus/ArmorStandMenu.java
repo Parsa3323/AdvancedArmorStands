@@ -18,12 +18,11 @@
 
 package me.parsa.aas.Menus;
 
-import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Menus.Manager.Menu;
 import me.parsa.aas.Player.PlayerManager;
+import me.parsa.aas.Utils.ArmorStandUtils;
 import me.parsa.aas.Utils.InventoryUtils;
 import me.parsa.aas.Utils.PlayerMenuUtility;
-import me.parsa.aas.inventory.manager.InventoryManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -35,7 +34,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,8 +43,6 @@ import java.util.UUID;
 public class ArmorStandMenu extends Menu {
 
     private final HashMap<UUID, Long> cooldownMap = new HashMap<>();
-
-    public static InventoryManager inventoryManager;
 
     private final ArrayList<UUID> coolDownList = new ArrayList<>();
 
@@ -58,7 +54,6 @@ public class ArmorStandMenu extends Menu {
         super(playerMenuUtility);
         this.name = name1;
         this.armorStand = armorStand;
-        this.inventoryManager = new InventoryManager(armorStand);
     }
 
     @Override
@@ -73,7 +68,8 @@ public class ArmorStandMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
-        AdvancedArmorStands.plugin.getServer().getPluginManager().registerEvents(inventoryManager, AdvancedArmorStands.plugin);
+
+
 
         Player p = (Player) e.getWhoClicked();
 
@@ -130,16 +126,20 @@ public class ArmorStandMenu extends Menu {
             return;
         }
 
-        if (!coolDownList.contains(p.getUniqueId())) {
-            cooldownMap.put(uuid, now);
-        }
+
 
 
         ItemStack placed = cursorItem.clone();
         placed.setAmount(1);
 
         ItemStack itemTaken = e.getCurrentItem();
-        if (itemTaken == null) itemTaken = new ItemStack(Material.AIR);
+
+        if (!ArmorStandUtils.isValidEquipmentForSlot(placed, slot)) {
+            p.sendMessage(ChatColor.RED + "This item cannot be placed in this slot!");
+            return;
+        }
+
+       // if (itemTaken == null) itemTaken = new ItemStack(Material.AIR);
 
         e.getInventory().setItem(slot, placed);
         p.setItemOnCursor(new ItemStack(Material.AIR));
@@ -148,22 +148,32 @@ public class ArmorStandMenu extends Menu {
             p.getInventory().addItem(itemTaken);
         }
 
-        switch (slot) {
-            case 4:
-                armorStand.setHelmet(placed);
-                break;
-            case 13:
-                armorStand.setChestplate(placed);
-                break;
-            case 22:
-                armorStand.setLeggings(placed);
-                break;
-            case 31:
-                armorStand.setBoots(placed);
-                break;
-            case 40:
-                armorStand.setItemInHand(placed);
-                break;
+        try {
+            switch (slot) {
+                case 4:
+                    armorStand.setHelmet(placed);
+                    break;
+                case 13:
+                    armorStand.setChestplate(placed);
+                    break;
+                case 22:
+                    armorStand.setLeggings(placed);
+                    break;
+                case 31:
+                    armorStand.setBoots(placed);
+                    break;
+                case 40:
+                    armorStand.setItemInHand(placed);
+                    break;
+            }
+            p.sendMessage(ChatColor.GREEN + "Armor stand updated successfully!");
+            PlayerManager.getCustomPlayerByBukkit(p).playSound("CLICK");
+        } catch (Exception ex) {
+            p.sendMessage(ChatColor.RED + "Failed to update armor stand!");
+            ex.printStackTrace();
+        }
+        if (!coolDownList.contains(p.getUniqueId())) {
+            cooldownMap.put(uuid, now);
         }
         PlayerManager.getCustomPlayerByBukkit(p).playSound("CLICK");
     }

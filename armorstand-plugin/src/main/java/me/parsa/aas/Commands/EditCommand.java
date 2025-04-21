@@ -21,12 +21,12 @@ package me.parsa.aas.Commands;
 import me.parsa.aas.Commands.Manager.SubCommand;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Menus.ArmorStandMenu;
+import me.parsa.aas.Utils.ArmorStandSelectionCache;
 import me.parsa.aas.Utils.ArmorStandUtils;
 import me.parsa.aas.Utils.PlayerMenuUtility;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class EditCommand extends SubCommand {
@@ -54,7 +54,8 @@ public class EditCommand extends SubCommand {
         }
 
         ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player), "", ArmorStandUtils.getArmorStandByName(args[1]));
-        armorStandMenu.open();
+        ArmorStandSelectionCache.setSelectedArmorStand(player.getUniqueId(), ArmorStandUtils.getArmorStandByName(args[1]));
+        armorStandMenu.open();;
     }
 
     @Override

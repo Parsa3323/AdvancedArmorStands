@@ -19,7 +19,6 @@
 package me.parsa.aas.Menus;
 
 import me.parsa.aas.Configs.TypesConfig;
-import me.parsa.aas.Menus.Manager.Menu;
 import me.parsa.aas.Menus.Manager.PaginatedMenu;
 import me.parsa.aas.Utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
@@ -31,10 +30,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.security.Key;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 public class SaveMenu extends PaginatedMenu {

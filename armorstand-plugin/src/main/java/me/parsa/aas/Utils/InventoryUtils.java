@@ -18,8 +18,8 @@
 
 package me.parsa.aas.Utils;
 
-import me.parsa.aas.Menus.ArmorStandMenu;
 import me.parsa.aas.inventory.manager.InventoryItem;
+import me.parsa.aas.inventory.manager.InventoryManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -37,13 +37,15 @@ public class InventoryUtils {
     private static final Map<UUID, ItemStack[]> contentBackups = new HashMap<>();
     private static final Map<UUID, ItemStack[]> armorBackups = new HashMap<>();
 
-    private static ArrayList<InventoryItem> inventoryItems = ArmorStandMenu.inventoryManager.getInventoryItems();
+    private static InventoryManager inventoryManager = new InventoryManager();
+
+    private static ArrayList<InventoryItem> inventoryItems = inventoryManager.getInventoryItems();
 
     public static void setItems(Player p) {
 
         Inventory inventory = p.getInventory();
         inventory.clear();
-        for (int i = 0; i < ArmorStandMenu.inventoryManager.getInventoryItems().size(); i++) {
+        for (int i = 0; i < inventoryManager.getInventoryItems().size(); i++) {
 
 
 
