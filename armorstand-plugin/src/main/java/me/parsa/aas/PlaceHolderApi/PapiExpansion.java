@@ -21,6 +21,7 @@ package me.parsa.aas.PlaceHolderApi;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Utils.ArmorStandUtils;
+import me.parsa.aas.Utils.TypeUtils;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,6 +52,8 @@ public class PapiExpansion extends PlaceholderExpansion {
         if (player == null) return "";
 
         if (params.equalsIgnoreCase("total_armor_stands")) return String.valueOf(ArmorStandUtils.getTotalArmorStands());
+
+        if (params.equalsIgnoreCase("total_types")) return String.valueOf(TypeUtils.getTotalTypes());
 
         return "";
     }

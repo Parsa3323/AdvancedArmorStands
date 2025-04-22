@@ -60,9 +60,8 @@ public class EditCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        ArrayList<String> list = new ArrayList<>(ArmorStands.get().getConfigurationSection("armorstands").getKeys(false));
 
-        return list;
+        return new ArrayList<>(ArmorStands.get().getConfigurationSection("armorstands").getKeys(false));
     }
 
     @Override

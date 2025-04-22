@@ -41,9 +41,9 @@ public class PlayerIntractListener implements Listener {
             if (player.isAdmin()) {
                 if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
                     if (e.getPlayer().isSneaking()) {
-                        ArmorStandMenu test = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), "", (ArmorStand) e.getRightClicked());
+                        ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), "", (ArmorStand) e.getRightClicked());
                         ArmorStandSelectionCache.setSelectedArmorStand(player.getBukkitPlayer().getUniqueId(), (ArmorStand) e.getRightClicked());
-                        test.open();
+                        armorStandMenu.open();
                     }
                     e.setCancelled(true);
                 }

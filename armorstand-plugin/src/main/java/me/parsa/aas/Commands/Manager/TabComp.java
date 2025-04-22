@@ -79,6 +79,12 @@ public class TabComp implements TabCompleter {
                 }
             }
 
+
+            if ("help".startsWith(currentInput)) {
+                list.add("help");
+            }
+
+
             if (currentInput.isEmpty()) {
                 for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
                     if (mainCommand.getSubCommands().get(i).isForOps()) {
@@ -89,6 +95,7 @@ public class TabComp implements TabCompleter {
                         list.add(mainCommand.getSubCommands().get(i).getName());
                     }
                 }
+                list.add("help");
                 return list;
             }
 

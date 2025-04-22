@@ -64,6 +64,11 @@ public class CreateCommand extends SubCommand implements Listener {
         }
         if (!args[1].equalsIgnoreCase("custom")) {
 
+            if (!TypesConfig.get().contains(args[1])) {
+                player.sendMessage(ChatColor.RED + "No type found named: " + args[1]);
+                return;
+            }
+
             ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
 
             ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, args[2]);
@@ -74,10 +79,7 @@ public class CreateCommand extends SubCommand implements Listener {
                 return;
             }
 
-            if (!TypesConfig.get().contains(args[1])) {
-                player.sendMessage(ChatColor.RED + "No type found named: " + args[1]);
-                return;
-            }
+
             armorStand.setArms(TypesConfig.get().getBoolean(args[1] + ".Arms"));
             armorStand.setGravity(TypesConfig.get().getBoolean(args[1] + ".Gravity"));
             armorStand.setBasePlate(TypesConfig.get().getBoolean(args[1] + ".BasePlate"));
@@ -94,7 +96,7 @@ public class CreateCommand extends SubCommand implements Listener {
 
                     Math.toRadians(getConfigDouble(args[1] + ".HeadPos.x")),
                     Math.toRadians(getConfigDouble(args[1] + ".HeadPos.y")),
-                    Math.toRadians(getConfigDouble(args[1] + ".HeadPos.z")) // <-- Fixed missing dot
+                    Math.toRadians(getConfigDouble(args[1] + ".HeadPos.z"))
             ));
 
             armorStand.setRightArmPose(new EulerAngle(

@@ -1,4 +1,3 @@
-
 /*
  *
  * Copyright
@@ -56,13 +55,63 @@ public class CommandManager implements CommandExecutor {
                 Player player = (Player) sender;
 
                 if (args.length > 0) {
+                    if (args[0].equalsIgnoreCase("help")) {
+                        int COMMANDS_PER_PAGE = 4;
+                        int page = 1;
+
+                        if (args.length >= 2) {
+                            try {
+                                page = Integer.parseInt(args[1]);
+                            } catch (NumberFormatException e) {
+                                player.sendMessage(ChatColor.RED + "Invalid page number.");
+                                return true;
+                            }
+                        }
+
+                        ArrayList<SubCommand> visibleCommands = new ArrayList<>();
+                        for (SubCommand cmd : subCommands) {
+                            if (!cmd.isForOps() || player.hasPermission("advanced-armorstands.admin")) {
+                                visibleCommands.add(cmd);
+                            }
+                        }
+
+                        int totalPages = (int) Math.ceil((double) visibleCommands.size() / COMMANDS_PER_PAGE);
+                        if (page < 1 || page > totalPages) {
+                            player.sendMessage(ChatColor.RED + "Invalid page. There are only " + totalPages + " pages.");
+                            return true;
+                        }
+
+                        int startIndex = (page - 1) * COMMANDS_PER_PAGE;
+                        int endIndex = Math.min(startIndex + COMMANDS_PER_PAGE, visibleCommands.size());
+
+                        player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
+                        player.sendMessage("   " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands");
+                        player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
+                        player.sendMessage(" ");
+                        player.sendMessage(ChatColor.YELLOW + " Commands (Page " + page + "/" + totalPages + ")");
+                        player.sendMessage(" ");
+
+                        for (int i = startIndex; i < endIndex; i++) {
+                            SubCommand cmd = visibleCommands.get(i);
+                            String commands = cmd.getSyntax();
+                            String description = cmd.getDescription();
+
+                            TextComponent commandComponent = new TextComponent(ChatColor.GOLD + "» " + commands + ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + description);
+                            commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to suggest this command ").create()));
+                            commandComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, commands));
+                            player.spigot().sendMessage(commandComponent);
+                            player.sendMessage(" ");
+                        }
+
+                        player.sendMessage(ChatColor.GRAY + "Use /as help [page] to view other pages.");
+                        player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
+                        PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
+                        return true;
+                    }
+
                     int count = 0;
-
-
                     for (int i = 0; i < getSubCommands().size(); i++) {
-
                         if (args[0].equalsIgnoreCase(getSubCommands().get(i).getName())) {
-
                             count++;
                             if (getSubCommands().get(i).isForOps()) {
                                 if (player.hasPermission("advanced-armorstands.admin")) {
@@ -73,7 +122,6 @@ public class CommandManager implements CommandExecutor {
                             } else {
                                 getSubCommands().get(i).perform(player, args);
                             }
-
                         }
                     }
                     if (count == 0) {
@@ -92,39 +140,7 @@ public class CommandManager implements CommandExecutor {
                         }
                     }
 
-
-
-                    player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
-                    player.sendMessage("   " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands");
-                    player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
-                    player.sendMessage("  ");
-                    player.sendMessage(ChatColor.YELLOW + " Commands ");
-                    player.sendMessage("  ");
-
-
-                    for (int i = 0; i < getSubCommands().size(); i++) {
-                        String commands = getSubCommands().get(i).getSyntax();
-                        String description = getSubCommands().get(i).getDescription();
-                        boolean isForOps = getSubCommands().get(i).isForOps();
-
-                        if (isForOps && !player.hasPermission("advanced-armorstands.admin")) {
-                            continue;
-                        }
-
-
-                        TextComponent commandComponent = new TextComponent(ChatColor.GOLD + "» " + commands + ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + description);
-                        commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to suggest this command ").create()));
-                        commandComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, commands));
-
-                        player.spigot().sendMessage(commandComponent);
-                        player.sendMessage(" ");
-                    }
-
-
-                    player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
-                 //   player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1, 1.5f);
-                    PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
-
+                    player.performCommand("as help 1");
                 }
             } else {
                 sender.sendMessage("This command can only be used by players!");
@@ -137,5 +153,4 @@ public class CommandManager implements CommandExecutor {
     public ArrayList<SubCommand> getSubCommands() {
         return subCommands;
     }
-
 }

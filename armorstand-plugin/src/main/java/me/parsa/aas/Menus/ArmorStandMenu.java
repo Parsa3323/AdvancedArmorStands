@@ -46,13 +46,10 @@ public class ArmorStandMenu extends Menu {
 
     private final ArrayList<UUID> coolDownList = new ArrayList<>();
 
-    private final String name;
-
     private final ArmorStand armorStand;
 
     public ArmorStandMenu(PlayerMenuUtility playerMenuUtility, String name1, ArmorStand armorStand) {
         super(playerMenuUtility);
-        this.name = name1;
         this.armorStand = armorStand;
     }
 
@@ -139,8 +136,6 @@ public class ArmorStandMenu extends Menu {
             return;
         }
 
-       // if (itemTaken == null) itemTaken = new ItemStack(Material.AIR);
-
         e.getInventory().setItem(slot, placed);
         p.setItemOnCursor(new ItemStack(Material.AIR));
 
@@ -185,8 +180,20 @@ public class ArmorStandMenu extends Menu {
         if (armorStand == null || !armorStand.isValid()) {
             playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "The armor stand is no longer available!");
             playerMenuUtility.getOwner().closeInventory();
+            for (int i = 0; i < inventory.getSize(); i++) {
+                ItemStack grayPane = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+                ItemMeta meta = grayPane.getItemMeta();
+
+                if (meta != null) {
+                    meta.setDisplayName(ChatColor.RED + "Armor stand is not available");
+                    grayPane.setItemMeta(meta);
+                }
+
+                inventory.setItem(i, grayPane);
+            }
             return;
         }
+
 
         Inventory inv = inventory;
         setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 7, new int[]{

@@ -119,16 +119,22 @@ public class SaveMenu extends PaginatedMenu {
     public void setMenuItems() {
         addMenuBorder();
 
-        if (TypesConfig.get().getKeys(false).isEmpty()) return;
+        Set<String> keys = TypesConfig.get().getKeys(false);
+        if (keys.isEmpty()) return;
 
-        for (String key : TypesConfig.get().getKeys(false)) {
+        ArrayList<String> list = new ArrayList<>(keys);
+
+        index = page * maxItemsPerPage;
+
+        for (int i = 0; i < maxItemsPerPage; i++) {
+            if (index >= list.size()) break;
+
+            String key = list.get(index);
 
             ItemStack itemStack = new ItemStack(Material.ARMOR_STAND);
-
             ItemMeta itemMeta = itemStack.getItemMeta();
 
             ArrayList<String> lore = new ArrayList<>();
-
             lore.add(ChatColor.GRAY + "Selecting this will override");
             lore.add(ChatColor.GRAY + "your old " + key + " config to");
             lore.add(ChatColor.GRAY + "the current config you made");
@@ -136,13 +142,11 @@ public class SaveMenu extends PaginatedMenu {
             lore.add(ChatColor.YELLOW + "Click to save");
 
             itemMeta.setLore(lore);
-
             itemMeta.setDisplayName(ChatColor.YELLOW + key);
-
             itemStack.setItemMeta(itemMeta);
 
             inventory.addItem(itemStack);
-
+            index++;
         }
 
     }

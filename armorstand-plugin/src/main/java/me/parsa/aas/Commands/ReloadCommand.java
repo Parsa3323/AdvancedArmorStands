@@ -23,7 +23,9 @@ import me.parsa.aas.Commands.Manager.SubCommand;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
 import me.parsa.aas.Player.PlayerManager;
+import me.parsa.aas.Utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
@@ -49,6 +51,11 @@ public class ReloadCommand extends SubCommand {
     public void perform(Player player, String[] args) {
 
         try {
+
+            for (ArmorStand armorStand : ArmorStandUtils.getArmorStands()) {
+
+            }
+
             TypesConfig.reload();
             ArmorStands.reload();
             player.sendMessage(ChatColor.GREEN + "✔ Successfully reloaded plugin's configs");

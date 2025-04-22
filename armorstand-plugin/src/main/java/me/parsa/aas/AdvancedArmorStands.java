@@ -28,12 +28,10 @@ import me.parsa.aas.Listener.PlayerLeaveEvent;
 import me.parsa.aas.Menus.Manager.MenuListener;
 import me.parsa.aas.PlaceHolderApi.PapiExpansion;
 import me.parsa.aas.Utils.PlayerMenuUtility;
-import me.parsa.aas.Utils.UpdateChecker;
 import me.parsa.aas.Utils.VersionSupportUtil;
 import me.parsa.aas.VersionSupport.IVersionSupport;
 import me.parsa.aas.inventory.manager.InventoryManager;
 import org.bstats.bukkit.Metrics;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
@@ -53,8 +51,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
     public IVersionSupport versionSupport;
 
     public static ArmorstandApi api;
-
-    public static String prefix = ChatColor.GOLD + "Advanced" + ChatColor.YELLOW + "ArmorStands " + ChatColor.GOLD + "» ";
 
     public static AdvancedArmorStands plugin;
 
@@ -100,7 +96,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         info("Loading configs");
 
-        TypesConfig.setup();
+        TypesConfig.init();
 
 
         TypesConfig.get().addDefault("running.Arms", true);
@@ -128,7 +124,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         TypesConfig.get().options().copyDefaults(true);
         TypesConfig.save();
 
-        ArmorStands.setup();
+        ArmorStands.init();
         ArmorStands.get().options().copyDefaults(true);
         ArmorStands.save();
         info("Registering Commands");
@@ -138,10 +134,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         info("Registering papi expansion");
         new PapiExpansion().register();
 
-        info("Checking for updates");
-        UpdateChecker updateChecker = new UpdateChecker(this, "Parsa3323", "AdvancedArmorStands");
-        updateChecker.checkForUpdates();
-
         info("Load done");
 
 
@@ -149,7 +141,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        info("Bye Bye...");
     }
 
     public static void debug(String message) {

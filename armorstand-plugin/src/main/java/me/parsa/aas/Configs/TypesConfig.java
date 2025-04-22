@@ -30,7 +30,7 @@ public class TypesConfig {
 
     private static FileConfiguration fileConfiguration;
 
-    public static void setup() {
+    public static void init() {
         file = new File(AdvancedArmorStands.plugin.getDataFolder(), "types.yml");
 
 

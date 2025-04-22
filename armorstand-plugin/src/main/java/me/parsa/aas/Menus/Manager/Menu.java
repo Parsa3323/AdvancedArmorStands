@@ -94,8 +94,8 @@ public abstract class Menu implements InventoryHolder {
 
     public ArrayList<String> createLoreNormal(String ... lines) {
         ArrayList<String> lore = new ArrayList<>();
-        for (int i = 0; i < lines.length; i++) {
-            lore.add(ChatColor.GRAY + lines[i]);
+        for (String line : lines) {
+            lore.add(ChatColor.GRAY + line);
         }
         return lore;
     }

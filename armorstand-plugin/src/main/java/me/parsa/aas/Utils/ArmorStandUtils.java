@@ -29,10 +29,44 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 public class ArmorStandUtils {
+
+    public static List<ArmorStand> getArmorStands() {
+        List<ArmorStand> armorStands = new ArrayList<>();
+        FileConfiguration config = ArmorStands.get();
+
+        if (!config.contains("armorstands")) {
+            return armorStands;
+        }
+
+        Set<String> keys = config.getConfigurationSection("armorstands").getKeys(false);
+
+        for (String key : keys) {
+            String path = "armorstands." + key;
+            UUID uuid = UUID.fromString(config.getString(path + ".UUID"));
+            String worldName = config.getString(path + ".World");
+
+            if (worldName == null) continue;
+
+            World world = Bukkit.getWorld(worldName);
+            if (world == null) continue;
+
+            for (Entity entity : world.getEntities()) {
+                if (entity instanceof ArmorStand && entity.getUniqueId().equals(uuid)) {
+                    armorStands.add((ArmorStand) entity);
+                    break;
+                }
+            }
+        }
+
+        return armorStands;
+    }
+
+
     public static String getNameByArmorStand(ArmorStand armorStand) {
         FileConfiguration config = ArmorStands.get();
         if (!config.contains("armorstands")) {
@@ -184,9 +218,8 @@ public class ArmorStandUtils {
 
     public static ArmorStand getArmorStandByName(String s) {
 
-        String name = s;
         FileConfiguration config = ArmorStands.get();
-        String path = "armorstands." + name;
+        String path = "armorstands." + s;
 
         if (!config.contains(path)) {
             AdvancedArmorStands.error(ChatColor.RED + "ArmorStand not found!");
@@ -204,11 +237,7 @@ public class ArmorStandUtils {
 
         for (Entity entity : world.getEntities()) {
             if (entity instanceof ArmorStand && entity.getUniqueId().equals(uuid)) {
-                ArmorStand armorStand = (ArmorStand) entity;
-
-
-
-                return armorStand;
+                return (ArmorStand) entity;
             }
         }
 

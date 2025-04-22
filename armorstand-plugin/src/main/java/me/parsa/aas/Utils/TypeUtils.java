@@ -16,17 +16,12 @@
  * limitations under the License.
  */
 
-package me.parsa.aas.Player;
+package me.parsa.aas.Utils;
 
-import org.bukkit.entity.Player;
+import me.parsa.aas.Configs.TypesConfig;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class PlayerManager {
-    private static final Map<Player, IPlayer> playerMap = new HashMap<>();
-
-    public static IPlayer getCustomPlayerByBukkit(Player player) {
-        return playerMap.computeIfAbsent(player, CustomPlayer::new);
+public class TypeUtils {
+    public static int getTotalTypes() {
+        return TypesConfig.get().getKeys(false).size();
     }
 }
