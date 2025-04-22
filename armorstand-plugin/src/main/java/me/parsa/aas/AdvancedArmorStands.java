@@ -32,6 +32,7 @@ import me.parsa.aas.Utils.UpdateChecker;
 import me.parsa.aas.Utils.VersionSupportUtil;
 import me.parsa.aas.VersionSupport.IVersionSupport;
 import me.parsa.aas.inventory.manager.InventoryManager;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -83,8 +84,11 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         boolean levelName = getConfig().getBoolean("debug", false);
 
+
         logLevel = (levelName) ? Level.FINE : Level.INFO;
         logger.setLevel(logLevel);
+
+        Metrics metrics = new Metrics(this, 25568);
 
         info("Registering events");
         PluginManager ev = getServer().getPluginManager();

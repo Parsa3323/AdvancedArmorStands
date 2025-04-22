@@ -98,7 +98,7 @@ public class CommandManager implements CommandExecutor {
                     player.sendMessage("   " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands");
                     player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
                     player.sendMessage("  ");
-                    player.sendMessage(ChatColor.YELLOW + "⚡ Commands ⚡");
+                    player.sendMessage(ChatColor.YELLOW + " Commands ");
                     player.sendMessage("  ");
 
 
@@ -112,8 +112,8 @@ public class CommandManager implements CommandExecutor {
                         }
 
 
-                        TextComponent commandComponent = new TextComponent(ChatColor.GOLD + "➤ " + commands + ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + description);
-                        commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "⚡ Click to suggest this command ⚡").create()));
+                        TextComponent commandComponent = new TextComponent(ChatColor.GOLD + "» " + commands + ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + description);
+                        commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to suggest this command ").create()));
                         commandComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, commands));
 
                         player.spigot().sendMessage(commandComponent);
