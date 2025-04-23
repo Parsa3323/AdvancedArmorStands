@@ -99,27 +99,27 @@ public final class AdvancedArmorStands extends JavaPlugin {
         TypesConfig.init();
 
 
-        TypesConfig.get().addDefault("running.Arms", true);
-        TypesConfig.get().addDefault("running.Gravity", false);
-        TypesConfig.get().addDefault("running.BasePlate", false);
-        TypesConfig.get().addDefault("running.CustomName", "&cMade with aas");
-        TypesConfig.get().addDefault("running.isCustomNameVisible", false);
-        TypesConfig.get().addDefault("running.itemInHandMaterial", "WOOD_SWORD");
-        TypesConfig.get().addDefault("running.HeadPos.x", null);
-        TypesConfig.get().addDefault("running.HeadPos.y", null);
-        TypesConfig.get().addDefault("running.HeadPos.z", null);
-        TypesConfig.get().addDefault("running.rightArmPose.x", -45);
-        TypesConfig.get().addDefault("running.rightArmPose.y", 0);
-        TypesConfig.get().addDefault("running.rightArmPose.z", 0);
-        TypesConfig.get().addDefault("running.leftArmPose.x", 45);
-        TypesConfig.get().addDefault("running.leftArmPose.y", 0);
-        TypesConfig.get().addDefault("running.leftArmPose.z", 0);
-        TypesConfig.get().addDefault("running.rightLegPose.x", 45);
-        TypesConfig.get().addDefault("running.rightLegPose.y", 0);
-        TypesConfig.get().addDefault("running.rightLegPose.z", 0);
-        TypesConfig.get().addDefault("running.leftLegPose.x", -45);
-        TypesConfig.get().addDefault("running.leftLegPose.y", 0);
-        TypesConfig.get().addDefault("running.leftLegPose.z", 0);
+        TypesConfig.get().addDefault("default.Arms", true);
+        TypesConfig.get().addDefault("default.Gravity", false);
+        TypesConfig.get().addDefault("default.BasePlate", false);
+        TypesConfig.get().addDefault("default.CustomName", "&cMade with aas");
+        TypesConfig.get().addDefault("default.isCustomNameVisible", false);
+        TypesConfig.get().addDefault("default.itemInHandMaterial", "WOOD_SWORD");
+        TypesConfig.get().addDefault("default.HeadPos.x", null);
+        TypesConfig.get().addDefault("default.HeadPos.y", null);
+        TypesConfig.get().addDefault("default.HeadPos.z", null);
+        TypesConfig.get().addDefault("default.rightArmPose.x", -45);
+        TypesConfig.get().addDefault("default.rightArmPose.y", 0);
+        TypesConfig.get().addDefault("default.rightArmPose.z", 0);
+        TypesConfig.get().addDefault("default.leftArmPose.x", 45);
+        TypesConfig.get().addDefault("default.leftArmPose.y", 0);
+        TypesConfig.get().addDefault("default.leftArmPose.z", 0);
+        TypesConfig.get().addDefault("default.rightLegPose.x", 45);
+        TypesConfig.get().addDefault("default.rightLegPose.y", 0);
+        TypesConfig.get().addDefault("default.rightLegPose.z", 0);
+        TypesConfig.get().addDefault("default.leftLegPose.x", -45);
+        TypesConfig.get().addDefault("default.leftLegPose.y", 0);
+        TypesConfig.get().addDefault("default.leftLegPose.z", 0);
 
         TypesConfig.get().options().copyDefaults(true);
         TypesConfig.save();

@@ -28,6 +28,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
@@ -54,7 +55,8 @@ public class InventoryManager implements Listener {
         Player player = event.getPlayer();
         if (event.getItem() != null && event.getItem().hasItemMeta()) {
             String name = ChatColor.stripColor(event.getItem().getItemMeta().getDisplayName());
-            if ("(Right Click) EXIT".equalsIgnoreCase(name)) {
+            if ("EXIT (Right Click)".equalsIgnoreCase(name)) {
+                event.setCancelled(true);
                 InventoryUtils.restore(player);
                 new ArmorStandMenu(new PlayerMenuUtility(player), "menu", ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId())).open();
 
@@ -68,7 +70,7 @@ public class InventoryManager implements Listener {
             for (int i = 0; i < getInventoryItems().size(); i++) {
 
                 if (event.getItem().equals(getInventoryItems().get(i).getItemStack())) {
-
+                    event.setCancelled(true);
                     getInventoryItems().get(i).execute(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), action);
 
                 }
@@ -79,6 +81,8 @@ public class InventoryManager implements Listener {
 
 
     }
+
+
 
     public ArrayList<InventoryItem> getInventoryItems() {
         return inventoryItems;

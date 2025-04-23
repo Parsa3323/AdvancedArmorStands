@@ -53,7 +53,7 @@ public class InventoryUtils {
 
             ItemStack itemStack = new ItemStack(Material.BARRIER);
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.GRAY + "(Right Click) " + ChatColor.RED  + "EXIT");
+            itemMeta.setDisplayName( ChatColor.RED  + "EXIT" + ChatColor.GRAY + " (Right Click)");
             itemStack.setItemMeta(itemMeta);
             inventory.setItem(8, itemStack);
 

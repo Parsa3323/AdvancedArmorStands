@@ -37,7 +37,7 @@ public class EditCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "opens the settings menu";
+        return "Opens the settings menu";
     }
 
     @Override

@@ -18,6 +18,8 @@
 
 package me.parsa.aas.inventory;
 
+import me.parsa.aas.AdvancedArmorStands;
+import me.parsa.aas.Utils.PlayerUtils;
 import me.parsa.aas.inventory.manager.InventoryItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -40,14 +42,16 @@ public class LeftLegItem extends InventoryItem {
     public ItemStack getItemStack() {
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GOLD + "RIGHT CLICK " + ChatColor.GRAY + "To rotate left leg to right");
-        lore.add(ChatColor.GOLD + "LEFT CLICK " + ChatColor.GRAY + "To rotate left leg to left");
-        lore.add(ChatColor.GOLD + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move left leg up");
-        lore.add(ChatColor.GOLD + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move left leg down");
+        lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.GRAY + "To rotate left leg to right");
+        lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.GRAY + "To rotate left leg to left");
+        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move left leg up");
+        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move left leg down");
+        lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
 
-        ItemStack itemStack = new ItemStack(Material.BED);
+
+        ItemStack itemStack = PlayerUtils.getSkullFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDA4NWE2NzgwMmMwZWE0NjJmYmJhNGExZGJiNjgxNzQ4ZjVjZDAxYTMwMzQ3NjdiMWVjZjgzYWUxMjdlODUwZiJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.RED + "LeftLeg");
+        itemMeta.setDisplayName(ChatColor.GREEN  +"LeftLeg" + ChatColor.GRAY + " (Hover)");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 
@@ -63,7 +67,6 @@ public class LeftLegItem extends InventoryItem {
     public void execute(Player p, ArmorStand armorStand, Action action) {
 
         EulerAngle currentPose = armorStand.getLeftLegPose();
-
         double step = Math.toRadians(5);
 
         if (p.isSneaking()) {
