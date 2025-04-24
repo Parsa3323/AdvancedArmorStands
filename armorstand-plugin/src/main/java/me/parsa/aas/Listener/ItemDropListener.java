@@ -19,21 +19,19 @@
 package me.parsa.aas.Listener;
 
 import me.parsa.aas.Utils.ArmorStandSelectionCache;
-import me.parsa.aas.Utils.InventoryUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 
-public class PlayerLeaveEvent implements Listener {
+public class ItemDropListener implements Listener {
 
     @EventHandler
-    public void quit(PlayerQuitEvent e) {
-        if (InventoryUtils.hasBackup(e.getPlayer())) {
-            InventoryUtils.restore(e.getPlayer());
-            InventoryUtils.save(e.getPlayer());
+    public void onPlayerItemDrop(PlayerDropItemEvent e) {
+
+        if (ArmorStandSelectionCache.hasSelection(e.getItemDrop().getUniqueId())) {
+            e.setCancelled(true);
         }
 
-        if (ArmorStandSelectionCache.hasSelection(e.getPlayer().getUniqueId())) ArmorStandSelectionCache.removeSelectedArmorStand(e.getPlayer().getUniqueId());
-
     }
+
 }

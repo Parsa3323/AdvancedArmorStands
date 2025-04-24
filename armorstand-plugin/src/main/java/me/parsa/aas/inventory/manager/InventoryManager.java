@@ -59,7 +59,7 @@ public class InventoryManager implements Listener {
                 event.setCancelled(true);
                 InventoryUtils.restore(player);
                 new ArmorStandMenu(new PlayerMenuUtility(player), "menu", ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId())).open();
-
+                ArmorStandSelectionCache.removeSelectedArmorStand(player.getUniqueId());
                 return;
             }
 

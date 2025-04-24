@@ -1,1 +1,10 @@
+# AdvancedArmorStands by Parsa3323.
+# Github here: https://github.com/Parsa3323/AdvancedArmorStands/
+
+# Enable & Disable Debug
 debug: false
+
+# Enables the feature where sneaking and right-clicking an armor stand
+# three times will save it as an Advanced Armor Stand, armor stand.
+# If set to false, this will be disabled.
+shift-right-click-to-add: true

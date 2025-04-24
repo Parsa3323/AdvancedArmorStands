@@ -20,9 +20,12 @@ package me.parsa.aas;
 
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
+import me.parsa.aas.Utils.ArmorStandSelectionCache;
 import me.parsa.aas.Utils.ArmorStandUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
+
+import java.util.UUID;
 
 public class API implements ArmorstandApi{
     @Override
@@ -43,6 +46,11 @@ public class API implements ArmorstandApi{
                 return TypesConfig.get();
             }
         };
+    }
+
+    @Override
+    public boolean isInEditSession(UUID uuid) {
+        return ArmorStandSelectionCache.hasSelection(uuid);
     }
 
     @Override

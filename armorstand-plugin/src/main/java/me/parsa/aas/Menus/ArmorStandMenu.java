@@ -18,8 +18,10 @@
 
 package me.parsa.aas.Menus;
 
+import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Menus.Manager.Menu;
 import me.parsa.aas.Player.PlayerManager;
+import me.parsa.aas.Utils.ArmorStandSelectionCache;
 import me.parsa.aas.Utils.ArmorStandUtils;
 import me.parsa.aas.Utils.InventoryUtils;
 import me.parsa.aas.Utils.PlayerMenuUtility;
@@ -31,6 +33,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -276,6 +279,11 @@ public class ArmorStandMenu extends Menu {
     @Override
     public boolean cancelClicks() {
         return false;
+    }
+
+    @Override
+    public void close(InventoryCloseEvent e) {
+        AdvancedArmorStands.debug("Closed menu");
     }
 
     private static void setSlots(Inventory inv, Material material, byte data, int[] slots) {

@@ -22,10 +22,13 @@ package me.parsa.aas;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 
+import java.util.UUID;
+
 public interface ArmorstandApi  {
 
     ConfigManager getConfigManager();
 
+    boolean isInEditSession(UUID uuid);
 
     interface ConfigManager {
 

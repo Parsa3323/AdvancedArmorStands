@@ -19,12 +19,15 @@
 package me.parsa.aas.Listener;
 
 
+import me.parsa.aas.AdvancedArmorStands;
+import me.parsa.aas.Commands.CreateCommand;
 import me.parsa.aas.Menus.ArmorStandMenu;
 import me.parsa.aas.Player.IPlayer;
 import me.parsa.aas.Player.PlayerManager;
 import me.parsa.aas.Utils.ArmorStandSelectionCache;
 import me.parsa.aas.Utils.ArmorStandUtils;
 import me.parsa.aas.Utils.PlayerMenuUtility;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -32,7 +35,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
+
 public class PlayerIntractListener implements Listener {
+
+    private final Map<UUID, Integer> interactionCount  = new HashMap<>();
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerInteractAtEntityEvent(PlayerInteractAtEntityEvent e) {
@@ -46,6 +56,25 @@ public class PlayerIntractListener implements Listener {
                         armorStandMenu.open();
                     }
                     e.setCancelled(true);
+                }
+                if (AdvancedArmorStands.plugin.getConfig().getBoolean("shift-right-click-to-add")) {
+                    UUID playerId = player.getBukkitPlayer().getUniqueId();
+                    int count = interactionCount.getOrDefault(playerId, 0) + 1;
+
+                    if (count < 3) {
+                        interactionCount.put(playerId, count);
+                        player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced armor stands.");
+                    } else if (count == 3) {
+                        int randomSuffix = new Random().nextInt(900) + 100;
+                        String name = "SavedStand" + randomSuffix;
+
+                        ArmorStand stand = (ArmorStand) e.getRightClicked();
+                        CreateCommand.saveArmorStand(name, stand);
+                        player.getBukkitPlayer().sendMessage(ChatColor.GOLD + "Armor stand saved as " + name + "!");
+
+                        interactionCount.remove(playerId);
+                    }
+
                 }
             }
 

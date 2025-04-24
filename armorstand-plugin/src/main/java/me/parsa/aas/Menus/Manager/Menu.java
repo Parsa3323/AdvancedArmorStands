@@ -24,6 +24,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -57,6 +58,8 @@ public abstract class Menu implements InventoryHolder {
 
     public abstract boolean cancelClicks();
 
+    public abstract void close(InventoryCloseEvent e);
+
     public void open() {
         inventory = Bukkit.createInventory(this, getSlots(), getMenuName());
 
@@ -79,6 +82,7 @@ public abstract class Menu implements InventoryHolder {
     public Inventory getInventory() {
         return inventory;
     }
+
 
     public ArrayList<String> createLoreAndDescription(String toJoinText, boolean pressable, String ... description) {
         ArrayList<String> lore = new ArrayList<>();

@@ -18,6 +18,7 @@
 
 package me.parsa.aas.Menus;
 
+import me.parsa.aas.AdvancedArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
 import me.parsa.aas.Menus.Manager.PaginatedMenu;
 import me.parsa.aas.Utils.PlayerMenuUtility;
@@ -27,6 +28,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -164,5 +166,10 @@ public class SaveMenu extends PaginatedMenu {
     @Override
     public boolean cancelClicks() {
         return true;
+    }
+
+    @Override
+    public void close(InventoryCloseEvent e) {
+        AdvancedArmorStands.debug("Closed menu");
     }
 }
