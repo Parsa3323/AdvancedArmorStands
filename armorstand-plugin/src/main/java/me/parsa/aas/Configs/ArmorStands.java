@@ -33,6 +33,9 @@ public class ArmorStands {
     public static void init() {
         file = new File(AdvancedArmorStands.plugin.getDataFolder(), "caches/armorstands.yml");
 
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
 
         if (!file.exists()) {
             try {

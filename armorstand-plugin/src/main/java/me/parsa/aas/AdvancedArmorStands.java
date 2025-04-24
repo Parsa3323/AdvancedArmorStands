@@ -24,6 +24,7 @@ import me.parsa.aas.Commands.Manager.TabComp;
 import me.parsa.aas.Configs.ArmorStands;
 import me.parsa.aas.Configs.TypesConfig;
 import me.parsa.aas.Listener.ItemDropListener;
+import me.parsa.aas.Listener.PlayerDieListener;
 import me.parsa.aas.Listener.PlayerIntractListener;
 import me.parsa.aas.Listener.PlayerLeaveEvent;
 import me.parsa.aas.Menus.Manager.MenuListener;
@@ -89,6 +90,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         info("Registering events");
         PluginManager ev = getServer().getPluginManager();
+        ev.registerEvents(new PlayerDieListener(), this);
         ev.registerEvents(new InventoryManager(), this);
         ev.registerEvents(new PlayerLeaveEvent(), this);
         ev.registerEvents(new CreateCommand(), this);
@@ -134,6 +136,11 @@ public final class AdvancedArmorStands extends JavaPlugin {
         getCommand("as").setExecutor(new CommandManager());
 
         info("Registering papi expansion");
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
+            error("Papi was not found. Disabling...");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
         new PapiExpansion().register();
 
         info("Load done");

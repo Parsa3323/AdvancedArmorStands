@@ -24,6 +24,7 @@ import me.parsa.aas.Player.PlayerManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -80,7 +81,11 @@ public class RenameCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return Collections.emptyList();
+        if (args.length == 2) {
+            return new ArrayList<>(ArmorStands.get().getConfigurationSection("armorstands").getKeys(false));
+        } else {
+            return null;
+        }
     }
 
     @Override

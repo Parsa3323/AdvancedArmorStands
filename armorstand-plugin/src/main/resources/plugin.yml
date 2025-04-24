@@ -1,6 +1,7 @@
 name: AdvancedArmorStands
 version: '${project.version}'
 main: me.parsa.aas.AdvancedArmorStands
+softdepend: [PlaceholderAPI]
 permissions:
   advanced-armorstands.admin:
     description: Admin access for aas
