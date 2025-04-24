@@ -85,6 +85,6 @@ public class RenameCommand extends SubCommand {
 
     @Override
     public boolean isForOps() {
-        return false;
+        return true;
     }
 }
