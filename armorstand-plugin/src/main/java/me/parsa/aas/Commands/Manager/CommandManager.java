@@ -46,6 +46,7 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new MoveCommand());
         subCommands.add(new EditCommand());
         subCommands.add(new DeleteCommand());
+        subCommands.add(new RenameCommand());
     }
 
     @Override

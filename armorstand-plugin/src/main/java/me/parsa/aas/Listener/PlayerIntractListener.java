@@ -43,6 +43,7 @@ import java.util.UUID;
 public class PlayerIntractListener implements Listener {
 
     private final Map<UUID, Integer> interactionCount  = new HashMap<>();
+    private final Map<UUID, ArmorStand> selectCount = new HashMap<>();
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerInteractAtEntityEvent(PlayerInteractAtEntityEvent e) {
@@ -56,26 +57,36 @@ public class PlayerIntractListener implements Listener {
                         armorStandMenu.open();
                     }
                     e.setCancelled(true);
-                }
-                if (AdvancedArmorStands.plugin.getConfig().getBoolean("shift-right-click-to-add")) {
-                    UUID playerId = player.getBukkitPlayer().getUniqueId();
-                    int count = interactionCount.getOrDefault(playerId, 0) + 1;
+                } else {
+                    if (AdvancedArmorStands.plugin.getConfig().getBoolean("shift-right-click-to-add")) {
 
-                    if (count < 3) {
-                        interactionCount.put(playerId, count);
-                        player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced armor stands.");
-                    } else if (count == 3) {
-                        int randomSuffix = new Random().nextInt(900) + 100;
-                        String name = "SavedStand" + randomSuffix;
 
-                        ArmorStand stand = (ArmorStand) e.getRightClicked();
-                        CreateCommand.saveArmorStand(name, stand);
-                        player.getBukkitPlayer().sendMessage(ChatColor.GOLD + "Armor stand saved as " + name + "!");
+                        UUID playerId = player.getBukkitPlayer().getUniqueId();
 
-                        interactionCount.remove(playerId);
+                        if (!selectCount.containsKey(playerId) || selectCount.get(playerId) != (ArmorStand) e.getRightClicked()) {
+                            interactionCount.put(playerId, 0);
+                        }
+
+                        int count = interactionCount.getOrDefault(playerId, 0) + 1;
+
+                        if (count < 3) {
+                            selectCount.put(playerId, (ArmorStand) e.getRightClicked());
+                            interactionCount.put(playerId, count);
+                            player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced armor stands.");
+                        } else if (count == 3) {
+                            int randomSuffix = new Random().nextInt(900) + 100;
+                            String name = "SavedStand" + randomSuffix;
+
+                            ArmorStand stand = (ArmorStand) e.getRightClicked();
+                            CreateCommand.saveArmorStand(name, stand);
+                            player.getBukkitPlayer().sendMessage(ChatColor.GOLD + "Armor stand saved as " + name + "!");
+
+                            interactionCount.remove(playerId);
+                        }
+
                     }
-
                 }
+
             }
 
         }
