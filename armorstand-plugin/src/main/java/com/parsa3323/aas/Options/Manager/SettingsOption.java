@@ -26,7 +26,7 @@ public abstract class SettingsOption  {
 
     public abstract String getName();
 
-    public abstract ItemStack getItemStack();
+    public abstract ItemStack getItemStack(ArmorStand armorStand);
 
     public abstract void click(InventoryClickEvent e, ArmorStand armorStand);
 

@@ -19,27 +19,35 @@
 package com.parsa3323.aas.Options;
 
 import com.parsa3323.aas.Options.Manager.SettingsOption;
-import org.bukkit.Material;
+import com.parsa3323.aas.Utils.PlayerUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class TestOption extends SettingsOption {
+import java.util.ArrayList;
 
-    private String thing = "THING";
+public class ArmsOptions extends SettingsOption {
 
     @Override
     public String getName() {
-        return "YEPO";
+        return "ArmsOptions";
     }
 
     @Override
-    public ItemStack getItemStack() {
-        ItemStack itemStack = new ItemStack(Material.BOW);
+    public ItemStack getItemStack(ArmorStand armorStand) {
+        ItemStack itemStack = PlayerUtils.getSkullFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGI2MzJiM2QwZjgyMGVjNjExNzA4ZTg5MjIyMjA1OWEzNjRkNzYyMjE3YzJjNmM5YmE3MWM1YWRiNDZmYzRiNCJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(thing);
+        itemMeta.setDisplayName(ChatColor.GREEN + "Arms");
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ChatColor.GRAY + "Enable and disable");
+        lore.add(ChatColor.GRAY + "arms for this armor stand ");
+        lore.add("");
+        lore.add((armorStand.hasArms()) ? ChatColor.GREEN + "✔ Has arms" : ChatColor.RED + "✘ Doesn't have arms");
+
+        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 
         return itemStack;
@@ -47,9 +55,7 @@ public class TestOption extends SettingsOption {
 
     @Override
     public void click(InventoryClickEvent e, ArmorStand armorStand) {
-        System.out.println("CLICKKKKKKKKK");
-         Player p = (Player) e.getWhoClicked();
-         thing = "LING";
+        armorStand.setArms(!armorStand.hasArms());
     }
 
 

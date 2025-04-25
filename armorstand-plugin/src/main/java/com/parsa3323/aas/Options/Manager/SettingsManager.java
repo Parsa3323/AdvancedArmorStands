@@ -19,7 +19,7 @@
 package com.parsa3323.aas.Options.Manager;
 
 import com.parsa3323.aas.Menus.Manager.PaginatedMenu;
-import com.parsa3323.aas.Options.TestOption;
+import com.parsa3323.aas.Options.ArmsOptions;
 import com.parsa3323.aas.Utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -40,7 +40,7 @@ public class SettingsManager extends PaginatedMenu {
     public SettingsManager(PlayerMenuUtility playerMenuUtility, ArmorStand armorStand) {
         super(playerMenuUtility);
         this.armorStand = armorStand;
-        settingsOptions.add(new TestOption());
+        settingsOptions.add(new ArmsOptions());
     }
 
     @Override
@@ -76,7 +76,7 @@ public class SettingsManager extends PaginatedMenu {
         }
 
         for (int i = 0; i < getSettingsOptions().size(); i++) {
-            if (e.getCurrentItem().equals(getSettingsOptions().get(i).getItemStack())) {
+            if (e.getCurrentItem().equals(getSettingsOptions().get(i).getItemStack(armorStand))) {
                 getSettingsOptions().get(i).click(e, armorStand);
                 super.open();
                 return;
@@ -93,7 +93,7 @@ public class SettingsManager extends PaginatedMenu {
         for (int i = 0; i < getSettingsOptions().size(); i++) {
             if (index >= getSettingsOptions().size()) break;
 
-            ItemStack itemStack = getSettingsOptions().get(i).getItemStack();
+            ItemStack itemStack = getSettingsOptions().get(i).getItemStack(armorStand);
             inventory.addItem(itemStack);
             index++;
 
