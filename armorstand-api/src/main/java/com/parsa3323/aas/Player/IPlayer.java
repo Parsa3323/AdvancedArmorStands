@@ -21,8 +21,6 @@ package com.parsa3323.aas.Player;
 
 import org.bukkit.entity.Player;
 
-import java.util.UUID;
-
 public interface IPlayer {
 
     Player getBukkitPlayer();

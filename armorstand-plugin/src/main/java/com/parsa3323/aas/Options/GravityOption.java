@@ -28,24 +28,23 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class ArmsOptions extends SettingsOption {
-
+public class GravityOption extends SettingsOption {
     @Override
     public String getName() {
-        return "ArmsOptions";
+        return "GravityOption";
     }
 
     @Override
     public ItemStack getItemStack(ArmorStand armorStand) {
-        ItemStack itemStack = PlayerUtils.getSkullFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGI2MzJiM2QwZjgyMGVjNjExNzA4ZTg5MjIyMjA1OWEzNjRkNzYyMjE3YzJjNmM5YmE3MWM1YWRiNDZmYzRiNCJ9fX0=");
+        ItemStack itemStack = PlayerUtils.getSkullFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU3YTQ3MzNjMDgzMGM4YjQyNWI2MjEzNzc4MGJkYmVmNTdiMTNhODg3YWFhZjExNzNjNmNlMGExZDc4NDFmMSJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Arms");
+        itemMeta.setDisplayName(ChatColor.GREEN + "Gravity");
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "arms for this armor stand ");
+        lore.add(ChatColor.GRAY + "gravity for this armor stand ");
         lore.add("");
-        lore.add((armorStand.hasArms()) ? ChatColor.GREEN + "✔ Has arms" : ChatColor.RED + "✘ Doesn't have arms");
+        lore.add((armorStand.hasGravity()) ? ChatColor.GREEN + "✔ Has gravity" : ChatColor.RED + "✘ Doesn't have gravity");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
@@ -55,13 +54,12 @@ public class ArmsOptions extends SettingsOption {
 
     @Override
     public void click(InventoryClickEvent e, ArmorStand armorStand) {
-        armorStand.setArms(!armorStand.hasArms());
+        armorStand.setGravity(!armorStand.hasGravity());
+
     }
 
     @Override
     public boolean updateInventory() {
         return true;
     }
-
-
 }

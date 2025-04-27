@@ -18,13 +18,13 @@
 
 package com.parsa3323.aas.Commands;
 
-import me.clip.placeholderapi.PlaceholderAPI;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.Commands.Manager.SubCommand;
 import com.parsa3323.aas.Configs.ArmorStands;
 import com.parsa3323.aas.Configs.TypesConfig;
 import com.parsa3323.aas.Events.ArmorStandCreateEvent;
 import com.parsa3323.aas.Player.PlayerManager;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;

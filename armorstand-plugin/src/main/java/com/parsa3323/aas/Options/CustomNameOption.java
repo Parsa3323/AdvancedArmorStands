@@ -22,30 +22,36 @@ import com.parsa3323.aas.Options.Manager.SettingsOption;
 import com.parsa3323.aas.Utils.PlayerUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
-public class ArmsOptions extends SettingsOption {
+public class CustomNameOption extends SettingsOption {
+
+    public static final Map<UUID, ArmorStand> players = new HashMap<>();
 
     @Override
     public String getName() {
-        return "ArmsOptions";
+        return "CustomNameOption";
     }
 
     @Override
     public ItemStack getItemStack(ArmorStand armorStand) {
-        ItemStack itemStack = PlayerUtils.getSkullFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGI2MzJiM2QwZjgyMGVjNjExNzA4ZTg5MjIyMjA1OWEzNjRkNzYyMjE3YzJjNmM5YmE3MWM1YWRiNDZmYzRiNCJ9fX0=");
+        ItemStack itemStack = PlayerUtils.getSkullFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWRlOGQwZjNlNDIxY2NlODU1NmViOGUzZTU4MzI1OWZmNjg3MzRiYTBmNGNhYjYzOWMyMzkwN2NkMmJlNGVmYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Arms");
+        itemMeta.setDisplayName(ChatColor.GREEN + "Custom name");
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "arms for this armor stand ");
+        lore.add(ChatColor.GRAY + "Set a custom name for");
+        lore.add(ChatColor.GRAY + "this armor stand ");
         lore.add("");
-        lore.add((armorStand.hasArms()) ? ChatColor.GREEN + "✔ Has arms" : ChatColor.RED + "✘ Doesn't have arms");
+        lore.add(ChatColor.GREEN + "Current name: " + armorStand.getCustomName());
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
@@ -55,12 +61,21 @@ public class ArmsOptions extends SettingsOption {
 
     @Override
     public void click(InventoryClickEvent e, ArmorStand armorStand) {
-        armorStand.setArms(!armorStand.hasArms());
+        Player p = (Player) e.getWhoClicked();
+
+        if (!players.containsKey(p.getUniqueId())) {
+            players.put(p.getUniqueId(), armorStand);
+            p.sendMessage(ChatColor.GREEN + "Type the name you want to set in the chat, To exit type 'exit'");
+            p.closeInventory();
+        } else {
+            p.sendMessage(ChatColor.RED + "You are already in a name set session");
+        }
+
     }
 
     @Override
     public boolean updateInventory() {
-        return true;
+        return false;
     }
 
 

@@ -23,10 +23,7 @@ import com.parsa3323.aas.Commands.Manager.CommandManager;
 import com.parsa3323.aas.Commands.Manager.TabComp;
 import com.parsa3323.aas.Configs.ArmorStands;
 import com.parsa3323.aas.Configs.TypesConfig;
-import com.parsa3323.aas.Listener.ItemDropListener;
-import com.parsa3323.aas.Listener.PlayerDieListener;
-import com.parsa3323.aas.Listener.PlayerIntractListener;
-import com.parsa3323.aas.Listener.PlayerLeaveEvent;
+import com.parsa3323.aas.Listener.*;
 import com.parsa3323.aas.Menus.Manager.MenuListener;
 import com.parsa3323.aas.PlaceHolderApi.PapiExpansion;
 import com.parsa3323.aas.Utils.PlayerMenuUtility;
@@ -90,6 +87,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         info("Registering events");
         PluginManager ev = getServer().getPluginManager();
+        ev.registerEvents(new ChatListener(), this);
         ev.registerEvents(new PlayerDieListener(), this);
         ev.registerEvents(new InventoryManager(), this);
         ev.registerEvents(new PlayerLeaveEvent(), this);
@@ -188,6 +186,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
             return playerMenuUtility;
         }
     }
+
 
 
 

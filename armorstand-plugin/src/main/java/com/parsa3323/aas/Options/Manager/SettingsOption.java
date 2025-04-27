@@ -30,5 +30,7 @@ public abstract class SettingsOption  {
 
     public abstract void click(InventoryClickEvent e, ArmorStand armorStand);
 
+    public abstract boolean updateInventory();
+
 
 }
