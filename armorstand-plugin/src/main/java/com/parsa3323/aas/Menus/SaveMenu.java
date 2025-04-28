@@ -119,9 +119,10 @@ public class SaveMenu extends PaginatedMenu {
 
     @Override
     public void setMenuItems() {
-        addMenuBorder();
-
         Set<String> keys = TypesConfig.get().getKeys(false);
+        addMenuBorder(keys.size());
+
+
         if (keys.isEmpty()) return;
 
         ArrayList<String> list = new ArrayList<>(keys);

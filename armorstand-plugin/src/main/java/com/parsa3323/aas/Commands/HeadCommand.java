@@ -19,31 +19,28 @@
 package com.parsa3323.aas.Commands;
 
 import com.parsa3323.aas.Commands.Manager.SubCommand;
-import com.parsa3323.aas.Configs.ArmorStands;
-import com.parsa3323.aas.Options.Manager.SettingsManager;
-import com.parsa3323.aas.Utils.ArmorStandUtils;
-import com.parsa3323.aas.Utils.PlayerMenuUtility;
+import com.parsa3323.aas.Utils.PlayerUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OptionsCommand extends SubCommand {
+public class HeadCommand extends SubCommand {
     @Override
     public String getName() {
-        return "options";
+        return "head";
     }
 
     @Override
     public String getDescription() {
-        return "Opens the options menu";
+        return "Gets a player's head";
     }
 
     @Override
     public String getSyntax() {
-        return "/as options <name>";
+        return "/as head <username>";
     }
 
     @Override
@@ -53,19 +50,20 @@ public class OptionsCommand extends SubCommand {
             return;
         }
 
-        ArmorStand armorStand = ArmorStandUtils.getArmorStandByName(args[1]);
-
-        if (null == armorStand) {
-            player.sendMessage(ChatColor.RED + "This armor stand is not available");
-            return;
-        }
-        new SettingsManager(new PlayerMenuUtility(player), armorStand, false).open();
+        player.getInventory().addItem(PlayerUtils.createSkullPlayer(args[1]));
+        player.sendMessage(ChatColor.GREEN + "");
 
     }
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return new ArrayList<>(ArmorStands.get().getConfigurationSection("armorstands").getKeys(false));
+        ArrayList<String> players = new ArrayList<>();
+
+        Bukkit.getOnlinePlayers().forEach(player1 -> {
+            players.add(player1.getName());
+        });
+
+        return players;
     }
 
     @Override

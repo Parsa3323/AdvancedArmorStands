@@ -44,19 +44,26 @@ public abstract class PaginatedMenu extends Menu {
         return itemStack;
     }
 
-    public void addMenuBorder(){
-        inventory.setItem(48, makeItem(Material.ARROW, ChatColor.GREEN + "Left"));
+    public void addMenuBorder(int total) {
+        if (page > 0) {
+            inventory.setItem(48, makeItem(Material.ARROW, ChatColor.GREEN + "Left"));
+        } else {
+            inventory.setItem(48, super.FILLER_GLASS);
+        }
 
-        inventory.setItem(49, makeItem(Material.BARRIER, ChatColor.DARK_RED + "Close"));
+        inventory.setItem(49, makeItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        inventory.setItem(50, makeItem(Material.ARROW, ChatColor.GREEN + "Right"));
+        if ((page + 1) * maxItemsPerPage < total) {
+            inventory.setItem(50, makeItem(Material.ARROW, ChatColor.GREEN + "Right"));
+        } else {
+            inventory.setItem(50, super.FILLER_GLASS);
+        }
 
         for (int i = 0; i < 10; i++) {
             if (inventory.getItem(i) == null) {
                 inventory.setItem(i, super.FILLER_GLASS);
             }
         }
-
         inventory.setItem(17, super.FILLER_GLASS);
         inventory.setItem(18, super.FILLER_GLASS);
         inventory.setItem(26, super.FILLER_GLASS);
@@ -70,6 +77,7 @@ public abstract class PaginatedMenu extends Menu {
             }
         }
     }
+
 
     public int getMaxItemsPerPage() {
         return maxItemsPerPage;

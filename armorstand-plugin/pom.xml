@@ -103,7 +103,7 @@
         </dependency>
         <dependency>
             <groupId>me.parsa</groupId>
-            <artifactId>VersionSupport_1_16_5</artifactId>
+            <artifactId>versionSupport_1_16_5</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>

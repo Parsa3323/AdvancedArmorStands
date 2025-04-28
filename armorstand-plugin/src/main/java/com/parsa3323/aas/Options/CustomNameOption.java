@@ -45,14 +45,26 @@ public class CustomNameOption extends SettingsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = PlayerUtils.getSkullFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWRlOGQwZjNlNDIxY2NlODU1NmViOGUzZTU4MzI1OWZmNjg3MzRiYTBmNGNhYjYzOWMyMzkwN2NkMmJlNGVmYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
+        String currentName = armorStand.getCustomName();
         itemMeta.setDisplayName(ChatColor.GREEN + "Custom name");
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Set a custom name for");
         lore.add(ChatColor.GRAY + "this armor stand ");
         lore.add("");
-        lore.add(ChatColor.GREEN + "Current name: " + armorStand.getCustomName());
-
+        if (currentName != null) {
+            String[] words = ChatColor.stripColor(currentName).split("\\s+");
+            StringBuilder line = new StringBuilder(ChatColor.GREEN + "Current name: ");
+            for (int i = 0; i < words.length; i++) {
+                line.append(words[i]).append(" ");
+                if ((i + 1) % 2 == 0 || i == words.length - 1) {
+                    lore.add(line.toString().trim());
+                    line = new StringBuilder(ChatColor.GREEN.toString());
+                }
+            }
+        } else {
+            lore.add(ChatColor.GREEN + "Current name: None");
+        }
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 

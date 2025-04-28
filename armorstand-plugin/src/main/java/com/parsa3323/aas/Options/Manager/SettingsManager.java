@@ -18,11 +18,9 @@
 
 package com.parsa3323.aas.Options.Manager;
 
+import com.parsa3323.aas.Menus.ArmorStandMenu;
 import com.parsa3323.aas.Menus.Manager.PaginatedMenu;
-import com.parsa3323.aas.Options.ArmsOptions;
-import com.parsa3323.aas.Options.BasePlateOption;
-import com.parsa3323.aas.Options.CustomNameOption;
-import com.parsa3323.aas.Options.GravityOption;
+import com.parsa3323.aas.Options.*;
 import com.parsa3323.aas.Utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -38,15 +36,19 @@ public class SettingsManager extends PaginatedMenu {
 
     public ArrayList<SettingsOption> settingsOptions = new ArrayList<>();
 
+    private final boolean isFromSettings;
+
     private final ArmorStand armorStand;
 
-    public SettingsManager(PlayerMenuUtility playerMenuUtility, ArmorStand armorStand) {
+    public SettingsManager(PlayerMenuUtility playerMenuUtility, ArmorStand armorStand, boolean isFromSettings) {
         super(playerMenuUtility);
+        this.isFromSettings = isFromSettings;
         this.armorStand = armorStand;
         settingsOptions.add(new ArmsOptions());
         settingsOptions.add(new GravityOption());
         settingsOptions.add(new CustomNameOption());
         settingsOptions.add(new BasePlateOption());
+        settingsOptions.add(new CustomNameVisibleOption());
     }
 
     @Override
@@ -63,7 +65,22 @@ public class SettingsManager extends PaginatedMenu {
     public void handleMenu(InventoryClickEvent e) {
 
         ItemStack clickedItem = e.getCurrentItem();
+
+        if (clickedItem == null) return;
+
         String itemName = ChatColor.stripColor(clickedItem.getItemMeta().getDisplayName());
+
+        if (clickedItem.getType() == Material.BARRIER) {
+
+            if (isFromSettings) {
+                ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(playerMenuUtility.getOwner()), "NONE", armorStand);
+                armorStandMenu.open();
+            } else {
+                playerMenuUtility.getOwner().closeInventory();
+
+            }
+
+        }
 
         if (clickedItem.getType() == Material.ARROW) {
             if (itemName.equalsIgnoreCase("Left")) {
@@ -94,7 +111,7 @@ public class SettingsManager extends PaginatedMenu {
 
     @Override
     public void setMenuItems() {
-        addMenuBorder();
+        addMenuBorder(getSettingsOptions().size());
 
         index = page * maxItemsPerPage;
 

@@ -20,6 +20,7 @@ package com.parsa3323.aas.Menus;
 
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.Menus.Manager.Menu;
+import com.parsa3323.aas.Options.Manager.SettingsManager;
 import com.parsa3323.aas.Player.PlayerManager;
 import com.parsa3323.aas.Utils.ArmorStandUtils;
 import com.parsa3323.aas.Utils.InventoryUtils;
@@ -71,15 +72,15 @@ public class ArmorStandMenu extends Menu {
         Player p = (Player) e.getWhoClicked();
 
         switch (e.getSlot()) {
-            case 8:
+            case 33:
                 InventoryUtils.save(p);
                 InventoryUtils.setItems(p);
                 p.closeInventory();
                 break;
-            case 20:
+            case 11:
                 p.closeInventory();
                 break;
-            case 24:
+            case 15:
                 if (coolDownList.contains(p.getUniqueId())) {
                     coolDownList.remove(p.getUniqueId());
                 } else {
@@ -89,6 +90,9 @@ public class ArmorStandMenu extends Menu {
                 setMenuItems();
                 p.updateInventory();
                 break;
+            case 29:
+                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(p), armorStand, true);
+                settingsManager.open();
         }
 
         if (p == null || e.getInventory() == null || e.getInventory().getHolder() == null) return;
@@ -208,11 +212,11 @@ public class ArmorStandMenu extends Menu {
         });
 
         setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 0, new int[]{
-                10, 11, 12, 19, 20, 21, 28, 29, 30
+                10, 11, 12, 19, 20, 21, 28, 30
         });
 
         setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 0, new int[]{
-                14, 15, 16, 23, 25, 32, 33, 34
+                14, 24, 16, 23, 25, 32, 8, 34
         });
 
         ItemStack close = new ItemStack(Material.BARRIER, 1);
@@ -220,13 +224,29 @@ public class ArmorStandMenu extends Menu {
 
         cMeta.setDisplayName(ChatColor.RED + "Close");
         close.setItemMeta(cMeta);
-        inventory.setItem(20, close);
+        inventory.setItem(11, close);
 
 
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Disabling cooldown");
         lore.add(ChatColor.GRAY + "isn't recommended");
+
+
+        ItemStack options = new ItemStack(Material.REDSTONE);
+        ItemMeta oMeta = options.getItemMeta();
+
+        ArrayList<String> oLore = new ArrayList<>();
+
+        oLore.add(ChatColor.GRAY + "Opens an inventory");
+        oLore.add(ChatColor.GRAY + "to enable & disable");
+        oLore.add(ChatColor.GRAY + "armor stand's options");
+
+        oMeta.setLore(oLore);
+        oMeta.setDisplayName(ChatColor.GREEN + "Options!");
+        options.setItemMeta(oMeta);
+
+        inventory.setItem(29, options);
 
         ItemStack edit = new ItemStack(Material.REDSTONE_BLOCK, 1);
         ItemMeta editMeta= edit.getItemMeta();
@@ -239,7 +259,7 @@ public class ArmorStandMenu extends Menu {
         editLore.add(ChatColor.GRAY + "positions with it");
         editMeta.setLore(editLore);
         edit.setItemMeta(editMeta);
-        inventory.setItem(8, edit);
+        inventory.setItem(33, edit);
 
         ItemStack toggle = new ItemStack(Material.ARROW) ;
         ItemMeta tMeta = toggle.getItemMeta();
@@ -248,7 +268,7 @@ public class ArmorStandMenu extends Menu {
         toggle.setItemMeta(tMeta);
 
 
-        inventory.setItem(24, toggle);
+        inventory.setItem(15, toggle);
         ItemStack head = (armorStand.getHelmet() != null) ? armorStand.getHelmet().clone() : new ItemStack(Material.AIR);
         inventory.setItem(4, head);
 

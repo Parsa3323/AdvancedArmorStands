@@ -19,6 +19,8 @@
 package com.parsa3323.aas.Listener;
 
 import com.parsa3323.aas.Options.CustomNameOption;
+import com.parsa3323.aas.Options.Manager.SettingsManager;
+import com.parsa3323.aas.Utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,6 +36,8 @@ public class ChatListener implements Listener {
             if (e.getMessage().equalsIgnoreCase("exit")) {
                 e.setCancelled(true);
                 e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully quit the name set session");
+                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), false);
+                settingsManager.open();
                 CustomNameOption.players.remove(e.getPlayer().getUniqueId());
                 return;
             }
@@ -44,6 +48,8 @@ public class ChatListener implements Listener {
             CustomNameOption.players.remove(e.getPlayer().getUniqueId());
 
             e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set armor stand's name to '" + e.getMessage() + "' ");
+
+            return;
         }
 
     }
