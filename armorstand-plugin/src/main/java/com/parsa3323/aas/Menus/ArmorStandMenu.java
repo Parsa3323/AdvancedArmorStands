@@ -233,7 +233,7 @@ public class ArmorStandMenu extends Menu {
         lore.add(ChatColor.GRAY + "isn't recommended");
 
 
-        ItemStack options = new ItemStack(Material.REDSTONE);
+        ItemStack options = new ItemStack(Material.NETHER_STAR);
         ItemMeta oMeta = options.getItemMeta();
 
         ArrayList<String> oLore = new ArrayList<>();

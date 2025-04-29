@@ -21,6 +21,7 @@ package com.parsa3323.aas;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -28,7 +29,23 @@ public interface ArmorstandApi  {
 
     ConfigManager getConfigManager();
 
+    SessionManager getSessionManager();
+
+    interface SessionManager {
+
+        void closeSession(UUID uuid);
+
+        void closeSession(Player p);
+
+        ArmorStand getArmorsStand(Player p);
+
+        ArmorStand getArmorsStand(UUID uuid);
+
+    }
+
     boolean isInEditSession(UUID uuid);
+
+    boolean isInEditSession(Player p);
 
     interface ConfigManager {
 

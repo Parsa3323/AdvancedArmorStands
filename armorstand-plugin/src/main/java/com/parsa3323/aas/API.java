@@ -20,10 +20,15 @@ package com.parsa3323.aas;
 
 import com.parsa3323.aas.Configs.ArmorStands;
 import com.parsa3323.aas.Configs.TypesConfig;
+import com.parsa3323.aas.Menus.ArmorStandMenu;
 import com.parsa3323.aas.Utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.Utils.ArmorStandUtils;
+import com.parsa3323.aas.Utils.InventoryUtils;
+import com.parsa3323.aas.Utils.PlayerMenuUtility;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -47,10 +52,43 @@ public class API implements ArmorstandApi{
             }
         };
     }
+    @Override
+    public SessionManager getSessionManager() {
+        return new SessionManager() {
+            @Override
+            public void closeSession(UUID uuid) {
+                InventoryUtils.restore(Bukkit.getPlayer(uuid));
+                new ArmorStandMenu(new PlayerMenuUtility(Bukkit.getPlayer(uuid)), "menu", ArmorStandSelectionCache.getSelectedArmorStand(uuid)).open();
+                ArmorStandSelectionCache.removeSelectedArmorStand(Bukkit.getPlayer(uuid).getUniqueId());
+            }
+
+            @Override
+            public void closeSession(Player p) {
+                InventoryUtils.restore(p);
+                new ArmorStandMenu(new PlayerMenuUtility(p), "menu", ArmorStandSelectionCache.getSelectedArmorStand(p.getUniqueId())).open();
+                ArmorStandSelectionCache.removeSelectedArmorStand(p.getUniqueId());
+            }
+
+            @Override
+            public ArmorStand getArmorsStand(Player p) {
+                return ArmorStandSelectionCache.getSelectedArmorStand(p.getUniqueId());
+            }
+
+            @Override
+            public ArmorStand getArmorsStand(UUID uuid) {
+                return ArmorStandSelectionCache.getSelectedArmorStand(uuid);
+            }
+        };
+    }
 
     @Override
     public boolean isInEditSession(UUID uuid) {
         return ArmorStandSelectionCache.hasSelection(uuid);
+    }
+
+    @Override
+    public boolean isInEditSession(Player p) {
+        return ArmorStandSelectionCache.hasSelection(p.getUniqueId());
     }
 
     @Override

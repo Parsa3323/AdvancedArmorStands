@@ -28,4 +28,6 @@ public interface IPlayer {
     void playSound(String s);
 
     boolean isAdmin();
+
+    void sendMessage(String m);
 }

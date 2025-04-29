@@ -197,7 +197,7 @@ public class CreateCommand extends SubCommand implements Listener {
         armorStand.setArms(true);
         armorStand.setGravity(false);
         armorStand.setBasePlate(false);
-        armorStand.setCustomName("Runner");
+        armorStand.setCustomName("Custom");
         armorStand.setCustomNameVisible(false);
 
         armorStand.setItemInHand(new ItemStack(Material.IRON_PICKAXE));

@@ -45,9 +45,12 @@ public class ChatListener implements Listener {
             e.setCancelled(true);
 
             CustomNameOption.players.get(e.getPlayer().getUniqueId()).setCustomName(ChatColor.translateAlternateColorCodes('&', e.getMessage()));
-            CustomNameOption.players.remove(e.getPlayer().getUniqueId());
 
             e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set armor stand's name to '" + e.getMessage() + "' ");
+            SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), false);
+            settingsManager.open();
+            CustomNameOption.players.remove(e.getPlayer().getUniqueId());
+
 
             return;
         }

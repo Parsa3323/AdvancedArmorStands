@@ -44,4 +44,9 @@ public class CustomPlayer implements IPlayer{
         return this.bukkitPlayer.hasPermission("advanced-armorstands.admin");
     }
 
+    @Override
+    public void sendMessage(String m) {
+        this.bukkitPlayer.sendMessage(m);
+    }
+
 }

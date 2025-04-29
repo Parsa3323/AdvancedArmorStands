@@ -146,7 +146,9 @@ public class CommandManager implements CommandExecutor {
                     player.performCommand("as help 1");
                 }
             } else {
-                sender.sendMessage("This command can only be used by players!");
+                sender.sendMessage(ChatColor.GRAY + "AdvancedArmorStands " + ChatColor.GOLD + "v" + AdvancedArmorStands.plugin.getDescription().getVersion() + ChatColor.GRAY + " by " + ChatColor.GOLD + "Parsa3323");
+
+                sender.sendMessage(ChatColor.GOLD + "Run this command in-game to see its subcommands!");
             }
             return true;
         }

@@ -104,7 +104,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         TypesConfig.get().addDefault("default.Arms", true);
         TypesConfig.get().addDefault("default.Gravity", false);
         TypesConfig.get().addDefault("default.BasePlate", false);
-        TypesConfig.get().addDefault("default.CustomName", "&cMade with aas");
+        TypesConfig.get().addDefault("default.CustomName", "&7Made with &6AdvancedArmorStands");
         TypesConfig.get().addDefault("default.isCustomNameVisible", false);
         TypesConfig.get().addDefault("default.itemInHandMaterial", "WOOD_SWORD");
         TypesConfig.get().addDefault("default.HeadPos.x", null);

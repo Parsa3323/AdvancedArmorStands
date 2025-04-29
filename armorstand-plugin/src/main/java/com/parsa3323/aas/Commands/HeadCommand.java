@@ -51,7 +51,7 @@ public class HeadCommand extends SubCommand {
         }
 
         player.getInventory().addItem(PlayerUtils.createSkullPlayer(args[1]));
-        player.sendMessage(ChatColor.GREEN + "");
+        player.sendMessage(ChatColor.GREEN + "Successfully gave you " + args[1] + "'s head");
 
     }
 

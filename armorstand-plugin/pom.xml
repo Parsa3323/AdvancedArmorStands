@@ -22,7 +22,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.parsa</groupId>
+    <groupId>com.parsa3323</groupId>
     <artifactId>armorstand-plugin</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -102,12 +102,12 @@
             <version>3.0.2</version> <!-- Or the latest -->
         </dependency>
         <dependency>
-            <groupId>me.parsa</groupId>
-            <artifactId>versionSupport_1_16_5</artifactId>
+            <groupId>com.parsa3323</groupId>
+            <artifactId>VersionSupport_1_16_5</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>me.parsa</groupId>
+            <groupId>com.parsa3323</groupId>
             <artifactId>VersionSupport_1_8</artifactId>
             <version>1.0.0</version>
         </dependency>
@@ -118,7 +118,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>me.parsa</groupId>
+            <groupId>com.parsa3323</groupId>
             <artifactId>armorstand-api</artifactId>
             <version>1.0.0</version>
         </dependency>
