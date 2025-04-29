@@ -66,7 +66,7 @@ public class SettingsManager extends PaginatedMenu {
 
         ItemStack clickedItem = e.getCurrentItem();
 
-        if (clickedItem == null) return;
+        if (clickedItem == null || !clickedItem.hasItemMeta() || !clickedItem.getItemMeta().hasDisplayName()) return;
 
         String itemName = ChatColor.stripColor(clickedItem.getItemMeta().getDisplayName());
 
