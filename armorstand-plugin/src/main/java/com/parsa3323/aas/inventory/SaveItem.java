@@ -18,8 +18,8 @@
 
 package com.parsa3323.aas.inventory;
 
-import com.parsa3323.aas.Menus.SaveMenu;
-import com.parsa3323.aas.Utils.PlayerMenuUtility;
+import com.parsa3323.aas.menus.SaveMenu;
+import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

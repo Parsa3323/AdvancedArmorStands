@@ -18,17 +18,17 @@
 
 package com.parsa3323.aas;
 
-import com.parsa3323.aas.Commands.CreateCommand;
-import com.parsa3323.aas.Commands.Manager.CommandManager;
-import com.parsa3323.aas.Commands.Manager.TabComp;
-import com.parsa3323.aas.Configs.ArmorStands;
-import com.parsa3323.aas.Configs.TypesConfig;
-import com.parsa3323.aas.Listener.*;
-import com.parsa3323.aas.Menus.Manager.MenuListener;
-import com.parsa3323.aas.PlaceHolderApi.PapiExpansion;
-import com.parsa3323.aas.Utils.PlayerMenuUtility;
-import com.parsa3323.aas.Utils.VersionSupportUtil;
-import com.parsa3323.aas.VersionSupport.IVersionSupport;
+import com.parsa3323.aas.commands.CreateCommand;
+import com.parsa3323.aas.commands.manager.CommandManager;
+import com.parsa3323.aas.commands.manager.TabComp;
+import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.TypesConfig;
+import com.parsa3323.aas.listener.*;
+import com.parsa3323.aas.menus.manager.MenuListener;
+import com.parsa3323.aas.placeholderapi.PapiExpansion;
+import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.utils.VersionSupportUtil;
+import com.parsa3323.aas.versionSupport.IVersionSupport;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.entity.Player;

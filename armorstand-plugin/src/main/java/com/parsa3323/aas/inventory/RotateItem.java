@@ -18,7 +18,7 @@
 
 package com.parsa3323.aas.inventory;
 
-import com.parsa3323.aas.Utils.PlayerUtils;
+import com.parsa3323.aas.utils.PlayerUtils;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

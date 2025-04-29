@@ -18,13 +18,13 @@
 
 package com.parsa3323.aas;
 
-import com.parsa3323.aas.Configs.ArmorStands;
-import com.parsa3323.aas.Configs.TypesConfig;
-import com.parsa3323.aas.Menus.ArmorStandMenu;
-import com.parsa3323.aas.Utils.ArmorStandSelectionCache;
-import com.parsa3323.aas.Utils.ArmorStandUtils;
-import com.parsa3323.aas.Utils.InventoryUtils;
-import com.parsa3323.aas.Utils.PlayerMenuUtility;
+import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.TypesConfig;
+import com.parsa3323.aas.menus.ArmorStandMenu;
+import com.parsa3323.aas.utils.ArmorStandSelectionCache;
+import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.InventoryUtils;
+import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;

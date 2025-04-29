@@ -18,7 +18,7 @@
 
 package com.parsa3323.aas;
 
-import com.parsa3323.aas.VersionSupport.IVersionSupport;
+import com.parsa3323.aas.versionSupport.IVersionSupport;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
