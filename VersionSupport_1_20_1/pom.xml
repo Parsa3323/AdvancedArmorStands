@@ -23,19 +23,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.parsa3323</groupId>
-  <artifactId>AdvancedArmorStands</artifactId>
+  <artifactId>VersionSupport_1_20_1</artifactId>
   <version>1.0.0</version>
-  <packaging>pom</packaging>
-    <modules>
-        <module>armorstand-plugin</module>
-        <module>armorstand-api</module>
-        <module>VersionSupport_1_20_1</module>
-        <module>VersionSupport_1_16_5</module>
-        <module>VersionSupport_1_8</module>
-    </modules>
+  <packaging>jar</packaging>
 
-
-  <name>AdvancedArmorStands</name>
+  <name>VersionSupport_1_20_1</name>
 
   <properties>
     <java.version>1.8</java.version>
@@ -43,11 +35,12 @@
   </properties>
 
   <build>
+    <defaultGoal>clean package</defaultGoal>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.13.0</version>
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
@@ -56,7 +49,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.4</version>
+        <version>3.5.3</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -77,33 +70,26 @@
 
   <repositories>
       <repository>
-          <id>placeholderapi</id>
-          <url>https://repo.extendedclip.com/releases/</url>
+        <id>spigotmc-repo</id>
+        <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
       </repository>
-      <repository>
-          <id>spigotmc-repo</id>
-          <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-      </repository>
-      <repository>
-          <id>sonatype</id>
-          <url>https://oss.sonatype.org/content/groups/public/</url>
-      </repository>
-
+    <repository>
+      <id>sonatype</id>
+      <url>https://oss.sonatype.org/content/groups/public/</url>
+    </repository>
   </repositories>
 
   <dependencies>
-
-      <dependency>
-          <groupId>me.clip</groupId>
-          <artifactId>placeholderapi</artifactId>
-          <version>2.11.6</version>
-          <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>org.spigotmc</groupId>
-          <artifactId>spigot-api</artifactId>
-          <version>1.8.8-R0.1-SNAPSHOT</version>
-          <scope>provided</scope>
-      </dependency>
+    <dependency>
+      <groupId>com.parsa3323</groupId>
+      <artifactId>armorstand-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot-api</artifactId>
+      <version>1.20.1-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 </project>

@@ -104,12 +104,17 @@
         <dependency>
             <groupId>com.parsa3323</groupId>
             <artifactId>VersionSupport_1_16_5</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.parsa3323</groupId>
+            <artifactId>VersionSupport_1_20_1</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.parsa3323</groupId>
             <artifactId>VersionSupport_1_8</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>
@@ -120,7 +125,7 @@
         <dependency>
             <groupId>com.parsa3323</groupId>
             <artifactId>armorstand-api</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -146,6 +151,10 @@
             <version>24.1.0</version>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.cryptomorin</groupId>
+            <artifactId>XSeries</artifactId>
+            <version>9.4.0</version>
+        </dependency>
     </dependencies>
 </project>

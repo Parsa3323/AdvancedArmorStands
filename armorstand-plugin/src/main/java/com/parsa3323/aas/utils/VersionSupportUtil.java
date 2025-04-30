@@ -22,6 +22,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.versionSupport.IVersionSupport;
 import com.parsa3323.aas.VersionSupport_1_16_5;
 import com.parsa3323.aas.VersionSupprt_1_8;
+import com.parsa3323.versionSupport_1_20_1.VersionSupport_1_20_1;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -71,7 +72,9 @@ public class VersionSupportUtil {
 
         if(VersionSupportUtil.isLowerThan("1.12")){
             versionSupport = new VersionSupprt_1_8();
-        } else if(VersionSupportUtil.isHigherThan("1.12")){
+        } else if(VersionSupportUtil.isHigherThan("1.16.5")){
+            versionSupport = new VersionSupport_1_20_1();
+        } else {
             versionSupport = new VersionSupport_1_16_5();
         }
 
