@@ -18,7 +18,7 @@
 
 package com.parsa3323.aas.inventory;
 
-import com.parsa3323.aas.utils.PlayerUtils;
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -47,10 +47,9 @@ public class RightHandItem extends InventoryItem {
         lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move left arm down");
         lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
 
-
         ItemStack itemStack = VersionSupportUtil.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjIzZmI3OGM1ZGY1YzY4OTUxOGI3MGU1NGU2MDJmNjQ3NGViZWU0MDk5MzQxMGQ2YTQ2ZWY3ZTMxZTEwYWFhYiJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN  +"RightHand" + ChatColor.GRAY + " (Hover)");
+        itemMeta.setDisplayName(ChatColor.GREEN  + "RightHand" + ChatColor.GRAY + " (Hover)");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 

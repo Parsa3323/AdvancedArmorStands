@@ -21,7 +21,9 @@ package com.parsa3323.aas.options.manager;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.options.*;
+import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -49,6 +51,9 @@ public class SettingsManager extends PaginatedMenu {
         settingsOptions.add(new CustomNameOption());
         settingsOptions.add(new BasePlateOption());
         settingsOptions.add(new CustomNameVisibleOption());
+        if (VersionSupportUtil.getVersionSupport().canGlow()) {
+            settingsOptions.add(new GlowingOption());
+        }
     }
 
     @Override
@@ -63,6 +68,7 @@ public class SettingsManager extends PaginatedMenu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
+
 
         ItemStack clickedItem = e.getCurrentItem();
 

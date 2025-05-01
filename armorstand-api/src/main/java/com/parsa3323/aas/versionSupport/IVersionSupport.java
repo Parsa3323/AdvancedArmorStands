@@ -20,6 +20,8 @@ package com.parsa3323.aas.versionSupport;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,5 +32,11 @@ public interface IVersionSupport {
     ItemStack getSkull(String base64);
 
     Material getMaterialForVersion(String s);
+
+    boolean isGlowing(ArmorStand as);
+
+    void setGlowing(ArmorStand as, boolean s);
+
+    boolean canGlow();
 
 }

@@ -18,12 +18,14 @@
 
 package com.parsa3323.aas.inventory.manager;
 
+import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.inventory.*;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
-import com.parsa3323.aas.inventory.*;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -57,8 +59,11 @@ public class InventoryManager implements Listener {
             if ("EXIT (Right Click)".equalsIgnoreCase(name)) {
                 event.setCancelled(true);
                 InventoryUtils.restore(player);
-                new ArmorStandMenu(new PlayerMenuUtility(player), "menu", ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId())).open();
+                ArmorStand armorStand = ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId());
+                AdvancedArmorStands.debug(armorStand.getName());
+                new ArmorStandMenu(new PlayerMenuUtility(player), "menu", armorStand).open();
                 ArmorStandSelectionCache.removeSelectedArmorStand(player.getUniqueId());
+
                 return;
             }
 

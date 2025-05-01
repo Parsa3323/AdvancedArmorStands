@@ -38,7 +38,6 @@ public class MenuListener implements Listener {
 
         InventoryHolder holder = e.getClickedInventory().getHolder();
 
-
         if (holder instanceof Menu) {
             Menu menu = (Menu) holder;
 

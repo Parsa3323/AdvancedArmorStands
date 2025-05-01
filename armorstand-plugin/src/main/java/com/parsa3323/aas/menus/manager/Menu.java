@@ -19,6 +19,7 @@
 package com.parsa3323.aas.menus.manager;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -76,7 +77,7 @@ public abstract class Menu implements InventoryHolder {
         }
 
         //TODO: Make the else not null and play NotePling
-        playerMenuUtility.getOwner().playSound(playerMenuUtility.getOwner().getLocation(), (getOpenSound() != null) ? getOpenSound() : null, 1 , 1);
+        playerMenuUtility.getOwner().playSound(playerMenuUtility.getOwner().getLocation(), (getOpenSound() != null) ? getOpenSound() : XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1 , 1);
         playerMenuUtility.getOwner().openInventory(inventory);
     }
 

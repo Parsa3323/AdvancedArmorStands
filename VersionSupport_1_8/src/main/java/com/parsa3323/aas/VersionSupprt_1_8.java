@@ -26,6 +26,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -63,12 +64,26 @@ public final class VersionSupprt_1_8 implements IVersionSupport {
     @Override
     public Material getMaterialForVersion(String s) {
         try {
-            Material sound = Material.valueOf(s);
-            return sound;
+            return Material.valueOf(s);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return null;
         }
 
+    }
+
+    @Override
+    public boolean isGlowing(ArmorStand as) {
+        return false;
+    }
+
+    @Override
+    public void setGlowing(ArmorStand as, boolean s) {
+
+    }
+
+    @Override
+    public boolean canGlow() {
+        return false;
     }
 }

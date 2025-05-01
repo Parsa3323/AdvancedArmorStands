@@ -23,6 +23,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.player.PlayerManager;
+import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
@@ -75,6 +76,7 @@ public class ArmorStandMenu extends Menu {
         switch (e.getSlot()) {
             case 33:
                 InventoryUtils.save(p);
+                ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
                 InventoryUtils.setItems(p);
                 p.closeInventory();
                 break;

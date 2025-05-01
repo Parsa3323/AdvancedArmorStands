@@ -34,6 +34,5 @@ public class PlayerLeaveEvent implements Listener {
         }
 
         if (ArmorStandSelectionCache.hasSelection(e.getPlayer().getUniqueId())) ArmorStandSelectionCache.removeSelectedArmorStand(e.getPlayer().getUniqueId());
-
     }
 }

@@ -30,6 +30,7 @@ import java.util.UUID;
 
 public class PlayerUtils {
 
+    @Deprecated
     public static ItemStack createSkullPlayer(String player) {
         ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 
@@ -45,6 +46,7 @@ public class PlayerUtils {
         return skull;
     }
 
+    @Deprecated
     public static ItemStack getSkullFromBase64(String base64) {
         ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
