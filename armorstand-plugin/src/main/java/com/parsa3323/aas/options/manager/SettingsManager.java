@@ -54,6 +54,7 @@ public class SettingsManager extends PaginatedMenu {
         if (VersionSupportUtil.getVersionSupport().canGlow()) {
             settingsOptions.add(new GlowingOption());
         }
+        settingsOptions.add(new VisibleOption());
     }
 
     @Override
