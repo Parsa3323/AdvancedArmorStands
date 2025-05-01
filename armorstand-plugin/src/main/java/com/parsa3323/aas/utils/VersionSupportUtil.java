@@ -27,6 +27,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class VersionSupportUtil {
 
@@ -79,6 +80,10 @@ public class VersionSupportUtil {
         }
 
         return versionSupport;
+    }
+
+    public static ItemStack getSkull(String base64) {
+        return AdvancedArmorStands.plugin.versionSupport.getSkull(base64);
     }
 
     public static Material getMaterialForCurrentVersion(String s) {

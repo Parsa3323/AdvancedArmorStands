@@ -18,12 +18,17 @@
 
 package com.parsa3323.aas;
 
+import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import com.parsa3323.aas.versionSupport.IVersionSupport;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public final class VersionSupport_1_16_5 implements IVersionSupport {
 
@@ -62,24 +67,33 @@ public final class VersionSupport_1_16_5 implements IVersionSupport {
     }
 
     @Override
+    public ItemStack getSkull(String base64) {
+        ItemStack head = XMaterial.PLAYER_HEAD.parseItem();
+
+        if(head == null) throw new RuntimeException("Failed to get skull");
+
+        ItemMeta itemMeta = head.getItemMeta();
+
+        if(itemMeta == null) return head;
+
+        itemMeta = XSkull.of(itemMeta).profile(Profileable.detect(base64)).lenient().apply();
+
+        head.setItemMeta(itemMeta);
+
+        return head;
+    }
+
+    @Override
     public Material getMaterialForVersion(String s) {
 
+        Material mat = Material.matchMaterial(s);
 
-        Material material = null;
-
-        switch (s) {
-            case "STAINED_GLASS_PANE":
-                material = Material.GRAY_STAINED_GLASS_PANE;
-                break;
-            default:
-                System.out.println("Unknown material: " + s);
-                return null;
-
-
-
+        if (mat == null) {
+            mat = Material.matchMaterial(s, true);
         }
 
-        return material;
+        return mat;
+
 
     }
 

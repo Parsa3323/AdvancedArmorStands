@@ -20,6 +20,7 @@ package com.parsa3323.aas.inventory;
 
 import com.parsa3323.aas.utils.PlayerUtils;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
+import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -46,7 +47,7 @@ public class RightLegItem extends InventoryItem {
         lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move right leg down");
         lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
 
-        ItemStack itemStack = PlayerUtils.getSkullFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJhNGUxOGRhMjVlODk5ZjQ2NTQ4ZGIyMDY5MmRmNzI2MTVjYWQ3OGVkMjlkYmFkMjYzOWVkODhiZTNkZWMzYSJ9fX0=");
+        ItemStack itemStack = VersionSupportUtil.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJhNGUxOGRhMjVlODk5ZjQ2NTQ4ZGIyMDY5MmRmNzI2MTVjYWQ3OGVkMjlkYmFkMjYzOWVkODhiZTNkZWMzYSJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GREEN  +"RightLeg" + ChatColor.GRAY + " (Hover)");
         itemMeta.setLore(lore);
@@ -62,8 +63,6 @@ public class RightLegItem extends InventoryItem {
 
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
-        armorStand.setArms(true);
-
         EulerAngle currentPose = armorStand.getRightLegPose();
 
         double step = Math.toRadians(5);

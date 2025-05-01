@@ -18,12 +18,17 @@
 
 package com.parsa3323.versionSupport_1_20_1;
 
+import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import com.parsa3323.aas.versionSupport.IVersionSupport;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class VersionSupport_1_20_1 implements IVersionSupport {
@@ -61,6 +66,23 @@ public final class VersionSupport_1_20_1 implements IVersionSupport {
         } catch (IllegalArgumentException e) {
             player.sendMessage(ChatColor.RED + "Sound " + soundName + " not found in this version!");
         }
+    }
+
+    @Override
+    public ItemStack getSkull(String base64) {
+        ItemStack head = XMaterial.PLAYER_HEAD.parseItem();
+
+        if(head == null) throw new RuntimeException("Failed to get skull");
+
+        ItemMeta itemMeta = head.getItemMeta();
+
+        if(itemMeta == null) return head;
+
+        itemMeta = XSkull.of(itemMeta).profile(Profileable.detect(base64)).lenient().apply();
+
+        head.setItemMeta(itemMeta);
+
+        return head;
     }
 
     @Override

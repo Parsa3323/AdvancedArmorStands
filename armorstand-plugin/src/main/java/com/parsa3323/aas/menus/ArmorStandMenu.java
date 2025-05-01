@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.menus;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
@@ -188,7 +189,7 @@ public class ArmorStandMenu extends Menu {
             playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "The armor stand is no longer available!");
             playerMenuUtility.getOwner().closeInventory();
             for (int i = 0; i < inventory.getSize(); i++) {
-                ItemStack grayPane = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+                ItemStack grayPane = new ItemStack(XMaterial.GRAY_STAINED_GLASS_PANE.parseMaterial(), 1, (short) 7);
                 ItemMeta meta = grayPane.getItemMeta();
 
                 if (meta != null) {
@@ -201,23 +202,24 @@ public class ArmorStandMenu extends Menu {
             return;
         }
 
-
         Inventory inv = inventory;
-        setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 7, new int[]{
+
+        setSlots(inv, XMaterial.GRAY_STAINED_GLASS_PANE, new int[]{
                 0, 1, 7, 9, 17, 18, 27 , 26, 35, 36, 37, 43, 44
         });
 
-        setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 0, new int[]{
+        setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
                 2, 3, 5, 6, 38, 39, 41, 42
         });
 
-        setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 0, new int[]{
+        setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
                 10, 11, 12, 19, 20, 21, 28, 30
         });
 
-        setSlots(inv, Material.STAINED_GLASS_PANE, (byte) 0, new int[]{
+        setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
                 14, 24, 16, 23, 25, 32, 8, 34
         });
+
 
         ItemStack close = new ItemStack(Material.BARRIER, 1);
         ItemMeta cMeta = close.getItemMeta();
@@ -306,8 +308,10 @@ public class ArmorStandMenu extends Menu {
         AdvancedArmorStands.debug("Closed menu");
     }
 
-    private static void setSlots(Inventory inv, Material material, byte data, int[] slots) {
-        ItemStack item = new ItemStack(material, 1, data);
+    private static void setSlots(Inventory inv, XMaterial material, int[] slots) {
+        ItemStack item = material.parseItem();
+        if (item == null) return;
+
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
             meta.setDisplayName(" ");
@@ -318,4 +322,5 @@ public class ArmorStandMenu extends Menu {
             inv.setItem(slot, item);
         }
     }
+
 }
