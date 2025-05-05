@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.versionSupport;
+package com.parsa3323.aas.api.versionSupport;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

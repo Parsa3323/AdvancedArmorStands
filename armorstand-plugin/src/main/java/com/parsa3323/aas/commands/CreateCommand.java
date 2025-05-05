@@ -22,7 +22,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.configs.ArmorStands;
 import com.parsa3323.aas.configs.TypesConfig;
-import com.parsa3323.aas.events.ArmorStandCreateEvent;
+import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.player.PlayerManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;

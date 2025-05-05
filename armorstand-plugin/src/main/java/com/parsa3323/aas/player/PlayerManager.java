@@ -18,7 +18,7 @@
 
 package com.parsa3323.aas.player;
 
-import com.parsa3323.aas.utils.PlayerUtils;
+import com.parsa3323.aas.api.player.IPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;

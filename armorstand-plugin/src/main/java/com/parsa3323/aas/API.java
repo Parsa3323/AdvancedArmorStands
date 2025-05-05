@@ -25,6 +25,7 @@ import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.api.ArmorstandApi;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
@@ -32,7 +33,7 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-public class API implements ArmorstandApi{
+public class API implements ArmorstandApi {
     @Override
     public ConfigManager getConfigManager() {
         return new ConfigManager() {

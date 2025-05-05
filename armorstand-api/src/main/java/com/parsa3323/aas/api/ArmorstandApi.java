@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas;
+package com.parsa3323.aas.api;
 
 
 import org.bukkit.configuration.file.FileConfiguration;

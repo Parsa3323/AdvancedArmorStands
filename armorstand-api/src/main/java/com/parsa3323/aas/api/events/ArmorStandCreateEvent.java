@@ -16,15 +16,14 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.events;
+package com.parsa3323.aas.api.events;
 
-import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class PlayerMoveArmorStandEvent extends Event {
+public class ArmorStandCreateEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
@@ -34,7 +33,25 @@ public class PlayerMoveArmorStandEvent extends Event {
 
     ArmorStand armorStand;
 
-    Location newLocation;
+    String name;
+
+    public ArmorStand getArmorStand() {
+        return armorStand;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArmorStandCreateEvent(Player player, ArmorStand armorStand, String name) {
+        this.armorStand = armorStand;
+        this.player = player;
+        this.name = name;
+    }
 
     public boolean isCancelled() {
         return cancelled;
@@ -42,24 +59,6 @@ public class PlayerMoveArmorStandEvent extends Event {
 
     public void setCancelled(boolean cancel) {
         cancelled = cancel;
-    }
-
-    public PlayerMoveArmorStandEvent(Location newLocation, ArmorStand armorStand, Player player) {
-        this.newLocation = newLocation;
-        this.armorStand = armorStand;
-        this.player = player;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public ArmorStand getArmorStand() {
-        return armorStand;
-    }
-
-    public Location getNewLocation() {
-        return newLocation;
     }
 
     public HandlerList getHandlers() {

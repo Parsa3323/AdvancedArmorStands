@@ -20,7 +20,7 @@ package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.configs.ArmorStands;
-import com.parsa3323.aas.events.PlayerMoveArmorStandEvent;
+import com.parsa3323.aas.api.events.PlayerMoveArmorStandEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;

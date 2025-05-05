@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.player;
+package com.parsa3323.aas.api.player;
 
 import org.bukkit.entity.Player;
 

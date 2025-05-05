@@ -21,7 +21,7 @@ package com.parsa3323.aas;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.profiles.builder.XSkull;
 import com.cryptomorin.xseries.profiles.objects.Profileable;
-import com.parsa3323.aas.versionSupport.IVersionSupport;
+import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

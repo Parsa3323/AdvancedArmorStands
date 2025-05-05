@@ -19,9 +19,10 @@
 package com.parsa3323.aas.player;
 
 import com.parsa3323.aas.utils.VersionSupportUtil;
+import com.parsa3323.aas.api.player.IPlayer;
 import org.bukkit.entity.Player;
 
-public class CustomPlayer implements IPlayer{
+public class CustomPlayer implements IPlayer {
 
     private final Player bukkitPlayer;
 

@@ -22,7 +22,7 @@ package com.parsa3323.aas.listener;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.menus.ArmorStandMenu;
-import com.parsa3323.aas.player.IPlayer;
+import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
