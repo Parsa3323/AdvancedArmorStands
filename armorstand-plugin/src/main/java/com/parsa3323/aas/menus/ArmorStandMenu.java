@@ -53,14 +53,14 @@ public class ArmorStandMenu extends Menu {
 
     private final ArmorStand armorStand;
 
-    public ArmorStandMenu(PlayerMenuUtility playerMenuUtility, String name1, ArmorStand armorStand) {
+    public ArmorStandMenu(PlayerMenuUtility playerMenuUtility, ArmorStand armorStand) {
         super(playerMenuUtility);
         this.armorStand = armorStand;
     }
 
     @Override
     public String getMenuName() {
-        return ChatColor.GOLD + "AdvancedArmorStands " + ChatColor.YELLOW + "»" + ChatColor.GOLD + " Settings";
+        return ChatColor.GOLD + "Settings";
     }
 
     @Override
@@ -99,9 +99,6 @@ public class ArmorStandMenu extends Menu {
         }
 
         if (p == null || e.getInventory() == null || e.getInventory().getHolder() == null) return;
-
-        InventoryAction action = e.getAction();
-        ClickType click = e.getClick();
 
         if (e.getAction() != InventoryAction.PICKUP_ALL
                 && e.getAction() != InventoryAction.PICKUP_ONE

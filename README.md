@@ -30,6 +30,26 @@
 ![FirstImg](https://biaupload.com/do.php?imgf=org-3b039f0f3c191.png)
 
 ![2Img](https://biaupload.com/do.php?imgf=org-02a4d92ff3c92.png)
+<div align="center">
+
+# Table of Content
+
+</div>
+
+- [Requirements](#requirements)
+- [FAQ](#f-a-q)
+    - [What java version?](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Java-Version)
+    - [Docs](https://github.com/Parsa3323/AdvancedArmorStands/wiki)
+        - [Api](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Api-usage)
+            - [Introduction](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Api-usage#introduction)
+            - [Events](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Api-usage#events)
+        - [Plugin usage](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Plugin-usage)
+            - [Commands](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Plugin-usage#commands)
+            - [Types](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Plugin-usage#how-to-add-a-type)
+- [Configs](#Configs)
+    - [Main config](#Main-Configuration)
+    - [Types config](#Types-Configuration)
+
 
 <div align="center">
 
@@ -40,6 +60,7 @@ This document contains the configuration details for AAS.
 ## Main Configuration
 
 The `main.yml` configuration file allows you to enable or disable debugging.
+
 
 </div>
 
@@ -121,6 +142,16 @@ For more details, refer to the official documentation or community guides.
     </td>
 </tr>
 </table>
+</div>
+
+<div align="center">
+
+# Requirements
+</div>
+
+- [PlaceHolderApi](https://www.spigotmc.org/resources/placeholderapi.6245/)
+
+
 
 
 

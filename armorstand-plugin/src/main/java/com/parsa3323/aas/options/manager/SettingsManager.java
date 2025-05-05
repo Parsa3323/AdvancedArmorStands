@@ -21,7 +21,6 @@ package com.parsa3323.aas.options.manager;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.options.*;
-import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -80,7 +79,7 @@ public class SettingsManager extends PaginatedMenu {
         if (clickedItem.getType() == Material.BARRIER) {
 
             if (isFromSettings) {
-                ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(playerMenuUtility.getOwner()), "NONE", armorStand);
+                ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(playerMenuUtility.getOwner()), armorStand);
                 armorStandMenu.open();
             } else {
                 playerMenuUtility.getOwner().closeInventory();

@@ -58,14 +58,14 @@ public class API implements ArmorstandApi{
             @Override
             public void closeSession(UUID uuid) {
                 InventoryUtils.restore(Bukkit.getPlayer(uuid));
-                new ArmorStandMenu(new PlayerMenuUtility(Bukkit.getPlayer(uuid)), "menu", ArmorStandSelectionCache.getSelectedArmorStand(uuid)).open();
+                new ArmorStandMenu(new PlayerMenuUtility(Bukkit.getPlayer(uuid)), ArmorStandSelectionCache.getSelectedArmorStand(uuid)).open();
                 ArmorStandSelectionCache.removeSelectedArmorStand(Bukkit.getPlayer(uuid).getUniqueId());
             }
 
             @Override
             public void closeSession(Player p) {
                 InventoryUtils.restore(p);
-                new ArmorStandMenu(new PlayerMenuUtility(p), "menu", ArmorStandSelectionCache.getSelectedArmorStand(p.getUniqueId())).open();
+                new ArmorStandMenu(new PlayerMenuUtility(p), ArmorStandSelectionCache.getSelectedArmorStand(p.getUniqueId())).open();
                 ArmorStandSelectionCache.removeSelectedArmorStand(p.getUniqueId());
             }
 

@@ -61,7 +61,7 @@ public class InventoryManager implements Listener {
                 InventoryUtils.restore(player);
                 ArmorStand armorStand = ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId());
                 AdvancedArmorStands.debug(armorStand.getName());
-                new ArmorStandMenu(new PlayerMenuUtility(player), "menu", armorStand).open();
+                new ArmorStandMenu(new PlayerMenuUtility(player), armorStand).open();
                 ArmorStandSelectionCache.removeSelectedArmorStand(player.getUniqueId());
 
                 return;

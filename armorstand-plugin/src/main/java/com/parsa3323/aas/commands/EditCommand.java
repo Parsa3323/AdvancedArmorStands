@@ -53,7 +53,7 @@ public class EditCommand extends SubCommand {
             return;
         }
 
-        ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player), "", ArmorStandUtils.getArmorStandByName(args[1]));
+        ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player), ArmorStandUtils.getArmorStandByName(args[1]));
         ArmorStandSelectionCache.setSelectedArmorStand(player.getUniqueId(), ArmorStandUtils.getArmorStandByName(args[1]));
         armorStandMenu.open();;
     }
