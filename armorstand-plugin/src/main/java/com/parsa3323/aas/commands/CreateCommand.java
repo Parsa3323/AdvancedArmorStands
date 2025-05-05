@@ -62,6 +62,7 @@ public class CreateCommand extends SubCommand implements Listener {
             sendUsage(player);
             return;
         }
+
         if (!args[1].equalsIgnoreCase("custom")) {
 
             if (!TypesConfig.get().contains(args[1])) {

@@ -25,7 +25,7 @@
 
     <groupId>com.parsa3323</groupId>
     <artifactId>VersionSupport_1_16_5</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>VersionSupport_1_12</name>
@@ -93,7 +93,7 @@
         <dependency>
             <groupId>com.parsa3323</groupId>
             <artifactId>armorstand-api</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
