@@ -141,7 +141,7 @@ For more details, refer to the official documentation or community guides.
 
 </div>
 
-[//]: # (..)
+[//]: # (...)
 
 
 
