@@ -32,5 +32,8 @@ jobs:
     steps:
       - name: Contribute List
         uses: akhilmhdh/contributors-readme-action@v2.3.10
+        with:
+          commit_message: Updated contributors - Action
+          pr_title_on_protected: Updated contributors - Action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

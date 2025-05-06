@@ -122,10 +122,6 @@ default: # <====== Name of the type
 For more details, refer to the official documentation or community guides.
 
 
-## Contributors
-
-<!-- readme: contributors -start -->
-<!-- readme: contributors -end -->
 
 </div>
 
@@ -135,6 +131,16 @@ For more details, refer to the official documentation or community guides.
 </div>
 
 - [PlaceHolderApi](https://www.spigotmc.org/resources/placeholderapi.6245/)
+
+<div align="center">
+
+## Contributors
+
+<!-- readme: contributors -start -->
+<!-- readme: contributors -end -->
+
+</div>
+
 
 
 
