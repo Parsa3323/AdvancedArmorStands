@@ -56,7 +56,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         logger = getLogger();
         api = new API();
 
@@ -88,7 +87,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         Metrics metrics = new Metrics(this, 25568);
 
-        info("Registering events");
+        status("Registering events");
         PluginManager ev = getServer().getPluginManager();
         ev.registerEvents(new ChatListener(), this);
         ev.registerEvents(new PlayerDieListener(), this);
@@ -99,7 +98,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ev.registerEvents(new MenuListener(), this);
         ev.registerEvents(new ItemDropListener(), this);
 
-        info("Loading configs");
+        status("Loading configs");
 
         TypesConfig.init();
 
@@ -132,26 +131,26 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStands.init();
         ArmorStands.get().options().copyDefaults(true);
         ArmorStands.save();
-        info("Registering Commands");
+        status("Registering Commands");
         getCommand("as").setTabCompleter(new TabComp());
         getCommand("as").setExecutor(new CommandManager());
 
-        info("Registering papi expansion");
+        status("Registering papi expansion");
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
-            error("Papi was not found. Disabling...");
+            error("PlaceholderAPI was not found. Disabling...");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
         new PapiExpansion().register();
 
-        info("Load done");
+        status("Load done");
 
 
     }
 
     @Override
     public void onDisable() {
-        info("Bye Bye...");
+        status("Bye Bye...");
     }
 
     public static void debug(String message) {
@@ -164,6 +163,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         if (logLevel.intValue() <= Level.INFO.intValue()) {
             logger.info("[INFO] " + message);
         }
+    }
+
+    public static void status(String message) {
+        logger.info(message);
     }
 
     public static void warn(String message) {
