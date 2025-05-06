@@ -19,6 +19,7 @@
 package com.parsa3323.aas.api;
 
 
+import com.parsa3323.aas.api.player.IPlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -30,6 +31,8 @@ public interface ArmorstandApi  {
     ConfigManager getConfigManager();
 
     SessionManager getSessionManager();
+
+    IPlayer getIPlayer(Player p);
 
     interface SessionManager {
 
@@ -76,6 +79,18 @@ public interface ArmorstandApi  {
         void removeArmorStand(ArmorStand armorStand);
 
         void removeArmorStand(String s);
+
+    }
+
+    InventoryManager getInventoryManager();
+
+    interface InventoryManager {
+
+        void openEditMenu(Player p, ArmorStand a);
+
+        void openOptionsMenu(Player p, ArmorStand a, boolean isFromSettings);
+
+        void openSaveMenu(Player p, ArmorStand a);
 
     }
 

@@ -5,7 +5,7 @@ main: com.parsa3323.aas.AdvancedArmorStands
 softdepend: [PlaceholderAPI]
 permissions:
   advanced-armorstands.admin:
-    description: Admin access for aas
+    description: Admin access for AdvancedArmorStands
     default: op
 commands:
   as:

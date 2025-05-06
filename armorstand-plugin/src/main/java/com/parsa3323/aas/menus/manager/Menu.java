@@ -76,7 +76,6 @@ public abstract class Menu implements InventoryHolder {
             }
         }
 
-        //TODO: Make the else not null and play NotePling
         playerMenuUtility.getOwner().playSound(playerMenuUtility.getOwner().getLocation(), (getOpenSound() != null) ? getOpenSound() : XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1 , 1);
         playerMenuUtility.getOwner().openInventory(inventory);
     }

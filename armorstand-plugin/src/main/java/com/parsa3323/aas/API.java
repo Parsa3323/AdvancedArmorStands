@@ -18,9 +18,13 @@
 
 package com.parsa3323.aas;
 
+import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.configs.ArmorStands;
 import com.parsa3323.aas.configs.TypesConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
+import com.parsa3323.aas.menus.SaveMenu;
+import com.parsa3323.aas.options.manager.SettingsManager;
+import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
@@ -83,6 +87,11 @@ public class API implements ArmorstandApi {
     }
 
     @Override
+    public IPlayer getIPlayer(Player p) {
+        return PlayerManager.getCustomPlayerByBukkit(p);
+    }
+
+    @Override
     public boolean isInEditSession(UUID uuid) {
         return ArmorStandSelectionCache.hasSelection(uuid);
     }
@@ -131,6 +140,27 @@ public class API implements ArmorstandApi {
 
                 as.remove();
 
+            }
+        };
+    }
+
+    @Override
+    public InventoryManager getInventoryManager() {
+        return new InventoryManager() {
+            @Override
+            public void openEditMenu(Player p, ArmorStand a) {
+                new ArmorStandMenu(new PlayerMenuUtility(p), a).open();
+            }
+
+            @Override
+            public void openOptionsMenu(Player p, ArmorStand a, boolean isFromSettings) {
+                new SettingsManager(new PlayerMenuUtility(p), a, isFromSettings).open();
+            }
+
+
+            @Override
+            public void openSaveMenu(Player p, ArmorStand a) {
+                new SaveMenu(new PlayerMenuUtility(p), a).open();
             }
         };
     }

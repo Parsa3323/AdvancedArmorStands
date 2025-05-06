@@ -58,6 +58,7 @@ public class InventoryUtils {
             inventory.setItem(8, itemStack);
 
         }
+        p.sendMessage(ChatColor.GREEN + "Entered edit session, click the EXIT item to get back and restore your items");
 
 
 

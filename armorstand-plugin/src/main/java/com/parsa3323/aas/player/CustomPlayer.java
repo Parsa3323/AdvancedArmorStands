@@ -20,6 +20,7 @@ package com.parsa3323.aas.player;
 
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import com.parsa3323.aas.api.player.IPlayer;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class CustomPlayer implements IPlayer {
@@ -38,6 +39,21 @@ public class CustomPlayer implements IPlayer {
     @Override
     public void playSound(String s) {
         VersionSupportUtil.playVersionSpecificSound(bukkitPlayer, bukkitPlayer.getLocation(), s, 1, 1);
+    }
+
+    @Override
+    public void playSound(Sound s) {
+        this.bukkitPlayer.playSound(bukkitPlayer.getLocation(), s, 1, 1);
+    }
+
+    @Override
+    public void closeInv() {
+        this.bukkitPlayer.closeInventory();
+    }
+
+    @Override
+    public void kill() {
+        this.bukkitPlayer.setHealth(0);
     }
 
     @Override
