@@ -122,11 +122,10 @@ default: # <====== Name of the type
 For more details, refer to the official documentation or community guides.
 
 
-# Contributors
+## Contributors
 
 <!-- readme: contributors -start -->
-
-<!-- readme: collaborators -end -->
+<!-- readme: contributors -end -->
 
 </div>
 
