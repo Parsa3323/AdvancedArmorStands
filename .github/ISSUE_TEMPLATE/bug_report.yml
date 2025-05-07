@@ -5,14 +5,6 @@ labels: ["bug"]
 assignees: []
 
 body:
-  - type: input
-    id: bug_title
-    attributes:
-      label: "Short Title"
-      description: "A brief summary of the bug"
-      placeholder: "e.g., Plugin crashes on startup"
-    validations:
-      required: true
 
   - type: textarea
     id: bug_description
