@@ -29,10 +29,10 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditCommand extends SubCommand {
+public class SettingsCommand extends SubCommand {
     @Override
     public String getName() {
-        return "edit";
+        return "settings";
     }
 
     @Override
@@ -42,7 +42,7 @@ public class EditCommand extends SubCommand {
 
     @Override
     public String getSyntax() {
-        return "/as edit <name>";
+        return "/as settings <name>";
     }
 
     @Override

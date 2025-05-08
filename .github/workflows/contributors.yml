@@ -1,10 +1,10 @@
-name: Add contributors
-on:
-  schedule:
-    - cron:  '20 20 * * *'
-  push:
-   branches:
-     - master
+#name: Add contributors
+#on:
+#  schedule:
+#    - cron:  '20 20 * * *'
+#  push:
+#   branches:
+#     - master
 
 #jobs:
 #  add-contributors:
@@ -22,18 +22,18 @@ on:
 #          COMMIT_MESSAGE: 'README: update contributors'
 #          AVATAR_SHAPE: 'round'
 
-jobs:
-  contrib-readme-job:
-    runs-on: ubuntu-latest
-    name: A job to automate contrib in readme
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - name: Contribute List
-        uses: akhilmhdh/contributors-readme-action@v2.3.10
-        with:
-          commit_message: Updated contributors - Action
-          pr_title_on_protected: Updated contributors - Action
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#jobs:
+#  contrib-readme-job:
+#    runs-on: ubuntu-latest
+#    name: A job to automate contrib in readme
+#    permissions:
+#      contents: write
+#      pull-requests: write
+#    steps:
+#      - name: Contribute List
+#        uses: akhilmhdh/contributors-readme-action@v2.3.10
+#        with:
+#          commit_message: Updated contributors - Action
+#          pr_title_on_protected: Updated contributors - Action
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
