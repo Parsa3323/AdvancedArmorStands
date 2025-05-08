@@ -32,6 +32,7 @@ public interface ArmorstandApi  {
 
     SessionManager getSessionManager();
 
+    @Deprecated
     IPlayer getIPlayer(Player p);
 
     interface SessionManager {

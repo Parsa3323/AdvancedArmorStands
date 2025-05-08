@@ -18,11 +18,13 @@
 
 package com.parsa3323.aas.options.manager;
 
+import com.parsa3323.aas.api.events.ArmorStandOptionChangeEvent;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.options.*;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -106,9 +108,13 @@ public class SettingsManager extends PaginatedMenu {
 
         for (int i = 0; i < getSettingsOptions().size(); i++) {
             if (e.getCurrentItem().equals(getSettingsOptions().get(i).getItemStack(armorStand))) {
-                getSettingsOptions().get(i).click(e, armorStand);
-                if (getSettingsOptions().get(i).updateInventory()) {
-                    super.open();
+                ArmorStandOptionChangeEvent armorStandOptionChangeEvent = new ArmorStandOptionChangeEvent(playerMenuUtility.getOwner(), armorStand);
+                Bukkit.getPluginManager().callEvent(armorStandOptionChangeEvent);
+                if (!armorStandOptionChangeEvent.isCancelled()) {
+                    getSettingsOptions().get(i).click(e, armorStand);
+                    if (getSettingsOptions().get(i).updateInventory()) {
+                        super.open();
+                    }
                 }
                 return;
             }
