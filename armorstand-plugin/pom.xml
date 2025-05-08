@@ -24,7 +24,7 @@
 
     <groupId>com.parsa3323</groupId>
     <artifactId>armorstand-plugin</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
 
     <name>armorstand-plugin</name>
@@ -99,12 +99,12 @@
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>3.0.2</version> <!-- Or the latest -->
+            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.parsa3323</groupId>
-            <artifactId>versionsupport_1_16_5</artifactId>
-            <version>${project.version}</version>
+            <artifactId>versionSupport_1_16_5</artifactId>
+            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>com.parsa3323</groupId>
