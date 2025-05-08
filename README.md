@@ -137,28 +137,11 @@ For more details, refer to the official documentation or community guides.
 
 ## Contributors
 
-<!-- readme: contributors -start -->
-<table>
-	<tbody>
-		<tr>
-            <td align="center">
-                <a href="https://github.com/Parsa3323">
-                    <img src="https://avatars.githubusercontent.com/u/124880821?v=4" width="100;" alt="Parsa3323"/>
-                    <br />
-                    <sub><b>Parsa3323</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/Whisbers">
-                    <img src="https://avatars.githubusercontent.com/u/192603192?v=4" width="100;" alt="Whisbers"/>
-                    <br />
-                    <sub><b>Whisbers</b></sub>
-                </a>
-            </td>
-		</tr>
-	<tbody>
-</table>
-<!-- readme: contributors -end -->
+<a href="https://github.com/Parsa3323/AdvancedArmorStands/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Parsa3323/AdvancedArmorStands" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
 
 </div>
 

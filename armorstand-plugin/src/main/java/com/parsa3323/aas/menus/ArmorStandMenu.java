@@ -60,7 +60,7 @@ public class ArmorStandMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.GOLD + "Settings";
+        return ChatColor.GRAY + "As " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Settings";
     }
 
     @Override
@@ -204,7 +204,7 @@ public class ArmorStandMenu extends Menu {
         Inventory inv = inventory;
 
         setSlots(inv, XMaterial.GRAY_STAINED_GLASS_PANE, new int[]{
-                0, 1, 7, 9, 17, 18, 27 , 26, 35, 36, 37, 43, 44
+                0,8, 1, 7, 9, 17, 18, 27 , 26, 35, 36, 37, 43, 44
         });
 
         setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
@@ -216,7 +216,7 @@ public class ArmorStandMenu extends Menu {
         });
 
         setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
-                14, 24, 16, 23, 25, 32, 8, 34
+                14, 24, 16, 23, 25, 32, 34
         });
 
 

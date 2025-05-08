@@ -58,7 +58,7 @@ public class SettingsManager extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return "Settings";
+        return "Options";
     }
 
     @Override
