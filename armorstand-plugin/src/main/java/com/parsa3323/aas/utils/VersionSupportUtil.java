@@ -23,6 +23,9 @@ import com.parsa3323.aas.VersionSupport_1_16_5;
 import com.parsa3323.aas.VersionSupprt_1_8;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.versionSupport_1_20_1.VersionSupport_1_20_1;
+import com.parsa3323.versionsupport_1_12.VersionSupport_1_12;
+import com.parsa3323.versionsupport_v1_18.Versionsupport_v1_18;
+import com.parsa3323.versionsupport_v1_19.Versionsupport_v1_19;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -71,13 +74,22 @@ public class VersionSupportUtil {
     public static IVersionSupport getVersionSupport(){
         IVersionSupport versionSupport = null;
 
-        if(VersionSupportUtil.isLowerThan("1.12")){
+        if (VersionSupportUtil.isLowerThan("1.12")) {
             versionSupport = new VersionSupprt_1_8();
-        } else if(VersionSupportUtil.isHigherThan("1.16.5")){
-            versionSupport = new VersionSupport_1_20_1();
-        } else {
+        } else if (VersionSupportUtil.isLowerThan("1.13")) {
+            versionSupport = new VersionSupport_1_12();
+        } else if (VersionSupportUtil.isLowerThan("1.17")) {
             versionSupport = new VersionSupport_1_16_5();
+        } else if (VersionSupportUtil.isLowerThan("1.18")) {
+            versionSupport = new Versionsupport_v1_18();
+        } else if (VersionSupportUtil.isLowerThan("1.19")) {
+            versionSupport = new Versionsupport_v1_18();
+        } else if (VersionSupportUtil.isLowerThan("1.20")) {
+            versionSupport = new Versionsupport_v1_19();
+        } else {
+            versionSupport = new VersionSupport_1_20_1();
         }
+
 
         return versionSupport;
     }

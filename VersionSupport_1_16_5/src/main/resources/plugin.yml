@@ -1,3 +1,0 @@
-name: VersionSupport_1_12
-version: '${project.version}'
-main: com.parsa3323.aas.VersionSupport_1_16_5

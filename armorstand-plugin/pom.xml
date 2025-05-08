@@ -103,7 +103,27 @@
         </dependency>
         <dependency>
             <groupId>com.parsa3323</groupId>
-            <artifactId>VersionSupport_1_16_5</artifactId>
+            <artifactId>versionsupport_1_16_5</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.parsa3323</groupId>
+            <artifactId>versionsupport_1_12</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.parsa3323</groupId>
+            <artifactId>versionsupport_v1_17</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.parsa3323</groupId>
+            <artifactId>versionsupport_v1_18</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.parsa3323</groupId>
+            <artifactId>versionsupport_v1_19</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
