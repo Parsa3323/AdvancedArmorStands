@@ -141,8 +141,6 @@ For more details, refer to the official documentation or community guides.
   <img src="https://contrib.rocks/image?repo=Parsa3323/AdvancedArmorStands" />
 </a>
 
-Made with [contrib.rocks](https://contrib.rocks).
-
 </div>
 
 [//]: # (...)
