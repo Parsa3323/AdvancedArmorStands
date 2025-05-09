@@ -48,6 +48,7 @@ public class AnimClearCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         if (args.length < 2) {
             sendUsage(player);
+            return;
         }
 
         ConfigurationSection configurationSection = ArmorStands.get().getConfigurationSection("armorstands");

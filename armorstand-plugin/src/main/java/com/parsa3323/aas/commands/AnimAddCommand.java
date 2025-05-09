@@ -50,6 +50,7 @@ public class AnimAddCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         if (args.length < 3) {
             sendUsage(player);
+            return;
         }
 
         ConfigurationSection configurationSection = ArmorStands.get().getConfigurationSection("armorstands");
