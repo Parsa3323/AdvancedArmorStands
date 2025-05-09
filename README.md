@@ -187,7 +187,7 @@ For more details, refer to the [official documentation](https://github.com/Parsa
 
 <div align="center">
 
-## Contributors
+# Contributors
 
 <a href="https://github.com/Parsa3323/AdvancedArmorStands/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Parsa3323/AdvancedArmorStands" />
@@ -195,7 +195,6 @@ For more details, refer to the [official documentation](https://github.com/Parsa
 
 </div>
 
-[//]: # (...)
 
 
 
