@@ -19,8 +19,8 @@
 package com.parsa3323.aas.utils;
 
 import com.parsa3323.aas.AdvancedArmorStands;
-import com.parsa3323.aas.configs.ArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
+import com.parsa3323.aas.configs.ArmorStands;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;

@@ -18,7 +18,6 @@
 
 package com.parsa3323.aas.inventory;
 
-import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;

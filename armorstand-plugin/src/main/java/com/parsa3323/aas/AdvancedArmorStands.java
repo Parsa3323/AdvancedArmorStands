@@ -18,25 +18,29 @@
 
 package com.parsa3323.aas;
 
+import com.parsa3323.aas.api.ArmorstandApi;
+import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.commands.manager.CommandManager;
 import com.parsa3323.aas.commands.manager.TabComp;
+import com.parsa3323.aas.configs.AnimationConfig;
 import com.parsa3323.aas.configs.ArmorStands;
 import com.parsa3323.aas.configs.TypesConfig;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
 import com.parsa3323.aas.listener.*;
 import com.parsa3323.aas.menus.manager.MenuListener;
 import com.parsa3323.aas.placeholderapi.PapiExpansion;
+import com.parsa3323.aas.utils.AnimationUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
-import com.parsa3323.aas.api.ArmorstandApi;
-import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,8 +104,21 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         status("Loading configs");
 
-        TypesConfig.init();
+        AnimationConfig.init();
 
+        FileConfiguration animations = AnimationConfig.get();
+
+        animations.addDefault("animations.wave.interval", 10);
+        animations.addDefault("animations.wave.loop", true);
+        animations.addDefault("animations.wave.steps", new ArrayList<>());
+        animations.options().copyDefaults(true);
+
+
+        AnimationConfig.get().options().copyDefaults(true);
+        AnimationConfig.save();
+
+
+        TypesConfig.init();
 
         TypesConfig.get().addDefault("default.Arms", true);
         TypesConfig.get().addDefault("default.Gravity", false);
@@ -145,6 +162,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         status("Load done");
 
+        AnimationUtils.init();
 
     }
 

@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas;
 
+import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.configs.ArmorStands;
 import com.parsa3323.aas.configs.TypesConfig;
@@ -29,7 +30,6 @@ import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
-import com.parsa3323.aas.api.ArmorstandApi;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;

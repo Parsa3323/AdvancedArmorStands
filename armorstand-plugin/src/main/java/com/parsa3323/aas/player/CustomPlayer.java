@@ -18,8 +18,8 @@
 
 package com.parsa3323.aas.player;
 
-import com.parsa3323.aas.utils.VersionSupportUtil;
 import com.parsa3323.aas.api.player.IPlayer;
+import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 

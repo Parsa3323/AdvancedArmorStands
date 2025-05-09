@@ -18,61 +18,58 @@
 
 package com.parsa3323.aas.commands;
 
-import com.parsa3323.aas.AdvancedArmorStands;
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.AnimationConfig;
 import com.parsa3323.aas.configs.ArmorStands;
-import com.parsa3323.aas.configs.TypesConfig;
-import com.parsa3323.aas.player.PlayerManager;
-import com.parsa3323.aas.utils.AnimationUtils;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-import java.util.Collections;
 import java.util.List;
 
-public class ReloadCommand extends SubCommand {
+public class AnimClearCommand extends SubCommand {
     @Override
     public String getName() {
-        return "Reload";
+        return "clearanimation";
     }
 
     @Override
     public String getDescription() {
-        return "Reloads plugin's configs";
+        return "Clear animations of an as";
     }
 
     @Override
     public String getSyntax() {
-        return "/as reload";
+        return "/as clearanimation <name>";
     }
 
     @Override
     public void perform(Player player, String[] args) {
-
-        try {
-
-
-            TypesConfig.reload();
-            ArmorStands.reload();
-            AnimationConfig.reload();
-            AnimationUtils.reloadAnimations();
-            player.sendMessage(ChatColor.GREEN + "✔ Successfully reloaded plugin's configs");
-            PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
-        } catch (Exception e) {
-            e.printStackTrace();
-            AdvancedArmorStands.info(ChatColor.RED + e.getMessage());
+        if (args.length < 2) {
+            sendUsage(player);
         }
 
+        ConfigurationSection configurationSection = ArmorStands.get().getConfigurationSection("armorstands");
+
+        if (!configurationSection.contains(args[1])) {
+            player.sendMessage(ChatColor.RED + "Invalid armor stand");
+            return;
+        }
+
+        configurationSection.set(args[1] + ".animation", null);
+        ArmorStands.save();
+        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
+        player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[1]);
     }
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return Collections.emptyList();
+        return ArmorStandUtils.getArmorStandList();
     }
 
     @Override
     public boolean isForOps() {
-        return true;
+        return false;
     }
 }
