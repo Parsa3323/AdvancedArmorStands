@@ -172,7 +172,7 @@ animations:
 
 
 
-For more details, refer to the official documentation or community guides.
+For more details, refer to the [official documentation](https://github.com/Parsa3323/AdvancedArmorStands/wiki) or community guides.
 
 
 
