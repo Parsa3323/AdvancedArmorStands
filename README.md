@@ -50,7 +50,7 @@
 - [Configs](#Configs)
     - [Main config](#Main-Configuration)
     - [Types config](#Types-Configuration)
-    - [Animations config]()
+    - [Animations config](#Animations-Configuration)
 
 
 <div align="center">
@@ -114,7 +114,7 @@ default: # <====== Name of the type
 > [!NOTE]  
 > Players can create as many types as they want (e.g., up to 80 types), but they must change the names and </br> each type can be used in the game using the `create` command
 
-## Types Configuration
+## Animations Configuration
 
 ```yaml
 animations:
@@ -139,46 +139,6 @@ animations:
           y: 0   # <====== Left leg Y rotation
           z: 0   # <====== Left leg Z rotation
         right_leg: # <====== Right leg pose for this step
-          x: -10 # <====== Right leg X rotation
-          y: 0   # <====== Right leg Y rotation
-          z: 0   # <====== Right leg Z rotation
-      - head:
-          x: 0   # <====== Head X rotation
-          y: 0   # <====== Head Y rotation
-          z: 0   # <====== Head Z rotation
-        left_arm:
-          x: -10 # <====== Left arm X rotation
-          y: 0   # <====== Left arm Y rotation
-          z: 30  # <====== Left arm Z rotation
-        right_arm:
-          x: -10 # <====== Right arm X rotation
-          y: 0   # <====== Right arm Y rotation
-          z: -30 # <====== Right arm Z rotation
-        left_leg:
-          x: -10 # <====== Left leg X rotation
-          y: 0   # <====== Left leg Y rotation
-          z: 0   # <====== Left leg Z rotation
-        right_leg:
-          x: 10  # <====== Right leg X rotation
-          y: 0   # <====== Right leg Y rotation
-          z: 0   # <====== Right leg Z rotation
-      - head:
-          x: 0   # <====== Head X rotation
-          y: 0   # <====== Head Y rotation
-          z: 0   # <====== Head Z rotation
-        left_arm:
-          x: -30 # <====== Left arm X rotation
-          y: 0   # <====== Left arm Y rotation
-          z: -10 # <====== Left arm Z rotation
-        right_arm:
-          x: -30 # <====== Right arm X rotation
-          y: 0   # <====== Right arm Y rotation
-          z: 10  # <====== Right arm Z rotation
-        left_leg:
-          x: 10  # <====== Left leg X rotation
-          y: 0   # <====== Left leg Y rotation
-          z: 0   # <====== Left leg Z rotation
-        right_leg:
           x: -10 # <====== Right leg X rotation
           y: 0   # <====== Right leg Y rotation
           z: 0   # <====== Right leg Z rotation
