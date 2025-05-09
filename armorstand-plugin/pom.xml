@@ -24,7 +24,7 @@
 
     <groupId>com.parsa3323</groupId>
     <artifactId>armorstand-plugin</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <packaging>jar</packaging>
 
     <name>armorstand-plugin</name>
@@ -103,7 +103,7 @@
         </dependency>
         <dependency>
             <groupId>com.parsa3323</groupId>
-            <artifactId>versionSupport_1_16_5</artifactId>
+            <artifactId>versionsupport_1_16_5</artifactId>
             <version>1.1.1</version>
         </dependency>
         <dependency>

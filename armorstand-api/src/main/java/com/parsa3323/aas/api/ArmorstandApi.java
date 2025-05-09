@@ -47,6 +47,18 @@ public interface ArmorstandApi  {
 
     }
 
+    AnimationManager getAnimationManager();
+
+    interface AnimationManager {
+
+        void reload();
+
+        boolean hasAnimation(ArmorStand armorStand);
+
+        boolean hasAnimation(String name);
+
+    }
+
     boolean isInEditSession(UUID uuid);
 
     boolean isInEditSession(Player p);
@@ -56,6 +68,8 @@ public interface ArmorstandApi  {
         FileConfiguration getMainConfig();
 
         FileConfiguration getCacheConfig();
+
+        FileConfiguration getAnimationConfig();
 
         FileConfiguration getTypesConfig();
 

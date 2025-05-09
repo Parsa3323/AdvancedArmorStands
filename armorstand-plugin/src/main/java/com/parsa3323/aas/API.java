@@ -20,16 +20,14 @@ package com.parsa3323.aas;
 
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.player.IPlayer;
+import com.parsa3323.aas.configs.AnimationConfig;
 import com.parsa3323.aas.configs.ArmorStands;
 import com.parsa3323.aas.configs.TypesConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.player.PlayerManager;
-import com.parsa3323.aas.utils.ArmorStandSelectionCache;
-import com.parsa3323.aas.utils.ArmorStandUtils;
-import com.parsa3323.aas.utils.InventoryUtils;
-import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
@@ -49,6 +47,11 @@ public class API implements ArmorstandApi {
             @Override
             public FileConfiguration getCacheConfig() {
                 return ArmorStands.get();
+            }
+
+            @Override
+            public FileConfiguration getAnimationConfig() {
+                return AnimationConfig.get();
             }
 
             @Override
@@ -89,6 +92,26 @@ public class API implements ArmorstandApi {
     @Override
     public IPlayer getIPlayer(Player p) {
         return PlayerManager.getCustomPlayerByBukkit(p);
+    }
+
+    @Override
+    public AnimationManager getAnimationManager() {
+        return new AnimationManager() {
+            @Override
+            public void reload() {
+                AnimationUtils.reloadAnimations();
+            }
+
+            @Override
+            public boolean hasAnimation(ArmorStand armorStand) {
+                return ArmorStands.get().contains("armorstands." + ArmorStandUtils.getNameByArmorStand(armorStand) + ".animation");
+            }
+
+            @Override
+            public boolean hasAnimation(String s) {
+                return ArmorStands.get().contains("armorstands." + ArmorStandUtils.getArmorStandByName(s) + ".animation");
+            }
+        };
     }
 
     @Override
