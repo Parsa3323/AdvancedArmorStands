@@ -164,6 +164,9 @@ animations:
           y: 0   # <====== Right leg Y rotation
           z: 0   # <====== Right leg Z rotation
 ```
+>[!TIP]
+> Or you can use the [online editor](https://aas.rabity.ir/animate)
+
 
 > [!CAUTION]
 > Don't touch cache yaml files.
