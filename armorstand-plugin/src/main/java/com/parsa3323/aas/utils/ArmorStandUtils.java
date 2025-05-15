@@ -7,7 +7,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.Q
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,6 +22,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
 import com.parsa3323.aas.configs.ArmorStands;
 import org.bukkit.*;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -29,43 +30,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 public class ArmorStandUtils {
-
-    public static List<ArmorStand> getArmorStands() {
-        List<ArmorStand> armorStands = new ArrayList<>();
-        FileConfiguration config = ArmorStands.get();
-
-        if (!config.contains("armorstands")) {
-            return armorStands;
-        }
-
-        Set<String> keys = config.getConfigurationSection("armorstands").getKeys(false);
-
-        for (String key : keys) {
-            String path = "armorstands." + key;
-            UUID uuid = UUID.fromString(config.getString(path + ".UUID"));
-            String worldName = config.getString(path + ".World");
-
-            if (worldName == null) continue;
-
-            World world = Bukkit.getWorld(worldName);
-            if (world == null) continue;
-
-            for (Entity entity : world.getEntities()) {
-                if (entity instanceof ArmorStand && entity.getUniqueId().equals(uuid)) {
-                    armorStands.add((ArmorStand) entity);
-                    break;
-                }
-            }
-        }
-
-        return armorStands;
-    }
-
 
     public static String getNameByArmorStand(ArmorStand armorStand) {
         FileConfiguration config = ArmorStands.get();
@@ -123,8 +91,13 @@ public class ArmorStandUtils {
 
     public static ArrayList<String> getArmorStandList() {
         FileConfiguration config = ArmorStands.get();
-        Set<String> keys = config.getConfigurationSection("armorstands").getKeys(false);
-        return new ArrayList<>(keys);
+
+        ConfigurationSection section = config.getConfigurationSection("armorstands");
+        if (section == null) {
+            Bukkit.getLogger().warning("[AdvancedArmorStands] 'armorstands' section is missing in ArmorStands.yml!");
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(section.getKeys(false));
     }
 
     public static void deleteArmorStand(String name, Player player) {

@@ -7,7 +7,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.Q
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-//TEST
 public class ArmorStandMenu extends Menu {
 
     private final HashMap<UUID, Long> cooldownMap = new HashMap<>();
@@ -217,7 +216,6 @@ public class ArmorStandMenu extends Menu {
         setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
                 14, 24, 16, 23, 25, 32, 34
         });
-
 
         ItemStack close = new ItemStack(Material.BARRIER, 1);
         ItemMeta cMeta = close.getItemMeta();
