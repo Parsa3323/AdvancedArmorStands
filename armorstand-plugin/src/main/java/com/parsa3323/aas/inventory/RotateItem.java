@@ -63,6 +63,7 @@ public class RotateItem extends InventoryItem {
 
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
+
         if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
             Location loc = armorStand.getLocation();
             loc.setYaw(loc.getYaw() + 5f);

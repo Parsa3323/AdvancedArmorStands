@@ -26,8 +26,10 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.EulerAngle;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -241,6 +243,100 @@ public class ArmorStandUtils {
         return mat.name().endsWith("_HELMET") ||
                 mat == Material.PUMPKIN ||
                 mat == Material.SKULL_ITEM;
+    }
+
+    public static void saveArmorStand(String name, ArmorStand armorStand, FileConfiguration c) {
+        if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
+            ConfigurationSection cs = c.getConfigurationSection("armorstands");
+
+            Location loc = armorStand.getLocation();
+            cs.set(name + ".yaw", loc.getYaw());
+            cs.set(name + ".pitch", loc.getPitch());
+            cs.set(name + ".small", armorStand.isSmall());
+            cs.set(name + ".gravity", armorStand.hasGravity());
+            cs.set(name + ".visible", armorStand.isVisible());
+            cs.set(name + ".baseplate", armorStand.hasBasePlate());
+            cs.set(name + ".marker", armorStand.isMarker());
+            cs.set(name + ".arms", armorStand.hasArms());
+            cs.set(name + ".customName", armorStand.getCustomName());
+            cs.set(name + ".customNameVisible", armorStand.isCustomNameVisible());
+
+            saveEulerAngle(cs, name + ".pose.head", armorStand.getHeadPose());
+            saveEulerAngle(cs, name + ".pose.body", armorStand.getBodyPose());
+            saveEulerAngle(cs, name + ".pose.leftArm", armorStand.getLeftArmPose());
+            saveEulerAngle(cs, name + ".pose.rightArm", armorStand.getRightArmPose());
+            saveEulerAngle(cs, name + ".pose.leftLeg", armorStand.getLeftLegPose());
+            saveEulerAngle(cs, name + ".pose.rightLeg", armorStand.getRightLegPose());
+
+            ArmorStands.save();
+        }
+    }
+
+    public static ArmorStand loadArmorStand(String name, FileConfiguration c) {
+        if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
+            ConfigurationSection cs = c.getConfigurationSection("armorstands");
+
+            World world = Bukkit.getWorld(cs.getString(name + ".World"));
+            if (world == null) {
+                return null;
+            }
+
+            double x = cs.getDouble(name + ".X");
+            double y = cs.getDouble(name + ".Y");
+            double z = cs.getDouble(name + ".Z");
+            float yaw = (float) cs.getDouble(name + ".yaw");
+            float pitch = (float) cs.getDouble(name + ".pitch");
+
+            Location loc = new Location(world, x, y, z, yaw, pitch);
+
+            double radius = 0.1;
+            for (Entity entity : world.getNearbyEntities(loc, radius, radius, radius)) {
+                if (entity instanceof ArmorStand) {
+                    Location entityLoc = entity.getLocation();
+                    if (entityLoc.getBlockX() == x && entityLoc.getBlockY() == y && entityLoc.getBlockZ() == z) {
+                        AdvancedArmorStands.debug("ArmorStand already exists at location: " + loc);
+                        return (ArmorStand) entity;
+                    }
+                }
+            }
+
+
+            ArmorStand armorStand = (ArmorStand) world.spawnEntity(loc, EntityType.ARMOR_STAND);
+
+            armorStand.setSmall(cs.getBoolean(name + ".small"));
+            armorStand.setGravity(cs.getBoolean(name + ".gravity"));
+            armorStand.setVisible(cs.getBoolean(name + ".visible"));
+            armorStand.setBasePlate(cs.getBoolean(name + ".baseplate"));
+            armorStand.setMarker(cs.getBoolean(name + ".marker"));
+            armorStand.setArms(cs.getBoolean(name + ".arms"));
+            AdvancedArmorStands.debug(String.valueOf(cs.getBoolean(name + ".arms")));
+            armorStand.setCustomName(cs.getString(name + ".customName"));
+            armorStand.setCustomNameVisible(cs.getBoolean(name + ".customNameVisible"));
+
+            armorStand.setHeadPose(loadEulerAngle(cs, name + ".pose.head"));
+            armorStand.setBodyPose(loadEulerAngle(cs, name + ".pose.body"));
+            armorStand.setLeftArmPose(loadEulerAngle(cs, name + ".pose.leftArm"));
+            armorStand.setRightArmPose(loadEulerAngle(cs, name + ".pose.rightArm"));
+            armorStand.setLeftLegPose(loadEulerAngle(cs, name + ".pose.leftLeg"));
+            armorStand.setRightLegPose(loadEulerAngle(cs, name + ".pose.rightLeg"));
+
+            return armorStand;
+        }
+
+        return null;
+    }
+
+    private static void saveEulerAngle(ConfigurationSection config, String path, EulerAngle angle) {
+        config.set(path + ".x", Math.toDegrees(angle.getX()));
+        config.set(path + ".y", Math.toDegrees(angle.getY()));
+        config.set(path + ".z", Math.toDegrees(angle.getZ()));
+    }
+
+    private static EulerAngle loadEulerAngle(ConfigurationSection config, String path) {
+        double x = Math.toRadians(config.getDouble(path + ".x"));
+        double y = Math.toRadians(config.getDouble(path + ".y"));
+        double z = Math.toRadians(config.getDouble(path + ".z"));
+        return new EulerAngle(x, y, z);
     }
 
     public static boolean canBeChestplate(Material mat) {

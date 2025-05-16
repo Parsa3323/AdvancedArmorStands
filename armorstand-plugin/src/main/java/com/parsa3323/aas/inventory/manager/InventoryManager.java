@@ -19,11 +19,14 @@
 package com.parsa3323.aas.inventory.manager;
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.inventory.*;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -75,7 +78,12 @@ public class InventoryManager implements Listener {
 
                 if (event.getItem().equals(getInventoryItems().get(i).getItemStack())) {
                     event.setCancelled(true);
+
+
                     getInventoryItems().get(i).execute(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), action);
+
+                    Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), ArmorStandUtils.getNameByArmorStand(ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()))));
+
 
                 }
 

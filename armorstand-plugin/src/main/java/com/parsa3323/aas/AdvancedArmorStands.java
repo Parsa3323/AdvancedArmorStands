@@ -31,10 +31,12 @@ import com.parsa3323.aas.listener.*;
 import com.parsa3323.aas.menus.manager.MenuListener;
 import com.parsa3323.aas.placeholderapi.PapiExpansion;
 import com.parsa3323.aas.utils.AnimationUtils;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
@@ -97,6 +99,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ev.registerEvents(new PlayerDieListener(), this);
         ev.registerEvents(new InventoryManager(), this);
         ev.registerEvents(new PlayerLeaveEvent(), this);
+        ev.registerEvents(new StateListener(), this);
         ev.registerEvents(new CreateCommand(), this);
         ev.registerEvents(new PlayerIntractListener(), this);
         ev.registerEvents(new MenuListener(), this);
@@ -159,6 +162,12 @@ public final class AdvancedArmorStands extends JavaPlugin {
             return;
         }
         new PapiExpansion().register();
+
+        status("Spawning armor stands");
+
+        for (String key : ArmorStandUtils.getArmorStandList()) {
+            ArmorStandUtils.loadArmorStand(key, ArmorStands.get());
+        }
 
         status("Load done");
 

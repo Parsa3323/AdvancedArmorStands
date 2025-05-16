@@ -73,6 +73,8 @@ The `main.yml` configuration file allows you to enable or disable debugging.
 debug: false # <========== Enable & Disable debug
 
 shift-right-click-to-add: true # <========== Enable & Disable shift-right-click to add ArmorStand
+
+auto-load-armor-stands: true # <========== Automatically reload armor stands on server restart
 ```
 
 <div align="center">

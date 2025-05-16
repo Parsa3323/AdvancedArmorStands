@@ -8,3 +8,7 @@ debug: false
 # three times will save it as an Advanced Armor Stand, armor stand.
 # If set to false, this will be disabled.
 shift-right-click-to-add: true
+
+# Armor stands probably disappear on server restart,
+# so enable this for the plugin to automatically restore the armor stands.
+auto-load-armor-stands: true

@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.inventory;
 
+import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -48,7 +49,7 @@ public class RightHandItem extends InventoryItem {
 
         ItemStack itemStack = VersionSupportUtil.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjIzZmI3OGM1ZGY1YzY4OTUxOGI3MGU1NGU2MDJmNjQ3NGViZWU0MDk5MzQxMGQ2YTQ2ZWY3ZTMxZTEwYWFhYiJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN  + "RightHand" + ChatColor.GRAY + " (Hover)");
+        itemMeta.setDisplayName(ChatColor.GREEN  + "Right hand" + ChatColor.GRAY + " (Hover)");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 
@@ -67,7 +68,7 @@ public class RightHandItem extends InventoryItem {
         EulerAngle currentPose = armorStand.getRightArmPose();
 
         double step = Math.toRadians(5);
-
+        
         if (p.isSneaking()) {
             if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
                 EulerAngle newPose = new EulerAngle(currentPose.getX() - step, currentPose.getY(), currentPose.getZ());

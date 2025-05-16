@@ -20,6 +20,7 @@ package com.parsa3323.aas.menus;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.player.PlayerManager;
@@ -27,6 +28,7 @@ import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -149,6 +151,9 @@ public class ArmorStandMenu extends Menu {
         }
 
         try {
+
+
+
             switch (slot) {
                 case 4:
                     armorStand.setHelmet(placed);
@@ -166,6 +171,9 @@ public class ArmorStandMenu extends Menu {
                     armorStand.setItemInHand(placed);
                     break;
             }
+            Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
+
+
             p.sendMessage(ChatColor.GREEN + "Armor stand updated successfully!");
             PlayerManager.getCustomPlayerByBukkit(p).playSound("CLICK");
         } catch (Exception ex) {

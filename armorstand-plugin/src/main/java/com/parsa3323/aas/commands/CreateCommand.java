@@ -24,6 +24,7 @@ import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.configs.ArmorStands;
 import com.parsa3323.aas.configs.TypesConfig;
 import com.parsa3323.aas.player.PlayerManager;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -72,6 +73,7 @@ public class CreateCommand extends SubCommand implements Listener {
 
             ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
 
+
             ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, args[2]);
             Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
 
@@ -79,6 +81,7 @@ public class CreateCommand extends SubCommand implements Listener {
                 armorStand.remove();
                 return;
             }
+
 
 
             armorStand.setArms(TypesConfig.get().getBoolean(args[1] + ".Arms"));
@@ -136,6 +139,9 @@ public class CreateCommand extends SubCommand implements Listener {
             AdvancedArmorStands.debug("leftLegPose.y = " + getConfigDouble(args[1] + ".leftLegPose.y"));
             AdvancedArmorStands.debug("leftLegPose.z = " + getConfigDouble(args[1] + ".leftLegPose.z"));
 
+            ArmorStandUtils.saveArmorStand(args[2], armorStand, ArmorStands.get());
+
+
             PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
             player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
             player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");
@@ -156,8 +162,6 @@ public class CreateCommand extends SubCommand implements Listener {
 
             ArmorStand stand = spawnCustomArmorStand(player.getWorld(), player.getLocation(), rightArm, leftArm, rightLeg, leftLeg, Headpos, player, Name);
 
-
-           // saveArmorStand(Name, stand);
 
         }
     }
@@ -195,6 +199,8 @@ public class CreateCommand extends SubCommand implements Listener {
 
         }
 
+
+
         armorStand.setArms(true);
         armorStand.setGravity(false);
         armorStand.setBasePlate(false);
@@ -215,6 +221,7 @@ public class CreateCommand extends SubCommand implements Listener {
         armorStand.setLeftArmPose(leftArmPose);
         armorStand.setRightLegPose(rightLegPose);
         armorStand.setLeftLegPose(leftLegPose);
+        ArmorStandUtils.saveArmorStand(name, armorStand, ArmorStands.get());
         PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
         player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
         player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");

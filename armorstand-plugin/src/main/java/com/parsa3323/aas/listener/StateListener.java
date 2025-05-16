@@ -16,26 +16,20 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.api.versionSupport;
+package com.parsa3323.aas.listener;
 
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
+import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
+import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.utils.ArmorStandUtils;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 
-public interface IVersionSupport {
+public class StateListener implements Listener {
 
-    void playSound(Player player, Location location, String soundName, float volume, float pitch);
+    @EventHandler
+    public void onStateChange(ArmorStandStateChangeEvent e) {
 
-    ItemStack getSkull(String base64);
+        ArmorStandUtils.saveArmorStand(e.getName(), e.getArmorStand(), ArmorStands.get());
 
-    Material getMaterialForVersion(String s);
-
-    boolean isGlowing(ArmorStand as);
-
-    void setGlowing(ArmorStand as, boolean s);
-
-    boolean canGlow();
-
+    }
 }

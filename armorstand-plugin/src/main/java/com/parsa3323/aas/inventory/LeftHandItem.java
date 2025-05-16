@@ -48,7 +48,7 @@ public class LeftHandItem extends InventoryItem {
 
         ItemStack itemStack = VersionSupportUtil.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjA3NGY2ZTM5YjhkNTY2ODc0MjI3YWRkOWNiMzRjYjE2MTJmY2Q1MjI0NjliNzM5ZmUwOTliNWY5MWI5MTc5MiJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN  + "LeftHand" + ChatColor.GRAY + " (Hover)");
+        itemMeta.setDisplayName(ChatColor.GREEN  + "Left hand" + ChatColor.GRAY + " (Hover)");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 

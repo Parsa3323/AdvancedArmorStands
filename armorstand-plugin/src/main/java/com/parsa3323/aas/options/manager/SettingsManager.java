@@ -19,9 +19,11 @@
 package com.parsa3323.aas.options.manager;
 
 import com.parsa3323.aas.api.events.ArmorStandOptionChangeEvent;
+import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.options.*;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.Bukkit;
@@ -112,10 +114,15 @@ public class SettingsManager extends PaginatedMenu {
                 ArmorStandOptionChangeEvent armorStandOptionChangeEvent = new ArmorStandOptionChangeEvent(playerMenuUtility.getOwner(), armorStand);
                 Bukkit.getPluginManager().callEvent(armorStandOptionChangeEvent);
                 if (!armorStandOptionChangeEvent.isCancelled()) {
+
+
+
                     getSettingsOptions().get(i).click(e, armorStand);
                     if (getSettingsOptions().get(i).updateInventory()) {
                         super.open();
                     }
+                    Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(playerMenuUtility.getOwner(), armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
+
                 }
                 return;
             }
