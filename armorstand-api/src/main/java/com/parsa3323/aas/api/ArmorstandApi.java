@@ -28,6 +28,8 @@ import java.util.UUID;
 
 public interface ArmorstandApi  {
 
+    boolean isFirstTimeRunning();
+
     ConfigManager getConfigManager();
 
     SessionManager getSessionManager();

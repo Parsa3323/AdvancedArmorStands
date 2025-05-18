@@ -50,6 +50,7 @@ import java.util.logging.Logger;
 public final class AdvancedArmorStands extends JavaPlugin {
 
     private static Logger logger;
+
     public static Level logLevel;
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
@@ -57,6 +58,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
     public IVersionSupport versionSupport;
 
     public static ArmorstandApi api;
+
+    public static boolean isFirstTimeRunning = false;
 
     public static AdvancedArmorStands plugin;
 
@@ -78,10 +81,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
 
         if (!getDataFolder().exists()) {
+            isFirstTimeRunning = true;
             getDataFolder().mkdirs();
         }
         plugin = this;
-
 
         saveDefaultConfig();
 

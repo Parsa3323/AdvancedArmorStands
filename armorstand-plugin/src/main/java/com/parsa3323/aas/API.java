@@ -37,6 +37,11 @@ import java.util.UUID;
 
 public class API implements ArmorstandApi {
     @Override
+    public boolean isFirstTimeRunning() {
+        return AdvancedArmorStands.isFirstTimeRunning;
+    }
+
+    @Override
     public ConfigManager getConfigManager() {
         return new ConfigManager() {
             @Override
