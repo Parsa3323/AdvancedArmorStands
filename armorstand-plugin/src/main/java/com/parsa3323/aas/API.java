@@ -20,6 +20,7 @@ package com.parsa3323.aas;
 
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.player.IPlayer;
+import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.configs.AnimationConfig;
 import com.parsa3323.aas.configs.ArmorStands;
 import com.parsa3323.aas.configs.TypesConfig;
@@ -36,6 +37,11 @@ import org.bukkit.entity.Player;
 import java.util.UUID;
 
 public class API implements ArmorstandApi {
+    @Override
+    public IVersionSupport getVersionSupport() {
+        return VersionSupportUtil.getVersionSupport();
+    }
+
     @Override
     public boolean isFirstTimeRunning() {
         return AdvancedArmorStands.isFirstTimeRunning;

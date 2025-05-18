@@ -20,6 +20,7 @@ package com.parsa3323.aas.api;
 
 
 import com.parsa3323.aas.api.player.IPlayer;
+import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -27,6 +28,8 @@ import org.bukkit.entity.Player;
 import java.util.UUID;
 
 public interface ArmorstandApi  {
+
+    IVersionSupport getVersionSupport();
 
     boolean isFirstTimeRunning();
 
