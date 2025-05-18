@@ -86,6 +86,6 @@ public class AnimAddCommand extends SubCommand {
 
     @Override
     public boolean isForOps() {
-        return false;
+        return true;
     }
 }

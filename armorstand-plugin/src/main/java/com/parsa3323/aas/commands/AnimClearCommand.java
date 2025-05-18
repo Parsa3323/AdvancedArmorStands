@@ -71,6 +71,6 @@ public class AnimClearCommand extends SubCommand {
 
     @Override
     public boolean isForOps() {
-        return false;
+        return true;
     }
 }
