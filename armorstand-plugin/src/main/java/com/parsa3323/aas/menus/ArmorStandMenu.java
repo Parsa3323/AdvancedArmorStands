@@ -24,10 +24,7 @@ import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.player.PlayerManager;
-import com.parsa3323.aas.utils.ArmorStandSelectionCache;
-import com.parsa3323.aas.utils.ArmorStandUtils;
-import com.parsa3323.aas.utils.InventoryUtils;
-import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -118,9 +115,17 @@ public class ArmorStandMenu extends Menu {
             cursorItem = new ItemStack(Material.AIR);
         }
 
+        boolean doesSupportOffHand = VersionSupportUtil.getVersionSupport().canSetItemOffHand();
+
+        if ((doesSupportOffHand && slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40 && slot != 39) ||
+                (!doesSupportOffHand && slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40)) {
+            return;
+        }
 
 
-        if (slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40) return;
+        //if (slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40) return;
+
+
 
         UUID uuid = p.getUniqueId();
         long now = System.currentTimeMillis();
@@ -167,9 +172,17 @@ public class ArmorStandMenu extends Menu {
                 case 31:
                     armorStand.setBoots(placed);
                     break;
+                case 39:
+                    if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
+                        VersionSupportUtil.getVersionSupport().setItemInOffHand(armorStand, placed);
+                    } else {
+                        return;
+                    }
+                    break;
                 case 40:
                     armorStand.setItemInHand(placed);
                     break;
+
             }
             Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
 
@@ -214,7 +227,7 @@ public class ArmorStandMenu extends Menu {
         });
 
         setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
-                2, 3, 5, 6, 38, 39, 41, 42
+                2, 3, 5, 6, 38, 41, 42
         });
 
         setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
@@ -289,6 +302,23 @@ public class ArmorStandMenu extends Menu {
 
         ItemStack itemInHand = (armorStand.getItemInHand() != null) ? armorStand.getItemInHand().clone() : new ItemStack(Material.AIR);
         inventory.setItem(40, itemInHand);
+
+        ItemStack itemInOffHand;
+
+        if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
+            itemInOffHand = (VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand) != null) ? VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).clone() : new ItemStack(Material.AIR);
+
+
+        } else {
+            itemInOffHand = new ItemStack(XMaterial.WHITE_STAINED_GLASS_PANE.parseMaterial());
+
+            ItemMeta itemMeta = itemInOffHand.getItemMeta();
+
+            itemMeta.setDisplayName(" ");
+            itemInOffHand.setItemMeta(itemMeta);
+        }
+
+        inventory.setItem(39, itemInOffHand);
 
     }
 

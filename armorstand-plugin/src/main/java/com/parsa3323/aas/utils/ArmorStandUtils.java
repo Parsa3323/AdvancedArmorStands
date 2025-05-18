@@ -244,6 +244,7 @@ public class ArmorStandUtils {
             case 13: return mat == Material.AIR || canBeChestplate(mat);
             case 22: return mat == Material.AIR || canBeLeggings(mat);
             case 31: return mat == Material.AIR || canBeBoots(mat);
+            case 39: return true;
             case 40: return true;
             default: return false;
         }
