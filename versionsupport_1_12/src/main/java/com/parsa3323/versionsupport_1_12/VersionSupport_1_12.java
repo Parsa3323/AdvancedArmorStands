@@ -111,4 +111,19 @@ public final class VersionSupport_1_12 implements IVersionSupport {
         return true;
     }
 
+    @Override
+    public boolean canSetItemOffHand() {
+        return true;
+    }
+
+    @Override
+    public ItemStack getItemInOffHand(ArmorStand as) {
+        return as.getEquipment().getItemInOffHand();
+    }
+
+    @Override
+    public void setItemInOffHand(ArmorStand as, ItemStack itemStack) {
+        as.getEquipment().setItemInOffHand(itemStack);
+    }
+
 }

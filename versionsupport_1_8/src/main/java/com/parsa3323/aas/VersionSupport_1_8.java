@@ -86,4 +86,19 @@ public final class VersionSupport_1_8 implements IVersionSupport {
     public boolean canGlow() {
         return false;
     }
+
+    @Override
+    public boolean canSetItemOffHand() {
+        return false;
+    }
+
+    @Override
+    public ItemStack getItemInOffHand(ArmorStand as) {
+        return null;
+    }
+
+    @Override
+    public void setItemInOffHand(ArmorStand as, ItemStack itemStack) {
+
+    }
 }
