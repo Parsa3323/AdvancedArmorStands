@@ -38,4 +38,10 @@ public interface IVersionSupport {
 
     boolean canGlow();
 
+    boolean canSetItemOffHand();
+
+    ItemStack getItemInOffHand(ArmorStand as);
+
+    void setItemInOffHand(ArmorStand as, ItemStack itemStack);
+
 }
