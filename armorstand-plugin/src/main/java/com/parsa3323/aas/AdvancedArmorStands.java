@@ -92,8 +92,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
         plugin = this;
 
-        // saveDefaultConfig();
-
         boolean levelName = getConfig().getBoolean("debug", false);
 
 
