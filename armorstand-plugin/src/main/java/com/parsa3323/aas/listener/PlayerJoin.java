@@ -21,29 +21,32 @@ package com.parsa3323.aas.listener;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoin implements Listener {
 
     @EventHandler
     public void playerJoin(PlayerJoinEvent e) {
-        if (PlayerManager.getCustomPlayerByBukkit(e.getPlayer()).isAdmin()) {
+        Bukkit.getScheduler().runTaskLaterAsynchronously(AdvancedArmorStands.plugin, () -> {
+            if (PlayerManager.getCustomPlayerByBukkit(e.getPlayer()).isAdmin()) {
 
-            AdvancedArmorStands.debug(e.getPlayer() + " is an advanced armor stand admin");
-            AdvancedArmorStands.debug("Total: " + ArmorStandUtils.getTotalArmorStands() + ", Found: " + ArmorStandUtils.getLoadedArmorStands());
+                AdvancedArmorStands.debug(e.getPlayer() + " is an advanced armor stand admin");
+                AdvancedArmorStands.debug("Total: " + ArmorStandUtils.getTotalArmorStands() + ", Found: " + ArmorStandUtils.getLoadedArmorStands());
 
-            if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
-                int unloaded = ArmorStandUtils.getTotalArmorStands() - ArmorStandUtils.getLoadedArmorStands();
+                if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
+                    int unloaded = ArmorStandUtils.getTotalArmorStands() - ArmorStandUtils.getLoadedArmorStands();
 
-                e.getPlayer().sendMessage(ChatColor.RED + "It looks like " + unloaded + " armor stands haven't been" +
-                        " loaded by the world generator. To fix this, " +
-                        "enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
+                    e.getPlayer().sendMessage(ChatColor.RED + "It looks like " + unloaded + " armor stands haven't been" +
+                            " loaded by the world generator. To fix this, " +
+                            "enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
 
+                }
             }
-        }
+        }, 5L);
+
     }
 }
