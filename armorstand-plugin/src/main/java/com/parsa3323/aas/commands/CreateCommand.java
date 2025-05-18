@@ -268,6 +268,8 @@ public class CreateCommand extends SubCommand implements Listener {
         config.set(path + ".X", armorStand.getLocation().getX());
         config.set(path + ".Y", armorStand.getLocation().getY());
         config.set(path + ".Z", armorStand.getLocation().getZ());
+        config.set(name + ".yaw", armorStand.getLocation().getYaw());
+        config.set(name + ".pitch", armorStand.getLocation().getPitch());
 
         ArmorStands.save();
     }

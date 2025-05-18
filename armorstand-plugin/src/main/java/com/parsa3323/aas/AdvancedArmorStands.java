@@ -100,6 +100,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ev.registerEvents(new InventoryManager(), this);
         ev.registerEvents(new PlayerLeaveEvent(), this);
         ev.registerEvents(new StateListener(), this);
+        ev.registerEvents(new PlayerJoin(), this);
         ev.registerEvents(new CreateCommand(), this);
         ev.registerEvents(new PlayerIntractListener(), this);
         ev.registerEvents(new MenuListener(), this);
@@ -163,11 +164,17 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
         new PapiExpansion().register();
 
-        status("Spawning armor stands");
-
-        for (String key : ArmorStandUtils.getArmorStandList()) {
-            ArmorStandUtils.loadArmorStand(key, ArmorStands.get());
+        if (getConfig().getBoolean("auto-load-armor-stands")) {
+            status("Spawning armor stands");
         }
+        for (String key : ArmorStandUtils.getArmorStandList()) {
+            ArmorStandUtils.loadArmorStand(key);
+        }
+
+        status("Checking for armor stands");
+
+        ArmorStandUtils.checkForArmorStands();
+
 
         status("Load done");
 

@@ -32,10 +32,21 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 public class ArmorStandUtils {
+
+    public static void setLoadedArmorStands(int loadedArmorStands) {
+        ArmorStandUtils.loadedArmorStands = loadedArmorStands;
+    }
+
+    public static int getLoadedArmorStands() {
+        return loadedArmorStands;
+    }
+
+    private static int loadedArmorStands = 0;
 
     public static String getNameByArmorStand(ArmorStand armorStand) {
         FileConfiguration config = ArmorStands.get();
@@ -250,8 +261,8 @@ public class ArmorStandUtils {
             ConfigurationSection cs = c.getConfigurationSection("armorstands");
 
             Location loc = armorStand.getLocation();
-            cs.set(name + ".yaw", loc.getYaw());
-            cs.set(name + ".pitch", loc.getPitch());
+//            cs.set(name + ".yaw", loc.getYaw());
+//            cs.set(name + ".pitch", loc.getPitch());
             cs.set(name + ".small", armorStand.isSmall());
             cs.set(name + ".gravity", armorStand.hasGravity());
             cs.set(name + ".visible", armorStand.isVisible());
@@ -272,13 +283,95 @@ public class ArmorStandUtils {
         }
     }
 
-    public static ArmorStand loadArmorStand(String name, FileConfiguration c) {
+    public static void checkForArmorStands() {
+
+        ConfigurationSection cs = ArmorStands.get().getConfigurationSection("armorstands");
+
+        int foundArmorStands = 0;
+
+        int totalArmorStands = getTotalArmorStands();
+
+        AdvancedArmorStands.debug("Starting checkForArmorStands: totalArmorStands = " + totalArmorStands);
+
+        for (String key : getArmorStandList()) {
+
+            AdvancedArmorStands.debug("Checking armor stand key: " + key);
+
+            double x = cs.getDouble(key + ".X");
+
+            double y = cs.getDouble(key + ".Y");
+
+            double z = cs.getDouble(key + ".Z");
+
+            float yaw = (float) cs.getDouble(key + ".yaw");
+            float pitch = (float) cs.getDouble(key + ".pitch");
+
+            World world = Bukkit.getWorld(cs.getString(key + ".World"));
+
+            AdvancedArmorStands.debug("Location read from config: World=" + cs.getString(key + ".World") + ", X=" + x + ", Y=" + y + ", Z=" + z);
+
+            if (world == null) {
+                AdvancedArmorStands.debug("World " + cs.getString(key + ".World") + " is not loaded or null!");
+                continue;
+            }
+
+            Location loc = new Location(world, x, y, z, yaw, pitch);
+
+            if (!world.isChunkLoaded(loc.getChunk())) {
+                AdvancedArmorStands.debug("Chunk at location " + loc + " is not loaded!");
+            } else {
+                AdvancedArmorStands.debug("Chunk at location " + loc + " is loaded.");
+            }
+
+
+            double radius = 0.1;
+
+            boolean foundHere = false;
+
+
+            for (Entity entity : world.getNearbyEntities(loc, radius, radius, radius)) {
+                if (entity instanceof ArmorStand) {
+                    Location entityLoc = entity.getLocation();
+
+                    double tolerance = 0.2;
+                    if (Math.abs(entityLoc.getX() - x) < tolerance &&
+                            Math.abs(entityLoc.getY() - y) < tolerance &&
+                            Math.abs(entityLoc.getZ() - z) < tolerance) {
+                        foundArmorStands++;
+                        AdvancedArmorStands.debug("ArmorStand exists at location: " + loc);
+                        foundHere = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!foundHere) {
+                AdvancedArmorStands.debug("No armor stand found near location: " + loc);
+            }
+
+
+        }
+
+        AdvancedArmorStands.debug("Total armor stands expected: " + totalArmorStands + ", Found armor stands: " + foundArmorStands);
+        setLoadedArmorStands(foundArmorStands);
+
+        if (totalArmorStands > foundArmorStands) {
+
+            AdvancedArmorStands.warn("It looks like some armor stands haven't been loaded by the world generator. To fix this, " +
+                    "enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
+
+
+        }
+
+    }
+
+    public static void loadArmorStand(String name) {
         if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
-            ConfigurationSection cs = c.getConfigurationSection("armorstands");
+            ConfigurationSection cs = ArmorStands.get().getConfigurationSection("armorstands");
 
             World world = Bukkit.getWorld(cs.getString(name + ".World"));
             if (world == null) {
-                return null;
+                return;
             }
 
             double x = cs.getDouble(name + ".X");
@@ -295,7 +388,7 @@ public class ArmorStandUtils {
                     Location entityLoc = entity.getLocation();
                     if (entityLoc.getBlockX() == x && entityLoc.getBlockY() == y && entityLoc.getBlockZ() == z) {
                         AdvancedArmorStands.debug("ArmorStand already exists at location: " + loc);
-                        return (ArmorStand) entity;
+                        return;
                     }
                 }
             }
@@ -320,10 +413,8 @@ public class ArmorStandUtils {
             armorStand.setLeftLegPose(loadEulerAngle(cs, name + ".pose.leftLeg"));
             armorStand.setRightLegPose(loadEulerAngle(cs, name + ".pose.rightLeg"));
 
-            return armorStand;
         }
 
-        return null;
     }
 
     private static void saveEulerAngle(ConfigurationSection config, String path, EulerAngle angle) {
