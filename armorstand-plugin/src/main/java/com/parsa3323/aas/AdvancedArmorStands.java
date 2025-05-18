@@ -36,12 +36,16 @@ import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -52,6 +56,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
     private static Logger logger;
 
     public static Level logLevel;
+
+    private final String CURRENT_CONFIG_VERSION = "1.0.0";
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
@@ -86,7 +92,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
         plugin = this;
 
-        saveDefaultConfig();
+        // saveDefaultConfig();
 
         boolean levelName = getConfig().getBoolean("debug", false);
 
@@ -110,6 +116,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ev.registerEvents(new ItemDropListener(), this);
 
         status("Loading configs");
+
+        checkConfig();
 
         AnimationConfig.init();
 
@@ -187,6 +195,33 @@ public final class AdvancedArmorStands extends JavaPlugin {
     public void onDisable() {
         status("Bye Bye...");
     }
+
+    public void checkConfig() {
+        File configFile = new File(getDataFolder(), "config.yml");
+
+        if (!configFile.exists()) {
+            saveDefaultConfig();
+            return;
+        }
+
+        String configVersion = getConfig().getString("config-version");
+        if (!CURRENT_CONFIG_VERSION.equals(configVersion)) {
+            warn("Plugin version and config version mismatch!");
+            warn("Plugin expects: " + CURRENT_CONFIG_VERSION + " but config has: " + configVersion);
+        }
+
+        String existingVersion = getConfig().getString("config-version", "unknown");
+
+        if (!CURRENT_CONFIG_VERSION.equals(existingVersion)) {
+            debug("Old config version detected (" + existingVersion + ").");
+            getLogger().warning("Config version is outdated! Please consider updating config.yml manually.");
+
+        }
+
+
+
+    }
+
 
     public static void debug(String message) {
         if (logLevel.intValue() <= Level.FINE.intValue()) {

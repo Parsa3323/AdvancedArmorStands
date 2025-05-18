@@ -1,6 +1,10 @@
 # AdvancedArmorStands by Parsa3323.
 # Github here: https://github.com/Parsa3323/AdvancedArmorStands/
 
+# DO NOT MODIFY THIS VALUE
+# This is used internally to ensure compatibility between plugin versions and config formats.
+config-version: 1.0.0
+
 # Enable & Disable Debug
 debug: false
 
