@@ -24,3 +24,4 @@
 ⚙️ Refactor: Cleaned up event listeners — v1.2.7
 ```
 
+[//]: # ()
