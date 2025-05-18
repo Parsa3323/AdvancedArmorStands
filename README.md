@@ -70,6 +70,8 @@ The `main.yml` configuration file allows you to enable or disable debugging.
 ```yaml
 # Main configuration
 
+config-version: <1.0.0> # <========== Config version (don't touch)
+
 debug: false # <========== Enable & Disable debug
 
 shift-right-click-to-add: true # <========== Enable & Disable shift-right-click to add ArmorStand
