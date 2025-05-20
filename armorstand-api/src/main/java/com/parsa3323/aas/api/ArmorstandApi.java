@@ -19,6 +19,7 @@
 package com.parsa3323.aas.api;
 
 
+import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -94,11 +95,11 @@ public interface ArmorstandApi  {
 
     interface ArmorStandManager {
 
-        ArmorStand getArmorStandByName(String s);
+        ArmorStand getArmorStandByName(String s) throws ArmorStandNotFoundException;
 
         void removeArmorStand(ArmorStand armorStand);
 
-        void removeArmorStand(String s);
+        void removeArmorStand(String s) throws ArmorStandNotFoundException;
 
     }
 

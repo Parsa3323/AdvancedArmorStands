@@ -20,6 +20,7 @@ package com.parsa3323.aas.utils;
 
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
+import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.configs.ArmorStands;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
@@ -32,6 +33,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -231,7 +233,11 @@ public class ArmorStandUtils {
 
     public static int getTotalArmorStands() {
         FileConfiguration config = ArmorStands.get();
+
+        if (null == config.getConfigurationSection("armorstands")) return 0;
+
         Set<String> keys = config.getConfigurationSection("armorstands").getKeys(false);
+
 
         return keys.size();
     }

@@ -19,6 +19,7 @@
 package com.parsa3323.aas;
 
 import com.parsa3323.aas.api.ArmorstandApi;
+import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.configs.AnimationConfig;
@@ -154,7 +155,13 @@ public class API implements ArmorstandApi {
     public ArmorStandManager getArmorStandManager() {
         return new ArmorStandManager() {
             @Override
-            public ArmorStand getArmorStandByName(String s) {
+            public ArmorStand getArmorStandByName(String s) throws ArmorStandNotFoundException {
+                ArmorStand stand = ArmorStandUtils.getArmorStandByName(s);
+
+                if (stand == null) {
+                    throw new ArmorStandNotFoundException("Armor stand not found: " + s);
+                }
+
                 return ArmorStandUtils.getArmorStandByName(s);
             }
 
@@ -166,11 +173,11 @@ public class API implements ArmorstandApi {
             }
 
             @Override
-            public void removeArmorStand(String s) {
+            public void removeArmorStand(String s) throws ArmorStandNotFoundException {
 
                 ArmorStand as = ArmorStandUtils.getArmorStandByName(s);
 
-                if (as == null) return;
+                if (as == null) throw new ArmorStandNotFoundException("Armor stand not found: " + s);
 
                 as.remove();
 

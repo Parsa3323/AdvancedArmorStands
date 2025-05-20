@@ -186,10 +186,12 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         ArmorStandUtils.checkForArmorStands();
 
+        status("Loading animations");
+
+        AnimationUtils.init();
 
         status("Load done");
 
-        AnimationUtils.init();
 
     }
 
@@ -208,15 +210,15 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         String configVersion = getConfig().getString("config-version");
         if (!CURRENT_CONFIG_VERSION.equals(configVersion)) {
-            warn("Plugin version and config version mismatch!");
-            warn("Plugin expects: " + CURRENT_CONFIG_VERSION + " but config has: " + configVersion);
+            debug("Plugin version and config version mismatch!");
+            debug("Plugin expects: " + CURRENT_CONFIG_VERSION + " but config has: " + configVersion);
         }
 
         String existingVersion = getConfig().getString("config-version", "unknown");
 
         if (!CURRENT_CONFIG_VERSION.equals(existingVersion)) {
             debug("Old config version detected (" + existingVersion + ").");
-            getLogger().warning("Config version is outdated! Please consider updating config.yml manually.");
+            warn("Config version is outdated! Please consider updating config.yml manually.");
 
         }
 
