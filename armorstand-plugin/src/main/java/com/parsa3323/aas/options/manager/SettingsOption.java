@@ -24,9 +24,15 @@ import org.bukkit.inventory.ItemStack;
 
 public abstract class SettingsOption  {
 
+    public static boolean IS_FROM_SETTINGS = false;
+
     public abstract String getName();
 
     public abstract ItemStack getItemStack(ArmorStand armorStand);
+
+    public void setIsFromSettings(boolean s) {
+        IS_FROM_SETTINGS = s;
+    }
 
     public abstract void click(InventoryClickEvent e, ArmorStand armorStand);
 

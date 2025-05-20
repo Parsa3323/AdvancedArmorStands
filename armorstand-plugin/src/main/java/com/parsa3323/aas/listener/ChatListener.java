@@ -36,7 +36,7 @@ public class ChatListener implements Listener {
             if (e.getMessage().equalsIgnoreCase("exit")) {
                 e.setCancelled(true);
                 e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully quit the name set session");
-                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), false);
+                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
                 settingsManager.open();
                 CustomNameOption.players.remove(e.getPlayer().getUniqueId());
                 return;
@@ -47,7 +47,7 @@ public class ChatListener implements Listener {
             CustomNameOption.players.get(e.getPlayer().getUniqueId()).setCustomName(ChatColor.translateAlternateColorCodes('&', e.getMessage()));
 
             e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set armor stand's name to '" + e.getMessage() + "' ");
-            SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), false);
+            SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
             settingsManager.open();
             CustomNameOption.players.remove(e.getPlayer().getUniqueId());
 

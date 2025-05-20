@@ -118,6 +118,7 @@ public class SettingsManager extends PaginatedMenu {
 
 
                     getSettingsOptions().get(i).click(e, armorStand);
+                    getSettingsOptions().get(i).setIsFromSettings(isFromSettings);
                     if (getSettingsOptions().get(i).updateInventory()) {
                         super.open();
                     }

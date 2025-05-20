@@ -383,11 +383,16 @@ public class ArmorStandUtils {
             Location loc = new Location(world, x, y, z, yaw, pitch);
 
             double radius = 0.1;
+
             for (Entity entity : world.getNearbyEntities(loc, radius, radius, radius)) {
                 if (entity instanceof ArmorStand) {
                     Location entityLoc = entity.getLocation();
-                    if (entityLoc.getBlockX() == x && entityLoc.getBlockY() == y && entityLoc.getBlockZ() == z) {
-                        AdvancedArmorStands.debug("ArmorStand already exists at location: " + loc);
+
+                    double tolerance = 0.2;
+                    if (Math.abs(entityLoc.getX() - x) < tolerance &&
+                            Math.abs(entityLoc.getY() - y) < tolerance &&
+                            Math.abs(entityLoc.getZ() - z) < tolerance) {
+                        AdvancedArmorStands.debug("ArmorStand exists at location: " + loc);
                         return;
                     }
                 }
@@ -395,6 +400,8 @@ public class ArmorStandUtils {
 
 
             ArmorStand armorStand = (ArmorStand) world.spawnEntity(loc, EntityType.ARMOR_STAND);
+
+            cs.set(name + ".UUID", armorStand.getUniqueId());
 
             armorStand.setSmall(cs.getBoolean(name + ".small"));
             armorStand.setGravity(cs.getBoolean(name + ".gravity"));

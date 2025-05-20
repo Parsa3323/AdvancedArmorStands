@@ -222,6 +222,7 @@ public class CreateCommand extends SubCommand implements Listener {
         armorStand.setRightLegPose(rightLegPose);
         armorStand.setLeftLegPose(leftLegPose);
         ArmorStandUtils.saveArmorStand(name, armorStand, ArmorStands.get());
+
         PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
         player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
         player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");

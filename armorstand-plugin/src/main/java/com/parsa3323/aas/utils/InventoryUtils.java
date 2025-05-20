@@ -35,6 +35,7 @@ import java.util.UUID;
 public class InventoryUtils {
 
     private static final Map<UUID, ItemStack[]> contentBackups = new HashMap<>();
+
     private static final Map<UUID, ItemStack[]> armorBackups = new HashMap<>();
 
     private static InventoryManager inventoryManager = new InventoryManager();
