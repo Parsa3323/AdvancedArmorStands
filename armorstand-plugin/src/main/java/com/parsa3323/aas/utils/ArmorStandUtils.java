@@ -108,7 +108,7 @@ public class ArmorStandUtils {
 
         ConfigurationSection section = config.getConfigurationSection("armorstands");
         if (section == null) {
-            Bukkit.getLogger().warning("[AdvancedArmorStands] 'armorstands' section is missing in ArmorStands.yml!");
+            AdvancedArmorStands.debug("'armorstands' section is missing in ArmorStands.yml!");
             return new ArrayList<>();
         }
         return new ArrayList<>(section.getKeys(false));
