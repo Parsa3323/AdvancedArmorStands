@@ -156,7 +156,7 @@ public class ArmorStandMenu extends Menu {
         e.getInventory().setItem(slot, placed);
         p.setItemOnCursor(new ItemStack(Material.AIR));
 
-        if (itemTaken.getType() != Material.AIR) {
+        if (itemTaken != null && itemTaken.getType() != Material.AIR) {
             p.getInventory().addItem(itemTaken);
         }
 

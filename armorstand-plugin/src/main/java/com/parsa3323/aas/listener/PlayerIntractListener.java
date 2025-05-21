@@ -92,6 +92,14 @@ public class PlayerIntractListener implements Listener {
                     }
                 }
 
+            } else {
+
+                if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
+
+                    e.setCancelled(true);
+
+                }
+
             }
 
         }

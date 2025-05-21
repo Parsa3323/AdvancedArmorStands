@@ -33,9 +33,9 @@ public class MenuListener implements Listener {
     public void onMenuClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
 
-//        if (e.getCurrentItem() == null) {
-//            return;
-//        }
+        if (e.getClickedInventory() == null || e.getSlot() < 0) {
+            return;
+        }
 
 
         InventoryHolder holder = e.getClickedInventory().getHolder();
