@@ -18,8 +18,6 @@
 
 package com.parsa3323.aas.options;
 
-import com.parsa3323.aas.AdvancedArmorStands;
-import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.options.manager.SettingsOption;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;

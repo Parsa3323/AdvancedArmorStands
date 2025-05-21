@@ -18,9 +18,7 @@
 
 package com.parsa3323.aas.player;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.api.player.IPlayer;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
