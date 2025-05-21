@@ -115,12 +115,15 @@ public class ArmorStandMenu extends Menu {
             cursorItem = new ItemStack(Material.AIR);
         }
 
+
         boolean doesSupportOffHand = VersionSupportUtil.getVersionSupport().canSetItemOffHand();
 
-        if ((doesSupportOffHand && slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40 && slot != 39) ||
-                (!doesSupportOffHand && slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40)) {
+        if (slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40 && (!doesSupportOffHand || slot != 39)) {
+            AdvancedArmorStands.debug("Returned");
             return;
+
         }
+
 
 
         //if (slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40) return;
@@ -141,12 +144,14 @@ public class ArmorStandMenu extends Menu {
         ItemStack placed = cursorItem.clone();
         placed.setAmount(1);
 
+
         ItemStack itemTaken = e.getCurrentItem();
 
         if (!ArmorStandUtils.isValidEquipmentForSlot(placed, slot)) {
             p.sendMessage(ChatColor.RED + "This item cannot be placed in this slot!");
             return;
         }
+
 
         e.getInventory().setItem(slot, placed);
         p.setItemOnCursor(new ItemStack(Material.AIR));

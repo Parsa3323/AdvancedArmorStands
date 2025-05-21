@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.menus.manager;
 
+import com.parsa3323.aas.AdvancedArmorStands;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -32,9 +33,10 @@ public class MenuListener implements Listener {
     public void onMenuClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
 
-        if (e.getCurrentItem() == null) {
-            return;
-        }
+//        if (e.getCurrentItem() == null) {
+//            return;
+//        }
+
 
         InventoryHolder holder = e.getClickedInventory().getHolder();
 

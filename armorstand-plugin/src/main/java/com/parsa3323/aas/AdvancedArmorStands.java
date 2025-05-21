@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
@@ -136,7 +137,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         TypesConfig.get().addDefault("default.BasePlate", false);
         TypesConfig.get().addDefault("default.CustomName", "&7Made with &6AdvancedArmorStands");
         TypesConfig.get().addDefault("default.isCustomNameVisible", false);
-        TypesConfig.get().addDefault("default.itemInHandMaterial", VersionSupportUtil.getVersionSupport().getMaterialForVersion("WOOD_SWORD"));
+        TypesConfig.get().addDefault("default.itemInHandMaterial", XMaterial.WOODEN_SWORD.parseMaterial().name());
         TypesConfig.get().addDefault("default.HeadPos.x", null);
         TypesConfig.get().addDefault("default.HeadPos.y", null);
         TypesConfig.get().addDefault("default.HeadPos.z", null);

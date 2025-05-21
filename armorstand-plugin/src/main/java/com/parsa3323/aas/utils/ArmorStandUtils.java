@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.utils;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
 import com.parsa3323.aas.configs.ArmorStands;
@@ -256,8 +257,8 @@ public class ArmorStandUtils {
 
     public static boolean canBeHelmet(Material mat) {
         return mat.name().endsWith("_HELMET") ||
-                mat == Material.PUMPKIN ||
-                mat == Material.SKULL_ITEM;
+                mat == XMaterial.PUMPKIN.parseMaterial() ||
+                mat == XMaterial.PLAYER_HEAD.parseMaterial();
     }
 
     public static void saveArmorStand(String name, ArmorStand armorStand, FileConfiguration c) {
