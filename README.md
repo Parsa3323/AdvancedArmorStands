@@ -169,7 +169,7 @@ animations:
           z: 0   # <====== Right leg Z rotation
 ```
 >[!TIP]
-> Or you can use the [online editor](https://aas.rabity.ir/)
+> Or you can use the [online editor](https://advancedarmorstands.ir/)
 
 
 > [!CAUTION]
@@ -179,7 +179,7 @@ animations:
 
 
 
-For more details, refer to the [official documentation](https://github.com/Parsa3323/AdvancedArmorStands/wiki) or community guides.
+For more details, refer to the [official documentation](https://docs.advancedarmorstands.ir/) or community guides.
 
 
 
