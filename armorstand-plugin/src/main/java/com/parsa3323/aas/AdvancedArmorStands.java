@@ -36,6 +36,7 @@ import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -114,6 +115,24 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ev.registerEvents(new MenuListener(), this);
         ev.registerEvents(new ItemDropListener(), this);
 
+
+        status("Checking requirements");
+
+        VersionSupportUtil.getVersionSupport();
+        try {
+
+            VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTVjZWQzNTI4N2JmYTAxNjY1ZGE3MjQ3MjM5YmEyNDE0YzE5MzZjNTZkMmU1YjIwMjdkMDUzMGQ5Yjk3MjUzMCJ9fX0=");
+            debug("XSeries skull support is available.");
+        } catch (Throwable t) {
+            error("XSeries are not supported on this server: " + t.getClass().getSimpleName() + ": " + t.getMessage());
+
+            error("Skull features are not supported on this server. Please use plugin version 1.0.0-beta.15 or older (not recommended): https://github.com/Parsa3323/AdvancedArmorStands/releases/tag/v1.0.0-beta.15");
+            warn("READ MORE: https://github.com/Parsa3323/AdvancedArmorStands/wiki/VersionSupport-Error");
+            warn("Using older versions is not recommended and may lead to other issues.");
+
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
+
         status("Loading configs");
 
         checkConfig();
@@ -131,6 +150,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         AnimationConfig.get().options().copyDefaults(true);
         AnimationConfig.save();
         TypesConfig.init();
+
 
         TypesConfig.get().addDefault("default.Arms", true);
         TypesConfig.get().addDefault("default.Gravity", false);
