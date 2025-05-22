@@ -57,7 +57,7 @@
         - [Api](https://docs.advancedarmorstands.ir/)
             - [Introduction](https://docs.advancedarmorstands.ir/)
             - [Events](https://docs.advancedarmorstands.ir/)
-        - [Plugin usage](hhttps://docs.advancedarmorstands.ir/)
+        - [Plugin usage](https://docs.advancedarmorstands.ir/)
             - [Commands](https://docs.advancedarmorstands.ir/)
             - [Types](https://docs.advancedarmorstands.ir/)
 - [Configs](#Configs)
