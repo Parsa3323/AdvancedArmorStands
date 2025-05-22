@@ -23,8 +23,16 @@
 
 <div align="center">
 
+[![S](https://img.shields.io/badge/Go_to-Spigot-yellow?style=for-the-badge)](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
+[![S](https://img.shields.io/badge/Go_to-Wiki-orange?style=for-the-badge)](https://docs.advancedarmorstands.ir/)
+[![S](https://img.shields.io/badge/Go_to-PolyMart-green?style=for-the-badge)](https://www.polymart.org/product/7829/advancedarmorstands)
+
+
 [![Repo Stats](https://github-readme-stats.vercel.app/api/pin/?username=Parsa3323&repo=AdvancedArmorStands&theme=dark)
 ](https://github.com/Parsa3323/AdvancedArmorStands)
+
+
+
 </div>
 
 [//]: # (![FirstImg]&#40;https://biaupload.com/do.php?imgf=org-3b039f0f3c191.png&#41;)
