@@ -23,9 +23,11 @@
 
 <div align="center">
 
-[![S](https://img.shields.io/badge/Go_to-Spigot-yellow?style=for-the-badge)](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
-[![S](https://img.shields.io/badge/Go_to-Wiki-orange?style=for-the-badge)](https://docs.advancedarmorstands.ir/)
-[![S](https://img.shields.io/badge/Go_to-PolyMart-green?style=for-the-badge)](https://www.polymart.org/product/7829/advancedarmorstands)
+[//]: # ([![S]&#40;https://img.shields.io/badge/Go_to-Spigot-yellow?style=for-the-badge&#41;]&#40;https://www.spigotmc.org/resources/advancedarmorstands.121022/&#41;)
+
+[//]: # ([![S]&#40;https://img.shields.io/badge/Go_to-Wiki-orange?style=for-the-badge&#41;]&#40;https://docs.advancedarmorstands.ir/&#41;)
+
+[//]: # ([![S]&#40;https://img.shields.io/badge/Go_to-PolyMart-green?style=for-the-badge&#41;]&#40;https://www.polymart.org/product/7829/advancedarmorstands&#41;)
 
 
 [![Repo Stats](https://github-readme-stats.vercel.app/api/pin/?username=Parsa3323&repo=AdvancedArmorStands&theme=dark)
@@ -46,16 +48,18 @@
 </div>
 
 - [Requirements](#requirements)
-- [Website](https://aas.rabity.ir/)
+- [Polymart](https://www.polymart.org/product/7829/advancedarmorstands)
+- [Spigot](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
+- [Website](https://advancedarmorstands.ir/)
 - [FAQ](#f-a-q)
     - [What java version?](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Java-Version)
-    - [Docs](https://github.com/Parsa3323/AdvancedArmorStands/wiki)
-        - [Api](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Api-usage)
-            - [Introduction](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Api-usage#introduction)
-            - [Events](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Api-usage#events)
-        - [Plugin usage](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Plugin-usage)
-            - [Commands](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Plugin-usage#commands)
-            - [Types](https://github.com/Parsa3323/AdvancedArmorStands/wiki/Plugin-usage#how-to-add-a-type)
+    - [Docs](https://docs.advancedarmorstands.ir/)
+        - [Api](https://docs.advancedarmorstands.ir/)
+            - [Introduction](https://docs.advancedarmorstands.ir/)
+            - [Events](https://docs.advancedarmorstands.ir/)
+        - [Plugin usage](hhttps://docs.advancedarmorstands.ir/)
+            - [Commands](https://docs.advancedarmorstands.ir/)
+            - [Types](https://docs.advancedarmorstands.ir/)
 - [Configs](#Configs)
     - [Main config](#Main-Configuration)
     - [Types config](#Types-Configuration)
