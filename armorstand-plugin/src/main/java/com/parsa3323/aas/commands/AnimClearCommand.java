@@ -20,7 +20,7 @@ package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -51,7 +51,7 @@ public class AnimClearCommand extends SubCommand {
             return;
         }
 
-        ConfigurationSection configurationSection = ArmorStands.get().getConfigurationSection("armorstands");
+        ConfigurationSection configurationSection = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
         if (!configurationSection.contains(args[1])) {
             player.sendMessage(ChatColor.RED + "Invalid armor stand");
@@ -59,7 +59,7 @@ public class AnimClearCommand extends SubCommand {
         }
 
         configurationSection.set(args[1] + ".animation", null);
-        ArmorStands.save();
+        ArmorStandsConfig.save();
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
         player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[1]);
     }

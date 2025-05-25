@@ -21,7 +21,7 @@ package com.parsa3323.aas.commands;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.configs.TypesConfig;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
@@ -139,7 +139,7 @@ public class CreateCommand extends SubCommand implements Listener {
             AdvancedArmorStands.debug("leftLegPose.y = " + getConfigDouble(args[1] + ".leftLegPose.y"));
             AdvancedArmorStands.debug("leftLegPose.z = " + getConfigDouble(args[1] + ".leftLegPose.z"));
 
-            ArmorStandUtils.saveArmorStand(args[2], armorStand, ArmorStands.get());
+            ArmorStandUtils.saveArmorStand(args[2], armorStand, ArmorStandsConfig.get());
 
 
             PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
@@ -221,7 +221,7 @@ public class CreateCommand extends SubCommand implements Listener {
         armorStand.setLeftArmPose(leftArmPose);
         armorStand.setRightLegPose(rightLegPose);
         armorStand.setLeftLegPose(leftLegPose);
-        ArmorStandUtils.saveArmorStand(name, armorStand, ArmorStands.get());
+        ArmorStandUtils.saveArmorStand(name, armorStand, ArmorStandsConfig.get());
 
         PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
         player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
@@ -238,7 +238,7 @@ public class CreateCommand extends SubCommand implements Listener {
     }
 
     public static void saveArmorStand(String name, ArmorStand armorStand) {
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
 
         config.set(path + ".UUID", armorStand.getUniqueId().toString());
@@ -247,7 +247,7 @@ public class CreateCommand extends SubCommand implements Listener {
         config.set(path + ".Y", armorStand.getLocation().getY());
         config.set(path + ".Z", armorStand.getLocation().getZ());
 
-        ArmorStands.save();
+        ArmorStandsConfig.save();
     }
 
     @EventHandler
@@ -255,7 +255,7 @@ public class CreateCommand extends SubCommand implements Listener {
         ArmorStand armorStand = event.getArmorStand();
         String name = event.getName();
 
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
 
         if (config.contains(path)) {
@@ -272,7 +272,7 @@ public class CreateCommand extends SubCommand implements Listener {
         config.set(path + ".yaw", armorStand.getLocation().getYaw());
         config.set(path + ".pitch", armorStand.getLocation().getPitch());
 
-        ArmorStands.save();
+        ArmorStandsConfig.save();
     }
 
 

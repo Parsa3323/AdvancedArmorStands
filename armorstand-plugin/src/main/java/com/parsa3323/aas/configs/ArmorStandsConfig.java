@@ -24,14 +24,16 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
-public class ArmorStands {
+public class ArmorStandsConfig {
     private static File file;
 
     private static FileConfiguration fileConfiguration;
 
     public static void init() {
-        file = new File(AdvancedArmorStands.plugin.getDataFolder(), "caches/armorstands.yml");
+        file = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.yml");
 
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -66,6 +68,20 @@ public class ArmorStands {
 
     public static void reload(){
         fileConfiguration = YamlConfiguration.loadConfiguration(file);
+    }
+
+    private static void moveOldFileIfNeeded() {
+        File oldFile = new File(AdvancedArmorStands.plugin.getDataFolder(), "caches/armorstands.yml");
+        File newFile = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.yml");
+
+        if (oldFile.exists() && !newFile.exists()) {
+            try {
+                Files.move(oldFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                AdvancedArmorStands.info("Moved armorstands.yml from caches/ to cache/ folder.");
+            } catch (IOException e) {
+                AdvancedArmorStands.error("Failed to move armorstands.yml to new cache folder: " + e.getMessage(), true);
+            }
+        }
     }
 
 }

@@ -21,7 +21,7 @@ package com.parsa3323.aas.utils;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -49,7 +49,7 @@ public class ArmorStandUtils {
     private static int loadedArmorStands = 0;
 
     public static String getNameByArmorStand(ArmorStand armorStand) {
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
         if (!config.contains("armorstands")) {
             return null;
         }
@@ -80,7 +80,7 @@ public class ArmorStandUtils {
     }
 
     public static void teleportToArmorStand(Player player, String name) {
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
 
         if (!config.contains(path)) {
@@ -103,7 +103,7 @@ public class ArmorStandUtils {
     }
 
     public static ArrayList<String> getArmorStandList() {
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
 
         ConfigurationSection section = config.getConfigurationSection("armorstands");
         if (section == null) {
@@ -114,7 +114,7 @@ public class ArmorStandUtils {
     }
 
     public static void deleteArmorStand(String name, Player player) {
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
 
         if (!config.contains(path)) {
@@ -146,7 +146,7 @@ public class ArmorStandUtils {
 
 
         config.set(path, null);
-        ArmorStands.save();
+        ArmorStandsConfig.save();
 
         player.sendMessage(ChatColor.GREEN + "Deleted ArmorStand: " + name);
     }
@@ -156,7 +156,7 @@ public class ArmorStandUtils {
             return false;
         }
 
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
         if (!config.contains("armorstands")) {
             AdvancedArmorStands.debug("Config does not contain 'armorstands' section.");
             return false;
@@ -204,11 +204,11 @@ public class ArmorStandUtils {
 
     public static ArmorStand getArmorStandByName(String s) {
 
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + s;
 
         if (!config.contains(path)) {
-            AdvancedArmorStands.error(ChatColor.RED + "ArmorStand not found!");
+            AdvancedArmorStands.error("ArmorStand not found!", true);
             return null;
         }
 
@@ -216,7 +216,7 @@ public class ArmorStandUtils {
         World world = Bukkit.getWorld(config.getString(path + ".World"));
 
         if (world == null) {
-            AdvancedArmorStands.error(ChatColor.RED + "World not found!");
+            AdvancedArmorStands.error("World not found!", true);
             return null;
         }
 
@@ -231,7 +231,7 @@ public class ArmorStandUtils {
     }
 
     public static int getTotalArmorStands() {
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
 
         if (null == config.getConfigurationSection("armorstands")) return 0;
 
@@ -284,13 +284,13 @@ public class ArmorStandUtils {
             saveEulerAngle(cs, name + ".pose.leftLeg", armorStand.getLeftLegPose());
             saveEulerAngle(cs, name + ".pose.rightLeg", armorStand.getRightLegPose());
 
-            ArmorStands.save();
+            ArmorStandsConfig.save();
         }
     }
 
     public static void checkForArmorStands() {
 
-        ConfigurationSection cs = ArmorStands.get().getConfigurationSection("armorstands");
+        ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
         int foundArmorStands = 0;
 
@@ -372,7 +372,7 @@ public class ArmorStandUtils {
 
     public static void loadArmorStand(String name) {
         if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
-            ConfigurationSection cs = ArmorStands.get().getConfigurationSection("armorstands");
+            ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
             World world = Bukkit.getWorld(cs.getString(name + ".World"));
             if (world == null) {

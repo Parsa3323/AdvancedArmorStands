@@ -20,7 +20,7 @@ package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.api.events.ArmorStandRenameEvent;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.Bukkit;
@@ -56,26 +56,26 @@ public class RenameCommand extends SubCommand {
         String oldname = args[1];
         String newname = args[2];
 
-        if (!ArmorStands.get().contains("armorstands." + oldname)) {
+        if (!ArmorStandsConfig.get().contains("armorstands." + oldname)) {
             player.sendMessage(ChatColor.RED + "Armor stand with name '" + oldname + "' not found.");
             return;
         }
 
         String path = "armorstands." + oldname;
-        String uuid = ArmorStands.get().getString(path + ".UUID");
-        String world = ArmorStands.get().getString(path + ".World");
-        double x = ArmorStands.get().getDouble(path + ".X");
-        double y = ArmorStands.get().getDouble(path + ".Y");
-        double z = ArmorStands.get().getDouble(path + ".Z");
+        String uuid = ArmorStandsConfig.get().getString(path + ".UUID");
+        String world = ArmorStandsConfig.get().getString(path + ".World");
+        double x = ArmorStandsConfig.get().getDouble(path + ".X");
+        double y = ArmorStandsConfig.get().getDouble(path + ".Y");
+        double z = ArmorStandsConfig.get().getDouble(path + ".Z");
 
-        ArmorStands.get().set("armorstands." + newname + ".UUID", uuid);
-        ArmorStands.get().set("armorstands." + newname + ".World", world);
-        ArmorStands.get().set("armorstands." + newname + ".X", x);
-        ArmorStands.get().set("armorstands." + newname + ".Y", y);
-        ArmorStands.get().set("armorstands." + newname + ".Z", z);
+        ArmorStandsConfig.get().set("armorstands." + newname + ".UUID", uuid);
+        ArmorStandsConfig.get().set("armorstands." + newname + ".World", world);
+        ArmorStandsConfig.get().set("armorstands." + newname + ".X", x);
+        ArmorStandsConfig.get().set("armorstands." + newname + ".Y", y);
+        ArmorStandsConfig.get().set("armorstands." + newname + ".Z", z);
 
-        ArmorStands.get().set("armorstands." + oldname, null);
-        ArmorStands.save();
+        ArmorStandsConfig.get().set("armorstands." + oldname, null);
+        ArmorStandsConfig.save();
 
         ArmorStandRenameEvent armorStandRenameEvent = new ArmorStandRenameEvent(player, ArmorStandUtils.getArmorStandByName(newname));
         Bukkit.getPluginManager().callEvent(armorStandRenameEvent);
@@ -89,7 +89,7 @@ public class RenameCommand extends SubCommand {
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
         if (args.length == 2) {
-            return new ArrayList<>(ArmorStands.get().getConfigurationSection("armorstands").getKeys(false));
+            return new ArrayList<>(ArmorStandsConfig.get().getConfigurationSection("armorstands").getKeys(false));
         } else {
             return null;
         }

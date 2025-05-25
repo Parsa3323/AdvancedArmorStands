@@ -19,7 +19,7 @@
 package com.parsa3323.aas.listener;
 
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,7 +29,7 @@ public class StateListener implements Listener {
     @EventHandler
     public void onStateChange(ArmorStandStateChangeEvent e) {
 
-        ArmorStandUtils.saveArmorStand(e.getName(), e.getArmorStand(), ArmorStands.get());
+        ArmorStandUtils.saveArmorStand(e.getName(), e.getArmorStand(), ArmorStandsConfig.get());
 
     }
 }

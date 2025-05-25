@@ -19,7 +19,7 @@
 package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.entity.Player;
 
@@ -57,7 +57,7 @@ public class DeleteCommand extends SubCommand {
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
 
-        return new ArrayList<>(ArmorStands.get().getConfigurationSection("armorstands").getKeys(false));
+        return new ArrayList<>(ArmorStandsConfig.get().getConfigurationSection("armorstands").getKeys(false));
     }
 
     @Override

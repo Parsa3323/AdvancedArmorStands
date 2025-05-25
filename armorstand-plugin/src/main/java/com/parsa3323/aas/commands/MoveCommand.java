@@ -20,7 +20,7 @@ package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.api.events.PlayerMoveArmorStandEvent;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -58,7 +58,7 @@ public class MoveCommand extends SubCommand {
         }
 
         String name = args[1];
-        FileConfiguration config = ArmorStands.get();
+        FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
 
         if (!config.contains(path)) {
@@ -92,7 +92,7 @@ public class MoveCommand extends SubCommand {
                 config.set(path + ".X", player.getLocation().getX());
                 config.set(path + ".Y", player.getLocation().getY());
                 config.set(path + ".Z", player.getLocation().getZ());
-                ArmorStands.save();
+                ArmorStandsConfig.save();
 
                 player.sendMessage(ChatColor.GREEN + "Moved ArmorStand: " + name + " to your location.");
                 return;
@@ -104,7 +104,7 @@ public class MoveCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return new ArrayList<>(ArmorStands.get().getConfigurationSection("armorstands").getKeys(false));
+        return new ArrayList<>(ArmorStandsConfig.get().getConfigurationSection("armorstands").getKeys(false));
     }
 
     @Override

@@ -21,7 +21,7 @@ package com.parsa3323.aas.commands;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.configs.AnimationConfig;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.configs.TypesConfig;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.AnimationUtils;
@@ -54,7 +54,7 @@ public class ReloadCommand extends SubCommand {
 
 
             TypesConfig.reload();
-            ArmorStands.reload();
+            ArmorStandsConfig.reload();
             AnimationConfig.reload();
             AnimationUtils.reloadAnimations();
             player.sendMessage(ChatColor.GREEN + "✔ Successfully reloaded plugin's configs");

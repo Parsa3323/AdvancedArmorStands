@@ -21,7 +21,7 @@ package com.parsa3323.aas.utils;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.configs.AnimationConfig;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
@@ -48,9 +48,9 @@ public class AnimationUtils {
         for (String key : ArmorStandUtils.getArmorStandList()) {
             AdvancedArmorStands.debug("Checking armor stand key: " + key);
 
-            if (ArmorStands.get().contains("armorstands." + key + ".animation")) {
+            if (ArmorStandsConfig.get().contains("armorstands." + key + ".animation")) {
                 AdvancedArmorStands.debug("armorstands." + key + ".animation");
-                String animationName = ArmorStands.get().getString("armorstands." + key + ".animation");
+                String animationName = ArmorStandsConfig.get().getString("armorstands." + key + ".animation");
                 AdvancedArmorStands.debug("Found animation '" + animationName + "' for key: " + key);
 
                 ConfigurationSection wave = animations.getConfigurationSection("animations." + animationName);

@@ -25,7 +25,7 @@ import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.commands.manager.CommandManager;
 import com.parsa3323.aas.commands.manager.TabComp;
 import com.parsa3323.aas.configs.AnimationConfig;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.configs.TypesConfig;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
 import com.parsa3323.aas.listener.*;
@@ -177,9 +177,9 @@ public final class AdvancedArmorStands extends JavaPlugin {
         TypesConfig.get().options().copyDefaults(true);
         TypesConfig.save();
 
-        ArmorStands.init();
-        ArmorStands.get().options().copyDefaults(true);
-        ArmorStands.save();
+        ArmorStandsConfig.init();
+        ArmorStandsConfig.get().options().copyDefaults(true);
+        ArmorStandsConfig.save();
         status("Registering Commands");
         getCommand("as").setTabCompleter(new TabComp());
         getCommand("as").setExecutor(new CommandManager());
@@ -269,6 +269,15 @@ public final class AdvancedArmorStands extends JavaPlugin {
     public static void error(String message) {
         if (logLevel.intValue() <= Level.SEVERE.intValue()) {
             logger.severe("[ERROR] " + message);
+        }
+    }
+
+    public static void error(String message, boolean sendTbLink) {
+        if (logLevel.intValue() <= Level.SEVERE.intValue()) {
+            logger.severe("[ERROR] " + message);
+            if (sendTbLink) {
+                warn("TROUBLE SHOOTING: https://docs.advancedarmorstands.ir/troubleshooting");
+            }
         }
     }
 

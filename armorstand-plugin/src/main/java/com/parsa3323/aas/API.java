@@ -23,7 +23,7 @@ import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.configs.AnimationConfig;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.configs.TypesConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.SaveMenu;
@@ -58,7 +58,7 @@ public class API implements ArmorstandApi {
 
             @Override
             public FileConfiguration getCacheConfig() {
-                return ArmorStands.get();
+                return ArmorStandsConfig.get();
             }
 
             @Override
@@ -116,12 +116,12 @@ public class API implements ArmorstandApi {
 
             @Override
             public boolean hasAnimation(ArmorStand armorStand) {
-                return ArmorStands.get().contains("armorstands." + ArmorStandUtils.getNameByArmorStand(armorStand) + ".animation");
+                return ArmorStandsConfig.get().contains("armorstands." + ArmorStandUtils.getNameByArmorStand(armorStand) + ".animation");
             }
 
             @Override
             public boolean hasAnimation(String s) {
-                return ArmorStands.get().contains("armorstands." + ArmorStandUtils.getArmorStandByName(s) + ".animation");
+                return ArmorStandsConfig.get().contains("armorstands." + ArmorStandUtils.getArmorStandByName(s) + ".animation");
             }
         };
     }
@@ -142,6 +142,16 @@ public class API implements ArmorstandApi {
             @Override
             public void debug(String args) {
                 AdvancedArmorStands.debug(args);
+            }
+
+            @Override
+            public void error(String message) {
+                AdvancedArmorStands.error(message);
+            }
+
+            @Override
+            public void error(String message, boolean b) {
+                AdvancedArmorStands.error(message, b);
             }
 
             @Override

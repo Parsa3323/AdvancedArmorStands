@@ -22,7 +22,7 @@ package com.parsa3323.aas.listener;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.commands.CreateCommand;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
@@ -82,7 +82,7 @@ public class PlayerIntractListener implements Listener {
                                 ArmorStand stand = (ArmorStand) e.getRightClicked();
                                 CreateCommand.saveArmorStand(name, stand);
                                 player.getBukkitPlayer().sendMessage(ChatColor.GOLD + "Armor stand saved as " + name + "!");
-                                ArmorStandUtils.saveArmorStand(name, stand, ArmorStands.get());
+                                ArmorStandUtils.saveArmorStand(name, stand, ArmorStandsConfig.get());
 
                                 interactionCount.remove(playerId);
                         }

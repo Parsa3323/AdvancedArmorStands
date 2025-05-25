@@ -87,6 +87,10 @@ public interface ArmorstandApi  {
 
         void debug(String args);
 
+        void error(String message);
+
+        void error(String message, boolean b);
+
         void info(String args);
 
     }

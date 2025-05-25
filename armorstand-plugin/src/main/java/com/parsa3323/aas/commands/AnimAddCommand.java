@@ -21,7 +21,7 @@ package com.parsa3323.aas.commands;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.configs.AnimationConfig;
-import com.parsa3323.aas.configs.ArmorStands;
+import com.parsa3323.aas.configs.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -53,7 +53,7 @@ public class AnimAddCommand extends SubCommand {
             return;
         }
 
-        ConfigurationSection configurationSection = ArmorStands.get().getConfigurationSection("armorstands");
+        ConfigurationSection configurationSection = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
         if (!configurationSection.contains(args[2])) {
             player.sendMessage(ChatColor.RED + "Invalid armor stand");
@@ -66,7 +66,7 @@ public class AnimAddCommand extends SubCommand {
         }
 
         configurationSection.set(args[2] + ".animation", args[1]);
-        ArmorStands.save();
+        ArmorStandsConfig.save();
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
         player.sendMessage(ChatColor.GREEN + "Successfully set the animation " + args[2] + " to armor stand " + args[1]);
     }
