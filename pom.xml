@@ -24,7 +24,7 @@
 
   <groupId>com.parsa3323</groupId>
   <artifactId>AdvancedArmorStands</artifactId>
-  <version>1.3.2</version>
+  <version>1.3.3</version>
   <packaging>pom</packaging>
     <modules>
         <module>armorstand-plugin</module>
