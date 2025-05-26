@@ -18,7 +18,6 @@
 
 package com.parsa3323.aas.menus.manager;
 
-import com.parsa3323.aas.AdvancedArmorStands;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

@@ -74,9 +74,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
     @Override
     public void onEnable() {
         logger = getLogger();
-        api = new API();
-
-        getServer().getServicesManager().register(ArmorstandApi.class, api, this, ServicePriority.Normal);
 
         getLogger().info("Loading " + getDescription().getName() + " v" + getDescription().getVersion());
 
@@ -93,6 +90,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
             getDataFolder().mkdirs();
         }
         plugin = this;
+
 
         boolean levelName = getConfig().getBoolean("debug", false);
 
@@ -136,6 +134,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         status("Loading configs");
 
         checkConfig();
+
+        api = new API();
+        getServer().getServicesManager().register(ArmorstandApi.class, api, this, ServicePriority.Normal);
+
 
         AnimationConfig.init();
 

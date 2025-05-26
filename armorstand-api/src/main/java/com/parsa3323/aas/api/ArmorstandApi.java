@@ -39,6 +39,9 @@ public interface ArmorstandApi  {
     SessionManager getSessionManager();
 
     @Deprecated
+    String getAddonsPath();
+
+    @Deprecated
     IPlayer getIPlayer(Player p);
 
     interface SessionManager {

@@ -39,6 +39,8 @@ public class ArmorStandsConfig {
             file.getParentFile().mkdirs();
         }
 
+        moveOldFileIfNeeded();
+
         if (!file.exists()) {
             try {
                 file.createNewFile();

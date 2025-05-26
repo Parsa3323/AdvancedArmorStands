@@ -35,9 +35,21 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
+import java.io.File;
 import java.util.UUID;
 
 public class API implements ArmorstandApi {
+
+    private final File addonFolder;
+
+    public API() {
+        this.addonFolder = new File(AdvancedArmorStands.plugin.getDataFolder(), "addons");
+        if (!addonFolder.exists()) {
+            addonFolder.mkdirs();
+        }
+    }
+
+
     @Override
     public IVersionSupport getVersionSupport() {
         return VersionSupportUtil.getVersionSupport();
@@ -99,6 +111,11 @@ public class API implements ArmorstandApi {
                 return ArmorStandSelectionCache.getSelectedArmorStand(uuid);
             }
         };
+    }
+
+    @Override
+    public String getAddonsPath() {
+        return addonFolder.getPath();
     }
 
     @Override
