@@ -20,7 +20,7 @@ package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.api.events.ArmorStandRenameEvent;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.ArmorStandsConfig;
+import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.Bukkit;
@@ -81,7 +81,7 @@ public class RenameCommand extends SubCommand {
         Bukkit.getPluginManager().callEvent(armorStandRenameEvent);
         if (!armorStandRenameEvent.isCancelled()) {
             player.sendMessage(ChatColor.GREEN + "Renamed armor stand '" + oldname + "' to '" + newname + "'");
-            PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
+            PlayerManager.getByBukkit(player).playSound("ORB_PICKUP");
         }
 
     }

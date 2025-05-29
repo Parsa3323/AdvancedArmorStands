@@ -27,7 +27,7 @@ import java.util.Map;
 public class PlayerManager {
     private static final Map<Player, IPlayer> playerMap = new HashMap<>();
 
-    public static IPlayer getCustomPlayerByBukkit(Player player) {
+    public static IPlayer getByBukkit(Player player) {
         return playerMap.computeIfAbsent(player, CustomPlayer::new);
     }
 }

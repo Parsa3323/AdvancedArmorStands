@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.configs;
+package com.parsa3323.aas.config;
 
 import com.parsa3323.aas.AdvancedArmorStands;
 import org.bukkit.configuration.file.FileConfiguration;

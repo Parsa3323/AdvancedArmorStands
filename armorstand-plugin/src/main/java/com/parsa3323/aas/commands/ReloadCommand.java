@@ -20,9 +20,9 @@ package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.AnimationConfig;
-import com.parsa3323.aas.configs.ArmorStandsConfig;
-import com.parsa3323.aas.configs.TypesConfig;
+import com.parsa3323.aas.config.AnimationConfig;
+import com.parsa3323.aas.config.ArmorStandsConfig;
+import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.AnimationUtils;
 import org.bukkit.ChatColor;
@@ -58,7 +58,7 @@ public class ReloadCommand extends SubCommand {
             AnimationConfig.reload();
             AnimationUtils.reloadAnimations();
             player.sendMessage(ChatColor.GREEN + "✔ Successfully reloaded plugin's configs");
-            PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
+            PlayerManager.getByBukkit(player).playSound("ORB_PICKUP");
         } catch (Exception e) {
             e.printStackTrace();
             AdvancedArmorStands.info(ChatColor.RED + e.getMessage());

@@ -21,7 +21,7 @@ package com.parsa3323.aas.utils;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
-import com.parsa3323.aas.configs.ArmorStandsConfig;
+import com.parsa3323.aas.config.ArmorStandsConfig;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;

@@ -19,7 +19,7 @@
 package com.parsa3323.aas.listener;
 
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
-import com.parsa3323.aas.configs.ArmorStandsConfig;
+import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -52,7 +52,7 @@ public class ListCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         ArrayList<String> armorStandList = ArmorStandUtils.getArmorStandList();
 
-        IPlayer player1 = PlayerManager.getCustomPlayerByBukkit(player);
+        IPlayer player1 = PlayerManager.getByBukkit(player);
         player1.playSound("NOTE_BASS");
 
         if (armorStandList.isEmpty()) {

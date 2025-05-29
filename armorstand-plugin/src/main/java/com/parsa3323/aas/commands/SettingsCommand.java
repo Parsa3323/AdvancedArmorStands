@@ -19,7 +19,7 @@
 package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.ArmorStandsConfig;
+import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;

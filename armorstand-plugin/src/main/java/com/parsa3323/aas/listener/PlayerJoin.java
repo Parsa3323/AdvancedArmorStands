@@ -32,7 +32,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void playerJoin(PlayerJoinEvent e) {
         Bukkit.getScheduler().runTaskLaterAsynchronously(AdvancedArmorStands.plugin, () -> {
-            if (PlayerManager.getCustomPlayerByBukkit(e.getPlayer()).isAdmin()) {
+            if (PlayerManager.getByBukkit(e.getPlayer()).isAdmin()) {
 
                 AdvancedArmorStands.debug(e.getPlayer() + " is an advanced armor stand admin");
                 AdvancedArmorStands.debug("Total: " + ArmorStandUtils.getTotalArmorStands() + ", Found: " + ArmorStandUtils.getLoadedArmorStands());

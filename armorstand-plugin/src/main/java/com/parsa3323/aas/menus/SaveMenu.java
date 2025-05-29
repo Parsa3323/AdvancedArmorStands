@@ -19,7 +19,7 @@
 package com.parsa3323.aas.menus;
 
 import com.parsa3323.aas.AdvancedArmorStands;
-import com.parsa3323.aas.configs.TypesConfig;
+import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;

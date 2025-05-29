@@ -20,8 +20,8 @@ package com.parsa3323.aas.utils;
 
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
-import com.parsa3323.aas.configs.AnimationConfig;
-import com.parsa3323.aas.configs.ArmorStandsConfig;
+import com.parsa3323.aas.config.AnimationConfig;
+import com.parsa3323.aas.config.ArmorStandsConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;

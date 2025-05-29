@@ -22,9 +22,9 @@ import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
-import com.parsa3323.aas.configs.AnimationConfig;
-import com.parsa3323.aas.configs.ArmorStandsConfig;
-import com.parsa3323.aas.configs.TypesConfig;
+import com.parsa3323.aas.config.AnimationConfig;
+import com.parsa3323.aas.config.ArmorStandsConfig;
+import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.manager.SettingsManager;
@@ -120,7 +120,7 @@ public class API implements ArmorstandApi {
 
     @Override
     public IPlayer getIPlayer(Player p) {
-        return PlayerManager.getCustomPlayerByBukkit(p);
+        return PlayerManager.getByBukkit(p);
     }
 
     @Override

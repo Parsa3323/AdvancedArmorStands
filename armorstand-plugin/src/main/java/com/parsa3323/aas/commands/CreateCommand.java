@@ -21,8 +21,8 @@ package com.parsa3323.aas.commands;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.configs.ArmorStandsConfig;
-import com.parsa3323.aas.configs.TypesConfig;
+import com.parsa3323.aas.config.ArmorStandsConfig;
+import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -142,7 +142,7 @@ public class CreateCommand extends SubCommand implements Listener {
             ArmorStandUtils.saveArmorStand(args[2], armorStand, ArmorStandsConfig.get());
 
 
-            PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
+            PlayerManager.getByBukkit(player).playSound("ORB_PICKUP");
             player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
             player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");
           //  saveArmorStand(args[2], armorStand);
@@ -223,7 +223,7 @@ public class CreateCommand extends SubCommand implements Listener {
         armorStand.setLeftLegPose(leftLegPose);
         ArmorStandUtils.saveArmorStand(name, armorStand, ArmorStandsConfig.get());
 
-        PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
+        PlayerManager.getByBukkit(player).playSound("ORB_PICKUP");
         player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
         player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");
         return armorStand;

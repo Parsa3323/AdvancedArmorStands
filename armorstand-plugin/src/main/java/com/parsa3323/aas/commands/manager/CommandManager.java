@@ -110,7 +110,7 @@ public class CommandManager implements CommandExecutor {
 
                         player.sendMessage(ChatColor.GRAY + "Use /as help [page] to view other pages.");
                         player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
-                        PlayerManager.getCustomPlayerByBukkit(player).playSound("ORB_PICKUP");
+                        PlayerManager.getByBukkit(player).playSound("ORB_PICKUP");
                         return true;
                     }
 
@@ -136,7 +136,7 @@ public class CommandManager implements CommandExecutor {
                 } else if (args.length == 0) {
 
                     if (subCommands.stream().allMatch(SubCommand::isForOps)) {
-                        if (!PlayerManager.getCustomPlayerByBukkit(player).isAdmin()) {
+                        if (!PlayerManager.getByBukkit(player).isAdmin()) {
                             TextComponent textComponent = new TextComponent(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "AdvancedArmorStands " + ChatColor.GOLD + "v" + AdvancedArmorStands.plugin.getDescription().getVersion() + ChatColor.GRAY + " by " + ChatColor.GOLD + "Parsa3323");
                             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GREEN + "Click to view github").create()));
                             textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/Parsa3323/AdvancedArmorStands/"));

@@ -22,7 +22,7 @@ package com.parsa3323.aas.listener;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.commands.CreateCommand;
-import com.parsa3323.aas.configs.ArmorStandsConfig;
+import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
@@ -48,7 +48,7 @@ public class PlayerIntractListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerInteractAtEntityEvent(PlayerInteractAtEntityEvent e) {
-        IPlayer player = PlayerManager.getCustomPlayerByBukkit(e.getPlayer());
+        IPlayer player = PlayerManager.getByBukkit(e.getPlayer());
         if (e.getRightClicked() instanceof ArmorStand) {
             if (player.isAdmin()) {
                 if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {

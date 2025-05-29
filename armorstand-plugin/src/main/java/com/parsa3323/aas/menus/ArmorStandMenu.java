@@ -86,7 +86,7 @@ public class ArmorStandMenu extends Menu {
                 } else {
                     coolDownList.add(p.getUniqueId());
                 }
-                PlayerManager.getCustomPlayerByBukkit(p).playSound("NOTE_PLING");
+                PlayerManager.getByBukkit(p).playSound("NOTE_PLING");
                 setMenuItems();
                 p.updateInventory();
                 break;
@@ -193,7 +193,7 @@ public class ArmorStandMenu extends Menu {
 
 
             p.sendMessage(ChatColor.GREEN + "Armor stand updated successfully!");
-            PlayerManager.getCustomPlayerByBukkit(p).playSound("CLICK");
+            PlayerManager.getByBukkit(p).playSound("CLICK");
         } catch (Exception ex) {
             p.sendMessage(ChatColor.RED + "Failed to update armor stand!");
             ex.printStackTrace();
@@ -201,7 +201,7 @@ public class ArmorStandMenu extends Menu {
         if (!coolDownList.contains(p.getUniqueId())) {
             cooldownMap.put(uuid, now);
         }
-        PlayerManager.getCustomPlayerByBukkit(p).playSound("CLICK");
+        PlayerManager.getByBukkit(p).playSound("CLICK");
     }
 
 

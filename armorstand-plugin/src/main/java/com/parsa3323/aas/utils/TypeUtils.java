@@ -18,7 +18,7 @@
 
 package com.parsa3323.aas.utils;
 
-import com.parsa3323.aas.configs.TypesConfig;
+import com.parsa3323.aas.config.TypesConfig;
 
 public class TypeUtils {
     public static int getTotalTypes() {
