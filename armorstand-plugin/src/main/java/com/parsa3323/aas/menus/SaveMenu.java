@@ -34,6 +34,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 
 public class SaveMenu extends PaginatedMenu {
@@ -64,7 +65,16 @@ public class SaveMenu extends PaginatedMenu {
         Player player = (Player) e.getWhoClicked();
         ItemStack clickedItem = e.getCurrentItem();
 
-        String itemName = ChatColor.stripColor(clickedItem.getItemMeta().getDisplayName());
+        if (clickedItem == null) return;
+
+        ItemMeta meta = clickedItem.getItemMeta();
+        if (meta == null) return;
+
+        String displayName = meta.getDisplayName();
+        if (displayName == null) return;
+
+        String itemName = ChatColor.stripColor(displayName);
+
 
         if (clickedItem.getType() == Material.ARROW) {
             if (itemName.equalsIgnoreCase("Left")) {
@@ -83,6 +93,39 @@ public class SaveMenu extends PaginatedMenu {
         }
 
         if (clickedItem.getType() == Material.BARRIER) player.closeInventory();
+
+        if (clickedItem.getType() == XMaterial.REDSTONE_BLOCK.parseMaterial()) {
+
+            itemName = "SavedType-" + new Random().nextInt(900) + 100;
+
+            TypesConfig.get().set( itemName + ".Arms", armorStand.hasArms());
+            TypesConfig.get().set(itemName + ".Gravity", armorStand.hasGravity());
+            TypesConfig.get().set(itemName + ".BasePlate", armorStand.hasBasePlate());
+            TypesConfig.get().set(itemName + ".CustomName", armorStand.getCustomName());
+            TypesConfig.get().set(itemName + ".isCustomNameVisible", armorStand.isCustomNameVisible());
+            TypesConfig.get().set(itemName +  ".itemInHandMaterial", armorStand.getItemInHand().getType().name());
+            TypesConfig.get().set(itemName +  ".HeadPos.x", Math.toDegrees(armorStand.getHeadPose().getX()));
+            TypesConfig.get().set(itemName + ".HeadPos.y", Math.toDegrees(armorStand.getHeadPose().getY()));
+            TypesConfig.get().set(itemName + ".HeadPos.z", Math.toDegrees(armorStand.getHeadPose().getZ()));
+            TypesConfig.get().set(itemName + ".rightArmPose.x", Math.toDegrees(armorStand.getRightArmPose().getX()));
+            TypesConfig.get().set(itemName + ".rightArmPose.y", Math.toDegrees(armorStand.getRightArmPose().getY()));
+            TypesConfig.get().set(itemName + ".rightArmPose.z", Math.toDegrees(armorStand.getRightArmPose().getZ()));
+            TypesConfig.get().set(itemName + ".leftArmPose.x", Math.toDegrees(armorStand.getLeftArmPose().getX()));
+            TypesConfig.get().set(itemName + ".leftArmPose.y", Math.toDegrees(armorStand.getLeftArmPose().getY()));
+            TypesConfig.get().set(itemName + ".leftArmPose.z", Math.toDegrees(armorStand.getLeftArmPose().getZ()));
+            TypesConfig.get().set(itemName + ".rightLegPose.x", Math.toDegrees(armorStand.getRightLegPose().getX()));
+            TypesConfig.get().set(itemName + ".rightLegPose.y", Math.toDegrees(armorStand.getRightLegPose().getY()));
+            TypesConfig.get().set(itemName + ".rightLegPose.z", Math.toDegrees(armorStand.getRightLegPose().getZ()));
+            TypesConfig.get().set(itemName + ".leftLegPose.x", Math.toDegrees(armorStand.getLeftLegPose().getX()));
+            TypesConfig.get().set(itemName + ".leftLegPose.y", Math.toDegrees(armorStand.getLeftLegPose().getY()));
+            TypesConfig.get().set(itemName + ".leftLegPose.z", Math.toDegrees(armorStand.getLeftLegPose().getZ()));
+
+            TypesConfig.save();
+            TypesConfig.reload();
+
+            player.sendMessage(ChatColor.GREEN + "Created type '" + itemName + "' with this armor stand's properties");
+            player.closeInventory();
+        }
 
         if (clickedItem.getType() == Material.ARMOR_STAND) {
 
@@ -170,7 +213,7 @@ public class SaveMenu extends PaginatedMenu {
         createTypeMeta.setLore(createLore);
         createTypeItem.setItemMeta(createTypeMeta);
 
-        inventory.setItem(46, createTypeItem);
+        inventory.setItem(50, createTypeItem);
 
 
     }
@@ -224,7 +267,7 @@ public class SaveMenu extends PaginatedMenu {
         inventory.setItem(36, super.FILLER_GLASS);
 
         for (int i = 44; i < 54; i++) {
-            if (i == 46) continue;
+            if (i == 50) continue;
             if (inventory.getItem(i) == null) {
                 inventory.setItem(i, super.FILLER_GLASS);
             }
