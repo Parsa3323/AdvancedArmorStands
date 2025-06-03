@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.menus;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
@@ -56,6 +57,9 @@ public class SaveMenu extends PaginatedMenu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
+
+        if (e.getCurrentItem() == null) return;
+
         Set<String> list = TypesConfig.get().getKeys(false);
         Player player = (Player) e.getWhoClicked();
         ItemStack clickedItem = e.getCurrentItem();
@@ -127,7 +131,7 @@ public class SaveMenu extends PaginatedMenu {
 
         ArrayList<String> list = new ArrayList<>(keys);
 
-        index = page * maxItemsPerPage;
+        index = (page * maxItemsPerPage);
 
         for (int i = 0; i < maxItemsPerPage; i++) {
             if (index >= list.size()) break;
@@ -152,6 +156,23 @@ public class SaveMenu extends PaginatedMenu {
             index++;
         }
 
+        ItemStack createTypeItem = new ItemStack(XMaterial.REDSTONE_BLOCK.parseMaterial());
+        ItemMeta createTypeMeta = createTypeItem.getItemMeta();
+        createTypeMeta.setDisplayName(ChatColor.YELLOW + "Create a type");
+
+        ArrayList<String> createLore = new ArrayList<>();
+        createLore.add(ChatColor.GRAY + "Select this to create");
+        createLore.add(ChatColor.GRAY + "a type with this armor");
+        createLore.add(ChatColor.GRAY + "stand's properties");
+        createLore.add("");
+        createLore.add(ChatColor.YELLOW + "Click to create");
+
+        createTypeMeta.setLore(createLore);
+        createTypeItem.setItemMeta(createTypeMeta);
+
+        inventory.setItem(46, createTypeItem);
+
+
     }
 
     @Override
@@ -172,5 +193,41 @@ public class SaveMenu extends PaginatedMenu {
     @Override
     public void close(InventoryCloseEvent e) {
         AdvancedArmorStands.debug("Closed menu");
+    }
+
+    @Override
+    public void addMenuBorder(int total) {
+        if (page > 0) {
+            inventory.setItem(48, makeItem(Material.ARROW, ChatColor.GREEN + "Left"));
+        } else {
+            inventory.setItem(48, super.FILLER_GLASS);
+        }
+
+        inventory.setItem(49, makeItem(Material.BARRIER, ChatColor.RED + "Close"));
+
+        if ((page + 1) * maxItemsPerPage < total) {
+            inventory.setItem(50, makeItem(Material.ARROW, ChatColor.GREEN + "Right"));
+        } else {
+            inventory.setItem(50, super.FILLER_GLASS);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            if (inventory.getItem(i) == null) {
+                inventory.setItem(i, super.FILLER_GLASS);
+            }
+        }
+        inventory.setItem(17, super.FILLER_GLASS);
+        inventory.setItem(18, super.FILLER_GLASS);
+        inventory.setItem(26, super.FILLER_GLASS);
+        inventory.setItem(27, super.FILLER_GLASS);
+        inventory.setItem(35, super.FILLER_GLASS);
+        inventory.setItem(36, super.FILLER_GLASS);
+
+        for (int i = 44; i < 54; i++) {
+            if (i == 46) continue;
+            if (inventory.getItem(i) == null) {
+                inventory.setItem(i, super.FILLER_GLASS);
+            }
+        }
     }
 }

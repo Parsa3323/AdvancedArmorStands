@@ -79,12 +79,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         versionSupport = VersionSupportUtil.getVersionSupport();
 
-        if (versionSupport == null) {
-            getLogger().severe("Could not find a version support for " + VersionSupportUtil.getVersion());
-            setEnabled(false);
-            return;
-        }
-
         if (!getDataFolder().exists()) {
             isFirstTimeRunning = true;
             getDataFolder().mkdirs();
