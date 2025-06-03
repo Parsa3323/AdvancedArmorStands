@@ -19,11 +19,11 @@
 package com.parsa3323.aas.menus;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
-import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -86,7 +86,7 @@ public class ArmorStandMenu extends Menu {
                 } else {
                     coolDownList.add(p.getUniqueId());
                 }
-                PlayerManager.getByBukkit(p).playSound("NOTE_PLING");
+                p.playSound(p.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1, 1);
                 setMenuItems();
                 p.updateInventory();
                 break;
@@ -193,7 +193,7 @@ public class ArmorStandMenu extends Menu {
 
 
             p.sendMessage(ChatColor.GREEN + "Armor stand updated successfully!");
-            PlayerManager.getByBukkit(p).playSound("CLICK");
+            p.playSound(p.getLocation(), XSound.UI_BUTTON_CLICK.parseSound(), 1,  1);
         } catch (Exception ex) {
             p.sendMessage(ChatColor.RED + "Failed to update armor stand!");
             ex.printStackTrace();
@@ -201,7 +201,7 @@ public class ArmorStandMenu extends Menu {
         if (!coolDownList.contains(p.getUniqueId())) {
             cooldownMap.put(uuid, now);
         }
-        PlayerManager.getByBukkit(p).playSound("CLICK");
+        p.playSound(p.getLocation(), XSound.UI_BUTTON_CLICK.parseSound(), 1,  1);
     }
 
 

@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.commands;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.player.PlayerManager;
@@ -53,11 +54,13 @@ public class ListCommand extends SubCommand {
         ArrayList<String> armorStandList = ArmorStandUtils.getArmorStandList();
 
         IPlayer player1 = PlayerManager.getByBukkit(player);
-        player1.playSound("NOTE_BASS");
+        player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_BASS.parseSound(), 1,  1);
+
 
         if (armorStandList.isEmpty()) {
             player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "✖ No ArmorStands found! ✖");
-            player1.playSound("VILLAGER_NO");
+            player.playSound(player.getLocation(), XSound.ENTITY_VILLAGER_NO.parseSound(), 1,  1);
+
         } else {
             player.sendMessage(ChatColor.DARK_GRAY + "§m----------------------------------");
             player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "  ✦ Saved ArmorStands ✦");
@@ -78,7 +81,7 @@ public class ListCommand extends SubCommand {
             }
 
             player.sendMessage(ChatColor.DARK_GRAY + "§m----------------------------------");
-            player1.playSound("ORB_PICKUP");
+            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         }
 
 

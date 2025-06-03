@@ -131,7 +131,7 @@ public class SaveMenu extends PaginatedMenu {
 
             if (TypesConfig.get().get(itemName) == null) return;
 
-            TypesConfig.get().set( itemName + ".Arms", armorStand.hasArms());
+            TypesConfig.get().set(itemName + ".Arms", armorStand.hasArms());
             TypesConfig.get().set(itemName + ".Gravity", armorStand.hasGravity());
             TypesConfig.get().set(itemName + ".BasePlate", armorStand.hasBasePlate());
             TypesConfig.get().set(itemName + ".CustomName", armorStand.getCustomName());
@@ -156,7 +156,7 @@ public class SaveMenu extends PaginatedMenu {
             TypesConfig.save();
             TypesConfig.reload();
 
-            player.sendMessage(ChatColor.GREEN + "Saved config");
+            player.sendMessage(ChatColor.GREEN + "Saved armor stand's properties to '" + itemName + "'");
             player.closeInventory();
 
         }

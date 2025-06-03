@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.commands.manager;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.*;
 import com.parsa3323.aas.player.PlayerManager;
@@ -110,7 +111,7 @@ public class CommandManager implements CommandExecutor {
 
                         player.sendMessage(ChatColor.GRAY + "Use /as help [page] to view other pages.");
                         player.sendMessage(ChatColor.DARK_GRAY + "§m--------------------------------------------------");
-                        PlayerManager.getByBukkit(player).playSound("ORB_PICKUP");
+                        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
                         return true;
                     }
 

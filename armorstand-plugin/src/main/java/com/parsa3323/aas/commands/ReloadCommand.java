@@ -18,13 +18,14 @@
 
 package com.parsa3323.aas.commands;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
-import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.AnimationUtils;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -57,11 +58,14 @@ public class ReloadCommand extends SubCommand {
             ArmorStandsConfig.reload();
             AnimationConfig.reload();
             AnimationUtils.reloadAnimations();
+            for (String key : ArmorStandUtils.getArmorStandList()) {
+                ArmorStandUtils.loadArmorStand(key);
+            }
             player.sendMessage(ChatColor.GREEN + "✔ Successfully reloaded plugin's configs");
-            PlayerManager.getByBukkit(player).playSound("ORB_PICKUP");
+            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         } catch (Exception e) {
             e.printStackTrace();
-            AdvancedArmorStands.info(ChatColor.RED + e.getMessage());
+            AdvancedArmorStands.error(ChatColor.RED + e.getMessage(), true);
         }
 
     }

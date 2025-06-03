@@ -22,27 +22,12 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.profiles.builder.XSkull;
 import com.cryptomorin.xseries.profiles.objects.Profileable;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public final class VersionSupport_1_8 implements IVersionSupport {
-
-
-    @Override
-    public void playSound(Player player, Location location, String soundName, float volume, float pitch) {
-        try {
-            Sound sound = Sound.valueOf(soundName);
-            player.playSound(location, sound, volume, pitch);
-        } catch (IllegalArgumentException e) {
-            player.sendMessage(ChatColor.RED + "Sound " + soundName + " not found in this version!");
-        }
-    }
 
     @Override
     public ItemStack getSkull(String base64) {

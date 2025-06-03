@@ -27,9 +27,7 @@ import com.parsa3323.versionsupport_1_12.VersionSupport_1_12;
 import com.parsa3323.versionsupport_v1_18.Versionsupport_v1_18;
 import com.parsa3323.versionsupport_v1_19.Versionsupport_v1_19;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class VersionSupportUtil {
@@ -102,9 +100,5 @@ public class VersionSupportUtil {
         return AdvancedArmorStands.plugin.versionSupport.getMaterialForVersion(s);
     }
 
-    public static void playVersionSpecificSound(Player player, Location location, String soundName, float volume, float pitch) {
-        AdvancedArmorStands.plugin.versionSupport.playSound(player, location, soundName, volume, pitch);
-        AdvancedArmorStands.debug(soundName);
-    }
 
 }

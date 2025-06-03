@@ -19,16 +19,11 @@
 
 package com.parsa3323.aas.api.player;
 
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public interface IPlayer {
 
     Player getBukkitPlayer();
-
-    void playSound(String s);
-
-    void playSound(Sound s);
 
     void closeInv();
 

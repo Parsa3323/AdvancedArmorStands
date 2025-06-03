@@ -18,15 +18,11 @@
 
 package com.parsa3323.aas.api.versionSupport;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public interface IVersionSupport {
-
-    void playSound(Player player, Location location, String soundName, float volume, float pitch);
 
     ItemStack getSkull(String base64);
 
