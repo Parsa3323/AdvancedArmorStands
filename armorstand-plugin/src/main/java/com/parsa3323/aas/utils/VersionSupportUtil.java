@@ -96,9 +96,4 @@ public class VersionSupportUtil {
         return AdvancedArmorStands.plugin.versionSupport.getSkull(base64);
     }
 
-    public static Material getMaterialForCurrentVersion(String s) {
-        return AdvancedArmorStands.plugin.versionSupport.getMaterialForVersion(s);
-    }
-
-
 }

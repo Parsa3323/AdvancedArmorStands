@@ -26,8 +26,6 @@ public interface IVersionSupport {
 
     ItemStack getSkull(String base64);
 
-    Material getMaterialForVersion(String s);
-
     boolean isGlowing(ArmorStand as);
 
     void setGlowing(ArmorStand as, boolean s);
