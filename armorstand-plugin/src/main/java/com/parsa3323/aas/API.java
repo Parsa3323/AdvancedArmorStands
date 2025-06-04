@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.player.IPlayer;
@@ -31,6 +32,7 @@ import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -111,6 +113,29 @@ public class API implements ArmorstandApi {
                 return ArmorStandSelectionCache.getSelectedArmorStand(uuid);
             }
         };
+    }
+
+    @Override
+    public boolean reloadPlugin() {
+        try {
+
+
+            TypesConfig.reload();
+            ArmorStandsConfig.reload();
+            AnimationConfig.reload();
+            AnimationUtils.reloadAnimations();
+            if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
+                for (String key : ArmorStandUtils.getArmorStandList()) {
+                    ArmorStandUtils.loadArmorStand(key);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            AdvancedArmorStands.error(ChatColor.RED + e.getMessage(), true);
+            return false;
+        }
+
     }
 
     @Override

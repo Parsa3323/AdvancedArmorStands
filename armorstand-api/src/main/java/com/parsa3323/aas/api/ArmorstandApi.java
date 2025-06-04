@@ -38,6 +38,8 @@ public interface ArmorstandApi  {
 
     SessionManager getSessionManager();
 
+    boolean reloadPlugin();
+
     @Deprecated
     String getAddonsPath();
 
