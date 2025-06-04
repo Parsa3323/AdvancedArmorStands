@@ -58,8 +58,10 @@ public class ReloadCommand extends SubCommand {
             ArmorStandsConfig.reload();
             AnimationConfig.reload();
             AnimationUtils.reloadAnimations();
-            for (String key : ArmorStandUtils.getArmorStandList()) {
-                ArmorStandUtils.loadArmorStand(key);
+            if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
+                for (String key : ArmorStandUtils.getArmorStandList()) {
+                    ArmorStandUtils.loadArmorStand(key);
+                }
             }
             player.sendMessage(ChatColor.GREEN + "✔ Successfully reloaded plugin's configs");
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);

@@ -96,6 +96,7 @@ public class SaveMenu extends PaginatedMenu {
 
         if (clickedItem.getType() == XMaterial.REDSTONE_BLOCK.parseMaterial()) {
 
+            // Todo: make this with chat
             itemName = "SavedType-" + new Random().nextInt(900) + 100;
 
             TypesConfig.get().set( itemName + ".Arms", armorStand.hasArms());

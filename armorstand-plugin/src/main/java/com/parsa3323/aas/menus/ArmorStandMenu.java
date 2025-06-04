@@ -72,8 +72,13 @@ public class ArmorStandMenu extends Menu {
 
         switch (e.getSlot()) {
             case 33:
+                if (ArmorStandSelectionCache.isIsInEditSession()) {
+                    p.sendMessage(ChatColor.RED + "You are already in an edit session");
+                    return;
+                }
                 InventoryUtils.save(p);
                 ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
+                ArmorStandSelectionCache.setIsInEditSession(true);
                 InventoryUtils.setItems(p);
                 p.closeInventory();
                 break;

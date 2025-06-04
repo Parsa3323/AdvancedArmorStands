@@ -26,10 +26,20 @@ import java.util.UUID;
 
 public class ArmorStandSelectionCache {
 
+    private static boolean isInEditSession = false;
+
     private static final Map<UUID, ArmorStand> selectedArmorStands = new HashMap<>();
 
     public static void setSelectedArmorStand(UUID playerId, ArmorStand armorStand) {
         selectedArmorStands.put(playerId, armorStand);
+    }
+
+    public static boolean isIsInEditSession() {
+        return isInEditSession;
+    }
+
+    public static void setIsInEditSession(boolean isInEditSession) {
+        ArmorStandSelectionCache.isInEditSession = isInEditSession;
     }
 
     public static ArmorStand getSelectedArmorStand(UUID playerId) {
