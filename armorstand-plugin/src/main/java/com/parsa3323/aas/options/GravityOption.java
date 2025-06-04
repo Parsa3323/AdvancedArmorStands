@@ -44,7 +44,7 @@ public class GravityOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "gravity for this armor stand ");
         lore.add("");
-        lore.add((armorStand.hasGravity()) ? ChatColor.GREEN + "✔ Has gravity" : ChatColor.RED + "✘ Doesn't have gravity");
+        lore.add((armorStand.hasGravity()) ? ChatColor.YELLOW + "✔ Has gravity" : ChatColor.RED + "✘ Doesn't have gravity");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

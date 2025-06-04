@@ -45,7 +45,7 @@ public class ArmsOptions extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "arms for this armor stand ");
         lore.add("");
-        lore.add((armorStand.hasArms()) ? ChatColor.GREEN + "✔ Has arms" : ChatColor.RED + "✘ Doesn't have arms");
+        lore.add((armorStand.hasArms()) ? ChatColor.YELLOW + "✔ Has arms" : ChatColor.RED + "✘ Doesn't have arms");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

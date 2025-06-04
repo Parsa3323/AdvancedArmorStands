@@ -55,7 +55,7 @@ public class CustomNameOption extends SettingsOption {
         lore.add("");
         if (currentName != null) {
             String[] words = ChatColor.stripColor(currentName).split("\\s+");
-            StringBuilder line = new StringBuilder(ChatColor.GREEN + "Current name: ");
+            StringBuilder line = new StringBuilder(ChatColor.YELLOW + "Current name: ");
             for (int i = 0; i < words.length; i++) {
                 line.append(words[i]).append(" ");
                 if ((i + 1) % 2 == 0 || i == words.length - 1) {
@@ -64,7 +64,7 @@ public class CustomNameOption extends SettingsOption {
                 }
             }
         } else {
-            lore.add(ChatColor.GREEN + "Current name: None");
+            lore.add(ChatColor.YELLOW + "Current name: None");
         }
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

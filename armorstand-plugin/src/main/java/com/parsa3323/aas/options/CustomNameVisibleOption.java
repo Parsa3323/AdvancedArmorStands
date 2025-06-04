@@ -44,7 +44,7 @@ public class CustomNameVisibleOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "custom name for this armor stand ");
         lore.add("");
-        lore.add((armorStand.isCustomNameVisible()) ? ChatColor.GREEN + "✔ Has custom name" : ChatColor.RED + "✘ Doesn't have custom name");
+        lore.add((armorStand.isCustomNameVisible()) ? ChatColor.YELLOW + "✔ Has custom name" : ChatColor.RED + "✘ Doesn't have custom name");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
