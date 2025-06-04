@@ -72,13 +72,13 @@ public class ArmorStandMenu extends Menu {
 
         switch (e.getSlot()) {
             case 33:
-                if (ArmorStandSelectionCache.isIsInEditSession()) {
+                if (ArmorStandSelectionCache.isIsInEditSession(p)) {
                     p.sendMessage(ChatColor.RED + "You are already in an edit session");
                     return;
                 }
                 InventoryUtils.save(p);
                 ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
-                ArmorStandSelectionCache.setIsInEditSession(true);
+                ArmorStandSelectionCache.addToEditSession(p);
                 InventoryUtils.setItems(p);
                 p.closeInventory();
                 break;
@@ -251,7 +251,7 @@ public class ArmorStandMenu extends Menu {
         ItemStack close = new ItemStack(Material.BARRIER, 1);
         ItemMeta cMeta = close.getItemMeta();
 
-        cMeta.setDisplayName(ChatColor.RED + "Close");
+        cMeta.setDisplayName(ChatColor.YELLOW + "Close");
         close.setItemMeta(cMeta);
         inventory.setItem(11, close);
 
@@ -262,30 +262,31 @@ public class ArmorStandMenu extends Menu {
         lore.add(ChatColor.GRAY + "isn't recommended");
 
 
+
+
         ItemStack options = new ItemStack(Material.NETHER_STAR);
         ItemMeta oMeta = options.getItemMeta();
 
         ArrayList<String> oLore = new ArrayList<>();
 
-        oLore.add(ChatColor.GRAY + "Opens an inventory");
-        oLore.add(ChatColor.GRAY + "to enable & disable");
-        oLore.add(ChatColor.GRAY + "armor stand's options");
+        oLore.add(ChatColor.GRAY + "Opens an inventory to");
+        oLore.add(ChatColor.GRAY + "enable & disable armor");
+        oLore.add(ChatColor.GRAY + "stand's options");
 
         oMeta.setLore(oLore);
-        oMeta.setDisplayName(ChatColor.GREEN + "Options!");
+        oMeta.setDisplayName(ChatColor.YELLOW + "Options!");
         options.setItemMeta(oMeta);
 
         inventory.setItem(29, options);
 
         ItemStack edit = new ItemStack(Material.REDSTONE_BLOCK, 1);
         ItemMeta editMeta= edit.getItemMeta();
-        editMeta.setDisplayName(ChatColor.GREEN + "Edit!");
+        editMeta.setDisplayName(ChatColor.YELLOW + "Edit!");
 
         ArrayList<String> editLore = new ArrayList<>();
-        editLore.add(ChatColor.GRAY + "gives you some");
-        editLore.add(ChatColor.GRAY + "items that");
-        editLore.add(ChatColor.GRAY + "you can edit as");
-        editLore.add(ChatColor.GRAY + "positions with it");
+        editLore.add(ChatColor.GRAY + "gives you some item");
+        editLore.add(ChatColor.GRAY + "that you can edit");
+        editLore.add(ChatColor.GRAY + "as positions with it");
         editMeta.setLore(editLore);
         edit.setItemMeta(editMeta);
         inventory.setItem(33, edit);

@@ -19,7 +19,9 @@
 package com.parsa3323.aas.utils;
 
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -28,18 +30,24 @@ public class ArmorStandSelectionCache {
 
     private static boolean isInEditSession = false;
 
+    private static final ArrayList<Player> editSessionPlayers = new ArrayList<>();
+
     private static final Map<UUID, ArmorStand> selectedArmorStands = new HashMap<>();
 
     public static void setSelectedArmorStand(UUID playerId, ArmorStand armorStand) {
         selectedArmorStands.put(playerId, armorStand);
     }
 
-    public static boolean isIsInEditSession() {
-        return isInEditSession;
+    public static boolean isIsInEditSession(Player player) {
+        return editSessionPlayers.contains(player);
     }
 
-    public static void setIsInEditSession(boolean isInEditSession) {
-        ArmorStandSelectionCache.isInEditSession = isInEditSession;
+    public static void addToEditSession(Player player) {
+        editSessionPlayers.add(player);
+    }
+
+    public static void removeFromEditSession(Player player) {
+        editSessionPlayers.remove(player);
     }
 
     public static ArmorStand getSelectedArmorStand(UUID playerId) {

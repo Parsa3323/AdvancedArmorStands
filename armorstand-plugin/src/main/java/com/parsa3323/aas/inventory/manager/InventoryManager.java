@@ -66,7 +66,7 @@ public class InventoryManager implements Listener {
                 AdvancedArmorStands.debug(armorStand.getName());
                 new ArmorStandMenu(new PlayerMenuUtility(player), armorStand).open();
                 ArmorStandSelectionCache.removeSelectedArmorStand(player.getUniqueId());
-                ArmorStandSelectionCache.setIsInEditSession(false);
+                ArmorStandSelectionCache.removeFromEditSession(player);
 
                 return;
             }
