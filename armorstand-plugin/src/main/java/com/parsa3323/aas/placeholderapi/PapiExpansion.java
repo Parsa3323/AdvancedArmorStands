@@ -55,6 +55,8 @@ public class PapiExpansion extends PlaceholderExpansion {
 
         if (params.equalsIgnoreCase("total_types")) return String.valueOf(TypeUtils.getTotalTypes());
 
+        if (params.equalsIgnoreCase("total_loaded_armor_stands")) return String.valueOf(ArmorStandUtils.getLoadedArmorStands());
+
         return "";
     }
 }

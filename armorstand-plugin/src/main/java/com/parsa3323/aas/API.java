@@ -18,7 +18,6 @@
 
 package com.parsa3323.aas;
 
-import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.player.IPlayer;
