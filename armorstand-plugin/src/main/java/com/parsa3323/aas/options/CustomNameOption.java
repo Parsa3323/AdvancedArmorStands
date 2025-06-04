@@ -60,7 +60,7 @@ public class CustomNameOption extends SettingsOption {
                 line.append(words[i]).append(" ");
                 if ((i + 1) % 2 == 0 || i == words.length - 1) {
                     lore.add(line.toString().trim());
-                    line = new StringBuilder(ChatColor.GREEN.toString());
+                    line = new StringBuilder(ChatColor.YELLOW.toString());
                 }
             }
         } else {
