@@ -196,7 +196,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
 
         status("Checking for armor stands");
-
+        ArmorStandUtils.checkArmorStandsFirstTime();
         ArmorStandUtils.checkForArmorStands();
 
         status("Loading animations");

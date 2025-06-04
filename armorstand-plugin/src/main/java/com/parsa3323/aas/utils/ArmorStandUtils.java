@@ -38,6 +38,8 @@ import java.util.UUID;
 
 public class ArmorStandUtils {
 
+    private static boolean isFirstTimeCreatingArmorStand = false;
+
     public static void setLoadedArmorStands(int loadedArmorStands) {
         ArmorStandUtils.loadedArmorStands = loadedArmorStands;
     }
@@ -150,6 +152,15 @@ public class ArmorStandUtils {
 
         player.sendMessage(ChatColor.GREEN + "Deleted ArmorStand: " + name);
     }
+
+    public static boolean isIsFirstTimeCreatingArmorStand() {
+        return isFirstTimeCreatingArmorStand;
+    }
+
+    public static void setIsFirstTimeCreatingArmorStand(boolean isFirstTimeCreatingArmorStand) {
+        ArmorStandUtils.isFirstTimeCreatingArmorStand = isFirstTimeCreatingArmorStand;
+    }
+
     public static boolean isConfiguredArmorStand(Entity entity) {
         if (!(entity instanceof ArmorStand)) {
             AdvancedArmorStands.debug("Entity is not an ArmorStand: " + entity.getType());
@@ -200,6 +211,12 @@ public class ArmorStandUtils {
 
         AdvancedArmorStands.debug("No match found. Entity is NOT a configured armor stand.");
         return false;
+    }
+
+    public static void checkArmorStandsFirstTime() {
+        if (getArmorStandList().isEmpty()) {
+            setIsFirstTimeCreatingArmorStand(true);
+        }
     }
 
     public static ArmorStand getArmorStandByName(String s) {

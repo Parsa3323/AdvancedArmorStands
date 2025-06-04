@@ -144,14 +144,14 @@ public class CreateCommand extends SubCommand implements Listener {
 
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
             player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
-            player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");
-          //  saveArmorStand(args[2], armorStand);
+            if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
+                player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");
+            }
         } else {
             if (args.length <= 7) {
                 player.sendMessage(ChatColor.RED + "Usage: " + "/as create custom <rightArm> <leftArm> <rightLeg> <leftLeg> <Headpos> <Name>");
                 return;
             }
-
 
             int rightArm = Integer.parseInt(args[2]);
             int leftArm = Integer.parseInt(args[3]);
@@ -161,8 +161,6 @@ public class CreateCommand extends SubCommand implements Listener {
             String Name = args[7];
 
             ArmorStand stand = spawnCustomArmorStand(player.getWorld(), player.getLocation(), rightArm, leftArm, rightLeg, leftLeg, Headpos, player, Name);
-
-
         }
     }
 
@@ -225,7 +223,7 @@ public class CreateCommand extends SubCommand implements Listener {
 
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
-        player.sendMessage(ChatColor.GREEN + "Did you know you can shift-right click on an armorstand to open its settings");
+        player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
         return armorStand;
     }
 

@@ -18,14 +18,21 @@
 
 package com.parsa3323.aas.listener;
 
+import com.parsa3323.aas.config.TypesConfig;
+import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.CustomNameOption;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+import java.util.Map;
+import java.util.UUID;
 
 public class ChatListener implements Listener {
 
@@ -52,6 +59,59 @@ public class ChatListener implements Listener {
             settingsManager.open();
             CustomNameOption.players.remove(e.getPlayer().getUniqueId());
 
+
+            return;
+        }
+
+        Map<UUID, ArmorStand> map = SaveMenu.playerList;
+        Player p = e.getPlayer();
+
+        if (map.containsKey(p.getUniqueId())) {
+
+            if (e.getMessage().equalsIgnoreCase("exit")) {
+                e.setCancelled(true);
+                e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully quit the type create session");
+                map.remove(p.getUniqueId());
+                return;
+            }
+
+            e.setCancelled(true);
+
+            ArmorStand armorStand = map.get(p.getUniqueId());
+            String itemName = e.getMessage();
+
+            if (TypesConfig.get().contains(itemName)) {
+                p.sendMessage(ChatColor.RED + "This type already exists, Either chose another name or select the type in the save menu");
+                return;
+            }
+
+            TypesConfig.get().set( itemName + ".Arms", armorStand.hasArms());
+            TypesConfig.get().set(itemName + ".Gravity", armorStand.hasGravity());
+            TypesConfig.get().set(itemName + ".BasePlate", armorStand.hasBasePlate());
+            TypesConfig.get().set(itemName + ".CustomName", armorStand.getCustomName());
+            TypesConfig.get().set(itemName + ".isCustomNameVisible", armorStand.isCustomNameVisible());
+            TypesConfig.get().set(itemName +  ".itemInHandMaterial", armorStand.getItemInHand().getType().name());
+            TypesConfig.get().set(itemName +  ".HeadPos.x", Math.toDegrees(armorStand.getHeadPose().getX()));
+            TypesConfig.get().set(itemName + ".HeadPos.y", Math.toDegrees(armorStand.getHeadPose().getY()));
+            TypesConfig.get().set(itemName + ".HeadPos.z", Math.toDegrees(armorStand.getHeadPose().getZ()));
+            TypesConfig.get().set(itemName + ".rightArmPose.x", Math.toDegrees(armorStand.getRightArmPose().getX()));
+            TypesConfig.get().set(itemName + ".rightArmPose.y", Math.toDegrees(armorStand.getRightArmPose().getY()));
+            TypesConfig.get().set(itemName + ".rightArmPose.z", Math.toDegrees(armorStand.getRightArmPose().getZ()));
+            TypesConfig.get().set(itemName + ".leftArmPose.x", Math.toDegrees(armorStand.getLeftArmPose().getX()));
+            TypesConfig.get().set(itemName + ".leftArmPose.y", Math.toDegrees(armorStand.getLeftArmPose().getY()));
+            TypesConfig.get().set(itemName + ".leftArmPose.z", Math.toDegrees(armorStand.getLeftArmPose().getZ()));
+            TypesConfig.get().set(itemName + ".rightLegPose.x", Math.toDegrees(armorStand.getRightLegPose().getX()));
+            TypesConfig.get().set(itemName + ".rightLegPose.y", Math.toDegrees(armorStand.getRightLegPose().getY()));
+            TypesConfig.get().set(itemName + ".rightLegPose.z", Math.toDegrees(armorStand.getRightLegPose().getZ()));
+            TypesConfig.get().set(itemName + ".leftLegPose.x", Math.toDegrees(armorStand.getLeftLegPose().getX()));
+            TypesConfig.get().set(itemName + ".leftLegPose.y", Math.toDegrees(armorStand.getLeftLegPose().getY()));
+            TypesConfig.get().set(itemName + ".leftLegPose.z", Math.toDegrees(armorStand.getLeftLegPose().getZ()));
+
+            TypesConfig.save();
+            TypesConfig.reload();
+
+            p.sendMessage(ChatColor.GREEN + "Created type '" + itemName + "' with this armor stand's properties");
+            map.remove(p.getUniqueId());
 
             return;
         }
