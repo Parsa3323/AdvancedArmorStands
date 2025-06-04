@@ -38,7 +38,7 @@ public class VisibleOption extends SettingsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = VersionSupportUtil.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGJlMDBlNDI2MjYwZDVkODQxNDBkNzUzN2E0ZTc3YWI5ZGEyMmEwOTNhNjM3ZGQ3MjQ5YTVlMTUwOWFiZjhhYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Visibility");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Visibility");
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Enable and disable");

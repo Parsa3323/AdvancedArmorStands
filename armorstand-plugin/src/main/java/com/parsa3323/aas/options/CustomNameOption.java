@@ -47,7 +47,7 @@ public class CustomNameOption extends SettingsOption {
         ItemStack itemStack = VersionSupportUtil.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWRlOGQwZjNlNDIxY2NlODU1NmViOGUzZTU4MzI1OWZmNjg3MzRiYTBmNGNhYjYzOWMyMzkwN2NkMmJlNGVmYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
         String currentName = armorStand.getCustomName();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Custom name");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Custom name");
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Set a custom name for");
