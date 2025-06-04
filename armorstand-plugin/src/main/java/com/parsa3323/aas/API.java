@@ -170,12 +170,12 @@ public class API implements ArmorstandApi {
 
     @Override
     public boolean isInEditSession(UUID uuid) {
-        return ArmorStandSelectionCache.hasSelection(uuid);
+        return ArmorStandSelectionCache.isIsInEditSession(Bukkit.getPlayer(uuid));
     }
 
     @Override
     public boolean isInEditSession(Player p) {
-        return ArmorStandSelectionCache.hasSelection(p.getUniqueId());
+        return ArmorStandSelectionCache.isIsInEditSession(p);
     }
 
     @Override
