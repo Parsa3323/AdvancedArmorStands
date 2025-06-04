@@ -40,7 +40,7 @@ public class BasePlateOption extends SettingsOption {
 
         ItemStack itemStack = VersionSupportUtil.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmI3NzNjNGNjNjc1ODgyYjkzNmViNDgxNWQ5NGY0ZmZiNjI0MTE5YWVjOWE0Y2Q2NGExNDM0ODE1YWY4YWJjYiJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Base Plate");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Base Plate");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "base plate for this armor stand ");
