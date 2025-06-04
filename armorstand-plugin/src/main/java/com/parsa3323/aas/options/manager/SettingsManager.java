@@ -63,7 +63,7 @@ public class SettingsManager extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return "Options";
+        return ChatColor.GRAY + "As " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Options";
     }
 
     @Override

@@ -251,7 +251,7 @@ public class ArmorStandMenu extends Menu {
         ItemStack close = new ItemStack(Material.BARRIER, 1);
         ItemMeta cMeta = close.getItemMeta();
 
-        cMeta.setDisplayName(ChatColor.YELLOW + "Close");
+        cMeta.setDisplayName(ChatColor.RED + "Close");
         close.setItemMeta(cMeta);
         inventory.setItem(11, close);
 
