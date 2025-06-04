@@ -48,7 +48,7 @@ public class SaveMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return "SaveMenu";
+        return ChatColor.GRAY + "As " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Save Menu";
     }
 
     @Override

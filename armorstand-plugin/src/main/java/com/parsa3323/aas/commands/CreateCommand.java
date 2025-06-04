@@ -145,7 +145,7 @@ public class CreateCommand extends SubCommand implements Listener {
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
             player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
             if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
-                player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings");
+                player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
                 ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
             }
         } else {
