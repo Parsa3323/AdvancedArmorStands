@@ -48,7 +48,9 @@ public class ArmorStandMenu extends Menu {
 
     private final ArrayList<UUID> coolDownList = new ArrayList<>();
 
-    private final Material EQUIPMENT_MATERIAL = XMaterial.BLACK_STAINED_GLASS_PANE.parseMaterial();
+    private final ItemStack EQUIPMENT_ITEM = XMaterial.YELLOW_STAINED_GLASS_PANE.parseItem();
+
+    private final Material EQUIPMENT_MATERIAL = EQUIPMENT_ITEM.getType();
 
     private final ArmorStand armorStand;
 
@@ -144,8 +146,8 @@ public class ArmorStandMenu extends Menu {
 
         UUID uuid = p.getUniqueId();
         long now = System.currentTimeMillis();
-        if (cooldownMap.containsKey(uuid) && (now - cooldownMap.get(uuid)) < 5000) {
-            int rem = (int) Math.ceil((5000 - (now - cooldownMap.get(uuid))) / 1000.0);
+        if (cooldownMap.containsKey(uuid) && (now - cooldownMap.get(uuid)) < 1000) {
+            int rem = (int) Math.ceil((1000 - (now - cooldownMap.get(uuid))) / 1000.0);
             p.sendMessage(ChatColor.RED + "You must wait " + rem + " seconds before placing an item");
             return;
         }
@@ -165,10 +167,10 @@ public class ArmorStandMenu extends Menu {
 
 
         if (cursorItem.getType() == Material.AIR) {
-            System.out.println("Removing");
+            AdvancedArmorStands.debug("Removing");
             e.getInventory().setItem(slot, createNull(getSlotName(slot)));
         } else {
-            System.out.println("Adding");
+            AdvancedArmorStands.debug("Adding");
             e.getInventory().setItem(slot, placed);
         }
 
@@ -382,27 +384,62 @@ public class ArmorStandMenu extends Menu {
     }
 
     private ItemStack createNull(String pos) {
-        System.out.println(EQUIPMENT_MATERIAL);
-        ItemStack head = new ItemStack(EQUIPMENT_MATERIAL);
+        ItemStack head = EQUIPMENT_ITEM;
         ItemMeta itemMeta = head.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Place an item here");
+        lore.add(ChatColor.GRAY + "To set the head");
+        lore.add(ChatColor.GRAY + "Drag and drop item");
+        lore.add(ChatColor.GRAY + "Only armor pieces allowed");
 
         switch (pos) {
             case "HEAD":
-                itemMeta.setDisplayName("HEAD");
+                ArrayList<String> headLore = new ArrayList<>();
+                headLore.add(ChatColor.GRAY + "Place an item here");
+                headLore.add(ChatColor.GRAY + "To set the head");
+                headLore.add(ChatColor.GRAY + "Drag and drop item");
+                headLore.add(ChatColor.GRAY + "Only armor pieces allowed");
+                itemMeta.setDisplayName(ChatColor.YELLOW + "Head");
+                itemMeta.setLore(headLore);
                 break;
             case "CHEST":
-                itemMeta.setDisplayName("CHEST");
+                ArrayList<String> cLore = new ArrayList<>();
+                cLore.add(ChatColor.GRAY + "Place an item here");
+                cLore.add(ChatColor.GRAY + "To set the chest");
+                cLore.add(ChatColor.GRAY + "Drag and drop item");
+                cLore.add(ChatColor.GRAY + "Only armor pieces allowed");
+                itemMeta.setDisplayName(ChatColor.YELLOW + "Chestplate");
+                itemMeta.setLore(cLore);
                 break;
             case "LEG":
-                itemMeta.setDisplayName("LEG");
+                ArrayList<String> legLore = new ArrayList<>();
+                legLore.add(ChatColor.GRAY + "Place an item here");
+                legLore.add(ChatColor.GRAY + "To set the legs");
+                legLore.add(ChatColor.GRAY + "Drag and drop item");
+                legLore.add(ChatColor.GRAY + "Only armor pieces allowed");
+                itemMeta.setDisplayName(ChatColor.YELLOW + "Leggings");
+                itemMeta.setLore(legLore);
                 break;
             case "BOOT":
-                itemMeta.setDisplayName("BOOT");
+                ArrayList<String> bootLore = new ArrayList<>();
+                bootLore.add(ChatColor.GRAY + "Place an item here");
+                bootLore.add(ChatColor.GRAY + "To set the boots");
+                bootLore.add(ChatColor.GRAY + "Drag and drop item");
+                bootLore.add(ChatColor.GRAY + "Only armor pieces allowed");
+                itemMeta.setDisplayName(ChatColor.YELLOW + "Boots");
+                itemMeta.setLore(bootLore);
                 break;
             default:
-                itemMeta.setDisplayName("Item in hand");
+                ArrayList<String> handLore = new ArrayList<>();
+                handLore.add(ChatColor.GRAY + "Place an item here");
+                handLore.add(ChatColor.GRAY + "To set the hand");
+                handLore.add(ChatColor.GRAY + "Drag and drop item");
+                handLore.add(ChatColor.GRAY + "All items are allowed");
+                itemMeta.setDisplayName(ChatColor.YELLOW + "Hand");
+                itemMeta.setLore(handLore);
                 break;
         }
+
 
         head.setItemMeta(itemMeta);
 
@@ -411,7 +448,6 @@ public class ArmorStandMenu extends Menu {
     }
 
     private String getSlotName(int slot) {
-        System.out.println(slot);
         switch (slot) {
             case 4:
                 return "HEAD";
