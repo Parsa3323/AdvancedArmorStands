@@ -48,6 +48,8 @@ public class ArmorStandMenu extends Menu {
 
     private final ArrayList<UUID> coolDownList = new ArrayList<>();
 
+    private final Material EQUIPMENT_MATERIAL = XMaterial.BLACK_STAINED_GLASS_PANE.parseMaterial();
+
     private final ArmorStand armorStand;
 
     public ArmorStandMenu(PlayerMenuUtility playerMenuUtility, ArmorStand armorStand) {
@@ -111,10 +113,16 @@ public class ArmorStandMenu extends Menu {
             return;
         }
 
+        ItemStack itemTaken = e.getCurrentItem();
+        ItemStack cursorItem = e.getCursor();
+
+        if (itemTaken != null && itemTaken.getType() == EQUIPMENT_MATERIAL && cursorItem.getType() == Material.AIR) {
+            return;
+        }
+
         e.setCancelled(true);
 
         int slot = e.getSlot();
-        ItemStack cursorItem = e.getCursor();
 
         if (cursorItem == null) {
             cursorItem = new ItemStack(Material.AIR);
@@ -128,7 +136,6 @@ public class ArmorStandMenu extends Menu {
             return;
 
         }
-
 
 
         //if (slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40) return;
@@ -150,7 +157,6 @@ public class ArmorStandMenu extends Menu {
         placed.setAmount(1);
 
 
-        ItemStack itemTaken = e.getCurrentItem();
 
         if (!ArmorStandUtils.isValidEquipmentForSlot(placed, slot)) {
             p.sendMessage(ChatColor.RED + "This item cannot be placed in this slot!");
@@ -158,10 +164,18 @@ public class ArmorStandMenu extends Menu {
         }
 
 
-        e.getInventory().setItem(slot, placed);
+        if (cursorItem.getType() == Material.AIR) {
+            System.out.println("Removing");
+            e.getInventory().setItem(slot, createNull(getSlotName(slot)));
+        } else {
+            System.out.println("Adding");
+            e.getInventory().setItem(slot, placed);
+        }
+
+
         p.setItemOnCursor(new ItemStack(Material.AIR));
 
-        if (itemTaken != null && itemTaken.getType() != Material.AIR) {
+        if (itemTaken != null && itemTaken.getType() != Material.AIR && itemTaken.getType() != EQUIPMENT_MATERIAL) {
             p.getInventory().addItem(itemTaken);
         }
 
@@ -196,9 +210,9 @@ public class ArmorStandMenu extends Menu {
             }
             Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
 
-
-            p.sendMessage(ChatColor.GREEN + "Armor stand updated successfully!");
+            p.sendMessage(ChatColor.YELLOW + "Armor stand updated successfully!");
             p.playSound(p.getLocation(), XSound.UI_BUTTON_CLICK.parseSound(), 1,  1);
+
         } catch (Exception ex) {
             p.sendMessage(ChatColor.RED + "Failed to update armor stand!");
             ex.printStackTrace();
@@ -297,21 +311,20 @@ public class ArmorStandMenu extends Menu {
         tMeta.setLore(lore);
         toggle.setItemMeta(tMeta);
 
-
         inventory.setItem(15, toggle);
-        ItemStack head = (armorStand.getHelmet() != null) ? armorStand.getHelmet().clone() : new ItemStack(Material.AIR);
+        ItemStack head = (armorStand.getHelmet() != null && armorStand.getHelmet().getType() != Material.AIR) ? armorStand.getHelmet().clone() : createNull("HEAD");
         inventory.setItem(4, head);
 
-        ItemStack chest = (armorStand.getChestplate() != null) ? armorStand.getChestplate().clone() : new ItemStack(Material.AIR);
+        ItemStack chest = (armorStand.getChestplate() != null && armorStand.getChestplate().getType() != Material.AIR) ? armorStand.getChestplate().clone() : createNull("CHEST");
         inventory.setItem(13, chest);
 
-        ItemStack leg = (armorStand.getLeggings() != null) ? armorStand.getLeggings().clone() : new ItemStack(Material.AIR);
+        ItemStack leg = (armorStand.getLeggings() != null && armorStand.getLeggings().getType() != Material.AIR) ? armorStand.getLeggings().clone() : createNull("LEG");
         inventory.setItem(22, leg);
 
-        ItemStack boots = (armorStand.getBoots() != null) ? armorStand.getBoots().clone() : new ItemStack(Material.AIR);
+        ItemStack boots = (armorStand.getBoots() != null && armorStand.getBoots().getType() != Material.AIR)  ? armorStand.getBoots().clone() : createNull("BOOT");
         inventory.setItem(31, boots);
 
-        ItemStack itemInHand = (armorStand.getItemInHand() != null) ? armorStand.getItemInHand().clone() : new ItemStack(Material.AIR);
+        ItemStack itemInHand = (armorStand.getItemInHand() != null && armorStand.getItemInHand().getType() != Material.AIR) ? armorStand.getItemInHand().clone() : createNull("NONE");
         inventory.setItem(40, itemInHand);
 
         ItemStack itemInOffHand;
@@ -367,5 +380,55 @@ public class ArmorStandMenu extends Menu {
             inv.setItem(slot, item);
         }
     }
+
+    private ItemStack createNull(String pos) {
+        System.out.println(EQUIPMENT_MATERIAL);
+        ItemStack head = new ItemStack(EQUIPMENT_MATERIAL);
+        ItemMeta itemMeta = head.getItemMeta();
+
+        switch (pos) {
+            case "HEAD":
+                itemMeta.setDisplayName("HEAD");
+                break;
+            case "CHEST":
+                itemMeta.setDisplayName("CHEST");
+                break;
+            case "LEG":
+                itemMeta.setDisplayName("LEG");
+                break;
+            case "BOOT":
+                itemMeta.setDisplayName("BOOT");
+                break;
+            default:
+                itemMeta.setDisplayName("Item in hand");
+                break;
+        }
+
+        head.setItemMeta(itemMeta);
+
+        return head;
+
+    }
+
+    private String getSlotName(int slot) {
+        System.out.println(slot);
+        switch (slot) {
+            case 4:
+                return "HEAD";
+            case 13:
+                return "CHEST";
+            case 22:
+                return "LEG";
+            case 31:
+                return "BOOT";
+            case 40:
+                return "HAND";
+            case 39:
+                return "OFFHAND";
+            default:
+                return "UNKNOWN";
+        }
+    }
+
 
 }

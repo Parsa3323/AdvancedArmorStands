@@ -53,14 +53,8 @@ public class ListCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         ArrayList<String> armorStandList = ArmorStandUtils.getArmorStandList();
 
-        IPlayer player1 = PlayerManager.getByBukkit(player);
-        player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_BASS.parseSound(), 1,  1);
-
-
         if (armorStandList.isEmpty()) {
             player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "✖ No ArmorStands found! ✖");
-            player.playSound(player.getLocation(), XSound.ENTITY_VILLAGER_NO.parseSound(), 1,  1);
-
         } else {
             player.sendMessage(ChatColor.DARK_GRAY + "§m----------------------------------");
             player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "  ✦ Saved ArmorStands ✦");
