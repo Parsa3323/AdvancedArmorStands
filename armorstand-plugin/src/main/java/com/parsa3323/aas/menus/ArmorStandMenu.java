@@ -138,13 +138,7 @@ public class ArmorStandMenu extends Menu {
         if (slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40 && (!doesSupportOffHand || slot != 39)) {
             AdvancedArmorStands.debug("Returned");
             return;
-
         }
-
-
-        //if (slot != 4 && slot != 13 && slot != 22 && slot != 31 && slot != 40) return;
-
-
 
         UUID uuid = p.getUniqueId();
         long now = System.currentTimeMillis();
@@ -154,19 +148,13 @@ public class ArmorStandMenu extends Menu {
             return;
         }
 
-
-
-
         ItemStack placed = cursorItem.clone();
         placed.setAmount(1);
-
-
 
         if (!ArmorStandUtils.isValidEquipmentForSlot(placed, slot)) {
             p.sendMessage(ChatColor.RED + "This item cannot be placed in this slot!");
             return;
         }
-
 
         if (cursorItem.getType() == Material.AIR) {
             AdvancedArmorStands.debug("Removing");
@@ -176,7 +164,6 @@ public class ArmorStandMenu extends Menu {
             e.getInventory().setItem(slot, placed);
         }
 
-
         p.setItemOnCursor(new ItemStack(Material.AIR));
 
         if (itemTaken != null && itemTaken.getType() != Material.AIR && itemTaken.getType() != EQUIPMENT_MATERIAL) {
@@ -184,9 +171,6 @@ public class ArmorStandMenu extends Menu {
         }
 
         try {
-
-
-
             switch (slot) {
                 case 4:
                     armorStand.setHelmet(placed);
@@ -223,10 +207,7 @@ public class ArmorStandMenu extends Menu {
         if (!coolDownList.contains(p.getUniqueId())) {
             cooldownMap.put(uuid, now);
         }
-        //p.playSound(p.getLocation(), XSound.UI_BUTTON_CLICK.parseSound(), 1,  1);
     }
-
-
 
     @Override
     public void setMenuItems() {
