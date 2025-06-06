@@ -73,15 +73,25 @@ public class ArmorStandsConfig {
     }
 
     private static void moveOldFileIfNeeded() {
+        File dataFolder = AdvancedArmorStands.plugin.getDataFolder();
         File oldFile = new File(AdvancedArmorStands.plugin.getDataFolder(), "caches/armorstands.yml");
         File newFile = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.yml");
 
         if (oldFile.exists() && !newFile.exists()) {
             try {
                 Files.move(oldFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                AdvancedArmorStands.info("Moved armorstands.yml from caches/ to cache/ folder.");
+                AdvancedArmorStands.debug("Moved armorstands.yml from caches/ to cache/ folder.");
             } catch (IOException e) {
                 AdvancedArmorStands.error("Failed to move armorstands.yml to new cache folder: " + e.getMessage(), true);
+            }
+        }
+
+        File oldDir = new File(dataFolder, "caches");
+        if (oldDir.exists() && oldDir.isDirectory() && oldDir.list().length == 0) {
+            if (oldDir.delete()) {
+                AdvancedArmorStands.debug("Removed old caches directory.");
+            } else {
+                AdvancedArmorStands.warn("Could not remove old caches directory.");
             }
         }
     }
