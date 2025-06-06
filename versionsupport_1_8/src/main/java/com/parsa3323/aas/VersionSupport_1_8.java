@@ -19,9 +19,11 @@
 package com.parsa3323.aas;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.XSound;
 import com.cryptomorin.xseries.profiles.builder.XSkull;
 import com.cryptomorin.xseries.profiles.objects.Profileable;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
+import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -73,5 +75,10 @@ public final class VersionSupport_1_8 implements IVersionSupport {
     @Override
     public void setItemInOffHand(ArmorStand as, ItemStack itemStack) {
 
+    }
+
+    @Override
+    public Sound getEquipSound() {
+        return XSound.UI_BUTTON_CLICK.parseSound();
     }
 }

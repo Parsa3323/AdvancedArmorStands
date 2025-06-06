@@ -81,7 +81,7 @@ public class PlayerIntractListener implements Listener {
 
                                 ArmorStand stand = (ArmorStand) e.getRightClicked();
                                 CreateCommand.saveArmorStand(name, stand);
-                                player.getBukkitPlayer().sendMessage(ChatColor.GOLD + "Armor stand saved as " + name + "!");
+                                player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "Armor stand saved as " + name + "!");
                                 ArmorStandUtils.saveArmorStand(name, stand, ArmorStandsConfig.get());
 
                                 interactionCount.remove(playerId);

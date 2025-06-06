@@ -61,7 +61,7 @@ public class ArmorStandMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.GRAY + "As " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Settings";
+        return ChatColor.DARK_GRAY + "As " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "Settings";
     }
 
     @Override
@@ -77,6 +77,7 @@ public class ArmorStandMenu extends Menu {
         switch (e.getSlot()) {
             case 33:
                 if (ArmorStandSelectionCache.isIsInEditSession(p)) {
+                    e.setCancelled(true);
                     p.sendMessage(ChatColor.RED + "You are already in an edit session");
                     return;
                 }
@@ -118,11 +119,13 @@ public class ArmorStandMenu extends Menu {
         ItemStack itemTaken = e.getCurrentItem();
         ItemStack cursorItem = e.getCursor();
 
+        e.setCancelled(true);
+
         if (itemTaken != null && itemTaken.getType() == EQUIPMENT_MATERIAL && cursorItem.getType() == Material.AIR) {
+            System.out.println("Returned");
             return;
         }
 
-        e.setCancelled(true);
 
         int slot = e.getSlot();
 
@@ -212,9 +215,8 @@ public class ArmorStandMenu extends Menu {
             }
             Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
 
+            p.playSound(p.getLocation(), VersionSupportUtil.getVersionSupport().getEquipSound(), 1,  1);
             p.sendMessage(ChatColor.YELLOW + "Armor stand updated successfully!");
-            p.playSound(p.getLocation(), XSound.UI_BUTTON_CLICK.parseSound(), 1,  1);
-
         } catch (Exception ex) {
             p.sendMessage(ChatColor.RED + "Failed to update armor stand!");
             ex.printStackTrace();
@@ -222,7 +224,7 @@ public class ArmorStandMenu extends Menu {
         if (!coolDownList.contains(p.getUniqueId())) {
             cooldownMap.put(uuid, now);
         }
-        p.playSound(p.getLocation(), XSound.UI_BUTTON_CLICK.parseSound(), 1,  1);
+        //p.playSound(p.getLocation(), XSound.UI_BUTTON_CLICK.parseSound(), 1,  1);
     }
 
 
