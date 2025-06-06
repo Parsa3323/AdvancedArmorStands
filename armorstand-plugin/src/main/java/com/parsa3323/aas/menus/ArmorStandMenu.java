@@ -122,7 +122,6 @@ public class ArmorStandMenu extends Menu {
         e.setCancelled(true);
 
         if (itemTaken != null && itemTaken.getType() == EQUIPMENT_MATERIAL && cursorItem.getType() == Material.AIR) {
-            System.out.println("Returned");
             return;
         }
 
