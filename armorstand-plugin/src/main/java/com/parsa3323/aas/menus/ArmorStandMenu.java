@@ -76,11 +76,11 @@ public class ArmorStandMenu extends Menu {
 
         switch (e.getSlot()) {
             case 33:
-                if (ArmorStandSelectionCache.isIsInEditSession(p)) {
-                    e.setCancelled(true);
-                    p.sendMessage(ChatColor.RED + "You are already in an edit session");
-                    return;
-                }
+//                if (ArmorStandSelectionCache.isIsInEditSession(p)) {
+//                    e.setCancelled(true);
+//                    p.sendMessage(ChatColor.RED + "You are already in an edit session");
+//                    return;
+//                }
                 InventoryUtils.save(p);
                 ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
                 ArmorStandSelectionCache.addToEditSession(p);
@@ -427,6 +427,29 @@ public class ArmorStandMenu extends Menu {
 
         return head;
 
+    }
+
+    @Override
+    public void open() {
+        if (ArmorStandSelectionCache.isIsInEditSession(playerMenuUtility.getOwner())) {
+            playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "You can not open menu while editing");
+            return;
+        }
+        inventory = Bukkit.createInventory(this, getSlots(), getMenuName());
+
+        this.setMenuItems();
+
+        if (getFillEmpty() != null) {
+            ItemStack glassPane = getFillEmpty();
+            for (int i = 0; i < inventory.getSize(); i++) {
+                if (inventory.getItem(i) == null) {
+                    inventory.setItem(i, glassPane);
+                }
+            }
+        }
+
+        playerMenuUtility.getOwner().playSound(playerMenuUtility.getOwner().getLocation(), (getOpenSound() != null) ? getOpenSound() : XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1 , 1);
+        playerMenuUtility.getOwner().openInventory(inventory);
     }
 
     private String getSlotName(int slot) {

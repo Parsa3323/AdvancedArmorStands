@@ -62,11 +62,11 @@ public class InventoryManager implements Listener {
             if ("EXIT (Right Click)".equalsIgnoreCase(name)) {
                 event.setCancelled(true);
                 InventoryUtils.restore(player);
+                ArmorStandSelectionCache.removeFromEditSession(player);
                 ArmorStand armorStand = ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId());
                 AdvancedArmorStands.debug(armorStand.getName());
                 new ArmorStandMenu(new PlayerMenuUtility(player), armorStand).open();
                 ArmorStandSelectionCache.removeSelectedArmorStand(player.getUniqueId());
-                ArmorStandSelectionCache.removeFromEditSession(player);
 
                 return;
             }
