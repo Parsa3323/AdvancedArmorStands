@@ -139,7 +139,7 @@ public class CreateCommand extends SubCommand implements Listener {
             AdvancedArmorStands.debug("leftLegPose.y = " + getConfigDouble(args[1] + ".leftLegPose.y"));
             AdvancedArmorStands.debug("leftLegPose.z = " + getConfigDouble(args[1] + ".leftLegPose.z"));
 
-            ArmorStandUtils.saveArmorStand(args[2], armorStand, ArmorStandsConfig.get());
+            ArmorStandUtils.saveArmorStand(args[2], armorStand);
 
 
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
@@ -220,7 +220,7 @@ public class CreateCommand extends SubCommand implements Listener {
         armorStand.setLeftArmPose(leftArmPose);
         armorStand.setRightLegPose(rightLegPose);
         armorStand.setLeftLegPose(leftLegPose);
-        ArmorStandUtils.saveArmorStand(name, armorStand, ArmorStandsConfig.get());
+        ArmorStandUtils.saveArmorStand(name, armorStand);
 
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
@@ -256,7 +256,6 @@ public class CreateCommand extends SubCommand implements Listener {
     public void onArmorStandCreate(ArmorStandCreateEvent event) {
         ArmorStand armorStand = event.getArmorStand();
         String name = event.getName();
-
         FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
 

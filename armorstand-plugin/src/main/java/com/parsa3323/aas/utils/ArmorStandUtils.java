@@ -278,31 +278,37 @@ public class ArmorStandUtils {
                 mat == XMaterial.PLAYER_HEAD.parseMaterial();
     }
 
-    public static void saveArmorStand(String name, ArmorStand armorStand, FileConfiguration c) {
-        if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
-            ConfigurationSection cs = c.getConfigurationSection("armorstands");
+    public static void saveArmorStand(String name, ArmorStand armorStand) {
+        ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands");
+        ConfigurationSection qs = ArmorStandsConfig.get().getConfigurationSection("armorstands." + name);
 
-            Location loc = armorStand.getLocation();
+        qs.set("equipment.helmet", (armorStand.getHelmet() != null) ? armorStand.getHelmet() : XMaterial.AIR.parseMaterial());
+        qs.set("equipment.chestplate", (armorStand.getChestplate() != null) ? armorStand.getChestplate() : XMaterial.AIR.parseMaterial());
+        qs.set("equipment.leggings", (armorStand.getLeggings() != null) ? armorStand.getLeggings() : XMaterial.AIR.parseMaterial());
+        qs.set("equipment.boots", (armorStand.getBoots() != null) ? armorStand.getBoots() : XMaterial.AIR.parseMaterial());
+        qs.set("equipment.hand", (armorStand.getItemInHand() != null) ? armorStand.getItemInHand() : XMaterial.AIR.parseMaterial());
+
+        Location loc = armorStand.getLocation();
 //            cs.set(name + ".yaw", loc.getYaw());
 //            cs.set(name + ".pitch", loc.getPitch());
-            cs.set(name + ".small", armorStand.isSmall());
-            cs.set(name + ".gravity", armorStand.hasGravity());
-            cs.set(name + ".visible", armorStand.isVisible());
-            cs.set(name + ".baseplate", armorStand.hasBasePlate());
-            cs.set(name + ".marker", armorStand.isMarker());
-            cs.set(name + ".arms", armorStand.hasArms());
-            cs.set(name + ".customName", armorStand.getCustomName());
-            cs.set(name + ".customNameVisible", armorStand.isCustomNameVisible());
 
-            saveEulerAngle(cs, name + ".pose.head", armorStand.getHeadPose());
-            saveEulerAngle(cs, name + ".pose.body", armorStand.getBodyPose());
-            saveEulerAngle(cs, name + ".pose.leftArm", armorStand.getLeftArmPose());
-            saveEulerAngle(cs, name + ".pose.rightArm", armorStand.getRightArmPose());
-            saveEulerAngle(cs, name + ".pose.leftLeg", armorStand.getLeftLegPose());
-            saveEulerAngle(cs, name + ".pose.rightLeg", armorStand.getRightLegPose());
+        cs.set(name + ".small", armorStand.isSmall());
+        cs.set(name + ".gravity", armorStand.hasGravity());
+        cs.set(name + ".visible", armorStand.isVisible());
+        cs.set(name + ".baseplate", armorStand.hasBasePlate());
+        cs.set(name + ".marker", armorStand.isMarker());
+        cs.set(name + ".arms", armorStand.hasArms());
+        cs.set(name + ".customName", armorStand.getCustomName());
+        cs.set(name + ".customNameVisible", armorStand.isCustomNameVisible());
 
-            ArmorStandsConfig.save();
-        }
+        saveEulerAngle(cs, name + ".pose.head", armorStand.getHeadPose());
+        saveEulerAngle(cs, name + ".pose.body", armorStand.getBodyPose());
+        saveEulerAngle(cs, name + ".pose.leftArm", armorStand.getLeftArmPose());
+        saveEulerAngle(cs, name + ".pose.rightArm", armorStand.getRightArmPose());
+        saveEulerAngle(cs, name + ".pose.leftLeg", armorStand.getLeftLegPose());
+        saveEulerAngle(cs, name + ".pose.rightLeg", armorStand.getRightLegPose());
+
+        ArmorStandsConfig.save();
     }
 
     public static void checkForArmorStands() {
@@ -390,6 +396,7 @@ public class ArmorStandUtils {
     public static void loadArmorStand(String name) {
         if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
             ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands");
+            ConfigurationSection qs = ArmorStandsConfig.get().getConfigurationSection("armorstands." + name);
 
             World world = Bukkit.getWorld(cs.getString(name + ".World"));
             if (world == null) {
@@ -423,7 +430,13 @@ public class ArmorStandUtils {
 
             ArmorStand armorStand = (ArmorStand) world.spawnEntity(loc, EntityType.ARMOR_STAND);
 
-            cs.set(name + ".UUID", armorStand.getUniqueId());
+            cs.set(name + ".UUID", armorStand.getUniqueId().toString());
+
+            armorStand.setItemInHand(qs.getItemStack("equipment.hand"));
+            armorStand.setBoots(qs.getItemStack("equipment.boots"));
+            armorStand.setHelmet(qs.getItemStack("equipment.helmet"));
+            armorStand.setChestplate(qs.getItemStack("equipment.chestplate"));
+            armorStand.setLeggings(qs.getItemStack("equipment.leggings"));
 
             armorStand.setSmall(cs.getBoolean(name + ".small"));
             armorStand.setGravity(cs.getBoolean(name + ".gravity"));
