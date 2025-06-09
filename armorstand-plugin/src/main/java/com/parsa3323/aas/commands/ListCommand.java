@@ -54,30 +54,55 @@ public class ListCommand extends SubCommand {
         ArrayList<String> armorStandList = ArmorStandUtils.getArmorStandList();
 
         if (armorStandList.isEmpty()) {
-            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "✖ No ArmorStands found! ✖");
+            player.sendMessage("");
+            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "    ⚠ No Saved ArmorStands Found ⚠");
+            player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/as save <name>" + ChatColor.GRAY + " to save your first ArmorStand!");
+            player.sendMessage("");
+            player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_BASS.parseSound(), 0.8f, 0.5f);
         } else {
-            player.sendMessage(ChatColor.DARK_GRAY + "§m----------------------------------");
-            player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "  ✦ Saved ArmorStands ✦");
-            player.sendMessage(ChatColor.DARK_GRAY + "§m----------------------------------");
+            player.sendMessage("");
+            player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "      * Saved ArmorStands *");
+            player.sendMessage(ChatColor.YELLOW + "           Found " + ChatColor.WHITE + armorStandList.size() + ChatColor.YELLOW + " saved ArmorStand" + (armorStandList.size() == 1 ? "" : "s"));
+            player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            player.sendMessage("");
 
+            int index = 1;
             for (String name : armorStandList) {
+                TextComponent indexComponent = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + index + ChatColor.DARK_GRAY + "] ");
+                TextComponent nameComponent = new TextComponent(ChatColor.GREEN + "" + ChatColor.BOLD + name);
+                nameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(ChatColor.YELLOW + "" + ChatColor.BOLD + "ArmorStand: " + ChatColor.WHITE + name)
+                                .append("\n" + ChatColor.GRAY + "Click buttons to interact")
+                                .create()));
 
-                TextComponent textComponent = new TextComponent(ChatColor.DARK_GREEN + "» " + ChatColor.GREEN + name);
-                textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + name).create()));
-                TextComponent deleteButton = new TextComponent(ChatColor.RED + "" + ChatColor.BOLD + " [DELETE] ");
-                deleteButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.RED + "Delete armorstand").create()));
+                TextComponent deleteButton = new TextComponent(ChatColor.DARK_RED + " [" + ChatColor.RED + "" + ChatColor.BOLD + "DL" + ChatColor.DARK_RED + "]");
+                deleteButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "* Delete ArmorStand")
+                                .append("\n" + ChatColor.GRAY + "This action cannot be undone!")
+                                .append("\n" + ChatColor.YELLOW + "Click to delete: " + ChatColor.WHITE + name)
+                                .create()));
                 deleteButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as delete " + name));
-                TextComponent teleportButton = new TextComponent(ChatColor.AQUA + "" + ChatColor.BOLD + "[TELEPORT]");
-                teleportButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Teleport to armorstand").create()));
+
+                TextComponent teleportButton = new TextComponent(ChatColor.DARK_AQUA + " [" + ChatColor.AQUA + "" + ChatColor.BOLD + "TP" + ChatColor.DARK_AQUA + "]");
+                teleportButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(ChatColor.AQUA + "" + ChatColor.BOLD + ">> Teleport to ArmorStand")
+                                .append("\n" + ChatColor.GRAY + "Instantly travel to this location")
+                                .append("\n" + ChatColor.YELLOW + "Destination: " + ChatColor.WHITE + name)
+                                .create()));
                 teleportButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as teleport " + name));
 
-                player.spigot().sendMessage(textComponent, deleteButton, teleportButton);
+                player.spigot().sendMessage(indexComponent, nameComponent, teleportButton, deleteButton);
+                index++;
             }
 
-            player.sendMessage(ChatColor.DARK_GRAY + "§m----------------------------------");
-            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
-        }
+            player.sendMessage("");
+            player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "Tip: Hover over buttons for more information!");
+            player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            player.sendMessage("");
 
+            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
+        }
 
     }
 
