@@ -103,7 +103,7 @@ public class CommandManager implements CommandExecutor {
                             String commands = cmd.getSyntax();
                             String description = cmd.getDescription();
 
-                            TextComponent commandComponent = new TextComponent(ChatColor.GOLD + " >> " + ChatColor.YELLOW + "" + ChatColor.BOLD + commands);
+                            TextComponent commandComponent = new TextComponent(ChatColor.GOLD + " » " + ChatColor.YELLOW + "" + ChatColor.BOLD + commands);
                             TextComponent descriptionComponent = new TextComponent(ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + description);
 
                             commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
@@ -145,7 +145,10 @@ public class CommandManager implements CommandExecutor {
                     }
                     if (count == 0) {
                         player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + ChatColor.YELLOW + args[0] + ChatColor.RED + "' is not a valid subcommand.");
-                        player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/as help" + ChatColor.GRAY + " to see all available commands.");
+                        if (player.hasPermission("advanced-armorstands.admin")) {
+                            player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/as help" + ChatColor.GRAY + " to see all available commands.");
+
+                        }
                     }
 
                 } else if (args.length == 0) {
