@@ -292,6 +292,12 @@ public class ArmorStandUtils {
 //            cs.set(name + ".yaw", loc.getYaw());
 //            cs.set(name + ".pitch", loc.getPitch());
 
+        if (VersionSupportUtil.getVersionSupport().canGlow()) {
+
+            cs.set(name + ".glowing", VersionSupportUtil.getVersionSupport().isGlowing(armorStand));
+
+        }
+
         cs.set(name + ".small", armorStand.isSmall());
         cs.set(name + ".gravity", armorStand.hasGravity());
         cs.set(name + ".visible", armorStand.isVisible());
@@ -437,6 +443,12 @@ public class ArmorStandUtils {
             armorStand.setHelmet(qs.getItemStack("equipment.helmet"));
             armorStand.setChestplate(qs.getItemStack("equipment.chestplate"));
             armorStand.setLeggings(qs.getItemStack("equipment.leggings"));
+
+            if (VersionSupportUtil.getVersionSupport().canGlow()) {
+
+                VersionSupportUtil.getVersionSupport().setGlowing(armorStand, cs.getBoolean(name + ".glowing"));
+
+            }
 
             armorStand.setSmall(cs.getBoolean(name + ".small"));
             armorStand.setGravity(cs.getBoolean(name + ".gravity"));
