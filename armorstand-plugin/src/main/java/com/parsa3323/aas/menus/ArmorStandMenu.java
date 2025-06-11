@@ -86,14 +86,8 @@ public class ArmorStandMenu extends Menu {
                 p.closeInventory();
                 break;
             case 15:
-                if (coolDownList.contains(p.getUniqueId())) {
-                    coolDownList.remove(p.getUniqueId());
-                } else {
-                    coolDownList.add(p.getUniqueId());
-                }
-                p.playSound(p.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1, 1);
-                setMenuItems();
-                p.updateInventory();
+                ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), armorStand);
+                actionMenu.open();
                 break;
             case 29:
                 SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(p), armorStand, true);
@@ -251,8 +245,10 @@ public class ArmorStandMenu extends Menu {
 
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Disabling cooldown");
-        lore.add(ChatColor.GRAY + "isn't recommended");
+        lore.add(ChatColor.GRAY + "Opens an inventory to");
+        lore.add(ChatColor.GRAY + "create and delete on-click");
+        lore.add(ChatColor.GRAY + "custom command actions for");
+        lore.add(ChatColor.GRAY + "your armor stand");
 
 
 
@@ -284,13 +280,13 @@ public class ArmorStandMenu extends Menu {
         edit.setItemMeta(editMeta);
         inventory.setItem(33, edit);
 
-        ItemStack toggle = new ItemStack(Material.ARROW) ;
-        ItemMeta tMeta = toggle.getItemMeta();
-        tMeta.setDisplayName((coolDownList.contains(playerMenuUtility.getOwner().getUniqueId())) ? ChatColor.GREEN + "Enable Cooldown" : ChatColor.RED + "Disable Cooldown");
+        ItemStack actions = new ItemStack(XMaterial.TRIPWIRE_HOOK.parseMaterial()) ;
+        ItemMeta tMeta = actions.getItemMeta();
+        tMeta.setDisplayName(ChatColor.YELLOW + "Actions");
         tMeta.setLore(lore);
-        toggle.setItemMeta(tMeta);
+        actions.setItemMeta(tMeta);
 
-        inventory.setItem(15, toggle);
+        inventory.setItem(15, actions);
         ItemStack head = (armorStand.getHelmet() != null && armorStand.getHelmet().getType() != Material.AIR) ? armorStand.getHelmet().clone() : createNull("HEAD");
         inventory.setItem(4, head);
 

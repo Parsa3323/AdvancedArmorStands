@@ -24,6 +24,7 @@ import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.commands.manager.CommandManager;
 import com.parsa3323.aas.commands.manager.TabComp;
+import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
@@ -146,6 +147,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         AnimationConfig.get().options().copyDefaults(true);
         AnimationConfig.save();
         TypesConfig.init();
+
+        ActionConfig.init();
+        ActionConfig.get().options().copyDefaults(true);
+        ActionConfig.save();
 
 
         TypesConfig.get().addDefault("default.Arms", true);

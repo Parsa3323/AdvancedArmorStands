@@ -22,23 +22,23 @@ package com.parsa3323.aas.listener;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.commands.CreateCommand;
+import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerIntractListener implements Listener {
 
@@ -56,6 +56,20 @@ public class PlayerIntractListener implements Listener {
                         ArmorStandSelectionCache.setSelectedArmorStand(player.getBukkitPlayer().getUniqueId(), (ArmorStand) e.getRightClicked());
                         armorStandMenu.open();
                     }
+                    ArrayList<String> list = new ArrayList<>(ActionConfig.get().getConfigurationSection("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked())).getKeys(false));
+                    for (int i = 0; i < list.size(); i++) {
+                        Player p = e.getPlayer();
+
+                        switch (ActionConfig.get().getString("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked()) + "." + list.get(i) + ".type")) {
+                            case "server":
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), list.get(i).replaceAll("-", " "));
+                                break;
+                            case "player":
+                                p.performCommand(list.get(i).replaceAll("-", " "));
+
+                        }
+                    }
+                    e.setCancelled(true);
                     e.setCancelled(true);
                 } else {
                     if (AdvancedArmorStands.plugin.getConfig().getBoolean("shift-right-click-to-add")) {
@@ -84,7 +98,7 @@ public class PlayerIntractListener implements Listener {
                                 ArmorStandUtils.saveArmorStand(name, stand);
 
                                 interactionCount.remove(playerId);
-                        }
+                            }
 
                         }
 
@@ -94,7 +108,10 @@ public class PlayerIntractListener implements Listener {
             } else {
 
                 if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
-
+                    ArrayList<String> list = new ArrayList<>(ActionConfig.get().getConfigurationSection("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked())).getKeys(false));
+                    for (int i = 0; i < list.size(); i++) {
+                        player.getBukkitPlayer().performCommand(list.get(i).replaceAll("-", " "));
+                    }
                     e.setCancelled(true);
 
                 }
@@ -110,6 +127,21 @@ public class PlayerIntractListener implements Listener {
 
         if (e.getEntity() instanceof ArmorStand) {
             if (ArmorStandUtils.isConfiguredArmorStand(e.getEntity())) {
+                ArrayList<String> list = new ArrayList<>(ActionConfig.get().getConfigurationSection("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getEntity())).getKeys(false));
+                for (int i = 0; i < list.size(); i++) {
+                    if (!(e.getDamager() instanceof Player)) return;
+
+                    Player p = (Player) e.getDamager();
+
+                    switch (ActionConfig.get().getString("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getEntity()) + "." + list.get(i) + ".type")) {
+                        case "server":
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), list.get(i).replaceAll("-", " "));
+                            break;
+                        case "player":
+                            p.performCommand(list.get(i).replaceAll("-", " "));
+
+                    }
+                }
                 e.setCancelled(true);
             }
         }

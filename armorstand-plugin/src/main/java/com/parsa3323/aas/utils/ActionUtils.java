@@ -16,18 +16,24 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.listener;
+package com.parsa3323.aas.utils;
 
-import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
-import com.parsa3323.aas.utils.ArmorStandUtils;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
+import com.parsa3323.aas.config.ActionConfig;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.ArmorStand;
 
-public class StateListener implements Listener {
+import java.util.ArrayList;
+import java.util.Set;
 
-    @EventHandler
-    public void onStateChange(ArmorStandStateChangeEvent e) {
-        ArmorStandUtils.saveArmorStand(e.getName(), e.getArmorStand());
+public class ActionUtils {
 
+    public static ArrayList<String> getTotalActionsForArmorStand(String name) {
+        ConfigurationSection cs = ActionConfig.get().getConfigurationSection("armorstand." + name);
+
+        if (null == cs) {
+            return new ArrayList<>();
+        }
+
+        return new ArrayList<>(cs.getKeys(false));
     }
 }

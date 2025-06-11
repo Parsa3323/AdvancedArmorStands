@@ -51,11 +51,15 @@ public class PapiExpansion extends PlaceholderExpansion {
     public @Nullable String onPlaceholderRequest(Player player, @NotNull String params) {
         if (player == null) return "";
 
-        if (params.equalsIgnoreCase("total_armor_stands")) return String.valueOf(ArmorStandUtils.getTotalArmorStands());
+        if (params.equalsIgnoreCase("total")) return String.valueOf(ArmorStandUtils.getTotalArmorStands());
 
         if (params.equalsIgnoreCase("total_types")) return String.valueOf(TypeUtils.getTotalTypes());
 
         if (params.equalsIgnoreCase("total_loaded_armor_stands")) return String.valueOf(ArmorStandUtils.getLoadedArmorStands());
+
+        if (params.equalsIgnoreCase("version")) return String.valueOf(AdvancedArmorStands.plugin.getDescription().getVersion());
+
+
 
         return "";
     }

@@ -18,10 +18,13 @@
 
 package com.parsa3323.aas.listener;
 
+import com.parsa3323.aas.menus.ActionMenu;
+import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.CustomNameOption;
 import com.parsa3323.aas.options.manager.SettingsManager;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -112,6 +115,35 @@ public class ChatListener implements Listener {
 
             p.sendMessage(ChatColor.GREEN + "Created type '" + itemName + "' with this armor stand's properties");
             map.remove(p.getUniqueId());
+
+            return;
+        }
+
+        Map<UUID, String> actions = ActionMenu.getMap();
+
+        if (actions.containsKey(p.getUniqueId())) {
+
+            if (e.getMessage().equalsIgnoreCase("exit")) {
+                e.setCancelled(true);
+                e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully quit the action set session");
+                ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), ArmorStandUtils.getArmorStandByName(actions.get(p.getUniqueId())));
+                actionMenu.open();
+                actions.remove(e.getPlayer().getUniqueId());
+                return;
+            }
+
+            e.setCancelled(true);
+
+            ActionConfig.get().set("armorstand." + actions.get(p.getUniqueId()) + "." + e.getMessage().replaceAll(" ", "-") + ".type", "player");
+            ActionConfig.save();
+            ActionConfig.reload();
+
+            p.sendMessage(ChatColor.GREEN + "Successfully created action '" + e.getMessage().replaceAll(" ", "-") + "'" + ", Change its settings in actions.yml.");
+            ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), ArmorStandUtils.getArmorStandByName(actions.get(p.getUniqueId())));
+            actionMenu.open();
+
+            actions.remove(e.getPlayer().getUniqueId());
+
 
             return;
         }
