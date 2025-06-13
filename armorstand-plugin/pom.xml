@@ -94,7 +94,13 @@
             <url>https://repo.codemc.io/repository/maven-public/</url>
         </repository>
     </repositories>
-
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
+        </repository>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.bstats</groupId>

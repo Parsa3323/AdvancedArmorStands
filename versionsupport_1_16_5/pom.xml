@@ -67,7 +67,13 @@
             </resource>
         </resources>
     </build>
-
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
+        </repository>
+    </distributionManagement>
     <repositories>
         <repository>
             <id>spigotmc-repo</id>
