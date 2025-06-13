@@ -136,6 +136,7 @@ public class SaveMenu extends PaginatedMenu {
 
             if (TypesConfig.get().get(itemName) == null) return;
 
+
             TypesConfig.get().set(itemName + ".Arms", armorStand.hasArms());
             TypesConfig.get().set(itemName + ".Gravity", armorStand.hasGravity());
             TypesConfig.get().set(itemName + ".BasePlate", armorStand.hasBasePlate());
