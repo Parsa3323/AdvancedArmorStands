@@ -64,6 +64,7 @@
     - [Main config](#Main-Configuration)
     - [Types config](#Types-Configuration)
     - [Animations config](#Animations-Configuration)
+    - [Actions config](#actions-configuration)
 
 
 <div align="center">
