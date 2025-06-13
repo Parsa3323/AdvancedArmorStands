@@ -80,12 +80,10 @@
   </build>
     <distributionManagement>
         <repository>
-            <id>parsa3323</id>
-            <name>GitHub Parsa3323 Apache Maven Packages</name>
+            <id>github</id>
             <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
         </repository>
     </distributionManagement>
-
   <repositories>
       <repository>
           <id>placeholderapi</id>

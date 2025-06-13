@@ -17,9 +17,10 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 8
-          server-id: parsa3323
+          server-id: github
           server-username: ${{ github.actor }}
-          server-password: ${{ github.token }}
+          server-password: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: BuildTools (Spigot 1.8.8)
         run: |
