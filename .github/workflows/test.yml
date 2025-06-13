@@ -18,9 +18,7 @@ jobs:
           distribution: 'zulu'
           java-version: 8
           server-id: github
-          server-username: ${{ github.actor }}
-          server-password: ${{ secrets.GITHUB_TOKEN }}
-
+          settings-path: ${{ github.workspace }}
 
       - name: BuildTools (Spigot 1.8.8)
         run: |
@@ -30,5 +28,10 @@ jobs:
           java -jar BuildTools.jar --rev 1.8.8
         shell: bash
 
-      - name: Build with Maven and publish
-        run: mvn clean deploy
+      - name: Build with Maven
+        run: mvn -B clean install
+
+      - name: Publish to GitHub Packages Apache Maven
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
