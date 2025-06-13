@@ -119,7 +119,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         } catch (Throwable t) {
             error("XSeries are not supported on this server: " + t.getClass().getSimpleName() + ": " + t.getMessage());
 
-            error("Skull features are not supported on this server. Please use plugin version 1.0.0-beta.15 or older (not recommended): https://github.com/Parsa3323/AdvancedArmorStands/releases/tag/v1.0.0-beta.15");
+            error("XSeries features are not supported on this server. Please use plugin version 1.0.0-beta.15 or older (not recommended): https://github.com/Parsa3323/AdvancedArmorStands/releases/tag/v1.0.0-beta.15");
             warn("READ MORE: https://docs.advancedarmorstands.ir/version-support-error");
             warn("Using older versions is not recommended and may lead to other issues.");
 

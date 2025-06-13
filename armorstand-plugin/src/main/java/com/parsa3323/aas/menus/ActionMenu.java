@@ -50,7 +50,7 @@ public class ActionMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return "Action Menu";
+        return ChatColor.DARK_GRAY + "As " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "Actions";
     }
 
     @Override
