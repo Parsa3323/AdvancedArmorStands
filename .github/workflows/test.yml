@@ -22,6 +22,8 @@ jobs:
           distribution: 'zulu'
           java-version: 8
           server-id: advancedarmorstands-repo
+          server-username: ${{ github.actor }}
+          server-password: ${{ secrets.GITHUB_TOKEN }}
           settings-path: ${{ github.workspace }}
       - name: BuildTools (Spigot 1.8.8)
         run: |
@@ -31,24 +33,8 @@ jobs:
           java -jar BuildTools.jar --rev 1.8.8
         shell: bash
 
-      - name: Create settings.xml
-        run: |
-          echo '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                                http://maven.apache.org/xsd/settings-1.0.0.xsd">
-            <servers>
-              <server>
-                <id>github</id>
-                <username>${env.GITHUB_ACTOR}</username>
-                <password>${env.GITHUB_TOKEN}</password>
-              </server>
-            </servers>
-          </settings>' > $GITHUB_WORKSPACE/settings.xml
-
-
       - name: Build with Maven
-        run: mvn -B clean install -s $GITHUB_WORKSPACE/settings.xml
+        run: mvn -B clean install
 
       - name: Publish to GitHub Packages Apache Maven
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
