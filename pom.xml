@@ -42,6 +42,7 @@
   <name>AdvancedArmorStands</name>
 
   <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
