@@ -78,6 +78,13 @@
       </resource>
     </resources>
   </build>
+    <distributionManagement>
+        <repository>
+            <id>parsa3323</id>
+            <name>GitHub Parsa3323 Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
+        </repository>
+    </distributionManagement>
 
   <repositories>
       <repository>

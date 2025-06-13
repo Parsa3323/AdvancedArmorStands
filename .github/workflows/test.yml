@@ -17,6 +17,9 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 8
+          server-id: parsa3323
+          server-username: ${{ github.actor }}
+          server-password: ${{ github.token }}
 
       - name: BuildTools (Spigot 1.8.8)
         run: |
@@ -26,5 +29,5 @@ jobs:
           java -jar BuildTools.jar --rev 1.8.8
         shell: bash
 
-      - name: Build with Maven
-        run: mvn -B clean install
+      - name: Build with Maven and publish
+        run: mvn clean deploy
