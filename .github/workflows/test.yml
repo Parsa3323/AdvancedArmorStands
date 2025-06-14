@@ -39,7 +39,7 @@ jobs:
       - name: Checkout Maven Repository
         uses: actions/checkout@v3
         with:
-          repository: Parsa3323/as-repository
+          repository: AdvancedArmorStands/Repository
           token: ${{ secrets.PAT_TOKEN }}
           path: maven-repo
 
