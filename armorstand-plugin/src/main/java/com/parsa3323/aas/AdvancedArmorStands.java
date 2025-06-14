@@ -232,6 +232,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
             debug("Plugin expects: " + CURRENT_CONFIG_VERSION + " but config has: " + configVersion);
         }
 
+
+
         String existingVersion = getConfig().getString("config-version", "unknown");
 
         if (!CURRENT_CONFIG_VERSION.equals(existingVersion)) {
