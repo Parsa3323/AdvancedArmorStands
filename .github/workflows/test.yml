@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: Parsa3323/as-repository
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           path: maven-repo
 
       - name: Copy Artifacts to Maven Repository
