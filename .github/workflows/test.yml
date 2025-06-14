@@ -1,9 +1,11 @@
 name: Compile and Deploy to Maven Repository
 
 on:
-  push:
-    branches: [master]
-  pull_request:
+  release:
+    types: [ published ]
+#  push:
+#    branches: [master]
+#  pull_request:
 
 permissions:
   contents: read
