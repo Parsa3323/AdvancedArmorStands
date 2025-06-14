@@ -81,7 +81,7 @@
   </build>
     <distributionManagement>
         <repository>
-            <id>advancedarmorstands-repo</id>
+            <id>github</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
         </repository>

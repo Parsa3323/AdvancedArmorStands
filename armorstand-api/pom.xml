@@ -70,17 +70,13 @@
 
     <distributionManagement>
         <repository>
-            <id>advancedarmorstands-repo</id>
+            <id>github</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
         </repository>
     </distributionManagement>
 
     <repositories>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/Parsa3323/_</url>
-        </repository>
         <repository>
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
