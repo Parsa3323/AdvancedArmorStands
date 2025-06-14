@@ -182,7 +182,7 @@ animations:
           z: 0   # <====== Right leg Z rotation
 ```
 >[!TIP]
-> Or you can use the [online editor](https://advancedarmorstands.ir/)
+> Or you can use the [online editor](https://advancedarmorstands.ir/animate)
 
 ## Actions Configuration
 
