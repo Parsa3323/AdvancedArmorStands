@@ -1,4 +1,4 @@
-name: Compile plugin
+name: Compile and Deploy to Maven Repository
 
 on:
   push:
@@ -21,10 +21,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 8
-          server-id: github
-          server-username: ${{ github.actor }}
-          server-password: ${{ secrets.GITHUB_TOKEN }}
-          settings-path: ${{ github.workspace }}
+
       - name: BuildTools (Spigot 1.8.8)
         run: |
           mkdir buildtools
@@ -36,7 +33,31 @@ jobs:
       - name: Build with Maven
         run: mvn -B clean install
 
-      - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to Temporary Repository
+        run: mvn deploy -DaltDeploymentRepository=temp-repo::default::file:./target/maven-repository
+
+      - name: Checkout Maven Repository
+        uses: actions/checkout@v3
+        with:
+          repository: Parsa3323/as-repository
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: maven-repo
+
+      - name: Copy Artifacts to Maven Repository
+        run: |
+          cp -r target/maven-repository/* maven-repo/
+          cd maven-repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Deploy artifacts from ${{ github.repository }}@${{ github.sha }}" || exit 0
+          git push
+
+  deploy-only-on-master:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Deploy Complete
+        run: echo "Artifacts deployed to https://repo.advancedarmorstands.ir/"
