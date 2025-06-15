@@ -21,6 +21,7 @@ package com.parsa3323.aas.commands;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.manager.SubCommand;
+import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
@@ -58,6 +59,7 @@ public class ReloadCommand extends SubCommand {
             ArmorStandsConfig.reload();
             AnimationConfig.reload();
             AnimationUtils.reloadAnimations();
+            ActionConfig.reload();
             if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
                 for (String key : ArmorStandUtils.getArmorStandList()) {
                     ArmorStandUtils.loadArmorStand(key);

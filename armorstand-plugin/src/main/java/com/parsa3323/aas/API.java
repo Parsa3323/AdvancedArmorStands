@@ -20,6 +20,8 @@ package com.parsa3323.aas;
 
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
+import com.parsa3323.aas.api.exeption.ConfigException;
+import com.parsa3323.aas.api.exeption.ReloadException;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.config.AnimationConfig;
@@ -65,23 +67,39 @@ public class API implements ArmorstandApi {
     public ConfigManager getConfigManager() {
         return new ConfigManager() {
             @Override
-            public FileConfiguration getMainConfig() {
-                return AdvancedArmorStands.plugin.getConfig();
+            public FileConfiguration getMainConfig() throws ConfigException {
+                try {
+                    return AdvancedArmorStands.plugin.getConfig();
+                } catch (Exception e) {
+                    throw new ConfigException(e);
+                }
             }
 
             @Override
-            public FileConfiguration getCacheConfig() {
-                return ArmorStandsConfig.get();
+            public FileConfiguration getCacheConfig() throws ConfigException {
+                try {
+                    return ArmorStandsConfig.get();
+                } catch (Exception e) {
+                    throw new ConfigException(e);
+                }
             }
 
             @Override
-            public FileConfiguration getAnimationConfig() {
-                return AnimationConfig.get();
+            public FileConfiguration getAnimationConfig() throws ConfigException {
+                try {
+                    return AnimationConfig.get();
+                } catch (Exception e) {
+                    throw new ConfigException(e);
+                }
             }
 
             @Override
-            public FileConfiguration getTypesConfig() {
-                return TypesConfig.get();
+            public FileConfiguration getTypesConfig() throws ConfigException {
+                try {
+                    return TypesConfig.get();
+                } catch (Exception e) {
+                    throw new ConfigException(e);
+                }
             }
         };
     }
@@ -115,7 +133,7 @@ public class API implements ArmorstandApi {
     }
 
     @Override
-    public boolean reloadPlugin() {
+    public boolean reloadPlugin() throws ReloadException {
         try {
 
 
@@ -131,8 +149,7 @@ public class API implements ArmorstandApi {
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            AdvancedArmorStands.error(ChatColor.RED + e.getMessage(), true);
-            return false;
+            throw new ReloadException(ChatColor.RED + e.getMessage());
         }
 
     }
@@ -151,8 +168,12 @@ public class API implements ArmorstandApi {
     public AnimationManager getAnimationManager() {
         return new AnimationManager() {
             @Override
-            public void reload() {
-                AnimationUtils.reloadAnimations();
+            public void reload() throws ReloadException {
+                try {
+                    AnimationUtils.reloadAnimations();
+                } catch (Exception e) {
+                    throw new ReloadException(e.getMessage());
+                }
             }
 
             @Override

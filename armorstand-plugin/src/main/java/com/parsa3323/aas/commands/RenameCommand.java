@@ -57,7 +57,7 @@ public class RenameCommand extends SubCommand {
         String newname = args[2];
 
         if (!ArmorStandsConfig.get().contains("armorstands." + oldname)) {
-            player.sendMessage(ChatColor.RED + "Armor stand with name '" + oldname + "' not found.");
+            player.sendMessage(ChatColor.RED + "Armor stand with the name '" + oldname + "' not found.");
             return;
         }
 
@@ -80,7 +80,7 @@ public class RenameCommand extends SubCommand {
         ArmorStandRenameEvent armorStandRenameEvent = new ArmorStandRenameEvent(player, ArmorStandUtils.getArmorStandByName(newname));
         Bukkit.getPluginManager().callEvent(armorStandRenameEvent);
         if (!armorStandRenameEvent.isCancelled()) {
-            player.sendMessage(ChatColor.GREEN + "Renamed armor stand '" + oldname + "' to '" + newname + "'");
+            player.sendMessage(ChatColor.GREEN + "Renamed armor stand from '" + oldname + "' to '" + newname + "'");
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         }
 

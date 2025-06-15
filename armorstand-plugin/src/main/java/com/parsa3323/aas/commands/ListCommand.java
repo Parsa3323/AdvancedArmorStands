@@ -19,9 +19,7 @@
 package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
-import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;

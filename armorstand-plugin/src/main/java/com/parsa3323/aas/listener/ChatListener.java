@@ -18,9 +18,9 @@
 
 package com.parsa3323.aas.listener;
 
-import com.parsa3323.aas.menus.ActionMenu;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.config.TypesConfig;
+import com.parsa3323.aas.menus.ActionMenu;
 import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.CustomNameOption;
 import com.parsa3323.aas.options.manager.SettingsManager;

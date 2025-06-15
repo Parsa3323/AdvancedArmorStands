@@ -18,17 +18,16 @@
 
 package com.parsa3323.aas.api.exeption;
 
-public class ArmorStandNotFoundException extends Exception {
-
-    public ArmorStandNotFoundException(String message) {
+public class ConfigException extends RuntimeException {
+    public ConfigException(String message) {
         super(message);
     }
 
-    public ArmorStandNotFoundException(String message, Throwable cause) {
+    public ConfigException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ArmorStandNotFoundException(Throwable cause) {
+    public ConfigException(Throwable cause) {
         super(cause);
     }
 }

@@ -20,6 +20,8 @@ package com.parsa3323.aas.api;
 
 
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
+import com.parsa3323.aas.api.exeption.ConfigException;
+import com.parsa3323.aas.api.exeption.ReloadException;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -38,7 +40,7 @@ public interface ArmorstandApi  {
 
     SessionManager getSessionManager();
 
-    boolean reloadPlugin();
+    boolean reloadPlugin() throws ReloadException;
 
     @Deprecated
     String getAddonsPath();
@@ -62,7 +64,7 @@ public interface ArmorstandApi  {
 
     interface AnimationManager {
 
-        void reload();
+        void reload() throws ReloadException;
 
         boolean hasAnimation(ArmorStand armorStand);
 
@@ -76,13 +78,13 @@ public interface ArmorstandApi  {
 
     interface ConfigManager {
 
-        FileConfiguration getMainConfig();
+        FileConfiguration getMainConfig() throws ConfigException;
 
-        FileConfiguration getCacheConfig();
+        FileConfiguration getCacheConfig() throws ConfigException;
 
-        FileConfiguration getAnimationConfig();
+        FileConfiguration getAnimationConfig() throws ConfigException;
 
-        FileConfiguration getTypesConfig();
+        FileConfiguration getTypesConfig() throws ConfigException;
 
     }
 
