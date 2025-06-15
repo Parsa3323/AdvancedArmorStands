@@ -26,6 +26,8 @@ import com.parsa3323.aas.options.CustomNameOption;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -55,7 +57,7 @@ public class ChatListener implements Listener {
 
             e.setCancelled(true);
 
-            CustomNameOption.players.get(e.getPlayer().getUniqueId()).setCustomName(ChatColor.translateAlternateColorCodes('&', e.getMessage()));
+            CustomNameOption.players.get(e.getPlayer().getUniqueId()).setCustomName(PlaceholderAPI.setPlaceholders(e.getPlayer(), ChatColor.translateAlternateColorCodes('&', e.getMessage())));
 
             e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set armor stand's name to '" + e.getMessage() + "' ");
             SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);

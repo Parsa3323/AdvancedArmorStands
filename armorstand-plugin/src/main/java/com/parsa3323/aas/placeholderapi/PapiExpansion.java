@@ -22,11 +22,35 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.TypeUtils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class PapiExpansion extends PlaceholderExpansion {
+
+    private final List<String> rotatingValues = Arrays.asList(
+            "Hello!", "Welcome!", "ArmorStands!", "Enjoy!", "Customize!", "Rotate!", "Edit!", "Java <3"
+    );
+
+    private String currentRotatingValue = rotatingValues.get(0);
+    private int index = 0;
+
+    public PapiExpansion() {
+        startRotationTask();
+    }
+
+    private void startRotationTask() {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(AdvancedArmorStands.plugin, () -> {
+            index = (index + 1) % rotatingValues.size();
+            currentRotatingValue = rotatingValues.get(index);
+        }, 20L, 20L);
+    }
+
+
     @Override
     public @NotNull String getIdentifier() {
         return "aas";
@@ -59,7 +83,7 @@ public class PapiExpansion extends PlaceholderExpansion {
 
         if (params.equalsIgnoreCase("version")) return String.valueOf(AdvancedArmorStands.plugin.getDescription().getVersion());
 
-
+        if (params.equalsIgnoreCase("rotating")) return currentRotatingValue;
 
         return "";
     }

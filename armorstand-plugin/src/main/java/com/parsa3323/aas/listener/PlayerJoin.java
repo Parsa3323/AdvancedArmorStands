@@ -21,11 +21,16 @@ package com.parsa3323.aas.listener;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import net.md_5.bungee.api.chat.*;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import javax.xml.soap.Text;
+import java.awt.*;
 
 public class PlayerJoin implements Listener {
 
@@ -43,6 +48,20 @@ public class PlayerJoin implements Listener {
                     e.getPlayer().sendMessage(ChatColor.RED + "It looks like " + unloaded + " armor stands haven't been" +
                             " loaded by the world generator. To fix this, " +
                             "enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
+
+                }
+                TextComponent textComponent = new TextComponent(ChatColor.RED + "Your config.yml file is outdated. ");
+
+                TextComponent learnMore = new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD + "Learn more.");
+                learnMore.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://docs.advancedarmorstands.ir/config-version-outdated"));
+                learnMore.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "https://docs.advancedarmorstands.ir/config-version-outdated").create()));
+
+                textComponent.addExtra(learnMore);
+
+                e.getPlayer().spigot().sendMessage(textComponent);
+
+
+                if (AdvancedArmorStands.CONFIG_OUTDATED) {
 
                 }
             }

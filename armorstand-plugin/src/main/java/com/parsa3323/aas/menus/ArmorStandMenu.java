@@ -188,7 +188,7 @@ public class ArmorStandMenu extends Menu {
             Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
 
             p.playSound(p.getLocation(), VersionSupportUtil.getVersionSupport().getEquipSound(), 1,  1);
-            p.sendMessage(ChatColor.YELLOW + "Armor stand updated successfully!");
+            p.sendMessage(ChatColor.GREEN + "Armor stand updated successfully!");
         } catch (Exception ex) {
             p.sendMessage(ChatColor.RED + "Failed to update armor stand!");
             ex.printStackTrace();

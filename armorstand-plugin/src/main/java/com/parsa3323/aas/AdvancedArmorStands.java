@@ -66,6 +66,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static boolean isFirstTimeRunning = false;
 
+    public static boolean CONFIG_OUTDATED = false;
+
     public static AdvancedArmorStands plugin;
 
     public static ArmorstandApi getApi() {
@@ -238,8 +240,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         if (!CURRENT_CONFIG_VERSION.equals(existingVersion)) {
             debug("Old config version detected (" + existingVersion + ").");
-            warn("Config version is outdated! Please consider updating config.yml manually.");
-            warn("Learn more: https://docs.advancedarmorstands.ir/config-version-outdated/");
+            error("Config version is outdated! Please consider updating config.yml manually.", "https://docs.advancedarmorstands.ir/config-version-outdated/");
+            CONFIG_OUTDATED = true;
         }
 
 
@@ -287,7 +289,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
     public static void error(String message, String readmorelink) {
         if (logLevel.intValue() <= Level.SEVERE.intValue()) {
             logger.severe("[ERROR] " + message);
-            warn("READMORE: " + readmorelink);
+            warn("Learn more: " + readmorelink);
         }
     }
 
