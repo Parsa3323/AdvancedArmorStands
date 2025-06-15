@@ -12,7 +12,7 @@ on:
 permissions:
   contents: read
   packages: write
-#sdas
+
 jobs:
   build:
     runs-on: ubuntu-latest
