@@ -3,6 +3,7 @@ name: Compile and Deploy to Maven Repository
 on:
   release:
     types: [ published ]
+    branches: [master]
 #  push:
 #    branches: [master]
 #  pull_request:
