@@ -24,7 +24,7 @@
 
     <groupId>com.parsa3323</groupId>
     <artifactId>versionsupport_1_8</artifactId>
-    <version>1.7.0</version>
+    <version>1.7.1</version>
     <packaging>jar</packaging>
 
     <name>VersionSupprt_1_8</name>
