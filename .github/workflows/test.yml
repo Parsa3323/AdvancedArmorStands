@@ -1,9 +1,8 @@
 name: Compile and Deploy to Maven Repository
 
 on:
+  workflow_dispatch:
   release:
-    types: [ published ]
-    branches: [master]
 #  push:
 #    branches: [master]
 #  pull_request:
