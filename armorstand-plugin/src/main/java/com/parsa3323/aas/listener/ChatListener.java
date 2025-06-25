@@ -137,6 +137,7 @@ public class ChatListener implements Listener {
             e.setCancelled(true);
 
             ActionConfig.get().set("armorstand." + actions.get(p.getUniqueId()) + "." + e.getMessage().replaceAll(" ", "-") + ".type", "player");
+            ActionConfig.get().set("armorstand." + actions.get(p.getUniqueId()) + "." + e.getMessage().replaceAll(" ", "-") + ".trigger", "all");
             ActionConfig.save();
             ActionConfig.reload();
 

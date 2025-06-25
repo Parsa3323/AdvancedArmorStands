@@ -19,6 +19,7 @@
 package com.parsa3323.aas.menus;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.parsa3323.aas.actions.manager.ActionsManager;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.utils.ActionUtils;
@@ -30,6 +31,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
@@ -108,7 +110,9 @@ public class ActionMenu extends PaginatedMenu {
             player.sendMessage(ChatColor.GREEN + "Type the command to set (no '/'), Type 'exit' to cancel.");
         }
 
-        if (clickedItem.getType() == XMaterial.PLAYER_HEAD.parseMaterial()) {
+        if (clickedItem.getType() != XMaterial.PLAYER_HEAD.parseMaterial()) return;
+
+        if (e.getClick() == ClickType.SHIFT_LEFT || e.getClick() == ClickType.SHIFT_RIGHT) {
 
             if (ActionConfig.get().get("armorstand." + ArmorStandUtils.getNameByArmorStand(armorStand) + "." + itemName) == null) return;
 
@@ -117,7 +121,12 @@ public class ActionMenu extends PaginatedMenu {
             ActionConfig.reload();
 
             super.open();
+
+            return;
         }
+
+
+        new ActionsManager(new PlayerMenuUtility(player), ArmorStandUtils.getNameByArmorStand(armorStand), itemName).open();
 
     }
 
@@ -148,7 +157,8 @@ public class ActionMenu extends PaginatedMenu {
             lore.add(ChatColor.GRAY + "stand, command will");
             lore.add(ChatColor.GRAY + "be run: " + key.replaceAll("-", " "));
             lore.add("");
-            lore.add(ChatColor.YELLOW + "Click to remove");
+            lore.add(ChatColor.YELLOW + "» Click to edit");
+            lore.add(ChatColor.YELLOW + "» Shift click to remove");
 
             itemMeta.setLore(lore);
             itemMeta.setDisplayName(ChatColor.YELLOW + key);

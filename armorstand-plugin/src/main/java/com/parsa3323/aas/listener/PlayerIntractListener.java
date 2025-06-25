@@ -30,6 +30,7 @@ import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -55,26 +56,6 @@ public class PlayerIntractListener implements Listener {
                         ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), (ArmorStand) e.getRightClicked());
                         ArmorStandSelectionCache.setSelectedArmorStand(player.getBukkitPlayer().getUniqueId(), (ArmorStand) e.getRightClicked());
                         armorStandMenu.open();
-                    } else {
-                        ArrayList<String> list = new ArrayList<>(ActionConfig.get().getConfigurationSection("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked())).getKeys(false));
-
-                        if (list == null) {
-                            list = new ArrayList<>();
-                        }
-
-                        for (int i = 0; i < list.size(); i++) {
-                            Player p = e.getPlayer();
-
-                            switch (ActionConfig.get().getString("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked()) + "." + list.get(i) + ".type")) {
-                                case "server":
-                                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), list.get(i).replaceAll("-", " "));
-                                    break;
-                                case "player":
-                                    p.performCommand(list.get(i).replaceAll("-", " "));
-
-                            }
-                        }
-                        e.setCancelled(true);
                     }
                     e.setCancelled(true);
                 } else {
@@ -111,16 +92,39 @@ public class PlayerIntractListener implements Listener {
                     }
                 }
 
-            } else {
+            }
 
-                if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
-                    ArrayList<String> list = new ArrayList<>(ActionConfig.get().getConfigurationSection("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked())).getKeys(false));
-                    for (int i = 0; i < list.size(); i++) {
-                        player.getBukkitPlayer().performCommand(list.get(i).replaceAll("-", " "));
-                    }
-                    e.setCancelled(true);
+            if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
 
+                ArrayList<String> list = new ArrayList<>(ActionConfig.get().getConfigurationSection("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked())).getKeys(false));
+
+                if (list == null) {
+                    list = new ArrayList<>();
                 }
+
+                for (int i = 0; i < list.size(); i++) {
+                    Player p = e.getPlayer();
+                    String key = list.get(i);
+                    String path = "armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked()) + "." + key;
+                    String trigger = ActionConfig.get().getString(path + ".trigger", "all").toLowerCase();
+                    boolean isSneaking = p.isSneaking();
+                    boolean allow = trigger.equals("right-click")
+                            || (isSneaking && trigger.equals("shift-right-click"))
+                            || trigger.equals("all");
+
+                    if (trigger.equals("right-click") && isSneaking) allow = false;
+
+                    if (!allow) continue;
+
+                    switch (ActionConfig.get().getString(path + ".type")) {
+                        case "server":
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), key.replaceAll("-", " "));
+                            break;
+                        case "player":
+                            p.performCommand(key.replaceAll("-", " "));
+                    }
+                }
+                e.setCancelled(true);
 
             }
 
@@ -130,32 +134,45 @@ public class PlayerIntractListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void entityDamageByEntityEvent(EntityDamageByEntityEvent e) {
+        if (!(e.getEntity() instanceof ArmorStand)) return;
+        if (!(e.getDamager() instanceof Player)) return;
 
-        if (e.getEntity() instanceof ArmorStand) {
-            if (ArmorStandUtils.isConfiguredArmorStand(e.getEntity())) {
-                ArrayList<String> list = new ArrayList<>(ActionConfig.get().getConfigurationSection("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getEntity())).getKeys(false));
+        ArmorStand armorStand = (ArmorStand) e.getEntity();
+        Player player = (Player) e.getDamager();
 
-                if (list == null) {
-                    list = new ArrayList<>();
-                }
+        if (!ArmorStandUtils.isConfiguredArmorStand(armorStand)) return;
 
-                for (int i = 0; i < list.size(); i++) {
-                    if (!(e.getDamager() instanceof Player)) return;
+        String standName = ArmorStandUtils.getNameByArmorStand(armorStand);
+        ConfigurationSection standSection = ActionConfig.get().getConfigurationSection("armorstand." + standName);
+        if (standSection == null) return;
 
-                    Player p = (Player) e.getDamager();
+        for (String key : standSection.getKeys(false)) {
+            ConfigurationSection commandSection = standSection.getConfigurationSection(key);
+            if (commandSection == null) continue;
 
-                    switch (ActionConfig.get().getString("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getEntity()) + "." + list.get(i) + ".type")) {
-                        case "server":
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), list.get(i).replaceAll("-", " "));
-                            break;
-                        case "player":
-                            p.performCommand(list.get(i).replaceAll("-", " "));
+            String trigger = commandSection.getString("trigger", "all");
 
-                    }
-                }
-                e.setCancelled(true);
+            boolean isSneaking = player.isSneaking();
+            boolean allow = trigger.equalsIgnoreCase("left-click")
+                    || (isSneaking && trigger.equalsIgnoreCase("shift-left-click"))
+                    || trigger.equalsIgnoreCase("all");
+
+            if (trigger.equals("left-click") && isSneaking) allow = false;
+
+
+            if (!allow) continue;
+
+            String type = commandSection.getString("type");
+            String command = key.replaceAll("-", " ");
+
+            if ("server".equalsIgnoreCase(type)) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+            } else if ("player".equalsIgnoreCase(type)) {
+                player.performCommand(command);
             }
         }
 
+        e.setCancelled(true);
     }
+
 }
