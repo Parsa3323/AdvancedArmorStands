@@ -18,8 +18,7 @@
 
 package com.parsa3323.aas.actions;
 
-import com.cryptomorin.xseries.XMaterial;
-import com.parsa3323.aas.actions.manager.ActionsItem;
+import com.parsa3323.aas.actions.manager.ActionItem;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -30,7 +29,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class SenderItem extends ActionsItem {
+public class SenderItem extends ActionItem {
     @Override
     public ItemStack getItemStack(String armorStandName, String commandPath) {
         ItemStack itemStack = new ItemStack(VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGI2MzJiM2QwZjgyMGVjNjExNzA4ZTg5MjIyMjA1OWEzNjRkNzYyMjE3YzJjNmM5YmE3MWM1YWRiNDZmYzRiNCJ9fX0="));

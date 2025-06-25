@@ -21,7 +21,7 @@ package com.parsa3323.aas.actions.manager;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class ActionsItem {
+public abstract class ActionItem {
 
     public abstract ItemStack getItemStack(String armorStandName, String commandPath);
 

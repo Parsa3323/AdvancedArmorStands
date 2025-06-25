@@ -18,7 +18,7 @@
 
 package com.parsa3323.aas.actions;
 
-import com.parsa3323.aas.actions.manager.ActionsItem;
+import com.parsa3323.aas.actions.manager.ActionItem;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -29,7 +29,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class TriggerItem extends ActionsItem {
+public class TriggerItem extends ActionItem {
 
     @Override
     public ItemStack getItemStack(String armorStandName, String commandPath) {

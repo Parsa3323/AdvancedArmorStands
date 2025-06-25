@@ -19,7 +19,7 @@
 package com.parsa3323.aas.menus;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.parsa3323.aas.actions.manager.ActionsManager;
+import com.parsa3323.aas.actions.manager.ActionManager;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.utils.ActionUtils;
@@ -126,7 +126,7 @@ public class ActionMenu extends PaginatedMenu {
         }
 
 
-        new ActionsManager(new PlayerMenuUtility(player), ArmorStandUtils.getNameByArmorStand(armorStand), itemName).open();
+        new ActionManager(new PlayerMenuUtility(player), ArmorStandUtils.getNameByArmorStand(armorStand), itemName).open();
 
     }
 

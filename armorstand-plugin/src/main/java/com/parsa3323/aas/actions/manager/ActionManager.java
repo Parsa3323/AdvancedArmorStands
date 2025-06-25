@@ -36,15 +36,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class ActionsManager extends PaginatedMenu {
+public class ActionManager extends PaginatedMenu {
 
-    public ArrayList<ActionsItem> actions = new ArrayList<>();
+    public ArrayList<ActionItem> actions = new ArrayList<>();
 
     private final String armorStandName;
 
     private final String commandPath;
 
-    public ActionsManager(PlayerMenuUtility playerMenuUtility, String armorStandName, String commandPath) {
+    public ActionManager(PlayerMenuUtility playerMenuUtility, String armorStandName, String commandPath) {
         super(playerMenuUtility);
 
         this.armorStandName = armorStandName;
@@ -56,7 +56,7 @@ public class ActionsManager extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return "Name"; // TODO: add a name
+        return ChatColor.DARK_GRAY + "As " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "Action Settings";
     }
 
     @Override
