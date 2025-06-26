@@ -221,7 +221,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        status("Bye Bye...");
+        status("Plugin has been successfully disabled");
     }
 
     public void checkConfig() {

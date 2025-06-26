@@ -92,7 +92,7 @@ public class SaveMenu extends PaginatedMenu {
             return;
         }
 
-        if (clickedItem.getType() == Material.BARRIER) player.closeInventory();
+        if (clickedItem.getType() == XMaterial.BARRIER.parseMaterial()) player.closeInventory();
 
         if (clickedItem.getType() == XMaterial.REDSTONE_BLOCK.parseMaterial()) {
 
