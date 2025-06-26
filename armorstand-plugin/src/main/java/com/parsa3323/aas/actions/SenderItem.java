@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class SenderItem extends ActionItem {
     @Override
     public ItemStack getItemStack(String armorStandName, String commandPath) {
-        ItemStack itemStack = new ItemStack(VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGI2MzJiM2QwZjgyMGVjNjExNzA4ZTg5MjIyMjA1OWEzNjRkNzYyMjE3YzJjNmM5YmE3MWM1YWRiNDZmYzRiNCJ9fX0="));
+        ItemStack itemStack = new ItemStack(VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWQ1NDgyOTY0ZDAzMGQyYWQ0YmVlZmQzYWJjZGY1YjliMGU0MTM0YjdhOWRkYTAwMzc4NWY2ZDg5ZWE5ZmZiMyJ9fX0="));
         ItemMeta itemMeta = itemStack.getItemMeta();
         ConfigurationSection cs = ActionConfig.get().getConfigurationSection("armorstand");
 
