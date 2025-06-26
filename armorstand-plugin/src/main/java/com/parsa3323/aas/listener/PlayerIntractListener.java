@@ -20,6 +20,9 @@ package com.parsa3323.aas.listener;
 
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.actions.SenderType;
+import com.parsa3323.aas.api.actions.TriggerType;
+import com.parsa3323.aas.api.events.ActionTriggerEvent;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.config.ActionConfig;
@@ -116,12 +119,22 @@ public class PlayerIntractListener implements Listener {
 
                     if (!allow) continue;
 
+                    TriggerType triggerType = (isSneaking ? TriggerType.SHIFT_RIGHT_CLICK : TriggerType.RIGHT_CLICK);
+
                     switch (ActionConfig.get().getString(path + ".type")) {
                         case "server":
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), key.replaceAll("-", " "));
+                            ActionTriggerEvent actionTriggerEvent = new ActionTriggerEvent(SenderType.CONSOLE, player.getBukkitPlayer(), triggerType, (ArmorStand) e.getRightClicked());
+                            Bukkit.getPluginManager().callEvent(actionTriggerEvent);
+                            if (!actionTriggerEvent.isCancelled()) {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), key.replaceAll("-", " "));
+                            }
                             break;
                         case "player":
-                            p.performCommand(key.replaceAll("-", " "));
+                            ActionTriggerEvent actionTriggerEvent1 = new ActionTriggerEvent(SenderType.PLAYER, player.getBukkitPlayer(), triggerType, (ArmorStand) e.getRightClicked());
+                            Bukkit.getPluginManager().callEvent(actionTriggerEvent1);
+                            if (!actionTriggerEvent1.isCancelled()) {
+                                p.performCommand(key.replaceAll("-", " "));
+                            }
                     }
                 }
                 e.setCancelled(true);
@@ -162,13 +175,23 @@ public class PlayerIntractListener implements Listener {
 
             if (!allow) continue;
 
+            TriggerType triggerType = (isSneaking ? TriggerType.SHIFT_LEFT_CLICK : TriggerType.LEFT_CLICK);
+
             String type = commandSection.getString("type");
             String command = key.replaceAll("-", " ");
 
             if ("server".equalsIgnoreCase(type)) {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+                ActionTriggerEvent actionTriggerEvent = new ActionTriggerEvent(SenderType.CONSOLE, player, triggerType, armorStand);
+                Bukkit.getPluginManager().callEvent(actionTriggerEvent);
+                if (!actionTriggerEvent.isCancelled()) {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+                }
             } else if ("player".equalsIgnoreCase(type)) {
-                player.performCommand(command);
+                ActionTriggerEvent actionTriggerEvent = new ActionTriggerEvent(SenderType.PLAYER, player, triggerType, armorStand);
+                Bukkit.getPluginManager().callEvent(actionTriggerEvent);
+                if (!actionTriggerEvent.isCancelled()) {
+                    player.performCommand(command);
+                }
             }
         }
 

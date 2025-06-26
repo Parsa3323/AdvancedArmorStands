@@ -19,6 +19,7 @@
 package com.parsa3323.aas.actions;
 
 import com.parsa3323.aas.actions.manager.ActionItem;
+import com.parsa3323.aas.api.exeption.ConfigException;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -38,7 +39,7 @@ public class TriggerItem extends ActionItem {
         ConfigurationSection cs = ActionConfig.get().getConfigurationSection("armorstand" + "." + armorStandName + "." + commandPath);
 
         if (cs == null) {
-            throw new IllegalStateException("'armorstand' section missing in ActionConfig.yml");
+            throw new ConfigException("'armorstand' section missing in ActionConfig.yml");
         }
 
         ArrayList<String> lore = new ArrayList<>();
