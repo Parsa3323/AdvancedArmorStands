@@ -6,8 +6,6 @@
 
 `1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.20.6, 1.21`
 
-By using this plugin you agree to the [Terms of Service](https://github.com/Parsa3323/AdvancedArmorStands/blob/master/TERMS_OF_SERVICE.md).
-
 ![GitHub Sponsors](https://img.shields.io/github/sponsors/Parsa3323?label=Sponsor&logo=GitHub)
 ![GitHub contributors](https://img.shields.io/github/contributors/Parsa3323/AdvancedArmorStands?label=Contributors&logo=GitHub)
 ![GitHub Releases](https://img.shields.io/github/downloads/Parsa3323/AdvancedArmorStands/total?label=Downloads&logo=GitHub)
@@ -48,6 +46,9 @@ By using this plugin you agree to the [Terms of Service](https://github.com/Pars
 # Table of Content
 
 </div>
+
+> [!NOTE]
+> By using this plugin you agree to the [Terms of Service](https://github.com/Parsa3323/AdvancedArmorStands/blob/master/TERMS_OF_SERVICE.md).
 
 - [Requirements](#requirements)
 - [Polymart](https://www.polymart.org/product/7829/advancedarmorstands)
