@@ -61,7 +61,7 @@ public class AnimClearCommand extends SubCommand {
         configurationSection.set(args[1] + ".animation", null);
         ArmorStandsConfig.save();
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
-        player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[1]);
+        player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[1] + "'s animations");
     }
 
     @Override
