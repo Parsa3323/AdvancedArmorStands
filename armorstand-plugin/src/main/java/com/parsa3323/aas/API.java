@@ -213,6 +213,11 @@ public class API implements ArmorstandApi {
             }
 
             @Override
+            public void error(String message, String troubleShootingLink) {
+                AdvancedArmorStands.error(message, troubleShootingLink);
+            }
+
+            @Override
             public void error(String message, boolean b) {
                 AdvancedArmorStands.error(message, b);
             }

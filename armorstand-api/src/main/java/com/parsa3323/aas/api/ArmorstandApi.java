@@ -96,6 +96,8 @@ public interface ArmorstandApi  {
 
         void error(String message);
 
+        void error(String message, String troubleShootingLink);
+
         void error(String message, boolean b);
 
         void info(String args);
