@@ -36,7 +36,6 @@ import com.parsa3323.aas.utils.AnimationUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
-import org.apache.logging.log4j.LogManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -53,7 +52,6 @@ import java.util.logging.Logger;
 
 public final class AdvancedArmorStands extends JavaPlugin {
 
-    private static final org.apache.logging.log4j.Logger log = LogManager.getLogger(AdvancedArmorStands.class);
     private static Logger logger;
 
     public static Level logLevel;
