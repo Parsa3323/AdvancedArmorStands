@@ -144,7 +144,7 @@ public class CommandManager implements CommandExecutor {
                         }
                     }
                     if (count == 0) {
-                        player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + ChatColor.YELLOW + args[0] + ChatColor.RED + "' is not a valid subcommand.");
+                        player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
                         if (player.hasPermission("advanced-armorstands.admin")) {
                             player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/as help" + ChatColor.GRAY + " to see all available commands.");
 
@@ -175,14 +175,14 @@ public class CommandManager implements CommandExecutor {
                 }
             } else {
                 sender.sendMessage("");
-                sender.sendMessage(ChatColor.GOLD + "═══════════════════════════════════════");
+                sender.sendMessage(ChatColor.GOLD + "======================================");
                 sender.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "    AdvancedArmorStands Plugin");
                 sender.sendMessage(ChatColor.GRAY + "    Version: " + ChatColor.WHITE + AdvancedArmorStands.plugin.getDescription().getVersion());
                 sender.sendMessage(ChatColor.GRAY + "    Author: " + ChatColor.YELLOW + "Parsa3323");
                 sender.sendMessage("");
                 sender.sendMessage(ChatColor.RED + "Note: " + ChatColor.GRAY + "This command must be run in-game to");
                 sender.sendMessage(ChatColor.GRAY + "      access the interactive command menu.");
-                sender.sendMessage(ChatColor.GOLD + "═══════════════════════════════════════");
+                sender.sendMessage(ChatColor.GOLD + "======================================");
                 sender.sendMessage("");
             }
             return true;

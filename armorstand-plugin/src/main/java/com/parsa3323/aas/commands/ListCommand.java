@@ -68,29 +68,38 @@ public class ListCommand extends SubCommand {
             int index = 1;
             for (String name : armorStandList) {
                 TextComponent indexComponent = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + index + ChatColor.DARK_GRAY + "] ");
-                TextComponent nameComponent = new TextComponent(ChatColor.GREEN + "" + ChatColor.BOLD + name);
+                TextComponent nameComponent = new TextComponent((ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) ? ChatColor.GREEN : ChatColor.RED) + "" + ChatColor.BOLD + name);
                 nameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(ChatColor.YELLOW + "" + ChatColor.BOLD + "ArmorStand: " + ChatColor.WHITE + name)
+                        new ComponentBuilder(ChatColor.YELLOW  + "ArmorStand: " + name)
                                 .append("\n" + ChatColor.GRAY + "Click buttons to interact")
+                                .append(!ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name))
+                                        ? "\n" + ChatColor.RED + "This armor stand is not loaded, enable auto load in config"
+                                        : "")
                                 .create()));
 
                 TextComponent deleteButton = new TextComponent(ChatColor.DARK_RED + " [" + ChatColor.RED + "" + ChatColor.BOLD + "DL" + ChatColor.DARK_RED + "]");
                 deleteButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "* Delete ArmorStand")
+                        new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete ArmorStand")
                                 .append("\n" + ChatColor.GRAY + "This action cannot be undone!")
-                                .append("\n" + ChatColor.YELLOW + "Click to delete: " + ChatColor.WHITE + name)
+                                .append("\n" + " ")
+                                .append("\n" + ChatColor.YELLOW + "Click to delete: " + name)
                                 .create()));
                 deleteButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as delete " + name));
 
                 TextComponent teleportButton = new TextComponent(ChatColor.DARK_AQUA + " [" + ChatColor.AQUA + "" + ChatColor.BOLD + "TP" + ChatColor.DARK_AQUA + "]");
                 teleportButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(ChatColor.AQUA + "" + ChatColor.BOLD + ">> Teleport to ArmorStand")
+                        new ComponentBuilder(ChatColor.AQUA + "" + ChatColor.BOLD + "Teleport to ArmorStand")
                                 .append("\n" + ChatColor.GRAY + "Instantly travel to this location")
-                                .append("\n" + ChatColor.YELLOW + "Destination: " + ChatColor.WHITE + name)
+                                .append("\n" + " ")
+                                .append("\n" + ChatColor.YELLOW + "Destination: " + name)
                                 .create()));
                 teleportButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as teleport " + name));
 
-                player.spigot().sendMessage(indexComponent, nameComponent, teleportButton, deleteButton);
+                if (ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name))) {
+                    player.spigot().sendMessage(indexComponent, nameComponent, teleportButton, deleteButton);
+                } else {
+                    player.spigot().sendMessage(indexComponent, nameComponent, deleteButton);
+                }
                 index++;
             }
 

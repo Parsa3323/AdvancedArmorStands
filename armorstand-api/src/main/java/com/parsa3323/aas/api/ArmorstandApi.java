@@ -108,6 +108,10 @@ public interface ArmorstandApi  {
 
     interface ArmorStandManager {
 
+        boolean isLoaded(String name);
+
+        boolean isLoaded(ArmorStand armorStand);
+
         ArmorStand getArmorStandByName(String s) throws ArmorStandNotFoundException;
 
         void removeArmorStand(ArmorStand armorStand);

@@ -50,6 +50,10 @@ public class ArmorStandUtils {
 
     private static int loadedArmorStands = 0;
 
+    public static boolean isLoaded(ArmorStand armorStand) {
+        return armorStand != null;
+    }
+
     public static String getNameByArmorStand(ArmorStand armorStand) {
         FileConfiguration config = ArmorStandsConfig.get();
         if (!config.contains("armorstands")) {
