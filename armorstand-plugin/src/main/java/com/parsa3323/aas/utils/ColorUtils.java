@@ -27,7 +27,7 @@ public class ColorUtils  {
     }
 
     public static String boldAndColor(ChatColor c) {
-        return ChatColor.BOLD + "" + c;
+        return c + "" + ChatColor.BOLD;
     }
 
     public static String removeColors(String r) {
