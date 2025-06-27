@@ -49,20 +49,17 @@ public class PlayerJoin implements Listener {
                             "enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
 
                 }
-                TextComponent textComponent = new TextComponent(ChatColor.RED + "Your config.yml file is outdated. ");
-
-                TextComponent learnMore = new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD + "Learn more.");
-                learnMore.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://docs.advancedarmorstands.ir/config-version-outdated"));
-                learnMore.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "https://docs.advancedarmorstands.ir/config-version-outdated").create()));
-
-                textComponent.addExtra(learnMore);
-
-                e.getPlayer().spigot().sendMessage(textComponent);
-
 
                 if (AdvancedArmorStands.CONFIG_OUTDATED) {
+                    TextComponent textComponent = new TextComponent(ChatColor.RED + "Your config.yml file is outdated. ");
 
-                }
+                    TextComponent learnMore = new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD + "Learn more.");
+                    learnMore.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://docs.advancedarmorstands.ir/config-version-outdated"));
+                    learnMore.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "https://docs.advancedarmorstands.ir/config-version-outdated").create()));
+
+                    textComponent.addExtra(learnMore);
+
+                    e.getPlayer().spigot().sendMessage(textComponent);                }
             }
         }, 5L);
 

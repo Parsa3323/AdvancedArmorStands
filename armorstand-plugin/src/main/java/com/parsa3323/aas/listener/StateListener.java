@@ -28,6 +28,5 @@ public class StateListener implements Listener {
     @EventHandler
     public void onStateChange(ArmorStandStateChangeEvent e) {
         ArmorStandUtils.saveArmorStand(e.getName(), e.getArmorStand());
-
     }
 }
