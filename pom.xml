@@ -40,7 +40,6 @@
 
 
   <name>AdvancedArmorStands</name>
-<!--    sdsd-->
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
     <java.version>1.8</java.version>
