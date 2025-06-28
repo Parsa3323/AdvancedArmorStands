@@ -78,7 +78,7 @@ This document contains the configuration details for AAS.
 
 ## Main Configuration
 
-The `main.yml` configuration file allows you to enable or disable debugging.
+`main.yml`:
 
 
 </div>
@@ -99,7 +99,7 @@ auto-load-armor-stands: false # <========== Automatically reload armor stands on
 
 ## Types Configuration
 
-The `types.yml` file defines different entity types with their properties.
+`types.yml`:
 
 </div>
 
