@@ -38,7 +38,7 @@ public interface ArmorstandApi  {
 
     ConfigManager getConfigManager();
 
-    SessionManager getSessionManager();
+    EditSessionManager getEditSessionManager();
 
     boolean reloadPlugin() throws ReloadException;
 
@@ -48,7 +48,7 @@ public interface ArmorstandApi  {
     @Deprecated
     IPlayer getIPlayer(Player p);
 
-    interface SessionManager {
+    interface EditSessionManager {
 
         void closeSession(UUID uuid);
 

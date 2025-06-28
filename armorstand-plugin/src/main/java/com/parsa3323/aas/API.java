@@ -105,8 +105,8 @@ public class API implements ArmorstandApi {
         };
     }
     @Override
-    public SessionManager getSessionManager() {
-        return new SessionManager() {
+    public EditSessionManager getEditSessionManager() {
+        return new EditSessionManager() {
             @Override
             public void closeSession(UUID uuid) {
                 InventoryUtils.restore(Bukkit.getPlayer(uuid));
