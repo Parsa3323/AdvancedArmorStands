@@ -1,5 +1,8 @@
-# AdvancedArmorStands by Parsa3323.
-# Github here: https://github.com/Parsa3323/AdvancedArmorStands/
+# AdvancedArmorStands
+# Version: ${project.version}
+# Author: Parsa3323
+# Github: https://github.com/Parsa3323/AdvancedArmorStands/
+# Docs: http://docs.advancedarmorstands.ir/
 
 # DO NOT MODIFY THIS VALUE
 # This is used internally to ensure compatibility between plugin versions and config formats.
