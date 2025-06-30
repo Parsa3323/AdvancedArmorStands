@@ -132,8 +132,16 @@ public class ArmorStandMenu extends Menu {
         UUID uuid = p.getUniqueId();
         long now = System.currentTimeMillis();
         if (cooldownMap.containsKey(uuid) && (now - cooldownMap.get(uuid)) < 1000) {
-            int rem = (int) Math.ceil((1000 - (now - cooldownMap.get(uuid))) / 1000.0);
-            p.sendMessage(ChatColor.RED + "You must wait " + rem + " seconds before placing an item");
+            float rem = (int) Math.ceil((1000 - (now - cooldownMap.get(uuid))) / 1000.0);
+            boolean usefloat = false;
+
+            if (rem < 1) {
+
+                usefloat = true;
+            }
+
+            int intRem = (int) Math.ceil((1000 - (now - cooldownMap.get(uuid))) / 1000.0);
+            p.sendMessage(ChatColor.RED + "You must wait " + (usefloat ? rem : intRem) + " seconds before placing an item");
             return;
         }
 
