@@ -21,6 +21,7 @@ package com.parsa3323.aas.commands;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.ColorUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -60,14 +61,14 @@ public class ListCommand extends SubCommand {
         } else {
             player.sendMessage("");
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "      * Saved ArmorStands *");
-            player.sendMessage(ChatColor.YELLOW + "           Found " + ChatColor.WHITE + armorStandList.size() + ChatColor.YELLOW + " saved ArmorStand" + (armorStandList.size() == 1 ? "" : "s"));
+            player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "         * Saved ArmorStands *");
+            player.sendMessage(ChatColor.YELLOW + "           Found " + ColorUtils.boldAndColor(ChatColor.YELLOW) + armorStandList.size() + ChatColor.RESET + ChatColor.YELLOW + " saved ArmorStand" + (armorStandList.size() == 1 ? "" : "s"));
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             player.sendMessage("");
 
             int index = 1;
             for (String name : armorStandList) {
-                TextComponent indexComponent = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + index + ChatColor.DARK_GRAY + "] ");
+                TextComponent indexComponent = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.GRAY + index + ChatColor.DARK_GRAY + "] ");
                 TextComponent nameComponent = new TextComponent((ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) ? ChatColor.GREEN : ChatColor.RED) + "" + ChatColor.BOLD + name);
                 nameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.YELLOW  + "ArmorStand: " + name)

@@ -107,7 +107,7 @@ public class CommandManager implements CommandExecutor {
                             TextComponent descriptionComponent = new TextComponent(ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + description);
 
                             commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                    new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Click to use this command")
+                                    new ComponentBuilder(ColorUtils.boldAndColor(ChatColor.YELLOW) + "Click to use this command")
                                             .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + commands)
                                             .append("\n" + ChatColor.GRAY + "Description: " + ChatColor.WHITE + description)
                                             .create()));
@@ -145,10 +145,6 @@ public class CommandManager implements CommandExecutor {
                     }
                     if (count == 0) {
                         player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
-                        if (player.hasPermission("advanced-armorstands.admin")) {
-                            player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/as help" + ChatColor.GRAY + " to see all available commands.");
-
-                        }
                     }
 
                 } else if (args.length == 0) {
