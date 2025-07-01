@@ -26,6 +26,7 @@ import com.parsa3323.aas.options.CustomNameOption;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.utils.VersionSupportUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -48,8 +49,11 @@ public class ChatListener implements Listener {
             if (e.getMessage().equalsIgnoreCase("exit")) {
                 e.setCancelled(true);
                 e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully quit the name set session");
-                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
-                settingsManager.open();
+                if (!VersionSupportUtil.isHigherThan("1.8")) {
+                    SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
+                    settingsManager.open();
+                }
+
                 CustomNameOption.players.remove(e.getPlayer().getUniqueId());
                 return;
             }
@@ -59,8 +63,12 @@ public class ChatListener implements Listener {
             CustomNameOption.players.get(e.getPlayer().getUniqueId()).setCustomName(PlaceholderAPI.setPlaceholders(e.getPlayer(), ChatColor.translateAlternateColorCodes('&', e.getMessage())));
 
             e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set armor stand's name to '" + e.getMessage() + "' ");
-            SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
-            settingsManager.open();
+
+            if (!VersionSupportUtil.isHigherThan("1.8")) {
+                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
+                settingsManager.open();
+            }
+
             CustomNameOption.players.remove(e.getPlayer().getUniqueId());
 
 
@@ -127,8 +135,12 @@ public class ChatListener implements Listener {
             if (e.getMessage().equalsIgnoreCase("exit")) {
                 e.setCancelled(true);
                 e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully quit the action set session");
-                ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), ArmorStandUtils.getArmorStandByName(actions.get(p.getUniqueId())));
-                actionMenu.open();
+
+                if (!VersionSupportUtil.isHigherThan("1.8")) {
+                    ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), ArmorStandUtils.getArmorStandByName(actions.get(p.getUniqueId())));
+                    actionMenu.open();
+                }
+
                 actions.remove(e.getPlayer().getUniqueId());
                 return;
             }
@@ -141,8 +153,12 @@ public class ChatListener implements Listener {
             ActionConfig.reload();
 
             p.sendMessage(ChatColor.GREEN + "Successfully created action '" + e.getMessage().replaceAll(" ", "-") + "'" + ", Change its settings in actions.yml.");
-            ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), ArmorStandUtils.getArmorStandByName(actions.get(p.getUniqueId())));
-            actionMenu.open();
+
+            if (!VersionSupportUtil.isHigherThan("1.8")) {
+                ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), ArmorStandUtils.getArmorStandByName(actions.get(p.getUniqueId())));
+                actionMenu.open();
+            }
+
 
             actions.remove(e.getPlayer().getUniqueId());
 

@@ -99,11 +99,11 @@ public class PlayerIntractListener implements Listener {
 
             if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
 
-                ArrayList<String> list = new ArrayList<>(ActionConfig.get().getConfigurationSection("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked())).getKeys(false));
+                ConfigurationSection cs = ActionConfig.get().getConfigurationSection("armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked()));
 
-                if (list == null) {
-                    list = new ArrayList<>();
-                }
+                if (cs == null) return;
+
+                ArrayList<String> list = new ArrayList<>(cs.getKeys(false));
 
                 for (int i = 0; i < list.size(); i++) {
                     Player p = e.getPlayer();
@@ -151,9 +151,12 @@ public class PlayerIntractListener implements Listener {
         if (!(e.getDamager() instanceof Player)) return;
 
         ArmorStand armorStand = (ArmorStand) e.getEntity();
+
         Player player = (Player) e.getDamager();
 
         if (!ArmorStandUtils.isConfiguredArmorStand(armorStand)) return;
+
+        e.setCancelled(true);
 
         String standName = ArmorStandUtils.getNameByArmorStand(armorStand);
         ConfigurationSection standSection = ActionConfig.get().getConfigurationSection("armorstand." + standName);
@@ -195,7 +198,7 @@ public class PlayerIntractListener implements Listener {
             }
         }
 
-        e.setCancelled(true);
+
     }
 
 }
