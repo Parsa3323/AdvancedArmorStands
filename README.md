@@ -53,6 +53,7 @@
 - [Requirements](#requirements)
 - [Polymart](https://www.polymart.org/product/7829/advancedarmorstands)
 - [Spigot](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
+- [Status](http://status.advancedarmorstands.ir/)
 - [Website](https://advancedarmorstands.ir/)
 - [FAQ](#f-a-q)
     - [What java version?](http://docs.advancedarmorstands.ir/installation#prerequisites)
