@@ -21,17 +21,16 @@ package com.parsa3323.aas.listener;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class ItemDropListener implements Listener {
+public class InventoryClickListener implements Listener {
 
     @EventHandler
-    public void onPlayerItemDrop(PlayerDropItemEvent e) {
+    public void click(InventoryClickEvent e) {
 
-        if (ArmorStandSelectionCache.hasSelection(e.getPlayer().getUniqueId())) {
+        if (ArmorStandSelectionCache.hasSelection(e.getWhoClicked().getUniqueId())) {
             e.setCancelled(true);
         }
 
     }
-
 }

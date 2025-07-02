@@ -29,6 +29,7 @@ public class PlayerDieListener implements Listener {
     public void playerDie(PlayerDeathEvent e) {
         if (ArmorStandSelectionCache.hasSelection(e.getEntity().getUniqueId())) {
             e.setKeepInventory(true);
+            e.getDrops().clear();
         }
     }
 

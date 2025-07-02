@@ -198,8 +198,6 @@ public class CreateCommand extends SubCommand implements Listener {
 
         }
 
-
-
         armorStand.setArms(true);
         armorStand.setGravity(false);
         armorStand.setBasePlate(false);

@@ -32,10 +32,7 @@ import com.parsa3323.aas.inventory.manager.InventoryManager;
 import com.parsa3323.aas.listener.*;
 import com.parsa3323.aas.menus.manager.MenuListener;
 import com.parsa3323.aas.placeholderapi.PapiExpansion;
-import com.parsa3323.aas.utils.AnimationUtils;
-import com.parsa3323.aas.utils.ArmorStandUtils;
-import com.parsa3323.aas.utils.PlayerMenuUtility;
-import com.parsa3323.aas.utils.VersionSupportUtil;
+import com.parsa3323.aas.utils.*;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -104,6 +101,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ev.registerEvents(new PlayerDieListener(), this);
         ev.registerEvents(new InventoryManager(), this);
         ev.registerEvents(new PlayerLeaveEvent(), this);
+        ev.registerEvents(new InventoryClickListener(), this);
         ev.registerEvents(new StateListener(), this);
         ev.registerEvents(new PlayerJoin(), this);
         ev.registerEvents(new CreateCommand(), this);
@@ -219,6 +217,21 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        status("Restoring inventories for players in edit session");
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+
+            if (ArmorStandSelectionCache.hasSelection(player.getUniqueId())) {
+
+                if (InventoryUtils.hasBackup(player)) {
+                    InventoryUtils.restore(player);
+                    InventoryUtils.save(player);
+                }
+
+            }
+
+        }
+
         status("Plugin has been successfully disabled");
     }
 
