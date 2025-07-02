@@ -27,7 +27,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RenameCommand extends SubCommand {
@@ -89,7 +88,8 @@ public class RenameCommand extends SubCommand {
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
         if (args.length == 2) {
-            return new ArrayList<>(ArmorStandsConfig.get().getConfigurationSection("armorstands").getKeys(false));
+            return ArmorStandUtils.getArmorStandList();
+
         } else {
             return null;
         }

@@ -283,7 +283,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         if (logLevel.intValue() <= Level.SEVERE.intValue()) {
             logger.severe("[ERROR] " + message);
             if (sendTbLink) {
-                warn("TROUBLE SHOOTING: https://docs.advancedarmorstands.ir/troubleshooting");
+                warn("Trouble shooting: https://docs.advancedarmorstands.ir/troubleshooting");
             }
         }
     }

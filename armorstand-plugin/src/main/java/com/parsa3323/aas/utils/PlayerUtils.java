@@ -19,6 +19,7 @@
 package com.parsa3323.aas.utils;
 
 
+import com.cryptomorin.xseries.XMaterial;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import org.bukkit.Material;
@@ -32,7 +33,7 @@ public class PlayerUtils {
 
     @Deprecated
     public static ItemStack createSkullPlayer(String player) {
-        ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        ItemStack skull = new ItemStack(XMaterial.PLAYER_HEAD.parseMaterial(), 1, (short) 3);
 
 
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();

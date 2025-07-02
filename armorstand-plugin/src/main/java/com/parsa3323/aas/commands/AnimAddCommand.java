@@ -55,7 +55,7 @@ public class AnimAddCommand extends SubCommand {
 
         ConfigurationSection configurationSection = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
-        if (!configurationSection.contains(args[2])) {
+        if (configurationSection == null || !configurationSection.contains(args[2])) {
             player.sendMessage(ChatColor.RED + "Invalid armor stand");
             return;
         }
@@ -79,7 +79,7 @@ public class AnimAddCommand extends SubCommand {
         }
 
         if (args.length == 3) {
-            return new ArrayList<>(ArmorStandUtils.getArmorStandList());
+            return ArmorStandUtils.getArmorStandList();
         }
         return null;
     }

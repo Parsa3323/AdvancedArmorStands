@@ -72,6 +72,11 @@ public class ArmorStandMenu extends Menu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
 
+        if (armorStand == null) {
+            e.setCancelled(true);
+            return;
+        }
+
         Player p = (Player) e.getWhoClicked();
 
         switch (e.getSlot()) {

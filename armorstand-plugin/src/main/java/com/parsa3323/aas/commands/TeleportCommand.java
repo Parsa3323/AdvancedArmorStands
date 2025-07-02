@@ -19,11 +19,9 @@
 package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TeleportCommand extends SubCommand {
@@ -56,7 +54,7 @@ public class TeleportCommand extends SubCommand {
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
 
-        return new ArrayList<>(ArmorStandsConfig.get().getConfigurationSection("armorstands").getKeys(false));
+        return ArmorStandUtils.getArmorStandList();
     }
 
     @Override

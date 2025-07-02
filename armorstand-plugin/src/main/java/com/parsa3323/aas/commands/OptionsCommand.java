@@ -19,7 +19,6 @@
 package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
@@ -27,7 +26,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OptionsCommand extends SubCommand {
@@ -65,7 +63,8 @@ public class OptionsCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return new ArrayList<>(ArmorStandsConfig.get().getConfigurationSection("armorstands").getKeys(false));
+        return ArmorStandUtils.getArmorStandList();
+
     }
 
     @Override

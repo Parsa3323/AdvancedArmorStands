@@ -36,7 +36,7 @@ import java.util.List;
 public class ReloadCommand extends SubCommand {
     @Override
     public String getName() {
-        return "Reload";
+        return "reload";
     }
 
     @Override

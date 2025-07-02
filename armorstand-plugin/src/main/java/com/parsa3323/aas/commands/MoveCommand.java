@@ -21,6 +21,7 @@ package com.parsa3323.aas.commands;
 import com.parsa3323.aas.api.events.PlayerMoveArmorStandEvent;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -29,7 +30,6 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -104,7 +104,8 @@ public class MoveCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return new ArrayList<>(ArmorStandsConfig.get().getConfigurationSection("armorstands").getKeys(false));
+        return ArmorStandUtils.getArmorStandList();
+
     }
 
     @Override
