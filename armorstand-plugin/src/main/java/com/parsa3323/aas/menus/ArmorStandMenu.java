@@ -310,7 +310,7 @@ public class ArmorStandMenu extends Menu {
         ItemStack itemInOffHand;
 
         if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
-            itemInOffHand = (VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand) != null) ? VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).clone() : createNull("NONE");
+            itemInOffHand = (VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand) != null && VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).getType() != Material.AIR) ? VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).clone() : createNull("NONE");
 
 
         } else {
