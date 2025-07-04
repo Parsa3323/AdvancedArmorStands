@@ -33,6 +33,6 @@ public class PlayerLeaveEvent implements Listener {
             InventoryUtils.save(e.getPlayer());
         }
 
-        if (ArmorStandSelectionCache.hasSelection(e.getPlayer().getUniqueId())) ArmorStandSelectionCache.removeSelectedArmorStand(e.getPlayer().getUniqueId());
+        if (ArmorStandSelectionCache.isIsInEditSession(e.getPlayer())) ArmorStandSelectionCache.removeSelectedArmorStand(e.getPlayer().getUniqueId());
     }
 }

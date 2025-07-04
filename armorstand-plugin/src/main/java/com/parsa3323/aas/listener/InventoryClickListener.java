@@ -19,6 +19,7 @@
 package com.parsa3323.aas.listener;
 
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -28,7 +29,7 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void click(InventoryClickEvent e) {
 
-        if (ArmorStandSelectionCache.hasSelection(e.getWhoClicked().getUniqueId())) {
+        if (ArmorStandSelectionCache.isIsInEditSession((Player) e.getWhoClicked())) {
             e.setCancelled(true);
         }
 

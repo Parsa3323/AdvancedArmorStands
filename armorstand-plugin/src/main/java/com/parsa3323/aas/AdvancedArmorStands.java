@@ -221,7 +221,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
 
-            if (ArmorStandSelectionCache.hasSelection(player.getUniqueId())) {
+            if (ArmorStandSelectionCache.isIsInEditSession(player)) {
 
                 if (InventoryUtils.hasBackup(player)) {
                     InventoryUtils.restore(player);

@@ -27,7 +27,7 @@ public class PlayerDieListener implements Listener {
 
     @EventHandler
     public void playerDie(PlayerDeathEvent e) {
-        if (ArmorStandSelectionCache.hasSelection(e.getEntity().getUniqueId())) {
+        if (ArmorStandSelectionCache.isIsInEditSession(e.getEntity())) {
             e.setKeepInventory(true);
             e.getDrops().clear();
         }

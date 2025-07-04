@@ -58,7 +58,8 @@ public class ArmorStandSelectionCache {
         selectedArmorStands.remove(playerId);
     }
 
-    public static boolean hasSelection(UUID playerId) {
+    @Deprecated
+    public static boolean hasArmorStandsSelection(UUID playerId) {
         return selectedArmorStands.containsKey(playerId);
     }
 

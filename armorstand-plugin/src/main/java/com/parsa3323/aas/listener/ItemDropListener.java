@@ -28,7 +28,7 @@ public class ItemDropListener implements Listener {
     @EventHandler
     public void onPlayerItemDrop(PlayerDropItemEvent e) {
 
-        if (ArmorStandSelectionCache.hasSelection(e.getPlayer().getUniqueId())) {
+        if (ArmorStandSelectionCache.isIsInEditSession(e.getPlayer())) {
             e.setCancelled(true);
         }
 
