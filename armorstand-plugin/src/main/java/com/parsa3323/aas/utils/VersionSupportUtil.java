@@ -55,19 +55,32 @@ public class VersionSupportUtil {
         int length = Math.max(parts1.length, parts2.length);
 
         for (int i = 0; i < length; i++) {
-            int part1 = i < parts1.length ? Integer.parseInt(parts1[i]) : 0;
-            int part2 = i < parts2.length ? Integer.parseInt(parts2[i]) : 0;
+            int part1 = i < parts1.length ? safeParse(parts1[i]) : 0;
+            int part2 = i < parts2.length ? safeParse(parts2[i]) : 0;
 
-            if (part1 < part2) {
-                return -1;
-            }
-            if (part1 > part2) {
-                return 1;
-            }
+            if (part1 < part2) return -1;
+            if (part1 > part2) return 1;
         }
 
         return 0;
     }
+
+    private static int safeParse(String s) {
+        StringBuilder numericPart = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                numericPart.append(c);
+            } else {
+                break;
+            }
+        }
+        try {
+            return Integer.parseInt(numericPart.toString());
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
     public static IVersionSupport getVersionSupport(){
         IVersionSupport versionSupport = null;
 
