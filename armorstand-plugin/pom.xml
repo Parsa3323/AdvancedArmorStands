@@ -24,7 +24,7 @@
 
     <groupId>com.parsa3323</groupId>
     <artifactId>armorstand-plugin</artifactId>
-    <version>1.8.2</version>
+    <version>1.8.3</version>
     <packaging>jar</packaging>
 
     <name>armorstand-plugin</name>
