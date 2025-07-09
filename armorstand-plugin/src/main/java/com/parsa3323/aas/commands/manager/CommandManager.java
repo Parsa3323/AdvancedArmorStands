@@ -23,6 +23,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.*;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.VersionSupportUtil;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -175,6 +176,7 @@ public class CommandManager implements CommandExecutor {
                 sender.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "    AdvancedArmorStands Plugin");
                 sender.sendMessage(ChatColor.GRAY + "    Version: " + ChatColor.WHITE + AdvancedArmorStands.plugin.getDescription().getVersion());
                 sender.sendMessage(ChatColor.GRAY + "    Author: " + ChatColor.YELLOW + "Parsa3323");
+                sender.sendMessage(ChatColor.GRAY + "    Version Support: " + ChatColor.YELLOW + VersionSupportUtil.getVersionSupport().getClass().getSimpleName());
                 sender.sendMessage("");
                 sender.sendMessage(ChatColor.RED + "Note: " + ChatColor.GRAY + "This command must be run in-game to");
                 sender.sendMessage(ChatColor.GRAY + "      access the interactive command menu.");
