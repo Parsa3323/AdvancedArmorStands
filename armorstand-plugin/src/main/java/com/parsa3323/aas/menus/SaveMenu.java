@@ -99,37 +99,6 @@ public class SaveMenu extends PaginatedMenu {
             playerList.put(player.getUniqueId(), armorStand);
             player.closeInventory();
             player.sendMessage(ChatColor.GREEN + "Type the name of the type you want to create and copy this armor stand's properties to, Type 'exit' to exit");
-
-            // Todo: make this with chat = Done
-            //itemName = "SavedType-" + new Random().nextInt(900) + 100;
-
-//            TypesConfig.get().set( itemName + ".Arms", armorStand.hasArms());
-//            TypesConfig.get().set(itemName + ".Gravity", armorStand.hasGravity());
-//            TypesConfig.get().set(itemName + ".BasePlate", armorStand.hasBasePlate());
-//            TypesConfig.get().set(itemName + ".CustomName", armorStand.getCustomName());
-//            TypesConfig.get().set(itemName + ".isCustomNameVisible", armorStand.isCustomNameVisible());
-//            TypesConfig.get().set(itemName +  ".itemInHandMaterial", armorStand.getItemInHand().getType().name());
-//            TypesConfig.get().set(itemName +  ".HeadPos.x", Math.toDegrees(armorStand.getHeadPose().getX()));
-//            TypesConfig.get().set(itemName + ".HeadPos.y", Math.toDegrees(armorStand.getHeadPose().getY()));
-//            TypesConfig.get().set(itemName + ".HeadPos.z", Math.toDegrees(armorStand.getHeadPose().getZ()));
-//            TypesConfig.get().set(itemName + ".rightArmPose.x", Math.toDegrees(armorStand.getRightArmPose().getX()));
-//            TypesConfig.get().set(itemName + ".rightArmPose.y", Math.toDegrees(armorStand.getRightArmPose().getY()));
-//            TypesConfig.get().set(itemName + ".rightArmPose.z", Math.toDegrees(armorStand.getRightArmPose().getZ()));
-//            TypesConfig.get().set(itemName + ".leftArmPose.x", Math.toDegrees(armorStand.getLeftArmPose().getX()));
-//            TypesConfig.get().set(itemName + ".leftArmPose.y", Math.toDegrees(armorStand.getLeftArmPose().getY()));
-//            TypesConfig.get().set(itemName + ".leftArmPose.z", Math.toDegrees(armorStand.getLeftArmPose().getZ()));
-//            TypesConfig.get().set(itemName + ".rightLegPose.x", Math.toDegrees(armorStand.getRightLegPose().getX()));
-//            TypesConfig.get().set(itemName + ".rightLegPose.y", Math.toDegrees(armorStand.getRightLegPose().getY()));
-//            TypesConfig.get().set(itemName + ".rightLegPose.z", Math.toDegrees(armorStand.getRightLegPose().getZ()));
-//            TypesConfig.get().set(itemName + ".leftLegPose.x", Math.toDegrees(armorStand.getLeftLegPose().getX()));
-//            TypesConfig.get().set(itemName + ".leftLegPose.y", Math.toDegrees(armorStand.getLeftLegPose().getY()));
-//            TypesConfig.get().set(itemName + ".leftLegPose.z", Math.toDegrees(armorStand.getLeftLegPose().getZ()));
-//
-//            TypesConfig.save();
-//            TypesConfig.reload();
-//
-//            player.sendMessage(ChatColor.GREEN + "Created type '" + itemName + "' with this armor stand's properties");
-//            player.closeInventory();
         }
 
         if (clickedItem.getType() == Material.ARMOR_STAND) {

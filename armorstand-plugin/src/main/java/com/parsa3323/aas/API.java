@@ -144,7 +144,7 @@ public class API implements ArmorstandApi {
             AnimationUtils.reloadAnimations();
             if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
                 for (String key : ArmorStandUtils.getArmorStandList()) {
-                    ArmorStandUtils.loadArmorStand(key);
+                    ArmorStandUtils.autoLoadArmorStand(key);
                 }
             }
             return true;

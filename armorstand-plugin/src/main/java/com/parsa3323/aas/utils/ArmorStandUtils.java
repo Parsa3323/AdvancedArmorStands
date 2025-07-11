@@ -21,6 +21,7 @@ package com.parsa3323.aas.utils;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
+import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
@@ -403,7 +404,81 @@ public class ArmorStandUtils {
 
     }
 
-    public static void loadArmorStand(String name) {
+    public static void loadArmorStand(String name) throws ArmorStandLoadException {
+        try {
+            ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands");
+            ConfigurationSection qs = ArmorStandsConfig.get().getConfigurationSection("armorstands." + name);
+
+            World world = Bukkit.getWorld(cs.getString(name + ".World"));
+            if (world == null) {
+                return;
+            }
+
+            double x = cs.getDouble(name + ".X");
+            double y = cs.getDouble(name + ".Y");
+            double z = cs.getDouble(name + ".Z");
+            float yaw = (float) cs.getDouble(name + ".yaw");
+            float pitch = (float) cs.getDouble(name + ".pitch");
+
+            Location loc = new Location(world, x, y, z, yaw, pitch);
+
+            double radius = 0.1;
+
+            for (Entity entity : world.getNearbyEntities(loc, radius, radius, radius)) {
+                if (entity instanceof ArmorStand) {
+                    Location entityLoc = entity.getLocation();
+
+                    double tolerance = 0.2;
+                    if (Math.abs(entityLoc.getX() - x) < tolerance &&
+                            Math.abs(entityLoc.getY() - y) < tolerance &&
+                            Math.abs(entityLoc.getZ() - z) < tolerance) {
+                        AdvancedArmorStands.debug("ArmorStand exists at location: " + loc);
+                        return;
+                    }
+                }
+            }
+
+
+            ArmorStand armorStand = (ArmorStand) world.spawnEntity(loc, EntityType.ARMOR_STAND);
+
+            cs.set(name + ".UUID", armorStand.getUniqueId().toString());
+
+            armorStand.setItemInHand(qs.getItemStack("equipment.hand"));
+            armorStand.setBoots(qs.getItemStack("equipment.boots"));
+            armorStand.setHelmet(qs.getItemStack("equipment.helmet"));
+            armorStand.setChestplate(qs.getItemStack("equipment.chestplate"));
+            armorStand.setLeggings(qs.getItemStack("equipment.leggings"));
+
+            if (VersionSupportUtil.getVersionSupport().canGlow()) {
+
+                VersionSupportUtil.getVersionSupport().setGlowing(armorStand, cs.getBoolean(name + ".glowing"));
+
+            }
+
+            armorStand.setSmall(cs.getBoolean(name + ".small"));
+            armorStand.setGravity(cs.getBoolean(name + ".gravity"));
+            armorStand.setVisible(cs.getBoolean(name + ".visible"));
+            armorStand.setBasePlate(cs.getBoolean(name + ".baseplate"));
+            armorStand.setMarker(cs.getBoolean(name + ".marker"));
+            armorStand.setArms(cs.getBoolean(name + ".arms"));
+            AdvancedArmorStands.debug(String.valueOf(cs.getBoolean(name + ".arms")));
+            armorStand.setCustomName(cs.getString(name + ".customName"));
+            armorStand.setCustomNameVisible(cs.getBoolean(name + ".customNameVisible"));
+
+            armorStand.setHeadPose(loadEulerAngle(cs, name + ".pose.head"));
+            armorStand.setBodyPose(loadEulerAngle(cs, name + ".pose.body"));
+            armorStand.setLeftArmPose(loadEulerAngle(cs, name + ".pose.leftArm"));
+            armorStand.setRightArmPose(loadEulerAngle(cs, name + ".pose.rightArm"));
+            armorStand.setLeftLegPose(loadEulerAngle(cs, name + ".pose.leftLeg"));
+            armorStand.setRightLegPose(loadEulerAngle(cs, name + ".pose.rightLeg"));
+        } catch (Exception e) {
+            throw new ArmorStandLoadException(e);
+        }
+
+
+    }
+
+    public static void autoLoadArmorStand(String name) {
         if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
             ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands");
             ConfigurationSection qs = ArmorStandsConfig.get().getConfigurationSection("armorstands." + name);

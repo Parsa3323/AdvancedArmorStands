@@ -18,65 +18,63 @@
 
 package com.parsa3323.aas.commands;
 
-import com.cryptomorin.xseries.XSound;
-import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.config.ActionConfig;
-import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
-import com.parsa3323.aas.config.TypesConfig;
-import com.parsa3323.aas.utils.AnimationUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
-import java.util.Collections;
 import java.util.List;
 
-public class ReloadCommand extends SubCommand {
+public class LoadCommand extends SubCommand {
     @Override
     public String getName() {
-        return "reload";
+        return "load";
     }
 
     @Override
     public String getDescription() {
-        return "Reloads plugin's configs";
+        return "Loads an as if its not loaded";
     }
 
     @Override
     public String getSyntax() {
-        return "/as reload";
+        return "/as load <name>";
     }
 
     @Override
     public void perform(Player player, String[] args) {
+        if (args.length < 1) {
+            sendUsage(player);
+            return;
+        }
+
+        if (!ArmorStandsConfig.get().contains("armorstands." + args[1])) {
+            player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[1] +"' ");
+            return;
+        }
+
+        ArmorStand as = ArmorStandUtils.getArmorStandByName(args[1]);
+
+        if (ArmorStandUtils.isLoaded(as)) {
+            player.sendMessage(ChatColor.RED + "This armor stand is already loaded");
+            return;
+        }
+
 
         try {
-
-
-            TypesConfig.reload();
-            ArmorStandsConfig.reload();
-            AnimationConfig.reload();
-            AnimationUtils.reloadAnimations();
-            ActionConfig.reload();
-            if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
-                for (String key : ArmorStandUtils.getArmorStandList()) {
-                    ArmorStandUtils.autoLoadArmorStand(key);
-                }
-            }
-            player.sendMessage(ChatColor.GREEN + "✔ Successfully reloaded plugin's configs");
-            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            AdvancedArmorStands.error(ChatColor.RED + e.getMessage(), true);
+            ArmorStandUtils.loadArmorStand(args[1]);
+        } catch (ArmorStandLoadException e) {
+            player.sendMessage(ChatColor.RED + "Failed to load the armor stand: " + e.getMessage());
         }
 
     }
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return Collections.emptyList();
+        return ArmorStandUtils.getArmorStandList();
     }
 
     @Override
