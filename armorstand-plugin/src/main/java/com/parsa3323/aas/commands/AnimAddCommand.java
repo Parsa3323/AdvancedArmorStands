@@ -22,6 +22,7 @@ import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
+import com.parsa3323.aas.utils.AnimationUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -56,12 +57,22 @@ public class AnimAddCommand extends SubCommand {
         ConfigurationSection configurationSection = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
         if (configurationSection == null || !configurationSection.contains(args[2])) {
-            player.sendMessage(ChatColor.RED + "Invalid armor stand");
+            String suggestion = getClosest(args[2], ArmorStandUtils.getArmorStandList());
+            if (suggestion != null) {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+            } else {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+            }
             return;
         }
 
         if (!AnimationConfig.get().contains("animations." + args[1])) {
-            player.sendMessage(ChatColor.RED + "Invalid animation");
+            String suggestion = getClosest(args[1], AnimationUtils.getTotalAnimations());
+            if (suggestion != null) {
+                player.sendMessage(ChatColor.RED + "Invalid animation '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+            } else {
+                player.sendMessage(ChatColor.RED + "Invalid animation");
+            }
             return;
         }
 
@@ -75,7 +86,6 @@ public class AnimAddCommand extends SubCommand {
     public List<String> getTabComplete(Player player, String[] args) {
         if (args.length == 2) {
             return new ArrayList<>(AnimationConfig.get().getConfigurationSection("animations").getKeys(false));
-
         }
 
         if (args.length == 3) {

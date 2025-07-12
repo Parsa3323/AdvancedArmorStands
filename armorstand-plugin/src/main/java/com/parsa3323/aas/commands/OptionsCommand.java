@@ -54,7 +54,12 @@ public class OptionsCommand extends SubCommand {
         ArmorStand armorStand = ArmorStandUtils.getArmorStandByName(args[1]);
 
         if (null == armorStand) {
-            player.sendMessage(ChatColor.RED + "This armor stand is not available");
+            String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
+            if (suggestion != null) {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+            } else {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+            }
             return;
         }
         new SettingsManager(new PlayerMenuUtility(player), armorStand, false).open();

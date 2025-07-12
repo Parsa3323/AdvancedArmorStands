@@ -20,6 +20,7 @@ package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -45,6 +46,16 @@ public class DeleteCommand extends SubCommand {
     public void perform(Player player, String[] args) {
 
         if (args.length > 2) {
+            return;
+        }
+
+        if (!ArmorStandUtils.exists(args[1])) {
+            String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
+            if (suggestion != null) {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+            } else {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+            }
             return;
         }
 

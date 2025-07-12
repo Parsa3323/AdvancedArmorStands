@@ -25,6 +25,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SubCommand {
@@ -46,6 +47,44 @@ public abstract class SubCommand {
         main.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, getSyntax()));
         main.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to suggest").create()));
         player.spigot().sendMessage(textComponent, main);
+    }
+
+    public String getClosest(String input, ArrayList<String> options) {
+        int minDistance = Integer.MAX_VALUE;
+        String closest = null;
+
+        for (String option : options) {
+            int distance = levenshteinDistance(input.toLowerCase(), option.toLowerCase());
+            if (distance < minDistance) {
+                minDistance = distance;
+                closest = option;
+            }
+        }
+
+        return (minDistance <= 3) ? closest : null;
+    }
+
+    private static int levenshteinDistance(String a, String b) {
+        int[][] dp = new int[a.length() + 1][b.length() + 1];
+
+        for (int i = 0; i <= a.length(); i++) {
+            for (int j = 0; j <= b.length(); j++) {
+                if (i == 0) {
+                    dp[i][j] = j;
+                } else if (j == 0) {
+                    dp[i][j] = i;
+                } else if (a.charAt(i - 1) == b.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = 1 + Math.min(
+                            dp[i - 1][j - 1],
+                            Math.min(dp[i - 1][j], dp[i][j - 1])
+                    );
+                }
+            }
+        }
+
+        return dp[a.length()][b.length()];
     }
 
 }

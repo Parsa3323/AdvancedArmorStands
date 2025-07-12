@@ -25,6 +25,7 @@ import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.TypeUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -67,7 +68,12 @@ public class CreateCommand extends SubCommand implements Listener {
         if (!args[1].equalsIgnoreCase("custom")) {
 
             if (!TypesConfig.get().contains(args[1])) {
-                player.sendMessage(ChatColor.RED + "No type found named: " + args[1]);
+                String suggestion = getClosest(args[1], TypeUtils.getTypesList());
+                if (suggestion != null) {
+                    player.sendMessage(ChatColor.RED + "No type found named: " + args[1] + ". Did you mean '" + suggestion + "'?");
+                } else {
+                    player.sendMessage(ChatColor.RED + "No type found named: " + args[1]);
+                }
                 return;
             }
 

@@ -56,7 +56,12 @@ public class RenameCommand extends SubCommand {
         String newname = args[2];
 
         if (!ArmorStandsConfig.get().contains("armorstands." + oldname)) {
-            player.sendMessage(ChatColor.RED + "Armor stand with the name '" + oldname + "' not found.");
+            String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
+            if (suggestion != null) {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+            } else {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+            }
             return;
         }
 

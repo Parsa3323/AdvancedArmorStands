@@ -52,7 +52,12 @@ public class LoadCommand extends SubCommand {
         }
 
         if (!ArmorStandsConfig.get().contains("armorstands." + args[1])) {
-            player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[1] +"' ");
+            String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
+            if (suggestion != null) {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+            } else {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+            }
             return;
         }
 

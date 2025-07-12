@@ -23,6 +23,7 @@ import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -48,6 +49,16 @@ public class SettingsCommand extends SubCommand {
 
         if (args.length < 2) {
             sendUsage(player);
+            return;
+        }
+
+        if (!ArmorStandUtils.exists(args[1])) {
+            String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
+            if (suggestion != null) {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+            } else {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+            }
             return;
         }
 

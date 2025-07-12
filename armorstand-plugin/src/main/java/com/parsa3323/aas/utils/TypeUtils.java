@@ -20,8 +20,14 @@ package com.parsa3323.aas.utils;
 
 import com.parsa3323.aas.config.TypesConfig;
 
+import java.util.ArrayList;
+
 public class TypeUtils {
     public static int getTotalTypes() {
         return TypesConfig.get().getKeys(false).size();
+    }
+
+    public static ArrayList<String> getTypesList() {
+        return new ArrayList<>(TypesConfig.get().getKeys(false));
     }
 }

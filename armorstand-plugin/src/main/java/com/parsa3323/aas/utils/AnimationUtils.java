@@ -29,6 +29,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.util.EulerAngle;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -143,6 +144,14 @@ public class AnimationUtils {
                 AdvancedArmorStands.debug("No animation defined for key: " + key);
             }
         }
+    }
+
+    public static ArrayList<String> getTotalAnimations() {
+        ConfigurationSection cs = AnimationConfig.get().getConfigurationSection("animations");
+
+        if (cs == null) return new ArrayList<>();
+
+        return new ArrayList<>(cs.getKeys(false));
     }
 
     private static int getIntSafe(Map<String, Object> map, String key) {

@@ -109,6 +109,14 @@ public class ArmorStandUtils {
         player.sendMessage(ChatColor.GREEN + "Teleported to ArmorStand: " + name);
     }
 
+    public static boolean exists(String name) {
+        return ArmorStandsConfig.get().contains("armorstands." + name);
+    }
+
+    public static boolean exists(ArmorStand armorStand) {
+        return getNameByArmorStand(armorStand) != null;
+    }
+
     public static ArrayList<String> getArmorStandList() {
         FileConfiguration config = ArmorStandsConfig.get();
 
