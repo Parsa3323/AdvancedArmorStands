@@ -23,6 +23,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.*;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.CommandUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -146,7 +147,12 @@ public class CommandManager implements CommandExecutor {
                         }
                     }
                     if (count == 0) {
-                        player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
+                        String suggestion = CommandUtils.getClosestCommand(args[0], getSubCommands());
+                        if (suggestion != null) {
+                            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "' is not a valid subcommand" + args[0] + "'. Did you mean '/as " + suggestion + "'?");
+                        } else {
+                            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
+                        }
                     }
 
                 } else if (args.length == 0) {

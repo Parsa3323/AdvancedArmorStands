@@ -44,9 +44,7 @@ public class PlayerJoin implements Listener {
                 if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
                     int unloaded = ArmorStandUtils.getTotalArmorStands() - ArmorStandUtils.getLoadedArmorStands();
 
-                    e.getPlayer().sendMessage(ChatColor.RED + "It looks like " + unloaded + " armor stands haven't been" +
-                            " loaded by the world generator. To fix this, " +
-                            "enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
+                    e.getPlayer().sendMessage(ChatColor.RED + "It looks like " + unloaded + " armor stands haven't been loaded by the world generator. To fix this, enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
 
                 }
 
