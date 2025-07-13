@@ -54,7 +54,7 @@ public class ListCommand extends SubCommand {
 
         if (armorStandList.isEmpty()) {
             player.sendMessage("");
-            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "    ⚠ No Saved ArmorStands Found ⚠");
+            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "     No Saved ArmorStands Found ");
             player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/as create <type> <name>" + ChatColor.GRAY + " to save your first ArmorStand!");
             player.sendMessage("");
             player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_BASS.parseSound(), 0.8f, 0.5f);
