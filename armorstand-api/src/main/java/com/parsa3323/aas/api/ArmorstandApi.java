@@ -108,6 +108,10 @@ public interface ArmorstandApi  {
 
     interface ArmorStandManager {
 
+        boolean exists(String name);
+
+        boolean exists(ArmorStand as);
+
         boolean isLoaded(String name);
 
         boolean isLoaded(ArmorStand armorStand);

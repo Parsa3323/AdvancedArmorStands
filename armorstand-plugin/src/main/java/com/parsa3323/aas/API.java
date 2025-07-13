@@ -234,6 +234,16 @@ public class API implements ArmorstandApi {
         return new ArmorStandManager() {
 
             @Override
+            public boolean exists(String name) {
+                return ArmorStandUtils.exists(name);
+            }
+
+            @Override
+            public boolean exists(ArmorStand as) {
+                return ArmorStandUtils.exists(as);
+            }
+
+            @Override
             public boolean isLoaded(String name) {
                 return ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name));
             }
