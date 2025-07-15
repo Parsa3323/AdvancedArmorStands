@@ -35,16 +35,6 @@ public class CustomPlayer implements IPlayer {
     }
 
     @Override
-    public void closeInv() {
-        this.bukkitPlayer.closeInventory();
-    }
-
-    @Override
-    public void kill() {
-        this.bukkitPlayer.setHealth(0);
-    }
-
-    @Override
     public boolean isAdmin() {
         return this.bukkitPlayer.hasPermission("advanced-armorstands.admin");
     }

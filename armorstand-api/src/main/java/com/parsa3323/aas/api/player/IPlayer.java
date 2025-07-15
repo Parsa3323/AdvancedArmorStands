@@ -25,10 +25,6 @@ public interface IPlayer {
 
     Player getBukkitPlayer();
 
-    void closeInv();
-
-    void kill();
-
     boolean isAdmin();
 
     void sendMessage(String m);

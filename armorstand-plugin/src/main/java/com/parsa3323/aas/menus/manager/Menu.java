@@ -22,17 +22,12 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
 
 public abstract class Menu implements InventoryHolder {
 
@@ -84,36 +79,5 @@ public abstract class Menu implements InventoryHolder {
     public Inventory getInventory() {
         return inventory;
     }
-
-
-    public ArrayList<String> createLoreAndDescription(String toJoinText, boolean pressable, String ... description) {
-        ArrayList<String> lore = new ArrayList<>();
-        for (int i = 0; i < description.length; i++) {
-            lore.add(ChatColor.GRAY + description[i]);
-        }
-        lore.add(" ");
-        if (pressable) {
-            lore.add(ChatColor.YELLOW + toJoinText);
-        }
-        return lore;
-    }
-
-    public ArrayList<String> createLoreNormal(String ... lines) {
-        ArrayList<String> lore = new ArrayList<>();
-        for (String line : lines) {
-            lore.add(ChatColor.GRAY + line);
-        }
-        return lore;
-    }
-
-    public ItemStack makeItem(String name, ArrayList<String> lore, Material item) {
-        ItemStack itemStack = new ItemStack(item, 1);
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(name);
-        itemMeta.setLore(lore);
-        itemStack.setItemMeta(itemMeta);
-        return itemStack;
-    }
-
 
 }

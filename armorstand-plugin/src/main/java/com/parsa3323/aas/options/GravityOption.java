@@ -36,7 +36,7 @@ public class GravityOption extends SettingsOption {
 
     @Override
     public ItemStack getItemStack(ArmorStand armorStand) {
-        ItemStack itemStack = VersionSupportUtil.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU3YTQ3MzNjMDgzMGM4YjQyNWI2MjEzNzc4MGJkYmVmNTdiMTNhODg3YWFhZjExNzNjNmNlMGExZDc4NDFmMSJ9fX0=");
+        ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU3YTQ3MzNjMDgzMGM4YjQyNWI2MjEzNzc4MGJkYmVmNTdiMTNhODg3YWFhZjExNzNjNmNlMGExZDc4NDFmMSJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ChatColor.YELLOW + "Gravity");
         ArrayList<String> lore = new ArrayList<>();

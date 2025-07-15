@@ -19,6 +19,7 @@
 package com.parsa3323.aas;
 
 import com.parsa3323.aas.api.ArmorstandApi;
+import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.exeption.ConfigException;
 import com.parsa3323.aas.api.exeption.ReloadException;
@@ -37,6 +38,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.UUID;
@@ -190,6 +192,31 @@ public class API implements ArmorstandApi {
     }
 
     @Override
+    public SkullUtils getSkullUtils() {
+        return new SkullUtils() {
+            @Override
+            public ItemStack getPlayerHead(Player player) {
+                return PlayerUtils.createSkullPlayer(player.getName());
+            }
+
+            @Override
+            public ItemStack getPlayerHead(UUID uuid) {
+                return PlayerUtils.createSkullPlayer(Bukkit.getPlayer(uuid).getName());
+            }
+
+            @Override
+            public ItemStack getPlayerHead(String name) {
+                return PlayerUtils.createSkullPlayer(name);
+            }
+
+            @Override
+            public ItemStack getSkull(String base64) {
+                return VersionSupportUtil.getVersionSupport().getSkull(base64);
+            }
+        };
+    }
+
+    @Override
     public boolean isInEditSession(UUID uuid) {
         return ArmorStandSelectionCache.isIsInEditSession(Bukkit.getPlayer(uuid));
     }
@@ -232,6 +259,16 @@ public class API implements ArmorstandApi {
     @Override
     public ArmorStandManager getArmorStandManager() {
         return new ArmorStandManager() {
+
+            @Override
+            public void loadArmorStand(ArmorStand armorStand) throws ArmorStandLoadException {
+                ArmorStandUtils.loadArmorStand(ArmorStandUtils.getNameByArmorStand(armorStand));
+            }
+
+            @Override
+            public void loadArmorStand(String name) throws ArmorStandLoadException {
+                ArmorStandUtils.loadArmorStand(name);
+            }
 
             @Override
             public boolean exists(String name) {

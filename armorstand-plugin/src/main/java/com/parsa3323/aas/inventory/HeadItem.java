@@ -46,7 +46,7 @@ public class HeadItem extends InventoryItem {
         lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move head down");
         lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
 
-        ItemStack itemStack = VersionSupportUtil.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTJmNTA5MjUwZWM0YTExMTZjMWE1ZmE3Y2E5YTNiNDFkZTI1YWYwNjdmMGNkNmNlN2VmN2ViMTI2OTc0ZWFlYyJ9fX0=");
+        ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTJmNTA5MjUwZWM0YTExMTZjMWE1ZmE3Y2E5YTNiNDFkZTI1YWYwNjdmMGNkNmNlN2VmN2ViMTI2OTc0ZWFlYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GREEN  + "Head" + ChatColor.GRAY + " (Hover)");
         itemMeta.setLore(lore);

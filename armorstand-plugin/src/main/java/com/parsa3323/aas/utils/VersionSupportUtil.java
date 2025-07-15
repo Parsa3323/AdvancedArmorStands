@@ -18,7 +18,6 @@
 
 package com.parsa3323.aas.utils;
 
-import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.VersionSupport_1_16_5;
 import com.parsa3323.aas.VersionSupport_1_8;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
@@ -27,13 +26,12 @@ import com.parsa3323.versionsupport_1_12.VersionSupport_1_12;
 import com.parsa3323.versionsupport_v1_18.Versionsupport_v1_18;
 import com.parsa3323.versionsupport_v1_19.Versionsupport_v1_19;
 import org.bukkit.Bukkit;
-import org.bukkit.inventory.ItemStack;
 
 public class VersionSupportUtil {
 
     private static final String PACKAGE_NAME = Bukkit.getServer().getClass().getPackage().getName();
-    private static final String SERVER_VERSION = Bukkit.getBukkitVersion().split("-")[0];
 
+    private static final String SERVER_VERSION = Bukkit.getBukkitVersion().split("-")[0];
 
     public static boolean isHigherThan(String version) {
         return compareVersions(SERVER_VERSION, version) > 0;
@@ -101,10 +99,6 @@ public class VersionSupportUtil {
 
 
         return versionSupport;
-    }
-
-    public static ItemStack getSkull(String base64) {
-        return AdvancedArmorStands.plugin.versionSupport.getSkull(base64);
     }
 
 }

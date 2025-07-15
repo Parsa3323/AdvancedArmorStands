@@ -19,6 +19,7 @@
 package com.parsa3323.aas.api;
 
 
+import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.exeption.ConfigException;
 import com.parsa3323.aas.api.exeption.ReloadException;
@@ -27,6 +28,7 @@ import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
@@ -42,7 +44,6 @@ public interface ArmorstandApi  {
 
     boolean reloadPlugin() throws ReloadException;
 
-    @Deprecated
     String getAddonsPath();
 
     @Deprecated
@@ -69,6 +70,20 @@ public interface ArmorstandApi  {
         boolean hasAnimation(ArmorStand armorStand);
 
         boolean hasAnimation(String name);
+
+    }
+
+    SkullUtils getSkullUtils();
+
+    interface SkullUtils {
+
+        ItemStack getPlayerHead(Player player);
+
+        ItemStack getPlayerHead(UUID uuid);
+
+        ItemStack getPlayerHead(String name);
+
+        ItemStack getSkull(String base64);
 
     }
 
@@ -107,6 +122,10 @@ public interface ArmorstandApi  {
     ArmorStandManager getArmorStandManager();
 
     interface ArmorStandManager {
+
+        void loadArmorStand(ArmorStand armorStand) throws ArmorStandLoadException;
+
+        void loadArmorStand(String name) throws ArmorStandLoadException;
 
         boolean exists(String name);
 
