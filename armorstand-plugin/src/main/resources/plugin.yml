@@ -2,6 +2,7 @@ name: AdvancedArmorStands
 version: '${project.version}'
 api-version: '1.13'
 main: com.parsa3323.aas.AdvancedArmorStands
+author: Parsa3323
 softdepend: [PlaceholderAPI]
 permissions:
   advanced-armorstands.admin:
@@ -12,4 +13,5 @@ commands:
     aliases:
       - advancedarmorstands
       - aas
+      - aa
     usage: /as
