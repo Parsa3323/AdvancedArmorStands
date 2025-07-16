@@ -56,7 +56,7 @@ public class OptionsCommand extends SubCommand {
         if (null == armorStand) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
             } else {
                 player.sendMessage(ChatColor.RED + "Invalid armor stand");
             }
