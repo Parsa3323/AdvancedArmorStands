@@ -71,8 +71,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         return api;
     }
 
-
-    //###
     @Override
     public void onEnable() {
         logger = getLogger();
