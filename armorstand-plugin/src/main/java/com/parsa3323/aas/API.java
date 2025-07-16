@@ -230,6 +230,11 @@ public class API implements ArmorstandApi {
     public LogsManager getLogManager() {
         return new LogsManager() {
             @Override
+            public boolean isDebug() {
+                return AdvancedArmorStands.isDebug();
+            }
+
+            @Override
             public void debug(String args) {
                 AdvancedArmorStands.debug(args);
             }

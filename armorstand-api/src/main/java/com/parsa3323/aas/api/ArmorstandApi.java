@@ -107,6 +107,8 @@ public interface ArmorstandApi  {
 
     interface LogsManager {
 
+        boolean isDebug();
+
         void debug(String args);
 
         void error(String message);

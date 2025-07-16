@@ -263,6 +263,9 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     }
 
+    public static boolean isDebug() {
+        return logLevel.intValue() <= Level.FINE.intValue() || plugin.getConfig().getBoolean("debug");
+    }
 
     public static void debug(String message) {
         if (logLevel.intValue() <= Level.FINE.intValue()) {
