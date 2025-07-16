@@ -18,9 +18,11 @@
 
 package com.parsa3323.aas.commands;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -43,7 +45,7 @@ public class TeleportCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (args.length > 2) {
+        if (args.length < 2) {
             sendUsage(player);
             return;
         }
@@ -58,7 +60,22 @@ public class TeleportCommand extends SubCommand {
             return;
         }
 
+        ArmorStand stand = ArmorStandUtils.getArmorStandByName(args[1]);
+
+        if (!(stand != null && stand.isOnGround())) {
+            if (args.length >= 3 && args[2].equalsIgnoreCase("--force")) {
+                ArmorStandUtils.teleportToArmorStand(player, args[1]);
+                player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
+                return;
+            }
+            player.sendMessage(ChatColor.RED + "This armor stand is not on the ground. Are you sure you want to teleport to it?");
+            player.sendMessage(ChatColor.RED + "Use '/as teleport " + args[1] + " --force' to force teleport");
+            return;
+        }
+
+
         ArmorStandUtils.teleportToArmorStand(player, args[1]);
+        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
 
     }
 
