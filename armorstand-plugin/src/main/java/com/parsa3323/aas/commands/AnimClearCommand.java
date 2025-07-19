@@ -31,7 +31,7 @@ import java.util.List;
 public class AnimClearCommand extends SubCommand {
     @Override
     public String getName() {
-        return "clearanimation";
+        return "clear";
     }
 
     @Override
@@ -41,32 +41,32 @@ public class AnimClearCommand extends SubCommand {
 
     @Override
     public String getSyntax() {
-        return "/as clearanimation <name>";
+        return "/as animation clear <name>";
     }
 
     @Override
     public void perform(Player player, String[] args) {
-        if (args.length < 2) {
+        if (args.length < 3) {
             sendUsage(player);
             return;
         }
 
         ConfigurationSection configurationSection = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
-        if (configurationSection == null || !configurationSection.contains(args[1])) {
-            String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
+        if (configurationSection == null || !configurationSection.contains(args[2])) {
+            String suggestion = getClosest(args[2], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
             } else {
                 player.sendMessage(ChatColor.RED + "Invalid armor stand");
             }
             return;
         }
 
-        configurationSection.set(args[1] + ".animation", null);
+        configurationSection.set(args[2] + ".animation", null);
         ArmorStandsConfig.save();
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
-        player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[1] + "'s animations");
+        player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[2] + "'s animations");
     }
 
     @Override

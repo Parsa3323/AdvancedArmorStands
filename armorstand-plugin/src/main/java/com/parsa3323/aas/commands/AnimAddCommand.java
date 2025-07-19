@@ -34,7 +34,7 @@ import java.util.List;
 public class AnimAddCommand extends SubCommand {
     @Override
     public String getName() {
-        return "addanimation";
+        return "add";
     }
 
     @Override
@@ -44,51 +44,51 @@ public class AnimAddCommand extends SubCommand {
 
     @Override
     public String getSyntax() {
-        return "/as addanimation <animation> <name>";
+        return "/as animation add <animation> <name>";
     }
 
     @Override
     public void perform(Player player, String[] args) {
-        if (args.length < 3) {
+        if (args.length < 4) {
             sendUsage(player);
             return;
         }
 
         ConfigurationSection configurationSection = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
-        if (configurationSection == null || !configurationSection.contains(args[2])) {
-            String suggestion = getClosest(args[2], ArmorStandUtils.getArmorStandList());
+        if (configurationSection == null || !configurationSection.contains(args[3])) {
+            String suggestion = getClosest(args[3], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[3] + "'. Did you mean '" + suggestion + "'?");
             } else {
                 player.sendMessage(ChatColor.RED + "Invalid armor stand");
             }
             return;
         }
 
-        if (!AnimationConfig.get().contains("animations." + args[1])) {
-            String suggestion = getClosest(args[1], AnimationUtils.getTotalAnimations());
+        if (!AnimationConfig.get().contains("animations." + args[2])) {
+            String suggestion = getClosest(args[2], AnimationUtils.getTotalAnimations());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid animation '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid animation '" + args[2] + "'. Did you mean '" + suggestion + "'?");
             } else {
                 player.sendMessage(ChatColor.RED + "Invalid animation");
             }
             return;
         }
 
-        configurationSection.set(args[2] + ".animation", args[1]);
+        configurationSection.set(args[3] + ".animation", args[2]);
         ArmorStandsConfig.save();
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
-        player.sendMessage(ChatColor.GREEN + "Successfully set the animation " + args[2] + " to armor stand " + args[1]);
+        player.sendMessage(ChatColor.GREEN + "Successfully set the animation " + args[2] + " to armor stand " + args[3]);
     }
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        if (args.length == 2) {
+        if (args.length == 3) {
             return new ArrayList<>(AnimationConfig.get().getConfigurationSection("animations").getKeys(false));
         }
 
-        if (args.length == 3) {
+        if (args.length == 4) {
             return ArmorStandUtils.getArmorStandList();
         }
         return null;

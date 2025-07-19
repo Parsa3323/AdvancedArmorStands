@@ -53,8 +53,7 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new RenameCommand());
         subCommands.add(new OptionsCommand());
         subCommands.add(new HeadCommand());
-        subCommands.add(new AnimAddCommand());
-        subCommands.add(new AnimClearCommand());
+        subCommands.add(new AnimationCommand());
     }
 
     @Override
