@@ -197,4 +197,8 @@ public class CommandManager implements CommandExecutor {
     public ArrayList<SubCommand> getSubCommands() {
         return subCommands;
     }
+
+    public int getAmount() {
+        return subCommands.size();
+    }
 }

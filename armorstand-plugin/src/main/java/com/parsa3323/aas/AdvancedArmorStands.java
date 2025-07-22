@@ -184,8 +184,12 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStandsConfig.get().options().copyDefaults(true);
         ArmorStandsConfig.save();
         status("Registering Commands");
+
+        CommandManager commandManager = new CommandManager();
         getCommand("as").setTabCompleter(new TabComp());
-        getCommand("as").setExecutor(new CommandManager());
+        getCommand("as").setExecutor(commandManager);
+
+        status("Registered " + commandManager.getAmount() + " commands");
 
         status("Registering papi expansion");
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
