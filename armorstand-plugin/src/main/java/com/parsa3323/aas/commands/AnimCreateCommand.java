@@ -18,11 +18,13 @@
 
 package com.parsa3323.aas.commands;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
+import com.parsa3323.aas.config.AnimationConfig;
+import com.parsa3323.aas.utils.AnimationUtils;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
-import com.parsa3323.aas.utils.PoseManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -40,7 +42,7 @@ public class AnimCreateCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Create an animation with an as";
+        return "Create/edit an animation with an as";
     }
 
     @Override
@@ -76,17 +78,30 @@ public class AnimCreateCommand extends SubCommand {
 
         InventoryUtils.save(player);
         ArmorStandSelectionCache.setKeyFrameSelectedArmorStand(player.getUniqueId(), as);
-        PoseManager.savePose(as);
+        ArmorStandUtils.savePose(as);
+
+        AnimationConfig.get().addDefault("animations." + args[3] + ".interval", 10);
+
+        AnimationConfig.get().addDefault("animations." + args[3] + ".loop", true);
+
+        AnimationConfig.save();
+
         animationNames.put(player.getUniqueId(), args[3]);
         ArmorStandSelectionCache.addToKeyFrameList(player);
         InventoryUtils.setEditorItems(player);
         player.closeInventory();
+        player.sendMessage("Successfully entered the animation edit/create session");
+        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
+
     }
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        if (args.length == 2) {
+        if (args.length == 3) {
             return ArmorStandUtils.getArmorStandList();
+        }
+        if (args.length == 4) {
+            return AnimationUtils.getTotalAnimations();
         }
         return Collections.emptyList();
     }

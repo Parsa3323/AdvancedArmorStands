@@ -20,11 +20,15 @@ package com.parsa3323.aas.animation.manager;
 
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.animation.KeyFrameOption;
+import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.inventory.*;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.menus.ArmorStandMenu;
-import com.parsa3323.aas.utils.*;
+import com.parsa3323.aas.utils.ArmorStandSelectionCache;
+import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.InventoryUtils;
+import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -64,7 +68,7 @@ public class EditorManager implements Listener {
                     ArmorStand armorStand = ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId());
                     AdvancedArmorStands.debug(armorStand.getName());
 
-                    ArmorStandPoseData savedPose = PoseManager.getPose(armorStand.getUniqueId());
+                    ArmorStandPoseData savedPose = ArmorStandUtils.getPose(armorStand.getUniqueId());
 
                     armorStand.setRightArmPose(savedPose.getRightArm());
                     armorStand.setLeftArmPose(savedPose.getLeftArm());

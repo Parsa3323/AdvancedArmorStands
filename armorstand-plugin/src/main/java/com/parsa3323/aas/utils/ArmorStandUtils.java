@@ -20,6 +20,7 @@ package com.parsa3323.aas.utils;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
 import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.config.ArmorStandsConfig;
@@ -34,10 +35,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ArmorStandUtils {
+
+    private static final Map<UUID, ArmorStandPoseData> poseMap = new ConcurrentHashMap<>();
 
     private static boolean isFirstTimeCreatingArmorStand = false;
 
@@ -84,6 +89,21 @@ public class ArmorStandUtils {
         }
 
         return null;
+    }
+
+    public static void savePose(ArmorStand armorStand) {
+        ArmorStandPoseData pose = new ArmorStandPoseData(
+                armorStand.getRightArmPose(),
+                armorStand.getLeftArmPose(),
+                armorStand.getRightLegPose(),
+                armorStand.getLeftLegPose(),
+                armorStand.getHeadPose()
+        );
+        poseMap.put(armorStand.getUniqueId(), pose);
+    }
+
+    public static ArmorStandPoseData getPose(UUID armorStandId) {
+        return poseMap.get(armorStandId);
     }
 
     public static void teleportToArmorStand(Player player, String name) {

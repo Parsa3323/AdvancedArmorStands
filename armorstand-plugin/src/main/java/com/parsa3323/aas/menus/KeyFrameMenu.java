@@ -19,10 +19,13 @@
 package com.parsa3323.aas.menus;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.api.exeption.ConfigException;
 import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
+import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.KeyFrameUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.TextUtils;
 import org.bukkit.ChatColor;
@@ -30,6 +33,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
@@ -95,8 +99,46 @@ public class KeyFrameMenu extends PaginatedMenu {
 
         if (clickedItem.getType() == XMaterial.BARRIER.parseMaterial()) {
             player.closeInventory();
+            return;
         }
 
+        if (e.getSlot() == 50) {
+
+            int currentInterval = AnimationConfig.get().getInt("animations." + animationName + ".interval");
+
+            if (e.getClick() == ClickType.SHIFT_LEFT) {
+                AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval + 10));
+                super.open();
+            } else if (e.getClick() == ClickType.LEFT) {
+                AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval + 1));
+                super.open();
+            } else if (e.getClick() == ClickType.SHIFT_RIGHT) {
+                AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval - 10));
+                super.open();
+            } else if (e.getClick() == ClickType.RIGHT) {
+                AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval - 1));
+                super.open();
+            }
+
+            AnimationConfig.save();
+            return;
+        }
+
+        if (e.getSlot() == 48) {
+            boolean currentLoop = AnimationConfig.get().getBoolean("animations." + animationName + ".loop");
+
+            AnimationConfig.get().set("animations." + animationName + ".loop", !currentLoop);
+
+            AnimationConfig.save();
+            super.open();
+            return;
+        }
+
+        KeyFrameUtils.removeStep(AnimCreateCommand.animationNames.get(playerMenuUtility.getOwner().getUniqueId()), Integer.parseInt(ColorUtils.removeColors(displayName)));
+
+        super.open();
+
+        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
     }
 
     @Override
@@ -131,7 +173,7 @@ public class KeyFrameMenu extends PaginatedMenu {
             ItemStack itemStack = new ItemStack(XMaterial.GREEN_TERRACOTTA.parseMaterial());
             ItemMeta itemMeta = itemStack.getItemMeta();
 
-            itemMeta.setDisplayName(ChatColor.YELLOW + "" + (index + 1) + TextUtils.getOrdinalSuffix(index + 1));
+            itemMeta.setDisplayName(ChatColor.YELLOW + "" + (index + 1));
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
 
@@ -140,6 +182,45 @@ public class KeyFrameMenu extends PaginatedMenu {
 
         }
 
+        ItemStack interval = new ItemStack(XMaterial.RED_STAINED_GLASS_PANE.parseMaterial());
+        ItemMeta iInterval = interval.getItemMeta();
+
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ChatColor.GRAY + "Controls animation timing");
+        lore.add(ChatColor.GRAY + "delay between each frame");
+        lore.add(ChatColor.GRAY + "Shorter = faster motion");
+
+        lore.add("");
+
+        lore.add(ChatColor.YELLOW + "Click to change");
+        lore.add(ChatColor.YELLOW + "Hold shift to change by 10");
+
+        iInterval.setLore(lore);
+
+        iInterval.setDisplayName(ChatColor.YELLOW + "Interval: " + AnimationConfig.get().getInt("animations." + animationName + ".interval"));
+
+        interval.setItemMeta(iInterval);
+
+        inventory.setItem(50, interval);
+
+        ItemStack loop = new ItemStack(XMaterial.RED_STAINED_GLASS_PANE.parseMaterial());
+
+        ItemMeta iLoop = loop.getItemMeta();
+
+        ArrayList<String> ilore = new ArrayList<>();
+
+        ilore.add(ChatColor.GRAY + "Defines whether the animation");
+        ilore.add(ChatColor.GRAY + "should loop repeat from");
+        ilore.add(ChatColor.GRAY + "the start infinitely");
+
+        iLoop.setLore(ilore);
+
+        iLoop.setDisplayName(ChatColor.YELLOW + "Loop: " + AnimationConfig.get().getBoolean("animations." + animationName + ".loop"));
+
+        loop.setItemMeta(iLoop);
+
+        inventory.setItem(48, loop);
     }
 
     @Override
@@ -161,4 +242,43 @@ public class KeyFrameMenu extends PaginatedMenu {
     public void close(InventoryCloseEvent e) {
 
     }
+
+    @Override
+    public void addMenuBorder(int total) {
+        if (page > 0) {
+            inventory.setItem(47, makeItem(Material.ARROW, ChatColor.GREEN + "Left"));
+        } else {
+            inventory.setItem(47, super.FILLER_GLASS);
+        }
+
+        inventory.setItem(49, makeItem(Material.BARRIER, ChatColor.RED + "Close"));
+
+        if ((page + 1) * maxItemsPerPage < total) {
+            inventory.setItem(51, makeItem(Material.ARROW, ChatColor.GREEN + "Right"));
+        } else {
+            inventory.setItem(51, super.FILLER_GLASS);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            if (inventory.getItem(i) == null) {
+                inventory.setItem(i, super.FILLER_GLASS);
+            }
+        }
+        inventory.setItem(17, super.FILLER_GLASS);
+        inventory.setItem(18, super.FILLER_GLASS);
+        inventory.setItem(26, super.FILLER_GLASS);
+        inventory.setItem(27, super.FILLER_GLASS);
+        inventory.setItem(35, super.FILLER_GLASS);
+        inventory.setItem(36, super.FILLER_GLASS);
+
+        for (int i = 44; i < 54; i++) {
+            if (i == 50) continue;
+            if (i == 48) continue;
+            if (inventory.getItem(i) == null) {
+                inventory.setItem(i, super.FILLER_GLASS);
+            }
+        }
+    }
+
+
 }

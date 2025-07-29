@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.utils;
+package com.parsa3323.aas.api.data;
 
 import org.bukkit.util.EulerAngle;
 

@@ -83,8 +83,6 @@ public class InventoryUtils {
             itemStack.setItemMeta(itemMeta);
             inventory.setItem(8, itemStack);
         }
-        p.sendMessage(ChatColor.GREEN + "Entered edit session, click the EXIT item to get back and restore your items");
-
     }
 
     public static void save(Player player) {

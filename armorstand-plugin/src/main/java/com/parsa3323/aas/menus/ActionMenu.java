@@ -213,17 +213,17 @@ public class ActionMenu extends PaginatedMenu {
     @Override
     public void addMenuBorder(int total) {
         if (page > 0) {
-            inventory.setItem(48, makeItem(Material.ARROW, ChatColor.GREEN + "Left"));
+            inventory.setItem(47, makeItem(Material.ARROW, ChatColor.GREEN + "Left"));
         } else {
-            inventory.setItem(48, super.FILLER_GLASS);
+            inventory.setItem(47, super.FILLER_GLASS);
         }
 
         inventory.setItem(49, makeItem(Material.BARRIER, ChatColor.RED + "Close"));
 
         if ((page + 1) * maxItemsPerPage < total) {
-            inventory.setItem(50, makeItem(Material.ARROW, ChatColor.GREEN + "Right"));
+            inventory.setItem(51, makeItem(Material.ARROW, ChatColor.GREEN + "Right"));
         } else {
-            inventory.setItem(50, super.FILLER_GLASS);
+            inventory.setItem(51, super.FILLER_GLASS);
         }
 
         for (int i = 0; i < 10; i++) {

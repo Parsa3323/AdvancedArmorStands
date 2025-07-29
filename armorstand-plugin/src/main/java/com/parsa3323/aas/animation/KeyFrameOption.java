@@ -19,6 +19,7 @@
 package com.parsa3323.aas.animation;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
@@ -134,7 +135,7 @@ public class KeyFrameOption extends InventoryItem {
                 AnimationConfig.save();
 
                 p.sendMessage(ChatColor.GREEN + "Created a keyframe with this as's properties");
-
+                p.playSound(p.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
 
             }
         }
