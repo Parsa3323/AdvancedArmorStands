@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.utils;
 
+import com.parsa3323.aas.animation.manager.EditorManager;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
 import org.bukkit.ChatColor;
@@ -42,7 +43,7 @@ public class InventoryUtils {
 
     private static ArrayList<InventoryItem> inventoryItems = inventoryManager.getInventoryItems();
 
-    public static void setItems(Player p) {
+    public static void setOptionItems(Player p) {
 
         Inventory inventory = p.getInventory();
         inventory.clear();
@@ -62,6 +63,27 @@ public class InventoryUtils {
         p.sendMessage(ChatColor.GREEN + "Entered edit session, click the EXIT item to get back and restore your items");
 
 
+
+    }
+
+    private static EditorManager editorManager = new EditorManager();
+
+    private static ArrayList<InventoryItem> editorInvItems = editorManager.getInventoryItems();
+
+    public static void setEditorItems(Player p) {
+        Inventory inventory = p.getInventory();
+        inventory.clear();
+        for (int i = 0; i < editorInvItems.size(); i++) {
+
+            inventory.setItem(editorInvItems.get(i).getSlot(), editorInvItems.get(i).getItemStack());
+
+            ItemStack itemStack = new ItemStack(Material.BARRIER);
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setDisplayName(ChatColor.RED  + "EXIT" + ChatColor.GRAY + " (Right Click)");
+            itemStack.setItemMeta(itemMeta);
+            inventory.setItem(8, itemStack);
+        }
+        p.sendMessage(ChatColor.GREEN + "Entered edit session, click the EXIT item to get back and restore your items");
 
     }
 

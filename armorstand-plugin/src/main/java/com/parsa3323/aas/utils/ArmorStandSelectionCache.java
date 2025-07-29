@@ -32,6 +32,10 @@ public class ArmorStandSelectionCache {
 
     private static final ArrayList<Player> editSessionPlayers = new ArrayList<>();
 
+    private static final Map<UUID, ArmorStand> keyFramePlayers = new HashMap<>();
+
+    private static final ArrayList<Player> keyFrameList = new ArrayList<>();
+
     private static final Map<UUID, ArmorStand> selectedArmorStands = new HashMap<>();
 
     public static void setSelectedArmorStand(UUID playerId, ArmorStand armorStand) {
@@ -50,6 +54,30 @@ public class ArmorStandSelectionCache {
         editSessionPlayers.remove(player);
     }
 
+    public static boolean isInKeyFrameList(Player player) {
+        return keyFrameList.contains(player);
+    }
+
+    public static void addToKeyFrameList(Player player) {
+        keyFrameList.add(player);
+    }
+
+    public static void removeFromKeyFrameList(Player player) {
+        keyFrameList.remove(player);
+    }
+
+    public static void setKeyFrameSelectedArmorStand(UUID playerId, ArmorStand armorStand) {
+        keyFramePlayers.put(playerId, armorStand);
+    }
+
+    public static void removeKeyFrameSelectedArmorStand(UUID playerId) {
+        keyFramePlayers.remove(playerId);
+    }
+
+    public static ArmorStand getKeyFrameSelectedArmorStand(UUID playerId) {
+        return keyFramePlayers.get(playerId);
+    }
+
     public static ArmorStand getSelectedArmorStand(UUID playerId) {
         return selectedArmorStands.get(playerId);
     }
@@ -61,6 +89,12 @@ public class ArmorStandSelectionCache {
     @Deprecated
     public static boolean hasArmorStandsSelection(UUID playerId) {
         return selectedArmorStands.containsKey(playerId);
+    }
+
+    @Deprecated
+    public static boolean hasKeyFrameSelection(UUID playerId) {
+        return keyFramePlayers.containsKey(playerId);
+
     }
 
 }

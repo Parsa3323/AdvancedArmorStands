@@ -84,7 +84,7 @@ public class ArmorStandMenu extends Menu {
                 InventoryUtils.save(p);
                 ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
                 ArmorStandSelectionCache.addToEditSession(p);
-                InventoryUtils.setItems(p);
+                InventoryUtils.setOptionItems(p);
                 p.closeInventory();
                 break;
             case 11:

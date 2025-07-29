@@ -16,16 +16,15 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.inventory.manager;
+package com.parsa3323.aas.animation.manager;
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.animation.KeyFrameOption;
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.inventory.*;
+import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.menus.ArmorStandMenu;
-import com.parsa3323.aas.utils.ArmorStandSelectionCache;
-import com.parsa3323.aas.utils.ArmorStandUtils;
-import com.parsa3323.aas.utils.InventoryUtils;
-import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -37,20 +36,18 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 
-public class InventoryManager implements Listener {
+public class EditorManager implements Listener {
 
     public ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
 
-    public InventoryManager() {
+    public EditorManager() {
 
-        inventoryItems.add(new RotateItem());
         inventoryItems.add(new HeadItem());
         inventoryItems.add(new RightHandItem());
-        inventoryItems.add(new SaveItem());
         inventoryItems.add(new LeftHandItem());
         inventoryItems.add(new RightLegItem());
         inventoryItems.add(new LeftLegItem());
-
+        inventoryItems.add(new KeyFrameOption());
     }
 
     @EventHandler
@@ -58,35 +55,41 @@ public class InventoryManager implements Listener {
         Action action = event.getAction();
         Player player = event.getPlayer();
         if (event.getItem() != null && event.getItem().hasItemMeta()) {
-            if (ArmorStandSelectionCache.isIsInEditSession(player)) {
+            if (ArmorStandSelectionCache.isInKeyFrameList(player)) {
                 String name = ChatColor.stripColor(event.getItem().getItemMeta().getDisplayName());
                 if ("EXIT (Right Click)".equalsIgnoreCase(name)) {
                     event.setCancelled(true);
                     InventoryUtils.restore(player);
-                    ArmorStandSelectionCache.removeFromEditSession(player);
-                    ArmorStand armorStand = ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId());
+                    ArmorStandSelectionCache.removeFromKeyFrameList(player);
+                    ArmorStand armorStand = ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId());
                     AdvancedArmorStands.debug(armorStand.getName());
-                    new ArmorStandMenu(new PlayerMenuUtility(player), armorStand).open();
-                    ArmorStandSelectionCache.removeSelectedArmorStand(player.getUniqueId());
 
+                    ArmorStandPoseData savedPose = PoseManager.getPose(armorStand.getUniqueId());
+
+                    armorStand.setRightArmPose(savedPose.getRightArm());
+                    armorStand.setLeftArmPose(savedPose.getLeftArm());
+                    armorStand.setRightLegPose(savedPose.getRightLeg());
+                    armorStand.setLeftLegPose(savedPose.getLeftLeg());
+                    armorStand.setHeadPose(savedPose.getHead());
+
+                    new ArmorStandMenu(new PlayerMenuUtility(player), armorStand).open();
+                    ArmorStandSelectionCache.removeKeyFrameSelectedArmorStand(player.getUniqueId());
                     return;
                 }
             }
         }
 
-
         if (player.hasPermission("advanced-armorstands.admin") && event.getItem() != null) {
-            System.out.println(ArmorStandSelectionCache.isInKeyFrameList(player));
-            if (ArmorStandSelectionCache.isIsInEditSession(player)) {
+            if (ArmorStandSelectionCache.isInKeyFrameList(player)) {
                 for (int i = 0; i < getInventoryItems().size(); i++) {
 
                     if (event.getItem().equals(getInventoryItems().get(i).getItemStack())) {
                         event.setCancelled(true);
 
 
-                        getInventoryItems().get(i).execute(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), action);
+                        getInventoryItems().get(i).execute(player, ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId()), action);
 
-                        Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), ArmorStandUtils.getNameByArmorStand(ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()))));
+                        Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(player, ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId()), ArmorStandUtils.getNameByArmorStand(ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId()))));
 
 
                     }
@@ -94,16 +97,10 @@ public class InventoryManager implements Listener {
                 }
             }
         }
-
-
-
     }
-
 
 
     public ArrayList<InventoryItem> getInventoryItems() {
         return inventoryItems;
     }
-
-
 }

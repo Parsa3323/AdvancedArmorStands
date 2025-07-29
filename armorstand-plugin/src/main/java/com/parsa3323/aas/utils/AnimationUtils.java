@@ -54,15 +54,15 @@ public class AnimationUtils {
                 String animationName = ArmorStandsConfig.get().getString("armorstands." + key + ".animation");
                 AdvancedArmorStands.debug("Found animation '" + animationName + "' for key: " + key);
 
-                ConfigurationSection wave = animations.getConfigurationSection("animations." + animationName);
-                if (wave == null) {
+                ConfigurationSection cs = animations.getConfigurationSection("animations." + animationName);
+                if (cs == null) {
                     AdvancedArmorStands.debug("Missing animation config section for: " + animationName);
                     continue;
                 }
 
-                int interval = wave.getInt("interval");
-                boolean loop = wave.getBoolean("loop");
-                List<Map<?, ?>> steps = wave.getMapList("steps");
+                int interval = cs.getInt("interval");
+                boolean loop = cs.getBoolean("loop");
+                List<Map<?, ?>> steps = cs.getMapList("steps");
 
                 AdvancedArmorStands.debug("Scheduling animation '" + animationName + "' with " + steps.size() + " steps, interval: " + interval + ", loop: " + loop);
 

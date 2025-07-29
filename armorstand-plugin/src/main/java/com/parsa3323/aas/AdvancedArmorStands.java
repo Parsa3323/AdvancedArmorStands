@@ -19,6 +19,7 @@
 package com.parsa3323.aas;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.parsa3323.aas.animation.manager.EditorManager;
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
@@ -100,6 +101,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ev.registerEvents(new ChatListener(), this);
         ev.registerEvents(new PlayerDieListener(), this);
         ev.registerEvents(new InventoryManager(), this);
+        ev.registerEvents(new EditorManager(), this);
         ev.registerEvents(new PlayerLeaveEvent(), this);
         ev.registerEvents(new InventoryClickListener(), this);
         ev.registerEvents(new StateListener(), this);
