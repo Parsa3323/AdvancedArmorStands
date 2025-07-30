@@ -20,7 +20,6 @@ package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.utils.ChatUtils;
 import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.CommandUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -94,8 +93,7 @@ public class AnimationCommand extends SubCommand {
                 }
 
                 for (String line : wrappedLines) {
-                    String coloredLine = ChatUtils.applyColorReset(line, prefix, command, sep, description);
-                    TextComponent component = new TextComponent(coloredLine);
+                    TextComponent component = new TextComponent(line);
                     component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command));
                     component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                             new ComponentBuilder(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Click to use this command")
@@ -104,6 +102,8 @@ public class AnimationCommand extends SubCommand {
                                     .create()));
                     player.spigot().sendMessage(component);
                 }
+
+
 
             }
             player.sendMessage(" ");
