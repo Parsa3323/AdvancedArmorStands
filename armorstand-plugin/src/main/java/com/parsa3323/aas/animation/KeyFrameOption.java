@@ -66,7 +66,7 @@ public class KeyFrameOption extends InventoryItem {
 
     @Override
     public int getSlot() {
-        return 7;
+        return 8;
     }
 
     @Override
