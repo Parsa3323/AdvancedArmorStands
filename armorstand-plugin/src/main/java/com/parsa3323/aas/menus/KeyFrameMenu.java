@@ -51,7 +51,7 @@ public class KeyFrameMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return "IDK";
+        return ChatColor.DARK_GRAY + "As " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "KeyFrame Editor";
     }
 
     @Override
