@@ -50,17 +50,8 @@ public class TeleportCommand extends SubCommand {
             return;
         }
 
-        if (!ArmorStandUtils.exists(args[1])) {
-            String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
-            if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
-            } else {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand");
-            }
-            return;
-        }
-
-        ArmorStand stand = ArmorStandUtils.getArmorStandByName(args[1]);
+        ArmorStand stand = checkArmorStandAndNotify(player, args[1]);
+        if (stand == null) return;
 
         if (!(stand != null && stand.isOnGround())) {
             if (args.length >= 3 && args[2].equalsIgnoreCase("--force")) {

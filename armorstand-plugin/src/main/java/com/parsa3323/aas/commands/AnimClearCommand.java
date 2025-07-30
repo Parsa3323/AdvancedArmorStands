@@ -24,6 +24,7 @@ import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -53,7 +54,13 @@ public class AnimClearCommand extends SubCommand {
 
         ConfigurationSection configurationSection = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
-        if (configurationSection == null || !configurationSection.contains(args[2])) {
+        ArmorStand as = checkArmorStandAndNotify(player, args[2]);
+
+        if (as == null) {
+            return;
+        }
+
+        if (configurationSection == null) {
             String suggestion = getClosest(args[2], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
                 player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");

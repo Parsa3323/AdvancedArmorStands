@@ -58,18 +58,9 @@ public class AnimCreateCommand extends SubCommand {
             return;
         }
 
-        ArmorStand as = ArmorStandUtils.getArmorStandByName(args[2]);
+        ArmorStand as = checkArmorStandAndNotify(player, args[2]);
 
-        if (as == null) {
-            String suggestion = getClosest(args[2], ArmorStandUtils.getArmorStandList());
-            if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
-            } else {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand");
-            }
-            return;
-
-        }
+        if (as == null) return;
 
         if (args[3] == null) {
             player.sendMessage(ChatColor.RED + "Invalid animation name");
@@ -90,7 +81,7 @@ public class AnimCreateCommand extends SubCommand {
         ArmorStandSelectionCache.addToKeyFrameList(player);
         InventoryUtils.setEditorItems(player);
         player.closeInventory();
-        player.sendMessage("Successfully entered the animation edit/create session");
+        player.sendMessage(ChatColor.GREEN + "Successfully entered the animation edit/create session");
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
 
     }

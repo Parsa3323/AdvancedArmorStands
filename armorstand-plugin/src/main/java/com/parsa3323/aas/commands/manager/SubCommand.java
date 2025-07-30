@@ -18,11 +18,13 @@
 
 package com.parsa3323.aas.commands.manager;
 
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -85,6 +87,24 @@ public abstract class SubCommand {
         }
 
         return dp[a.length()][b.length()];
+    }
+
+    public ArmorStand checkArmorStandAndNotify(Player player, String input) {
+        ArmorStand as = ArmorStandUtils.getArmorStandByName(input);
+        if (as == null) {
+            if (ArmorStandUtils.getArmorStandList().contains(input)) {
+                player.sendMessage(ChatColor.RED + "This armor stand is not loaded");
+                return null;
+            }
+            String suggestion = getClosest(input, ArmorStandUtils.getArmorStandList());
+            if (suggestion != null) {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + input + "'. Did you mean '" + suggestion + "'?");
+            } else {
+                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+            }
+            return null;
+        }
+        return as;
     }
 
 }
