@@ -75,7 +75,7 @@ public class InventoryUtils {
         inventory.clear();
         for (int i = 0; i < editorInvItems.size(); i++) {
 
-            inventory.setItem(editorInvItems.get(i).getSlot(), editorInvItems.get(i).getItemStack());
+            inventory.setItem(editorInvItems.get(i).getSlot() - 1, editorInvItems.get(i).getItemStack());
 
             ItemStack itemStack = new ItemStack(Material.BARRIER);
             ItemMeta itemMeta = itemStack.getItemMeta();
