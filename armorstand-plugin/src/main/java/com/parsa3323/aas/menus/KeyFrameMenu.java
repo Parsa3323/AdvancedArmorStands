@@ -187,14 +187,22 @@ public class KeyFrameMenu extends PaginatedMenu {
 
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Controls animation timing");
-        lore.add(ChatColor.GRAY + "delay between each frame");
-        lore.add(ChatColor.GRAY + "Shorter = faster motion");
+        lore.add(ChatColor.GRAY + "Sets the delay");
+        lore.add(ChatColor.GRAY + "between animation frames.");
+        lore.add(ChatColor.GRAY + "Lower value means");
+        lore.add(ChatColor.GRAY + "faster animation speed.");
+
+        lore.add("");
+
+        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Left-click to increase");
+        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Right-click to decrease.");
+        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Hold Shift to change");
+        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " by increments of 10.");
+
 
         lore.add("");
 
         lore.add(ChatColor.YELLOW + "Click to change");
-        lore.add(ChatColor.YELLOW + "Hold shift to change by 10");
 
         iInterval.setLore(lore);
 
@@ -213,6 +221,10 @@ public class KeyFrameMenu extends PaginatedMenu {
         ilore.add(ChatColor.GRAY + "Defines whether the animation");
         ilore.add(ChatColor.GRAY + "should loop repeat from");
         ilore.add(ChatColor.GRAY + "the start infinitely");
+
+        ilore.add("");
+
+        ilore.add(ChatColor.YELLOW + "Click to change");
 
         iLoop.setLore(ilore);
 
