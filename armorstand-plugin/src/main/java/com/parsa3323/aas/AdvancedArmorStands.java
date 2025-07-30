@@ -21,6 +21,7 @@ package com.parsa3323.aas;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.animation.manager.EditorManager;
 import com.parsa3323.aas.api.ArmorstandApi;
+import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.commands.manager.CommandManager;
@@ -37,6 +38,7 @@ import com.parsa3323.aas.utils.*;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
@@ -233,6 +235,25 @@ public final class AdvancedArmorStands extends JavaPlugin {
                     InventoryUtils.restore(player);
                     InventoryUtils.save(player);
                 }
+
+            }
+
+            if (ArmorStandSelectionCache.isInKeyFrameList(player)) {
+
+                InventoryUtils.restore(player);
+                ArmorStandSelectionCache.removeFromKeyFrameList(player);
+                ArmorStand armorStand = ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId());
+                AdvancedArmorStands.debug(armorStand.getName());
+
+                ArmorStandPoseData savedPose = ArmorStandUtils.getPose(armorStand.getUniqueId());
+
+                armorStand.setRightArmPose(savedPose.getRightArm());
+                armorStand.setLeftArmPose(savedPose.getLeftArm());
+                armorStand.setRightLegPose(savedPose.getRightLeg());
+                armorStand.setLeftLegPose(savedPose.getLeftLeg());
+                armorStand.setHeadPose(savedPose.getHead());
+
+                ArmorStandSelectionCache.removeKeyFrameSelectedArmorStand(player.getUniqueId());
 
             }
 

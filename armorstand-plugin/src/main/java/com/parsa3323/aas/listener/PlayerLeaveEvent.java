@@ -18,8 +18,12 @@
 
 package com.parsa3323.aas.listener;
 
+import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -34,5 +38,22 @@ public class PlayerLeaveEvent implements Listener {
         }
 
         if (ArmorStandSelectionCache.isIsInEditSession(e.getPlayer())) ArmorStandSelectionCache.removeSelectedArmorStand(e.getPlayer().getUniqueId());
+
+        if (ArmorStandSelectionCache.isInKeyFrameList(e.getPlayer())) {
+            InventoryUtils.restore(e.getPlayer());
+            ArmorStandSelectionCache.removeFromKeyFrameList(e.getPlayer());
+            ArmorStand armorStand = ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(e.getPlayer().getUniqueId());
+            AdvancedArmorStands.debug(armorStand.getName());
+
+            ArmorStandPoseData savedPose = ArmorStandUtils.getPose(armorStand.getUniqueId());
+
+            armorStand.setRightArmPose(savedPose.getRightArm());
+            armorStand.setLeftArmPose(savedPose.getLeftArm());
+            armorStand.setRightLegPose(savedPose.getRightLeg());
+            armorStand.setLeftLegPose(savedPose.getLeftLeg());
+            armorStand.setHeadPose(savedPose.getHead());
+
+            ArmorStandSelectionCache.removeKeyFrameSelectedArmorStand(e.getPlayer().getUniqueId());
+        }
     }
 }

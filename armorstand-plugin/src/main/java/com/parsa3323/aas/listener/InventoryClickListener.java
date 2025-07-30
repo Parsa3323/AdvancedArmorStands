@@ -29,7 +29,7 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void click(InventoryClickEvent e) {
 
-        if (ArmorStandSelectionCache.isIsInEditSession((Player) e.getWhoClicked())) {
+        if (ArmorStandSelectionCache.isIsInEditSession((Player) e.getWhoClicked()) || ArmorStandSelectionCache.isInKeyFrameList(((Player) e.getWhoClicked()).getPlayer())) {
             e.setCancelled(true);
         }
 
