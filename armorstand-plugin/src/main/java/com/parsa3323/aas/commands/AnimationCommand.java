@@ -40,6 +40,7 @@ public class AnimationCommand extends SubCommand {
         animationSubCommands.add(new AnimAddCommand());
         animationSubCommands.add(new AnimCreateCommand());
         animationSubCommands.add(new AnimClearCommand());
+        animationSubCommands.add(new AnimRemoveCommand());
     }
 
     @Override
