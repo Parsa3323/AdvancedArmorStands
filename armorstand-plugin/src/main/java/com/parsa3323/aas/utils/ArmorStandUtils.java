@@ -91,6 +91,14 @@ public class ArmorStandUtils {
         return null;
     }
 
+    public static boolean hasAnimation(ArmorStand armorStand) {
+        ConfigurationSection configurationSection = ArmorStandsConfig.get().getConfigurationSection("armorstands");
+
+        if (configurationSection == null) return false;
+
+        return configurationSection.contains(getNameByArmorStand(armorStand) + ".animation");
+    }
+
     public static void savePose(ArmorStand armorStand) {
         ArmorStandPoseData pose = new ArmorStandPoseData(
                 armorStand.getRightArmPose(),

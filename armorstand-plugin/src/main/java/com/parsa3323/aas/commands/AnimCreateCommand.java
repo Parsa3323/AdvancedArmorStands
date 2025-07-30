@@ -67,6 +67,11 @@ public class AnimCreateCommand extends SubCommand {
             return;
         }
 
+        if (ArmorStandUtils.hasAnimation(as)) {
+            player.sendMessage(ChatColor.RED + "Can't open the editor on an armor stand that has animation");
+            return;
+        }
+
         InventoryUtils.save(player);
         ArmorStandSelectionCache.setKeyFrameSelectedArmorStand(player.getUniqueId(), as);
         ArmorStandUtils.savePose(as);
