@@ -51,15 +51,19 @@ public class SenderItem extends ActionItem {
         switch (cs.getString(armorStandName + "." + commandPath + ".type")) {
             case "server":
                 lore.add(ChatColor.GRAY + "» Player");
-                lore.add(ChatColor.YELLOW + "» Console");
+                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Console");
                 break;
 
             case "player":
-                lore.add(ChatColor.YELLOW + "» Player");
+                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Player");
                 lore.add(ChatColor.GRAY + "» Console");
                 break;
 
         }
+
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Click to change");
+
 
         itemMeta.setLore(lore);
 

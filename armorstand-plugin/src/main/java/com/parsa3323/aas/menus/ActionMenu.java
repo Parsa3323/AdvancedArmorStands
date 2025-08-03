@@ -157,8 +157,8 @@ public class ActionMenu extends PaginatedMenu {
             lore.add(ChatColor.GRAY + "stand, command will");
             lore.add(ChatColor.GRAY + "be run: " + key.replaceAll("-", " "));
             lore.add("");
-            lore.add(ChatColor.YELLOW + "» Click to edit");
-            lore.add(ChatColor.YELLOW + "» Shift click to remove");
+            lore.add(ChatColor.GOLD + "» " + ChatColor.YELLOW + "Click to edit");
+            lore.add(ChatColor.GOLD + "» " + ChatColor.YELLOW + "Shift click to remove");
 
             itemMeta.setLore(lore);
             itemMeta.setDisplayName(ChatColor.YELLOW + key);

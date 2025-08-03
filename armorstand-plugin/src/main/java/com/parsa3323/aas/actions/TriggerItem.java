@@ -57,10 +57,10 @@ public class TriggerItem extends ActionItem {
                 lore.add(ChatColor.GRAY + "» Left click");
                 lore.add(ChatColor.GRAY + "» Shift right click");
                 lore.add(ChatColor.GRAY + "» Shift left click");
-                lore.add(ChatColor.YELLOW + "» All");
+                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " All");
                 break;
             case "right-click":
-                lore.add(ChatColor.YELLOW + "» Right click");
+                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Right click");
                 lore.add(ChatColor.GRAY + "» Left click");
                 lore.add(ChatColor.GRAY + "» Shift right click");
                 lore.add(ChatColor.GRAY + "» Shift left click");
@@ -68,7 +68,7 @@ public class TriggerItem extends ActionItem {
                 break;
             case "left-click":
                 lore.add(ChatColor.GRAY + "» Right click");
-                lore.add(ChatColor.YELLOW + "» Left click");
+                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Left click");
                 lore.add(ChatColor.GRAY + "» Shift right click");
                 lore.add(ChatColor.GRAY + "» Shift left click");
                 lore.add(ChatColor.GRAY + "» All");
@@ -76,7 +76,7 @@ public class TriggerItem extends ActionItem {
             case "shift-right-click":
                 lore.add(ChatColor.GRAY + "» Right click");
                 lore.add(ChatColor.GRAY + "» Left click");
-                lore.add(ChatColor.YELLOW + "» Shift right click");
+                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Shift right click");
                 lore.add(ChatColor.GRAY + "» Shift left click");
                 lore.add(ChatColor.GRAY + "» All");
                 break;
@@ -84,12 +84,15 @@ public class TriggerItem extends ActionItem {
                 lore.add(ChatColor.GRAY + "» Right click");
                 lore.add(ChatColor.GRAY + "» Left click");
                 lore.add(ChatColor.GRAY + "» Shift right click");
-                lore.add(ChatColor.YELLOW + "» Shift left click");
+                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Shift left click");
                 lore.add(ChatColor.GRAY + "» All");
                 break;
 
         }
 
+
+        lore.add("");
+        lore.add(ChatColor.YELLOW + "Click to change");
 
         itemMeta.setLore(lore);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Trigger Type");

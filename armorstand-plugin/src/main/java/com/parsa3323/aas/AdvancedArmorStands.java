@@ -37,6 +37,7 @@ import com.parsa3323.aas.placeholderapi.PapiExpansion;
 import com.parsa3323.aas.utils.*;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -96,6 +97,11 @@ public final class AdvancedArmorStands extends JavaPlugin {
         logger.setLevel(logLevel);
 
         Metrics metrics = new Metrics(this, 25568);
+
+        if (isFirstTimeRunning) {
+            status(ChatColor.RED + "Thanks for downloading this plugin <3");
+            status(ChatColor.YELLOW + getDescription().getDescription());
+        }
 
         status("Registering events");
         PluginManager ev = getServer().getPluginManager();
