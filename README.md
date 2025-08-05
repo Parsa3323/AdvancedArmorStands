@@ -192,7 +192,7 @@ animations:
           z: 0   # <====== Right leg Z rotation
 ```
 >[!TIP]
-> Or you can use the in-game animation creator or the [online editor](https://advancedarmorstands.ir/animate)
+> Or you can use the [in-game animation creator](https://docs.advancedarmorstands.ir/animations) or the [online editor](https://advancedarmorstands.ir/animate)
 
 <div align="center">
 
