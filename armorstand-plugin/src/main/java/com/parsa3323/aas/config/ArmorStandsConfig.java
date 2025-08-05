@@ -73,6 +73,7 @@ public class ArmorStandsConfig {
         File newFile = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.yml");
 
         if (oldFile.exists() && !newFile.exists()) {
+            AdvancedArmorStands.setMigrating(true);
             try {
                 Files.move(oldFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 AdvancedArmorStands.debug("Moved armorstands.yml from caches/ to cache/ folder.");

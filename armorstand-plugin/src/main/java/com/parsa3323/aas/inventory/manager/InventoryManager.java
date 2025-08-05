@@ -76,7 +76,6 @@ public class InventoryManager implements Listener {
 
 
         if (player.hasPermission("advanced-armorstands.admin") && event.getItem() != null) {
-            System.out.println(ArmorStandSelectionCache.isInKeyFrameList(player));
             if (ArmorStandSelectionCache.isIsInEditSession(player)) {
                 for (int i = 0; i < getInventoryItems().size(); i++) {
 

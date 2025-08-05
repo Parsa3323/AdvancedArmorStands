@@ -48,6 +48,10 @@ public class PlayerJoin implements Listener {
 
                 }
 
+                if (AdvancedArmorStands.isMigrating()) {
+                    e.getPlayer().sendMessage(ChatColor.RED + "It looks like you are migrating");
+                }
+
                 if (AdvancedArmorStands.CONFIG_OUTDATED) {
                     TextComponent textComponent = new TextComponent(ChatColor.RED + "Your config.yml file is outdated. ");
 

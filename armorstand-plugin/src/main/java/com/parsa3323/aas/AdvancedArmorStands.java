@@ -67,7 +67,17 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static boolean isFirstTimeRunning = false;
 
+    private static boolean migrating = false;
+
     public static boolean CONFIG_OUTDATED = false;
+
+    public static boolean isMigrating() {
+        return migrating;
+    }
+
+    public static void setMigrating(boolean migrating) {
+        AdvancedArmorStands.migrating = migrating;
+    }
 
     public static AdvancedArmorStands plugin;
 
@@ -291,7 +301,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
             error("Config version is outdated! Please consider updating config.yml manually.", "https://docs.advancedarmorstands.ir/config-version-outdated/");
             CONFIG_OUTDATED = true;
         }
-
 
 
     }
