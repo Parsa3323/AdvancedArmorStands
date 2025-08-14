@@ -46,7 +46,7 @@ public class DebugCommand extends SubCommand {
     public String getSyntax() {
         return "/as debug";
     }
-//s
+
     @Override
     public void perform(Player player, String[] args) {
         String serverVersion = Bukkit.getVersion();
