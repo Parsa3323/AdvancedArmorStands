@@ -22,6 +22,7 @@ import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.SoundUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -71,9 +72,13 @@ public class LoadCommand extends SubCommand {
 
         try {
             ArmorStandUtils.loadArmorStand(args[1]);
+            player.sendMessage(ChatColor.GREEN + "Successfully loaded armor stand '" + args[1] + "'");
+            SoundUtils.playSuccessSound(player);
         } catch (ArmorStandLoadException e) {
             player.sendMessage(ChatColor.RED + "Failed to load the armor stand: " + e.getMessage());
+            SoundUtils.playErrorSound(player);
         }
+
 
     }
 
