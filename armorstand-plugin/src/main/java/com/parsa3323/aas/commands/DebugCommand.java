@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.commands;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
@@ -88,6 +89,8 @@ public class DebugCommand extends SubCommand {
         player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "This information can help with troubleshooting issues.");
         player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         player.sendMessage("");
+
+        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
     }
 
     @Override
