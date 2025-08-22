@@ -44,6 +44,8 @@ public interface ArmorstandApi  {
 
     boolean reloadPlugin() throws ReloadException;
 
+    boolean isMigrating();
+
     String getAddonsPath();
 
     @Deprecated

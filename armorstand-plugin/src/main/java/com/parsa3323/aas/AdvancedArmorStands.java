@@ -37,10 +37,10 @@ import com.parsa3323.aas.placeholderapi.PapiExpansion;
 import com.parsa3323.aas.utils.*;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -109,28 +109,35 @@ public final class AdvancedArmorStands extends JavaPlugin {
         Metrics metrics = new Metrics(this, 25568);
 
         if (isFirstTimeRunning) {
-            status(ChatColor.RED + "Thanks for downloading this plugin <3");
-            status(ChatColor.YELLOW + getDescription().getDescription());
+            status("§aThank you for installing this plugin ❤");
+            status("§e" + getDescription().getDescription());
         }
 
-        status("Registering events");
-        PluginManager ev = getServer().getPluginManager();
+        status("Registering event listeners...");
 
-        ev.registerEvents(new ChatListener(), this);
-        ev.registerEvents(new PlayerDieListener(), this);
-        ev.registerEvents(new InventoryManager(), this);
-        ev.registerEvents(new EditorManager(), this);
-        ev.registerEvents(new PlayerLeaveEvent(), this);
-        ev.registerEvents(new InventoryClickListener(), this);
-        ev.registerEvents(new StateListener(), this);
-        ev.registerEvents(new PlayerJoin(), this);
-        ev.registerEvents(new CreateCommand(), this);
-        ev.registerEvents(new PlayerIntractListener(), this);
-        ev.registerEvents(new MenuListener(), this);
-        ev.registerEvents(new ItemDropListener(), this);
+        PluginManager pm = getServer().getPluginManager();
 
+        Listener[] listeners = new Listener[] {
+                new ChatListener(),
+                new PlayerDieListener(),
+                new InventoryManager(),
+                new EditorManager(),
+                new PlayerLeaveEvent(),
+                new InventoryClickListener(),
+                new StateListener(),
+                new PlayerJoin(),
+                new CreateCommand(),
+                new PlayerIntractListener(),
+                new MenuListener(),
+                new ItemDropListener()
+        };
 
-        status("Checking requirements");
+        for (Listener listener : listeners) {
+            pm.registerEvents(listener, this);
+            getLogger().info("Loaded listener: " + listener.getClass().getSimpleName());
+        }
+
+        status("Checking requirements...");
 
 
         VersionSupportUtil.getVersionSupport();
@@ -148,7 +155,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
         }
 
-        status("Loading configs");
+        status("Loading configuration files...");
 
         checkConfig();
 
@@ -203,15 +210,19 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStandsConfig.init();
         ArmorStandsConfig.get().options().copyDefaults(true);
         ArmorStandsConfig.save();
-        status("Registering Commands");
+        status("Registering commands...");
 
         CommandManager commandManager = new CommandManager();
         getCommand("as").setTabCompleter(new TabComp());
         getCommand("as").setExecutor(commandManager);
 
+        commandManager.getSubCommands().forEach(subCommand -> {
+            status("Registered '" + subCommand.getName() + "' command");
+        });
+
         status("Registered " + commandManager.getAmount() + " commands");
 
-        status("Registering papi expansion");
+        status("Hooking into PlaceholderAPI...");
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
             error("PlaceholderAPI was not found. Disabling...");
             getServer().getPluginManager().disablePlugin(this);
@@ -220,21 +231,25 @@ public final class AdvancedArmorStands extends JavaPlugin {
         new PapiExpansion().register();
 
         if (getConfig().getBoolean("auto-load-armor-stands")) {
-            status("Spawning armor stands");
+            status("Spawning armor stands...");
         }
         for (String key : ArmorStandUtils.getArmorStandList()) {
             ArmorStandUtils.autoLoadArmorStand(key);
         }
 
-        status("Checking for armor stands");
+        status("Checking armor stands...");
         ArmorStandUtils.checkArmorStandsFirstTime();
         ArmorStandUtils.checkForArmorStands();
 
-        status("Loading animations");
+        status("Preparing animations...");
 
         AnimationUtils.init();
 
-        status("Load done");
+        AnimationUtils.getTotalAnimations().forEach(s -> {
+            status("Loaded '" + s + "'!");
+        });
+
+        status("All systems loaded successfully!");
 
 
     }

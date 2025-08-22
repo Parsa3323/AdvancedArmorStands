@@ -158,6 +158,11 @@ public class API implements ArmorstandApi {
     }
 
     @Override
+    public boolean isMigrating() {
+        return AdvancedArmorStands.isMigrating();
+    }
+
+    @Override
     public String getAddonsPath() {
         return addonFolder.getPath();
     }
