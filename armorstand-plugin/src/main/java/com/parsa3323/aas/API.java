@@ -301,8 +301,18 @@ public class API implements ArmorstandApi {
             }
 
             @Override
-            public void setPose(String asName, ArmorStandPoseData poseData) {
+            public void setPose(String asName, ArmorStandPoseData poseData) throws ArmorStandNotFoundException {
+                ArmorStand armorStand = ArmorStandUtils.getArmorStandByName(asName);
 
+                if (armorStand == null) {
+                    throw new ArmorStandNotFoundException("Armor stand '" + asName + "' not found!");
+                }
+
+                armorStand.setHeadPose(poseData.getHead());
+                armorStand.setRightArmPose(poseData.getRightArm());
+                armorStand.setLeftArmPose(poseData.getRightArm());
+                armorStand.setRightLegPose(poseData.getRightLeg());
+                armorStand.setLeftLegPose(poseData.getLeftLeg());
             }
 
             @Override

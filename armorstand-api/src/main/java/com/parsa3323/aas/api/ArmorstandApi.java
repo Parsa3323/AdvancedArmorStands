@@ -132,7 +132,7 @@ public interface ArmorstandApi  {
 
         void createArmorStand(String name, ArmorStandPoseData poseData, Location location, Player player) throws ArmorStandAlreadyExistsException;
 
-        void setPose(String asName, ArmorStandPoseData poseData);
+        void setPose(String asName, ArmorStandPoseData poseData) throws ArmorStandNotFoundException;
 
         boolean exists(String name);
 
