@@ -19,12 +19,11 @@
 package com.parsa3323.aas.api;
 
 
-import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
-import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
-import com.parsa3323.aas.api.exeption.ConfigException;
-import com.parsa3323.aas.api.exeption.ReloadException;
+import com.parsa3323.aas.api.data.ArmorStandPoseData;
+import com.parsa3323.aas.api.exeption.*;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -130,6 +129,10 @@ public interface ArmorstandApi  {
         void loadArmorStand(ArmorStand armorStand) throws ArmorStandLoadException;
 
         void loadArmorStand(String name) throws ArmorStandLoadException;
+
+        void createArmorStand(String name, ArmorStandPoseData poseData, Location location, Player player) throws ArmorStandAlreadyExistsException;
+
+        void setPose(String asName, ArmorStandPoseData poseData);
 
         boolean exists(String name);
 

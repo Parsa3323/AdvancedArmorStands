@@ -19,10 +19,9 @@
 package com.parsa3323.aas;
 
 import com.parsa3323.aas.api.ArmorstandApi;
-import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
-import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
-import com.parsa3323.aas.api.exeption.ConfigException;
-import com.parsa3323.aas.api.exeption.ReloadException;
+import com.parsa3323.aas.api.data.ArmorStandPoseData;
+import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
+import com.parsa3323.aas.api.exeption.*;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.config.AnimationConfig;
@@ -35,8 +34,10 @@ import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -278,6 +279,30 @@ public class API implements ArmorstandApi {
             @Override
             public void loadArmorStand(String name) throws ArmorStandLoadException {
                 ArmorStandUtils.loadArmorStand(name);
+            }
+
+            @Override
+            public void createArmorStand(String name, ArmorStandPoseData poseData, Location location, Player player) throws ArmorStandAlreadyExistsException {
+                ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
+
+                ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, name);
+                Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
+
+                if (armorStandCreateEvent.isCancelled()) {
+                    armorStand.remove();
+                    return;
+                }
+
+                armorStand.setHeadPose(poseData.getHead());
+                armorStand.setRightArmPose(poseData.getRightArm());
+                armorStand.setLeftArmPose(poseData.getLeftArm());
+                armorStand.setRightLegPose(poseData.getRightLeg());
+                armorStand.setLeftLegPose(poseData.getLeftLeg());
+            }
+
+            @Override
+            public void setPose(String asName, ArmorStandPoseData poseData) {
+
             }
 
             @Override
