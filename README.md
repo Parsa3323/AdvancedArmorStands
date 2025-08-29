@@ -235,6 +235,10 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 
 <div align="center">
 
+# Usage
+
+**Super lightweight, ultra-efficient plugin that barely uses any server resources!** <img src="https://github.com/user-attachments/assets/084a8def-16ee-4516-84b6-3471bf97448d" width="20" style="vertical-align:middle;" />
+
 # Contributors
 
 <a href="https://github.com/Parsa3323/AdvancedArmorStands/graphs/contributors">
