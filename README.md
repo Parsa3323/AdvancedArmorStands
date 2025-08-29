@@ -4,7 +4,7 @@
 
 # Advanced Armor Stands <img src="https://github.com/user-attachments/assets/084a8def-16ee-4516-84b6-3471bf97448d" width="24" style="vertical-align:middle;" />
 
-**Super lightweight, ultra-efficient plugin that barely uses any server resources!**
+**Super lightweight, smart, ultra-efficient plugin that barely uses any server resources!**
 
 
 `1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.20.6, 1.21`
