@@ -72,6 +72,9 @@ public interface ArmorstandApi  {
 
         boolean hasAnimation(String name);
 
+        void setAnimation(String name, String animation) throws AnimationNotFoundException;
+
+        void setAnimation(String armorStandName, String animationName, boolean loop, int interval, ArmorStandPoseData... animation);
     }
 
     SkullUtils getSkullUtils();

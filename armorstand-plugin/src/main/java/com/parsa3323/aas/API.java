@@ -35,6 +35,7 @@ import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -42,7 +43,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
-import java.util.UUID;
+import java.util.*;
 
 public class API implements ArmorstandApi {
 
@@ -192,8 +193,44 @@ public class API implements ArmorstandApi {
 
             @Override
             public boolean hasAnimation(String s) {
-                return ArmorStandsConfig.get().contains("armorstands." + ArmorStandUtils.getArmorStandByName(s) + ".animation");
+                return ArmorStandsConfig.get().contains("armorstands." + s + ".animation");
             }
+
+            @Override
+            public void setAnimation(String name, String animation) throws AnimationNotFoundException {
+                if (!AnimationConfig.get().contains("animations." + animation)) throw new AnimationNotFoundException("Animation not found: " + animation);
+                ArmorStandsConfig.get().set("armorstands." + name + ".animation", animation);
+                ArmorStandsConfig.save();
+            }
+
+            @Override
+            public void setAnimation(String armorStandName, String animationName, boolean loop, int interval, ArmorStandPoseData... animation) {
+                ConfigurationSection cs = AnimationConfig.get().createSection("animations." + animationName);
+
+                cs.set("interval", interval);
+                cs.set("loop", loop);
+
+                List<Map<String, Object>> steps = new ArrayList<>();
+
+                for (ArmorStandPoseData poseData : animation) {
+                    Map<String, Object> step = new LinkedHashMap<>();
+
+                    step.put("head", ConfigUtils.mapPose(poseData.getHead()));
+                    step.put("left_arm", ConfigUtils.mapPose(poseData.getLeftArm()));
+                    step.put("right_arm", ConfigUtils.mapPose(poseData.getRightArm()));
+                    step.put("left_leg", ConfigUtils.mapPose(poseData.getLeftLeg()));
+                    step.put("right_leg", ConfigUtils.mapPose(poseData.getRightLeg()));
+
+                    steps.add(step);
+                }
+
+                cs.set("steps", steps);
+
+                AnimationConfig.save();
+                ArmorStandsConfig.get().set("armorstands." + armorStandName + ".animation", animationName);
+                ArmorStandsConfig.save();
+            }
+
         };
     }
 
