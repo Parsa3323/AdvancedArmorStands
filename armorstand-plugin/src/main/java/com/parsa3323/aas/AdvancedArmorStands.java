@@ -147,7 +147,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
             debug("XSeries support is available.");
         } catch (Throwable t) {
             error("XSeries are not supported on this server: " + t.getClass().getSimpleName() + ": " + t.getMessage());
-
+            error(" ");
             error("XSeries features are not supported on this server. Please use plugin version 1.0.0-beta.15 or older (not recommended): https://github.com/Parsa3323/AdvancedArmorStands/releases/tag/v1.0.0-beta.15");
             warn("Read more: https://docs.advancedarmorstands.ir/version-support-error");
             warn("Using older versions is not recommended and may lead to other issues.");
@@ -256,7 +256,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        status("Restoring inventories for players in edit session");
+        status("Restoring inventories for players in edit session...");
 
         for (Player player : Bukkit.getOnlinePlayers()) {
 
@@ -265,6 +265,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
                 if (InventoryUtils.hasBackup(player)) {
                     InventoryUtils.restore(player);
                     InventoryUtils.save(player);
+                    status("Restored " + player.getDisplayName() +"'s inventory");
                 }
 
             }
@@ -286,11 +287,13 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
                 ArmorStandSelectionCache.removeKeyFrameSelectedArmorStand(player.getUniqueId());
 
+                status("Restored " + player.getDisplayName() +"'s inventory");
+
             }
 
         }
 
-        status("Plugin has been successfully disabled");
+        status("Plugin has been successfully disabled!");
     }
 
     public void checkConfig() {
