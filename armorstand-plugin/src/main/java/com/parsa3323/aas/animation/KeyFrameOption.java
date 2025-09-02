@@ -44,7 +44,7 @@ public class KeyFrameOption extends InventoryItem {
     public String getName() {
         return "KeyFrameOption";
     }
-
+    
     @Override
     public ItemStack getItemStack() {
         ArrayList<String> lore = new ArrayList<>();
