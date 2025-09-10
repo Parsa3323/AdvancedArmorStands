@@ -65,25 +65,25 @@ public class RenameCommand extends SubCommand {
             return;
         }
 
-        String path = "armorstands." + oldname;
-        String uuid = ArmorStandsConfig.get().getString(path + ".UUID");
-        String world = ArmorStandsConfig.get().getString(path + ".World");
-        double x = ArmorStandsConfig.get().getDouble(path + ".X");
-        double y = ArmorStandsConfig.get().getDouble(path + ".Y");
-        double z = ArmorStandsConfig.get().getDouble(path + ".Z");
-
-        ArmorStandsConfig.get().set("armorstands." + newname + ".UUID", uuid);
-        ArmorStandsConfig.get().set("armorstands." + newname + ".World", world);
-        ArmorStandsConfig.get().set("armorstands." + newname + ".X", x);
-        ArmorStandsConfig.get().set("armorstands." + newname + ".Y", y);
-        ArmorStandsConfig.get().set("armorstands." + newname + ".Z", z);
-
-        ArmorStandsConfig.get().set("armorstands." + oldname, null);
-        ArmorStandsConfig.save();
-
         ArmorStandRenameEvent armorStandRenameEvent = new ArmorStandRenameEvent(player, ArmorStandUtils.getArmorStandByName(newname));
         Bukkit.getPluginManager().callEvent(armorStandRenameEvent);
         if (!armorStandRenameEvent.isCancelled()) {
+            String path = "armorstands." + oldname;
+            String uuid = ArmorStandsConfig.get().getString(path + ".UUID");
+            String world = ArmorStandsConfig.get().getString(path + ".World");
+            double x = ArmorStandsConfig.get().getDouble(path + ".X");
+            double y = ArmorStandsConfig.get().getDouble(path + ".Y");
+            double z = ArmorStandsConfig.get().getDouble(path + ".Z");
+
+            ArmorStandsConfig.get().set("armorstands." + newname + ".UUID", uuid);
+            ArmorStandsConfig.get().set("armorstands." + newname + ".World", world);
+            ArmorStandsConfig.get().set("armorstands." + newname + ".X", x);
+            ArmorStandsConfig.get().set("armorstands." + newname + ".Y", y);
+            ArmorStandsConfig.get().set("armorstands." + newname + ".Z", z);
+
+            ArmorStandsConfig.get().set("armorstands." + oldname, null);
+            ArmorStandsConfig.save();
+
             player.sendMessage(ChatColor.GREEN + "Renamed armor stand from '" + oldname + "' to '" + newname + "'");
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         }

@@ -19,35 +19,39 @@
 package com.parsa3323.aas.tools;
 
 import com.parsa3323.aas.tools.manager.ToolsOption;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class Test extends ToolsOption {
+public class TeleportTool extends ToolsOption {
     @Override
     public ItemStack getItemStack(ArmorStand armorStand) {
-        ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU3YTQ3MzNjMDgzMGM4YjQyNWI2MjEzNzc4MGJkYmVmNTdiMTNhODg3YWFhZjExNzNjNmNlMGExZDc4NDFmMSJ9fX0=");
+        ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjYwN2ZhYTYxYzU5ODE2MDE0ODQyY2NmZmZhOTYxMzM5NmQ4YTk5ZWQwN2E2NTE5YTU0NGM2NTcyOWRmNTFhYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Gravity");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "Teleport");
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "gravity for this armor stand ");
+        lore.add(ChatColor.GRAY + "Teleport to the");
+        lore.add(ChatColor.GRAY + "armor stand's location");
         lore.add("");
-        lore.add((armorStand.hasGravity()) ? ChatColor.YELLOW + "✔ Has gravity" : ChatColor.RED + "✘ Doesn't have gravity");
+        lore.add(ChatColor.YELLOW + "Click to teleport");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 
-        return itemStack;    }
+        return itemStack;
+    }
 
     @Override
     public void execute(InventoryClickEvent e, ArmorStand armorStand) {
-        System.out.println("bruh");
+        ArmorStandUtils.teleportToArmorStand((Player) e.getWhoClicked(), ArmorStandUtils.getNameByArmorStand(armorStand));
+
     }
 }

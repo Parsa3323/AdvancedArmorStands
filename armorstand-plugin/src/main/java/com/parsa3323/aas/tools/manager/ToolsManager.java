@@ -20,7 +20,9 @@ package com.parsa3323.aas.tools.manager;
 
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
-import com.parsa3323.aas.tools.Test;
+import com.parsa3323.aas.tools.DeleteTool;
+import com.parsa3323.aas.tools.MoveTool;
+import com.parsa3323.aas.tools.TeleportTool;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -42,7 +44,9 @@ public class ToolsManager extends PaginatedMenu {
         super(playerMenuUtility);
         this.armorStand = armorStand;
 
-        toolsOptions.add(new Test());
+        toolsOptions.add(new MoveTool());
+        toolsOptions.add(new DeleteTool());
+        toolsOptions.add(new TeleportTool());
     }
 
     @Override
