@@ -173,6 +173,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         animations.options().copyDefaults(true);
 
 
+
         AnimationConfig.get().options().copyDefaults(true);
         AnimationConfig.save();
         TypesConfig.init();

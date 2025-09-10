@@ -38,7 +38,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CreateCommand extends SubCommand implements Listener {
@@ -243,19 +245,6 @@ public class CreateCommand extends SubCommand implements Listener {
         return TypesConfig.get().getDouble(path);
     }
 
-    public static void saveArmorStand(String name, ArmorStand armorStand) {
-        FileConfiguration config = ArmorStandsConfig.get();
-        String path = "armorstands." + name;
-
-        config.set(path + ".UUID", armorStand.getUniqueId().toString());
-        config.set(path + ".World", armorStand.getLocation().getWorld().getName());
-        config.set(path + ".X", armorStand.getLocation().getX());
-        config.set(path + ".Y", armorStand.getLocation().getY());
-        config.set(path + ".Z", armorStand.getLocation().getZ());
-
-        ArmorStandsConfig.save();
-    }
-
     @EventHandler
     public void onArmorStandCreate(ArmorStandCreateEvent event) {
         ArmorStand armorStand = event.getArmorStand();
@@ -276,6 +265,17 @@ public class CreateCommand extends SubCommand implements Listener {
         config.set(path + ".Z", armorStand.getLocation().getZ());
         config.set(path + ".yaw", armorStand.getLocation().getYaw());
         config.set(path + ".pitch", armorStand.getLocation().getPitch());
+
+        Date now = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = format.format(now);
+        config.set(path + ".info.date_created", formattedDate);
+        config.set(path + ".info.created_by", event.getPlayer().getDisplayName());
+        config.set(path + ".info.world", event.getArmorStand().getWorld().getName());
+        config.set(path + ".info.X", armorStand.getLocation().getX());
+        config.set(path + ".info.Y", armorStand.getLocation().getY());
+        config.set(path + ".info.Z", armorStand.getLocation().getZ());
+
 
         ArmorStandsConfig.save();
     }

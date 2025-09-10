@@ -22,6 +22,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
+import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.utils.*;
@@ -225,7 +226,7 @@ public class ArmorStandMenu extends Menu {
         Inventory inv = inventory;
 
         setSlots(inv, XMaterial.GRAY_STAINED_GLASS_PANE, new int[]{
-                0,8, 1, 7, 9, 17, 18, 27 , 26, 35, 36, 37, 43, 44
+                0,8, 1, 7, 9, 17, 18, 27 , 26, 35, 36, 37, 43
         });
 
         setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
@@ -239,6 +240,37 @@ public class ArmorStandMenu extends Menu {
         setSlots(inv, XMaterial.WHITE_STAINED_GLASS_PANE, new int[]{
                 14, 24, 16, 23, 25, 32, 34
         });
+
+        ItemStack info = XMaterial.GRAY_STAINED_GLASS_PANE.parseItem();
+        ItemMeta iMeta = info.getItemMeta();
+
+        String path = "armorstands." + ArmorStandUtils.getNameByArmorStand(armorStand);
+
+        String dateCreated = ArmorStandsConfig.get().getString(path + ".info.date_created", "Unknown");
+        String createdBy = ArmorStandsConfig.get().getString(path + ".info.created_by", "Unknown");
+        String world = ArmorStandsConfig.get().getString(path + ".info.world", "Unknown");
+        int x = ArmorStandsConfig.get().getInt(path + ".info.X", 0);
+        int y = ArmorStandsConfig.get().getInt(path + ".info.Y", 0);
+        int z = ArmorStandsConfig.get().getInt(path + ".info.Z", 0);
+
+        ArrayList<String> iLore = new ArrayList<>();
+
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Date Created: " + ChatColor.WHITE + dateCreated);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Created By: " + ChatColor.WHITE + createdBy);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " World: " + ChatColor.WHITE + world);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Location: "
+                + ChatColor.WHITE + x
+                + ChatColor.GRAY + ", "
+                + ChatColor.WHITE + y
+                + ChatColor.GRAY + ", "
+                + ChatColor.WHITE + z);
+
+        iMeta.setLore(iLore);
+        iMeta.setDisplayName(ColorUtils.boldAndColor(ChatColor.YELLOW) + " ArmorStand Information");
+
+        info.setItemMeta(iMeta);
+
+        inventory.setItem(44, info);
 
         ItemStack close = new ItemStack(Material.BARRIER, 1);
         ItemMeta cMeta = close.getItemMeta();

@@ -23,8 +23,8 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.actions.SenderType;
 import com.parsa3323.aas.api.actions.TriggerType;
 import com.parsa3323.aas.api.events.ActionTriggerEvent;
+import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.api.player.IPlayer;
-import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.player.PlayerManager;
@@ -83,7 +83,16 @@ public class PlayerIntractListener implements Listener {
                                 String name = "SavedStand" + randomSuffix;
 
                                 ArmorStand stand = (ArmorStand) e.getRightClicked();
-                                CreateCommand.saveArmorStand(name, stand);
+
+                                ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player.getBukkitPlayer(), stand, name);
+                                Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
+
+                                if (armorStandCreateEvent.isCancelled()) {
+                                    stand.remove();
+                                    return;
+                                }
+
+                                //CreateCommand.saveArmorStand(name, stand);
                                 player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "Armor stand saved as " + name + "!");
                                 ArmorStandUtils.saveArmorStand(name, stand);
 
