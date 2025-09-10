@@ -25,6 +25,7 @@ import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
+import com.parsa3323.aas.tools.manager.ToolsManager;
 import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -32,6 +33,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -89,6 +91,13 @@ public class ArmorStandMenu extends Menu {
                 p.closeInventory();
                 break;
             case 11:
+                if (e.getClick() == ClickType.SHIFT_RIGHT || e.getClick() == ClickType.SHIFT_LEFT) {
+                    ToolsManager toolsManager = new ToolsManager(new PlayerMenuUtility(playerMenuUtility.getOwner()), armorStand);
+                    toolsManager.open();
+
+                    return;
+                }
+
                 p.closeInventory();
                 break;
             case 15:
@@ -276,7 +285,17 @@ public class ArmorStandMenu extends Menu {
         ItemMeta cMeta = close.getItemMeta();
 
         cMeta.setDisplayName(ChatColor.RED + "Close");
+
+        ArrayList<String> cLore = new ArrayList<>();
+
+        cLore.add(ChatColor.GRAY + "Click to close this menu");
+        cLore.add(ChatColor.GRAY + "Shift-click to open the ");
+        cLore.add(ChatColor.GRAY + "Tools Menu for editing");
+        cLore.add(ChatColor.GRAY + "the armor stand");
+
+        cMeta.setLore(cLore);
         close.setItemMeta(cMeta);
+
         inventory.setItem(11, close);
 
 
