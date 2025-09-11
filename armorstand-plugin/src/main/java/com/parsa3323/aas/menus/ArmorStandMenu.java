@@ -75,50 +75,15 @@ public class ArmorStandMenu extends Menu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
 
-        if (armorStand == null) {
-            e.setCancelled(true);
-            return;
-        }
+        if (isInvalidEvent(e)) return;
 
         Player p = (Player) e.getWhoClicked();
 
-        switch (e.getSlot()) {
-            case 33:
-                InventoryUtils.save(p);
-                ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
-                ArmorStandSelectionCache.addToEditSession(p);
-                InventoryUtils.setOptionItems(p);
-                p.closeInventory();
-                break;
-            case 11:
-                if (e.getClick() == ClickType.SHIFT_RIGHT || e.getClick() == ClickType.SHIFT_LEFT) {
-                    ToolsManager toolsManager = new ToolsManager(new PlayerMenuUtility(playerMenuUtility.getOwner()), armorStand);
-                    toolsManager.open();
-
-                    return;
-                }
-
-                p.closeInventory();
-                break;
-            case 15:
-                ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), armorStand);
-                actionMenu.open();
-                break;
-            case 29:
-                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(p), armorStand, true);
-                settingsManager.open();
-        }
+        if (handleSlotItems(e, p)) return;
 
         if (p == null || e.getInventory() == null || e.getInventory().getHolder() == null) return;
 
-        if (e.getAction() != InventoryAction.PICKUP_ALL
-                && e.getAction() != InventoryAction.PICKUP_ONE
-                && e.getAction() != InventoryAction.PLACE_ALL
-                && e.getAction() != InventoryAction.PLACE_ONE
-                && e.getAction() != InventoryAction.SWAP_WITH_CURSOR) {
-            e.setCancelled(true);
-            return;
-        }
+        if (isValidInventoryAction(e)) return;
 
         ItemStack itemTaken = e.getCurrentItem();
         ItemStack cursorItem = e.getCursor();
@@ -211,6 +176,56 @@ public class ArmorStandMenu extends Menu {
         if (!coolDownList.contains(p.getUniqueId())) {
             cooldownMap.put(uuid, now);
         }
+    }
+
+    private static boolean isValidInventoryAction(InventoryClickEvent e) {
+        if (e.getAction() != InventoryAction.PICKUP_ALL
+                && e.getAction() != InventoryAction.PICKUP_ONE
+                && e.getAction() != InventoryAction.PLACE_ALL
+                && e.getAction() != InventoryAction.PLACE_ONE
+                && e.getAction() != InventoryAction.SWAP_WITH_CURSOR) {
+            e.setCancelled(true);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean handleSlotItems(InventoryClickEvent e, Player p) {
+        switch (e.getSlot()) {
+            case 33:
+                InventoryUtils.save(p);
+                ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
+                ArmorStandSelectionCache.addToEditSession(p);
+                InventoryUtils.setOptionItems(p);
+                p.closeInventory();
+                break;
+            case 11:
+                if (e.getClick() == ClickType.SHIFT_RIGHT || e.getClick() == ClickType.SHIFT_LEFT) {
+                    ToolsManager toolsManager = new ToolsManager(new PlayerMenuUtility(playerMenuUtility.getOwner()), armorStand);
+                    toolsManager.open();
+
+                    return true;
+                }
+
+                p.closeInventory();
+                break;
+            case 15:
+                ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), armorStand);
+                actionMenu.open();
+                break;
+            case 29:
+                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(p), armorStand, true);
+                settingsManager.open();
+        }
+        return false;
+    }
+
+    private boolean isInvalidEvent(InventoryClickEvent e) {
+        if (armorStand == null) {
+            e.setCancelled(true);
+            return true;
+        }
+        return false;
     }
 
     @Override
