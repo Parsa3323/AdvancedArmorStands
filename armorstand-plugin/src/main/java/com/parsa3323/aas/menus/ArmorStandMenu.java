@@ -250,99 +250,16 @@ public class ArmorStandMenu extends Menu {
                 14, 24, 16, 23, 25, 32, 34
         });
 
-        ItemStack info = XMaterial.GRAY_STAINED_GLASS_PANE.parseItem();
-        ItemMeta iMeta = info.getItemMeta();
+        addInfoItem();
 
-        String path = "armorstands." + ArmorStandUtils.getNameByArmorStand(armorStand);
+        addCloseItem();
 
-        String dateCreated = ArmorStandsConfig.get().getString(path + ".info.date_created", "Unknown");
-        String createdBy = ArmorStandsConfig.get().getString(path + ".info.created_by", "Unknown");
-        String world = ArmorStandsConfig.get().getString(path + ".info.world", "Unknown");
-        int x = ArmorStandsConfig.get().getInt(path + ".info.X", 0);
-        int y = ArmorStandsConfig.get().getInt(path + ".info.Y", 0);
-        int z = ArmorStandsConfig.get().getInt(path + ".info.Z", 0);
+        addOptionsItem();
 
-        ArrayList<String> iLore = new ArrayList<>();
+        addEditItem();
 
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Date Created: " + ChatColor.WHITE + dateCreated);
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Created By: " + ChatColor.WHITE + createdBy);
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " World: " + ChatColor.WHITE + world);
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Location: "
-                + ChatColor.WHITE + x
-                + ChatColor.GRAY + ", "
-                + ChatColor.WHITE + y
-                + ChatColor.GRAY + ", "
-                + ChatColor.WHITE + z);
+        addActionsItem();
 
-        iMeta.setLore(iLore);
-        iMeta.setDisplayName(ColorUtils.boldAndColor(ChatColor.YELLOW) + " ArmorStand Information");
-
-        info.setItemMeta(iMeta);
-
-        inventory.setItem(44, info);
-
-        ItemStack close = new ItemStack(Material.BARRIER, 1);
-        ItemMeta cMeta = close.getItemMeta();
-
-        cMeta.setDisplayName(ChatColor.RED + "Close");
-
-        ArrayList<String> cLore = new ArrayList<>();
-
-        cLore.add(ChatColor.GRAY + "Click to close this menu");
-        cLore.add(ChatColor.GRAY + "Shift-click to open the ");
-        cLore.add(ChatColor.GRAY + "Tools Menu for editing");
-        cLore.add(ChatColor.GRAY + "the armor stand");
-
-        cMeta.setLore(cLore);
-        close.setItemMeta(cMeta);
-
-        inventory.setItem(11, close);
-
-
-        ArrayList<String> lore = new ArrayList<>();
-
-        lore.add(ChatColor.GRAY + "Opens an inventory to");
-        lore.add(ChatColor.GRAY + "create and delete on-click");
-        lore.add(ChatColor.GRAY + "custom command actions for");
-        lore.add(ChatColor.GRAY + "your armor stand");
-
-
-
-
-        ItemStack options = new ItemStack(Material.NETHER_STAR);
-        ItemMeta oMeta = options.getItemMeta();
-
-        ArrayList<String> oLore = new ArrayList<>();
-
-        oLore.add(ChatColor.GRAY + "Opens an inventory to");
-        oLore.add(ChatColor.GRAY + "enable & disable armor");
-        oLore.add(ChatColor.GRAY + "stand's options");
-
-        oMeta.setLore(oLore);
-        oMeta.setDisplayName(ChatColor.YELLOW + "Options!");
-        options.setItemMeta(oMeta);
-
-        inventory.setItem(29, options);
-
-        ItemStack edit = new ItemStack(Material.REDSTONE_BLOCK, 1);
-        ItemMeta editMeta= edit.getItemMeta();
-        editMeta.setDisplayName(ChatColor.YELLOW + "Edit!");
-
-        ArrayList<String> editLore = new ArrayList<>();
-        editLore.add(ChatColor.GRAY + "gives you some item");
-        editLore.add(ChatColor.GRAY + "that you can edit");
-        editLore.add(ChatColor.GRAY + "as positions with it");
-        editMeta.setLore(editLore);
-        edit.setItemMeta(editMeta);
-        inventory.setItem(33, edit);
-
-        ItemStack actions = new ItemStack(XMaterial.TRIPWIRE_HOOK.parseMaterial()) ;
-        ItemMeta tMeta = actions.getItemMeta();
-        tMeta.setDisplayName(ChatColor.YELLOW + "Actions");
-        tMeta.setLore(lore);
-        actions.setItemMeta(tMeta);
-
-        inventory.setItem(15, actions);
         ItemStack head = (armorStand.getHelmet() != null && armorStand.getHelmet().getType() != Material.AIR) ? armorStand.getHelmet().clone() : createNull("HEAD");
         inventory.setItem(4, head);
 
@@ -375,6 +292,108 @@ public class ArmorStandMenu extends Menu {
 
         inventory.setItem(39, itemInOffHand);
 
+    }
+
+    private void addOptionsItem() {
+        ItemStack options = new ItemStack(Material.NETHER_STAR);
+        ItemMeta oMeta = options.getItemMeta();
+
+        ArrayList<String> oLore = new ArrayList<>();
+
+        oLore.add(ChatColor.GRAY + "Opens an inventory to");
+        oLore.add(ChatColor.GRAY + "enable & disable armor");
+        oLore.add(ChatColor.GRAY + "stand's options");
+
+        oMeta.setLore(oLore);
+        oMeta.setDisplayName(ChatColor.YELLOW + "Options!");
+        options.setItemMeta(oMeta);
+
+        inventory.setItem(29, options);
+    }
+
+    private void addEditItem() {
+        ItemStack edit = new ItemStack(Material.REDSTONE_BLOCK, 1);
+        ItemMeta editMeta= edit.getItemMeta();
+        editMeta.setDisplayName(ChatColor.YELLOW + "Edit!");
+
+        ArrayList<String> editLore = new ArrayList<>();
+        editLore.add(ChatColor.GRAY + "gives you some item");
+        editLore.add(ChatColor.GRAY + "that you can edit");
+        editLore.add(ChatColor.GRAY + "as positions with it");
+        editMeta.setLore(editLore);
+        edit.setItemMeta(editMeta);
+        inventory.setItem(33, edit);
+    }
+
+    private void addActionsItem() {
+        ItemStack actions = new ItemStack(XMaterial.TRIPWIRE_HOOK.parseMaterial());
+
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ChatColor.GRAY + "Opens an inventory to");
+        lore.add(ChatColor.GRAY + "create and delete on-click");
+        lore.add(ChatColor.GRAY + "custom command actions for");
+        lore.add(ChatColor.GRAY + "your armor stand");
+
+
+        ItemMeta tMeta = actions.getItemMeta();
+        tMeta.setDisplayName(ChatColor.YELLOW + "Actions");
+        tMeta.setLore(lore);
+        actions.setItemMeta(tMeta);
+
+        inventory.setItem(15, actions);
+    }
+
+    private void addCloseItem() {
+        ItemStack close = new ItemStack(Material.BARRIER, 1);
+        ItemMeta cMeta = close.getItemMeta();
+
+        cMeta.setDisplayName(ChatColor.RED + "Close");
+
+        ArrayList<String> cLore = new ArrayList<>();
+
+        cLore.add(ChatColor.GRAY + "Click to close this menu");
+        cLore.add(ChatColor.GRAY + "Shift-click to open the ");
+        cLore.add(ChatColor.GRAY + "Tools Menu for editing");
+        cLore.add(ChatColor.GRAY + "the armor stand");
+
+        cMeta.setLore(cLore);
+        close.setItemMeta(cMeta);
+
+        inventory.setItem(11, close);
+    }
+
+    private void addInfoItem() {
+        ItemStack info = XMaterial.GRAY_STAINED_GLASS_PANE.parseItem();
+        ItemMeta iMeta = info.getItemMeta();
+
+        String path = "armorstands." + ArmorStandUtils.getNameByArmorStand(armorStand);
+
+        String dateCreated = ArmorStandsConfig.get().getString(path + ".info.date_created", "Unknown");
+        String createdBy = ArmorStandsConfig.get().getString(path + ".info.created_by", "Unknown");
+        String world = ArmorStandsConfig.get().getString(path + ".info.world", "Unknown");
+        int x = ArmorStandsConfig.get().getInt(path + ".info.X", 0);
+        int y = ArmorStandsConfig.get().getInt(path + ".info.Y", 0);
+        int z = ArmorStandsConfig.get().getInt(path + ".info.Z", 0);
+
+        ArrayList<String> iLore = new ArrayList<>();
+
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Date Created: " + ChatColor.WHITE + dateCreated);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Created By: " + ChatColor.WHITE + createdBy);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " World: " + ChatColor.WHITE + world);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Location: "
+                + ChatColor.WHITE + x
+                + ChatColor.GRAY + ", "
+                + ChatColor.WHITE + y
+                + ChatColor.GRAY + ", "
+                + ChatColor.WHITE + z);
+
+        iMeta.setLore(iLore);
+        iMeta.setDisplayName(ColorUtils.boldAndColor(ChatColor.YELLOW) + " ArmorStand Information");
+
+        info.setItemMeta(iMeta);
+
+        inventory.setItem(44, info);
     }
 
     @Override
