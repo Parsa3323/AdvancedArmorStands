@@ -22,6 +22,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,75 +37,85 @@ public class TabComp implements TabCompleter {
         mainCommand = new CommandManager();
 
         if (strings.length > 1) {
-            Player player = (Player) commandSender;
-
-            for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
-                if (strings[0].equalsIgnoreCase(mainCommand.getSubCommands().get(i).getName())) {
-                    List<String> subTab = mainCommand.getSubCommands().get(i).getTabComplete(player, strings);
-
-                    if (subTab == null || subTab.isEmpty()) return new ArrayList<>();
-
-                    String currentArg = strings[strings.length - 1].toLowerCase();
-
-                    if (currentArg.isEmpty()) return subTab;
-
-                    List<String> filtered = new ArrayList<>();
-
-                    for (String suggestion : subTab) {
-                        if (suggestion.toLowerCase().startsWith(currentArg)) {
-                            filtered.add(suggestion);
-                        }
-                    }
-
-                    if (filtered.size() == 1) return filtered;
-
-                    return new ArrayList<>();
-                }
-            }
+            List<String> x = handleSubCommandTabCompletion((Player) commandSender, strings);
+            if (x != null) return x;
         } else if (strings.length == 1) {
-            ArrayList<String> list = new ArrayList<>();
-            String currentInput = strings[0].toLowerCase();
-
-
-            for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
-                String subName = mainCommand.getSubCommands().get(i).getName().toLowerCase();
-
-                if (subName.startsWith(currentInput)) {
-                    if (mainCommand.getSubCommands().get(i).isForOps()) {
-                        if (commandSender.hasPermission("advanced-armorstands.admin")) {
-                            list.add(mainCommand.getSubCommands().get(i).getName());
-                        }
-                    } else {
-                        list.add(mainCommand.getSubCommands().get(i).getName());
-                    }
-                }
-            }
-
-
-            if ("help".startsWith(currentInput)) {
-                list.add("help");
-            }
-
-
-            if (currentInput.isEmpty()) {
-                for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
-                    if (mainCommand.getSubCommands().get(i).isForOps()) {
-                        if (commandSender.hasPermission("advanced-armorstands.admin")) {
-                            list.add(mainCommand.getSubCommands().get(i).getName());
-                        }
-                    } else {
-                        list.add(mainCommand.getSubCommands().get(i).getName());
-                    }
-                }
-                list.add("help");
-                return list;
-            }
-
-            if (list.size() == 1) return list;
-            return list;
+            return handleMainCommandTabCompletion(commandSender, strings);
         }
 
         return new ArrayList<>();
+    }
+
+    private @NotNull ArrayList<String> handleMainCommandTabCompletion(CommandSender commandSender, String[] strings) {
+        ArrayList<String> list = new ArrayList<>();
+        String currentInput = strings[0].toLowerCase();
+
+
+        for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
+            String subName = mainCommand.getSubCommands().get(i).getName().toLowerCase();
+
+            if (subName.startsWith(currentInput)) {
+                if (mainCommand.getSubCommands().get(i).isForOps()) {
+                    if (commandSender.hasPermission("advanced-armorstands.admin")) {
+                        list.add(mainCommand.getSubCommands().get(i).getName());
+                    }
+                } else {
+                    list.add(mainCommand.getSubCommands().get(i).getName());
+                }
+            }
+        }
+
+
+        if ("help".startsWith(currentInput)) {
+            list.add("help");
+        }
+
+
+        if (currentInput.isEmpty()) {
+            for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
+                if (mainCommand.getSubCommands().get(i).isForOps()) {
+                    if (commandSender.hasPermission("advanced-armorstands.admin")) {
+                        list.add(mainCommand.getSubCommands().get(i).getName());
+                    }
+                } else {
+                    list.add(mainCommand.getSubCommands().get(i).getName());
+                }
+            }
+            list.add("help");
+            return list;
+        }
+
+        if (list.size() == 1) return list;
+        return list;
+    }
+
+    private @Nullable List<String> handleSubCommandTabCompletion(Player commandSender, String[] strings) {
+        Player player = commandSender;
+
+        for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
+            if (strings[0].equalsIgnoreCase(mainCommand.getSubCommands().get(i).getName())) {
+                List<String> subTab = mainCommand.getSubCommands().get(i).getTabComplete(player, strings);
+
+                if (subTab == null || subTab.isEmpty()) return new ArrayList<>();
+
+                String currentArg = strings[strings.length - 1].toLowerCase();
+
+                if (currentArg.isEmpty()) return subTab;
+
+                List<String> filtered = new ArrayList<>();
+
+                for (String suggestion : subTab) {
+                    if (suggestion.toLowerCase().startsWith(currentArg)) {
+                        filtered.add(suggestion);
+                    }
+                }
+
+                if (filtered.size() == 1) return filtered;
+
+                return new ArrayList<>();
+            }
+        }
+        return null;
     }
 
 }
