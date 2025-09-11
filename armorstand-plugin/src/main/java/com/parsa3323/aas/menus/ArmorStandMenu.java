@@ -216,19 +216,7 @@ public class ArmorStandMenu extends Menu {
     @Override
     public void setMenuItems() {
         if (armorStand == null || !armorStand.isValid()) {
-            playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "The armor stand is no longer available!");
-            playerMenuUtility.getOwner().closeInventory();
-            for (int i = 0; i < inventory.getSize(); i++) {
-                ItemStack grayPane = new ItemStack(XMaterial.GRAY_STAINED_GLASS_PANE.parseMaterial(), 1, (short) 7);
-                ItemMeta meta = grayPane.getItemMeta();
-
-                if (meta != null) {
-                    meta.setDisplayName(ChatColor.RED + "Armor stand is not available");
-                    grayPane.setItemMeta(meta);
-                }
-
-                inventory.setItem(i, grayPane);
-            }
+            handleInvalidArmorStand();
             return;
         }
 
@@ -260,13 +248,18 @@ public class ArmorStandMenu extends Menu {
 
         addActionsItem();
 
-        addEquipmentItems();
+        handleEquipment();
 
+        addOffHandItem();
+
+    }
+
+    private void addOffHandItem() {
         ItemStack itemInOffHand;
 
         if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
-
             itemInOffHand = (VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand) != null && VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).getType() != Material.AIR) ? VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).clone() : createNull("NONE");
+
 
         } else {
             itemInOffHand = new ItemStack(XMaterial.WHITE_STAINED_GLASS_PANE.parseMaterial());
@@ -278,10 +271,9 @@ public class ArmorStandMenu extends Menu {
         }
 
         inventory.setItem(39, itemInOffHand);
-
     }
 
-    private void addEquipmentItems() {
+    private void handleEquipment() {
         ItemStack head = (armorStand.getHelmet() != null && armorStand.getHelmet().getType() != Material.AIR) ? armorStand.getHelmet().clone() : createNull("HEAD");
         inventory.setItem(4, head);
 
@@ -296,6 +288,23 @@ public class ArmorStandMenu extends Menu {
 
         ItemStack itemInHand = (armorStand.getItemInHand() != null && armorStand.getItemInHand().getType() != Material.AIR) ? armorStand.getItemInHand().clone() : createNull("NONE");
         inventory.setItem(40, itemInHand);
+    }
+
+    private void handleInvalidArmorStand() {
+        playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "The armor stand is no longer available!");
+        playerMenuUtility.getOwner().closeInventory();
+        for (int i = 0; i < inventory.getSize(); i++) {
+            ItemStack grayPane = new ItemStack(XMaterial.GRAY_STAINED_GLASS_PANE.parseMaterial(), 1, (short) 7);
+            ItemMeta meta = grayPane.getItemMeta();
+
+            if (meta != null) {
+                meta.setDisplayName(ChatColor.RED + "Armor stand is not available");
+                grayPane.setItemMeta(meta);
+            }
+
+            inventory.setItem(i, grayPane);
+        }
+        return;
     }
 
     private void addOptionsItem() {
