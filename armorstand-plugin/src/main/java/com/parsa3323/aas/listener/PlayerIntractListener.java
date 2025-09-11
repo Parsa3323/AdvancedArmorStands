@@ -130,21 +130,10 @@ public class PlayerIntractListener implements Listener {
 
                     TriggerType triggerType = (isSneaking ? TriggerType.SHIFT_RIGHT_CLICK : TriggerType.RIGHT_CLICK);
 
-                    switch (ActionConfig.get().getString(path + ".type")) {
-                        case "server":
-                            ActionTriggerEvent actionTriggerEvent = new ActionTriggerEvent(SenderType.CONSOLE, player.getBukkitPlayer(), triggerType, (ArmorStand) e.getRightClicked());
-                            Bukkit.getPluginManager().callEvent(actionTriggerEvent);
-                            if (!actionTriggerEvent.isCancelled()) {
-                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), key.replaceAll("-", " "));
-                            }
-                            break;
-                        case "player":
-                            ActionTriggerEvent actionTriggerEvent1 = new ActionTriggerEvent(SenderType.PLAYER, player.getBukkitPlayer(), triggerType, (ArmorStand) e.getRightClicked());
-                            Bukkit.getPluginManager().callEvent(actionTriggerEvent1);
-                            if (!actionTriggerEvent1.isCancelled()) {
-                                p.performCommand(key.replaceAll("-", " "));
-                            }
-                    }
+                    String type = ActionConfig.get().getString(path + ".type");
+                    String command = key.replaceAll("-", " ");
+                    handleAction(type, p, triggerType, (ArmorStand) e.getRightClicked(), command);
+
                 }
                 e.setCancelled(true);
 
