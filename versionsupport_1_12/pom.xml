@@ -24,7 +24,7 @@
 
     <groupId>com.parsa3323</groupId>
     <artifactId>versionsupport_1_12</artifactId>
-    <version>1.9.0</version>
+    <version>1.10.0-dev1</version>
     <packaging>jar</packaging>
 
     <name>versionsupport_1_12</name>
