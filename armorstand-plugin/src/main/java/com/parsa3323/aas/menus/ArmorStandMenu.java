@@ -81,9 +81,9 @@ public class ArmorStandMenu extends Menu {
 
         if (handleSlotItems(e, p)) return;
 
-        if (p == null || e.getInventory() == null || e.getInventory().getHolder() == null) return;
+        if (isInvalidContext(e, p)) return;
 
-        if (isValidInventoryAction(e)) return;
+        if (isInvalidInventoryAction(e)) return;
 
         ItemStack itemTaken = e.getCurrentItem();
         ItemStack cursorItem = e.getCursor();
@@ -111,11 +111,7 @@ public class ArmorStandMenu extends Menu {
 
         UUID uuid = p.getUniqueId();
         long now = System.currentTimeMillis();
-        if (cooldownMap.containsKey(uuid) && (now - cooldownMap.get(uuid)) < 1000) {
-            int rem = (int) Math.ceil((1000 - (now - cooldownMap.get(uuid))) / 1000.0);
-            p.sendMessage(ChatColor.RED + "You must wait " + rem + " seconds before placing an item");
-            return;
-        }
+        if (handleCooldown(uuid, now, p)) return;
 
         ItemStack placed = cursorItem.clone();
         placed.setAmount(1);
@@ -125,46 +121,14 @@ public class ArmorStandMenu extends Menu {
             return;
         }
 
-        if (cursorItem.getType() == Material.AIR) {
-            AdvancedArmorStands.debug("Removing");
-            e.getInventory().setItem(slot, createNull(getSlotName(slot)));
-        } else {
-            AdvancedArmorStands.debug("Adding");
-            e.getInventory().setItem(slot, placed);
-        }
+        checkClickType(e, cursorItem, slot, placed);
 
         p.setItemOnCursor(new ItemStack(Material.AIR));
 
-        if (itemTaken != null && itemTaken.getType() != Material.AIR && itemTaken.getType() != EQUIPMENT_MATERIAL) {
-            p.getInventory().addItem(itemTaken);
-        }
+        checkItemTaken(itemTaken, p);
 
         try {
-            switch (slot) {
-                case 4:
-                    armorStand.setHelmet(placed);
-                    break;
-                case 13:
-                    armorStand.setChestplate(placed);
-                    break;
-                case 22:
-                    armorStand.setLeggings(placed);
-                    break;
-                case 31:
-                    armorStand.setBoots(placed);
-                    break;
-                case 39:
-                    if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
-                        VersionSupportUtil.getVersionSupport().setItemInOffHand(armorStand, placed);
-                    } else {
-                        return;
-                    }
-                    break;
-                case 40:
-                    armorStand.setItemInHand(placed);
-                    break;
-
-            }
+            if (applyToArmorStand(slot, placed)) return;
             Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
 
             p.playSound(p.getLocation(), VersionSupportUtil.getVersionSupport().getEquipSound(), 1,  1);
@@ -178,7 +142,65 @@ public class ArmorStandMenu extends Menu {
         }
     }
 
-    private static boolean isValidInventoryAction(InventoryClickEvent e) {
+    private boolean applyToArmorStand(int slot, ItemStack placed) {
+        switch (slot) {
+            case 4:
+                armorStand.setHelmet(placed);
+                break;
+            case 13:
+                armorStand.setChestplate(placed);
+                break;
+            case 22:
+                armorStand.setLeggings(placed);
+                break;
+            case 31:
+                armorStand.setBoots(placed);
+                break;
+            case 39:
+                if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
+                    VersionSupportUtil.getVersionSupport().setItemInOffHand(armorStand, placed);
+                } else {
+                    return true;
+                }
+                break;
+            case 40:
+                armorStand.setItemInHand(placed);
+                break;
+
+        }
+        return false;
+    }
+
+    private void checkItemTaken(ItemStack itemTaken, Player p) {
+        if (itemTaken != null && itemTaken.getType() != Material.AIR && itemTaken.getType() != EQUIPMENT_MATERIAL) {
+            p.getInventory().addItem(itemTaken);
+        }
+    }
+
+    private void checkClickType(InventoryClickEvent e, ItemStack cursorItem, int slot, ItemStack placed) {
+        if (cursorItem.getType() == Material.AIR) {
+            AdvancedArmorStands.debug("Removing");
+            e.getInventory().setItem(slot, createNull(getSlotName(slot)));
+        } else {
+            AdvancedArmorStands.debug("Adding");
+            e.getInventory().setItem(slot, placed);
+        }
+    }
+
+    private static boolean isInvalidContext(InventoryClickEvent e, Player p) {
+        return p == null || e.getInventory() == null || e.getInventory().getHolder() == null;
+    }
+
+    private boolean handleCooldown(UUID uuid, long now, Player p) {
+        if (cooldownMap.containsKey(uuid) && (now - cooldownMap.get(uuid)) < 1000) {
+            int rem = (int) Math.ceil((1000 - (now - cooldownMap.get(uuid))) / 1000.0);
+            p.sendMessage(ChatColor.RED + "You must wait " + rem + " seconds before placing an item");
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isInvalidInventoryAction(InventoryClickEvent e) {
         if (e.getAction() != InventoryAction.PICKUP_ALL
                 && e.getAction() != InventoryAction.PICKUP_ONE
                 && e.getAction() != InventoryAction.PLACE_ALL
