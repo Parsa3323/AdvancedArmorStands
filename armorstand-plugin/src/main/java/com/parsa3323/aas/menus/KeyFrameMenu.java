@@ -104,12 +104,33 @@ public class KeyFrameMenu extends PaginatedMenu {
 
         if (e.getSlot() == 50) {
 
-            setInterval(e, animationName);
+            int currentInterval = AnimationConfig.get().getInt("animations." + animationName + ".interval");
+
+            if (e.getClick() == ClickType.SHIFT_LEFT) {
+                AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval + 10));
+                super.open();
+            } else if (e.getClick() == ClickType.LEFT) {
+                AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval + 1));
+                super.open();
+            } else if (e.getClick() == ClickType.SHIFT_RIGHT) {
+                AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval - 10));
+                super.open();
+            } else if (e.getClick() == ClickType.RIGHT) {
+                AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval - 1));
+                super.open();
+            }
+
+            AnimationConfig.save();
             return;
         }
 
         if (e.getSlot() == 48) {
-            toggleLoop(animationName);
+            boolean currentLoop = AnimationConfig.get().getBoolean("animations." + animationName + ".loop");
+
+            AnimationConfig.get().set("animations." + animationName + ".loop", !currentLoop);
+
+            AnimationConfig.save();
+            super.open();
             return;
         }
 
@@ -118,37 +139,6 @@ public class KeyFrameMenu extends PaginatedMenu {
         super.open();
 
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
-    }
-
-    private void toggleLoop(String animationName) {
-        boolean currentLoop = AnimationConfig.get().getBoolean("animations." + animationName + ".loop");
-
-        AnimationConfig.get().set("animations." + animationName + ".loop", !currentLoop);
-
-        AnimationConfig.save();
-        super.open();
-        return;
-    }
-
-    private void setInterval(InventoryClickEvent e, String animationName) {
-        int currentInterval = AnimationConfig.get().getInt("animations." + animationName + ".interval");
-
-        if (e.getClick() == ClickType.SHIFT_LEFT) {
-            AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval + 10));
-            super.open();
-        } else if (e.getClick() == ClickType.LEFT) {
-            AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval + 1));
-            super.open();
-        } else if (e.getClick() == ClickType.SHIFT_RIGHT) {
-            AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval - 10));
-            super.open();
-        } else if (e.getClick() == ClickType.RIGHT) {
-            AnimationConfig.get().set("animations." + animationName + ".interval", (currentInterval - 1));
-            super.open();
-        }
-
-        AnimationConfig.save();
-        return;
     }
 
     @Override

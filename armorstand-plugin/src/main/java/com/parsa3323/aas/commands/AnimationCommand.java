@@ -61,98 +61,86 @@ public class AnimationCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if (args.length < 2) {
-            displayHelp(player);
+            player.sendMessage("");
+            player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            player.sendMessage("     " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands " + ColorUtils.boldAndColor(ChatColor.GRAY) + "animation commands");
+            player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            player.sendMessage("");
+            for (SubCommand cmd : animationSubCommands) {
+                String command = cmd.getSyntax();
+                String description = cmd.getDescription();
+                String prefix = ChatColor.GOLD + " » ";
+                String commandColor = ChatColor.YELLOW + "" + ChatColor.BOLD;
+                String sep = ChatColor.DARK_GRAY + " - ";
+                String descColor = ChatColor.GRAY.toString();
+
+                String fullMessage = prefix + commandColor + command + sep + descColor + description;
+
+                int lineCharLimit = 50;
+                List<String> wrappedLines = new ArrayList<>();
+
+                int index = 0;
+                while (index < fullMessage.length()) {
+                    int end = Math.min(index + lineCharLimit, fullMessage.length());
+
+                    if (end < fullMessage.length() && fullMessage.charAt(end) != ' ') {
+                        int spaceBack = fullMessage.lastIndexOf(' ', end);
+                        if (spaceBack > index) end = spaceBack;
+                    }
+
+                    String line = fullMessage.substring(index, end).trim();
+                    wrappedLines.add(line);
+                    index = end;
+                }
+
+                for (String line : wrappedLines) {
+                    TextComponent component = new TextComponent(line);
+                    component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command));
+                    component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                            new ComponentBuilder(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Click to use this command")
+                                    .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + command)
+                                    .append("\n" + ChatColor.GRAY + "Description: " + ChatColor.WHITE + description)
+                                    .create()));
+                    player.spigot().sendMessage(component);
+                }
+
+
+
+            }
+            player.sendMessage(" ");
+            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
         } else {
 
-            executeCommand(player, args);
-
-        }
-
-    }
-
-    private void executeCommand(Player player, String[] args) {
-        int count = 0;
-        for (SubCommand cmd : animationSubCommands) {
-            if (args[1].equalsIgnoreCase(cmd.getName())) {
-                count++;
-                if (cmd.isForOps()) {
-                    if (player.hasPermission("advanced-armorstands.admin")) {
-                        cmd.perform(player, args);
+            int count = 0;
+            for (SubCommand cmd : animationSubCommands) {
+                if (args[1].equalsIgnoreCase(cmd.getName())) {
+                    count++;
+                    if (cmd.isForOps()) {
+                        if (player.hasPermission("advanced-armorstands.admin")) {
+                            cmd.perform(player, args);
+                        } else {
+                            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Access Denied: " + ChatColor.RED + "You don't have permission to use this command!");
+                        }
                     } else {
-                        player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Access Denied: " + ChatColor.RED + "You don't have permission to use this command!");
+                        cmd.perform(player, args);
                     }
+                }
+
+            }
+
+            if (count == 0) {
+                String suggestion = CommandUtils.getClosestCommand(args[1], animationSubCommands);
+
+                if (suggestion != null) {
+                    player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "' is not a valid subcommand" + args[0] + "'. Did you mean '/as " + suggestion + "'?");
                 } else {
-                    cmd.perform(player, args);
-                }
-            }
-
-        }
-
-        if (count == 0) {
-            String suggestion = CommandUtils.getClosestCommand(args[1], animationSubCommands);
-
-            if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "' is not a valid subcommand" + args[0] + "'. Did you mean '/as " + suggestion + "'?");
-            } else {
-                player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
-            }
-
-        }
-    }
-
-    private void displayHelp(Player player) {
-        player.sendMessage("");
-        player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        player.sendMessage("     " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands " + ColorUtils.boldAndColor(ChatColor.GRAY) + "animation commands");
-        player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        player.sendMessage("");
-        for (SubCommand cmd : animationSubCommands) {
-            String command = cmd.getSyntax();
-            String description = cmd.getDescription();
-            String prefix = ChatColor.GOLD + " » ";
-            String commandColor = ChatColor.YELLOW + "" + ChatColor.BOLD;
-            String sep = ChatColor.DARK_GRAY + " - ";
-            String descColor = ChatColor.GRAY.toString();
-
-            String fullMessage = prefix + commandColor + command + sep + descColor + description;
-
-            int lineCharLimit = 50;
-            List<String> wrappedLines = new ArrayList<>();
-
-            int index = 0;
-            while (index < fullMessage.length()) {
-                int end = Math.min(index + lineCharLimit, fullMessage.length());
-
-                if (end < fullMessage.length() && fullMessage.charAt(end) != ' ') {
-                    int spaceBack = fullMessage.lastIndexOf(' ', end);
-                    if (spaceBack > index) end = spaceBack;
+                    player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
                 }
 
-                String line = fullMessage.substring(index, end).trim();
-                wrappedLines.add(line);
-                index = end;
             }
-
-            for (String line : wrappedLines) {
-                sendCommandMessages(player, line, command, description);
-            }
-
-
 
         }
-        player.sendMessage(" ");
-        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
-    }
 
-    private static void sendCommandMessages(Player player, String line, String command, String description) {
-        TextComponent component = new TextComponent(line);
-        component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command));
-        component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                new ComponentBuilder(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Click to use this command")
-                        .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + command)
-                        .append("\n" + ChatColor.GRAY + "Description: " + ChatColor.WHITE + description)
-                        .create()));
-        player.spigot().sendMessage(component);
     }
 
 

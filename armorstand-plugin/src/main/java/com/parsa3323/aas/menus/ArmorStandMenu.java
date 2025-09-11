@@ -75,15 +75,50 @@ public class ArmorStandMenu extends Menu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
 
-        if (isInvalidEvent(e)) return;
+        if (armorStand == null) {
+            e.setCancelled(true);
+            return;
+        }
 
         Player p = (Player) e.getWhoClicked();
 
-        if (handleSlotItems(e, p)) return;
+        switch (e.getSlot()) {
+            case 33:
+                InventoryUtils.save(p);
+                ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
+                ArmorStandSelectionCache.addToEditSession(p);
+                InventoryUtils.setOptionItems(p);
+                p.closeInventory();
+                break;
+            case 11:
+                if (e.getClick() == ClickType.SHIFT_RIGHT || e.getClick() == ClickType.SHIFT_LEFT) {
+                    ToolsManager toolsManager = new ToolsManager(new PlayerMenuUtility(playerMenuUtility.getOwner()), armorStand);
+                    toolsManager.open();
 
-        if (isInvalidContext(e, p)) return;
+                    return;
+                }
 
-        if (isInvalidInventoryAction(e)) return;
+                p.closeInventory();
+                break;
+            case 15:
+                ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), armorStand);
+                actionMenu.open();
+                break;
+            case 29:
+                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(p), armorStand, true);
+                settingsManager.open();
+        }
+
+        if (p == null || e.getInventory() == null || e.getInventory().getHolder() == null) return;
+
+        if (e.getAction() != InventoryAction.PICKUP_ALL
+                && e.getAction() != InventoryAction.PICKUP_ONE
+                && e.getAction() != InventoryAction.PLACE_ALL
+                && e.getAction() != InventoryAction.PLACE_ONE
+                && e.getAction() != InventoryAction.SWAP_WITH_CURSOR) {
+            e.setCancelled(true);
+            return;
+        }
 
         ItemStack itemTaken = e.getCurrentItem();
         ItemStack cursorItem = e.getCursor();
@@ -111,7 +146,11 @@ public class ArmorStandMenu extends Menu {
 
         UUID uuid = p.getUniqueId();
         long now = System.currentTimeMillis();
-        if (handleCooldown(uuid, now, p)) return;
+        if (cooldownMap.containsKey(uuid) && (now - cooldownMap.get(uuid)) < 1000) {
+            int rem = (int) Math.ceil((1000 - (now - cooldownMap.get(uuid))) / 1000.0);
+            p.sendMessage(ChatColor.RED + "You must wait " + rem + " seconds before placing an item");
+            return;
+        }
 
         ItemStack placed = cursorItem.clone();
         placed.setAmount(1);
@@ -121,14 +160,46 @@ public class ArmorStandMenu extends Menu {
             return;
         }
 
-        checkClickType(e, cursorItem, slot, placed);
+        if (cursorItem.getType() == Material.AIR) {
+            AdvancedArmorStands.debug("Removing");
+            e.getInventory().setItem(slot, createNull(getSlotName(slot)));
+        } else {
+            AdvancedArmorStands.debug("Adding");
+            e.getInventory().setItem(slot, placed);
+        }
 
         p.setItemOnCursor(new ItemStack(Material.AIR));
 
-        checkItemTaken(itemTaken, p);
+        if (itemTaken != null && itemTaken.getType() != Material.AIR && itemTaken.getType() != EQUIPMENT_MATERIAL) {
+            p.getInventory().addItem(itemTaken);
+        }
 
         try {
-            if (applyToArmorStand(slot, placed)) return;
+            switch (slot) {
+                case 4:
+                    armorStand.setHelmet(placed);
+                    break;
+                case 13:
+                    armorStand.setChestplate(placed);
+                    break;
+                case 22:
+                    armorStand.setLeggings(placed);
+                    break;
+                case 31:
+                    armorStand.setBoots(placed);
+                    break;
+                case 39:
+                    if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
+                        VersionSupportUtil.getVersionSupport().setItemInOffHand(armorStand, placed);
+                    } else {
+                        return;
+                    }
+                    break;
+                case 40:
+                    armorStand.setItemInHand(placed);
+                    break;
+
+            }
             Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
 
             p.playSound(p.getLocation(), VersionSupportUtil.getVersionSupport().getEquipSound(), 1,  1);
@@ -142,118 +213,22 @@ public class ArmorStandMenu extends Menu {
         }
     }
 
-    private boolean applyToArmorStand(int slot, ItemStack placed) {
-        switch (slot) {
-            case 4:
-                armorStand.setHelmet(placed);
-                break;
-            case 13:
-                armorStand.setChestplate(placed);
-                break;
-            case 22:
-                armorStand.setLeggings(placed);
-                break;
-            case 31:
-                armorStand.setBoots(placed);
-                break;
-            case 39:
-                if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
-                    VersionSupportUtil.getVersionSupport().setItemInOffHand(armorStand, placed);
-                } else {
-                    return true;
-                }
-                break;
-            case 40:
-                armorStand.setItemInHand(placed);
-                break;
-
-        }
-        return false;
-    }
-
-    private void checkItemTaken(ItemStack itemTaken, Player p) {
-        if (itemTaken != null && itemTaken.getType() != Material.AIR && itemTaken.getType() != EQUIPMENT_MATERIAL) {
-            p.getInventory().addItem(itemTaken);
-        }
-    }
-
-    private void checkClickType(InventoryClickEvent e, ItemStack cursorItem, int slot, ItemStack placed) {
-        if (cursorItem.getType() == Material.AIR) {
-            AdvancedArmorStands.debug("Removing");
-            e.getInventory().setItem(slot, createNull(getSlotName(slot)));
-        } else {
-            AdvancedArmorStands.debug("Adding");
-            e.getInventory().setItem(slot, placed);
-        }
-    }
-
-    private static boolean isInvalidContext(InventoryClickEvent e, Player p) {
-        return p == null || e.getInventory() == null || e.getInventory().getHolder() == null;
-    }
-
-    private boolean handleCooldown(UUID uuid, long now, Player p) {
-        if (cooldownMap.containsKey(uuid) && (now - cooldownMap.get(uuid)) < 1000) {
-            int rem = (int) Math.ceil((1000 - (now - cooldownMap.get(uuid))) / 1000.0);
-            p.sendMessage(ChatColor.RED + "You must wait " + rem + " seconds before placing an item");
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isInvalidInventoryAction(InventoryClickEvent e) {
-        if (e.getAction() != InventoryAction.PICKUP_ALL
-                && e.getAction() != InventoryAction.PICKUP_ONE
-                && e.getAction() != InventoryAction.PLACE_ALL
-                && e.getAction() != InventoryAction.PLACE_ONE
-                && e.getAction() != InventoryAction.SWAP_WITH_CURSOR) {
-            e.setCancelled(true);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean handleSlotItems(InventoryClickEvent e, Player p) {
-        switch (e.getSlot()) {
-            case 33:
-                InventoryUtils.save(p);
-                ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
-                ArmorStandSelectionCache.addToEditSession(p);
-                InventoryUtils.setOptionItems(p);
-                p.closeInventory();
-                break;
-            case 11:
-                if (e.getClick() == ClickType.SHIFT_RIGHT || e.getClick() == ClickType.SHIFT_LEFT) {
-                    ToolsManager toolsManager = new ToolsManager(new PlayerMenuUtility(playerMenuUtility.getOwner()), armorStand);
-                    toolsManager.open();
-
-                    return true;
-                }
-
-                p.closeInventory();
-                break;
-            case 15:
-                ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), armorStand);
-                actionMenu.open();
-                break;
-            case 29:
-                SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(p), armorStand, true);
-                settingsManager.open();
-        }
-        return false;
-    }
-
-    private boolean isInvalidEvent(InventoryClickEvent e) {
-        if (armorStand == null) {
-            e.setCancelled(true);
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void setMenuItems() {
         if (armorStand == null || !armorStand.isValid()) {
-            handleInvalidArmorStand();
+            playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "The armor stand is no longer available!");
+            playerMenuUtility.getOwner().closeInventory();
+            for (int i = 0; i < inventory.getSize(); i++) {
+                ItemStack grayPane = new ItemStack(XMaterial.GRAY_STAINED_GLASS_PANE.parseMaterial(), 1, (short) 7);
+                ItemMeta meta = grayPane.getItemMeta();
+
+                if (meta != null) {
+                    meta.setDisplayName(ChatColor.RED + "Armor stand is not available");
+                    grayPane.setItemMeta(meta);
+                }
+
+                inventory.setItem(i, grayPane);
+            }
             return;
         }
 
@@ -275,145 +250,6 @@ public class ArmorStandMenu extends Menu {
                 14, 24, 16, 23, 25, 32, 34
         });
 
-        addInfoItem();
-
-        addCloseItem();
-
-        addOptionsItem();
-
-        addEditItem();
-
-        addActionsItem();
-
-        handleEquipment();
-
-        addOffHandItem();
-
-    }
-
-    private void addOffHandItem() {
-        ItemStack itemInOffHand;
-
-        if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
-            itemInOffHand = (VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand) != null && VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).getType() != Material.AIR) ? VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).clone() : createNull("NONE");
-
-
-        } else {
-            itemInOffHand = new ItemStack(XMaterial.WHITE_STAINED_GLASS_PANE.parseMaterial());
-
-            ItemMeta itemMeta = itemInOffHand.getItemMeta();
-
-            itemMeta.setDisplayName(" ");
-            itemInOffHand.setItemMeta(itemMeta);
-        }
-
-        inventory.setItem(39, itemInOffHand);
-    }
-
-    private void handleEquipment() {
-        ItemStack head = (armorStand.getHelmet() != null && armorStand.getHelmet().getType() != Material.AIR) ? armorStand.getHelmet().clone() : createNull("HEAD");
-        inventory.setItem(4, head);
-
-        ItemStack chest = (armorStand.getChestplate() != null && armorStand.getChestplate().getType() != Material.AIR) ? armorStand.getChestplate().clone() : createNull("CHEST");
-        inventory.setItem(13, chest);
-
-        ItemStack leg = (armorStand.getLeggings() != null && armorStand.getLeggings().getType() != Material.AIR) ? armorStand.getLeggings().clone() : createNull("LEG");
-        inventory.setItem(22, leg);
-
-        ItemStack boots = (armorStand.getBoots() != null && armorStand.getBoots().getType() != Material.AIR)  ? armorStand.getBoots().clone() : createNull("BOOT");
-        inventory.setItem(31, boots);
-
-        ItemStack itemInHand = (armorStand.getItemInHand() != null && armorStand.getItemInHand().getType() != Material.AIR) ? armorStand.getItemInHand().clone() : createNull("NONE");
-        inventory.setItem(40, itemInHand);
-    }
-
-    private void handleInvalidArmorStand() {
-        playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "The armor stand is no longer available!");
-        playerMenuUtility.getOwner().closeInventory();
-        for (int i = 0; i < inventory.getSize(); i++) {
-            ItemStack grayPane = new ItemStack(XMaterial.GRAY_STAINED_GLASS_PANE.parseMaterial(), 1, (short) 7);
-            ItemMeta meta = grayPane.getItemMeta();
-
-            if (meta != null) {
-                meta.setDisplayName(ChatColor.RED + "Armor stand is not available");
-                grayPane.setItemMeta(meta);
-            }
-
-            inventory.setItem(i, grayPane);
-        }
-        return;
-    }
-
-    private void addOptionsItem() {
-        ItemStack options = new ItemStack(Material.NETHER_STAR);
-        ItemMeta oMeta = options.getItemMeta();
-
-        ArrayList<String> oLore = new ArrayList<>();
-
-        oLore.add(ChatColor.GRAY + "Opens an inventory to");
-        oLore.add(ChatColor.GRAY + "enable & disable armor");
-        oLore.add(ChatColor.GRAY + "stand's options");
-
-        oMeta.setLore(oLore);
-        oMeta.setDisplayName(ChatColor.YELLOW + "Options!");
-        options.setItemMeta(oMeta);
-
-        inventory.setItem(29, options);
-    }
-
-    private void addEditItem() {
-        ItemStack edit = new ItemStack(Material.REDSTONE_BLOCK, 1);
-        ItemMeta editMeta= edit.getItemMeta();
-        editMeta.setDisplayName(ChatColor.YELLOW + "Edit!");
-
-        ArrayList<String> editLore = new ArrayList<>();
-        editLore.add(ChatColor.GRAY + "gives you some item");
-        editLore.add(ChatColor.GRAY + "that you can edit");
-        editLore.add(ChatColor.GRAY + "as positions with it");
-        editMeta.setLore(editLore);
-        edit.setItemMeta(editMeta);
-        inventory.setItem(33, edit);
-    }
-
-    private void addActionsItem() {
-        ItemStack actions = new ItemStack(XMaterial.TRIPWIRE_HOOK.parseMaterial());
-
-        ArrayList<String> lore = new ArrayList<>();
-
-        lore.add(ChatColor.GRAY + "Opens an inventory to");
-        lore.add(ChatColor.GRAY + "create and delete on-click");
-        lore.add(ChatColor.GRAY + "custom command actions for");
-        lore.add(ChatColor.GRAY + "your armor stand");
-
-
-        ItemMeta tMeta = actions.getItemMeta();
-        tMeta.setDisplayName(ChatColor.YELLOW + "Actions");
-        tMeta.setLore(lore);
-        actions.setItemMeta(tMeta);
-
-        inventory.setItem(15, actions);
-    }
-
-    private void addCloseItem() {
-        ItemStack close = new ItemStack(Material.BARRIER, 1);
-        ItemMeta cMeta = close.getItemMeta();
-
-        cMeta.setDisplayName(ChatColor.RED + "Close");
-
-        ArrayList<String> cLore = new ArrayList<>();
-
-        cLore.add(ChatColor.GRAY + "Click to close this menu");
-        cLore.add(ChatColor.GRAY + "Shift-click to open the ");
-        cLore.add(ChatColor.GRAY + "Tools Menu for editing");
-        cLore.add(ChatColor.GRAY + "the armor stand");
-
-        cMeta.setLore(cLore);
-        close.setItemMeta(cMeta);
-
-        inventory.setItem(11, close);
-    }
-
-    private void addInfoItem() {
         ItemStack info = XMaterial.GRAY_STAINED_GLASS_PANE.parseItem();
         ItemMeta iMeta = info.getItemMeta();
 
@@ -444,6 +280,101 @@ public class ArmorStandMenu extends Menu {
         info.setItemMeta(iMeta);
 
         inventory.setItem(44, info);
+
+        ItemStack close = new ItemStack(Material.BARRIER, 1);
+        ItemMeta cMeta = close.getItemMeta();
+
+        cMeta.setDisplayName(ChatColor.RED + "Close");
+
+        ArrayList<String> cLore = new ArrayList<>();
+
+        cLore.add(ChatColor.GRAY + "Click to close this menu");
+        cLore.add(ChatColor.GRAY + "Shift-click to open the ");
+        cLore.add(ChatColor.GRAY + "Tools Menu for editing");
+        cLore.add(ChatColor.GRAY + "the armor stand");
+
+        cMeta.setLore(cLore);
+        close.setItemMeta(cMeta);
+
+        inventory.setItem(11, close);
+
+
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ChatColor.GRAY + "Opens an inventory to");
+        lore.add(ChatColor.GRAY + "create and delete on-click");
+        lore.add(ChatColor.GRAY + "custom command actions for");
+        lore.add(ChatColor.GRAY + "your armor stand");
+
+
+
+
+        ItemStack options = new ItemStack(Material.NETHER_STAR);
+        ItemMeta oMeta = options.getItemMeta();
+
+        ArrayList<String> oLore = new ArrayList<>();
+
+        oLore.add(ChatColor.GRAY + "Opens an inventory to");
+        oLore.add(ChatColor.GRAY + "enable & disable armor");
+        oLore.add(ChatColor.GRAY + "stand's options");
+
+        oMeta.setLore(oLore);
+        oMeta.setDisplayName(ChatColor.YELLOW + "Options!");
+        options.setItemMeta(oMeta);
+
+        inventory.setItem(29, options);
+
+        ItemStack edit = new ItemStack(Material.REDSTONE_BLOCK, 1);
+        ItemMeta editMeta= edit.getItemMeta();
+        editMeta.setDisplayName(ChatColor.YELLOW + "Edit!");
+
+        ArrayList<String> editLore = new ArrayList<>();
+        editLore.add(ChatColor.GRAY + "gives you some item");
+        editLore.add(ChatColor.GRAY + "that you can edit");
+        editLore.add(ChatColor.GRAY + "as positions with it");
+        editMeta.setLore(editLore);
+        edit.setItemMeta(editMeta);
+        inventory.setItem(33, edit);
+
+        ItemStack actions = new ItemStack(XMaterial.TRIPWIRE_HOOK.parseMaterial()) ;
+        ItemMeta tMeta = actions.getItemMeta();
+        tMeta.setDisplayName(ChatColor.YELLOW + "Actions");
+        tMeta.setLore(lore);
+        actions.setItemMeta(tMeta);
+
+        inventory.setItem(15, actions);
+        ItemStack head = (armorStand.getHelmet() != null && armorStand.getHelmet().getType() != Material.AIR) ? armorStand.getHelmet().clone() : createNull("HEAD");
+        inventory.setItem(4, head);
+
+        ItemStack chest = (armorStand.getChestplate() != null && armorStand.getChestplate().getType() != Material.AIR) ? armorStand.getChestplate().clone() : createNull("CHEST");
+        inventory.setItem(13, chest);
+
+        ItemStack leg = (armorStand.getLeggings() != null && armorStand.getLeggings().getType() != Material.AIR) ? armorStand.getLeggings().clone() : createNull("LEG");
+        inventory.setItem(22, leg);
+
+        ItemStack boots = (armorStand.getBoots() != null && armorStand.getBoots().getType() != Material.AIR)  ? armorStand.getBoots().clone() : createNull("BOOT");
+        inventory.setItem(31, boots);
+
+        ItemStack itemInHand = (armorStand.getItemInHand() != null && armorStand.getItemInHand().getType() != Material.AIR) ? armorStand.getItemInHand().clone() : createNull("NONE");
+        inventory.setItem(40, itemInHand);
+
+        ItemStack itemInOffHand;
+
+        if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
+            itemInOffHand = (VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand) != null && VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).getType() != Material.AIR) ? VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).clone() : createNull("NONE");
+
+
+        } else {
+            itemInOffHand = new ItemStack(XMaterial.WHITE_STAINED_GLASS_PANE.parseMaterial());
+
+            ItemMeta itemMeta = itemInOffHand.getItemMeta();
+
+            itemMeta.setDisplayName(" ");
+            itemInOffHand.setItemMeta(itemMeta);
+        }
+
+        inventory.setItem(39, itemInOffHand);
+
     }
 
     @Override
