@@ -66,5 +66,6 @@ public class MoveTool extends ToolsOption {
 
         moveList.put(p.getUniqueId(), armorStand);
         p.sendMessage(ChatColor.GREEN + "Click on the block you want the armor stand to be on");
+        p.closeInventory();
     }
 }
