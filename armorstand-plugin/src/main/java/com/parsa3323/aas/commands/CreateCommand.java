@@ -170,7 +170,7 @@ public class CreateCommand extends SubCommand implements Listener {
             int leftLeg = Integer.parseInt(args[5]);
             int headPos = Integer.parseInt(args[6]);
 
-            String armorStandName = String.join("_", java.util.Arrays.copyOfRange(args, 7, args.length));;
+            String armorStandName = String.join("_", java.util.Arrays.copyOfRange(args, 7, args.length));
 
             ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
 
