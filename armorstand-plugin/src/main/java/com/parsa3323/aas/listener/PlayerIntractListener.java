@@ -75,9 +75,28 @@ public class PlayerIntractListener implements Listener {
                             int count = interactionCount.getOrDefault(playerId, 0) + 1;
 
                             if (count < 3) {
-                                handleCountMessage(e, playerId, count, player);
+                                selectCount.put(playerId, (ArmorStand) e.getRightClicked());
+                                interactionCount.put(playerId, count);
+                                player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced armor stands.");
                             } else if (count == 3) {
-                                if (saveArmorStand(e, player, playerId)) return;
+                                int randomSuffix = new Random().nextInt(900) + 100;
+                                String name = "SavedStand" + randomSuffix;
+
+                                ArmorStand stand = (ArmorStand) e.getRightClicked();
+
+                                ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player.getBukkitPlayer(), stand, name);
+                                Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
+
+                                if (armorStandCreateEvent.isCancelled()) {
+                                    stand.remove();
+                                    return;
+                                }
+
+                                //CreateCommand.saveArmorStand(name, stand);
+                                player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "Armor stand saved as " + name + "!");
+                                ArmorStandUtils.saveArmorStand(name, stand);
+
+                                interactionCount.remove(playerId);
                             }
 
                         }
@@ -134,34 +153,6 @@ public class PlayerIntractListener implements Listener {
         }
     }
 
-    private boolean saveArmorStand(PlayerInteractAtEntityEvent e, IPlayer player, UUID playerId) {
-        int randomSuffix = new Random().nextInt(900) + 100;
-        String name = "SavedStand" + randomSuffix;
-
-        ArmorStand stand = (ArmorStand) e.getRightClicked();
-
-        ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player.getBukkitPlayer(), stand, name);
-        Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
-
-        if (armorStandCreateEvent.isCancelled()) {
-            stand.remove();
-            return true;
-        }
-
-        //CreateCommand.saveArmorStand(name, stand);
-        player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "Armor stand saved as " + name + "!");
-        ArmorStandUtils.saveArmorStand(name, stand);
-
-        interactionCount.remove(playerId);
-        return false;
-    }
-
-    private void handleCountMessage(PlayerInteractAtEntityEvent e, UUID playerId, int count, IPlayer player) {
-        selectCount.put(playerId, (ArmorStand) e.getRightClicked());
-        interactionCount.put(playerId, count);
-        player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced armor stands.");
-    }
-
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void entityDamageByEntityEvent(EntityDamageByEntityEvent e) {
@@ -201,22 +192,26 @@ public class PlayerIntractListener implements Listener {
             String type = commandSection.getString("type");
             String command = key.replaceAll("-", " ");
 
-            if ("server".equalsIgnoreCase(type)) {
-                ActionTriggerEvent actionTriggerEvent = new ActionTriggerEvent(SenderType.CONSOLE, player, triggerType, armorStand);
-                Bukkit.getPluginManager().callEvent(actionTriggerEvent);
-                if (!actionTriggerEvent.isCancelled()) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
-                }
-            } else if ("player".equalsIgnoreCase(type)) {
-                ActionTriggerEvent actionTriggerEvent = new ActionTriggerEvent(SenderType.PLAYER, player, triggerType, armorStand);
-                Bukkit.getPluginManager().callEvent(actionTriggerEvent);
-                if (!actionTriggerEvent.isCancelled()) {
-                    player.performCommand(command);
-                }
-            }
+            handleAction(type, player, triggerType, armorStand, command);
         }
 
 
+    }
+
+    private static void handleAction(String type, Player player, TriggerType triggerType, ArmorStand armorStand, String command) {
+        if ("server".equalsIgnoreCase(type)) {
+            ActionTriggerEvent actionTriggerEvent = new ActionTriggerEvent(SenderType.CONSOLE, player, triggerType, armorStand);
+            Bukkit.getPluginManager().callEvent(actionTriggerEvent);
+            if (!actionTriggerEvent.isCancelled()) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+            }
+        } else if ("player".equalsIgnoreCase(type)) {
+            ActionTriggerEvent actionTriggerEvent = new ActionTriggerEvent(SenderType.PLAYER, player, triggerType, armorStand);
+            Bukkit.getPluginManager().callEvent(actionTriggerEvent);
+            if (!actionTriggerEvent.isCancelled()) {
+                player.performCommand(command);
+            }
+        }
     }
 
 }
