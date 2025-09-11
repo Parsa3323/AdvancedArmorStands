@@ -54,35 +54,10 @@ public class PlayerIntractListener implements Listener {
         IPlayer player = PlayerManager.getByBukkit(e.getPlayer());
         if (e.getRightClicked() instanceof ArmorStand) {
             if (player.isAdmin()) {
-                if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
-                    if (e.getPlayer().isSneaking()) {
-                        ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), (ArmorStand) e.getRightClicked());
-                        ArmorStandSelectionCache.setSelectedArmorStand(player.getBukkitPlayer().getUniqueId(), (ArmorStand) e.getRightClicked());
-                        armorStandMenu.open();
-                    }
-                    e.setCancelled(true);
+                if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked()) && e.getPlayer().isSneaking()) {
+                    handleAdminShiftRightClick(e, player);
                 } else {
-                    if (AdvancedArmorStands.plugin.getConfig().getBoolean("shift-right-click-to-add")) {
-
-                        if (player.getBukkitPlayer().isSneaking()) {
-
-                            UUID playerId = player.getBukkitPlayer().getUniqueId();
-
-                            if (!selectCount.containsKey(playerId) || selectCount.get(playerId) != (ArmorStand) e.getRightClicked()) {
-                                interactionCount.put(playerId, 0);
-                            }
-
-                            int count = interactionCount.getOrDefault(playerId, 0) + 1;
-
-                            if (count < 3) {
-                                handleCount(e, playerId, count, player);
-                            } else if (count == 3) {
-                                if (saveArmorStand(e, player, playerId)) return;
-                            }
-
-                        }
-
-                    }
+                    if (handleShiftRightClickAdd(e, player)) return;
                 }
 
             }
@@ -121,6 +96,37 @@ public class PlayerIntractListener implements Listener {
             }
 
         }
+    }
+
+    private boolean handleShiftRightClickAdd(PlayerInteractAtEntityEvent e, IPlayer player) {
+        if (AdvancedArmorStands.plugin.getConfig().getBoolean("shift-right-click-to-add")) {
+
+            if (player.getBukkitPlayer().isSneaking()) {
+
+                UUID playerId = player.getBukkitPlayer().getUniqueId();
+
+                if (!selectCount.containsKey(playerId) || selectCount.get(playerId) != (ArmorStand) e.getRightClicked()) {
+                    interactionCount.put(playerId, 0);
+                }
+
+                int count = interactionCount.getOrDefault(playerId, 0) + 1;
+
+                if (count < 3) {
+                    handleCount(e, playerId, count, player);
+                } else if (count == 3) {
+                    if (saveArmorStand(e, player, playerId)) return true;
+                }
+
+            }
+
+        }
+        return false;
+    }
+
+    private static void handleAdminShiftRightClick(PlayerInteractAtEntityEvent e, IPlayer player) {
+        ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player.getBukkitPlayer()), (ArmorStand) e.getRightClicked());
+        ArmorStandSelectionCache.setSelectedArmorStand(player.getBukkitPlayer().getUniqueId(), (ArmorStand) e.getRightClicked());
+        armorStandMenu.open();
     }
 
     private void handleCount(PlayerInteractAtEntityEvent e, UUID playerId, int count, IPlayer player) {
