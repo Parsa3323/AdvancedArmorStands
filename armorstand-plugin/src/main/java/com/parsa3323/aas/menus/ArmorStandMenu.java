@@ -260,6 +260,28 @@ public class ArmorStandMenu extends Menu {
 
         addActionsItem();
 
+        addEquipmentItems();
+
+        ItemStack itemInOffHand;
+
+        if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
+
+            itemInOffHand = (VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand) != null && VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).getType() != Material.AIR) ? VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).clone() : createNull("NONE");
+
+        } else {
+            itemInOffHand = new ItemStack(XMaterial.WHITE_STAINED_GLASS_PANE.parseMaterial());
+
+            ItemMeta itemMeta = itemInOffHand.getItemMeta();
+
+            itemMeta.setDisplayName(" ");
+            itemInOffHand.setItemMeta(itemMeta);
+        }
+
+        inventory.setItem(39, itemInOffHand);
+
+    }
+
+    private void addEquipmentItems() {
         ItemStack head = (armorStand.getHelmet() != null && armorStand.getHelmet().getType() != Material.AIR) ? armorStand.getHelmet().clone() : createNull("HEAD");
         inventory.setItem(4, head);
 
@@ -274,24 +296,6 @@ public class ArmorStandMenu extends Menu {
 
         ItemStack itemInHand = (armorStand.getItemInHand() != null && armorStand.getItemInHand().getType() != Material.AIR) ? armorStand.getItemInHand().clone() : createNull("NONE");
         inventory.setItem(40, itemInHand);
-
-        ItemStack itemInOffHand;
-
-        if (VersionSupportUtil.getVersionSupport().canSetItemOffHand()) {
-            itemInOffHand = (VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand) != null && VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).getType() != Material.AIR) ? VersionSupportUtil.getVersionSupport().getItemInOffHand(armorStand).clone() : createNull("NONE");
-
-
-        } else {
-            itemInOffHand = new ItemStack(XMaterial.WHITE_STAINED_GLASS_PANE.parseMaterial());
-
-            ItemMeta itemMeta = itemInOffHand.getItemMeta();
-
-            itemMeta.setDisplayName(" ");
-            itemInOffHand.setItemMeta(itemMeta);
-        }
-
-        inventory.setItem(39, itemInOffHand);
-
     }
 
     private void addOptionsItem() {
