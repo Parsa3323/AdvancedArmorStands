@@ -27,7 +27,9 @@ import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.TypeUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -36,7 +38,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
-import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,8 +82,9 @@ public class CreateCommand extends SubCommand implements Listener {
 
             ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
 
+            String armorStandName = String.join("_", java.util.Arrays.copyOfRange(args, 2, args.length));
 
-            ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, args[2]);
+            ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, armorStandName);
             Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
 
             if (armorStandCreateEvent.isCancelled()) {
@@ -147,7 +149,7 @@ public class CreateCommand extends SubCommand implements Listener {
             AdvancedArmorStands.debug("leftLegPose.y = " + getConfigDouble(args[1] + ".leftLegPose.y"));
             AdvancedArmorStands.debug("leftLegPose.z = " + getConfigDouble(args[1] + ".leftLegPose.z"));
 
-            ArmorStandUtils.saveArmorStand(args[2], armorStand);
+            ArmorStandUtils.saveArmorStand(armorStandName, armorStand);
 
 
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
@@ -158,7 +160,7 @@ public class CreateCommand extends SubCommand implements Listener {
             }
         } else {
             if (args.length <= 7) {
-                player.sendMessage(ChatColor.RED + "Usage: " + "/as create custom <rightArm> <leftArm> <rightLeg> <leftLeg> <Headpos> <Name>");
+                player.sendMessage(ChatColor.RED + "Usage: " + "/as create custom <right-arm> <left-arm> <right-leg> <left-leg> <head-pos> <name>");
                 return;
             }
 
@@ -166,10 +168,50 @@ public class CreateCommand extends SubCommand implements Listener {
             int leftArm = Integer.parseInt(args[3]);
             int rightLeg = Integer.parseInt(args[4]);
             int leftLeg = Integer.parseInt(args[5]);
-            int Headpos = Integer.parseInt(args[6]);
-            String Name = args[7];
+            int headPos = Integer.parseInt(args[6]);
 
-            ArmorStand stand = spawnCustomArmorStand(player.getWorld(), player.getLocation(), rightArm, leftArm, rightLeg, leftLeg, Headpos, player, Name);
+            String armorStandName = String.join("_", java.util.Arrays.copyOfRange(args, 7, args.length));;
+
+            ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
+
+            ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, armorStandName);
+            Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
+
+            if (armorStandCreateEvent.isCancelled()) {
+                armorStand.remove();
+                return;
+
+            }
+
+            armorStand.setArms(true);
+            armorStand.setGravity(false);
+            armorStand.setBasePlate(false);
+            armorStand.setCustomName("&7Made with &6&lA&e&ld&6&lv&e&la&6&ln&e&lc&6&le&e&ld&6&lA&e&lr&6&lm&e&lo&6&lr&e&lS&6&lt&e&la&6&ln&e&ld&6&ls");
+            armorStand.setCustomNameVisible(false);
+
+            armorStand.setItemInHand(new ItemStack(Material.IRON_PICKAXE));
+
+            EulerAngle rightArmPose = new EulerAngle(Math.toRadians(rightArm), 0, 0);
+            EulerAngle leftArmPose = new EulerAngle(Math.toRadians(leftArm), 0, 0);
+
+            EulerAngle rightLegPose = new EulerAngle(Math.toRadians(rightLeg), 0, 0);
+            EulerAngle leftLegPose = new EulerAngle(Math.toRadians(leftLeg), 0, 0);
+
+            armorStand.setHeadPose(new EulerAngle(Math.toRadians(0), Math.toRadians(headPos), 0));
+
+            armorStand.setRightArmPose(rightArmPose);
+            armorStand.setLeftArmPose(leftArmPose);
+            armorStand.setRightLegPose(rightLegPose);
+            armorStand.setLeftLegPose(leftLegPose);
+
+            ArmorStandUtils.saveArmorStand(armorStandName, armorStand);
+
+            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
+            player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
+            if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
+                player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
+                ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
+            }
         }
     }
 
@@ -190,51 +232,6 @@ public class CreateCommand extends SubCommand implements Listener {
     @Override
     public boolean isForOps() {
         return true;
-    }
-
-    public static ArmorStand spawnCustomArmorStand(@NotNull World world, @NotNull Location location, int rightArmPoseint, int leftArmPoseint, int rightLegPoseint, int leftLegPoseint, int Headpos, Player player, String name ) {
-
-
-        ArmorStand armorStand = (ArmorStand) world.spawnEntity(location, EntityType.ARMOR_STAND);
-
-        ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, name);
-        Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
-
-        if (armorStandCreateEvent.isCancelled()) {
-            armorStand.remove();
-            return null;
-
-        }
-
-        armorStand.setArms(true);
-        armorStand.setGravity(false);
-        armorStand.setBasePlate(false);
-        armorStand.setCustomName("Custom");
-        armorStand.setCustomNameVisible(false);
-
-        armorStand.setItemInHand(new ItemStack(Material.IRON_PICKAXE));
-
-        EulerAngle rightArmPose = new EulerAngle(Math.toRadians(rightArmPoseint), 0, 0);  
-        EulerAngle leftArmPose = new EulerAngle(Math.toRadians(leftArmPoseint), 0, 0);
-
-        EulerAngle rightLegPose = new EulerAngle(Math.toRadians(rightLegPoseint), 0, 0);
-        EulerAngle leftLegPose = new EulerAngle(Math.toRadians(leftLegPoseint), 0, 0);
-
-        armorStand.setHeadPose(new EulerAngle(Math.toRadians(0), Math.toRadians(Headpos), 0));
-
-        armorStand.setRightArmPose(rightArmPose);
-        armorStand.setLeftArmPose(leftArmPose);
-        armorStand.setRightLegPose(rightLegPose);
-        armorStand.setLeftLegPose(leftLegPose);
-        ArmorStandUtils.saveArmorStand(name, armorStand);
-
-        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
-        player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
-        if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
-            player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
-            ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
-        }
-        return armorStand;
     }
 
     private double getConfigDouble(String path) {
