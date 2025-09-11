@@ -157,11 +157,15 @@ public interface ArmorstandApi  {
 
     interface InventoryManager {
 
-        void openEditMenu(Player p, ArmorStand a);
+        void openToolsMenu(Player p, ArmorStand as) throws InventoryException;
 
-        void openOptionsMenu(Player p, ArmorStand a, boolean isFromSettings);
+        void openActionsMenu(Player p, ArmorStand as) throws InventoryException;
 
-        void openSaveMenu(Player p, ArmorStand a);
+        void openEditMenu(Player p, ArmorStand a) throws InventoryException;
+
+        void openOptionsMenu(Player p, ArmorStand a, boolean isFromSettings) throws InventoryException;
+
+        void openSaveMenu(Player p, ArmorStand a) throws InventoryException;
 
     }
 

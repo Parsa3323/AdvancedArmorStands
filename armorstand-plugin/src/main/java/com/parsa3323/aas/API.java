@@ -27,10 +27,12 @@ import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
+import com.parsa3323.aas.menus.ActionMenu;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.player.PlayerManager;
+import com.parsa3323.aas.tools.manager.ToolsManager;
 import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -407,19 +409,52 @@ public class API implements ArmorstandApi {
     public InventoryManager getInventoryManager() {
         return new InventoryManager() {
             @Override
-            public void openEditMenu(Player p, ArmorStand a) {
-                new ArmorStandMenu(new PlayerMenuUtility(p), a).open();
+            public void openToolsMenu(Player p, ArmorStand as) throws InventoryException {
+                try {
+                    new ToolsManager(new PlayerMenuUtility(p), as).open();
+                } catch (Exception e) {
+                    throw new InventoryException("Failed to open Tools Menu", e);
+                }
             }
 
             @Override
-            public void openOptionsMenu(Player p, ArmorStand a, boolean isFromSettings) {
-                new SettingsManager(new PlayerMenuUtility(p), a, isFromSettings).open();
+            public void openActionsMenu(Player p, ArmorStand as) throws InventoryException {
+                try {
+                    ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), as);
+                    actionMenu.open();
+                } catch (Exception e) {
+                    throw new InventoryException("Failed to open Actions Menu", e);
+                }
+
+            }
+
+            @Override
+            public void openEditMenu(Player p, ArmorStand a) throws InventoryException {
+                try {
+                    new ArmorStandMenu(new PlayerMenuUtility(p), a).open();
+                } catch (Exception e) {
+                    throw new InventoryException("Failed to open Edit Menu", e);
+                }
+            }
+
+            @Override
+            public void openOptionsMenu(Player p, ArmorStand a, boolean isFromSettings) throws InventoryException {
+
+                try {
+                    new SettingsManager(new PlayerMenuUtility(p), a, isFromSettings).open();
+                } catch (Exception e) {
+                    throw new InventoryException("Failed to open Options Menu", e);
+                }
             }
 
 
             @Override
-            public void openSaveMenu(Player p, ArmorStand a) {
-                new SaveMenu(new PlayerMenuUtility(p), a).open();
+            public void openSaveMenu(Player p, ArmorStand a) throws InventoryException {
+                try {
+                    new SaveMenu(new PlayerMenuUtility(p), a).open();
+                } catch (Exception e) {
+                    throw new InventoryException("Failed to open Save Menu", e);
+                }
             }
         };
     }
