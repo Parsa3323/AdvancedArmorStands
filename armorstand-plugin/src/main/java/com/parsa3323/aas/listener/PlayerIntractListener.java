@@ -75,28 +75,9 @@ public class PlayerIntractListener implements Listener {
                             int count = interactionCount.getOrDefault(playerId, 0) + 1;
 
                             if (count < 3) {
-                                selectCount.put(playerId, (ArmorStand) e.getRightClicked());
-                                interactionCount.put(playerId, count);
-                                player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced armor stands.");
+                                handleCount(e, playerId, count, player);
                             } else if (count == 3) {
-                                int randomSuffix = new Random().nextInt(900) + 100;
-                                String name = "SavedStand" + randomSuffix;
-
-                                ArmorStand stand = (ArmorStand) e.getRightClicked();
-
-                                ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player.getBukkitPlayer(), stand, name);
-                                Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
-
-                                if (armorStandCreateEvent.isCancelled()) {
-                                    stand.remove();
-                                    return;
-                                }
-
-                                //CreateCommand.saveArmorStand(name, stand);
-                                player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "Armor stand saved as " + name + "!");
-                                ArmorStandUtils.saveArmorStand(name, stand);
-
-                                interactionCount.remove(playerId);
+                                if (saveArmorStand(e, player, playerId)) return;
                             }
 
                         }
@@ -140,6 +121,34 @@ public class PlayerIntractListener implements Listener {
             }
 
         }
+    }
+
+    private void handleCount(PlayerInteractAtEntityEvent e, UUID playerId, int count, IPlayer player) {
+        selectCount.put(playerId, (ArmorStand) e.getRightClicked());
+        interactionCount.put(playerId, count);
+        player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced armor stands.");
+    }
+
+    private boolean saveArmorStand(PlayerInteractAtEntityEvent e, IPlayer player, UUID playerId) {
+        int randomSuffix = new Random().nextInt(900) + 100;
+        String name = "SavedStand" + randomSuffix;
+
+        ArmorStand stand = (ArmorStand) e.getRightClicked();
+
+        ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player.getBukkitPlayer(), stand, name);
+        Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
+
+        if (armorStandCreateEvent.isCancelled()) {
+            stand.remove();
+            return true;
+        }
+
+        //CreateCommand.saveArmorStand(name, stand);
+        player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "Armor stand saved as " + name + "!");
+        ArmorStandUtils.saveArmorStand(name, stand);
+
+        interactionCount.remove(playerId);
+        return false;
     }
 
 
