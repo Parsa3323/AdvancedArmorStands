@@ -64,7 +64,7 @@ public class SettingsCommand extends SubCommand {
 
         ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player), ArmorStandUtils.getArmorStandByName(args[1]));
         ArmorStandSelectionCache.setSelectedArmorStand(player.getUniqueId(), ArmorStandUtils.getArmorStandByName(args[1]));
-        armorStandMenu.open();;
+        armorStandMenu.open();
     }
 
     @Override
