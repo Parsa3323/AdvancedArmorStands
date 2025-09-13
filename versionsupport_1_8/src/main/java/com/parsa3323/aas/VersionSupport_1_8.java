@@ -23,8 +23,12 @@ import com.cryptomorin.xseries.XSound;
 import com.cryptomorin.xseries.profiles.builder.XSkull;
 import com.cryptomorin.xseries.profiles.objects.Profileable;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
+import net.minecraft.server.v1_8_R3.ChatComponentText;
+import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -80,5 +84,13 @@ public final class VersionSupport_1_8 implements IVersionSupport {
     @Override
     public Sound getEquipSound() {
         return XSound.UI_BUTTON_CLICK.parseSound();
+    }
+
+    @Override
+    public void sendActionBar(Player player, String message) {
+        PacketPlayOutChat packet  = new PacketPlayOutChat(new ChatComponentText(message), (byte) 2);
+
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+
     }
 }

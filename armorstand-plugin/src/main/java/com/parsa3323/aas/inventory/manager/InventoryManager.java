@@ -22,10 +22,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.inventory.*;
 import com.parsa3323.aas.menus.ArmorStandMenu;
-import com.parsa3323.aas.utils.ArmorStandSelectionCache;
-import com.parsa3323.aas.utils.ArmorStandUtils;
-import com.parsa3323.aas.utils.InventoryUtils;
-import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -87,7 +84,7 @@ public class InventoryManager implements Listener {
 
                         Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), ArmorStandUtils.getNameByArmorStand(ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()))));
 
-
+                        VersionSupportUtil.getVersionSupport().sendActionBar(player, ChatColor.GREEN + "Updated armor stand!");
                     }
 
                 }

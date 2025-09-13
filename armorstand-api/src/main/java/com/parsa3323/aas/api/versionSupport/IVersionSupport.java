@@ -20,6 +20,7 @@ package com.parsa3323.aas.api.versionSupport;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public interface IVersionSupport {
@@ -39,4 +40,6 @@ public interface IVersionSupport {
     void setItemInOffHand(ArmorStand as, ItemStack itemStack);
 
     Sound getEquipSound();
+
+    void sendActionBar(Player player, String message);
 }
