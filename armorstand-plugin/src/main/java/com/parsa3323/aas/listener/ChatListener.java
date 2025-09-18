@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.listener;
 
+import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.ActionMenu;
@@ -60,7 +61,9 @@ public class ChatListener implements Listener {
 
             e.setCancelled(true);
 
-            CustomNameOption.players.get(e.getPlayer().getUniqueId()).setCustomName(PlaceholderAPI.setPlaceholders(e.getPlayer(), ChatColor.translateAlternateColorCodes('&', e.getMessage())));
+            CustomNameOption.players.get(e.getPlayer().getUniqueId()).setCustomName((AdvancedArmorStands.isIsPapiAvailable()) ?
+                    PlaceholderAPI.setPlaceholders(e.getPlayer(), ChatColor.translateAlternateColorCodes('&', e.getMessage())) :
+                    ChatColor.translateAlternateColorCodes('&', e.getMessage()));
 
             e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set armor stand's name to '" + e.getMessage() + "' ");
 

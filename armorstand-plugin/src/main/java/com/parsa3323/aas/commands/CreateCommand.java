@@ -99,7 +99,7 @@ public class CreateCommand extends SubCommand implements Listener {
             armorStand.setBasePlate(TypesConfig.get().getBoolean(args[1] + ".BasePlate"));
             String path = args[1] + ".CustomName";
             String rawName = TypesConfig.get().getString(path);
-            String replacedName = PlaceholderAPI.setPlaceholders(player, rawName);
+            String replacedName = (AdvancedArmorStands.isIsPapiAvailable()) ? PlaceholderAPI.setPlaceholders(player, rawName) : rawName;
             String coloredName = ChatColor.translateAlternateColorCodes('&', replacedName);
             armorStand.setCustomName(coloredName);
 
