@@ -67,6 +67,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static boolean isFirstTimeRunning = false;
 
+    public static boolean isPapiAvailable = false;
+
     private static boolean migrating = false;
 
     public static boolean CONFIG_OUTDATED = false;
@@ -83,6 +85,14 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static ArmorstandApi getApi() {
         return api;
+    }
+
+    public static boolean isIsPapiAvailable() {
+        return isPapiAvailable;
+    }
+
+    public static void setIsPapiAvailable(boolean isPapiAvailable) {
+        AdvancedArmorStands.isPapiAvailable = isPapiAvailable;
     }
 
     @Override
@@ -227,12 +237,11 @@ public final class AdvancedArmorStands extends JavaPlugin {
         status("Registered " + commandManager.getAmount() + " commands");
 
         status("Hooking into PlaceholderAPI...");
-        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
-            error("PlaceholderAPI was not found. Disabling...");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            error("PlaceholderAPI was found. Registering expansions");
+            new PapiExpansion().register();
+            setIsPapiAvailable(true);
         }
-        new PapiExpansion().register();
 
         if (getConfig().getBoolean("auto-load-armor-stands")) {
             status("Spawning armor stands...");
