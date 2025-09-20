@@ -67,7 +67,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static boolean isFirstTimeRunning = false;
 
-    public static boolean isPapiAvailable = false;
+    private static boolean isPapiAvailable = false;
 
     private static boolean migrating = false;
 
@@ -136,7 +136,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
                 new EditorManager(),
                 new PlayerLeaveEvent(),
                 new InventoryClickListener(),
-                new StateListener(),
+                new StateChangeListener(),
                 new PlayerJoin(),
                 new CreateCommand(),
                 new PlayerIntractListener(),

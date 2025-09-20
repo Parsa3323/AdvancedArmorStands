@@ -23,7 +23,7 @@ import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class StateListener implements Listener {
+public class StateChangeListener implements Listener {
 
     @EventHandler
     public void onStateChange(ArmorStandStateChangeEvent e) {
