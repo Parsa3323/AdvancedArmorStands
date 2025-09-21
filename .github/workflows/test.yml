@@ -26,10 +26,6 @@ jobs:
           distribution: 'zulu'
           java-version: 8
 
-      - name: Download BungeeCord Chat Snapshot
-        run: |
-          mkdir -p ~/.m2/repository/net/md-5/bungeecord-chat/1.8-SNAPSHOT/
-          curl -L -o ~/.m2/repository/net/md-5/bungeecord-chat/1.8-SNAPSHOT/bungeecord-chat-1.8-SNAPSHOT.jar https://repo.example.com/path-to-bungeecord-chat-1.8-SNAPSHOT.jar
 
       - name: BuildTools (Spigot 1.8.8)
         run: |
