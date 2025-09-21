@@ -26,21 +26,18 @@ jobs:
           distribution: 'zulu'
           java-version: 8
 
+      - name: Download BungeeCord Chat Snapshot
+        run: |
+          mkdir -p ~/.m2/repository/net/md-5/bungeecord-chat/1.8-SNAPSHOT/
+          curl -L -o ~/.m2/repository/net/md-5/bungeecord-chat/1.8-SNAPSHOT/bungeecord-chat-1.8-SNAPSHOT.jar https://repo.example.com/path-to-bungeecord-chat-1.8-SNAPSHOT.jar
+
       - name: BuildTools (Spigot 1.8.8)
         run: |
           mkdir buildtools
           cd buildtools
           curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-          java -Dhttps.protocols=TLSv1.2 -Dfile.encoding=UTF-8 -jar BuildTools.jar --rev 1.8.8
+          java -jar BuildTools.jar --rev 1.8.8
         shell: bash
-
-#      - name: BuildTools (Spigot 1.8.8)
-#        run: |
-#          mkdir buildtools
-#          cd buildtools
-#          curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-#          java -jar BuildTools.jar --rev 1.8.8
-#        shell: bash
 
       - name: Build with Maven
         run: mvn -B clean install
