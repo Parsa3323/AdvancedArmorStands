@@ -31,8 +31,16 @@ jobs:
           mkdir buildtools
           cd buildtools
           curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-          java -jar BuildTools.jar --rev 1.8.8
+          java -Dhttps.protocols=TLSv1.2 -Dfile.encoding=UTF-8 -jar BuildTools.jar --rev 1.8.8
         shell: bash
+
+#      - name: BuildTools (Spigot 1.8.8)
+#        run: |
+#          mkdir buildtools
+#          cd buildtools
+#          curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+#          java -jar BuildTools.jar --rev 1.8.8
+#        shell: bash
 
       - name: Build with Maven
         run: mvn -B clean install
