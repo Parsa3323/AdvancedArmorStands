@@ -316,6 +316,32 @@ public class API implements ArmorstandApi {
             }
 
             @Override
+            public void moveArmorStand(ArmorStand armorStand, Location location) {
+                String path = "armorstands." + ArmorStandUtils.getNameByArmorStand(armorStand);
+
+                ArmorStandsConfig.get().set(path + ".World", location.getWorld().getName());
+                ArmorStandsConfig.get().set(path + ".X", location.getX());
+                ArmorStandsConfig.get().set(path + ".Y", location.getY());
+                ArmorStandsConfig.get().set(path + ".Z", location.getZ());
+                ArmorStandsConfig.save();
+
+                armorStand.teleport(location);
+            }
+
+            @Override
+            public void moveArmorStand(String name, Location location) {
+                String path = "armorstands." + name;
+
+                ArmorStandsConfig.get().set(path + ".World", location.getWorld().getName());
+                ArmorStandsConfig.get().set(path + ".X", location.getX());
+                ArmorStandsConfig.get().set(path + ".Y", location.getY());
+                ArmorStandsConfig.get().set(path + ".Z", location.getZ());
+                ArmorStandsConfig.save();
+
+                ArmorStandUtils.getArmorStandByName(name).teleport(location);
+            }
+
+            @Override
             public void loadArmorStand(String name) throws ArmorStandLoadException {
                 ArmorStandUtils.loadArmorStand(name);
             }

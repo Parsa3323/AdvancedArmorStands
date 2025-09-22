@@ -131,6 +131,10 @@ public interface ArmorstandApi  {
 
         void loadArmorStand(ArmorStand armorStand) throws ArmorStandLoadException;
 
+        void moveArmorStand(ArmorStand armorStand, Location location);
+
+        void moveArmorStand(String name, Location location);
+
         void loadArmorStand(String name) throws ArmorStandLoadException;
 
         void createArmorStand(String name, ArmorStandPoseData poseData, Location location, Player player) throws ArmorStandAlreadyExistsException;
