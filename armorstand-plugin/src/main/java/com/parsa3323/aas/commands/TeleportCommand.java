@@ -22,6 +22,7 @@ import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
@@ -59,9 +60,12 @@ public class TeleportCommand extends SubCommand {
                 player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
                 return;
             }
-            player.sendMessage(ChatColor.RED + "This armor stand is not on the ground. Are you sure you want to teleport to it?");
-            player.sendMessage(ChatColor.RED + "Use '/as teleport " + args[1] + " --force' to force teleport");
-            return;
+            if (player.getGameMode() != GameMode.CREATIVE) {
+                player.sendMessage(ChatColor.RED + "This armor stand is not on the ground. Are you sure you want to teleport to it?");
+                player.sendMessage(ChatColor.RED + "Use '/as teleport " + args[1] + " --force' to force teleport");
+                return;
+            }
+
         }
 
 
