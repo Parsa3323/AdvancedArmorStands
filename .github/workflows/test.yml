@@ -38,16 +38,16 @@ jobs:
 
       - name: BuildTools (Spigot 1.8.8)
         run: |
-          mkdir buildtools
-          cd buildtools
+          mkdir -p buildtools/1.8.8
+          cd buildtools/1.8.8
           curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
           java -jar BuildTools.jar --rev 1.8.8
         shell: bash
 
       - name: BuildTools (Spigot 1.12.2)
         run: |
-          mkdir buildtools
-          cd buildtools
+          mkdir -p buildtools/1.12.2
+          cd buildtools/1.12.2
           curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
           java -jar BuildTools.jar --rev 1.12.2
         shell: bash
