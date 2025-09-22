@@ -91,7 +91,7 @@ The `main.yml` file is the plugin's main configuration file:
 ```yaml
 # Main configuration
 
-config-version: <1.0.0> # <========== Config version (don't touch)
+config-version: 1.0.0 # <========== Config version (don't touch)
 
 debug: false # <========== Enable & Disable debug
 
