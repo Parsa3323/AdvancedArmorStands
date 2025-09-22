@@ -25,6 +25,7 @@ import com.cryptomorin.xseries.profiles.objects.Profileable;
 import com.parsa3323.aas.api.versionSupport.IVersionSupport;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -90,5 +91,17 @@ public final class Versionsupport_v1_18 implements IVersionSupport {
     @Override
     public void sendActionBar(Player player, String message) {
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
+    }
+
+    @Override
+    public void rotateArmorStand(ArmorStand armorStand, float deltaYaw) {
+        if (armorStand == null) return;
+
+        Location loc = armorStand.getLocation();
+        float newYaw = loc.getYaw() + deltaYaw;
+
+        newYaw = (newYaw + 540) % 360 - 180;
+
+        armorStand.setRotation(newYaw, loc.getPitch());
     }
 }

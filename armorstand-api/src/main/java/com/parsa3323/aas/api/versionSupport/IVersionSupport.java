@@ -42,4 +42,6 @@ public interface IVersionSupport {
     Sound getEquipSound();
 
     void sendActionBar(Player player, String message);
+
+    void rotateArmorStand(ArmorStand armorStand, float deltaYaw);
 }

@@ -21,7 +21,6 @@ package com.parsa3323.aas.inventory;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
@@ -63,15 +62,13 @@ public class RotateItem extends InventoryItem {
 
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
+//        /sd
         if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
-            Location loc = armorStand.getLocation();
-            loc.setYaw(loc.getYaw() + 5f);
-            armorStand.teleport(loc);
+            VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, +5f);
         } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
-            Location loc = armorStand.getLocation();
-            loc.setYaw(loc.getYaw() - 5f);
-            armorStand.teleport(loc);
+            VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, -5f);
         }
+
     }
 
 }
