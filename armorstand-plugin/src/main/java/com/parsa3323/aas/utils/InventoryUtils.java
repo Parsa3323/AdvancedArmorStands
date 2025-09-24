@@ -18,15 +18,18 @@
 
 package com.parsa3323.aas.utils;
 
+import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.animation.manager.EditorManager;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +45,10 @@ public class InventoryUtils {
     private static InventoryManager inventoryManager = new InventoryManager();
 
     private static ArrayList<InventoryItem> inventoryItems = inventoryManager.getInventoryItems();
+
+    private static final Map<UUID, Integer> actionBarCount = new HashMap<>();
+
+    private static final Map<UUID, BukkitTask> clearTasks = new HashMap<>();
 
     public static void setOptionItems(Player p) {
 
@@ -107,4 +114,27 @@ public class InventoryUtils {
         return contentBackups.containsKey(player.getUniqueId());
     }
 
+
+    public static void sendStackingActionBar(Player player, String baseMessage, int durationTicks) {
+        UUID id = player.getUniqueId();
+
+        int count = actionBarCount.getOrDefault(id, 0) + 1;
+        actionBarCount.put(id, count);
+
+        String message = ChatColor.GREEN + baseMessage + (count > 1 ? " x" + count : "");
+        VersionSupportUtil.getVersionSupport().sendActionBar(player, message);
+
+        if (clearTasks.containsKey(id)) {
+            clearTasks.get(id).cancel();
+        }
+
+        BukkitTask task = Bukkit.getScheduler().runTaskLater(AdvancedArmorStands.plugin, () -> {
+            actionBarCount.remove(id);
+            clearTasks.remove(id);
+
+            VersionSupportUtil.getVersionSupport().sendActionBar(player, "");
+        }, durationTicks);
+
+        clearTasks.put(id, task);
+    }
 }
