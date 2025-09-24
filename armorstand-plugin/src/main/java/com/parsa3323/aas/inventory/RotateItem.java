@@ -62,7 +62,6 @@ public class RotateItem extends InventoryItem {
 
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
-//        /sd
         if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
             VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, +5f);
         } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
