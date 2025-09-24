@@ -64,6 +64,11 @@ public class AnimationUtils {
                 boolean loop = cs.getBoolean("loop");
                 List<Map<?, ?>> steps = cs.getMapList("steps");
 
+                if (steps == null || steps.isEmpty()) {
+                    AdvancedArmorStands.warn("Animation '" + animationName + "' has no steps defined!");
+                    continue;
+                }
+
                 AdvancedArmorStands.debug("Scheduling animation '" + animationName + "' with " + steps.size() + " steps, interval: " + interval + ", loop: " + loop);
 
                 animationTaskID = Bukkit.getScheduler().runTaskTimer(AdvancedArmorStands.plugin, new Runnable() {
