@@ -44,9 +44,12 @@ public class RotateItem extends InventoryItem {
 
         lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.GRAY + "To rotate to right");
         lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.GRAY + "To rotate to left");
-        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move body up");
-        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move body down");
+        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK (Block) " + ChatColor.GRAY + "To move body up");
+        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK (Block) " + ChatColor.GRAY + "To move body down");
+        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK (Air) " + ChatColor.GRAY + "To move body right");
+        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK (Air) " + ChatColor.GRAY + "To move body left");
         lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
+
 
 
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTVjZWQzNTI4N2JmYTAxNjY1ZGE3MjQ3MjM5YmEyNDE0YzE5MzZjNTZkMmU1YjIwMjdkMDUzMGQ5Yjk3MjUzMCJ9fX0=");
@@ -70,20 +73,31 @@ public class RotateItem extends InventoryItem {
 
         if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
             if (p.isSneaking()) {
-                EulerAngle newPose = new EulerAngle(currentPose.getX() - step, currentPose.getY(), currentPose.getZ());
-                armorStand.setBodyPose(newPose);
+                if (action == Action.RIGHT_CLICK_BLOCK) {
+                    EulerAngle newPose = new EulerAngle(currentPose.getX() - step, currentPose.getY(), currentPose.getZ());
+                    armorStand.setBodyPose(newPose);
+                } else {
+                    EulerAngle newPose = new EulerAngle(currentPose.getX(), currentPose.getY(), currentPose.getZ() + step);
+                    armorStand.setBodyPose(newPose);
+                }
             } else {
                 VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, +5f);
             }
         } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
             if (p.isSneaking()) {
-                EulerAngle newPose = new EulerAngle(currentPose.getX() + step, currentPose.getY(), currentPose.getZ());
-                armorStand.setBodyPose(newPose);
+                if (action == Action.LEFT_CLICK_BLOCK) {
+                    EulerAngle newPose = new EulerAngle(currentPose.getX() + step, currentPose.getY(), currentPose.getZ());
+                    armorStand.setBodyPose(newPose);
+                } else {
+                    EulerAngle newPose = new EulerAngle(currentPose.getX(), currentPose.getY(), currentPose.getZ() - step);
+                    armorStand.setBodyPose(newPose);
+                }
             } else {
                 VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, -5f);
             }
         }
     }
+
 
 
 }
