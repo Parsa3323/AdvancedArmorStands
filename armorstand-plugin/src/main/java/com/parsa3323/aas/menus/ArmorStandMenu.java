@@ -85,6 +85,11 @@ public class ArmorStandMenu extends Menu {
                 if (playerMenuUtility.getOwner().getGameMode() == GameMode.ADVENTURE) {
                     InventoryUtils.setGameMode(playerMenuUtility.getOwner(), playerMenuUtility.getOwner().getGameMode());
                     playerMenuUtility.getOwner().setGameMode(GameMode.CREATIVE);
+                    playerMenuUtility.getOwner().sendMessage(
+                            ChatColor.GREEN + "Your gamemode has been temporarily switched to CREATIVE, " +
+                                    "because edit sessions do not support ADVENTURE mode. " +
+                                    "It will be restored automatically when you exit."
+                    );
                 }
                 ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
                 ArmorStandSelectionCache.addToEditSession(p);
