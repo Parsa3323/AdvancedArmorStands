@@ -26,6 +26,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.EulerAngle;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,8 @@ public class RotateItem extends InventoryItem {
 
         lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.GRAY + "To rotate to right");
         lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.GRAY + "To rotate to left");
+        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move body up");
+        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move body down");
         lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
 
 
@@ -62,12 +65,25 @@ public class RotateItem extends InventoryItem {
 
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
-        if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
-            VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, +5f);
-        } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
-            VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, -5f);
-        }
+        EulerAngle currentPose = armorStand.getBodyPose();
+        double step = Math.toRadians(5);
 
+        if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
+            if (p.isSneaking()) {
+                EulerAngle newPose = new EulerAngle(currentPose.getX() - step, currentPose.getY(), currentPose.getZ());
+                armorStand.setBodyPose(newPose);
+            } else {
+                VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, +5f);
+            }
+        } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
+            if (p.isSneaking()) {
+                EulerAngle newPose = new EulerAngle(currentPose.getX() + step, currentPose.getY(), currentPose.getZ());
+                armorStand.setBodyPose(newPose);
+            } else {
+                VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, -5f);
+            }
+        }
     }
+
 
 }

@@ -42,8 +42,10 @@ public class RightLegItem extends InventoryItem {
 
         lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.GRAY + "To rotate right leg to right");
         lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.GRAY + "To rotate right leg to left");
-        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move right leg up");
-        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move right leg down");
+        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK (Block) " + ChatColor.GRAY + "To move right leg up");
+        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK (Block) " + ChatColor.GRAY + "To move right leg down");
+        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK (Air) " + ChatColor.GRAY + "To move body right");
+        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK (Air) " + ChatColor.GRAY + "To move body left");
         lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
 
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJhNGUxOGRhMjVlODk5ZjQ2NTQ4ZGIyMDY5MmRmNzI2MTVjYWQ3OGVkMjlkYmFkMjYzOWVkODhiZTNkZWMzYSJ9fX0=");
@@ -62,27 +64,34 @@ public class RightLegItem extends InventoryItem {
 
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
-        EulerAngle currentPose = armorStand.getRightLegPose();
-
+        EulerAngle currentPose = armorStand.getBodyPose();
         double step = Math.toRadians(5);
 
-        if (p.isSneaking()) {
-            if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
-                EulerAngle newPose = new EulerAngle(currentPose.getX() - step, currentPose.getY(), currentPose.getZ());
-                armorStand.setRightLegPose(newPose);
-            } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
-                EulerAngle newPose = new EulerAngle(currentPose.getX() + step, currentPose.getY(), currentPose.getZ());
-                armorStand.setRightLegPose(newPose);
+        if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
+            if (p.isSneaking()) {
+                if (action == Action.RIGHT_CLICK_BLOCK) {
+                    EulerAngle newPose = new EulerAngle(currentPose.getX() - step, currentPose.getY(), currentPose.getZ());
+                    armorStand.setBodyPose(newPose);
+                } else {
+                    EulerAngle newPose = new EulerAngle(currentPose.getX(), currentPose.getY(), currentPose.getZ() + step);
+                    armorStand.setBodyPose(newPose);
+                }
+            } else {
+                VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, +5f);
             }
-        }
-        else {
-            if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
-                EulerAngle newPose = new EulerAngle(currentPose.getX(), currentPose.getY() + step, currentPose.getZ());
-                armorStand.setRightLegPose(newPose);
-            } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
-                EulerAngle newPose = new EulerAngle(currentPose.getX(), currentPose.getY() - step, currentPose.getZ());
-                armorStand.setRightLegPose(newPose);
+        } else if (action == Action.LEFT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR) {
+            if (p.isSneaking()) {
+                if (action == Action.LEFT_CLICK_BLOCK) {
+                    EulerAngle newPose = new EulerAngle(currentPose.getX() + step, currentPose.getY(), currentPose.getZ());
+                    armorStand.setBodyPose(newPose);
+                } else {
+                    EulerAngle newPose = new EulerAngle(currentPose.getX(), currentPose.getY(), currentPose.getZ() - step);
+                    armorStand.setBodyPose(newPose);
+                }
+            } else {
+                VersionSupportUtil.getVersionSupport().rotateArmorStand(armorStand, -5f);
             }
         }
     }
+
 }
