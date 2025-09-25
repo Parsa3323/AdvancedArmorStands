@@ -24,6 +24,7 @@ import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.menus.KeyFrameMenu;
+import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -134,7 +135,7 @@ public class KeyFrameOption extends InventoryItem {
                 config.set(path, steps);
                 AnimationConfig.save();
 
-                p.sendMessage(ChatColor.GREEN + "Created a keyframe with this as's properties");
+                InventoryUtils.sendStackingActionBar(p, ChatColor.GREEN + "Added keyframe!", 60);
                 p.playSound(p.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
 
             }
