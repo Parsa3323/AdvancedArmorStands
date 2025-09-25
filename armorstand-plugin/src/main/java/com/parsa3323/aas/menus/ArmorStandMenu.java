@@ -84,6 +84,7 @@ public class ArmorStandMenu extends Menu {
                 InventoryUtils.save(p);
                 if (playerMenuUtility.getOwner().getGameMode() == GameMode.ADVENTURE) {
                     InventoryUtils.setGameMode(playerMenuUtility.getOwner(), GameMode.CREATIVE);
+                    playerMenuUtility.getOwner().setGameMode(GameMode.CREATIVE);
                 }
                 ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
                 ArmorStandSelectionCache.addToEditSession(p);
