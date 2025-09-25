@@ -87,7 +87,6 @@ public class InventoryManager implements Listener {
 
                         Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), ArmorStandUtils.getNameByArmorStand(ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()))));
 
-                        //VersionSupportUtil.getVersionSupport().sendActionBar(player, ChatColor.GREEN + "Updated armor stand!");
                         InventoryUtils.sendStackingActionBar(player, ChatColor.GREEN + "Updated armor stand!", 60);
                     }
 
