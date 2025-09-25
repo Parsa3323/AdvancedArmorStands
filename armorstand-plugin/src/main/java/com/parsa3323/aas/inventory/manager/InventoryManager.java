@@ -69,6 +69,10 @@ public class InventoryManager implements Listener {
                     new ArmorStandMenu(new PlayerMenuUtility(player), armorStand).open();
                     ArmorStandSelectionCache.removeSelectedArmorStand(player.getUniqueId());
 
+                    if (InventoryUtils.hasGameMode(player)) {
+                        InventoryUtils.getAndClearGameMode(player);
+                    }
+
                     return;
                 }
             }

@@ -27,10 +27,7 @@ import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.tools.manager.ToolsManager;
 import com.parsa3323.aas.utils.*;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -85,6 +82,9 @@ public class ArmorStandMenu extends Menu {
         switch (e.getSlot()) {
             case 33:
                 InventoryUtils.save(p);
+                if (playerMenuUtility.getOwner().getGameMode() == GameMode.ADVENTURE) {
+                    InventoryUtils.setGameMode(playerMenuUtility.getOwner(), GameMode.CREATIVE);
+                }
                 ArmorStandSelectionCache.setSelectedArmorStand(playerMenuUtility.getOwner().getUniqueId(), armorStand);
                 ArmorStandSelectionCache.addToEditSession(p);
                 InventoryUtils.setOptionItems(p);

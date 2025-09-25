@@ -24,6 +24,7 @@ import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -49,6 +50,8 @@ public class InventoryUtils {
     private static final Map<UUID, Integer> actionBarCount = new HashMap<>();
 
     private static final Map<UUID, BukkitTask> clearTasks = new HashMap<>();
+
+    private static final Map<UUID, GameMode> gameModes = new HashMap<>();
 
     public static void setOptionItems(Player p) {
 
@@ -108,6 +111,20 @@ public class InventoryUtils {
     public static void clear(Player player) {
         contentBackups.remove(player.getUniqueId());
         armorBackups.remove(player.getUniqueId());
+    }
+
+    public static void setGameMode(Player player, GameMode gameMode) {
+        gameModes.put(player.getUniqueId(), gameMode);
+    }
+
+    public static GameMode getAndClearGameMode(Player player) {
+        GameMode gameMode = gameModes.get(player.getUniqueId());
+        gameModes.remove(player.getUniqueId());
+        return gameMode;
+    }
+
+    public static boolean hasGameMode(Player player) {
+        return gameModes.containsKey(player.getUniqueId());
     }
 
     public static boolean hasBackup(Player player) {

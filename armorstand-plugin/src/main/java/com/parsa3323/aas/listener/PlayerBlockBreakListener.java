@@ -21,6 +21,7 @@ package com.parsa3323.aas.listener;
 import com.parsa3323.aas.api.events.PlayerMoveArmorStandEvent;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.tools.MoveTool;
+import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -67,6 +68,12 @@ public class PlayerBlockBreakListener implements Listener {
             MoveTool.moveList.remove(e.getPlayer().getUniqueId());
 
             player.sendMessage(ChatColor.GREEN + "Successfully moved the armorstand.");
+        }
+
+        if (ArmorStandSelectionCache.isIsInEditSession(e.getPlayer())) {
+
+            e.setCancelled(true);
+
         }
 
     }
