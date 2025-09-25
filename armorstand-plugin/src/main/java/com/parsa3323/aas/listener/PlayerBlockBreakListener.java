@@ -34,6 +34,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 public class PlayerBlockBreakListener implements Listener {
 
+    private boolean firstTimeBreaking = true;
+
     @EventHandler
     public void onPlayerBlockBreak(BlockBreakEvent e) {
 
@@ -71,6 +73,10 @@ public class PlayerBlockBreakListener implements Listener {
         }
 
         if (ArmorStandSelectionCache.isIsInEditSession(e.getPlayer())) {
+            if (firstTimeBreaking) {
+                e.getPlayer().sendMessage(ChatColor.RED + "You cannot break blocks in edit session");
+                firstTimeBreaking = false;
+            }
 
             e.setCancelled(true);
 
