@@ -269,6 +269,20 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        status("Restoring gamemodes for players in edit session...");
+
+        Bukkit.getOnlinePlayers().forEach(player -> {
+
+            if (ArmorStandSelectionCache.isIsInEditSession(player)) {
+
+                if (InventoryUtils.hasGameMode(player)) {
+                    player.setGameMode(InventoryUtils.getAndClearGameMode(player));
+                }
+
+            }
+
+        });
+
         status("Restoring inventories for players in edit session...");
 
         for (Player player : Bukkit.getOnlinePlayers()) {
