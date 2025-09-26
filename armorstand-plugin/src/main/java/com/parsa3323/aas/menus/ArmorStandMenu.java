@@ -275,10 +275,10 @@ public class ArmorStandMenu extends Menu {
 
         ArrayList<String> iLore = new ArrayList<>();
 
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Date Created: " + ChatColor.WHITE + dateCreated);
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Created By: " + ChatColor.WHITE + createdBy);
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " World: " + ChatColor.WHITE + world);
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + " Location: "
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Date Created: " + ChatColor.WHITE + dateCreated);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Created By: " + ChatColor.WHITE + createdBy);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "World: " + ChatColor.WHITE + world);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Location: "
                 + ChatColor.WHITE + x
                 + ChatColor.GRAY + ", "
                 + ChatColor.WHITE + y
@@ -286,7 +286,7 @@ public class ArmorStandMenu extends Menu {
                 + ChatColor.WHITE + z);
 
         iMeta.setLore(iLore);
-        iMeta.setDisplayName(ColorUtils.boldAndColor(ChatColor.YELLOW) + " ArmorStand Information");
+        iMeta.setDisplayName(ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStand Information");
 
         info.setItemMeta(iMeta);
 
