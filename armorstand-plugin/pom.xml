@@ -119,17 +119,22 @@
         </dependency>
         <dependency>
             <groupId>com.parsa3323</groupId>
-            <artifactId>versionsupport_v1_17</artifactId>
+            <artifactId>versionsupport_1_17</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.parsa3323</groupId>
-            <artifactId>versionsupport_v1_18</artifactId>
+            <artifactId>versionsupport_1_18</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.parsa3323</groupId>
-            <artifactId>versionsupport_v1_19</artifactId>
+            <artifactId>versionsupport_1_11</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.parsa3323</groupId>
+            <artifactId>versionsupport_1_19</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.parsa3323.versionsupport_v1_18;
+package com.parsa3323.versionsupport_1_11;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
@@ -25,15 +25,19 @@ import com.cryptomorin.xseries.profiles.objects.Profileable;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.minecraft.server.v1_11_R1.EntityArmorStand;
+import net.minecraft.server.v1_11_R1.PacketPlayOutEntityTeleport;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_11_R1.entity.CraftArmorStand;
+import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public final class Versionsupport_v1_18 implements VersionSupport {
-
+public final class VersionSupport_1_11 implements VersionSupport {
 
     @Override
     public ItemStack getSkull(String base64) {
@@ -85,7 +89,6 @@ public final class Versionsupport_v1_18 implements VersionSupport {
     @Override
     public Sound getEquipSound() {
         return XSound.ITEM_ARMOR_EQUIP_GENERIC.parseSound();
-
     }
 
     @Override
@@ -102,6 +105,21 @@ public final class Versionsupport_v1_18 implements VersionSupport {
 
         newYaw = (newYaw + 540) % 360 - 180;
 
-        armorStand.setRotation(newYaw, loc.getPitch());
+        EntityArmorStand nmsStand = ((CraftArmorStand) armorStand).getHandle();
+
+        nmsStand.yaw = newYaw;
+        nmsStand.lastYaw = newYaw;
+        nmsStand.aK = newYaw;
+
+        nmsStand.pitch = loc.getPitch();
+        nmsStand.lastPitch = loc.getPitch();
+
+        loc.setYaw(newYaw);
+
+        PacketPlayOutEntityTeleport packet = new PacketPlayOutEntityTeleport(nmsStand);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+        }
     }
+
 }

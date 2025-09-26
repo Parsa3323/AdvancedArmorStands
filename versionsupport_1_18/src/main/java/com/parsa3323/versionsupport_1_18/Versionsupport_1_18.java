@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.parsa3323.versionsupport_v1_17;
+package com.parsa3323.versionsupport_1_18;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
@@ -32,7 +32,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public final class Versionsupport_v1_17 implements VersionSupport {
+public final class Versionsupport_1_18 implements VersionSupport {
+
 
     @Override
     public ItemStack getSkull(String base64) {

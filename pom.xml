@@ -30,12 +30,13 @@
         <module>armorstand-plugin</module>
         <module>armorstand-api</module>
         <module>versionsupport_1_20_1</module>
-        <module>versionsupport_v1_18</module>
-        <module>versionsupport_v1_19</module>
-        <module>versionsupport_v1_17</module>
+        <module>versionsupport_1_18</module>
+        <module>versionsupport_1_19</module>
+        <module>versionsupport_1_17</module>
         <module>versionsupport_1_12</module>
         <module>versionsupport_1_16_5</module>
         <module>versionsupport_1_8</module>
+        <module>VersionSupport_1_11</module>
     </modules>
 
 
