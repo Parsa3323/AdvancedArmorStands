@@ -139,7 +139,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
                 new StateChangeListener(),
                 new PlayerJoin(),
                 new CreateCommand(),
-                new PlayerIntractListener(),
+                new PlayerInteractListener(),
                 new MenuListener(),
                 new ItemDropListener(),
                 new PlayerBlockBreakListener()

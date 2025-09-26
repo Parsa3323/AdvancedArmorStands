@@ -44,7 +44,7 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
 import java.util.*;
 
-public class PlayerIntractListener implements Listener {
+public class PlayerInteractListener implements Listener {
 
     private final Map<UUID, Integer> interactionCount  = new HashMap<>();
     private final Map<UUID, ArmorStand> selectCount = new HashMap<>();
