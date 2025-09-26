@@ -515,29 +515,21 @@ public class ArmorStandUtils {
 
     }
 
-    public static boolean isPlayerInFrontOfArmorStand(Player player, ArmorStand stand, double maxDistance, double maxAngle) {
+    public static boolean shouldTeleport(Player player, ArmorStand stand, double minDistance) {
         double distance = player.getLocation().distance(stand.getLocation());
-        if (distance > maxDistance) {
-            return false;
-        }
 
-        Vector playerDirection = player.getLocation().getDirection().normalize();
-        Vector toStand = stand.getLocation().toVector().subtract(player.getLocation().toVector()).normalize();
-
-        double angle = playerDirection.angle(toStand);
-
-        return angle < Math.toRadians(maxAngle);
+        return distance > minDistance;
     }
 
-    public static void teleportPlayerInFrontOfStand(Player player, ArmorStand stand, double distance) {
+
+    public static void teleportPlayerInFrontOfStand(Player player, ArmorStand stand, double distanceInFront) {
         Location standLoc = stand.getLocation().clone();
 
         Vector direction = standLoc.getDirection().normalize();
 
-        Location target = standLoc.add(direction.multiply(distance));
+        Location target = standLoc.add(direction.multiply(distanceInFront));
 
-        target.setYaw(standLoc.getYaw());
-        target.setPitch(player.getLocation().getPitch());
+        target.setDirection(standLoc.toVector().subtract(target.toVector()));
 
         player.teleport(target);
     }

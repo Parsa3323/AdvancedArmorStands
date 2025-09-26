@@ -96,7 +96,7 @@ public class ArmorStandMenu extends Menu {
                 InventoryUtils.setOptionItems(p);
                 p.closeInventory();
 
-                if (ArmorStandUtils.isPlayerInFrontOfArmorStand(playerMenuUtility.getOwner(), armorStand, 8.0, 45.0)) {
+                if (ArmorStandUtils.shouldTeleport(playerMenuUtility.getOwner(), armorStand, 12.0)) {
                     ArmorStandUtils.teleportPlayerInFrontOfStand(playerMenuUtility.getOwner(), armorStand, 2.0);
                 }
 
