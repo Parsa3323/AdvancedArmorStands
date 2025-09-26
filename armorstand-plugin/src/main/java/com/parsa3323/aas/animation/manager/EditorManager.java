@@ -22,6 +22,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.animation.KeyFrameOption;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
+import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.inventory.*;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.menus.ArmorStandMenu;
@@ -29,6 +30,10 @@ import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -81,6 +86,13 @@ public class EditorManager implements Listener {
 
                     new ArmorStandMenu(new PlayerMenuUtility(player), armorStand).open();
                     ArmorStandSelectionCache.removeKeyFrameSelectedArmorStand(player.getUniqueId());
+
+                    TextComponent textComponent = new TextComponent(ChatColor.GREEN + "Animation saved successfully, click to add to this armorstand");
+                    textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to set this animation to " + ArmorStandUtils.getNameByArmorStand(armorStand)).create()));
+                    textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as animation add " + ArmorStandUtils.getNameByArmorStand(armorStand) + " " + AnimCreateCommand.animationNames.get(player.getUniqueId())));
+
+                    player.spigot().sendMessage(textComponent);
+
                     return;
                 }
             }
