@@ -89,7 +89,13 @@ public class EditorManager implements Listener {
 
                     TextComponent textComponent = new TextComponent(ChatColor.GREEN + "Animation saved successfully, click to add to this armorstand");
                     textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to set this animation to " + ArmorStandUtils.getNameByArmorStand(armorStand)).create()));
-                    textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as animation add " + ArmorStandUtils.getNameByArmorStand(armorStand) + " " + AnimCreateCommand.animationNames.get(player.getUniqueId())));
+                    textComponent.setClickEvent(new ClickEvent(
+                            ClickEvent.Action.RUN_COMMAND,
+                            "/as animation add "
+                                    + AnimCreateCommand.animationNames.get(player.getUniqueId())
+                                    + " "
+                                    + ArmorStandUtils.getNameByArmorStand(armorStand)
+                    ));
 
                     player.spigot().sendMessage(textComponent);
 
