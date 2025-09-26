@@ -529,10 +529,14 @@ public class ArmorStandUtils {
 
         Location target = standLoc.add(direction.multiply(distanceInFront));
 
-        target.setDirection(standLoc.toVector().subtract(target.toVector()));
+        Vector lookAt = stand.getLocation().toVector().subtract(target.toVector());
+        lookAt.setY(0);
+
+        target.setDirection(lookAt);
 
         player.teleport(target);
     }
+
 
 
     public static void autoLoadArmorStand(String name) {

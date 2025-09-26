@@ -63,6 +63,9 @@ public class EditorManager implements Listener {
                 String name = ChatColor.stripColor(event.getItem().getItemMeta().getDisplayName());
                 if ("EXIT (Right Click)".equalsIgnoreCase(name)) {
                     event.setCancelled(true);
+                    if (InventoryUtils.hasGameMode(player)) {
+                        player.setGameMode(InventoryUtils.getAndClearGameMode(player));
+                    }
                     InventoryUtils.restore(player);
                     ArmorStandSelectionCache.removeFromKeyFrameList(player);
                     ArmorStand armorStand = ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId());

@@ -26,6 +26,7 @@ import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
@@ -85,6 +86,15 @@ public class AnimCreateCommand extends SubCommand {
         animationNames.put(player.getUniqueId(), args[3]);
         ArmorStandSelectionCache.addToKeyFrameList(player);
         InventoryUtils.setEditorItems(player);
+        if (player.getGameMode() == GameMode.ADVENTURE) {
+            InventoryUtils.setGameMode(player, player.getGameMode());
+            player.setGameMode(GameMode.CREATIVE);
+            player.sendMessage(
+                    ChatColor.GREEN + "Your gamemode has been temporarily switched to CREATIVE, " +
+                            "because edit sessions do not support ADVENTURE mode. " +
+                            "It will be restored automatically when you exit."
+            );
+        }
         player.closeInventory();
         player.sendMessage(ChatColor.GREEN + "Successfully entered the animation edit/create session");
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
