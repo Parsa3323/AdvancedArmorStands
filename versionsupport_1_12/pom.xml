@@ -27,7 +27,7 @@
     <version>1.10.2-dev3</version>
     <packaging>jar</packaging>
 
-    <name>versionsupport_1_12</name>
+    <name>VersionSupport_1_12</name>
 
     <properties>
         <java.version>1.8</java.version>
