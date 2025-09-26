@@ -33,6 +33,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -513,6 +514,34 @@ public class ArmorStandUtils {
 
 
     }
+
+    public static boolean isPlayerInFrontOfArmorStand(Player player, ArmorStand stand, double maxDistance, double maxAngle) {
+        double distance = player.getLocation().distance(stand.getLocation());
+        if (distance > maxDistance) {
+            return false;
+        }
+
+        Vector playerDirection = player.getLocation().getDirection().normalize();
+        Vector toStand = stand.getLocation().toVector().subtract(player.getLocation().toVector()).normalize();
+
+        double angle = playerDirection.angle(toStand);
+
+        return angle < Math.toRadians(maxAngle);
+    }
+
+    public static void teleportPlayerInFrontOfStand(Player player, ArmorStand stand, double distance) {
+        Location standLoc = stand.getLocation().clone();
+
+        Vector direction = standLoc.getDirection().normalize();
+
+        Location target = standLoc.add(direction.multiply(distance));
+
+        target.setYaw(standLoc.getYaw());
+        target.setPitch(player.getLocation().getPitch());
+
+        player.teleport(target);
+    }
+
 
     public static void autoLoadArmorStand(String name) {
         if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {

@@ -95,6 +95,11 @@ public class ArmorStandMenu extends Menu {
                 ArmorStandSelectionCache.addToEditSession(p);
                 InventoryUtils.setOptionItems(p);
                 p.closeInventory();
+
+                if (ArmorStandUtils.isPlayerInFrontOfArmorStand(playerMenuUtility.getOwner(), armorStand, 8.0, 45.0)) {
+                    ArmorStandUtils.teleportPlayerInFrontOfStand(playerMenuUtility.getOwner(), armorStand, 2.0);
+                }
+
                 break;
             case 11:
                 if (e.getClick() == ClickType.SHIFT_RIGHT || e.getClick() == ClickType.SHIFT_LEFT) {

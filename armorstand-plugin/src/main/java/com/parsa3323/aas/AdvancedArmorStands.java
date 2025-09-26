@@ -275,6 +275,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
             if (ArmorStandSelectionCache.isIsInEditSession(player)) {
                 if (InventoryUtils.hasGameMode(player)) {
                     player.setGameMode(InventoryUtils.getAndClearGameMode(player));
+                    status("Restored " + player.getDisplayName() + "'s gamemode");
                 }
             }
         });
