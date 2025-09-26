@@ -22,7 +22,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.cryptomorin.xseries.profiles.builder.XSkull;
 import com.cryptomorin.xseries.profiles.objects.Profileable;
-import com.parsa3323.aas.api.versionSupport.IVersionSupport;
+import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.EntityArmorStand;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
@@ -37,7 +37,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public final class VersionSupport_1_8 implements IVersionSupport {
+public final class VersionSupport_1_8 implements VersionSupport {
 
     @Override
     public ItemStack getSkull(String base64) {

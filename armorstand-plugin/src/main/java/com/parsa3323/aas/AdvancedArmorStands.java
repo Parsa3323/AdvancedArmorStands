@@ -22,7 +22,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.animation.manager.EditorManager;
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
-import com.parsa3323.aas.api.versionSupport.IVersionSupport;
+import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.commands.manager.CommandManager;
 import com.parsa3323.aas.commands.manager.TabComp;
@@ -61,7 +61,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
-    public IVersionSupport versionSupport;
+    public VersionSupport versionSupport;
 
     public static ArmorstandApi api;
 

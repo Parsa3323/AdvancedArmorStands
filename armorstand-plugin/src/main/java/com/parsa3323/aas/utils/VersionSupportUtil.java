@@ -20,7 +20,7 @@ package com.parsa3323.aas.utils;
 
 import com.parsa3323.aas.VersionSupport_1_16_5;
 import com.parsa3323.aas.VersionSupport_1_8;
-import com.parsa3323.aas.api.versionSupport.IVersionSupport;
+import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.versionSupport_1_20_1.VersionSupport_1_20_1;
 import com.parsa3323.versionsupport_1_12.VersionSupport_1_12;
 import com.parsa3323.versionsupport_v1_18.Versionsupport_v1_18;
@@ -78,8 +78,8 @@ public class VersionSupportUtil {
         }
     }
 
-    public static IVersionSupport getVersionSupport(){
-        IVersionSupport versionSupport = null;
+    public static VersionSupport getVersionSupport(){
+        VersionSupport versionSupport = null;
 
         if (VersionSupportUtil.isLowerThan("1.12")) {
             versionSupport = new VersionSupport_1_8();

@@ -23,7 +23,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public interface IVersionSupport {
+public interface VersionSupport {
 
     ItemStack getSkull(String base64);
 

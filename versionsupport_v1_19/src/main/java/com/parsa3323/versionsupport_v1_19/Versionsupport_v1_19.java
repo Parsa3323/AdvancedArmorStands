@@ -22,7 +22,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.cryptomorin.xseries.profiles.builder.XSkull;
 import com.cryptomorin.xseries.profiles.objects.Profileable;
-import com.parsa3323.aas.api.versionSupport.IVersionSupport;
+import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
@@ -32,7 +32,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public final class Versionsupport_v1_19 implements IVersionSupport {
+public final class Versionsupport_v1_19 implements VersionSupport {
 
     @Override
     public ItemStack getSkull(String base64) {

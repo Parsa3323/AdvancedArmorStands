@@ -23,7 +23,7 @@ import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.api.exeption.*;
 import com.parsa3323.aas.api.player.IPlayer;
-import com.parsa3323.aas.api.versionSupport.IVersionSupport;
+import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
@@ -61,7 +61,7 @@ public class API implements ArmorstandApi {
 
 
     @Override
-    public IVersionSupport getVersionSupport() {
+    public VersionSupport getVersionSupport() {
         return VersionSupportUtil.getVersionSupport();
     }
 

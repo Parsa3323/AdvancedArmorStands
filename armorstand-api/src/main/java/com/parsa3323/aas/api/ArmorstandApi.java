@@ -22,7 +22,7 @@ package com.parsa3323.aas.api;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.exeption.*;
 import com.parsa3323.aas.api.player.IPlayer;
-import com.parsa3323.aas.api.versionSupport.IVersionSupport;
+import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
@@ -33,7 +33,7 @@ import java.util.UUID;
 
 public interface ArmorstandApi  {
 
-    IVersionSupport getVersionSupport();
+    VersionSupport getVersionSupport();
 
     boolean isFirstTimeRunning();
 
