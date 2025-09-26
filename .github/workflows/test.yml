@@ -31,10 +31,11 @@ jobs:
           mkdir -p ~/.m2/repository/net/md-5/bungeecord-chat/1.8-SNAPSHOT/
           curl -L -o ~/.m2/repository/net/md-5/bungeecord-chat/1.8-SNAPSHOT/bungeecord-chat-1.8-SNAPSHOT.jar https://maven.elmakers.com/repository/net/md-5/bungeecord-chat/1.8-SNAPSHOT/bungeecord-chat-1.8-SNAPSHOT.jar
 
-      - name: Download BungeeCord Chat Snapshot (Spigot 1.11.2)
+      - name: Download BungeeCord Chat Snapshot (Spigot 1.10)
         run: |
-          mkdir -p ~/.m2/repository/net/md-5/bungeecord-chat/1.11-SNAPSHOT/
-          curl -L -o ~/.m2/repository/net/md-5/bungeecord-chat/1.11-SNAPSHOT/bungeecord-chat-1.11-20200526.094816-73.jar https://repo.stellardrift.ca/maven/snapshots/net/md-5/bungeecord-chat/1.11-SNAPSHOT/bungeecord-chat-1.11-20200526.094816-73.jar
+          mkdir -p ~/.m2/repository/net/md-5/bungeecord-chat/1.10-SNAPSHOT/
+          curl -L -o ~/.m2/repository/net/md-5/bungeecord-chat/1.10-SNAPSHOT/bungeecord-chat-1.10-SNAPSHOT.jar \
+            https://maven.elmakers.com/repository/net/md-5/bungeecord-chat/1.10-SNAPSHOT/bungeecord-chat-1.10-SNAPSHOT.jar
 
       - name: Download BungeeCord Chat Snapshot (Spigot 1.12.2)
         run: |
