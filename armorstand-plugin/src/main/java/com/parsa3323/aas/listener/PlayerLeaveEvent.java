@@ -43,7 +43,7 @@ public class PlayerLeaveEvent implements Listener {
                 e.getPlayer().setGameMode(InventoryUtils.getAndClearGameMode(e.getPlayer()));
             }
             ArmorStandSelectionCache.removeSelectedArmorStand(e.getPlayer().getUniqueId());
-        };
+        }
 
         if (ArmorStandSelectionCache.isInKeyFrameList(e.getPlayer())) {
             InventoryUtils.restore(e.getPlayer());
