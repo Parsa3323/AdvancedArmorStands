@@ -79,7 +79,7 @@
 
 # Configs
 
-This document contains the configuration details for AAS.
+This document contains the configuration details for AdvancedArmorStands.
 
 ## Main Configuration
 
@@ -232,7 +232,7 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 # Requirements
 </div>
 
-- [PlaceHolderApi](https://www.spigotmc.org/resources/placeholderapi.6245/)
+- [PlaceHolderApi](https://www.spigotmc.org/resources/placeholderapi.6245/) (Optional)
 
 <div align="center">
 
