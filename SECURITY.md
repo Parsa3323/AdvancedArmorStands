@@ -6,8 +6,13 @@ It's best to use the latest version of AAS, as older versions may contain securi
 
 | Version | Supported          |
 |---------|--------------------|
-| > 1.8.3 | :white_check_mark: |
-| < 1.8.3 | :x:                |
+| 1.10.1  | :white_check_mark: |
+| 1.10.0  | :white_check_mark: |
+| 1.9.0   | :white_check_mark: |
+| 1.8.3   | :white_check_mark: |
+| 1.8.2   | :x:                |
+| 1.8.1   | :x:                |
+| 1.8.0   | :x:                |
 
 ## Reporting a Vulnerability
 
