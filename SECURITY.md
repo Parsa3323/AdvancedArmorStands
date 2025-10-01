@@ -22,4 +22,4 @@ If you’ve discovered a security vulnerability, please help us keep the project
 * Include steps to reproduce the problem if possible.  
 * Do NOT share exploit details publicly; we will handle them securely.
 
-Your contribution helps keep our project secure—thank you for your support! 
+Your contribution helps keep our project secure, thank you for your support! 
