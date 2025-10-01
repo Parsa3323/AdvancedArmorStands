@@ -138,7 +138,7 @@ default: # <====== Name of the type
 > Modify `itemInHandMaterial` to any valid Minecraft material (on your minecraft version).
 
 > [!NOTE]  
-> Players can create as many types as they want (e.g., up to 80 types), but they must change the names and </br> each type can be used in the game using the `create` command
+> Players can create as many types as they want, but they must change the names and </br> each type can be used in the game using the `create` command
 
 <div align="center">
 
