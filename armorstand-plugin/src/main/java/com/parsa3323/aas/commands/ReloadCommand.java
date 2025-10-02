@@ -53,8 +53,6 @@ public class ReloadCommand extends SubCommand {
     public void perform(Player player, String[] args) {
 
         try {
-
-
             TypesConfig.reload();
             ArmorStandsConfig.reload();
             AnimationConfig.reload();
