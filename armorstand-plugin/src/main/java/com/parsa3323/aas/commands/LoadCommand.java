@@ -75,7 +75,7 @@ public class LoadCommand extends SubCommand {
             player.sendMessage(ChatColor.GREEN + "Successfully loaded armor stand '" + args[1] + "'");
             SoundUtils.playSuccessSound(player);
         } catch (ArmorStandLoadException e) {
-            player.sendMessage(ChatColor.RED + "Failed to load the armor stand: " + e.getMessage());
+            player.sendMessage(ChatColor.RED + "Failed to load the armor stand check console for more details!");
             SoundUtils.playErrorSound(player);
         }
 
