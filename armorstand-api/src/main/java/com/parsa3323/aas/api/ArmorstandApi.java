@@ -115,6 +115,7 @@ public interface ArmorstandApi  {
 
         void debug(String args);
 
+        @Deprecated
         void error(String message);
 
         void error(String message, String troubleShootingLink);
