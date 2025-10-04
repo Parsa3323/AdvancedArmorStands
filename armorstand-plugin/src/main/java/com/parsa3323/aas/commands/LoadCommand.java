@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.commands;
 
+import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
@@ -76,6 +77,8 @@ public class LoadCommand extends SubCommand {
             SoundUtils.playSuccessSound(player);
         } catch (ArmorStandLoadException e) {
             player.sendMessage(ChatColor.RED + "Failed to load the armor stand check console for more details!");
+            AdvancedArmorStands.error("Error loading an armorstand: " + e.getStackTrace(), true);
+            e.printStackTrace();
             SoundUtils.playErrorSound(player);
         }
 
