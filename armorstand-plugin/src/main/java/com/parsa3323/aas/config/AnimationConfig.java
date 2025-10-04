@@ -60,7 +60,7 @@ public class AnimationConfig {
             fileConfiguration.save(file);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error while saving : " + e.getMessage());
+            AdvancedArmorStands.error("Error while saving : " + e.getMessage(), true);
         }
 
     }
