@@ -39,6 +39,7 @@ public class TypesConfig {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
+                AdvancedArmorStands.error("Error while creating file : " + e.getMessage(), true);
             }
         }
 

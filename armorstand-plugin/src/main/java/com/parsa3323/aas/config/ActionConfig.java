@@ -39,6 +39,7 @@ public class ActionConfig {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
+                AdvancedArmorStands.error("Error while creating file : " + e.getMessage(), true);
             }
         }
 
