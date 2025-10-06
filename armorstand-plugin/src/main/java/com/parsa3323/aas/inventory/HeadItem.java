@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class HeadItem extends InventoryItem {
     @Override
     public String getName() {
-        return "HeadItem";
+        return "Head Item";
     }
 
     @Override
