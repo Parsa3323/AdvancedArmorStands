@@ -56,9 +56,9 @@ public interface ArmorstandApi  {
 
         void closeSession(Player p);
 
-        ArmorStand getArmorsStand(Player p);
+        ArmorStand getArmorStand(Player p);
 
-        ArmorStand getArmorsStand(UUID uuid);
+        ArmorStand getArmorStand(UUID uuid);
 
     }
 

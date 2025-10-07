@@ -128,12 +128,12 @@ public class API implements ArmorstandApi {
             }
 
             @Override
-            public ArmorStand getArmorsStand(Player p) {
+            public ArmorStand getArmorStand(Player p) {
                 return ArmorStandSelectionCache.getSelectedArmorStand(p.getUniqueId());
             }
 
             @Override
-            public ArmorStand getArmorsStand(UUID uuid) {
+            public ArmorStand getArmorStand(UUID uuid) {
                 return ArmorStandSelectionCache.getSelectedArmorStand(uuid);
             }
         };
