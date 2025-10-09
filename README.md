@@ -25,15 +25,12 @@
 ](https://github.com/Parsa3323/AdvancedArmorStands/issues)[![CodeFactor](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands)
 
 </div>
-
 <div align="center">
 
 [![Repo Stats](https://github-readme-stats.vercel.app/api/pin/?username=Parsa3323&repo=AdvancedArmorStands&theme=dark)
 ](https://github.com/Parsa3323/AdvancedArmorStands)
 
-
 </div>
-
 
 <div align="center">
 
@@ -74,7 +71,6 @@ This document contains the configuration details for AdvancedArmorStands.
 ## Main Configuration
 
 The `main.yml` file is the plugin's main configuration file:
-
 
 </div>
 
