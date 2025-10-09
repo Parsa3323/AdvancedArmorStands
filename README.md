@@ -27,7 +27,7 @@
 </div>
 <div align="center">
 
-[![Repo Stats](https://github-readme-stats.vercel.app/api/pin/?username=Parsa3323&repo=AdvancedArmorStands&bg_color=00000000)
+[![Repo Stats](https://github-readme-stats.vercel.app/api/pin/?username=Parsa3323&repo=AdvancedArmorStands&bg_color=00000000&text_color=797c80&border_color=797c80)
 ](https://github.com/Parsa3323/AdvancedArmorStands)
 
 </div>
