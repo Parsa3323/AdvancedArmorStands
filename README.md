@@ -18,10 +18,11 @@
 ]()
 [![GitHub issues](https://img.shields.io/github/issues/Parsa3323/AdvancedArmorStands?label=Open%20Issues&logo=GitHub)
 ](https://github.com/Parsa3323/AdvancedArmorStands/issues)![GitHub repo size](https://img.shields.io/github/repo-size/Parsa3323/AdvancedArmorStands?color=yellow&logo=github)
-![GitHub license](https://img.shields.io/github/license/Parsa3323/AdvancedArmorStands?color=purple&logo=github)
+[![GitHub license](https://img.shields.io/github/license/Parsa3323/AdvancedArmorStands?color=purple&logo=github)
+]()
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Parsa3323/AdvancedArmorStands/test.yml?logo=github)
-![Forks](https://img.shields.io/github/forks/Parsa3323/AdvancedArmorStands?style=)
-[![CodeFactor](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands)
+[![Forks](https://img.shields.io/github/forks/Parsa3323/AdvancedArmorStands?style=)
+](https://github.com/Parsa3323/AdvancedArmorStands/issues)[![CodeFactor](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands)
 
 </div>
 
