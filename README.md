@@ -12,7 +12,7 @@
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/Parsa3323?label=Sponsor&logo=GitHub)]()
 [![GitHub contributors](https://img.shields.io/github/contributors/Parsa3323/AdvancedArmorStands?label=Contributors&logo=GitHub)
 ](https://github.com/Parsa3323/AdvancedArmorStands/graphs/contributors)
-[![Downloads](https://img.shields.io/spiget/downloads/121022?color=blue&logo=spigot)
+[![Downloads](https://img.shields.io/spiget/downloads/121022?label=Downloads&?color=blue&logo=spigot)
 ](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Parsa3323/AdvancedArmorStands?label=Last%20Commit&logo=GitHub)
 ]()
