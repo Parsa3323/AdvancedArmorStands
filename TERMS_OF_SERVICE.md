@@ -1,4 +1,4 @@
-### Terms of Service – AdvancedArmorStands
+### Terms of Service - AdvancedArmorStands
 
 By using the AdvancedArmorStands Minecraft plugin, you agree to the following terms:
 
