@@ -6,6 +6,7 @@ It's best to use the latest version of AAS, as older versions may contain securi
 
 | Version | Supported          |
 |---------|--------------------|
+| 1.10.2  | :white_check_mark: |
 | 1.10.1  | :white_check_mark: |
 | 1.10.0  | :white_check_mark: |
 | 1.9.0   | :white_check_mark: |
