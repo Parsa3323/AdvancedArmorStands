@@ -143,16 +143,7 @@ public class API implements ArmorstandApi {
     public boolean reloadPlugin() throws ReloadException {
         try {
 
-
-            TypesConfig.reload();
-            ArmorStandsConfig.reload();
-            AnimationConfig.reload();
-            AnimationUtils.reloadAnimations();
-            if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
-                for (String key : ArmorStandUtils.getArmorStandList()) {
-                    ArmorStandUtils.autoLoadArmorStand(key);
-                }
-            }
+            PluginUtils.reload();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
