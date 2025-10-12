@@ -275,9 +275,9 @@ public class ArmorStandMenu extends Menu {
 
         ArrayList<String> iLore = new ArrayList<>();
 
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Date Created: " + ChatColor.WHITE + dateCreated);
-        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Display Name: " + ChatColor.WHITE + ColorUtils.transform(armorStand.getCustomName()));
         iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Name: " + ChatColor.WHITE + ArmorStandUtils.getNameByArmorStand(armorStand));
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Display Name: " + ChatColor.WHITE + ColorUtils.transform(armorStand.getCustomName()));
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Date Created: " + ChatColor.WHITE + dateCreated);
         iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Created By: " + ChatColor.WHITE + createdBy);
         iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "World: " + ChatColor.WHITE + world);
         iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Location: "
