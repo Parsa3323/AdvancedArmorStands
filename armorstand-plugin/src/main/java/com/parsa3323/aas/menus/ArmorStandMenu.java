@@ -268,6 +268,8 @@ public class ArmorStandMenu extends Menu {
 
         String dateCreated = ArmorStandsConfig.get().getString(path + ".info.date_created", "Unknown");
         String createdBy = ArmorStandsConfig.get().getString(path + ".info.created_by", "Unknown");
+        String lastChangeDate = ArmorStandsConfig.get().getString(path + ".info.last_changed_date", "Unknown");
+        String lastChangePlayer = ArmorStandsConfig.get().getString(path + ".info.last_changed_player", "Unknown");
         String world = ArmorStandsConfig.get().getString(path + ".info.world", "Unknown");
         int x = ArmorStandsConfig.get().getInt(path + ".info.X", 0);
         int y = ArmorStandsConfig.get().getInt(path + ".info.Y", 0);
@@ -279,6 +281,8 @@ public class ArmorStandMenu extends Menu {
         iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Display Name: " + ChatColor.WHITE + ColorUtils.transform(armorStand.getCustomName()));
         iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Date Created: " + ChatColor.WHITE + dateCreated);
         iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Created By: " + ChatColor.WHITE + createdBy);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Last Modified: " + ChatColor.WHITE + lastChangeDate);
+        iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Changed By: " + ChatColor.WHITE + lastChangePlayer);
         iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "World: " + ChatColor.WHITE + world);
         iLore.add(ChatColor.GOLD + " » " + ChatColor.GRAY + "Location: "
                 + ChatColor.WHITE + x

@@ -19,14 +19,30 @@
 package com.parsa3323.aas.listener;
 
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
+import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class StateChangeListener implements Listener {
 
     @EventHandler
     public void onStateChange(ArmorStandStateChangeEvent e) {
         ArmorStandUtils.saveArmorStand(e.getName(), e.getArmorStand());
+
+        String path = "armorstands." + ArmorStandUtils.getNameByArmorStand(e.getArmorStand());
+
+        Date now = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = format.format(now);
+
+        ArmorStandsConfig.get().set(path + ".info.last_changed_date", formattedDate);
+        ArmorStandsConfig.get().set(path + ".info.last_changed_player", e.getPlayer().getDisplayName());
+
+        ArmorStandsConfig.save();
+
     }
 }
