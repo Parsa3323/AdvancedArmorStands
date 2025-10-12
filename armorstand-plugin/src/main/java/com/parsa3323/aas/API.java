@@ -286,22 +286,34 @@ public class API implements ArmorstandApi {
 
             @Override
             public void error(String message) {
-                AdvancedArmorStands.error(message);
+                if (TextUtils.containsLink(message)) {
+                    throw new LogException("Message can't have links, use troubleShootingLink instead!");
+                }
+                AdvancedArmorStands.error(message + " [NOT OFFICIAL]");
             }
 
             @Override
             public void error(String message, String troubleShootingLink) {
-                AdvancedArmorStands.error(message, troubleShootingLink);
+                if (TextUtils.containsLink(message)) {
+                    throw new LogException("Message can't have links, use troubleShootingLink instead!");
+                }
+                AdvancedArmorStands.error(message + " [NOT OFFICIAL, CLICK AT YOUR OWN RISK]", troubleShootingLink);
             }
 
             @Override
             public void error(String message, boolean b) {
-                AdvancedArmorStands.error(message, b);
+                if (TextUtils.containsLink(message)) {
+                    throw new LogException("Message can't have links, use troubleShootingLink instead!");
+                }
+                AdvancedArmorStands.error(message + " [NOT OFFICIAL]", b);
             }
 
             @Override
             public void info(String args) {
-                AdvancedArmorStands.info(args);
+                if (TextUtils.containsLink(args)) {
+                    throw new LogException("Message can't have links, use troubleShootingLink instead!");
+                }
+                AdvancedArmorStands.info(args + " [NOT OFFICIAL]");
             }
         };
     }

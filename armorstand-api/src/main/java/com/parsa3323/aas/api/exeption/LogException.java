@@ -16,26 +16,21 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.utils;
+package com.parsa3323.aas.api.exeption;
 
-import java.util.regex.Pattern;
-
-public class TextUtils {
-    public static String getOrdinalSuffix(int value) {
-        if (value >= 11 && value <= 13) return "th";
-        switch (value % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
-        }
+public class LogException extends RuntimeException {
+    public LogException(String message) {
+        super(message);
     }
 
-    public static boolean containsLink(String text) {
-        return Pattern.compile(
-                "(?i)(https?:\\/\\/|www\\.|\\.[a-z]{2,})"
-        ).matcher(text).find();
+    public LogException(String message, Throwable cause) {
+        super(message, cause);
     }
 
+    public LogException(Throwable cause) {
+        super(cause);
+    }
 
+    public LogException() {
+    }
 }

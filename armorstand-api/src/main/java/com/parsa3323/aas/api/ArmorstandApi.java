@@ -113,14 +113,14 @@ public interface ArmorstandApi  {
 
         boolean isDebug();
 
-        void debug(String args);
+        void debug(String args) throws LogException;
 
         @Deprecated
-        void error(String message);
+        void error(String message) throws LogException;
 
-        void error(String message, String troubleShootingLink);
+        void error(String message, String troubleShootingLink) throws LogException;
 
-        void error(String message, boolean b);
+        void error(String message, boolean b) throws LogException;
 
         void info(String args);
 
