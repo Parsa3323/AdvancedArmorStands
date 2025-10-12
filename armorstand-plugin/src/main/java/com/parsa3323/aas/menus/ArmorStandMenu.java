@@ -320,8 +320,6 @@ public class ArmorStandMenu extends Menu {
         lore.add(ChatColor.GRAY + "your armor stand");
 
 
-
-
         ItemStack options = new ItemStack(Material.NETHER_STAR);
         ItemMeta oMeta = options.getItemMeta();
 
