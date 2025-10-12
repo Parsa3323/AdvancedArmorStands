@@ -22,7 +22,6 @@ import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.api.exeption.*;
-import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
@@ -31,7 +30,6 @@ import com.parsa3323.aas.menus.ActionMenu;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.manager.SettingsManager;
-import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.tools.manager.ToolsManager;
 import com.parsa3323.aas.utils.*;
 import org.bukkit.Bukkit;
@@ -163,9 +161,15 @@ public class API implements ArmorstandApi {
     }
 
     @Override
-    public IPlayer getIPlayer(Player p) {
-        return PlayerManager.getByBukkit(p);
+    public PlayerManager getPlayerManager(Player player) {
+        return new PlayerManager() {
+            @Override
+            public boolean isPluginAdmin() {
+                return com.parsa3323.aas.player.PlayerManager.getByBukkit(player).isAdmin();
+            }
+        };
     }
+
 
     @Override
     public AnimationManager getAnimationManager() {

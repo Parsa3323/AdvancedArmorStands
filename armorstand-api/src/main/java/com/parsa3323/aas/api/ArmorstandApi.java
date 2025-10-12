@@ -21,7 +21,6 @@ package com.parsa3323.aas.api;
 
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.exeption.*;
-import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -47,8 +46,11 @@ public interface ArmorstandApi  {
 
     String getAddonsPath();
 
-    @Deprecated
-    IPlayer getIPlayer(Player p);
+    PlayerManager getPlayerManager(Player player);
+
+    interface PlayerManager {
+        boolean isPluginAdmin();
+    }
 
     interface EditSessionManager {
 
