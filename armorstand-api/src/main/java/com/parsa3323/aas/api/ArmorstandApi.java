@@ -50,6 +50,8 @@ public interface ArmorstandApi  {
 
     interface PlayerManager {
         boolean isPluginAdmin();
+
+        void restoreInventory() throws InventoryRestoreException;
     }
 
     interface EditSessionManager {

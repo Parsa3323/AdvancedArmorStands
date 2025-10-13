@@ -167,6 +167,44 @@ public class API implements ArmorstandApi {
             public boolean isPluginAdmin() {
                 return com.parsa3323.aas.player.PlayerManager.getByBukkit(player).isAdmin();
             }
+
+            @Override
+            public void restoreInventory() throws InventoryRestoreException {
+                if (!player.isOnline()) throw new InventoryRestoreException("Player is not online");
+
+                if (ArmorStandSelectionCache.isIsInEditSession(player)) {
+                    if (InventoryUtils.hasGameMode(player)) {
+                        player.setGameMode(InventoryUtils.getAndClearGameMode(player));
+                        AdvancedArmorStands.debug("Restored " + player.getDisplayName() + "'s gamemode");
+                    }
+                    if (InventoryUtils.hasBackup(player)) {
+                        InventoryUtils.restore(player);
+                        InventoryUtils.save(player);
+                        AdvancedArmorStands.debug("Restored " + player.getDisplayName() +"'s inventory");
+                    }
+                }
+
+                if (ArmorStandSelectionCache.isInKeyFrameList(player)) {
+
+                    InventoryUtils.restore(player);
+                    ArmorStandSelectionCache.removeFromKeyFrameList(player);
+                    ArmorStand armorStand = ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId());
+                    AdvancedArmorStands.debug(armorStand.getName());
+
+                    ArmorStandPoseData savedPose = ArmorStandUtils.getPose(armorStand.getUniqueId());
+
+                    armorStand.setRightArmPose(savedPose.getRightArm());
+                    armorStand.setLeftArmPose(savedPose.getLeftArm());
+                    armorStand.setRightLegPose(savedPose.getRightLeg());
+                    armorStand.setLeftLegPose(savedPose.getLeftLeg());
+                    armorStand.setHeadPose(savedPose.getHead());
+
+                    ArmorStandSelectionCache.removeKeyFrameSelectedArmorStand(player.getUniqueId());
+
+                    AdvancedArmorStands.debug("Restored " + player.getDisplayName() +"'s inventory");
+
+                }
+            }
         };
     }
 
