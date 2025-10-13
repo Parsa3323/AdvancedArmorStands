@@ -92,7 +92,6 @@ public class PlayerInteractListener implements Listener {
                                     return;
                                 }
 
-                                //CreateCommand.saveArmorStand(name, stand);
                                 player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "Armor stand saved as " + name + "!");
                                 ArmorStandUtils.saveArmorStand(name, stand);
 
