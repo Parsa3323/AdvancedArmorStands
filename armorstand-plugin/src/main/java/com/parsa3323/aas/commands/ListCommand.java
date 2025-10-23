@@ -39,6 +39,11 @@ public class ListCommand extends SubCommand {
     }
 
     @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
+    }
+
+    @Override
     public String getDescription() {
         return "Shows a list of armor stands";
     }

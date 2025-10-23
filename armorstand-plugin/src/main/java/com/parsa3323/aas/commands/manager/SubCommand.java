@@ -33,6 +33,8 @@ import java.util.List;
 public abstract class SubCommand {
     public abstract String getName();
 
+    public abstract ArrayList<String> getExampleLore();
+
     public abstract String getDescription();
 
     public abstract String getSyntax();

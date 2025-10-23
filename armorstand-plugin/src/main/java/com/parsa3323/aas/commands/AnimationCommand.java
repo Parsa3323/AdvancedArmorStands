@@ -44,6 +44,11 @@ public class AnimationCommand extends SubCommand {
     }
 
     @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
+    }
+
+    @Override
     public String getName() {
         return "animation";
     }

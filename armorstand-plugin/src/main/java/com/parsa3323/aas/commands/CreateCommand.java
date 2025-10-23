@@ -25,6 +25,7 @@ import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.TypeUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -40,9 +41,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class CreateCommand extends SubCommand implements Listener {
     @Override
@@ -58,6 +57,15 @@ public class CreateCommand extends SubCommand implements Listener {
     @Override
     public String getSyntax() {
         return "/as create <type> <name>";
+    }
+
+    @Override
+    public ArrayList<String> getExampleLore() {
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as create " + ((TypeUtils.getTypesList().get(0) == null) ? "defualt (example)" : TypeUtils.getTypesList().get(0)) + " testStand");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as create custom testStand head 1 2 3 right-hand 1 2 3");
+        return lore;
     }
 
     @Override
@@ -159,18 +167,12 @@ public class CreateCommand extends SubCommand implements Listener {
                 ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
             }
         } else {
-            if (args.length <= 7) {
-                player.sendMessage(ChatColor.RED + "Usage: " + "/as create custom <right-arm> <left-arm> <right-leg> <left-leg> <head-pos> <name>");
+            if (args.length < 6) {
+                player.sendMessage(ChatColor.RED + "Usage: /as create custom <name> <part> <x> <y> <z> [<part> <x> <y> <z> ...]");
                 return;
             }
 
-            int rightArm = Integer.parseInt(args[2]);
-            int leftArm = Integer.parseInt(args[3]);
-            int rightLeg = Integer.parseInt(args[4]);
-            int leftLeg = Integer.parseInt(args[5]);
-            int headPos = Integer.parseInt(args[6]);
-
-            String armorStandName = String.join("_", java.util.Arrays.copyOfRange(args, 7, args.length));
+            String armorStandName = args[2];
 
             ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
 
@@ -180,34 +182,60 @@ public class CreateCommand extends SubCommand implements Listener {
             if (armorStandCreateEvent.isCancelled()) {
                 armorStand.remove();
                 return;
-
             }
 
             armorStand.setArms(true);
             armorStand.setGravity(false);
             armorStand.setBasePlate(false);
-            armorStand.setCustomName("&7Made with &6&lA&e&ld&6&lv&e&la&6&ln&e&lc&6&le&e&ld&6&lA&e&lr&6&lm&e&lo&6&lr&e&lS&6&lt&e&la&6&ln&e&ld&6&ls");
+            armorStand.setCustomName(ChatColor.translateAlternateColorCodes('&', "&7Made with &6&lA&e&ld&6&lv&e&la&6&ln&e&lc&6&le&e&ld&6&lA&e&lr&6&lm&e&lo&6&lr&e&lS&6&lt&e&la&6&ln&e&ld&6&ls"));
             armorStand.setCustomNameVisible(false);
 
-            armorStand.setItemInHand(new ItemStack(Material.IRON_PICKAXE));
+            for (int i = 3; i + 3 < args.length; i += 4) {
+                String part = args[i].toLowerCase();
 
-            EulerAngle rightArmPose = new EulerAngle(Math.toRadians(rightArm), 0, 0);
-            EulerAngle leftArmPose = new EulerAngle(Math.toRadians(leftArm), 0, 0);
+                double x, y, z;
+                try {
+                    x = Double.parseDouble(args[i + 1]);
+                    y = Double.parseDouble(args[i + 2]);
+                    z = Double.parseDouble(args[i + 3]);
+                } catch (NumberFormatException e) {
+                    player.sendMessage(ChatColor.RED + "Invalid number for part " + part + ". Usage: <part> <x> <y> <z>");
+                    armorStand.remove();
+                    return;
+                }
 
-            EulerAngle rightLegPose = new EulerAngle(Math.toRadians(rightLeg), 0, 0);
-            EulerAngle leftLegPose = new EulerAngle(Math.toRadians(leftLeg), 0, 0);
+                EulerAngle pose = new EulerAngle(Math.toRadians(x), Math.toRadians(y), Math.toRadians(z));
 
-            armorStand.setHeadPose(new EulerAngle(Math.toRadians(0), Math.toRadians(headPos), 0));
-
-            armorStand.setRightArmPose(rightArmPose);
-            armorStand.setLeftArmPose(leftArmPose);
-            armorStand.setRightLegPose(rightLegPose);
-            armorStand.setLeftLegPose(leftLegPose);
+                switch (part) {
+                    case "head":
+                        armorStand.setHeadPose(pose);
+                        break;
+                    case "right-arm":
+                    case "rightarm":
+                        armorStand.setRightArmPose(pose);
+                        break;
+                    case "left-arm":
+                    case "leftarm":
+                        armorStand.setLeftArmPose(pose);
+                        break;
+                    case "right-leg":
+                    case "rightleg":
+                        armorStand.setRightLegPose(pose);
+                        break;
+                    case "left-leg":
+                    case "leftleg":
+                        armorStand.setLeftLegPose(pose);
+                        break;
+                    default:
+                        player.sendMessage(ChatColor.RED + "Unknown part: " + part);
+                        break;
+                }
+            }
 
             ArmorStandUtils.saveArmorStand(armorStandName, armorStand);
 
-            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
-            player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
+            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
+            player.sendMessage(ChatColor.GREEN + "Successfully created custom armor stand: " + armorStandName);
             if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
                 player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
                 ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
@@ -218,15 +246,32 @@ public class CreateCommand extends SubCommand implements Listener {
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
         if (args.length == 2) {
-            ArrayList<String> list = new ArrayList<>(TypesConfig.get().getKeys(false));
-            list.add("custom");
-            return list;
-        } else {
-            ArrayList<String> ll = new ArrayList<>();
-
-            ll.add("");
-            return ll;
+            List<String> types = new ArrayList<>(TypesConfig.get().getKeys(false));
+            types.add("custom");
+            return types;
         }
+
+        if (args.length == 3 && args[1].equalsIgnoreCase("custom")) {
+            return Collections.singletonList("<name>");
+        }
+
+        if (args.length == 4 && args[1].equalsIgnoreCase("custom")) {
+            return Arrays.asList("head", "body", "leftArm", "rightArm", "leftLeg", "rightLeg");
+        }
+
+        if (args[1].equalsIgnoreCase("custom")) {
+            switch (args.length % 4) {
+                case 1:
+                    return Arrays.asList("head", "body", "leftArm", "rightArm", "leftLeg", "rightLeg");
+                case 2:
+                    return Collections.singletonList("<x>");
+                case 3:
+                    return Collections.singletonList("<y>");
+                case 0:
+                    return Collections.singletonList("<z>");
+            }
+        }
+        return Collections.emptyList();
     }
 
     @Override

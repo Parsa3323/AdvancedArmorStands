@@ -39,6 +39,11 @@ public class AnimAddCommand extends SubCommand {
     }
 
     @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
+    }
+
+    @Override
     public String getDescription() {
         return "Add an animation to as";
     }

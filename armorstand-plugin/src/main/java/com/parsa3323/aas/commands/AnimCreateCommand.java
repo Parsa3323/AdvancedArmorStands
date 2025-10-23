@@ -47,6 +47,11 @@ public class AnimCreateCommand extends SubCommand {
     }
 
     @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
+    }
+
+    @Override
     public String getSyntax() {
         return "/as animation create <name> <animation-name>";
     }

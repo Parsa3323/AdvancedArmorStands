@@ -25,6 +25,7 @@ import com.parsa3323.aas.utils.PluginUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class ReloadCommand extends SubCommand {
     @Override
     public String getName() {
         return "reload";
+    }
+
+    @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
     }
 
     @Override

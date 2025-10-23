@@ -26,6 +26,7 @@ import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimRemoveCommand extends SubCommand {
@@ -42,6 +43,11 @@ public class AnimRemoveCommand extends SubCommand {
     @Override
     public String getSyntax() {
         return "/as animation remove <name>";
+    }
+
+    @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
     }
 
     @Override

@@ -34,6 +34,11 @@ public class HeadCommand extends SubCommand {
     }
 
     @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
+    }
+
+    @Override
     public String getDescription() {
         return "Gets a player's head";
     }

@@ -26,12 +26,18 @@ import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsCommand extends SubCommand {
     @Override
     public String getName() {
         return "settings";
+    }
+
+    @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
     }
 
     @Override

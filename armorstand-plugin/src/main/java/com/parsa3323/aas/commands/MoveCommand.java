@@ -30,6 +30,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +38,11 @@ public class MoveCommand extends SubCommand {
     @Override
     public String getName() {
         return "move";
+    }
+
+    @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
     }
 
     @Override

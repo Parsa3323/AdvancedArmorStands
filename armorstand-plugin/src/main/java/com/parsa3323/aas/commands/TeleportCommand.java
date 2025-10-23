@@ -26,12 +26,18 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeleportCommand extends SubCommand {
     @Override
     public String getName() {
         return "teleport";
+    }
+
+    @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
     }
 
     @Override

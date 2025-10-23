@@ -27,12 +27,18 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimClearCommand extends SubCommand {
     @Override
     public String getName() {
         return "clear";
+    }
+
+    @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
     }
 
     @Override

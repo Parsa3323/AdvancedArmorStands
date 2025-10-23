@@ -36,6 +36,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommandManager implements CommandExecutor {
 
@@ -109,11 +110,24 @@ public class CommandManager implements CommandExecutor {
                             TextComponent commandComponent = new TextComponent(ChatColor.GOLD + " » " + ChatColor.YELLOW + "" + ChatColor.BOLD + commands);
                             TextComponent descriptionComponent = new TextComponent(ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + description);
 
-                            commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                    new ComponentBuilder(ColorUtils.boldAndColor(ChatColor.YELLOW) + "Click to use this command")
-                                            .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + commands)
-                                            .append("\n" + ChatColor.GRAY + "Description: " + ChatColor.WHITE + description)
-                                            .create()));
+                            ComponentBuilder hoverBuilder = new ComponentBuilder("");
+
+                            List<String> exampleLore = cmd.getExampleLore();
+                            if (exampleLore != null && !exampleLore.isEmpty()) {
+                                hoverBuilder.append(ChatColor.GRAY + "Examples:")
+                                        .append("\n");
+                                for (String line : exampleLore) {
+                                    hoverBuilder.append(ChatColor.YELLOW + "  " + line)
+                                            .append("\n");
+                                }
+                            }
+
+                            hoverBuilder
+                                    .append(ColorUtils.boldAndColor(ChatColor.YELLOW) + "Click to suggest this command")
+                                    .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + commands)
+                                    .append("\n" + ChatColor.GRAY + "Description: " + ChatColor.WHITE + description);
+
+                            commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverBuilder.create()));
                             commandComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, commands));
 
                             player.spigot().sendMessage(commandComponent, descriptionComponent);

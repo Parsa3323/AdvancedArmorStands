@@ -28,12 +28,18 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoadCommand extends SubCommand {
     @Override
     public String getName() {
         return "load";
+    }
+
+    @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
     }
 
     @Override

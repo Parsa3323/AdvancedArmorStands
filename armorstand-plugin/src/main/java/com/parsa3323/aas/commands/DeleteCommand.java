@@ -23,12 +23,18 @@ import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteCommand extends SubCommand {
     @Override
     public String getName() {
         return "delete";
+    }
+
+    @Override
+    public ArrayList<String> getExampleLore() {
+        return null;
     }
 
     @Override
