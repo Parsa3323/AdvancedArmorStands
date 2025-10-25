@@ -120,6 +120,7 @@ public class CommandManager implements CommandExecutor {
                                     hoverBuilder.append(ChatColor.YELLOW + "  " + line)
                                             .append("\n");
                                 }
+                                hoverBuilder.append("\n");
                             }
 
                             hoverBuilder
