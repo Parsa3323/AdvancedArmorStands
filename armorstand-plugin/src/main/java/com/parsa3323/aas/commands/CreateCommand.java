@@ -65,6 +65,7 @@ public class CreateCommand extends SubCommand implements Listener {
 
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as create " + ((TypeUtils.getTypesList().get(0) == null) ? "defualt (example)" : TypeUtils.getTypesList().get(0)) + " testStand");
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as create custom testStand head 1 2 3 right-hand 1 2 3");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as create none testStand head");
         return lore;
     }
 
