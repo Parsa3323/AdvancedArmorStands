@@ -75,104 +75,15 @@ public class CreateCommand extends SubCommand implements Listener {
             sendUsage(player);
             return;
         }
+        String type = args[1].toLowerCase();
 
-        if (!args[1].equalsIgnoreCase("custom")) {
+        String armorStandName = String.join("_", java.util.Arrays.copyOfRange(args, 2, args.length));
 
-            if (!TypesConfig.get().contains(args[1])) {
-                String suggestion = getClosest(args[1], TypeUtils.getTypesList());
-                if (suggestion != null) {
-                    player.sendMessage(ChatColor.RED + "No type found named: " + args[1] + ". Did you mean '" + suggestion + "'?");
-                } else {
-                    player.sendMessage(ChatColor.RED + "No type found named: " + args[1]);
-                }
-                return;
-            }
-
-            ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
-
-            String armorStandName = String.join("_", java.util.Arrays.copyOfRange(args, 2, args.length));
-
-            ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, armorStandName);
-            Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
-
-            if (armorStandCreateEvent.isCancelled()) {
-                armorStand.remove();
-                return;
-            }
-
-
-
-            armorStand.setArms(TypesConfig.get().getBoolean(args[1] + ".Arms"));
-            armorStand.setGravity(TypesConfig.get().getBoolean(args[1] + ".Gravity"));
-            armorStand.setBasePlate(TypesConfig.get().getBoolean(args[1] + ".BasePlate"));
-            String path = args[1] + ".CustomName";
-            String rawName = TypesConfig.get().getString(path);
-            String replacedName = (AdvancedArmorStands.isIsPapiAvailable()) ? PlaceholderAPI.setPlaceholders(player, rawName) : rawName;
-            String coloredName = ChatColor.translateAlternateColorCodes('&', replacedName);
-            armorStand.setCustomName(coloredName);
-
-            armorStand.setCustomNameVisible(TypesConfig.get().getBoolean(args[1] + ".isCustomNameVisible"));
-            armorStand.setItemInHand(new ItemStack(Material.valueOf(TypesConfig.get().getString(args[1] + ".itemInHandMaterial"))));
-
-            armorStand.setHeadPose(new EulerAngle(
-
-                    Math.toRadians(getConfigDouble(args[1] + ".HeadPos.x")),
-                    Math.toRadians(getConfigDouble(args[1] + ".HeadPos.y")),
-                    Math.toRadians(getConfigDouble(args[1] + ".HeadPos.z"))
-            ));
-
-            armorStand.setRightArmPose(new EulerAngle(
-                    Math.toRadians(getConfigDouble(args[1] + ".rightArmPose.x")),
-                    Math.toRadians(getConfigDouble(args[1] + ".rightArmPose.y")),
-                    Math.toRadians(getConfigDouble(args[1] + ".rightArmPose.z"))
-            ));
-            AdvancedArmorStands.debug("rightArmPose.x = " + getConfigDouble(args[1] + ".rightArmPose.x"));
-            AdvancedArmorStands.debug("rightArmPose.y = " + getConfigDouble(args[1] + ".rightArmPose.y"));
-            AdvancedArmorStands.debug("rightArmPose.z = " + getConfigDouble(args[1] + ".rightArmPose.z"));
-
-            armorStand.setLeftArmPose(new EulerAngle(
-                    Math.toRadians(getConfigDouble(args[1] + ".leftArmPose.x")),
-                    Math.toRadians(getConfigDouble(args[1] + ".leftArmPose.y")),
-                    Math.toRadians(getConfigDouble(args[1] + ".leftArmPose.z"))
-            ));
-            AdvancedArmorStands.debug("leftArmPose.x = " + getConfigDouble(args[1] + ".leftArmPose.x"));
-            AdvancedArmorStands.debug("leftArmPose.y = " + getConfigDouble(args[1] + ".leftArmPose.y"));
-            AdvancedArmorStands.debug("leftArmPose.z = " + getConfigDouble(args[1] + ".leftArmPose.z"));
-
-            armorStand.setRightLegPose(new EulerAngle(
-                    Math.toRadians(getConfigDouble(args[1] + ".rightLegPose.x")),
-                    Math.toRadians(getConfigDouble(args[1] + ".rightLegPose.y")),
-                    Math.toRadians(getConfigDouble(args[1] + ".rightLegPose.z"))
-            ));
-            AdvancedArmorStands.debug("rightLegPose.x = " + getConfigDouble(args[1] + ".rightLegPose.x"));
-            AdvancedArmorStands.debug("rightLegPose.y = " + getConfigDouble(args[1] + ".rightLegPose.y"));
-            AdvancedArmorStands.debug("rightLegPose.z = " + getConfigDouble(args[1] + ".rightLegPose.z"));
-
-            armorStand.setLeftLegPose(new EulerAngle(
-                    Math.toRadians(getConfigDouble(args[1] + ".leftLegPose.x")),
-                    Math.toRadians(getConfigDouble(args[1] + ".leftLegPose.y")),
-                    Math.toRadians(getConfigDouble(args[1] + ".leftLegPose.z"))
-            ));
-            AdvancedArmorStands.debug("leftLegPose.x = " + getConfigDouble(args[1] + ".leftLegPose.x"));
-            AdvancedArmorStands.debug("leftLegPose.y = " + getConfigDouble(args[1] + ".leftLegPose.y"));
-            AdvancedArmorStands.debug("leftLegPose.z = " + getConfigDouble(args[1] + ".leftLegPose.z"));
-
-            ArmorStandUtils.saveArmorStand(armorStandName, armorStand);
-
-
-            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
-            player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
-            if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
-                player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
-                ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
-            }
-        } else {
+        if (type.equalsIgnoreCase("custom")) {
             if (args.length < 6) {
                 player.sendMessage(ChatColor.RED + "Usage: /as create custom <name> <part> <x> <y> <z> [<part> <x> <y> <z> ...]");
                 return;
             }
-
-            String armorStandName = args[2];
 
             ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
 
@@ -240,7 +151,126 @@ public class CreateCommand extends SubCommand implements Listener {
                 player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
                 ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
             }
+
+            return;
         }
+
+        if (type.equalsIgnoreCase("none")) {
+            ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
+
+            ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, armorStandName);
+            Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
+
+            if (armorStandCreateEvent.isCancelled()) {
+                armorStand.remove();
+                return;
+            }
+
+            armorStand.setArms(true);
+            armorStand.setGravity(false);
+            armorStand.setBasePlate(false);
+            armorStand.setCustomName(ChatColor.translateAlternateColorCodes('&', "&7Made with &6&lA&e&ld&6&lv&e&la&6&ln&e&lc&6&le&e&ld&6&lA&e&lr&6&lm&e&lo&6&lr&e&lS&6&lt&e&la&6&ln&e&ld&6&ls"));
+            armorStand.setCustomNameVisible(false);
+
+            ArmorStandUtils.saveArmorStand(armorStandName, armorStand);
+
+            player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
+            player.sendMessage(ChatColor.GREEN + "Successfully created custom armor stand: " + armorStandName);
+            if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
+                player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
+                ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
+            }
+
+            return;
+        }
+
+        if (!TypesConfig.get().contains(args[1])) {
+            String suggestion = getClosest(args[1], TypeUtils.getTypesList());
+            if (suggestion != null) {
+                player.sendMessage(ChatColor.RED + "No type found named: " + args[1] + ". Did you mean '" + suggestion + "'?");
+            } else {
+                player.sendMessage(ChatColor.RED + "No type found named: " + args[1]);
+            }
+            return;
+        }
+
+        ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
+
+        ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player, armorStand, armorStandName);
+        Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
+
+        if (armorStandCreateEvent.isCancelled()) {
+            armorStand.remove();
+            return;
+        }
+
+
+
+        armorStand.setArms(TypesConfig.get().getBoolean(args[1] + ".Arms"));
+        armorStand.setGravity(TypesConfig.get().getBoolean(args[1] + ".Gravity"));
+        armorStand.setBasePlate(TypesConfig.get().getBoolean(args[1] + ".BasePlate"));
+        String path = args[1] + ".CustomName";
+        String rawName = TypesConfig.get().getString(path);
+        String replacedName = (AdvancedArmorStands.isIsPapiAvailable()) ? PlaceholderAPI.setPlaceholders(player, rawName) : rawName;
+        String coloredName = ChatColor.translateAlternateColorCodes('&', replacedName);
+        armorStand.setCustomName(coloredName);
+
+        armorStand.setCustomNameVisible(TypesConfig.get().getBoolean(args[1] + ".isCustomNameVisible"));
+        armorStand.setItemInHand(new ItemStack(Material.valueOf(TypesConfig.get().getString(args[1] + ".itemInHandMaterial"))));
+
+        armorStand.setHeadPose(new EulerAngle(
+
+                Math.toRadians(getConfigDouble(args[1] + ".HeadPos.x")),
+                Math.toRadians(getConfigDouble(args[1] + ".HeadPos.y")),
+                Math.toRadians(getConfigDouble(args[1] + ".HeadPos.z"))
+        ));
+
+        armorStand.setRightArmPose(new EulerAngle(
+                Math.toRadians(getConfigDouble(args[1] + ".rightArmPose.x")),
+                Math.toRadians(getConfigDouble(args[1] + ".rightArmPose.y")),
+                Math.toRadians(getConfigDouble(args[1] + ".rightArmPose.z"))
+        ));
+        AdvancedArmorStands.debug("rightArmPose.x = " + getConfigDouble(args[1] + ".rightArmPose.x"));
+        AdvancedArmorStands.debug("rightArmPose.y = " + getConfigDouble(args[1] + ".rightArmPose.y"));
+        AdvancedArmorStands.debug("rightArmPose.z = " + getConfigDouble(args[1] + ".rightArmPose.z"));
+
+        armorStand.setLeftArmPose(new EulerAngle(
+                Math.toRadians(getConfigDouble(args[1] + ".leftArmPose.x")),
+                Math.toRadians(getConfigDouble(args[1] + ".leftArmPose.y")),
+                Math.toRadians(getConfigDouble(args[1] + ".leftArmPose.z"))
+        ));
+        AdvancedArmorStands.debug("leftArmPose.x = " + getConfigDouble(args[1] + ".leftArmPose.x"));
+        AdvancedArmorStands.debug("leftArmPose.y = " + getConfigDouble(args[1] + ".leftArmPose.y"));
+        AdvancedArmorStands.debug("leftArmPose.z = " + getConfigDouble(args[1] + ".leftArmPose.z"));
+
+        armorStand.setRightLegPose(new EulerAngle(
+                Math.toRadians(getConfigDouble(args[1] + ".rightLegPose.x")),
+                Math.toRadians(getConfigDouble(args[1] + ".rightLegPose.y")),
+                Math.toRadians(getConfigDouble(args[1] + ".rightLegPose.z"))
+        ));
+        AdvancedArmorStands.debug("rightLegPose.x = " + getConfigDouble(args[1] + ".rightLegPose.x"));
+        AdvancedArmorStands.debug("rightLegPose.y = " + getConfigDouble(args[1] + ".rightLegPose.y"));
+        AdvancedArmorStands.debug("rightLegPose.z = " + getConfigDouble(args[1] + ".rightLegPose.z"));
+
+        armorStand.setLeftLegPose(new EulerAngle(
+                Math.toRadians(getConfigDouble(args[1] + ".leftLegPose.x")),
+                Math.toRadians(getConfigDouble(args[1] + ".leftLegPose.y")),
+                Math.toRadians(getConfigDouble(args[1] + ".leftLegPose.z"))
+        ));
+        AdvancedArmorStands.debug("leftLegPose.x = " + getConfigDouble(args[1] + ".leftLegPose.x"));
+        AdvancedArmorStands.debug("leftLegPose.y = " + getConfigDouble(args[1] + ".leftLegPose.y"));
+        AdvancedArmorStands.debug("leftLegPose.z = " + getConfigDouble(args[1] + ".leftLegPose.z"));
+
+        ArmorStandUtils.saveArmorStand(armorStandName, armorStand);
+
+
+        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
+        player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
+        if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
+            player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
+            ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
+        }
+
     }
 
     @Override
@@ -248,6 +278,7 @@ public class CreateCommand extends SubCommand implements Listener {
         if (args.length == 2) {
             List<String> types = new ArrayList<>(TypesConfig.get().getKeys(false));
             types.add("custom");
+            types.add("none");
             return types;
         }
 
