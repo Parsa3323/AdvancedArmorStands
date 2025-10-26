@@ -24,6 +24,7 @@ import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.AnimationUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.PluginUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
@@ -88,6 +89,13 @@ public class AnimAddCommand extends SubCommand {
 
         configurationSection.set(args[3] + ".animation", args[2]);
         ArmorStandsConfig.save();
+
+        try {
+            PluginUtils.reload();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
         player.sendMessage(ChatColor.GREEN + "Successfully set the animation " + args[2] + " to armor stand " + args[3]);
     }
