@@ -21,7 +21,6 @@ package com.parsa3323.aas.animation.manager;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.animation.KeyFrameOption;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
-import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.inventory.*;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
@@ -34,7 +33,6 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -111,14 +109,9 @@ public class EditorManager implements Listener {
                     if (event.getItem().equals(getInventoryItems().get(i).getItemStack())) {
                         event.setCancelled(true);
 
-
                         getInventoryItems().get(i).execute(player, ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId()), action);
 
-                        Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(player, ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId()), ArmorStandUtils.getNameByArmorStand(ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId()))));
-
-
                     }
-
                 }
             }
         }

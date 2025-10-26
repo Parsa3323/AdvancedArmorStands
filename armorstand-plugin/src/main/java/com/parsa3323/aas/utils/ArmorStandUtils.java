@@ -61,6 +61,40 @@ public class ArmorStandUtils {
         return armorStand != null;
     }
 
+    public static void resetArmorStandPosition(ArmorStand armorStand) {
+        String name = getNameByArmorStand(armorStand);
+        ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands." + name);
+        if (cs == null) {
+            AdvancedArmorStands.debug("No config section found for armorstand: " + name);
+            return;
+        }
+
+        World world = Bukkit.getWorld(cs.getString("World"));
+        if (world == null) {
+            AdvancedArmorStands.debug("World not found for armorstand: " + name);
+            return;
+        }
+
+        double x = cs.getDouble("X");
+        double y = cs.getDouble("Y");
+        double z = cs.getDouble("Z");
+        float yaw = (float) cs.getDouble("yaw");
+        float pitch = (float) cs.getDouble("pitch");
+
+        Location newLoc = new Location(world, x, y, z, yaw, pitch);
+        armorStand.teleport(newLoc);
+
+        armorStand.setHeadPose(loadEulerAngle(ArmorStandsConfig.get().getConfigurationSection("armorstands"), name + ".pose.head"));
+        armorStand.setBodyPose(loadEulerAngle(ArmorStandsConfig.get().getConfigurationSection("armorstands"), name + ".pose.body"));
+        armorStand.setLeftArmPose(loadEulerAngle(ArmorStandsConfig.get().getConfigurationSection("armorstands"), name + ".pose.leftArm"));
+        armorStand.setRightArmPose(loadEulerAngle(ArmorStandsConfig.get().getConfigurationSection("armorstands"), name + ".pose.rightArm"));
+        armorStand.setLeftLegPose(loadEulerAngle(ArmorStandsConfig.get().getConfigurationSection("armorstands"), name + ".pose.leftLeg"));
+        armorStand.setRightLegPose(loadEulerAngle(ArmorStandsConfig.get().getConfigurationSection("armorstands"), name + ".pose.rightLeg"));
+
+        AdvancedArmorStands.debug("ArmorStand " + name + " position reset to " + newLoc);
+    }
+
+
     public static String getNameByArmorStand(ArmorStand armorStand) {
         FileConfiguration config = ArmorStandsConfig.get();
         if (!config.contains("armorstands")) {

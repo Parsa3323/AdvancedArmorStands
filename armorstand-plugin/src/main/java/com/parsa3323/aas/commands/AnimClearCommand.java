@@ -22,6 +22,7 @@ import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.PluginUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
@@ -79,6 +80,15 @@ public class AnimClearCommand extends SubCommand {
         configurationSection.set(args[2] + ".animation", null);
         ArmorStandsConfig.save();
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
+
+        try {
+            PluginUtils.reload();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        ArmorStandUtils.resetArmorStandPosition(as);
+
         player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[2] + "'s animations");
     }
 
