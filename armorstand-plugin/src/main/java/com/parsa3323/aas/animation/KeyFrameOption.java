@@ -57,7 +57,7 @@ public class KeyFrameOption extends InventoryItem {
         ItemStack itemStack = new ItemStack(XMaterial.NETHER_STAR.parseMaterial());
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        itemMeta.setDisplayName(ChatColor.GREEN + "Keyframe" + ChatColor.GRAY + " (Hover)");
+        itemMeta.setDisplayName(ChatColor.GREEN + "Key frame" + ChatColor.GRAY + " (Hover)");
 
         itemMeta.setLore(lore);
 
