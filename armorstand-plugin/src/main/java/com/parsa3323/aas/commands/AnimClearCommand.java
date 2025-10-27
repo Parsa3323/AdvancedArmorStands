@@ -94,7 +94,7 @@ public class AnimClearCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return ArmorStandUtils.getArmorStandList();
+        return ArmorStandUtils.getArmorStandsWithAnimation();
     }
 
     @Override

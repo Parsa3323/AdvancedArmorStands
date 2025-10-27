@@ -645,6 +645,20 @@ public class ArmorStandUtils {
 
     }
 
+    public static ArrayList<String> getArmorStandsWithAnimation() {
+
+        ArrayList<String> list = new ArrayList<>();
+
+        getArmorStandList().forEach(s -> {
+            if (ArmorStandsConfig.get().contains("armorstands." + s + ".animation")) {
+                list.add(s);
+            }
+        });
+
+        return list;
+
+    }
+
     private static void saveEulerAngle(ConfigurationSection config, String path, EulerAngle angle) {
         config.set(path + ".x", Math.toDegrees(angle.getX()));
         config.set(path + ".y", Math.toDegrees(angle.getY()));

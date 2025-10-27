@@ -54,7 +54,7 @@ public class AnimRemoveCommand extends SubCommand {
     public void perform(Player player, String[] args) {
 
         if (!AnimationConfig.get().contains("animations." + args[2])) {
-            String suggestion = getClosest(args[2], AnimationUtils.getTotalAnimations());
+            String suggestion = getClosest(args[2], AnimationUtils.getAnimationsList());
             if (suggestion != null) {
                 player.sendMessage(ChatColor.RED + "Invalid animation '" + args[2] + "'. Did you mean '" + suggestion + "'?");
             } else {
@@ -83,7 +83,7 @@ public class AnimRemoveCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return AnimationUtils.getTotalAnimations();
+        return AnimationUtils.getAnimationsList();
     }
 
     @Override

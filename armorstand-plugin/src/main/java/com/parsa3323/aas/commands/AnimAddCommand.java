@@ -32,6 +32,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AnimAddCommand extends SubCommand {
     @Override
@@ -78,7 +79,7 @@ public class AnimAddCommand extends SubCommand {
         }
 
         if (!AnimationConfig.get().contains("animations." + args[2])) {
-            String suggestion = getClosest(args[2], AnimationUtils.getTotalAnimations());
+            String suggestion = getClosest(args[2], AnimationUtils.getAnimationsList());
             if (suggestion != null) {
                 player.sendMessage(ChatColor.RED + "Invalid animation '" + args[2] + "'. Did you mean '" + suggestion + "'?");
             } else {
@@ -107,8 +108,9 @@ public class AnimAddCommand extends SubCommand {
         }
 
         if (args.length == 4) {
-            return ArmorStandUtils.getArmorStandList();
-        }
+            return ArmorStandUtils.getArmorStandList().stream()
+                    .filter(s -> !ArmorStandUtils.getArmorStandsWithAnimation().contains(s))
+                    .collect(Collectors.toList());        }
         return null;
     }
 

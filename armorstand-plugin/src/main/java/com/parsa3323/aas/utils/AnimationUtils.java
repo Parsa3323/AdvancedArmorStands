@@ -151,7 +151,7 @@ public class AnimationUtils {
         }
     }
 
-    public static ArrayList<String> getTotalAnimations() {
+    public static ArrayList<String> getAnimationsList() {
         ConfigurationSection cs = AnimationConfig.get().getConfigurationSection("animations");
 
         if (cs == null) return new ArrayList<>();

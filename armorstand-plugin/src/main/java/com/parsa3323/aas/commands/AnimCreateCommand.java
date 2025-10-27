@@ -31,6 +31,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AnimCreateCommand extends SubCommand {
 
@@ -109,10 +110,11 @@ public class AnimCreateCommand extends SubCommand {
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
         if (args.length == 3) {
-            return ArmorStandUtils.getArmorStandList();
-        }
+            return ArmorStandUtils.getArmorStandList().stream()
+                    .filter(s -> !ArmorStandUtils.getArmorStandsWithAnimation().contains(s))
+                    .collect(Collectors.toList());        }
         if (args.length == 4) {
-            return AnimationUtils.getTotalAnimations();
+            return AnimationUtils.getAnimationsList();
         }
         return Collections.emptyList();
     }
