@@ -28,6 +28,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public interface ArmorstandApi  {
@@ -132,6 +133,17 @@ public interface ArmorstandApi  {
 
     ArmorStandManager getArmorStandManager();
 
+
+    interface ArmorStandInfoUtils {
+
+        ArrayList<String> getArmorStandsList();
+
+        ArrayList<String> getArmorStandsWithAnimation();
+
+        int getTotalArmorStands();
+
+    }
+
     interface ArmorStandManager {
 
         void loadArmorStand(ArmorStand armorStand) throws ArmorStandLoadException;
@@ -159,6 +171,8 @@ public interface ArmorstandApi  {
         void removeArmorStand(ArmorStand armorStand);
 
         void removeArmorStand(String s) throws ArmorStandNotFoundException;
+
+        ArmorStandInfoUtils getUtils();
 
     }
 

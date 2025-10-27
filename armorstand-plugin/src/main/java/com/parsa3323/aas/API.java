@@ -473,6 +473,26 @@ public class API implements ArmorstandApi {
                 as.remove();
 
             }
+
+            @Override
+            public ArmorStandInfoUtils getUtils() {
+                return new ArmorStandInfoUtils() {
+                    @Override
+                    public ArrayList<String> getArmorStandsList() {
+                        return ArmorStandUtils.getArmorStandList();
+                    }
+
+                    @Override
+                    public ArrayList<String> getArmorStandsWithAnimation() {
+                        return ArmorStandUtils.getArmorStandsWithAnimation();
+                    }
+
+                    @Override
+                    public int getTotalArmorStands() {
+                        return ArmorStandUtils.getTotalArmorStands();
+                    }
+                };
+            }
         };
     }
 
