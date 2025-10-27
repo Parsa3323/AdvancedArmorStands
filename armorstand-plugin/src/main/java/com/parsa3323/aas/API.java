@@ -491,6 +491,11 @@ public class API implements ArmorstandApi {
                     public int getTotalArmorStands() {
                         return ArmorStandUtils.getTotalArmorStands();
                     }
+
+                    @Override
+                    public int getTotalLoadedArmorStands() {
+                        return ArmorStandUtils.getLoadedArmorStands();
+                    }
                 };
             }
         };

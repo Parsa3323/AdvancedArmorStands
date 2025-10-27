@@ -142,6 +142,8 @@ public interface ArmorstandApi  {
 
         int getTotalArmorStands();
 
+        int getTotalLoadedArmorStands();
+
     }
 
     interface ArmorStandManager {
