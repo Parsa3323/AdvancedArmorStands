@@ -73,7 +73,7 @@ public class KeyFrameOption extends InventoryItem {
     @Override
     public void execute(Player p, ArmorStand armorStand, Action action) {
 
-        if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
+        if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK || action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
             if (p.isSneaking()) {
                 KeyFrameMenu keyFrameMenu = new KeyFrameMenu(new PlayerMenuUtility(p.getPlayer()));
                 keyFrameMenu.open();
