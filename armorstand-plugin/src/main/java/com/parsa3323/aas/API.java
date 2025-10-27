@@ -164,7 +164,7 @@ public class API implements ArmorstandApi {
     public PlayerManager getPlayerManager(Player player) {
         return new PlayerManager() {
             @Override
-            public boolean isPluginAdmin() {
+            public boolean hasAdminPermission() {
                 return com.parsa3323.aas.player.PlayerManager.getByBukkit(player).isAdmin();
             }
 
