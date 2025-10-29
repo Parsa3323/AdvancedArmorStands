@@ -24,7 +24,7 @@
 
     <groupId>com.parsa3323</groupId>
     <artifactId>armorstand-api</artifactId>
-    <version>1.10.2-dev4</version>
+    <version>1.10.2</version>
     <packaging>jar</packaging>
 
     <name>armorstand-api</name>
