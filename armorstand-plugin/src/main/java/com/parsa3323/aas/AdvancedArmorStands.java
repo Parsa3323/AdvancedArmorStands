@@ -233,10 +233,14 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStandsConfig.get().options().copyDefaults(true);
         ArmorStandsConfig.save();
 
+        status("Loading Artificial Intelligence...");
+
         aiApiKey = getConfig().getString("ai.token");
 
         if (aiApiKey != null && !aiApiKey.equalsIgnoreCase("PLACE_YOUR_TOKEN_HERE")) {
             isAiEnabled = true;
+
+            status("Artificial Intelligence is enabled.");
         }
 
         status("Registering commands...");
