@@ -56,6 +56,7 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new HeadCommand());
         subCommands.add(new AnimationCommand());
         subCommands.add(new DebugCommand());
+        subCommands.add(new TellCommand());
     }
 
     @Override

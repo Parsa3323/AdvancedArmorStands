@@ -57,7 +57,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static Level logLevel;
 
-    private final String CURRENT_CONFIG_VERSION = "1.0.0";
+    private final String CURRENT_CONFIG_VERSION = "1.0.1";
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
@@ -70,6 +70,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
     private static boolean isPapiAvailable = false;
 
     private static boolean migrating = false;
+
+    private static String apiKey;
 
     public static boolean CONFIG_OUTDATED = false;
 
@@ -93,6 +95,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static void setIsPapiAvailable(boolean isPapiAvailable) {
         AdvancedArmorStands.isPapiAvailable = isPapiAvailable;
+    }
+
+    public static String getApiKey() {
+        return apiKey;
     }
 
     @Override
@@ -224,6 +230,9 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStandsConfig.init();
         ArmorStandsConfig.get().options().copyDefaults(true);
         ArmorStandsConfig.save();
+
+        apiKey = getConfig().getString("ai.token");
+
         status("Registering commands...");
 
         CommandManager commandManager = new CommandManager();
