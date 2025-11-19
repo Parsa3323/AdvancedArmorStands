@@ -68,6 +68,11 @@ public class TellCommand extends SubCommand {
         ArmorStand stand = checkArmorStandAndNotify(player, args[1]);
         if (stand == null) return;
 
+        String name = args[1];
+
+        ArmorStand armorstand = ArmorStandUtils.getArmorStandByName(name);
+
+        MemoryData memoryData = new MemoryData("", AiUtils.getDefaultInstructions(name, "NOTHING FOR NOW"));
 
         player.sendMessage(AiUtils.getResponse(AdvancedArmorStands.getAiApiKey(), new MemoryData("", "If you are told 'hey' answer lalo"), args[1]));
     }

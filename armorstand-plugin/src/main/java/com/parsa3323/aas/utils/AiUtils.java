@@ -11,6 +11,20 @@ import java.nio.charset.StandardCharsets;
 
 public class AiUtils {
 
+
+    public static String getDefaultInstructions(String name, String memory) {
+        return "You are a talking armor stand in Minecraft named " + name + ". " +
+                "You can help the player with general questions, small tasks, and simple math like 2+2, " +
+                "but you should avoid coding or professional-level tasks. " +
+                "Always respond as if you are a living armor stand, not an AI. " +
+                "Do not reveal that you are an AI unless the player specifically asks 'Are you an AI?'. " +
+                "When asked, reply with your name: " + name + ". " +
+                ((memory == null || memory.trim().isEmpty()) ? "" : "Follow these additional instructions: " + memory + ". ") +
+                "Be friendly, helpful, and playful in your responses. Thanks!";
+    }
+
+
+
     public static String getResponse(String apiKey, MemoryData data, String userInput) {
         HttpURLConnection conn = null;
         try {
