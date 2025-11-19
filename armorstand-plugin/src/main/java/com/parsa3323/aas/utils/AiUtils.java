@@ -1,6 +1,9 @@
 package com.parsa3323.aas.utils;
 
+import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.data.MemoryData;
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -23,8 +26,68 @@ public class AiUtils {
                 "Be friendly, helpful, and playful in your responses. Thanks!";
     }
 
+    public static void getResponseAsync(String apiKey, MemoryData data, String userInput, java.util.function.Consumer<String> callback) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn = null;
+                String result;
+                try {
+                    String instructions = data.getInstructionsData() == null ? "" : data.getInstructionsData();
+                    String history = data.getHistoryData() == null ? "" : data.getHistoryData();
+                    String user = userInput == null ? "" : userInput;
 
+                    String userContent = (history.isEmpty() ? "" : (history + "\n")) + user;
 
+                    JSONObject body = new JSONObject();
+                    body.put("model", "gemini-2.5-flash");
+
+                    JSONArray messages = new JSONArray();
+                    messages.put(new JSONObject().put("role", "system").put("content", instructions));
+                    messages.put(new JSONObject().put("role", "user").put("content", userContent));
+                    body.put("messages", messages);
+
+                    body.put("temperature", 0.2);
+                    body.put("max_tokens", 1024);
+
+                    String endpointUrl = "https://generativelanguage.googleapis.com/v1beta/chat/completions";
+
+                    URL url = new URL(endpointUrl);
+                    conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    conn.setRequestProperty("Authorization", "Bearer " + apiKey);
+                    conn.setDoOutput(true);
+                    conn.setConnectTimeout(30000);
+                    conn.setReadTimeout(30000);
+
+                    try (OutputStream os = conn.getOutputStream()) {
+                        os.write(body.toString().getBytes(StandardCharsets.UTF_8));
+                    }
+
+                    int responseCode = conn.getResponseCode();
+                    String response = responseCode == 200 ? readStream(conn.getInputStream())
+                            : readStream(conn.getErrorStream());
+
+                    if (responseCode != 200) {
+                        result = "AI error: HTTP " + responseCode + " - " + response;
+                    } else {
+                        result = parseChatCompletionsResponse(response);
+                    }
+
+                } catch (Exception e) {
+                    result = "AI error: " + e.getClass().getSimpleName() + ": " + e.getMessage();
+                } finally {
+                    if (conn != null) conn.disconnect();
+                }
+
+                String finalResult = result;
+                Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> callback.accept(finalResult));
+            }
+        }.runTaskAsynchronously(AdvancedArmorStands.plugin);
+    }
+
+    @Deprecated
     public static String getResponse(String apiKey, MemoryData data, String userInput) {
         HttpURLConnection conn = null;
         try {
