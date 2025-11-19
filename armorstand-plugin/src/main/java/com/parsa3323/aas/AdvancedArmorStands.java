@@ -246,7 +246,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
             status("Artificial Intelligence is enabled.");
         } else {
-            status("Artificial Intelligence is disabled, see config for more details");
+            status("Artificial Intelligence is disabled, see config for more details.");
         }
 
         status("Registering commands...");
