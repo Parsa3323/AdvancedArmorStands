@@ -77,7 +77,6 @@ public class TellCommand extends SubCommand {
         String response = AiUtils.getResponse(AdvancedArmorStands.getAiApiKey(), memoryData, args[2]);
 
         player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + response);
-
     }
 
     @Override
