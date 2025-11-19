@@ -19,11 +19,14 @@
 package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.actions.AiRole;
 import com.parsa3323.aas.api.data.MemoryData;
+import com.parsa3323.aas.api.events.ArmorStandAiRespondEvent;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.AiUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -72,12 +75,17 @@ public class TellCommand extends SubCommand {
 
         String userInput = String.join("_", java.util.Arrays.copyOfRange(args, 2, args.length));
 
-        MemoryData memoryData = new MemoryData("", AiUtils.getDefaultInstructions(name, null));
+        MemoryData memoryData = new MemoryData(AiUtils.getHistory(player.getName(), name), AiUtils.getDefaultInstructions(name, null));
 
         player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "Thinking");
 
         AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), memoryData, userInput, response -> {
             player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + response);
+
+            Bukkit.getPluginManager().callEvent(new ArmorStandAiRespondEvent(ArmorStandUtils.getArmorStandByName(name), response, userInput, player));
+
+            AiUtils.addToHistory(player.getName(), name, AiRole.PLAYER, userInput);
+            AiUtils.addToHistory(player.getName(), name, AiRole.AI, response);
         });
 
     }

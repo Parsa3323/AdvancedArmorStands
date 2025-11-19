@@ -161,7 +161,7 @@ public class AiUtils {
         return sb.toString();
     }
 
-    public static void addToMemory(String playerName, String armorStandName, AiRole role, String content) {
+    public static void addToHistory(String playerName, String armorStandName, AiRole role, String content) {
         YamlConfiguration config = AiConfig.get();
         String path = playerName + "." + armorStandName + ".conversation";
 
@@ -187,29 +187,28 @@ public class AiUtils {
         AiConfig.save();
     }
 
-    public static List<Map<String, String>> getMemory(String playerName, String armorStandName) {
+    public static String getHistory(String playerName, String armorStandName) {
         YamlConfiguration config = AiConfig.get();
         String path = playerName + "." + armorStandName + ".conversation";
 
         List<Map<?, ?>> rawList = config.getMapList(path);
-        List<Map<String, String>> conversation = new ArrayList<>();
+        if (rawList == null || rawList.isEmpty()) return "";
 
-        if (rawList != null) {
-            for (Map<?, ?> entry : rawList) {
-                Map<String, String> map = new HashMap<>();
-                Object roleObj = entry.get("role");
-                Object contentObj = entry.get("content");
-                if (roleObj != null) map.put("role", roleObj.toString());
-                if (contentObj != null) map.put("content", contentObj.toString());
-                conversation.add(map);
+        StringBuilder sb = new StringBuilder();
+        for (Map<?, ?> entry : rawList) {
+            Object roleObj = entry.get("role");
+            Object contentObj = entry.get("content");
+            if (roleObj != null && contentObj != null) {
+                sb.append(roleObj.toString()).append(": ").append(contentObj.toString()).append("\n");
             }
         }
 
-        return conversation;
+        return sb.toString().trim();
     }
 
 
-    public static void clearMemory(String playerName, String armorStandName) {
+
+    public static void clearHistory(String playerName, String armorStandName) {
         YamlConfiguration config = AiConfig.get();
         String path = playerName + "." + armorStandName;
         config.set(path, null);
