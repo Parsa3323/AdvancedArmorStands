@@ -71,7 +71,9 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     private static boolean migrating = false;
 
-    private static String apiKey;
+    private static String aiApiKey;
+
+    private static boolean isAiEnabled = false;
 
     public static boolean CONFIG_OUTDATED = false;
 
@@ -97,8 +99,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
         AdvancedArmorStands.isPapiAvailable = isPapiAvailable;
     }
 
-    public static String getApiKey() {
-        return apiKey;
+    public static String getAiApiKey() {
+        return aiApiKey;
     }
 
     @Override
@@ -231,7 +233,11 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStandsConfig.get().options().copyDefaults(true);
         ArmorStandsConfig.save();
 
-        apiKey = getConfig().getString("ai.token");
+        aiApiKey = getConfig().getString("ai.token");
+
+        if (aiApiKey != null && !aiApiKey.equalsIgnoreCase("PLACE_YOUR_TOKEN_HERE")) {
+            isAiEnabled = true;
+        }
 
         status("Registering commands...");
 
