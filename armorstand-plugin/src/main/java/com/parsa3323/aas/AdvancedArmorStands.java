@@ -26,10 +26,7 @@ import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.commands.manager.CommandManager;
 import com.parsa3323.aas.commands.manager.TabComp;
-import com.parsa3323.aas.config.ActionConfig;
-import com.parsa3323.aas.config.AnimationConfig;
-import com.parsa3323.aas.config.ArmorStandsConfig;
-import com.parsa3323.aas.config.TypesConfig;
+import com.parsa3323.aas.config.*;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
 import com.parsa3323.aas.listener.*;
 import com.parsa3323.aas.menus.manager.MenuListener;
@@ -207,7 +204,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ActionConfig.get().options().copyDefaults(true);
         ActionConfig.save();
 
-
         TypesConfig.get().addDefault("default.Arms", true);
         TypesConfig.get().addDefault("default.Gravity", false);
         TypesConfig.get().addDefault("default.BasePlate", false);
@@ -236,6 +232,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStandsConfig.init();
         ArmorStandsConfig.get().options().copyDefaults(true);
         ArmorStandsConfig.save();
+
+        AiConfig.init();
+        AiConfig.get().options().copyDefaults(true);
+        AiConfig.save();
 
         status("Loading Artificial Intelligence...");
 
