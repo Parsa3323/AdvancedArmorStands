@@ -204,6 +204,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ActionConfig.get().options().copyDefaults(true);
         ActionConfig.save();
 
+
         TypesConfig.get().addDefault("default.Arms", true);
         TypesConfig.get().addDefault("default.Gravity", false);
         TypesConfig.get().addDefault("default.BasePlate", false);

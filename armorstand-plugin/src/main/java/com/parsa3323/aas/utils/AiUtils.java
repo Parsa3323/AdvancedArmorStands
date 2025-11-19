@@ -1,8 +1,11 @@
 package com.parsa3323.aas.utils;
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.actions.AiRole;
 import com.parsa3323.aas.api.data.MemoryData;
+import com.parsa3323.aas.config.AiConfig;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,6 +14,10 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AiUtils {
 
@@ -154,10 +161,60 @@ public class AiUtils {
         return sb.toString();
     }
 
-    public static void addToMemory(String message) {
+    public static void addToMemory(String playerName, String armorStandName, AiRole role, String content) {
+        YamlConfiguration config = AiConfig.get();
+        String path = playerName + "." + armorStandName + ".conversation";
 
+        List<Map<?, ?>> rawList = config.getMapList(path);
+        List<Map<String, Object>> conversation = new ArrayList<>();
+
+        if (rawList != null) {
+            for (Map<?, ?> entry : rawList) {
+                Map<String, Object> map = new HashMap<>();
+                for (Map.Entry<?, ?> e : entry.entrySet()) {
+                    map.put(e.getKey().toString(), e.getValue());
+                }
+                conversation.add(map);
+            }
+        }
+
+        Map<String, Object> newEntry = new HashMap<>();
+        newEntry.put("role", role.name().toLowerCase());
+        newEntry.put("content", content);
+
+        conversation.add(newEntry);
+        config.set(path, conversation);
+        AiConfig.save();
     }
 
+    public static List<Map<String, String>> getMemory(String playerName, String armorStandName) {
+        YamlConfiguration config = AiConfig.get();
+        String path = playerName + "." + armorStandName + ".conversation";
+
+        List<Map<?, ?>> rawList = config.getMapList(path);
+        List<Map<String, String>> conversation = new ArrayList<>();
+
+        if (rawList != null) {
+            for (Map<?, ?> entry : rawList) {
+                Map<String, String> map = new HashMap<>();
+                Object roleObj = entry.get("role");
+                Object contentObj = entry.get("content");
+                if (roleObj != null) map.put("role", roleObj.toString());
+                if (contentObj != null) map.put("content", contentObj.toString());
+                conversation.add(map);
+            }
+        }
+
+        return conversation;
+    }
+
+
+    public static void clearMemory(String playerName, String armorStandName) {
+        YamlConfiguration config = AiConfig.get();
+        String path = playerName + "." + armorStandName;
+        config.set(path, null);
+        AiConfig.save();
+    }
 
     private static String parseChatCompletionsResponse(String json) {
         try {
