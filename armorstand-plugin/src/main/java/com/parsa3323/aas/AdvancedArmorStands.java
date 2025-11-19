@@ -288,8 +288,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         });
 
         status("All systems loaded successfully!");
-
-
     }
 
     @Override
