@@ -19,12 +19,14 @@
 package com.parsa3323.aas.listener;
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.ActionMenu;
 import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.CustomNameOption;
 import com.parsa3323.aas.options.manager.SettingsManager;
+import com.parsa3323.aas.utils.AiUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
@@ -44,6 +46,8 @@ public class ChatListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerChat(AsyncPlayerChatEvent e) {
+
+        String message = e.getMessage();
 
         if (CustomNameOption.players.containsKey(e.getPlayer().getUniqueId())) {
 
@@ -169,7 +173,23 @@ public class ChatListener implements Listener {
             return;
         }
 
+        for (String armorstand : ArmorStandUtils.getArmorStandList()) {
+            String mentionPrefix = "@" + armorstand;
 
+            if (message.startsWith(mentionPrefix)) {
+                String afterMention = message.substring(mentionPrefix.length()).trim();
+
+                MemoryData memoryData = new MemoryData("", AiUtils.getDefaultInstructions(armorstand, null));
+
+                p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "Thinking");
+
+                AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), memoryData, afterMention, response -> {
+                    p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + response);
+                });
+            }
+        }
+
+        e.setFormat("%1$s: " + message);
     }
 
 }
