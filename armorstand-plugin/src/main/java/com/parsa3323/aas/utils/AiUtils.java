@@ -154,6 +154,10 @@ public class AiUtils {
         return sb.toString();
     }
 
+    public static void addToMemory(String message) {
+
+    }
+
 
     private static String parseChatCompletionsResponse(String json) {
         try {

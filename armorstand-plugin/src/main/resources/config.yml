@@ -27,3 +27,5 @@ ai:
   # You can generate a token at: https://aistudio.google.com/api-keys
   # Leave this blank or do not modify it to disable the AI functionality.
   token: 'PLACE_YOUR_TOKEN_HERE'
+
+  memory-expiration-time: '15' # - Minutes
