@@ -70,11 +70,15 @@ public class TellCommand extends SubCommand {
 
         String name = args[1];
 
-        ArmorStand armorstand = ArmorStandUtils.getArmorStandByName(name);
+        MemoryData memoryData = new MemoryData("", AiUtils.getDefaultInstructions(name, null));
 
-        MemoryData memoryData = new MemoryData("", AiUtils.getDefaultInstructions(name, "NOTHING FOR NOW"));
+        player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "Thinking");
 
-        player.sendMessage(AiUtils.getResponse(AdvancedArmorStands.getAiApiKey(), new MemoryData("", "If you are told 'hey' answer lalo"), args[1]));
+        String response = AiUtils.getResponse(AdvancedArmorStands.getAiApiKey(), memoryData, args[2]);
+
+        player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + response);
+
+
     }
 
     @Override
