@@ -84,7 +84,6 @@ public class AiConfig {
     }
 
 
-
     private static byte[] encrypt(String data, String key) throws Exception {
         SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
         Cipher cipher = Cipher.getInstance("AES");
