@@ -171,30 +171,32 @@ public class ChatListener implements Listener {
             return;
         }
 
-        for (String armorstand : ArmorStandUtils.getArmorStandList()) {
-            String mentionPrefix = "@" + armorstand;
+        if (AdvancedArmorStands.isIsAiEnabled()) {
+            for (String armorstand : ArmorStandUtils.getArmorStandList()) {
+                String mentionPrefix = "@" + armorstand;
 
-            if (message.startsWith(mentionPrefix)) {
-                String afterMention = message.substring(mentionPrefix.length()).trim();
+                if (message.startsWith(mentionPrefix)) {
+                    String afterMention = message.substring(mentionPrefix.length()).trim();
 
-                String coloredMessage = ColorUtils.boldAndColor(ChatColor.YELLOW) + mentionPrefix + ChatColor.RESET + " " + afterMention;
+                    String coloredMessage = ColorUtils.boldAndColor(ChatColor.YELLOW) + mentionPrefix + ChatColor.RESET + " " + afterMention;
 
-                e.setFormat("%1$s: " + coloredMessage);
+                    e.setFormat("%1$s: " + coloredMessage);
 
-                MemoryData memoryData = new MemoryData("", AiUtils.getDefaultInstructions(armorstand, null));
+                    MemoryData memoryData = new MemoryData("", AiUtils.getDefaultInstructions(armorstand, null));
 
-                Bukkit.getScheduler().runTaskLater(AdvancedArmorStands.plugin, () -> {
-                    p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "Thinking");
+                    Bukkit.getScheduler().runTaskLater(AdvancedArmorStands.plugin, () -> {
+                        p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "Thinking");
 
-                    AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), memoryData, afterMention, response -> {
-                        Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> {
-                            p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + response);
+                        AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), memoryData, afterMention, response -> {
+                            Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> {
+                                p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + response);
+                            });
                         });
-                    });
 
-                }, 2L);
+                    }, 2L);
 
-                break;
+                    break;
+                }
             }
         }
 

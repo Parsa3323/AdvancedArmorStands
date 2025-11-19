@@ -103,6 +103,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         return aiApiKey;
     }
 
+    public static boolean isIsAiEnabled() {
+        return isAiEnabled;
+    }
+
     @Override
     public void onEnable() {
         logger = getLogger();
@@ -241,6 +245,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
             isAiEnabled = true;
 
             status("Artificial Intelligence is enabled.");
+        } else {
+            status("Artificial Intelligence is disabled, see config for more details");
         }
 
         status("Registering commands...");
