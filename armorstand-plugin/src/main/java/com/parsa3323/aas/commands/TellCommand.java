@@ -22,6 +22,10 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.AiUtils;
+import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.ColorUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -36,7 +40,12 @@ public class TellCommand extends SubCommand {
 
     @Override
     public ArrayList<String> getExampleLore() {
-        return null;
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as tell " + ((ArmorStandUtils.getArmorStandList().isEmpty()) ? "test (example" : ArmorStandUtils.getArmorStandList().get(0)) + " who are you?");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as tell " + ((ArmorStandUtils.getArmorStandList().isEmpty()) ? "test (example" : ArmorStandUtils.getArmorStandList().get(0)) + " what is your name?");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as tell " + ((ArmorStandUtils.getArmorStandList().isEmpty()) ? "test (example" : ArmorStandUtils.getArmorStandList().get(0)) + " whats 2 + 2?");
+        return lore;
     }
 
     @Override
@@ -51,6 +60,15 @@ public class TellCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
+        if (args.length < 2) {
+            sendUsage(player);
+            return;
+        }
+
+        ArmorStand stand = checkArmorStandAndNotify(player, args[1]);
+        if (stand == null) return;
+
+
         player.sendMessage(AiUtils.getResponse(AdvancedArmorStands.getAiApiKey(), new MemoryData("", "If you are told 'hey' answer lalo"), args[1]));
     }
 
