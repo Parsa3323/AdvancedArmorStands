@@ -51,9 +51,7 @@ public class TellCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-
         player.sendMessage(AiUtils.getResponse(AdvancedArmorStands.getAiApiKey(), new MemoryData("", "If you are told 'hey' answer lalo"), args[1]));
-        System.out.println(AdvancedArmorStands.getAiApiKey());
     }
 
     @Override
