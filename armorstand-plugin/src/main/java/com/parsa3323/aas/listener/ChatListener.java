@@ -186,10 +186,14 @@ public class ChatListener implements Listener {
                 AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), memoryData, afterMention, response -> {
                     p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + response);
                 });
+
+                String coloredMessage = ChatColor.RED + mentionPrefix + ChatColor.RESET + " " + afterMention;
+
+                e.setFormat("%1$s: " + coloredMessage);
+                break;
             }
         }
 
-        e.setFormat("%1$s: " + message);
     }
 
 }
