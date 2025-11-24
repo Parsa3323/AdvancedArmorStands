@@ -310,19 +310,14 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
 
-            if (ArmorStandSelectionCache.isIsInEditSession(player)) {
-
-                if (InventoryUtils.hasBackup(player)) {
-                    InventoryUtils.restore(player);
-                    InventoryUtils.save(player);
-                    status("Restored " + player.getDisplayName() +"'s inventory");
-                }
-
+            if (InventoryUtils.hasBackup(player)) {
+                InventoryUtils.restore(player);
+                InventoryUtils.save(player);
+                status("Restored " + player.getDisplayName() +"'s inventory");
             }
 
             if (ArmorStandSelectionCache.isInKeyFrameList(player)) {
 
-                InventoryUtils.restore(player);
                 ArmorStandSelectionCache.removeFromKeyFrameList(player);
                 ArmorStand armorStand = ArmorStandSelectionCache.getKeyFrameSelectedArmorStand(player.getUniqueId());
                 AdvancedArmorStands.debug(armorStand.getName());

@@ -83,19 +83,17 @@ public class MemoryOption extends AiSettingsOption {
         player.closeInventory();
 
         InventoryUtils.save(player);
-
         player.getInventory().clear();
 
         ItemStack itemStack = new ItemStack(XMaterial.WRITABLE_BOOK.parseMaterial());
-
         BookMeta meta = (BookMeta) itemStack.getItemMeta();
 
-        if (AiUtils.getUserSetInstructions(armorStand) != null) {
+        String text = AiUtils.getUserSetInstructions(armorStand);
+        List<String> pages = new ArrayList<>();
 
+        if (text != null && !text.isEmpty()) {
             int maxCharsPerPage = 256;
-            List<String> pages = new ArrayList<>();
-
-            String[] words = AiUtils.getUserSetInstructions(armorStand).split("\\s+");
+            String[] words = text.split("\\s+");
             StringBuilder currentPage = new StringBuilder();
 
             for (String word : words) {
@@ -107,24 +105,28 @@ public class MemoryOption extends AiSettingsOption {
                 currentPage.append(word);
             }
 
-            if (currentPage.length() > 0) {
-                pages.add(currentPage.toString());
-            }
-            meta.setPages(pages);
 
+            if (currentPage.length() > 0) {
+                currentPage.append(" ");
+                pages.add(currentPage.toString());
+            } else {
+                pages.add(" ");
+            }
+        } else {
+            pages.add(" ");
         }
 
+        meta.setPages(pages);
         meta.setTitle("Custom Instructions");
 
         itemStack.setItemMeta(meta);
-
         player.getInventory().setItem(4, itemStack);
 
         waiting.put(player.getUniqueId(), armorStand);
 
-        player.sendMessage(ChatColor.GREEN + "Open the book to change the instructions of the armor stand's ai.");
-
+        player.sendMessage(ChatColor.GREEN + "Open the book to change the instructions of the armor stand's AI.");
     }
+
 
     @Override
     public boolean updateInventory() {
