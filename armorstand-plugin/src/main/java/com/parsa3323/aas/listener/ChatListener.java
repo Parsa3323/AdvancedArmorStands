@@ -178,6 +178,11 @@ public class ChatListener implements Listener {
                 String mentionPrefix = "@" + armorstand;
 
                 if (message.startsWith(mentionPrefix)) {
+                    if (!ArmorStandUtils.hasAi(armorstand)) {
+                        p.sendMessage(ChatColor.RED + "This armorstand doesn't have AI enabled");
+                        return;
+                    }
+
                     String afterMention = message.substring(mentionPrefix.length()).trim();
 
                     String coloredMessage = ColorUtils.boldAndColor(ChatColor.YELLOW) + mentionPrefix + ChatColor.RESET + " " + afterMention;
