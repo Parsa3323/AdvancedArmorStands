@@ -18,7 +18,6 @@
 
 package com.parsa3323.aas.ai;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.ai.manager.AiSettingsOption;
 import com.parsa3323.aas.utils.AiUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
@@ -82,10 +81,6 @@ public class MemoryOption extends AiSettingsOption {
 
     @Override
     public void execute(ArmorStand armorStand, Player player) {
-
-        ItemStack book = new ItemStack(XMaterial.WRITABLE_BOOK.parseMaterial());
-        player.getInventory().addItem(book);
-
         InventoryUtils.openBookInHand(player);
         waiting.put(player.getUniqueId(), armorStand);
 
