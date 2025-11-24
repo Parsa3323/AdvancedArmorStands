@@ -54,7 +54,7 @@ public class MemoryOption extends AiSettingsOption {
 
         if (currentInstructions != null) {
             String[] words = ChatColor.stripColor(currentInstructions).split("\\s+");
-            StringBuilder line = new StringBuilder(ChatColor.YELLOW + "Current: ");
+            StringBuilder line = new StringBuilder(ChatColor.YELLOW + "Current" + ChatColor.GOLD + " » " + ChatColor.YELLOW);
             for (int i = 0; i < words.length; i++) {
                 line.append(words[i]).append(" ");
                 if ((i + 1) % 2 == 0 || i == words.length - 1) {
@@ -63,7 +63,7 @@ public class MemoryOption extends AiSettingsOption {
                 }
             }
         } else {
-            lore.add(ChatColor.YELLOW + "Current: None");
+            lore.add(ChatColor.YELLOW + "Current" + ChatColor.GOLD + " » " + ChatColor.YELLOW + "None");
         }
 
         lore.add("");
