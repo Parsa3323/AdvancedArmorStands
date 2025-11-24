@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.ai;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.ai.manager.AiSettingsOption;
 import com.parsa3323.aas.utils.AiUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
@@ -26,12 +27,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class MemoryOption extends AiSettingsOption {
 
@@ -82,10 +81,51 @@ public class MemoryOption extends AiSettingsOption {
     @Override
     public void execute(ArmorStand armorStand, Player player) {
         player.closeInventory();
-        InventoryUtils.openBookInHand(player);
+
+        InventoryUtils.save(player);
+
+        player.getInventory().clear();
+
+        ItemStack itemStack = new ItemStack(XMaterial.WRITABLE_BOOK.parseMaterial());
+
+        String text = (AiUtils.getUserSetInstructions(armorStand) != null) ? AiUtils.getUserSetInstructions(armorStand) : "";
+
+        BookMeta meta = (BookMeta) itemStack.getItemMeta();
+        int maxCharsPerPage = 256;
+        List<String> pages = new ArrayList<>();
+
+        String[] words = text.split("\\s+");
+        StringBuilder currentPage = new StringBuilder();
+
+        for (String word : words) {
+            if (currentPage.length() + word.length() + 1 > maxCharsPerPage) {
+                pages.add(currentPage.toString());
+                currentPage = new StringBuilder();
+            }
+            if (currentPage.length() > 0) currentPage.append(" ");
+            currentPage.append(word);
+        }
+
+        if (currentPage.length() > 0) {
+            pages.add(currentPage.toString());
+        }
+
+        meta.setPages(pages);
+        meta.setTitle("My Book");
+
+        itemStack.setItemMeta(meta);
+
+        player.getInventory().setItem(4, itemStack);
+
         waiting.put(player.getUniqueId(), armorStand);
 
-        player.sendMessage("Write your text in the book and press Done.");
+        player.sendMessage(ChatColor.GREEN + "Open the book to change the instructions of the armor stand's ai.");
+
+    }
+
+    @Override
+    public boolean updateInventory() {
+        return false;
     }
 
 }

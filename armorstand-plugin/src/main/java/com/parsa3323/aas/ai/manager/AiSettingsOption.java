@@ -26,4 +26,6 @@ public abstract class AiSettingsOption {
     public abstract ItemStack getItemStack(ArmorStand armorStand, Player player);
 
     public abstract void execute(ArmorStand armorStand, Player player);
+
+    public abstract boolean updateInventory();
 }

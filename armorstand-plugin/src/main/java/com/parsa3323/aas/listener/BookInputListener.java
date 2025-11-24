@@ -2,8 +2,10 @@ package com.parsa3323.aas.listener;
 
 
 import com.parsa3323.aas.ai.MemoryOption;
+import com.parsa3323.aas.ai.manager.AiSettingsManager;
 import com.parsa3323.aas.utils.AiUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
+import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -28,13 +30,13 @@ public class BookInputListener implements Listener {
         String text = String.join("\n", meta.getPages());
 
         AiUtils.setUserSetInstructions(waiting.get(p.getUniqueId()), text);
+        InventoryUtils.restore(e.getPlayer());
+        AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(e.getPlayer()), waiting.get(p.getUniqueId()));
+        aiSettingsManager.open();
+        p.sendMessage(ChatColor.GREEN + "Successfully updated armor stand's instructions");
+        System.out.println(text);
 
         waiting.remove(p.getUniqueId());
-
-        System.out.println(text);
-        p.sendMessage(ChatColor.GREEN + "Successfully updated armor stand's instructions");
-        p.getInventory().setItemInHand(InventoryUtils.getOldHandItem(e.getPlayer()));
-
     }
 
 }
