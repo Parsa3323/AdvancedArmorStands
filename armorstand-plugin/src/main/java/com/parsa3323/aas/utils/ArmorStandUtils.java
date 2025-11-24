@@ -61,6 +61,15 @@ public class ArmorStandUtils {
         return armorStand != null;
     }
 
+    public static boolean hasAi(String name) {
+        return ArmorStandsConfig.get().getBoolean("armorstands." + name + ".ai");
+    }
+
+    public static void setAi(String name, boolean value) {
+        ArmorStandsConfig.get().set("armorstands." + name + ".ai", value);
+
+    }
+
     public static void resetArmorStandPosition(ArmorStand armorStand) {
         String name = getNameByArmorStand(armorStand);
         ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands." + name);

@@ -72,6 +72,11 @@ public class TellCommand extends SubCommand {
 
         String name = args[1];
 
+        if (!ArmorStandUtils.hasAi(name)) {
+            player.sendMessage(ChatColor.RED + "This armorstand doesn't have AI enabled");
+            return;
+        }
+
         String userInput = String.join("_", java.util.Arrays.copyOfRange(args, 2, args.length));
 
         MemoryData memoryData = new MemoryData(AiUtils.getHistory(player.getName(), name), AiUtils.getDefaultInstructions(name, AiUtils.getUserSetInstructions(stand)));
