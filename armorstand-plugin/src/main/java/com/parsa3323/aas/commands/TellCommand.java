@@ -74,7 +74,7 @@ public class TellCommand extends SubCommand {
 
         String userInput = String.join("_", java.util.Arrays.copyOfRange(args, 2, args.length));
 
-        MemoryData memoryData = new MemoryData(AiUtils.getHistory(player.getName(), name), AiUtils.getDefaultInstructions(name, null));
+        MemoryData memoryData = new MemoryData(AiUtils.getHistory(player.getName(), name), AiUtils.getDefaultInstructions(name, AiUtils.getUserSetInstructions(stand)));
 
         player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "Thinking");
 
