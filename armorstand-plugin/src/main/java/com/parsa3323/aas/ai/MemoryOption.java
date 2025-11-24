@@ -88,30 +88,33 @@ public class MemoryOption extends AiSettingsOption {
 
         ItemStack itemStack = new ItemStack(XMaterial.WRITABLE_BOOK.parseMaterial());
 
-        String text = (AiUtils.getUserSetInstructions(armorStand) != null) ? AiUtils.getUserSetInstructions(armorStand) : "";
-
         BookMeta meta = (BookMeta) itemStack.getItemMeta();
-        int maxCharsPerPage = 256;
-        List<String> pages = new ArrayList<>();
 
-        String[] words = text.split("\\s+");
-        StringBuilder currentPage = new StringBuilder();
+        if (AiUtils.getUserSetInstructions(armorStand) != null) {
 
-        for (String word : words) {
-            if (currentPage.length() + word.length() + 1 > maxCharsPerPage) {
-                pages.add(currentPage.toString());
-                currentPage = new StringBuilder();
+            int maxCharsPerPage = 256;
+            List<String> pages = new ArrayList<>();
+
+            String[] words = AiUtils.getUserSetInstructions(armorStand).split("\\s+");
+            StringBuilder currentPage = new StringBuilder();
+
+            for (String word : words) {
+                if (currentPage.length() + word.length() + 1 > maxCharsPerPage) {
+                    pages.add(currentPage.toString());
+                    currentPage = new StringBuilder();
+                }
+                if (currentPage.length() > 0) currentPage.append(" ");
+                currentPage.append(word);
             }
-            if (currentPage.length() > 0) currentPage.append(" ");
-            currentPage.append(word);
+
+            if (currentPage.length() > 0) {
+                pages.add(currentPage.toString());
+            }
+            meta.setPages(pages);
+
         }
 
-        if (currentPage.length() > 0) {
-            pages.add(currentPage.toString());
-        }
-
-        meta.setPages(pages);
-        meta.setTitle("My Book");
+        meta.setTitle("Custom Instructions");
 
         itemStack.setItemMeta(meta);
 

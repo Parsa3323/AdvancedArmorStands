@@ -104,7 +104,7 @@ public class AiUtils {
     }
 
     public static void setUserSetInstructions(ArmorStand armorStand, String value) {
-        String path = armorStand + ".custom-instructions";
+        String path = ArmorStandUtils.getNameByArmorStand(armorStand) + ".custom-instructions";
 
         AiConfig.get().set(path, value);
         AiConfig.save();
