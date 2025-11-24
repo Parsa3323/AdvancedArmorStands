@@ -37,13 +37,13 @@ public class AiOption extends SettingsOption {
 
     @Override
     public String getName() {
-        return "ArmsOptions";
+        return "AiOption";
     }
 
     @Override
     public ItemStack getItemStack(ArmorStand armorStand) {
         if (AdvancedArmorStands.isIsAiEnabled()) {
-            ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzI1MDhlMmNhNjUwMGJjZTMwNTM5YzM4ODg0MmE1NjcyYjdiYzI5YTY4NzZkZDZhNTAyNTY3MmUyNTJkMjVkYSJ9fX0=");
+            ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThiMTA5YjAyOWYzZmQ1ODAzYzIxZjFkNzE0YmU1NTE0MmRmYzAzNTJkMGM0YzY1MjZiZGI1MmU3MTg5YWFmMiJ9fX0=");
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
             ArrayList<String> lore = new ArrayList<>();
