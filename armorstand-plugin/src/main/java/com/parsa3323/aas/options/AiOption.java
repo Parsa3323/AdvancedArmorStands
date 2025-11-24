@@ -18,6 +18,8 @@
 
 package com.parsa3323.aas.options;
 
+import com.cryptomorin.xseries.XMaterial;
+import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.ai.manager.AiSettingsManager;
 import com.parsa3323.aas.options.manager.SettingsOption;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
@@ -40,29 +42,45 @@ public class AiOption extends SettingsOption {
 
     @Override
     public ItemStack getItemStack(ArmorStand armorStand) {
-        ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzI1MDhlMmNhNjUwMGJjZTMwNTM5YzM4ODg0MmE1NjcyYjdiYzI5YTY4NzZkZDZhNTAyNTY3MmUyNTJkMjVkYSJ9fX0=");
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "i dont SHIT");
-        ArrayList<String> lore = new ArrayList<>();
+        if (AdvancedArmorStands.isIsAiEnabled()) {
+            ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzI1MDhlMmNhNjUwMGJjZTMwNTM5YzM4ODg0MmE1NjcyYjdiYzI5YTY4NzZkZDZhNTAyNTY3MmUyNTJkMjVkYSJ9fX0=");
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
+            ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "arms for this armor stand ");
-        lore.add("");
-        lore.add((armorStand.hasArms()) ? ChatColor.YELLOW + "✔ Has arms" : ChatColor.RED + "✘ Doesn't have arms");
+            lore.add(ChatColor.GRAY + "Options for artificial");
+            lore.add(ChatColor.GRAY + "intelligence of the armorstand");
+            lore.add("");
+            lore.add(ChatColor.YELLOW + "Click to open");
 
-        itemMeta.setLore(lore);
-        itemStack.setItemMeta(itemMeta);
+            itemMeta.setLore(lore);
+            itemStack.setItemMeta(itemMeta);
 
-        return itemStack;
+            return itemStack;
+        } else {
+            ItemStack itemStack = new ItemStack(XMaterial.GRAY_STAINED_GLASS.parseMaterial());
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
+            ArrayList<String> lore = new ArrayList<>();
+
+            lore.add(ChatColor.GRAY + "Enable artificial intelligence");
+            lore.add(ChatColor.GRAY + "for armorstands by setting");
+            lore.add(ChatColor.GRAY + "your api key in the config");
+            lore.add("");
+            lore.add(ChatColor.RED + "Not Enabled");
+
+            itemMeta.setLore(lore);
+            itemStack.setItemMeta(itemMeta);
+
+            return itemStack;
+        }
     }
 
     @Override
     public void click(InventoryClickEvent e, ArmorStand armorStand) {
-        System.out.println("CLICKED");
+        if (!AdvancedArmorStands.isIsAiEnabled()) return;
         AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility((Player) e.getWhoClicked()), armorStand);
-
         aiSettingsManager.open();
-        System.out.println("OPENED");
 
     }
 
