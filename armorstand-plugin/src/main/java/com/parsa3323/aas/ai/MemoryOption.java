@@ -81,6 +81,7 @@ public class MemoryOption extends AiSettingsOption {
 
     @Override
     public void execute(ArmorStand armorStand, Player player) {
+        player.closeInventory();
         InventoryUtils.openBookInHand(player);
         waiting.put(player.getUniqueId(), armorStand);
 

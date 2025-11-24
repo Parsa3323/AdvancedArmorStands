@@ -82,7 +82,6 @@ public class InventoryUtils {
         buf.writerIndex(1);
         PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
-        player.getInventory().setItemInHand(oldItem);
     }
 
     public static void setOptionItems(Player p) {
