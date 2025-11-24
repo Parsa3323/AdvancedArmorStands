@@ -124,6 +124,8 @@ public class MemoryOption extends AiSettingsOption {
 
         waiting.put(player.getUniqueId(), armorStand);
 
+        VersionSupportUtil.getVersionSupport().openBook(itemStack, player);
+
         player.sendMessage(ChatColor.GREEN + "Open the book to change the instructions of the armor stand's AI.");
     }
 

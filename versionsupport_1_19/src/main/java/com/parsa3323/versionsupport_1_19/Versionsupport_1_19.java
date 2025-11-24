@@ -102,4 +102,9 @@ public final class Versionsupport_1_19 implements VersionSupport {
 
         armorStand.setRotation(newYaw, loc.getPitch());
     }
+
+    @Override
+    public void openBook(ItemStack book, Player p) {
+        p.openBook(book);
+    }
 }
