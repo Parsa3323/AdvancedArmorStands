@@ -19,6 +19,7 @@
 package com.parsa3323.aas.ai.manager;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.parsa3323.aas.ai.AiToggleOption;
 import com.parsa3323.aas.ai.MemoryOption;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
@@ -46,6 +47,7 @@ public class AiSettingsManager extends PaginatedMenu {
         this.armorStand = armorStand;
 
         settings.add(new MemoryOption());
+        settings.add(new AiToggleOption());
     }
 
 
