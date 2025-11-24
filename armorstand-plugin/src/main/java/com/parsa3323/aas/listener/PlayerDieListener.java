@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.listener;
 
+import com.parsa3323.aas.ai.MemoryOption;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,7 +28,7 @@ public class PlayerDieListener implements Listener {
 
     @EventHandler
     public void playerDie(PlayerDeathEvent e) {
-        if (ArmorStandSelectionCache.isIsInEditSession(e.getEntity()) || ArmorStandSelectionCache.isInKeyFrameList(e.getEntity())) {
+        if (ArmorStandSelectionCache.isIsInEditSession(e.getEntity()) || ArmorStandSelectionCache.isInKeyFrameList(e.getEntity()) || MemoryOption.waiting.containsKey(e.getEntity().getUniqueId())) {
             e.setKeepInventory(true);
             e.getDrops().clear();
         }

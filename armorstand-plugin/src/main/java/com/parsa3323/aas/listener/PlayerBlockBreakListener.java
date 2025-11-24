@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.listener;
 
+import com.parsa3323.aas.ai.MemoryOption;
 import com.parsa3323.aas.api.events.PlayerMoveArmorStandEvent;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.tools.MoveTool;
@@ -74,12 +75,21 @@ public class PlayerBlockBreakListener implements Listener {
 
         if (ArmorStandSelectionCache.isIsInEditSession(e.getPlayer())) {
             if (firstTimeBreaking) {
-                e.getPlayer().sendMessage(ChatColor.RED + "You cannot break blocks in edit session");
+                e.getPlayer().sendMessage(ChatColor.RED + "You cannot break blocks in edit session.");
                 firstTimeBreaking = false;
             }
 
             e.setCancelled(true);
 
+        }
+
+        if (MemoryOption.waiting.containsKey(e.getPlayer().getUniqueId())) {
+            if (firstTimeBreaking) {
+                e.getPlayer().sendMessage(ChatColor.RED + "You cannot break blocks here.");
+                firstTimeBreaking = false;
+            }
+
+            e.setCancelled(true);
         }
 
     }
