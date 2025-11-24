@@ -60,8 +60,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public VersionSupport versionSupport;
 
-    private static BookInputListener bookInput;
-
     public static ArmorstandApi api;
 
     public static boolean isFirstTimeRunning = false;
@@ -104,10 +102,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static boolean isIsAiEnabled() {
         return isAiEnabled;
-    }
-
-    public static BookInputListener getBookInput() {
-        return bookInput;
     }
 
     @Override
@@ -157,11 +151,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
                 new PlayerInteractListener(),
                 new MenuListener(),
                 new ItemDropListener(),
-                new PlayerBlockBreakListener()
+                new PlayerBlockBreakListener(),
+                new BookInputListener()
         };
 
-        bookInput = new BookInputListener();
-        bookInput.register(this);
 
         for (Listener listener : listeners) {
             pm.registerEvents(listener, this);

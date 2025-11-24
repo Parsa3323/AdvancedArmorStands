@@ -19,9 +19,9 @@
 package com.parsa3323.aas.ai;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.ai.manager.AiSettingsOption;
 import com.parsa3323.aas.utils.AiUtils;
+import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -30,8 +30,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class MemoryOption extends AiSettingsOption {
+
+    public static final Map<UUID, ArmorStand> waiting = new HashMap<>();
+
     @Override
     public ItemStack getItemStack(ArmorStand armorStand, Player player) {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzI1MDhlMmNhNjUwMGJjZTMwNTM5YzM4ODg0MmE1NjcyYjdiYzI5YTY4NzZkZDZhNTAyNTY3MmUyNTJkMjVkYSJ9fX0=");
@@ -80,10 +86,8 @@ public class MemoryOption extends AiSettingsOption {
         ItemStack book = new ItemStack(XMaterial.WRITABLE_BOOK.parseMaterial());
         player.getInventory().addItem(book);
 
-        AdvancedArmorStands.getBookInput().waitFor(player, text -> {
-            AiUtils.setUserSetInstructions(armorStand, text);
-            System.out.println(text);
-        });
+        InventoryUtils.openBookInHand(player);
+        waiting.put(player.getUniqueId(), armorStand);
 
         player.sendMessage("Write your text in the book and press Done.");
     }

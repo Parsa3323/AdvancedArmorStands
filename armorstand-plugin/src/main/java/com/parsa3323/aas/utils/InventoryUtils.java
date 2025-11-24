@@ -18,17 +18,24 @@
 
 package com.parsa3323.aas.utils;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.animation.manager.EditorManager;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import net.minecraft.server.v1_8_R3.PacketDataSerializer;
+import net.minecraft.server.v1_8_R3.PacketPlayOutCustomPayload;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -45,6 +52,8 @@ public class InventoryUtils {
 
     private static InventoryManager inventoryManager = new InventoryManager();
 
+    private static final Map<UUID, ItemStack> oldHandItems = new HashMap<>();
+
     private static ArrayList<InventoryItem> inventoryItems = inventoryManager.getInventoryItems();
 
     private static final Map<UUID, Integer> actionBarCount = new HashMap<>();
@@ -52,6 +61,29 @@ public class InventoryUtils {
     private static final Map<UUID, BukkitTask> clearTasks = new HashMap<>();
 
     private static final Map<UUID, GameMode> gameModes = new HashMap<>();
+
+    public static void openBookInHand(Player player) {
+        UUID uuid = player.getUniqueId();
+
+        ItemStack oldItem = player.getInventory().getItemInHand();
+        oldHandItems.put(uuid, oldItem);
+
+        ItemStack book = new ItemStack(XMaterial.WRITABLE_BOOK.parseMaterial());
+        BookMeta meta = (BookMeta) book.getItemMeta();
+        meta.setAuthor(player.getName());
+        meta.setTitle("Input");
+        meta.addPage("");
+        book.setItemMeta(meta);
+
+        player.getInventory().setItemInHand(book);
+
+        ByteBuf buf = Unpooled.buffer(1);
+        buf.setByte(0, (byte) 0);
+        buf.writerIndex(1);
+        PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("MC|BOpen", new PacketDataSerializer(buf));
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+        player.getInventory().setItemInHand(oldItem);
+    }
 
     public static void setOptionItems(Player p) {
 
@@ -74,6 +106,14 @@ public class InventoryUtils {
 
 
 
+    }
+
+    public static ItemStack getOldHandItem(Player player) {
+        return oldHandItems.get(player.getUniqueId());
+    }
+
+    public static void clearHandItem(Player player) {
+        oldHandItems.remove(player.getUniqueId());
     }
 
     private static EditorManager editorManager = new EditorManager();

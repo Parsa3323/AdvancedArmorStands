@@ -1,51 +1,40 @@
 package com.parsa3323.aas.listener;
 
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.ListenerPriority;
-import com.comphenix.protocol.events.PacketAdapter;
-import com.comphenix.protocol.events.PacketEvent;
+import com.parsa3323.aas.ai.MemoryOption;
+import com.parsa3323.aas.utils.AiUtils;
+import com.parsa3323.aas.utils.InventoryUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerEditBookEvent;
 import org.bukkit.inventory.meta.BookMeta;
-import org.bukkit.plugin.Plugin;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.function.Consumer;
 
-public class BookInputListener {
+public class BookInputListener implements Listener {
 
-    private final Map<UUID, Consumer<String>> waiting = new HashMap<>();
+    @EventHandler
+    public void onBookEdit(PlayerEditBookEvent e) {
+        Map<UUID, ArmorStand> waiting = MemoryOption.waiting;
 
-    public void waitFor(Player p, Consumer<String> callback) {
-        waiting.put(p.getUniqueId(), callback);
+        Player p = e.getPlayer();
+        if (!waiting.containsKey(p.getUniqueId())) return;
+
+        BookMeta meta = e.getNewBookMeta();
+        String text = String.join("\n", meta.getPages());
+
+        AiUtils.setUserSetInstructions(waiting.get(p.getUniqueId()), text);
+
+        waiting.remove(p.getUniqueId());
+
+        System.out.println(text);
+        p.sendMessage(ChatColor.GREEN + "Successfully updated armor stand's instructions");
+        p.getInventory().setItemInHand(InventoryUtils.getOldHandItem(e.getPlayer()));
+
     }
 
-    public void register(Plugin plugin) {
-        ProtocolLibrary.getProtocolManager().addPacketListener(
-                new PacketAdapter(plugin, ListenerPriority.NORMAL, PacketType.Play.Client.CUSTOM_PAYLOAD) {
-
-                    @Override
-                    public void onPacketReceiving(PacketEvent event) {
-                        if (!event.getPacket().getStrings().read(0).equalsIgnoreCase("MC|BEdit"))
-                            return;
-
-                        Player p = event.getPlayer();
-                        Consumer<String> callback = waiting.remove(p.getUniqueId());
-                        if (callback == null) return;
-
-                        ItemStack book = event.getPacket().getItemModifier().read(0);
-                        if (!(book.getItemMeta() instanceof BookMeta)) return;
-
-                        BookMeta meta = (BookMeta) book.getItemMeta();
-                        String text = String.join("\n", meta.getPages());
-
-                        callback.accept(text);
-                    }
-                }
-        );
-    }
 }
