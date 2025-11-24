@@ -32,7 +32,6 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TellCommand extends SubCommand {
@@ -92,7 +91,11 @@ public class TellCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return Collections.emptyList();
+        if (args.length == 2) {
+            return ArmorStandUtils.getArmorStandList();
+
+        }
+        return null;
     }
 
     @Override
