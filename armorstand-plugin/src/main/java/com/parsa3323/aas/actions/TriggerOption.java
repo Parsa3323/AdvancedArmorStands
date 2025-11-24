@@ -30,7 +30,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class TriggerItem extends ActionItem {
+public class TriggerOption extends ActionItem {
 
     @Override
     public ItemStack getItemStack(String armorStandName, String commandPath) {

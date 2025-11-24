@@ -16,18 +16,17 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.actions.manager;
+package com.parsa3323.aas.ai.manager;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.parsa3323.aas.actions.SenderOption;
-import com.parsa3323.aas.actions.TriggerOption;
-import com.parsa3323.aas.menus.ActionMenu;
+import com.parsa3323.aas.ai.MemoryOption;
+import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
-import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -36,27 +35,23 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class ActionManager extends PaginatedMenu {
+public class AiSettingsManager extends PaginatedMenu {
 
-    public ArrayList<ActionItem> actions = new ArrayList<>();
+    public ArrayList<AiSettingsOption> settings = new ArrayList<>();
 
-    private final String armorStandName;
+    private final ArmorStand armorStand;
 
-    private final String commandPath;
-
-    public ActionManager(PlayerMenuUtility playerMenuUtility, String armorStandName, String commandPath) {
+    public AiSettingsManager(PlayerMenuUtility playerMenuUtility, ArmorStand armorStand) {
         super(playerMenuUtility);
+        this.armorStand = armorStand;
 
-        this.armorStandName = armorStandName;
-        this.commandPath = commandPath;
-
-        actions.add(new SenderOption());
-        actions.add(new TriggerOption());
+        settings.add(new MemoryOption());
     }
+
 
     @Override
     public String getMenuName() {
-        return ChatColor.DARK_GRAY + "As " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "Action Settings";
+        return ChatColor.DARK_GRAY + "As " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "Ai Settings";
     }
 
     @Override
@@ -88,7 +83,7 @@ public class ActionManager extends PaginatedMenu {
                     super.open();
                 }
             } else if (itemName.equalsIgnoreCase("Right")) {
-                if (!((index + 1) >= actions.size())) {
+                if (!((index + 1) >= settings.size())) {
                     page++;
 
                     super.open();
@@ -98,15 +93,15 @@ public class ActionManager extends PaginatedMenu {
         }
 
         if (clickedItem.getType() == XMaterial.BARRIER.parseMaterial()) {
-            ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(player), ArmorStandUtils.getArmorStandByName(armorStandName));
-            actionMenu.open();
+            ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player), armorStand);
+            armorStandMenu.open();
         }
 
-        for (int i = 0; i < actions.size(); i++) {
+        for (int i = 0; i < settings.size(); i++) {
 
-            if (e.getCurrentItem().equals(actions.get(i).getItemStack(armorStandName, commandPath))) {
+            if (e.getCurrentItem().equals(settings.get(i).getItemStack(armorStand, playerMenuUtility.getOwner()))) {
 
-                actions.get(i).execute(e, armorStandName, commandPath);
+                settings.get(i).execute(armorStand, playerMenuUtility.getOwner());
                 super.open();
 
                 return;
@@ -118,14 +113,14 @@ public class ActionManager extends PaginatedMenu {
     @Override
     public void setMenuItems() {
 
-        addMenuBorder(actions.size());
+        addMenuBorder(settings.size());
 
         index = page * maxItemsPerPage;
 
-        for (int i = 0; i < actions.size(); i++) {
-            if (index >= actions.size()) break;
+        for (int i = 0; i < settings.size(); i++) {
+            if (index >= settings.size()) break;
 
-            ItemStack itemStack = actions.get(i).getItemStack(armorStandName, commandPath);
+            ItemStack itemStack = settings.get(i).getItemStack(armorStand, playerMenuUtility.getOwner());
             inventory.addItem(itemStack);
             index++;
 
@@ -144,7 +139,7 @@ public class ActionManager extends PaginatedMenu {
 
     @Override
     public boolean cancelClicks() {
-        return true;
+        return false;
     }
 
     @Override

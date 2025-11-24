@@ -18,17 +18,20 @@
 
 package com.parsa3323.aas.options;
 
+import com.parsa3323.aas.ai.manager.AiSettingsManager;
 import com.parsa3323.aas.options.manager.SettingsOption;
+import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class ArmsOptions extends SettingsOption {
+public class AiOption extends SettingsOption {
 
     @Override
     public String getName() {
@@ -37,9 +40,9 @@ public class ArmsOptions extends SettingsOption {
 
     @Override
     public ItemStack getItemStack(ArmorStand armorStand) {
-        ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGI2MzJiM2QwZjgyMGVjNjExNzA4ZTg5MjIyMjA1OWEzNjRkNzYyMjE3YzJjNmM5YmE3MWM1YWRiNDZmYzRiNCJ9fX0=");
+        ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzI1MDhlMmNhNjUwMGJjZTMwNTM5YzM4ODg0MmE1NjcyYjdiYzI5YTY4NzZkZDZhNTAyNTY3MmUyNTJkMjVkYSJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Arms");
+        itemMeta.setDisplayName(ChatColor.YELLOW + "i dont SHIT");
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Enable and disable");
@@ -55,12 +58,17 @@ public class ArmsOptions extends SettingsOption {
 
     @Override
     public void click(InventoryClickEvent e, ArmorStand armorStand) {
-        armorStand.setArms(!armorStand.hasArms());
+        System.out.println("CLICKED");
+        AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility((Player) e.getWhoClicked()), armorStand);
+
+        aiSettingsManager.open();
+        System.out.println("OPENED");
+
     }
 
     @Override
     public boolean updateInventory() {
-        return true;
+        return false;
     }
 
 

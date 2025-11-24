@@ -6,6 +6,7 @@ import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.config.AiConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -92,6 +93,21 @@ public class AiUtils {
                 Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> callback.accept(finalResult));
             }
         }.runTaskAsynchronously(AdvancedArmorStands.plugin);
+    }
+
+
+    public static String getUserSetInstructions(ArmorStand armorStand) {
+        String path = ArmorStandUtils.getNameByArmorStand(armorStand) + ".custom-instructions";
+
+        return AiConfig.get().getString(path);
+
+    }
+
+    public static void setUserSetInstructions(ArmorStand armorStand, String value) {
+        String path = armorStand + ".custom-instructions";
+
+        AiConfig.get().set(path, value);
+        AiConfig.save();
     }
 
     @Deprecated

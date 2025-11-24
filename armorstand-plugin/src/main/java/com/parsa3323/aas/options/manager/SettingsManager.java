@@ -49,7 +49,7 @@ public class SettingsManager extends PaginatedMenu {
         super(playerMenuUtility);
         this.isFromSettings = isFromSettings;
         this.armorStand = armorStand;
-        settingsOptions.add(new ArmsOptions());
+        settingsOptions.add(new ArmsOption());
         settingsOptions.add(new GravityOption());
         settingsOptions.add(new CustomNameOption());
         settingsOptions.add(new BasePlateOption());
@@ -59,6 +59,7 @@ public class SettingsManager extends PaginatedMenu {
         }
         settingsOptions.add(new VisibleOption());
         settingsOptions.add(new SmallOption());
+        settingsOptions.add(new AiOption());
     }
 
     @Override
