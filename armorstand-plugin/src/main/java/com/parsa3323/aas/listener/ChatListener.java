@@ -184,7 +184,7 @@ public class ChatListener implements Listener {
 
                     e.setFormat("%1$s: " + coloredMessage);
 
-                    MemoryData memoryData = new MemoryData(AiUtils.getHistory(p.getName(), armorstand), AiUtils.getDefaultInstructions(armorstand, null));
+                    MemoryData memoryData = new MemoryData(AiUtils.getHistory(p.getName(), armorstand), AiUtils.getDefaultInstructions(armorstand, AiUtils.getUserSetInstructions(ArmorStandUtils.getArmorStandByName(armorstand))));
 
                     Bukkit.getScheduler().runTaskLater(AdvancedArmorStands.plugin, () -> {
                         p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "Thinking");
