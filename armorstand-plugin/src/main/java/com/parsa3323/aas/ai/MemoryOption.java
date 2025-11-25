@@ -45,8 +45,9 @@ public class MemoryOption extends AiSettingsOption {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Add custom instructions");
-        lore.add(ChatColor.GRAY + "for the armorstand's ai");
-        lore.add(ChatColor.GRAY + "to follow when responding.");
+        lore.add(ChatColor.GRAY + "for this armor stand's AI");
+        lore.add(ChatColor.GRAY + "to follow when replying.");
+
 
         String currentInstructions = AiUtils.getUserSetInstructions(armorStand);
 
