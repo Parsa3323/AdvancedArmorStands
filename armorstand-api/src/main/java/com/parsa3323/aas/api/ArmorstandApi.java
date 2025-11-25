@@ -181,6 +181,10 @@ public interface ArmorstandApi  {
 
         boolean hasAiEnabled(ArmorStand armorStand);
 
+        void setAi(ArmorStand armorStand, boolean value);
+
+        void setAi(String name, boolean value);
+
     }
 
     InventoryManager getInventoryManager();

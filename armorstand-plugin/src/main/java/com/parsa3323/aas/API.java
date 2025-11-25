@@ -510,6 +510,16 @@ public class API implements ArmorstandApi {
             public boolean hasAiEnabled(ArmorStand armorStand) {
                 return ArmorStandUtils.hasAi(ArmorStandUtils.getNameByArmorStand(armorStand));
             }
+
+            @Override
+            public void setAi(ArmorStand armorStand, boolean value) {
+                ArmorStandUtils.setAi(ArmorStandUtils.getNameByArmorStand(armorStand), value);
+            }
+
+            @Override
+            public void setAi(String name, boolean value) {
+                ArmorStandUtils.setAi(name, value);
+            }
         };
     }
 
