@@ -118,6 +118,7 @@ public class MemoryOption extends AiSettingsOption {
 
         meta.setPages(pages);
         meta.setTitle("Custom Instructions");
+        meta.setDisplayName(ChatColor.GREEN + "Memory" + ChatColor.GRAY + " (Right Click)");
 
         itemStack.setItemMeta(meta);
         player.getInventory().setItem(4, itemStack);
@@ -126,7 +127,7 @@ public class MemoryOption extends AiSettingsOption {
 
         VersionSupportUtil.getVersionSupport().openBook(itemStack, player);
 
-        player.sendMessage(ChatColor.GREEN + "Open the book to change the instructions of the armor stand's AI.");
+        player.sendMessage(ChatColor.GREEN + "Open the book to change the instructions of the armor stand's AI. Type 'exit' in it to exit");
     }
 
 
