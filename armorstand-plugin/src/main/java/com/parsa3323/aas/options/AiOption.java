@@ -58,7 +58,7 @@ public class AiOption extends SettingsOption {
 
             return itemStack;
         } else {
-            ItemStack itemStack = XMaterial.GRAY_STAINED_GLASS.parseItem();
+            ItemStack itemStack = XMaterial.GRAY_STAINED_GLASS_PANE.parseItem();
             ItemMeta itemMeta = itemStack.getItemMeta();
 
             itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
