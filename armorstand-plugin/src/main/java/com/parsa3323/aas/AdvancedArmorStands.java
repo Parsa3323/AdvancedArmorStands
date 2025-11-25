@@ -266,7 +266,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         status("Hooking into PlaceholderAPI...");
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            error("PlaceholderAPI was found. Registering expansions");
+            status("PlaceholderAPI was found. Registering expansions");
             new PapiExpansion().register();
             setIsPapiAvailable(true);
         }
