@@ -199,15 +199,15 @@ public interface ArmorstandApi  {
 
     interface AiManager {
 
-        void getResponseAsync(String apiKey, MemoryData data, String userInput, java.util.function.Consumer<String> callback);
+        void getResponseAsync(String apiKey, MemoryData data, String userInput, java.util.function.Consumer<String> callback) throws AiException;
 
-        void getResponseAsync(MemoryData data, String userInput, java.util.function.Consumer<String> callback);
-
-        @Deprecated
-        String getResponse(String apiKey, MemoryData data, String userInput);
+        void getResponseAsync(MemoryData data, String userInput, java.util.function.Consumer<String> callback) throws AiException;
 
         @Deprecated
-        String getResponse(MemoryData data, String userInput);
+        String getResponse(String apiKey, MemoryData data, String userInput) throws AiException;
+
+        @Deprecated
+        String getResponse(MemoryData data, String userInput) throws AiException;
 
 
     }

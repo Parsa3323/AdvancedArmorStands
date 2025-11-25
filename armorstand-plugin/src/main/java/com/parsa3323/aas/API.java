@@ -561,23 +561,39 @@ public class API implements ArmorstandApi {
     public AiManager getAiManager() {
         return new AiManager() {
             @Override
-            public void getResponseAsync(String apiKey, MemoryData data, String userInput, Consumer<String> callback) {
-                AiUtils.getResponseAsync(apiKey, data, userInput, callback);
+            public void getResponseAsync(String apiKey, MemoryData data, String userInput, Consumer<String> callback) throws AiException {
+                try {
+                    AiUtils.getResponseAsync(apiKey, data, userInput, callback);
+                } catch (Exception e) {
+                    throw new AiException(e);
+                }
             }
 
             @Override
-            public void getResponseAsync(MemoryData data, String userInput, Consumer<String> callback) {
-                AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), data, userInput, callback);
+            public void getResponseAsync(MemoryData data, String userInput, Consumer<String> callback) throws AiException {
+                try {
+                    AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), data, userInput, callback);
+                } catch (Exception e) {
+                    throw new AiException(e);
+                }
             }
 
             @Override
-            public String getResponse(String apiKey, MemoryData data, String userInput) {
-                return AiUtils.getResponse(apiKey, data, userInput);
+            public String getResponse(String apiKey, MemoryData data, String userInput) throws AiException {
+                try {
+                    return AiUtils.getResponse(apiKey, data, userInput);
+                } catch (Exception e) {
+                    throw new AiException(e);
+                }
             }
 
             @Override
-            public String getResponse(MemoryData data, String userInput) {
-                return AiUtils.getResponse(AdvancedArmorStands.getAiApiKey(), data, userInput);
+            public String getResponse(MemoryData data, String userInput) throws AiException {
+                try {
+                    return AiUtils.getResponse(AdvancedArmorStands.getAiApiKey(), data, userInput);
+                } catch (Exception e) {
+                    throw new AiException(e);
+                }
             }
         };
     }
