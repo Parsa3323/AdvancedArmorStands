@@ -244,7 +244,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         aiApiKey = getConfig().getString("ai.token");
 
-        if (aiApiKey != null && !aiApiKey.equalsIgnoreCase("PLACE_YOUR_TOKEN_HERE")) {
+        if (aiApiKey != null && !aiApiKey.equalsIgnoreCase("PLACE_YOUR_TOKEN_HERE") && !aiApiKey.trim().isEmpty()) {
             isAiEnabled = true;
 
             status("Artificial Intelligence is enabled.");
