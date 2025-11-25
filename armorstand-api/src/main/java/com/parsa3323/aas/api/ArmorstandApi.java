@@ -116,7 +116,6 @@ public interface ArmorstandApi  {
     LogsManager getLogManager();
 
     interface LogsManager {
-
         boolean isDebug();
 
         void debug(String args) throws LogException;
@@ -129,7 +128,6 @@ public interface ArmorstandApi  {
         void error(String message, boolean b) throws LogException;
 
         void info(String args);
-
     }
 
     ArmorStandManager getArmorStandManager();
