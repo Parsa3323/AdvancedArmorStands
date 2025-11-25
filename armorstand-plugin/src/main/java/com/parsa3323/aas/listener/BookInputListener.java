@@ -31,6 +31,7 @@ public class BookInputListener implements Listener {
 
         if (text.equalsIgnoreCase("exit")) {
             InventoryUtils.restore(e.getPlayer());
+            p.sendMessage(ChatColor.GREEN + "Successfully exited memory set session.");
             AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(e.getPlayer()), waiting.get(p.getUniqueId()));
             aiSettingsManager.open();
             return;
