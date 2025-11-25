@@ -29,6 +29,13 @@ public class BookInputListener implements Listener {
         BookMeta meta = e.getNewBookMeta();
         String text = String.join("\n", meta.getPages());
 
+        if (text.equalsIgnoreCase("exit")) {
+            InventoryUtils.restore(e.getPlayer());
+            AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(e.getPlayer()), waiting.get(p.getUniqueId()));
+            aiSettingsManager.open();
+            return;
+        }
+
         AiUtils.setUserSetInstructions(waiting.get(p.getUniqueId()), text);
         InventoryUtils.restore(e.getPlayer());
         AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(e.getPlayer()), waiting.get(p.getUniqueId()));
