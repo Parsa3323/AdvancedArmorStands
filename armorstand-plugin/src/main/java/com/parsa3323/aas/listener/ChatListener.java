@@ -28,6 +28,7 @@ import com.parsa3323.aas.menus.ActionMenu;
 import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.CustomNameOption;
 import com.parsa3323.aas.options.manager.SettingsManager;
+import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.*;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -180,6 +181,11 @@ public class ChatListener implements Listener {
                 if (message.startsWith(mentionPrefix)) {
                     if (!ArmorStandUtils.hasAi(armorstand)) {
                         p.sendMessage(ChatColor.RED + "This armorstand doesn't have AI enabled");
+                        e.setCancelled(true);
+                        return;
+                    }
+
+                    if (!AdvancedArmorStands.plugin.getConfig().getBoolean("ai.allow-players") && !PlayerManager.getByBukkit(p).isAdmin()) {
                         return;
                     }
 
