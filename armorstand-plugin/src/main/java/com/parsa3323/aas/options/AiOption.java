@@ -79,8 +79,11 @@ public class AiOption extends SettingsOption {
 
     @Override
     public void click(InventoryClickEvent e, ArmorStand armorStand) {
-        if (!AdvancedArmorStands.isIsAiEnabled()) return;
-        AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility((Player) e.getWhoClicked()), armorStand);
+        Player p = (Player) e.getWhoClicked();
+        if (!AdvancedArmorStands.isIsAiEnabled()) {
+            return;
+        }
+        AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(p), armorStand);
         aiSettingsManager.open();
 
     }
