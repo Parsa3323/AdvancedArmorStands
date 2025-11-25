@@ -21,9 +21,16 @@ shift-right-click-to-add: true
 # so enable this for the plugin to automatically restore the armor stands.
 auto-load-armor-stands: false
 
+# Artificial Intelligence feature for the plugin.
+# Talk to armor stands that have AI enabled.
 ai:
-  # Artificial Intelligence feature for the plugin.
   # Place your Gemini AI API token here to enable all AI-related features.
   # You can generate a token at: https://aistudio.google.com/api-keys
   # Leave this blank or do not modify it to disable the AI functionality.
   token: 'PLACE_YOUR_TOKEN_HERE'
+
+
+  # Allows all players (regardless of permission) to send messages to armor stand AIs.
+  # When enabled, players can interact using the syntax:
+  # @<armorstand-name> <message>
+  allow-players: true
