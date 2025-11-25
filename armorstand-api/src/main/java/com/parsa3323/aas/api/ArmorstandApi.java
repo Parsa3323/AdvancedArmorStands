@@ -132,7 +132,6 @@ public interface ArmorstandApi  {
 
     ArmorStandManager getArmorStandManager();
 
-
     interface ArmorStandInfoUtils {
 
         ArrayList<String> getArmorStandsList();
