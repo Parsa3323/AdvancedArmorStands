@@ -48,10 +48,12 @@ public class AiOption extends SettingsOption {
             itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
             ArrayList<String> lore = new ArrayList<>();
 
-            lore.add(ChatColor.GRAY + "Options for artificial");
-            lore.add(ChatColor.GRAY + "intelligence of the armorstand");
+            lore.add(ChatColor.GRAY + "Options related to the");
+            lore.add(ChatColor.GRAY + "artificial intelligence");
+            lore.add(ChatColor.GRAY + "of this armor stand.");
             lore.add("");
             lore.add(ChatColor.YELLOW + "Click to open");
+
 
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -64,11 +66,12 @@ public class AiOption extends SettingsOption {
             itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
 
             ArrayList<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + "Enable artificial intelligence");
-            lore.add(ChatColor.GRAY + "for armorstands by setting");
-            lore.add(ChatColor.GRAY + "your api key in the config");
+            lore.add(ChatColor.GRAY + "Enable AI for armor stands");
+            lore.add(ChatColor.GRAY + "by setting your API key");
+            lore.add(ChatColor.GRAY + "in the config.");
             lore.add("");
             lore.add(ChatColor.RED + "Not Enabled");
+
 
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
