@@ -58,11 +58,12 @@ public class AiOption extends SettingsOption {
 
             return itemStack;
         } else {
-            ItemStack itemStack = new ItemStack(XMaterial.GRAY_STAINED_GLASS.parseMaterial());
+            ItemStack itemStack = XMaterial.GRAY_STAINED_GLASS.parseItem();
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
-            ArrayList<String> lore = new ArrayList<>();
 
+            itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
+
+            ArrayList<String> lore = new ArrayList<>();
             lore.add(ChatColor.GRAY + "Enable artificial intelligence");
             lore.add(ChatColor.GRAY + "for armorstands by setting");
             lore.add(ChatColor.GRAY + "your api key in the config");
