@@ -177,6 +177,10 @@ public interface ArmorstandApi  {
 
         ArmorStandInfoUtils getUtils();
 
+        boolean hasAiEnabled(String name);
+
+        boolean hasAiEnabled(ArmorStand armorStand);
+
     }
 
     InventoryManager getInventoryManager();
