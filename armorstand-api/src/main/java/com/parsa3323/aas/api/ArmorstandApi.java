@@ -20,6 +20,7 @@ package com.parsa3323.aas.api;
 
 
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
+import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.api.exeption.*;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import org.bukkit.Location;
@@ -191,6 +192,23 @@ public interface ArmorstandApi  {
         void openOptionsMenu(Player p, ArmorStand a, boolean isFromSettings) throws InventoryException;
 
         void openSaveMenu(Player p, ArmorStand a) throws InventoryException;
+
+    }
+
+    AiManager getAiManager();
+
+    interface AiManager {
+
+        void getResponseAsync(String apiKey, MemoryData data, String userInput, java.util.function.Consumer<String> callback);
+
+        void getResponseAsync(MemoryData data, String userInput, java.util.function.Consumer<String> callback);
+
+        @Deprecated
+        String getResponse(String apiKey, MemoryData data, String userInput);
+
+        @Deprecated
+        String getResponse(MemoryData data, String userInput);
+
 
     }
 

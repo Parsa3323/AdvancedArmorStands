@@ -20,6 +20,7 @@ package com.parsa3323.aas;
 
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
+import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.api.exeption.*;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
@@ -44,6 +45,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class API implements ArmorstandApi {
 
@@ -551,6 +553,31 @@ public class API implements ArmorstandApi {
                 } catch (Exception e) {
                     throw new InventoryException("Failed to open Save Menu", e);
                 }
+            }
+        };
+    }
+
+    @Override
+    public AiManager getAiManager() {
+        return new AiManager() {
+            @Override
+            public void getResponseAsync(String apiKey, MemoryData data, String userInput, Consumer<String> callback) {
+                AiUtils.getResponseAsync(apiKey, data, userInput, callback);
+            }
+
+            @Override
+            public void getResponseAsync(MemoryData data, String userInput, Consumer<String> callback) {
+                AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), data, userInput, callback);
+            }
+
+            @Override
+            public String getResponse(String apiKey, MemoryData data, String userInput) {
+                return AiUtils.getResponse(apiKey, data, userInput);
+            }
+
+            @Override
+            public String getResponse(MemoryData data, String userInput) {
+                return AiUtils.getResponse(AdvancedArmorStands.getAiApiKey(), data, userInput);
             }
         };
     }
