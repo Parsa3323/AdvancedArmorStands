@@ -86,7 +86,7 @@ shift-right-click-to-add: true # <========== Enable & Disable shift-right-click 
 auto-load-armor-stands: false # <========== Automatically reload armor stands on server restart
 
 ai:
-  token: 'PLACE_YOUR_TOKEN_HERE' # <========== Token for AI integration (add your actual token here)
+  token: 'PLACE_YOUR_TOKEN_HERE' # <========== Token for AI integration (place your actual token here)
 
   allow-players: true # <========== Allow players to interact with the AI system
 ```
