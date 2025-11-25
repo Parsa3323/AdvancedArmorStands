@@ -23,6 +23,7 @@ import com.parsa3323.aas.ai.AiToggleOption;
 import com.parsa3323.aas.ai.MemoryOption;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
+import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -41,6 +42,7 @@ public class AiSettingsManager extends PaginatedMenu {
     public ArrayList<AiSettingsOption> settings = new ArrayList<>();
 
     private final ArmorStand armorStand;
+
 
     public AiSettingsManager(PlayerMenuUtility playerMenuUtility, ArmorStand armorStand) {
         super(playerMenuUtility);
@@ -97,6 +99,8 @@ public class AiSettingsManager extends PaginatedMenu {
         if (clickedItem.getType() == XMaterial.BARRIER.parseMaterial()) {
             ArmorStandMenu armorStandMenu = new ArmorStandMenu(new PlayerMenuUtility(player), armorStand);
             armorStandMenu.open();
+
+            SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(player), armorStand, true);
         }
 
         for (int i = 0; i < settings.size(); i++) {
