@@ -197,7 +197,7 @@ public class ChatListener implements Listener {
                     MemoryData memoryData = new MemoryData(AiUtils.getHistory(p.getName(), armorstand), AiUtils.getDefaultInstructions(armorstand, AiUtils.getUserSetInstructions(ArmorStandUtils.getArmorStandByName(armorstand))));
 
                     Bukkit.getScheduler().runTaskLater(AdvancedArmorStands.plugin, () -> {
-                        ActionBarTimer thinkingBar = new ActionBarTimer(p, "Thinking...");
+                        ActionBarTimer thinkingBar = new ActionBarTimer(p,  ChatColor.GRAY + "Thinking...");
 
                         p.playSound(p.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
 
