@@ -18,10 +18,9 @@
 
 package com.parsa3323.aas.listener;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
-import com.parsa3323.aas.api.actions.AiRole;
 import com.parsa3323.aas.api.data.MemoryData;
-import com.parsa3323.aas.api.events.ArmorStandAiRespondEvent;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.ActionMenu;
@@ -198,18 +197,16 @@ public class ChatListener implements Listener {
                     MemoryData memoryData = new MemoryData(AiUtils.getHistory(p.getName(), armorstand), AiUtils.getDefaultInstructions(armorstand, AiUtils.getUserSetInstructions(ArmorStandUtils.getArmorStandByName(armorstand))));
 
                     Bukkit.getScheduler().runTaskLater(AdvancedArmorStands.plugin, () -> {
-                        p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "Thinking");
+                        ActionBarTimer thinkingBar = new ActionBarTimer(p, "Thinking...");
+
+                        p.playSound(p.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
+
+                        thinkingBar.start();
 
                         AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), memoryData, afterMention, response -> {
                             Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> {
-                                p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + response);
-
-                                Bukkit.getPluginManager().callEvent(new ArmorStandAiRespondEvent(ArmorStandUtils.getArmorStandByName(armorstand), response, afterMention, p));
-
-                                AiUtils.addToHistory(p.getName(), armorstand, AiRole.PLAYER, afterMention);
-                                AiUtils.addToHistory(p.getName(), armorstand, AiRole.AI, response);
-
-
+                                thinkingBar.stop();
+                                AiUtils.sendResponseWithHistory(p, response, armorstand, afterMention);
                             });
                         });
 

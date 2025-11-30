@@ -18,15 +18,14 @@
 
 package com.parsa3323.aas.commands;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
-import com.parsa3323.aas.api.actions.AiRole;
 import com.parsa3323.aas.api.data.MemoryData;
-import com.parsa3323.aas.api.events.ArmorStandAiRespondEvent;
 import com.parsa3323.aas.commands.manager.SubCommand;
+import com.parsa3323.aas.utils.ActionBarTimer;
 import com.parsa3323.aas.utils.AiUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -81,18 +80,20 @@ public class TellCommand extends SubCommand {
 
         MemoryData memoryData = new MemoryData(AiUtils.getHistory(player.getName(), name), AiUtils.getDefaultInstructions(name, AiUtils.getUserSetInstructions(stand)));
 
-        player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "Thinking");
+        player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
+
+        ActionBarTimer actionBarTimer = new ActionBarTimer(player, "Thinking...");
+
+        actionBarTimer.start();
 
         AiUtils.getResponseAsync(AdvancedArmorStands.getAiApiKey(), memoryData, userInput, response -> {
-            player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + response);
-
-            Bukkit.getPluginManager().callEvent(new ArmorStandAiRespondEvent(ArmorStandUtils.getArmorStandByName(name), response, userInput, player));
-
-            AiUtils.addToHistory(player.getName(), name, AiRole.PLAYER, userInput);
-            AiUtils.addToHistory(player.getName(), name, AiRole.AI, response);
+            actionBarTimer.stop();
+            AiUtils.sendResponseWithHistory(player, response, name, userInput);
         });
 
     }
+
+
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {

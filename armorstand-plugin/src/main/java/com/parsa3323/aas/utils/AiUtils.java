@@ -3,10 +3,13 @@ package com.parsa3323.aas.utils;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.actions.AiRole;
 import com.parsa3323.aas.api.data.MemoryData;
+import com.parsa3323.aas.api.events.ArmorStandAiRespondEvent;
 import com.parsa3323.aas.config.AiConfig;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -108,6 +111,15 @@ public class AiUtils {
 
         AiConfig.get().set(path, value);
         AiConfig.save();
+    }
+
+    public static void sendResponseWithHistory(Player player, String response, String armorStandName, String userInput) {
+        player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GOLD + response);
+
+        Bukkit.getPluginManager().callEvent(new ArmorStandAiRespondEvent(ArmorStandUtils.getArmorStandByName(armorStandName), response, userInput, player));
+
+        AiUtils.addToHistory(player.getName(), armorStandName, AiRole.PLAYER, userInput);
+        AiUtils.addToHistory(player.getName(), armorStandName, AiRole.AI, response);
     }
 
     @Deprecated
