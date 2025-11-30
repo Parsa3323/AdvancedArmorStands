@@ -76,6 +76,7 @@ public class AiCommand extends SubCommand {
 
         AiUtils.getAssistWithAi(AdvancedArmorStands.getAiApiKey(), userInput, player, s -> {
             AiUtils.sendResponse(player, s);
+            actionBarTimer.stop();
         });
 
 
