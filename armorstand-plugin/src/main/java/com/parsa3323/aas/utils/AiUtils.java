@@ -180,7 +180,7 @@ public class AiUtils {
         try {
             obj = new JSONObject(aiJson);
         } catch (Exception e) {
-            player.sendMessage(ChatColor.RED + "Failed to parse AI response: " + e.getMessage());
+            AdvancedArmorStands.error("Failed to parse AI response: " + e.getMessage());
             return;
         }
 
@@ -195,37 +195,37 @@ public class AiUtils {
             switch (action) {
                 case "create":
                     if (name == null || params == null) {
-                        AdvancedArmorStands.warn(ChatColor.RED + "Invalid create action from AI: missing name or params.");
+                        AdvancedArmorStands.warn("Invalid create action from AI: missing name or params.");
                         return;
                     }
                     ArmorStandPoseData poseDataCreate = parsePoseData(params.optJSONObject("pose"));
                     Location locCreate = parseLocation(params, player);
                     if (locCreate == null) {
-                        AdvancedArmorStands.warn(ChatColor.RED + "Failed to determine location for create action.");
+                        AdvancedArmorStands.warn("Failed to determine location for create action.");
                         return;
                     }
                     try {
                         api.getArmorStandManager().createArmorStand(name, poseDataCreate, locCreate, player);
                     } catch (ArmorStandAlreadyExistsException e) {
-                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand with name " + name + " already exists.");
+                        AdvancedArmorStands.warn("ArmorStand with name " + name + " already exists.");
                     }
                     break;
 
                 case "remove":
                     if (name == null) {
-                        AdvancedArmorStands.warn(ChatColor.RED + "Invalid remove action: missing name.");
+                        AdvancedArmorStands.warn("Invalid remove action: missing name.");
                         return;
                     }
                     try {
                         api.getArmorStandManager().removeArmorStand(realCaseName);
                     } catch (ArmorStandNotFoundException e) {
-                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand " + realCaseName + " not found.");
+                        AdvancedArmorStands.warn("ArmorStand " + realCaseName + " not found.");
                     }
                     break;
 
                 case "pose":
                     if (name == null || params == null) {
-                        AdvancedArmorStands.warn(ChatColor.RED + "Invalid pose action: missing name or params.");
+                        AdvancedArmorStands.warn("Invalid pose action: missing name or params.");
                         return;
                     }
                     ArmorStandPoseData poseData = parsePoseData(params.optJSONObject("pose"));
@@ -234,20 +234,20 @@ public class AiUtils {
                         try {
                             api.reloadPlugin();
                         } catch (ReloadException e) {
-                            AdvancedArmorStands.warn(ChatColor.RED + "Pose applied but failed to reload plugin: " + e.getMessage());
+                            AdvancedArmorStands.warn("Pose applied but failed to reload plugin: " + e.getMessage());
                         }
                     } catch (ArmorStandNotFoundException e) {
-                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand " + realCaseName + " not found.");
+                        AdvancedArmorStands.warn("ArmorStand " + realCaseName + " not found.");
                     }
                     break;
 
                 case "none":
                 default:
-                    AdvancedArmorStands.warn(ChatColor.YELLOW + "AI did not provide a valid action.");
+                    AdvancedArmorStands.warn("AI did not provide a valid action.");
                     break;
             }
         } catch (Exception e) {
-            AdvancedArmorStands.error(ChatColor.RED + "Unexpected error handling AI action: " + e.getMessage());
+            AdvancedArmorStands.error("Unexpected error handling AI action: " + e.getMessage());
             e.printStackTrace();
         }
     }
