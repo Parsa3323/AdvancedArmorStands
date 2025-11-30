@@ -61,7 +61,7 @@ public class TellCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (args.length < 2) {
+        if (args.length < 3) {
             sendUsage(player);
             return;
         }
