@@ -186,6 +186,7 @@ public class AiUtils {
 
         String action = obj.optString("action", "none");
         String name = obj.optString("name", null);
+        String realCaseName = ArmorStandUtils.findRealCase(name);
         JSONObject params = obj.optJSONObject("params");
 
         ArmorstandApi api = AdvancedArmorStands.getApi();
@@ -216,9 +217,9 @@ public class AiUtils {
                         return;
                     }
                     try {
-                        api.getArmorStandManager().removeArmorStand(name);
+                        api.getArmorStandManager().removeArmorStand(realCaseName);
                     } catch (ArmorStandNotFoundException e) {
-                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand " + name + " not found.");
+                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand " + realCaseName + " not found.");
                     }
                     break;
 
@@ -229,14 +230,14 @@ public class AiUtils {
                     }
                     ArmorStandPoseData poseData = parsePoseData(params.optJSONObject("pose"));
                     try {
-                        api.getArmorStandManager().setPose(name, poseData);
+                        api.getArmorStandManager().setPose(realCaseName, poseData);
                         try {
                             api.reloadPlugin();
                         } catch (ReloadException e) {
                             AdvancedArmorStands.warn(ChatColor.RED + "Pose applied but failed to reload plugin: " + e.getMessage());
                         }
                     } catch (ArmorStandNotFoundException e) {
-                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand " + name + " not found.");
+                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand " + realCaseName + " not found.");
                     }
                     break;
 
