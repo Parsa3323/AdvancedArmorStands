@@ -59,7 +59,6 @@ public class API implements ArmorstandApi {
         }
     }
 
-
     @Override
     public VersionSupport getVersionSupport() {
         return VersionSupportUtil.getVersionSupport();

@@ -332,6 +332,21 @@ public class ArmorStandUtils {
         return null;
     }
 
+    public static String findRealCase(String name) {
+        FileConfiguration config = ArmorStandsConfig.get();
+        ConfigurationSection section = config.getConfigurationSection("armorstands");
+
+        if (section == null) return null;
+
+        for (String key : section.getKeys(false)) {
+            if (key.equalsIgnoreCase(name)) {
+                return key;
+            }
+        }
+
+        return null;
+    }
+
     public static int getTotalArmorStands() {
         FileConfiguration config = ArmorStandsConfig.get();
 

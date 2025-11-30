@@ -1,16 +1,24 @@
 package com.parsa3323.aas.utils;
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.actions.AiRole;
+import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.api.events.ArmorStandAiRespondEvent;
+import com.parsa3323.aas.api.exeption.ArmorStandAlreadyExistsException;
+import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
+import com.parsa3323.aas.api.exeption.ReloadException;
 import com.parsa3323.aas.config.AiConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.EulerAngle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -36,6 +44,258 @@ public class AiUtils {
                 ((memory == null || memory.trim().isEmpty()) ? "" : "Follow these additional instructions: " + memory + ". ") +
                 "Be friendly, helpful, and playful in your responses. Thanks!";
     }
+
+    public static String getAssistInstructions() {
+        return "You are the AI assistant for the AdvancedArmorStands plugin. You must always return ONLY a single JSON object. Never return explanations, never return markdown, never return multiple objects, and never return anything outside the JSON.\n" +
+                "\n" +
+                "Your JSON must always include these fields:\n" +
+                "\"response\": string describing what you are doing,\n" +
+                "\"action\": one of \"none\", \"create\", \"remove\", \"pose\", \"animate\",\n" +
+                "\"name\": the armorstand name or null,\n" +
+                "\"dataId\": the pose/armorstand data id for pose actions or null,\n" +
+                "\"params\": an object containing the remaining necessary information.\n" +
+                "\n" +
+                "Rules for actions:\n" +
+                "\n" +
+                "1. CREATE:\n" +
+                "action must be \"create\".\n" +
+                "You must include \"name\".\n" +
+                "params must include:\n" +
+                "\"pose\": an object containing 5 arrays of 3 numbers each, representing degrees:\n" +
+                "\"rightArm\": [x, y, z],\n" +
+                "\"leftArm\": [x, y, z],\n" +
+                "\"rightLeg\": [x, y, z],\n" +
+                "\"leftLeg\": [x, y, z],\n" +
+                "\"head\": [x, y, z]\n" +
+                "params must also include \"location\": either the string \"player\" or an object with:\n" +
+                "\"x\", \"y\", \"z\", \"world\", \"yaw\", \"pitch\".\n" +
+                "\n" +
+                "2. REMOVE:\n" +
+                "action must be \"remove\".\n" +
+                "You must include \"name\".\n" +
+                "params should be an empty object.\n" +
+                "\n" +
+                "3. POSE:\n" +
+                "action must be \"pose\".\n" +
+                "You must include \"name\".\n" +
+                "params must include the same \"pose\" structure as CREATE.\n" +
+                "\n" +
+                "5. NONE:\n" +
+                "If the user request is unclear or cannot be done, return:\n" +
+                "action = \"none\",\n" +
+                "name = null,\n" +
+                "dataId = null,\n" +
+                "params = {},\n" +
+                "response explaining why.\n" +
+                "\n" +
+                "All rotation values must be degrees, not radians.\n" +
+                "Never guess plugin internals that the user did not specify.\n" +
+                "Never omit required fields.\n" +
+                "Never output comments.\n" +
+                "Never break the JSON format.\n" +
+                "Always obey these rules exactly.\n";
+
+//                "\n" +
+//                "4. ANIMATE:\n" +
+//                "action must be \"animate\".\n" +
+//                "You must include \"name\".\n" +
+//                "params must include:\n" +
+//                "\"animation\": the animation string used by setAnimation(name, animation).\n" +
+    }
+
+    public static void getAssistWithAi(String apiKey, String userInput, Player p, java.util.function.Consumer<String> callback) {
+        Bukkit.getScheduler().runTaskAsynchronously(AdvancedArmorStands.plugin, () -> {
+            HttpURLConnection conn = null;
+            String result;
+
+            try {
+                String instructions = getAssistInstructions();
+                String userContent = userInput == null ? "" : userInput;
+
+                JSONObject body = new JSONObject();
+                body.put("model", "gemini-2.5-flash");
+
+                JSONArray messages = new JSONArray();
+                messages.put(new JSONObject().put("role", "system").put("content", instructions));
+                messages.put(new JSONObject().put("role", "user").put("content", userContent));
+                body.put("messages", messages);
+
+                body.put("temperature", 0.2);
+                body.put("max_tokens", 1024);
+
+                URL url = new URL("https://generativelanguage.googleapis.com/v1beta/chat/completions");
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestProperty("Authorization", "Bearer " + apiKey);
+                conn.setDoOutput(true);
+                conn.setConnectTimeout(30000);
+                conn.setReadTimeout(30000);
+
+                try (OutputStream os = conn.getOutputStream()) {
+                    os.write(body.toString().getBytes(StandardCharsets.UTF_8));
+                }
+
+                int responseCode = conn.getResponseCode();
+                String response = responseCode == 200 ? readStream(conn.getInputStream())
+                        : readStream(conn.getErrorStream());
+
+                if (responseCode != 200) {
+                    result = "{\"response\":\"AI error: HTTP " + responseCode + "\",\"action\":\"none\"}";
+                } else {
+                    result = parseChatCompletionsResponse(response);
+                }
+
+            } catch (Exception e) {
+                result = "{\"response\":\"AI error: " + e.getMessage() + "\",\"action\":\"none\"}";
+            } finally {
+                if (conn != null) conn.disconnect();
+            }
+
+            String finalResult = result;
+
+            Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> {
+                try {
+                    handleAiAction(finalResult, p);
+
+                    String responseText;
+                    try {
+                        JSONObject json = new JSONObject(finalResult);
+                        responseText = json.optString("response", "");
+                    } catch (Exception e) {
+                        responseText = finalResult;
+                    }
+
+                    callback.accept(responseText);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+        });
+    }
+
+
+    public static void handleAiAction(String aiJson, Player player) {
+        JSONObject obj;
+        try {
+            obj = new JSONObject(aiJson);
+        } catch (Exception e) {
+            player.sendMessage(ChatColor.RED + "Failed to parse AI response: " + e.getMessage());
+            return;
+        }
+
+        String action = obj.optString("action", "none");
+        String name = obj.optString("name", null);
+        JSONObject params = obj.optJSONObject("params");
+
+        ArmorstandApi api = AdvancedArmorStands.getApi();
+
+        try {
+            switch (action) {
+                case "create":
+                    if (name == null || params == null) {
+                        AdvancedArmorStands.warn(ChatColor.RED + "Invalid create action from AI: missing name or params.");
+                        return;
+                    }
+                    ArmorStandPoseData poseDataCreate = parsePoseData(params.optJSONObject("pose"));
+                    Location locCreate = parseLocation(params, player);
+                    if (locCreate == null) {
+                        AdvancedArmorStands.warn(ChatColor.RED + "Failed to determine location for create action.");
+                        return;
+                    }
+                    try {
+                        api.getArmorStandManager().createArmorStand(name, poseDataCreate, locCreate, player);
+                    } catch (ArmorStandAlreadyExistsException e) {
+                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand with name " + name + " already exists.");
+                    }
+                    break;
+
+                case "remove":
+                    if (name == null) {
+                        AdvancedArmorStands.warn(ChatColor.RED + "Invalid remove action: missing name.");
+                        return;
+                    }
+                    try {
+                        api.getArmorStandManager().removeArmorStand(name);
+                    } catch (ArmorStandNotFoundException e) {
+                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand " + name + " not found.");
+                    }
+                    break;
+
+                case "pose":
+                    if (name == null || params == null) {
+                        AdvancedArmorStands.warn(ChatColor.RED + "Invalid pose action: missing name or params.");
+                        return;
+                    }
+                    ArmorStandPoseData poseData = parsePoseData(params.optJSONObject("pose"));
+                    try {
+                        api.getArmorStandManager().setPose(name, poseData);
+                        try {
+                            api.reloadPlugin();
+                        } catch (ReloadException e) {
+                            AdvancedArmorStands.warn(ChatColor.RED + "Pose applied but failed to reload plugin: " + e.getMessage());
+                        }
+                    } catch (ArmorStandNotFoundException e) {
+                        AdvancedArmorStands.warn(ChatColor.RED + "ArmorStand " + name + " not found.");
+                    }
+                    break;
+
+                case "none":
+                default:
+                    AdvancedArmorStands.warn(ChatColor.YELLOW + "AI did not provide a valid action.");
+                    break;
+            }
+        } catch (Exception e) {
+            AdvancedArmorStands.error(ChatColor.RED + "Unexpected error handling AI action: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+    private static ArmorStandPoseData parsePoseData(JSONObject poseObj) {
+        if (poseObj == null) return new ArmorStandPoseData(new EulerAngle(0,0,0), new EulerAngle(0,0,0), new EulerAngle(0,0,0), new EulerAngle(0,0,0), new EulerAngle(0,0,0));
+        return new ArmorStandPoseData(
+                parseEuler(poseObj.optJSONArray("rightArm")),
+                parseEuler(poseObj.optJSONArray("leftArm")),
+                parseEuler(poseObj.optJSONArray("rightLeg")),
+                parseEuler(poseObj.optJSONArray("leftLeg")),
+                parseEuler(poseObj.optJSONArray("head"))
+        );
+    }
+
+    private static EulerAngle parseEuler(JSONArray arr) {
+        if (arr == null || arr.length() != 3) return new EulerAngle(0,0,0);
+        return new EulerAngle(
+                Math.toRadians(arr.getDouble(0)),
+                Math.toRadians(arr.getDouble(1)),
+                Math.toRadians(arr.getDouble(2))
+        );
+    }
+
+    private static Location parseLocation(JSONObject params, Player player) {
+        if (params == null) return null;
+        if (params.has("location")) {
+            Object locObj = params.get("location");
+            if (locObj instanceof String && ((String) locObj).equalsIgnoreCase("player")) {
+                return player.getLocation();
+            } else if (locObj instanceof JSONObject) {
+                JSONObject locJson = (JSONObject) locObj;
+                World world = Bukkit.getWorld(locJson.optString("world", "world"));
+                if (world == null) world = player.getWorld();
+                return new Location(
+                        world,
+                        locJson.optDouble("x", player.getLocation().getX()),
+                        locJson.optDouble("y", player.getLocation().getY()),
+                        locJson.optDouble("z", player.getLocation().getZ()),
+                        (float) locJson.optDouble("yaw", player.getLocation().getYaw()),
+                        (float) locJson.optDouble("pitch", player.getLocation().getPitch())
+                );
+            }
+        }
+        return player.getLocation();
+    }
+
+
 
     public static void getResponseAsync(String apiKey, MemoryData data, String userInput, java.util.function.Consumer<String> callback) {
         new BukkitRunnable() {
@@ -120,6 +380,10 @@ public class AiUtils {
 
         AiUtils.addToHistory(player.getName(), armorStandName, AiRole.PLAYER, userInput);
         AiUtils.addToHistory(player.getName(), armorStandName, AiRole.AI, response);
+    }
+
+    public static void sendResponse(Player player, String response) {
+        player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GOLD + response);
     }
 
     @Deprecated

@@ -58,6 +58,7 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new DebugCommand());
         if (AdvancedArmorStands.isIsAiEnabled()) {
             subCommands.add(new TellCommand());
+            subCommands.add(new AiCommand());
         }
     }
 
