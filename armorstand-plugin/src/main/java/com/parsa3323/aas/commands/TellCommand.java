@@ -106,6 +106,6 @@ public class TellCommand extends SubCommand {
 
     @Override
     public boolean isForOps() {
-        return false;
+        return true;
     }
 }
