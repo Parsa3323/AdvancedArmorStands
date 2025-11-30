@@ -82,7 +82,7 @@ public class TellCommand extends SubCommand {
 
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
 
-        ActionBarTimer actionBarTimer = new ActionBarTimer(player, "Thinking...");
+        ActionBarTimer actionBarTimer = new ActionBarTimer(player, ChatColor.GRAY + "Thinking...");
 
         actionBarTimer.start();
 
