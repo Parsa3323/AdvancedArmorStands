@@ -442,13 +442,13 @@ public class API implements ArmorstandApi {
                 ArmorStandUtils.savePose(stand);
                 previewMap.put(p.getUniqueId(), stand);
 
-                TextComponent textComponent = new TextComponent(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + asName + "'s position has been changed");
+                TextComponent textComponent = new TextComponent(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.BOLD + asName + "'s position has been changed");
 
-                TextComponent accept = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + "[ACCEPT]");
+                TextComponent accept = new TextComponent(ColorUtils.boldAndColor(ChatColor.BOLD) + " [ACCEPT]");
                 accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as preview accept"));
                 accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to accept").create()));
 
-                TextComponent deny = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + "[DENY]");
+                TextComponent deny = new TextComponent(ColorUtils.boldAndColor(ChatColor.BOLD) + " [DENY]");
                 deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as preview deny"));
                 deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to deny").create()));
 
