@@ -154,10 +154,7 @@ public class CommandManager implements CommandExecutor {
                     }
 
                     if (args[0].equalsIgnoreCase("preview")) {
-                        if (args.length < 2) return true;
-
-                        if (API.previewMap.containsKey(player.getUniqueId())) {
-
+                        if (!(args.length < 2) && API.previewMap.containsKey(player.getUniqueId())) {
                             switch (args[1]) {
                                 case "accept":
                                     ArmorStandUtils.removePose(player);
@@ -175,9 +172,8 @@ public class CommandManager implements CommandExecutor {
                                     player.sendMessage(ChatColor.GREEN + "Successfully denied the new position.");
                                     break;
                             }
-
+                            return true;
                         }
-                        return true;
                     }
 
 

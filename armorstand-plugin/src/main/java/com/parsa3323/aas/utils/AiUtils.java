@@ -33,7 +33,6 @@ import java.util.Map;
 
 public class AiUtils {
 
-
     public static String getDefaultInstructions(String name, String memory) {
         return "You are a talking armor stand in Minecraft named " + name + ". " +
                 "You can help the player with general questions, small tasks, and simple math like 2+2, " +
@@ -479,6 +478,8 @@ public class AiUtils {
         config.set(path, conversation);
         AiConfig.save();
     }
+
+
 
     public static String getHistory(String playerName, String armorStandName) {
         YamlConfiguration config = AiConfig.get();
