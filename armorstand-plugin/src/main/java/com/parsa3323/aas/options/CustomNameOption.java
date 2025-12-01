@@ -83,7 +83,6 @@ public class CustomNameOption extends SettingsOption {
         } else {
             p.sendMessage(ChatColor.RED + "You are already in a name set session");
         }
-
     }
 
     @Override
