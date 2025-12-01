@@ -228,16 +228,19 @@ public class AiUtils {
                         return;
                     }
                     ArmorStandPoseData poseData = parsePoseData(params.optJSONObject("pose"));
-                    try {
-                        api.getArmorStandManager().previewPose(realCaseName, poseData, player);
+                    Bukkit.getScheduler().runTaskLater(AdvancedArmorStands.plugin, () -> {
                         try {
-                            api.reloadPlugin();
-                        } catch (ReloadException e) {
-                            AdvancedArmorStands.warn("Pose applied but failed to reload plugin: " + e.getMessage());
+                            api.getArmorStandManager().previewPose(realCaseName, poseData, player);
+                            try {
+                                api.reloadPlugin();
+                            } catch (ReloadException e) {
+                                AdvancedArmorStands.warn("Pose applied but failed to reload plugin: " + e.getMessage());
+                            }
+                        } catch (ArmorStandNotFoundException e) {
+                            AdvancedArmorStands.warn("ArmorStand " + realCaseName + " not found.");
                         }
-                    } catch (ArmorStandNotFoundException e) {
-                        AdvancedArmorStands.warn("ArmorStand " + realCaseName + " not found.");
-                    }
+                    }, 2L);
+
                     break;
 
                 case "none":
