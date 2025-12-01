@@ -161,6 +161,7 @@ public class CommandManager implements CommandExecutor {
                             switch (args[1]) {
                                 case "accept":
                                     ArmorStandUtils.removePose(player);
+                                    API.previewMap.remove(player.getUniqueId());
                                     player.sendMessage(ChatColor.GREEN + "Accepted this position for this armor stand.");
                                     break;
                                 case "deny":
@@ -169,6 +170,8 @@ public class CommandManager implements CommandExecutor {
                                     } catch (ArmorStandNotFoundException e) {
                                         throw new RuntimeException(e);
                                     }
+                                    ArmorStandUtils.removePose(player);
+                                    API.previewMap.remove(player.getUniqueId());
                                     player.sendMessage(ChatColor.GREEN + "Successfully denied the new position.");
                                     break;
                             }
