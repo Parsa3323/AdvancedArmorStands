@@ -154,6 +154,10 @@ public class ArmorStandUtils {
         poseMap.put(armorStand.getUniqueId(), pose);
     }
 
+    public static void removePose(Player player) {
+        poseMap.remove(player.getUniqueId());
+    }
+
     public static ArmorStandPoseData getPose(UUID armorStandId) {
         return poseMap.get(armorStandId);
     }

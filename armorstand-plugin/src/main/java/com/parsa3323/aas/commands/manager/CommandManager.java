@@ -19,9 +19,12 @@
 package com.parsa3323.aas.commands.manager;
 
 import com.cryptomorin.xseries.XSound;
+import com.parsa3323.aas.API;
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.commands.*;
 import com.parsa3323.aas.player.PlayerManager;
+import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.CommandUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
@@ -149,6 +152,32 @@ public class CommandManager implements CommandExecutor {
                         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
                         return true;
                     }
+
+                    if (args[0].equalsIgnoreCase("preview")) {
+                        if (args.length < 2) return true;
+
+                        if (API.previewMap.containsKey(player.getUniqueId())) {
+
+                            switch (args[1]) {
+                                case "accept":
+                                    ArmorStandUtils.removePose(player);
+                                    player.sendMessage(ChatColor.GREEN + "Accepted this position for this armor stand.");
+                                    break;
+                                case "deny":
+                                    try {
+                                        AdvancedArmorStands.api.getArmorStandManager().setPose(ArmorStandUtils.getNameByArmorStand(API.previewMap.get(player.getUniqueId())), ArmorStandUtils.getPose(API.previewMap.get(player.getUniqueId()).getUniqueId()));
+                                    } catch (ArmorStandNotFoundException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    player.sendMessage(ChatColor.GREEN + "Successfully denied the new position.");
+                                    break;
+                            }
+
+                        }
+                        return true;
+                    }
+
+
 
                     int count = 0;
                     for (int i = 0; i < getSubCommands().size(); i++) {

@@ -33,6 +33,10 @@ import com.parsa3323.aas.menus.SaveMenu;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.tools.manager.ToolsManager;
 import com.parsa3323.aas.utils.*;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -50,6 +54,8 @@ import java.util.function.Consumer;
 public class API implements ArmorstandApi {
 
     private final File addonFolder;
+
+    public static final Map<UUID, ArmorStand> previewMap = new HashMap<>();
 
     public API() {
         this.addonFolder = new File(AdvancedArmorStands.plugin.getDataFolder(), "addons");
@@ -424,6 +430,31 @@ public class API implements ArmorstandApi {
                 armorStand.setLeftArmPose(poseData.getRightArm());
                 armorStand.setRightLegPose(poseData.getRightLeg());
                 armorStand.setLeftLegPose(poseData.getLeftLeg());
+            }
+
+            @Override
+            public void previewPose(String asName, ArmorStandPoseData poseData, Player p) throws ArmorStandNotFoundException {
+                ArmorStand stand = ArmorStandUtils.getArmorStandByName(asName);
+                if (stand == null) {
+                    throw new ArmorStandNotFoundException("Armor stand '" + asName + "' not found!");
+                }
+
+                ArmorStandUtils.savePose(stand);
+                previewMap.put(p.getUniqueId(), stand);
+
+                TextComponent textComponent = new TextComponent(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + asName + "'s position has been changed");
+
+                TextComponent accept = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + "[ACCEPT]");
+                accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as preview accept"));
+                accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to accept").create()));
+
+                TextComponent deny = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + "[DENY]");
+                deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as preview deny"));
+                deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to deny").create()));
+
+                p.spigot().sendMessage(textComponent, accept, deny);
+
+                setPose(asName, poseData);
             }
 
             @Override

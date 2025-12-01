@@ -158,6 +158,8 @@ public interface ArmorstandApi  {
 
         void setPose(String asName, ArmorStandPoseData poseData) throws ArmorStandNotFoundException;
 
+        void previewPose(String asName, ArmorStandPoseData poseData, Player p) throws ArmorStandNotFoundException;
+
         boolean exists(String name);
 
         boolean exists(ArmorStand as);
