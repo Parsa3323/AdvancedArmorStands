@@ -230,7 +230,7 @@ public class AiUtils {
                     }
                     ArmorStandPoseData poseData = parsePoseData(params.optJSONObject("pose"));
                     try {
-                        api.getArmorStandManager().setPose(realCaseName, poseData);
+                        api.getArmorStandManager().previewPose(realCaseName, poseData, player);
                         try {
                             api.reloadPlugin();
                         } catch (ReloadException e) {
