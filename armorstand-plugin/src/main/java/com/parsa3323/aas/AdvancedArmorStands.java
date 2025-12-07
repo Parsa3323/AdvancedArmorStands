@@ -274,10 +274,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         if (getConfig().getBoolean("auto-load-armor-stands")) {
             status("Spawning armor stands...");
         }
+
         for (String key : ArmorStandUtils.getArmorStandList()) {
             ArmorStandUtils.autoLoadArmorStand(key);
         }
-
 
         status("Checking armor stands...");
         ArmorStandUtils.checkArmorStandsFirstTime();
