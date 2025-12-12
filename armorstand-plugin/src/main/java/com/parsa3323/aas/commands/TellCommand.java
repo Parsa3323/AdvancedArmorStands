@@ -51,7 +51,7 @@ public class TellCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Tell the armorstand ai something";
+        return "Talk to an armorstand";
     }
 
     @Override
