@@ -49,13 +49,39 @@ public class LoadCommand extends SubCommand {
 
     @Override
     public String getSyntax() {
-        return "/as load <name>";
+        return "/as load <name|--all>";
     }
 
     @Override
     public void perform(Player player, String[] args) {
         if (args.length < 2) {
             sendUsage(player);
+            return;
+        }
+
+
+        if (args[1].equalsIgnoreCase("--all")) {
+            List<String> names = ArmorStandUtils.getArmorStandList();
+            int loaded = 0;
+
+            for (String name : names) {
+                try {
+                    ArmorStand as = ArmorStandUtils.getArmorStandByName(name);
+                    if (!ArmorStandUtils.isLoaded(as)) {
+                        ArmorStandUtils.loadArmorStand(name);
+                        loaded++;
+                    }
+                } catch (ArmorStandLoadException e) {
+                    AdvancedArmorStands.error("Error loading " + name + ": " + e.getMessage(), true);
+                }
+            }
+
+            if (loaded == 0) {
+                player.sendMessage(ChatColor.YELLOW + "No unloaded armor stands found.");
+            } else {
+                player.sendMessage(ChatColor.GREEN + "Loaded " + loaded + " armor stands.");
+                SoundUtils.playSuccessSound(player);
+            }
             return;
         }
 
@@ -93,7 +119,9 @@ public class LoadCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return ArmorStandUtils.getArmorStandList();
+        List<String> list = new ArrayList<>(ArmorStandUtils.getArmorStandList());
+        list.add("all");
+        return list;
     }
 
     @Override
