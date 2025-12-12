@@ -62,7 +62,7 @@ public class AiCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if (args.length < 2) {
-            player.sendMessage(ChatColor.RED + "Prompt should not be empty");
+            sendUsage(player);
             return;
         }
 
