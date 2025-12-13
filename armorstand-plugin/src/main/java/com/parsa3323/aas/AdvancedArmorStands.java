@@ -43,8 +43,7 @@ import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -237,6 +236,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStandsConfig.get().options().copyDefaults(true);
         ArmorStandsConfig.save();
 
+        if (checkForArmorStandConflict()) {
+            error("ArmorStand name conflicts found. This is unexpected.", true);
+        }
+
         AiConfig.init();
         AiConfig.get().options().copyDefaults(true);
         AiConfig.save();
@@ -358,7 +361,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
 
 
-
         String existingVersion = getConfig().getString("config-version", "unknown");
 
         if (!CURRENT_CONFIG_VERSION.equals(existingVersion)) {
@@ -369,6 +371,20 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
 
     }
+
+    public static boolean checkForArmorStandConflict() {
+        List<String> list = ArmorStandUtils.getArmorStandList();
+        Set<String> seen = new HashSet<>();
+
+        for (String name : list) {
+            String lower = name.toLowerCase(Locale.ROOT);
+            if (!seen.add(lower)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public static boolean isDebug() {
         return logLevel.intValue() <= Level.FINE.intValue() || plugin.getConfig().getBoolean("debug");
