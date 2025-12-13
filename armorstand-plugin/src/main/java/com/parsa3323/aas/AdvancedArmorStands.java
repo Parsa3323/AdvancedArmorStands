@@ -238,6 +238,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         if (checkForArmorStandConflict()) {
             error("ArmorStand name conflicts found. This is unexpected.", true);
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
         }
 
         AiConfig.init();
