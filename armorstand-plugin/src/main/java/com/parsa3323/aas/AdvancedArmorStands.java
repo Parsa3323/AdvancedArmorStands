@@ -339,7 +339,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
                 ArmorStandSelectionCache.removeKeyFrameSelectedArmorStand(player.getUniqueId());
 
                 status("Restored " + player.getDisplayName() +"'s inventory");
-
             }
 
         }
