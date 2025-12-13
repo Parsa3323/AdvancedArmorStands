@@ -22,6 +22,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.animation.manager.EditorManager;
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
+import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.commands.manager.CommandManager;
@@ -236,10 +237,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStandsConfig.get().options().copyDefaults(true);
         ArmorStandsConfig.save();
 
-        if (checkForArmorStandConflict()) {
-            error("ArmorStand name conflicts found. This is unexpected.", true);
-            Bukkit.getPluginManager().disablePlugin(this);
-            return;
+        if (checkForArmorStandConflictAndDelete()) {
+            warn("ArmorStand name conflicts found. Deleting one...");
         }
 
         AiConfig.init();
@@ -374,13 +373,23 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     }
 
-    public static boolean checkForArmorStandConflict() {
+    public static boolean checkForArmorStandConflictAndDelete() {
         List<String> list = ArmorStandUtils.getArmorStandList();
         Set<String> seen = new HashSet<>();
 
-        for (String name : list) {
-            String lower = name.toLowerCase(Locale.ROOT);
-            if (!seen.add(lower)) {
+        Iterator<String> it = list.iterator();
+        while (it.hasNext()) {
+            String name = it.next();
+            String key = name.toLowerCase(Locale.ROOT);
+
+            if (!seen.add(key)) {
+                it.remove();
+
+                try {
+                    ArmorStandUtils.deleteArmorStandNoLog(name);
+                } catch (ArmorStandNotFoundException e) {
+                    error("Error while deleting armorstand: " + e.getMessage());
+                }
                 return true;
             }
         }

@@ -23,6 +23,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
 import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
+import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
@@ -240,6 +241,35 @@ public class ArmorStandUtils {
         ArmorStandsConfig.save();
 
         player.sendMessage(ChatColor.GREEN + "Deleted ArmorStand: " + name);
+    }
+
+    public static void deleteArmorStandNoLog(String name) throws ArmorStandNotFoundException {
+        FileConfiguration config = ArmorStandsConfig.get();
+        String path = "armorstands." + name;
+
+        if (!config.contains(path)) {
+            throw new ArmorStandNotFoundException("ArmorStand not found!");
+        }
+
+        UUID uuid = UUID.fromString(config.getString(path + ".UUID"));
+        World world = Bukkit.getWorld(config.getString(path + ".World"));
+
+        if (world == null) {
+            throw new ArmorStandNotFoundException("World not found!");
+        }
+
+
+
+        for (Entity entity : world.getEntities()) {
+            if (entity instanceof ArmorStand && entity.getUniqueId().equals(uuid)) {
+                entity.remove();
+                break;
+            }
+        }
+
+
+        config.set(path, null);
+        ArmorStandsConfig.save();
     }
 
     public static boolean isIsFirstTimeCreatingArmorStand() {
