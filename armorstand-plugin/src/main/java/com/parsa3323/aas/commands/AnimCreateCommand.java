@@ -21,10 +21,7 @@ package com.parsa3323.aas.commands;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.AnimationConfig;
-import com.parsa3323.aas.utils.AnimationUtils;
-import com.parsa3323.aas.utils.ArmorStandSelectionCache;
-import com.parsa3323.aas.utils.ArmorStandUtils;
-import com.parsa3323.aas.utils.InventoryUtils;
+import com.parsa3323.aas.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.ArmorStand;
@@ -49,9 +46,13 @@ public class AnimCreateCommand extends SubCommand {
 
     @Override
     public ArrayList<String> getExampleLore() {
-        return null;
-    }
+        ArrayList<String> lore = new ArrayList<>();
 
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation create " + (TextUtils.getFirstContent(AnimationUtils.getAnimationsList(), "exampleAnimation"))  + ChatColor.DARK_GRAY + " (existing)" + " " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "testStand") + ChatColor.DARK_GRAY + " (to edit)");
+
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation create testAnimation" + ChatColor.DARK_GRAY + " (non-existing)" + " " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "testStand") + ChatColor.DARK_GRAY + " (to create)");
+        return lore;
+    }
     @Override
     public String getSyntax() {
         return "/as animation create <name> <animation-name>";
