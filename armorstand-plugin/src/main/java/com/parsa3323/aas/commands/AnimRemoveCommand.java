@@ -23,6 +23,8 @@ import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.AnimationUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -47,7 +49,10 @@ public class AnimRemoveCommand extends SubCommand {
 
     @Override
     public ArrayList<String> getExampleLore() {
-        return null;
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation remove " + TextUtils.getFirstContent(AnimationUtils.getAnimationsList(), "exampleAnimation"));
+        return lore;
     }
 
     @Override
