@@ -20,6 +20,8 @@ package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -34,8 +36,10 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public ArrayList<String> getExampleLore() {
-        return null;
-    }
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as delete " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "exampleStand"));
+        return lore;    }
 
     @Override
     public String getDescription() {
