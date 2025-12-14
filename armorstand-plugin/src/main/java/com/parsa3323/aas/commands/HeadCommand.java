@@ -19,6 +19,7 @@
 package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.commands.manager.SubCommand;
+import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -35,8 +36,10 @@ public class HeadCommand extends SubCommand {
 
     @Override
     public ArrayList<String> getExampleLore() {
-        return null;
-    }
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as head " + "examplePlayer");
+        return lore;    }
 
     @Override
     public String getDescription() {
