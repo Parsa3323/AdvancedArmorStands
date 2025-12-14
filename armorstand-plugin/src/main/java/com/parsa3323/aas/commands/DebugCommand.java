@@ -40,8 +40,10 @@ public class DebugCommand extends SubCommand {
 
     @Override
     public ArrayList<String> getExampleLore() {
-        return null;
-    }
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ChatColor.DARK_GRAY + "This command is only for debugging");
+        return lore;    }
 
     @Override
     public String getDescription() {
