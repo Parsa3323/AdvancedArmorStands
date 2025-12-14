@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.utils;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class TextUtils {
@@ -37,5 +38,8 @@ public class TextUtils {
         ).matcher(text).find();
     }
 
+    public static String getFirstContent(ArrayList<String> list, String placeHolder) {
+        return (list.get(0) == null) ? placeHolder : list.get(0);
+    }
 
 }

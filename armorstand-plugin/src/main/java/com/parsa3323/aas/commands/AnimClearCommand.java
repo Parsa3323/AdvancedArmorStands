@@ -22,7 +22,9 @@ import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.PluginUtils;
+import com.parsa3323.aas.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
@@ -37,9 +39,13 @@ public class AnimClearCommand extends SubCommand {
         return "clear";
     }
 
+
     @Override
     public ArrayList<String> getExampleLore() {
-        return null;
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation clear " + (TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "testStand")));
+        return lore;
     }
 
     @Override
