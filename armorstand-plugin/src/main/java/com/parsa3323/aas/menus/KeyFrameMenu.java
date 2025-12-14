@@ -161,7 +161,7 @@ public class KeyFrameMenu extends PaginatedMenu {
 
             ArrayList<String> lore = new ArrayList<>();
 
-            lore.add(ChatColor.GRAY + "This is the " + (index + 1) + TextUtils.getOrdinalSuffix(index + 1) + " step");
+            lore.add(ChatColor.GRAY + "This is the " + (index + 1) + TextUtils.getOriginalSuffix(index + 1) + " step");
             lore.add(ChatColor.GRAY + "for " + animationName + " animation that");
             lore.add(ChatColor.GRAY + "will turn armor stand's position to this");
             lore.add(ChatColor.GRAY + "on its turn");

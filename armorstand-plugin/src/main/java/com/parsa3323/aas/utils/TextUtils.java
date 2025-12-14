@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class TextUtils {
-    public static String getOrdinalSuffix(int value) {
+    public static String getOriginalSuffix(int value) {
         if (value >= 11 && value <= 13) return "th";
         switch (value % 10) {
             case 1: return "st";
