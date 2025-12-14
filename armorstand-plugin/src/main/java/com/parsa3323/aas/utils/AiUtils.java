@@ -215,7 +215,7 @@ public class AiUtils {
                         AdvancedArmorStands.warn("Invalid remove action: missing name.");
                         return;
                     }
-                    ArmorStandUtils.deleteArmorStand(realCaseName, player);
+                    api.getArmorStandManager().removeArmorStand(realCaseName);
                     break;
 
                 case "pose":
