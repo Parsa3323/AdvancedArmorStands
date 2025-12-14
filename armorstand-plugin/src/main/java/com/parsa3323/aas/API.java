@@ -489,17 +489,13 @@ public class API implements ArmorstandApi {
             }
 
             @Override
-            public void removeArmorStand(ArmorStand armorStand) {
-                armorStand.remove();
+            public void removeArmorStand(ArmorStand armorStand) throws ArmorStandNotFoundException {
+                ArmorStandUtils.deleteArmorStandNoLog(ArmorStandUtils.getNameByArmorStand(armorStand));
             }
 
             @Override
             public void removeArmorStand(String s) throws ArmorStandNotFoundException {
-                ArmorStand as = ArmorStandUtils.getArmorStandByName(s);
-
-                if (as == null) throw new ArmorStandNotFoundException("Armor stand not found: " + s);
-
-                as.remove();
+                ArmorStandUtils.deleteArmorStandNoLog(s);
             }
 
             @Override

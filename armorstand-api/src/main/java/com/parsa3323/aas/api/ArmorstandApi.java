@@ -170,7 +170,7 @@ public interface ArmorstandApi  {
 
         ArmorStand getArmorStandByName(String s) throws ArmorStandNotFoundException;
 
-        void removeArmorStand(ArmorStand armorStand);
+        void removeArmorStand(ArmorStand armorStand) throws ArmorStandNotFoundException;
 
         void removeArmorStand(String s) throws ArmorStandNotFoundException;
 
