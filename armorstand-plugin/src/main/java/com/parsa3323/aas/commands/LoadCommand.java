@@ -23,7 +23,9 @@ import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.SoundUtils;
+import com.parsa3323.aas.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -39,8 +41,19 @@ public class LoadCommand extends SubCommand {
 
     @Override
     public ArrayList<String> getExampleLore() {
-        return null;
-    }
+        ArrayList<String> lore = new ArrayList<>();
+
+        ArrayList<String> unloaded = new ArrayList<>(ArmorStandUtils.getArmorStandList());
+
+        for (String armorStand : ArmorStandUtils.getArmorStandList()) {
+            if (!ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(armorStand))){
+                unloaded.add(armorStand);
+            }
+        }
+
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as load " + TextUtils.getFirstContent(unloaded, "unloadedArmorStand"));
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as load --all");
+        return lore;    }
 
     @Override
     public String getDescription() {
