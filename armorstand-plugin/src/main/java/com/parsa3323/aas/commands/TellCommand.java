@@ -90,7 +90,6 @@ public class TellCommand extends SubCommand {
             actionBarTimer.stop();
             AiUtils.sendResponseWithHistory(player, response, name, userInput);
         });
-
     }
 
 
