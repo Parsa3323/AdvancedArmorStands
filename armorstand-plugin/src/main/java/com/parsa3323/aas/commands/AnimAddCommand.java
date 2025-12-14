@@ -22,9 +22,7 @@ import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
-import com.parsa3323.aas.utils.AnimationUtils;
-import com.parsa3323.aas.utils.ArmorStandUtils;
-import com.parsa3323.aas.utils.PluginUtils;
+import com.parsa3323.aas.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
@@ -42,7 +40,11 @@ public class AnimAddCommand extends SubCommand {
 
     @Override
     public ArrayList<String> getExampleLore() {
-        return null;
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation add " + ((AnimationUtils.getAnimationsList().get(0) == null) ? "defualt (example)" :
+                TypeUtils.getTypesList().get(0)) + " " + ((ArmorStandUtils.getArmorStandList().get(0) == null) ? "testArmorStand" : ArmorStandUtils.getArmorStandList().get(0)));
+        return lore;
     }
 
     @Override
