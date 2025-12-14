@@ -53,7 +53,8 @@ public class LoadCommand extends SubCommand {
 
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as load " + TextUtils.getFirstContent(unloaded, "unloadedArmorStand"));
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as load --all");
-        return lore;    }
+        return lore;
+    }
 
     @Override
     public String getDescription() {
