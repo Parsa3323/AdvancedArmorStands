@@ -48,9 +48,9 @@ public class AnimCreateCommand extends SubCommand {
     public ArrayList<String> getExampleLore() {
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation create " + (TextUtils.getFirstContent(AnimationUtils.getAnimationsList(), "exampleAnimation"))  + ChatColor.DARK_GRAY + " (existing)" + " " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "testStand") + ChatColor.DARK_GRAY + " (to edit)");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation create " + (TextUtils.getFirstContent(AnimationUtils.getAnimationsList(), "exampleAnimation"))  + ColorUtils.boldAndColor(ChatColor.YELLOW) + " (existing)" + ColorUtils.boldAndColor(ChatColor.YELLOW) + " " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "testStand") + ColorUtils.boldAndColor(ChatColor.YELLOW) + " (to edit)");
 
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation create testAnimation" + ChatColor.DARK_GRAY + " (non-existing)" + " " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "testStand") + ChatColor.DARK_GRAY + " (to create)");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation create testAnimation" + ColorUtils.boldAndColor(ChatColor.YELLOW) + " (non-existing)" + ColorUtils.boldAndColor(ChatColor.YELLOW) + " " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "testStand") + ColorUtils.boldAndColor(ChatColor.YELLOW) + " (to create)");
         return lore;
     }
     @Override
