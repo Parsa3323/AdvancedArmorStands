@@ -51,6 +51,7 @@ public class LoadCommand extends SubCommand {
             }
         }
 
+
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as load " + TextUtils.getFirstContent(unloaded, "unloadedArmorStand"));
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as load --all");
         return lore;
@@ -115,7 +116,6 @@ public class LoadCommand extends SubCommand {
             player.sendMessage(ChatColor.RED + "This armor stand is already loaded");
             return;
         }
-
 
         try {
             ArmorStandUtils.loadArmorStand(args[1]);
