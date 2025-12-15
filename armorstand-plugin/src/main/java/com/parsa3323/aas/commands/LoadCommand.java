@@ -112,7 +112,6 @@ public class LoadCommand extends SubCommand {
 
         ArmorStand as = ArmorStandUtils.getArmorStandByName(args[1]);
 
-
         if (ArmorStandUtils.isLoaded(as)) {
             player.sendMessage(ChatColor.RED + "This armor stand is already loaded");
             return;
