@@ -101,11 +101,30 @@ public class AnimationCommand extends SubCommand {
                 for (String line : wrappedLines) {
                     TextComponent component = new TextComponent(line);
                     component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command));
-                    component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                            new ComponentBuilder(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Click to use this command")
-                                    .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + command)
-                                    .append("\n" + ChatColor.GRAY + "Description: " + ChatColor.WHITE + description)
-                                    .create()));
+
+                    ArrayList<String> exampleLore = cmd.getExampleLore();
+
+                    ComponentBuilder hoverBuilder = new ComponentBuilder("");
+
+                    if (exampleLore != null && !exampleLore.isEmpty()) {
+                        hoverBuilder.append(ChatColor.GRAY + "Examples:")
+                                .append("\n");
+                        for (String example : exampleLore) {
+                            hoverBuilder.append(ChatColor.YELLOW + "  " + example)
+                                    .append("\n");
+                        }
+                        hoverBuilder.append("\n");
+                    }
+
+                    hoverBuilder
+                            .append(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Click to use this command")
+                            .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + command)
+                            .append("\n" + ChatColor.GRAY + "Description: " + ChatColor.WHITE + description);
+
+                    component.setHoverEvent(
+                            new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverBuilder.create())
+                    );
+
                     player.spigot().sendMessage(component);
                 }
 
