@@ -20,10 +20,8 @@ package com.parsa3323.aas.utils;
 
 import com.parsa3323.aas.api.data.IssueData;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class IssueUtils {
 
@@ -48,6 +46,16 @@ public class IssueUtils {
         return ISSUES.size();
     }
 
+    public static boolean hasIssues() {
+        return !ISSUES.isEmpty();
+    }
+
+    public static List<IssueData> topIssues(int limit) {
+        return ISSUES.values().stream()
+                .sorted((a, b) -> Integer.compare(b.occurrences, a.occurrences))
+                .limit(limit)
+                .collect(Collectors.toList());
+    }
 
     private static String normalize(String msg) {
         return msg.toLowerCase().trim();

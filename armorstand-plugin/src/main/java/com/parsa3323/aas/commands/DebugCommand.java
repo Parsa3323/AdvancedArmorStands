@@ -20,9 +20,11 @@ package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.data.IssueData;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.IssueUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -80,6 +82,30 @@ public class DebugCommand extends SubCommand {
         player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + " Plugin Information");
         player.sendMessage(ChatColor.GOLD + " » " + ChatColor.GRAY + "Version Support: " + ChatColor.WHITE + VersionSupportUtil.getVersionSupport().getClass().getSimpleName());
         player.sendMessage(ChatColor.GOLD + " » " + ChatColor.GRAY + "Plugin Version: " + ChatColor.WHITE + pluginVersion);
+        player.sendMessage(ChatColor.GOLD + " » " + ChatColor.GRAY + "Issues: " + ChatColor.RED + IssueUtils.getTotalIssues() + " issue(s) found");
+
+        if (IssueUtils.hasIssues()) {
+            int shown = 0;
+            int limit = 3;
+
+            for (IssueData issue : IssueUtils.topIssues(limit)) {
+                player.sendMessage(
+                        ChatColor.GOLD + " » " +
+                                ChatColor.RED + issue.message +
+                                ChatColor.DARK_GRAY + " (x" + issue.occurrences + ")"
+                );
+                shown++;
+            }
+
+            int remaining = IssueUtils.getTotalIssues() - shown;
+            if (remaining > 0) {
+                player.sendMessage(
+                        ChatColor.GOLD + " » " +
+                                ChatColor.GRAY + "... and " + remaining + " more"
+                );
+            }
+        }
+
         player.sendMessage(ChatColor.GOLD + " » " + ChatColor.GRAY + "Java Version: " + ChatColor.WHITE + System.getProperty("java.version"));
         player.sendMessage("");
 
