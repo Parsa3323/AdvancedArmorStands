@@ -117,13 +117,6 @@ public class LoadCommand extends SubCommand {
             return;
         }
 
-
-        AdvancedArmorStands.error("test error");
-        AdvancedArmorStands.error("test error1");
-        AdvancedArmorStands.error("test error2");
-        AdvancedArmorStands.error("test error3");
-
-
         try {
             ArmorStandUtils.loadArmorStand(args[1]);
             player.sendMessage(ChatColor.GREEN + "Successfully loaded armor stand '" + args[1] + "'");
