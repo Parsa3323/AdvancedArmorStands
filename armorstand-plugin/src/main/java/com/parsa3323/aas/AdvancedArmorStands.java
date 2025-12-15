@@ -423,26 +423,33 @@ public final class AdvancedArmorStands extends JavaPlugin {
     }
 
     public static void error(String message) {
-        if (logLevel.intValue() <= Level.SEVERE.intValue()) {
-            logger.severe("[ERROR] " + message);
-        }
+        error(message, null, false);
     }
 
     public static void error(String message, boolean sendTbLink) {
+        error(message, "https://docs.advancedarmorstands.ir/troubleshooting", sendTbLink);
+    }
+
+    public static void error(String message, String readMoreLink) {
+        error(message, readMoreLink, false);
+    }
+
+    private static void error(String message, String readMoreLink, boolean sendTbLink) {
         if (logLevel.intValue() <= Level.SEVERE.intValue()) {
             logger.severe("[ERROR] " + message);
-            if (sendTbLink) {
-                warn("Trouble shooting: https://docs.advancedarmorstands.ir/troubleshooting");
+
+            if (readMoreLink != null) {
+                warn("Learn more: " + readMoreLink);
             }
+
+            if (sendTbLink) {
+                warn("Troubleshooting: https://docs.advancedarmorstands.ir/troubleshooting");
+            }
+
+            IssueUtils.record(message, readMoreLink);
         }
     }
 
-    public static void error(String message, String readmorelink) {
-        if (logLevel.intValue() <= Level.SEVERE.intValue()) {
-            logger.severe("[ERROR] " + message);
-            warn("Learn more: " + readmorelink);
-        }
-    }
 
     public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
         PlayerMenuUtility playerMenuUtility;
