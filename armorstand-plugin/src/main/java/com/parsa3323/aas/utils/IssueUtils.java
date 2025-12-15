@@ -44,6 +44,11 @@ public class IssueUtils {
         return Collections.unmodifiableCollection(ISSUES.values());
     }
 
+    public static int getTotalIssues() {
+        return ISSUES.size();
+    }
+
+
     private static String normalize(String msg) {
         return msg.toLowerCase().trim();
     }
