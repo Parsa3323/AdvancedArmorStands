@@ -21,6 +21,7 @@ package com.parsa3323.aas;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.animation.manager.EditorManager;
 import com.parsa3323.aas.api.ArmorstandApi;
+import com.parsa3323.aas.api.actions.IssueLevel;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
@@ -421,6 +422,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
     public static void warn(String message) {
         if (logLevel.intValue() <= Level.WARNING.intValue()) {
             logger.warning("[WARNING] " + message);
+            IssueUtils.record(IssueLevel.WARNING, message, null);
         }
     }
 
@@ -448,7 +450,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
                 warn("Troubleshooting: https://docs.advancedarmorstands.ir/troubleshooting");
             }
 
-            IssueUtils.record(message, readMoreLink);
+            IssueUtils.record(IssueLevel.ERROR, message, readMoreLink);
         }
     }
 

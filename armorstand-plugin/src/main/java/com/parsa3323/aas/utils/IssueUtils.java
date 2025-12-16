@@ -19,6 +19,7 @@
 package com.parsa3323.aas.utils;
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.actions.IssueLevel;
 import com.parsa3323.aas.api.data.IssueData;
 
 import java.io.*;
@@ -45,18 +46,19 @@ public class IssueUtils {
         }
     }
 
-    public static void record(String message, String readMore) {
-        String key = normalize(message);
+    public static void record(IssueLevel level, String message, String readMore) {
+        String key = level.name() + ":" + normalize(message);
 
         IssueData issue = ISSUES.get(key);
         if (issue == null) {
-            ISSUES.put(key, new IssueData(message, readMore));
+            ISSUES.put(key, new IssueData(message, readMore, level));
         } else {
             issue.occurrences++;
         }
 
         save();
     }
+
 
     public static void save() {
         if (file == null || ISSUES.isEmpty()) return;
@@ -99,12 +101,43 @@ public class IssueUtils {
     }
 
     public static int getTotalIssues() {
-        return ISSUES.size();
+        int count = 0;
+        for (IssueData issue : ISSUES.values()) {
+            if (issue.level == IssueLevel.ERROR) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public static boolean hasIssues() {
-        return !ISSUES.isEmpty();
+        for (IssueData issue : ISSUES.values()) {
+            if (issue.level == IssueLevel.ERROR) {
+                return true;
+            }
+        }
+        return false;
     }
+
+    public static int getTotalWarnings() {
+        int count = 0;
+        for (IssueData issue : ISSUES.values()) {
+            if (issue.level == IssueLevel.WARNING) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static boolean hasWarnings() {
+        for (IssueData issue : ISSUES.values()) {
+            if (issue.level == IssueLevel.WARNING) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public static List<IssueData> topIssues(int limit) {
         return ISSUES.values().stream()

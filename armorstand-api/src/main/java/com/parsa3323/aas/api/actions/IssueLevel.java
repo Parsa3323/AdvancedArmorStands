@@ -16,23 +16,9 @@
  * limitations under the License.
  */
 
-package com.parsa3323.aas.api.data;
+package com.parsa3323.aas.api.actions;
 
-import com.parsa3323.aas.api.actions.IssueLevel;
-
-public class IssueData {
-
-    public final String message;
-    public final String readMore;
-    public final IssueLevel level;
-    public final long firstSeen;
-    public int occurrences;
-
-    public IssueData(String message, String readMore, IssueLevel level) {
-        this.message = message;
-        this.readMore = readMore;
-        this.level = level;
-        this.firstSeen = System.currentTimeMillis();
-        this.occurrences = 1;
-    }
+public enum IssueLevel {
+    ERROR,
+    WARNING
 }
