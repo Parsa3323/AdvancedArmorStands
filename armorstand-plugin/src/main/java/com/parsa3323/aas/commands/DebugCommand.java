@@ -142,7 +142,6 @@ public class DebugCommand extends SubCommand {
         }
 
 
-
         player.sendMessage(ChatColor.GOLD + " » " + ChatColor.GRAY + "Java Version: " + ChatColor.WHITE + System.getProperty("java.version"));
         player.sendMessage("");
 
