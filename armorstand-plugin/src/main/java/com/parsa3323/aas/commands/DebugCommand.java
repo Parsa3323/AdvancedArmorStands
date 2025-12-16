@@ -101,7 +101,7 @@ public class DebugCommand extends SubCommand {
                 player.sendMessage(
                         ChatColor.GOLD + " » " +
                                 ChatColor.RED + issue.message +
-                                ChatColor.DARK_GRAY + " (x" + issue.occurrences + ")"
+                                ColorUtils.boldAndColor(ChatColor.GRAY) + " (x" + issue.occurrences + ")"
                 );
                 shown++;
                 if (shown >= limit) break;
@@ -126,7 +126,7 @@ public class DebugCommand extends SubCommand {
                 player.sendMessage(
                         ChatColor.GOLD + " » " +
                                 ChatColor.YELLOW + issue.message +
-                                ChatColor.DARK_GRAY + " (x" + issue.occurrences + ")"
+                                ColorUtils.boldAndColor(ChatColor.GRAY) + " (x" + issue.occurrences + ")"
                 );
                 shown++;
                 if (shown >= limit) break;
