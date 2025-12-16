@@ -146,6 +146,21 @@ public class IssueUtils {
                 .collect(Collectors.toList());
     }
 
+    public static List<IssueData> getErrorsList() {
+        return ISSUES.values().stream()
+                .filter(issue -> issue.level == IssueLevel.ERROR)
+                .sorted((a, b) -> Integer.compare(b.occurrences, a.occurrences))
+                .collect(Collectors.toList());
+    }
+
+    public static List<IssueData> getWarnsList() {
+        return ISSUES.values().stream()
+                .filter(issue -> issue.level == IssueLevel.WARNING)
+                .sorted((a, b) -> Integer.compare(b.occurrences, a.occurrences))
+                .collect(Collectors.toList());
+    }
+
+
     private static String normalize(String msg) {
         return msg.toLowerCase().trim();
     }

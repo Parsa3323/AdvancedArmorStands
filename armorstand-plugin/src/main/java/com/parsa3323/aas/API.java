@@ -20,6 +20,7 @@ package com.parsa3323.aas;
 
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
+import com.parsa3323.aas.api.data.IssueData;
 import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.api.exeption.*;
@@ -636,6 +637,41 @@ public class API implements ArmorstandApi {
                 } catch (Exception e) {
                     throw new AiException(e);
                 }
+            }
+        };
+    }
+
+    @Override
+    public IssueManager getIssueManager() {
+        return new IssueManager() {
+            @Override
+            public int getTotalErrors() {
+                return IssueUtils.getTotalIssues();
+            }
+
+            @Override
+            public int getTotalWarnings() {
+                return IssueUtils.getTotalWarnings();
+            }
+
+            @Override
+            public List<IssueData> getErrorsList() {
+                return IssueUtils.getErrorsList();
+            }
+
+            @Override
+            public List<IssueData> getWarnsList() {
+                return IssueUtils.getWarnsList();
+            }
+
+            @Override
+            public boolean hasErrors() {
+                return IssueUtils.hasIssues();
+            }
+
+            @Override
+            public boolean hasWarnings() {
+                return IssueUtils.hasWarnings();
             }
         };
     }

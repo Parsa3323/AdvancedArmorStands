@@ -20,6 +20,7 @@ package com.parsa3323.aas.api;
 
 
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
+import com.parsa3323.aas.api.data.IssueData;
 import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.api.exeption.*;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
@@ -30,6 +31,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public interface ArmorstandApi  {
@@ -215,6 +217,24 @@ public interface ArmorstandApi  {
 
         @Deprecated
         String getResponse(MemoryData data, String userInput) throws AiException;
+
+    }
+
+    IssueManager getIssueManager();
+
+    interface IssueManager {
+
+        int getTotalErrors();
+
+        int getTotalWarnings();
+
+        List<IssueData> getErrorsList();
+
+        List<IssueData> getWarnsList();
+
+        boolean hasErrors();
+
+        boolean hasWarnings();
 
     }
 
