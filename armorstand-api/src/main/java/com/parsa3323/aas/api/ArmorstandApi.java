@@ -216,7 +216,6 @@ public interface ArmorstandApi  {
         @Deprecated
         String getResponse(MemoryData data, String userInput) throws AiException;
 
-
     }
 
 }
