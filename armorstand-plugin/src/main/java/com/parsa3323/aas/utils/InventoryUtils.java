@@ -58,9 +58,6 @@ public class InventoryUtils {
         Inventory inventory = p.getInventory();
         inventory.clear();
         for (int i = 0; i < inventoryManager.getInventoryItems().size(); i++) {
-
-
-
             inventory.setItem(inventoryItems.get(i).getSlot(), inventoryItems.get(i).getItemStack());
 
             ItemStack itemStack = new ItemStack(Material.BARRIER);
