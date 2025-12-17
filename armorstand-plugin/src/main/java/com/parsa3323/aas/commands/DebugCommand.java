@@ -86,12 +86,12 @@ public class DebugCommand extends SubCommand {
         player.sendMessage(
                 ChatColor.GOLD + " » " +
                         ChatColor.GRAY + "Issues: " +
-                        ChatColor.RED + IssueUtils.getTotalIssues() + " issue(s) " +
+                        ChatColor.RED + IssueUtils.getTotalErrors() + " issue(s) " +
                         ChatColor.GRAY + "and " +
                         ChatColor.YELLOW + IssueUtils.getTotalWarnings() + " warning(s)"
         );
 
-        if (IssueUtils.hasIssues()) {
+        if (IssueUtils.hasErrors()) {
             int shown = 0;
             int limit = 3;
 
@@ -107,7 +107,7 @@ public class DebugCommand extends SubCommand {
                 if (shown >= limit) break;
             }
 
-            int remaining = IssueUtils.getTotalIssues() - shown;
+            int remaining = IssueUtils.getTotalErrors() - shown;
             if (remaining > 0) {
                 player.sendMessage(
                         ChatColor.GOLD + " » " +

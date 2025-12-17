@@ -646,7 +646,7 @@ public class API implements ArmorstandApi {
         return new IssueManager() {
             @Override
             public int getTotalErrors() {
-                return IssueUtils.getTotalIssues();
+                return IssueUtils.getTotalErrors();
             }
 
             @Override
@@ -666,7 +666,7 @@ public class API implements ArmorstandApi {
 
             @Override
             public boolean hasErrors() {
-                return IssueUtils.hasIssues();
+                return IssueUtils.hasErrors();
             }
 
             @Override

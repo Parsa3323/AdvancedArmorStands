@@ -100,7 +100,7 @@ public class IssueUtils {
         return Collections.unmodifiableCollection(ISSUES.values());
     }
 
-    public static int getTotalIssues() {
+    public static int getTotalErrors() {
         int count = 0;
         for (IssueData issue : ISSUES.values()) {
             if (issue.level == IssueLevel.ERROR) {
@@ -110,7 +110,7 @@ public class IssueUtils {
         return count;
     }
 
-    public static boolean hasIssues() {
+    public static boolean hasErrors() {
         for (IssueData issue : ISSUES.values()) {
             if (issue.level == IssueLevel.ERROR) {
                 return true;
