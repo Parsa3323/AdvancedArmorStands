@@ -19,6 +19,7 @@
 package com.parsa3323.aas.inventory;
 
 import com.parsa3323.aas.inventory.manager.InventoryItem;
+import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -44,7 +45,8 @@ public class LeftHandItem extends InventoryItem {
         lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rotate left hand to left");
         lore.add(ChatColor.YELLOW + "SHIFT + RIGHT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move left arm up");
         lore.add(ChatColor.YELLOW + "SHIFT + LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move left arm down");
-        lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
+        lore.add("");
+        lore.add(ColorUtils.boldAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
 
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjA3NGY2ZTM5YjhkNTY2ODc0MjI3YWRkOWNiMzRjYjE2MTJmY2Q1MjI0NjliNzM5ZmUwOTliNWY5MWI5MTc5MiJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
