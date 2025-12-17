@@ -333,7 +333,7 @@ public class AiUtils {
                             : readStream(conn.getErrorStream());
 
                     if (responseCode != 200) {
-                        result = "AI error: HTTP " + responseCode + " - " + response;
+                        result = "AI error: HTTP " + responseCode;
                     } else {
                         result = parseChatCompletionsResponse(response);
                     }
@@ -423,7 +423,7 @@ public class AiUtils {
                     : readStream(conn.getErrorStream());
 
             if (responseCode != 200) {
-                return "AI error: HTTP " + responseCode + " - " + response;
+                return "AI error: HTTP " + responseCode;
             }
 
             return parseChatCompletionsResponse(response);
