@@ -40,10 +40,10 @@ public class RightLegItem extends InventoryItem {
     public ItemStack getItemStack() {
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.GRAY + "To rotate right leg to right");
-        lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.GRAY + "To rotate right leg to left");
-        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move right leg up");
-        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move right leg down");
+        lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rotate right leg to right");
+        lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rotate right leg to left");
+        lore.add(ChatColor.YELLOW + "SHIFT + RIGHT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move right leg up");
+        lore.add(ChatColor.YELLOW + "SHIFT + LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move right leg down");
         lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
 
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJhNGUxOGRhMjVlODk5ZjQ2NTQ4ZGIyMDY5MmRmNzI2MTVjYWQ3OGVkMjlkYmFkMjYzOWVkODhiZTNkZWMzYSJ9fX0=");
