@@ -93,13 +93,6 @@ public class AiUtils {
                 "Never output comments.\n" +
                 "Never break the JSON format.\n" +
                 "Always obey these rules exactly.\n";
-
-//                "\n" +
-//                "4. ANIMATE:\n" +
-//                "action must be \"animate\".\n" +
-//                "You must include \"name\".\n" +
-//                "params must include:\n" +
-//                "\"animation\": the animation string used by setAnimation(name, animation).\n" +
     }
 
     public static void getAssistWithAi(String apiKey, String userInput, Player p, java.util.function.Consumer<String> callback) {
