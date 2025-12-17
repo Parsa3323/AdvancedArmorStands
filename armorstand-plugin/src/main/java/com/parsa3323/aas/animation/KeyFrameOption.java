@@ -24,6 +24,7 @@ import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.menus.KeyFrameMenu;
+import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
@@ -52,7 +53,8 @@ public class KeyFrameOption extends InventoryItem {
 
         lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.GRAY + "Add a keyframe");
         lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "Open keyframe menu");
-        lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
+        lore.add("");
+        lore.add(ColorUtils.boldAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
 
         ItemStack itemStack = new ItemStack(XMaterial.NETHER_STAR.parseMaterial());
         ItemMeta itemMeta = itemStack.getItemMeta();
