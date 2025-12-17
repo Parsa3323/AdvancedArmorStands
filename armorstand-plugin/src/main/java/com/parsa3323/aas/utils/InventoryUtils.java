@@ -66,7 +66,14 @@ public class InventoryUtils {
             ItemStack itemStack = new ItemStack(Material.BARRIER);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName( ChatColor.RED  + "EXIT" + ChatColor.GRAY + " (Right Click)");
+            ArrayList<String> lore = new ArrayList<>();
+
+            lore.add("");
+            lore.add(ColorUtils.boldAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+
+            itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
+
             inventory.setItem(8, itemStack);
 
         }
