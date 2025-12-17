@@ -40,10 +40,10 @@ public class LeftLegItem extends InventoryItem {
     public ItemStack getItemStack() {
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.GRAY + "To rotate left leg to right");
-        lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.GRAY + "To rotate left leg to left");
-        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "To move left leg up");
-        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK " + ChatColor.GRAY + "To move left leg down");
+        lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rotate left leg to right");
+        lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rotate left leg to left");
+        lore.add(ChatColor.YELLOW + "SHIFT + RIGHT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move left leg up");
+        lore.add(ChatColor.YELLOW + "SHIFT + LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move left leg down");
         lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
 
 
