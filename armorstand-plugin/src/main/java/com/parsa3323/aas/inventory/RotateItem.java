@@ -44,10 +44,10 @@ public class RotateItem extends InventoryItem {
 
         lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.GRAY + "To rotate to right");
         lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.GRAY + "To rotate to left");
-        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK (Block) " + ChatColor.GRAY + "To move body up");
-        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK (Block) " + ChatColor.GRAY + "To move body down");
-        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK (Air) " + ChatColor.GRAY + "To move body right");
-        lore.add(ChatColor.YELLOW + "SHIFT LEFT CLICK (Air) " + ChatColor.GRAY + "To move body left");
+        lore.add(ChatColor.YELLOW + "SHIFT + RIGHT CLICK (Block) " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "To move body up");
+        lore.add(ChatColor.YELLOW + "SHIFT + LEFT CLICK (Block) " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "To move body down");
+        lore.add(ChatColor.YELLOW + "SHIFT + RIGHT CLICK (Air) " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "To move body right");
+        lore.add(ChatColor.YELLOW + "SHIFT + LEFT CLICK (Air) " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "To move body left");
         lore.add(ChatColor.DARK_GRAY + "AdvancedArmorStands Editor Item");
 
 
