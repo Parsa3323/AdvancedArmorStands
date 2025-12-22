@@ -198,8 +198,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         animations.addDefault("animations.wave.steps", new ArrayList<>());
         animations.options().copyDefaults(true);
 
-
-
         AnimationConfig.get().options().copyDefaults(true);
         AnimationConfig.save();
         TypesConfig.init();
@@ -209,7 +207,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ActionConfig.init();
         ActionConfig.get().options().copyDefaults(true);
         ActionConfig.save();
-
 
         TypesConfig.get().addDefault("default.Arms", true);
         TypesConfig.get().addDefault("default.Gravity", false);
