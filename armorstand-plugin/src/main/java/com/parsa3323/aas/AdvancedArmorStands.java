@@ -188,7 +188,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         api = new API();
         getServer().getServicesManager().register(ArmorstandApi.class, api, this, ServicePriority.Normal);
 
-
         AnimationConfig.init();
 
         FileConfiguration animations = AnimationConfig.get();
