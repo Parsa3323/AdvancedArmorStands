@@ -198,7 +198,6 @@ public class CommandManager implements CommandExecutor {
                             player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
                         }
                     }
-
                 } else if (args.length == 0) {
 
                     if (subCommands.stream().allMatch(SubCommand::isForOps)) {
