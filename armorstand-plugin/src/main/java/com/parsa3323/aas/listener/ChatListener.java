@@ -60,6 +60,7 @@ public class ChatListener implements Listener {
                 }
 
                 CustomNameOption.players.remove(e.getPlayer().getUniqueId());
+
                 return;
             }
 

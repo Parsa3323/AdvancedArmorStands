@@ -55,7 +55,6 @@ public class GravityOption extends SettingsOption {
     @Override
     public void click(InventoryClickEvent e, ArmorStand armorStand) {
         armorStand.setGravity(!armorStand.hasGravity());
-
     }
 
     @Override
