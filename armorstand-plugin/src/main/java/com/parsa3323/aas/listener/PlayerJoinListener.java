@@ -66,7 +66,8 @@ public class PlayerJoinListener implements Listener {
 
                     textComponent.addExtra(learnMore);
 
-                    e.getPlayer().spigot().sendMessage(textComponent);                }
+                    e.getPlayer().spigot().sendMessage(textComponent);
+                }
             }
         }, 5L);
 
