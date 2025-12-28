@@ -21,6 +21,7 @@ package com.parsa3323.aas.listener;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
+import com.parsa3323.aas.utils.IssueUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -46,6 +47,14 @@ public class PlayerJoinListener implements Listener {
 
                     e.getPlayer().sendMessage(ChatColor.RED + "It looks like " + unloaded + " armor stands haven't been loaded by the world generator. To fix this, enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
 
+                }
+
+                if (IssueUtils.hasWarnings() || IssueUtils.hasErrors()) {
+                    int totalErrors = IssueUtils.getTotalWarnings() + IssueUtils.getTotalErrors();
+
+                    e.getPlayer().sendMessage(ChatColor.YELLOW +
+                            "The plugin has encountered " + totalErrors +
+                            " error(s)/warning(s) this session. Check the log file for details.");
                 }
 
                 if (AdvancedArmorStands.CONFIG_OUTDATED) {
