@@ -71,7 +71,6 @@ public class ArmorStandMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
-
         if (armorStand == null) {
             e.setCancelled(true);
             return;
