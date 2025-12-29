@@ -106,7 +106,6 @@ public class AiSettingsManager extends PaginatedMenu {
         for (int i = 0; i < settings.size(); i++) {
 
             if (e.getCurrentItem().equals(settings.get(i).getItemStack(armorStand, playerMenuUtility.getOwner()))) {
-
                 settings.get(i).execute(armorStand, playerMenuUtility.getOwner());
                 if (settings.get(i).updateInventory()) super.open();
 
@@ -145,7 +144,7 @@ public class AiSettingsManager extends PaginatedMenu {
 
     @Override
     public boolean cancelClicks() {
-        return false;
+        return true;
     }
 
     @Override
