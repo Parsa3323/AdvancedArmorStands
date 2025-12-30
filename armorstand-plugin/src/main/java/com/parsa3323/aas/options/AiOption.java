@@ -60,7 +60,7 @@ public class AiOption extends SettingsOption {
 
             return itemStack;
         } else {
-            ItemStack itemStack = XMaterial.GRAY_STAINED_GLASS_PANE.parseItem();
+            ItemStack itemStack = XMaterial.LIGHT_GRAY_STAINED_GLASS_PANE.parseItem();
             ItemMeta itemMeta = itemStack.getItemMeta();
 
             itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
@@ -84,6 +84,7 @@ public class AiOption extends SettingsOption {
     public void click(InventoryClickEvent e, ArmorStand armorStand) {
         Player p = (Player) e.getWhoClicked();
         if (!AdvancedArmorStands.isIsAiEnabled()) {
+
             return;
         }
         AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(p), armorStand);
