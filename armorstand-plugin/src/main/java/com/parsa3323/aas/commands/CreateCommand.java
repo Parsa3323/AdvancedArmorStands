@@ -207,23 +207,25 @@ public class CreateCommand extends SubCommand implements Listener {
 
 
 
-        armorStand.setArms(TypesConfig.get().getBoolean(args[1] + ".Arms"));
+        armorStand.setArms(TypesConfig.get().getBoolean(args[1] + ".arms"));
         armorStand.setGravity(false);
-        armorStand.setBasePlate(TypesConfig.get().getBoolean(args[1] + ".BasePlate"));
-        String path = args[1] + ".CustomName";
+        armorStand.setBasePlate(TypesConfig.get().getBoolean(args[1] + ".basePlate"));
+        String path = args[1] + ".customName";
         String rawName = TypesConfig.get().getString(path);
         String replacedName = (AdvancedArmorStands.isIsPapiAvailable()) ? PlaceholderAPI.setPlaceholders(player, rawName) : rawName;
         String coloredName = ChatColor.translateAlternateColorCodes('&', replacedName);
         armorStand.setCustomName(coloredName);
 
         armorStand.setCustomNameVisible(TypesConfig.get().getBoolean(args[1] + ".isCustomNameVisible"));
+        armorStand.setVisible(TypesConfig.get().getBoolean(args[1] + ".isVisible"));
+        armorStand.setSmall(TypesConfig.get().getBoolean(args[1] + ".isSmall"));
         armorStand.setItemInHand(new ItemStack(Material.valueOf(TypesConfig.get().getString(args[1] + ".itemInHandMaterial"))));
 
         armorStand.setHeadPose(new EulerAngle(
 
-                Math.toRadians(getConfigDouble(args[1] + ".HeadPos.x")),
-                Math.toRadians(getConfigDouble(args[1] + ".HeadPos.y")),
-                Math.toRadians(getConfigDouble(args[1] + ".HeadPos.z"))
+                Math.toRadians(getConfigDouble(args[1] + ".headPos.x")),
+                Math.toRadians(getConfigDouble(args[1] + ".headPos.y")),
+                Math.toRadians(getConfigDouble(args[1] + ".headPos.z"))
         ));
 
         armorStand.setRightArmPose(new EulerAngle(

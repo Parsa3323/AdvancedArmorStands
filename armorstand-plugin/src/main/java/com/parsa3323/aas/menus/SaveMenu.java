@@ -106,14 +106,16 @@ public class SaveMenu extends PaginatedMenu {
             if (TypesConfig.get().get(itemName) == null) return;
 
 
-            TypesConfig.get().set(itemName + ".Arms", armorStand.hasArms());
-            TypesConfig.get().set(itemName + ".BasePlate", armorStand.hasBasePlate());
-            TypesConfig.get().set(itemName + ".CustomName", armorStand.getCustomName());
+            TypesConfig.get().set(itemName + ".arms", armorStand.hasArms());
+            TypesConfig.get().set(itemName + ".basePlate", armorStand.hasBasePlate());
+            TypesConfig.get().set(itemName + ".customName", armorStand.getCustomName());
             TypesConfig.get().set(itemName + ".isCustomNameVisible", armorStand.isCustomNameVisible());
+            TypesConfig.get().set(itemName + ".isVisible", armorStand.isVisible());
+            TypesConfig.get().set(itemName + ".isSmall", armorStand.isSmall());
             TypesConfig.get().set(itemName +  ".itemInHandMaterial", armorStand.getItemInHand().getType().name());
-            TypesConfig.get().set(itemName +  ".HeadPos.x", Math.toDegrees(armorStand.getHeadPose().getX()));
-            TypesConfig.get().set(itemName + ".HeadPos.y", Math.toDegrees(armorStand.getHeadPose().getY()));
-            TypesConfig.get().set(itemName + ".HeadPos.z", Math.toDegrees(armorStand.getHeadPose().getZ()));
+            TypesConfig.get().set(itemName +  ".headPos.x", Math.toDegrees(armorStand.getHeadPose().getX()));
+            TypesConfig.get().set(itemName + ".headPos.y", Math.toDegrees(armorStand.getHeadPose().getY()));
+            TypesConfig.get().set(itemName + ".headPos.z", Math.toDegrees(armorStand.getHeadPose().getZ()));
             TypesConfig.get().set(itemName + ".rightArmPose.x", Math.toDegrees(armorStand.getRightArmPose().getX()));
             TypesConfig.get().set(itemName + ".rightArmPose.y", Math.toDegrees(armorStand.getRightArmPose().getY()));
             TypesConfig.get().set(itemName + ".rightArmPose.z", Math.toDegrees(armorStand.getRightArmPose().getZ()));
