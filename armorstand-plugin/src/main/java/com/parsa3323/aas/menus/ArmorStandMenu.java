@@ -104,11 +104,13 @@ public class ArmorStandMenu extends Menu {
                 if (e.getClick() == ClickType.SHIFT_RIGHT || e.getClick() == ClickType.SHIFT_LEFT) {
                     ToolsManager toolsManager = new ToolsManager(new PlayerMenuUtility(playerMenuUtility.getOwner()), armorStand);
                     toolsManager.open();
+                } else {
+                    p.closeInventory();
 
-                    return;
                 }
 
-                p.closeInventory();
+
+
                 break;
             case 15:
                 ActionMenu actionMenu = new ActionMenu(new PlayerMenuUtility(p), armorStand);
