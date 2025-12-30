@@ -210,7 +210,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         TypesConfig.get().addDefault("default.arms", true); // TODO: add
         TypesConfig.get().addDefault("default.basePlate", false); // TODO: add
         TypesConfig.get().addDefault("default.customName", "&7Made with &6&lA&e&ld&6&lv&e&la&6&ln&e&lc&6&le&e&ld&6&lA&e&lr&6&lm&e&lo&6&lr&e&lS&6&lt&e&la&6&ln&e&ld&6&ls"); // TODO: add
-        if (TypesConfig.get().contains("default.Gravity")) TypesConfig.get().set("default.Gravity", null);
         TypesConfig.get().addDefault("default.isCustomNameVisible", false);
         TypesConfig.get().addDefault("default.isVisible", true); // TODO: add
         TypesConfig.get().addDefault("default.isSmall", false);  // TODO: add
@@ -232,6 +231,9 @@ public final class AdvancedArmorStands extends JavaPlugin {
         TypesConfig.get().addDefault("default.leftLegPose.z", 0);
 
         TypesConfig.get().options().copyDefaults(true);
+
+        TypeUtils.migrateTypes();
+
         TypesConfig.save();
 
         ArmorStandsConfig.init();
@@ -464,6 +466,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
             return playerMenuUtility;
         }
     }
+
 
 
 

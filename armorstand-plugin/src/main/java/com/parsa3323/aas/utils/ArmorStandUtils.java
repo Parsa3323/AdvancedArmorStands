@@ -698,10 +698,10 @@ public class ArmorStandUtils {
             armorStand.setRightArmPose(loadEulerAngle(cs, name + ".pose.rightArm"));
             armorStand.setLeftLegPose(loadEulerAngle(cs, name + ".pose.leftLeg"));
             armorStand.setRightLegPose(loadEulerAngle(cs, name + ".pose.rightLeg"));
-
         }
 
     }
+
 
     public static ArrayList<String> getArmorStandsWithAnimation() {
 
