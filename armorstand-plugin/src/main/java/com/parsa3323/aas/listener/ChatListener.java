@@ -106,7 +106,6 @@ public class ChatListener implements Listener {
             }
 
             TypesConfig.get().set( itemName + ".Arms", armorStand.hasArms());
-            TypesConfig.get().set(itemName + ".Gravity", armorStand.hasGravity());
             TypesConfig.get().set(itemName + ".BasePlate", armorStand.hasBasePlate());
             TypesConfig.get().set(itemName + ".CustomName", armorStand.getCustomName());
             TypesConfig.get().set(itemName + ".isCustomNameVisible", armorStand.isCustomNameVisible());

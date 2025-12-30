@@ -50,7 +50,6 @@ public class SettingsManager extends PaginatedMenu {
         this.isFromSettings = isFromSettings;
         this.armorStand = armorStand;
         settingsOptions.add(new ArmsOption());
-        settingsOptions.add(new GravityOption());
         settingsOptions.add(new CustomNameOption());
         settingsOptions.add(new BasePlateOption());
         settingsOptions.add(new CustomNameVisibleOption());
