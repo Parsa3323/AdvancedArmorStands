@@ -19,6 +19,7 @@
 package com.parsa3323.aas.options;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.ai.manager.AiSettingsManager;
 import com.parsa3323.aas.options.manager.SettingsOption;
@@ -84,7 +85,7 @@ public class AiOption extends SettingsOption {
     public void click(InventoryClickEvent e, ArmorStand armorStand) {
         Player p = (Player) e.getWhoClicked();
         if (!AdvancedArmorStands.isIsAiEnabled()) {
-
+            p.playSound(p.getLocation(), XSound.BLOCK_NOTE_BLOCK_BASS.parseSound(), 0.8f, 0.5f);
             return;
         }
         AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(p), armorStand);
