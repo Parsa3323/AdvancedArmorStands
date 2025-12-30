@@ -101,13 +101,14 @@ The `types.yml` file is the configuration for types:
 
 ```yaml
 default: # <====== Name of the type
-  Arms: true # <====== Has arms?
-  Gravity: false # <====== Has gravity?
-  BasePlate: false # <====== Does it have a baseplate?
-  CustomName: '&cMade with aas' # <====== Custom name for the entity
+  arms: true # <====== Has arms?
+  basePlate: false # <====== Does it have a baseplate?
+  customName: '&cMade with aas' # <====== Custom name for the entity
   isCustomNameVisible: false # <====== Should the custom name be visible?
+  isVisible: true # <====== Is visible?
+  isSmall: false # <====== Is small?
   itemInHandMaterial: WOOD_SWORD # <====== Item held in the hand
-  HeadPos: {} # <====== Head position (empty by default)
+  headPos: {} # <====== Head position (empty by default)
   rightArmPose: # <====== Right arm pose
     x: -45
     y: 0
