@@ -134,7 +134,7 @@ public class LoadCommand extends SubCommand {
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
         List<String> list = new ArrayList<>(ArmorStandUtils.getArmorStandList());
-        list.add("all");
+        list.add("--all");
         return list;
     }
 
