@@ -77,7 +77,7 @@ public class CommandManager implements CommandExecutor {
                             try {
                                 page = Integer.parseInt(args[1]);
                             } catch (NumberFormatException e) {
-                                player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Error: " + ChatColor.RED + "Please enter a valid page number.");
+                                player.sendMessage(ChatColor.RED + "Please enter a valid page number.");
                                 return true;
                             }
                         }
@@ -91,7 +91,7 @@ public class CommandManager implements CommandExecutor {
 
                         int totalPages = (int) Math.ceil((double) visibleCommands.size() / COMMANDS_PER_PAGE);
                         if (page < 1 || page > totalPages) {
-                            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Invalid Page: " + ChatColor.RED + "Please choose a page between " + ChatColor.YELLOW + "1" + ChatColor.RED + " and " + ChatColor.YELLOW + totalPages + ChatColor.RED + ".");
+                            player.sendMessage(ChatColor.RED  + "Invalid Page, Please choose a page between " + ChatColor.YELLOW + "1" + ChatColor.RED + " and " + ChatColor.YELLOW + totalPages + ChatColor.RED + ".");
                             return true;
                         }
 
@@ -183,7 +183,7 @@ public class CommandManager implements CommandExecutor {
                                 if (player.hasPermission("advanced-armorstands.admin")) {
                                     getSubCommands().get(i).perform(player, args);
                                 } else {
-                                    player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Access Denied: " + ChatColor.RED + "You don't have permission to use this command!");
+                                    player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
                                 }
                             } else {
                                 getSubCommands().get(i).perform(player, args);
@@ -193,9 +193,9 @@ public class CommandManager implements CommandExecutor {
                     if (count == 0) {
                         String suggestion = CommandUtils.getClosestCommand(args[0], getSubCommands());
                         if (suggestion != null) {
-                            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand. Did you mean '/as " + suggestion + "'?");
+                            player.sendMessage(ChatColor.RED + "Command: '" + args[0] + "' is not a valid subcommand. Did you mean '/as " + suggestion + "'?");
                         } else {
-                            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
+                            player.sendMessage(ChatColor.RED + "Command: '" + args[0] + "' is not a valid subcommand.");
                         }
                     }
                 } else if (args.length == 0) {

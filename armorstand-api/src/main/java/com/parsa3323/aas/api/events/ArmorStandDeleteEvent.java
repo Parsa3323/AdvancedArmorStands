@@ -25,7 +25,6 @@ import org.bukkit.event.HandlerList;
 
 public class ArmorStandDeleteEvent extends Event {
 
-
     private static final HandlerList handlers = new HandlerList();
 
     private boolean cancelled;
