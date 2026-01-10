@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.commands;
 
+import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
@@ -61,7 +62,11 @@ public class DeleteCommand extends SubCommand {
 
         if (args[1].equalsIgnoreCase("--all")) {
             for (String name : ArmorStandUtils.getArmorStandList()) {
-                ArmorStandUtils.deleteArmorStand(name, player);
+                try {
+                    ArmorStandUtils.deleteArmorStandNoLog(name);
+                } catch (ArmorStandNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 player.sendMessage(ChatColor.GREEN + "Deleted all ArmorStands");
             }
             return;
@@ -77,7 +82,7 @@ public class DeleteCommand extends SubCommand {
             return;
         }
 
-        ArmorStandUtils.deleteArmorStand(args[1], player);
+        player.sendMessage(ChatColor.GREEN + "Deleted ");
 
     }
 
