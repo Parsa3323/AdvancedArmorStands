@@ -59,6 +59,14 @@ public class DeleteCommand extends SubCommand {
             return;
         }
 
+        if (args[1].equalsIgnoreCase("--all")) {
+            for (String name : ArmorStandUtils.getArmorStandList()) {
+                ArmorStandUtils.deleteArmorStand(name, player);
+                player.sendMessage(ChatColor.GREEN + "Deleted all ArmorStands");
+            }
+            return;
+        }
+
         if (!ArmorStandUtils.exists(args[1])) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
@@ -75,7 +83,9 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        return ArmorStandUtils.getArmorStandList();
+        List<String> list = new ArrayList<>(ArmorStandUtils.getArmorStandList());
+        list.add("--all");
+        return list;
 
     }
 

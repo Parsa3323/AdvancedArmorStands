@@ -71,6 +71,31 @@ public class ListCommand extends SubCommand {
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             player.sendMessage("");
 
+            TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "Delete All" + ChatColor.DARK_RED + "]");
+            TextComponent loadAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "Load All" + ChatColor.DARK_RED + "]");
+
+            deleteAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                    new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete All ArmorStands")
+                            .append("\n" + ChatColor.GRAY + "This action cannot be undone!")
+                            .append("\n" + " ")
+                            .append("\n" + ChatColor.YELLOW + "Click to delete all ArmorStands ")
+                            .create()));
+            deleteAll.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as delete --all"));
+
+            loadAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                    new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Load AmorStands")
+                            .append("\n" + ChatColor.GRAY + "Load all ArmorStands")
+                            .append("\n" + " ")
+                            .append("\n" + ChatColor.YELLOW + "Click to load all ArmorStands")
+                            .create()));
+            loadAll.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as load --all"));
+
+            if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
+                player.spigot().sendMessage(deleteAll, loadAll);
+            } else {
+                player.spigot().sendMessage(deleteAll);
+            }
+
             int index = 1;
             for (String name : armorStandList) {
                 TextComponent indexComponent = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.GRAY + index + ChatColor.DARK_GRAY + "] ");
