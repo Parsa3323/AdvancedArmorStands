@@ -42,7 +42,7 @@ public class SmallOption extends SettingsOption {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "small size for this armor stand ");
+        lore.add(ChatColor.GRAY + "small size for this ArmorStand");
         lore.add("");
         lore.add((armorStand.isSmall()) ? ChatColor.YELLOW + "✔ Is small" : ChatColor.RED + "✘ isn't small");
 

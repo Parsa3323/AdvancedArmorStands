@@ -42,7 +42,7 @@ public class VisibleOption extends SettingsOption {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "visibility for this armor stand ");
+        lore.add(ChatColor.GRAY + "visibility for this ArmorStand");
         lore.add("");
         lore.add((armorStand.isVisible()) ? ChatColor.YELLOW + "✔ Is visible" : ChatColor.RED + "✘ isn't visible");
 

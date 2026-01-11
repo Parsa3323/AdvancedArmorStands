@@ -42,7 +42,7 @@ public class GlowingOption extends SettingsOption {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "glowing this armor stand ");
+        lore.add(ChatColor.GRAY + "glowing this ArmorStand");
         lore.add("");
         lore.add((VersionSupportUtil.getVersionSupport().isGlowing(armorStand)) ? ChatColor.YELLOW + "✔ Is glowing" : ChatColor.RED + "✘ Isn't glowing");
 
