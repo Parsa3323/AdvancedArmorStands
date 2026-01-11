@@ -43,7 +43,7 @@ public class HeadCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Gets a player's head";
+        return "Get a player's head";
     }
 
     @Override
