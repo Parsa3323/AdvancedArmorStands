@@ -42,7 +42,7 @@ public class SaveItem extends InventoryItem {
     public ItemStack getItemStack() {
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Click to save the armor stand setting ");
+        lore.add(ChatColor.GRAY + "Click to save the ArmorStand setting ");
         lore.add(ChatColor.GRAY + "as a type, that you can use it later");
         lore.add("");
         lore.add(ColorUtils.boldAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
