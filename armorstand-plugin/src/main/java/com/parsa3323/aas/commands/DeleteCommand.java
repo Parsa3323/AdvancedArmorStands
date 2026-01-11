@@ -83,8 +83,7 @@ public class DeleteCommand extends SubCommand {
             return;
         }
 
-        player.sendMessage(ChatColor.GREEN + "Deleted ArmorStand: " + args[1]);
-
+        ArmorStandUtils.deleteArmorStand(args[1], player);
     }
 
     @Override
