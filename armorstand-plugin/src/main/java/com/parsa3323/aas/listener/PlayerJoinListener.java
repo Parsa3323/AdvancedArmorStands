@@ -39,13 +39,13 @@ public class PlayerJoinListener implements Listener {
         Bukkit.getScheduler().runTaskLaterAsynchronously(AdvancedArmorStands.plugin, () -> {
             if (PlayerManager.getByBukkit(e.getPlayer()).isAdmin()) {
 
-                AdvancedArmorStands.debug(e.getPlayer() + " is an advanced armor stand admin");
+                AdvancedArmorStands.debug(e.getPlayer() + " is an AdvancedArmorStand admin");
                 AdvancedArmorStands.debug("Total: " + ArmorStandUtils.getTotalArmorStands() + ", Found: " + ArmorStandUtils.getLoadedArmorStands());
 
                 if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
                     int unloaded = ArmorStandUtils.getTotalArmorStands() - ArmorStandUtils.getLoadedArmorStands();
 
-                    e.getPlayer().sendMessage(ChatColor.RED + "It looks like " + unloaded + " armor stands haven't been loaded by the world generator. To fix this, enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
+                    e.getPlayer().sendMessage(ChatColor.RED + "It looks like " + unloaded + " ArmorStands haven't been loaded by the world generator. To fix this, enable 'auto-load-armor-stands' in the config to automatically load all ArmorStands.");
 
                 }
 
