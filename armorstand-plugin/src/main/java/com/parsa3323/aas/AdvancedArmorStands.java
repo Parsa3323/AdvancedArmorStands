@@ -207,16 +207,16 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ActionConfig.get().options().copyDefaults(true);
         ActionConfig.save();
 
-        TypesConfig.get().addDefault("default.arms", true); // TODO: add
-        TypesConfig.get().addDefault("default.basePlate", false); // TODO: add
-        TypesConfig.get().addDefault("default.customName", "&7Made with &6&lA&e&ld&6&lv&e&la&6&ln&e&lc&6&le&e&ld&6&lA&e&lr&6&lm&e&lo&6&lr&e&lS&6&lt&e&la&6&ln&e&ld&6&ls"); // TODO: add
+        TypesConfig.get().addDefault("default.arms", true);
+        TypesConfig.get().addDefault("default.basePlate", false);
+        TypesConfig.get().addDefault("default.customName", "&7Made with &6&lA&e&ld&6&lv&e&la&6&ln&e&lc&6&le&e&ld&6&lA&e&lr&6&lm&e&lo&6&lr&e&lS&6&lt&e&la&6&ln&e&ld&6&ls");
         TypesConfig.get().addDefault("default.isCustomNameVisible", false);
-        TypesConfig.get().addDefault("default.isVisible", true); // TODO: add
-        TypesConfig.get().addDefault("default.isSmall", false);  // TODO: add
+        TypesConfig.get().addDefault("default.isVisible", true);
+        TypesConfig.get().addDefault("default.isSmall", false);
         TypesConfig.get().addDefault("default.itemInHandMaterial", XMaterial.WOODEN_SWORD.parseMaterial().name());
-        TypesConfig.get().addDefault("default.headPos.x", null); // TODO: add
-        TypesConfig.get().addDefault("default.headPos.y", null); // TODO: add
-        TypesConfig.get().addDefault("default.headPos.z", null); // TODO: add
+        TypesConfig.get().addDefault("default.headPos.x", null);
+        TypesConfig.get().addDefault("default.headPos.y", null);
+        TypesConfig.get().addDefault("default.headPos.z", null);
         TypesConfig.get().addDefault("default.rightArmPose.x", -45);
         TypesConfig.get().addDefault("default.rightArmPose.y", 0);
         TypesConfig.get().addDefault("default.rightArmPose.z", 0);
