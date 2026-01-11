@@ -67,7 +67,7 @@ public class TeleportCommand extends SubCommand {
                 return;
             }
             if (player.getGameMode() != GameMode.CREATIVE) {
-                player.sendMessage(ChatColor.RED + "This armor stand is not on the ground. Are you sure you want to teleport to it?");
+                player.sendMessage(ChatColor.RED + "This ArmorStand is not on the ground. Are you sure you want to teleport to it?");
                 player.sendMessage(ChatColor.RED + "Use '/as teleport " + args[1] + " --force' to force teleport");
                 return;
             }
