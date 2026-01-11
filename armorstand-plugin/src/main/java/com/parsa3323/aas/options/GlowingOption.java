@@ -19,6 +19,8 @@
 package com.parsa3323.aas.options;
 
 import com.parsa3323.aas.options.manager.SettingsOption;
+import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.IconUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -44,7 +46,7 @@ public class GlowingOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "glowing this ArmorStand");
         lore.add("");
-        lore.add((VersionSupportUtil.getVersionSupport().isGlowing(armorStand)) ? ChatColor.YELLOW + "✔ Is glowing" : ChatColor.RED + "✘ Isn't glowing");
+        lore.add((VersionSupportUtil.getVersionSupport().isGlowing(armorStand)) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK() + ChatColor.YELLOW + " Is glowing" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS() + ChatColor.RED + " Isn't glowing");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
