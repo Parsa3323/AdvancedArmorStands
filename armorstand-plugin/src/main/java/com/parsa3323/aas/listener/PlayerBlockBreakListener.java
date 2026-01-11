@@ -70,7 +70,7 @@ public class PlayerBlockBreakListener implements Listener {
 
             MoveTool.moveList.remove(e.getPlayer().getUniqueId());
 
-            player.sendMessage(ChatColor.GREEN + "Successfully moved the armorstand.");
+            player.sendMessage(ChatColor.GREEN + "Successfully moved the ArmorStand.");
         }
 
         if (ArmorStandSelectionCache.isIsInEditSession(e.getPlayer())) {
