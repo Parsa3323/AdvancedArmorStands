@@ -53,7 +53,7 @@ public class PlayerJoinListener implements Listener {
                     int totalErrors = IssueUtils.getTotalWarnings() + IssueUtils.getTotalErrors();
 
                     e.getPlayer().sendMessage(ChatColor.YELLOW +
-                            "The plugin has encountered " + totalErrors +
+                            "AdvancedArmorStands has encountered " + totalErrors +
                             " error(s)/warning(s) this session. Check the log file for details.");
                 }
 
