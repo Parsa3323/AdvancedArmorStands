@@ -77,7 +77,7 @@ public class PlayerInteractListener implements Listener {
                             if (count < 3) {
                                 selectCount.put(playerId, (ArmorStand) e.getRightClicked());
                                 interactionCount.put(playerId, count);
-                                player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced armor stands.");
+                                player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced ArmorStands.");
                             } else if (count == 3) {
                                 int randomSuffix = new Random().nextInt(900) + 100;
                                 String name = "SavedStand" + randomSuffix;
@@ -92,7 +92,7 @@ public class PlayerInteractListener implements Listener {
                                     return;
                                 }
 
-                                player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "Armor stand saved as " + name + "!");
+                                player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "ArmorStand saved as " + name + "!");
                                 ArmorStandUtils.saveArmorStand(name, stand);
 
                                 interactionCount.remove(playerId);
