@@ -71,8 +71,8 @@ public class ListCommand extends SubCommand {
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             player.sendMessage("");
 
-            TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "Delete All" + ChatColor.DARK_RED + "]");
-            TextComponent loadAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "Load All" + ChatColor.DARK_RED + "]");
+            TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "DL All" + ChatColor.DARK_RED + "]");
+            TextComponent loadAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "LD All" + ChatColor.DARK_RED + "]");
 
             deleteAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                     new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete All ArmorStands")
@@ -90,11 +90,17 @@ public class ListCommand extends SubCommand {
                             .create()));
             loadAll.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as load --all"));
 
-            if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
-                player.spigot().sendMessage(deleteAll, loadAll);
-            } else {
-                player.spigot().sendMessage(deleteAll);
+            if (!ArmorStandUtils.getArmorStandList().isEmpty()){
+                if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
+                    player.spigot().sendMessage(deleteAll, loadAll);
+                } else {
+                    player.spigot().sendMessage(deleteAll);
+                }
+
+                player.sendMessage("");
             }
+
+
 
             int index = 1;
             for (String name : armorStandList) {
