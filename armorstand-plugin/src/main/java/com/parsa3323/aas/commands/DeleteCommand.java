@@ -44,7 +44,7 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Delete an armor stand";
+        return "Delete an ArmorStand";
     }
 
 
@@ -75,9 +75,9 @@ public class DeleteCommand extends SubCommand {
         if (!ArmorStandUtils.exists(args[1])) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
             }
             return;
         }
