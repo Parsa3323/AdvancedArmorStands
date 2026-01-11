@@ -39,7 +39,7 @@ public class TeleportTool extends ToolsOption {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Teleport to the");
-        lore.add(ChatColor.GRAY + "armor stand's location");
+        lore.add(ChatColor.GRAY + "ArmorStand's location");
         lore.add("");
         lore.add(ChatColor.YELLOW + "Click to teleport");
 
