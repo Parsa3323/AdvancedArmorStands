@@ -23,6 +23,8 @@ import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.ai.manager.AiSettingsManager;
 import com.parsa3323.aas.options.manager.SettingsOption;
+import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.IconUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -71,7 +73,7 @@ public class AiOption extends SettingsOption {
             lore.add(ChatColor.GRAY + "by setting your API key");
             lore.add(ChatColor.GRAY + "in the config.");
             lore.add("");
-            lore.add(ChatColor.RED + "Not Enabled");
+            lore.add(ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS() + ChatColor.RED + " Not Enabled");
 
 
             itemMeta.setLore(lore);
