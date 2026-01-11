@@ -51,7 +51,7 @@ public class TellCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Talk to an armorstand";
+        return "Talk to an ArmorStand";
     }
 
     @Override
@@ -72,7 +72,7 @@ public class TellCommand extends SubCommand {
         String name = args[1];
 
         if (!ArmorStandUtils.hasAi(name)) {
-            player.sendMessage(ChatColor.RED + "This armorstand doesn't have AI enabled");
+            player.sendMessage(ChatColor.RED + "This ArmorStand doesn't have AI enabled");
             return;
         }
 

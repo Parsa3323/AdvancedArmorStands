@@ -42,7 +42,7 @@ public class TeleportCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Teleport to armor stand";
+        return "Teleport to an ArmorStand";
     }
 
     @Override
