@@ -75,13 +75,13 @@ public class ArmorStandUtils {
         String name = getNameByArmorStand(armorStand);
         ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands." + name);
         if (cs == null) {
-            AdvancedArmorStands.debug("No config section found for armorstand: " + name);
+            AdvancedArmorStands.debug("No config section found for ArmorStand: " + name);
             return;
         }
 
         World world = Bukkit.getWorld(cs.getString("World"));
         if (world == null) {
-            AdvancedArmorStands.debug("World not found for armorstand: " + name);
+            AdvancedArmorStands.debug("World not found for ArmorStand: " + name);
             return;
         }
 
@@ -199,7 +199,7 @@ public class ArmorStandUtils {
 
         ConfigurationSection section = config.getConfigurationSection("armorstands");
         if (section == null) {
-            AdvancedArmorStands.debug("'armorstands' section is missing in ArmorStands.yml!");
+            AdvancedArmorStands.debug("'ArmorStands' section is missing in ArmorStands.yml!");
             return new ArrayList<>();
         }
         return new ArrayList<>(section.getKeys(false));
@@ -288,12 +288,12 @@ public class ArmorStandUtils {
 
         FileConfiguration config = ArmorStandsConfig.get();
         if (!config.contains("armorstands")) {
-            AdvancedArmorStands.debug("Config does not contain 'armorstands' section.");
+            AdvancedArmorStands.debug("Config does not contain 'ArmorStands' section.");
             return false;
         }
 
         Set<String> keys = config.getConfigurationSection("armorstands").getKeys(false);
-        AdvancedArmorStands.debug("Found " + keys.size() + " armor stands in config.");
+        AdvancedArmorStands.debug("Found " + keys.size() + " ArmorStands in config.");
 
         for (String key : keys) {
             String path = "armorstands." + key;
@@ -302,7 +302,7 @@ public class ArmorStandUtils {
             double z = config.getDouble(path + ".Z");
             String worldName = config.getString(path + ".World");
 
-            AdvancedArmorStands.debug("Checking armor stand: " + key + " at (" + x + ", " + y + ", " + z + ") in world " + worldName);
+            AdvancedArmorStands.debug("Checking ArmorStand: " + key + " at (" + x + ", " + y + ", " + z + ") in world " + worldName);
 
             if (worldName == null) {
                 AdvancedArmorStands.debug("[ERROR] Missing world name for " + key + " in config!");
@@ -323,12 +323,12 @@ public class ArmorStandUtils {
             AdvancedArmorStands.debug("Distance squared: " + distance);
 
             if (distance < 0.01) {
-                AdvancedArmorStands.debug("MATCH FOUND! Entity is a configured armor stand.");
+                AdvancedArmorStands.debug("MATCH FOUND! Entity is a configured ArmorStand.");
                 return true;
             }
         }
 
-        AdvancedArmorStands.debug("No match found. Entity is NOT a configured armor stand.");
+        AdvancedArmorStands.debug("No match found. Entity is NOT a configured ArmorStand.");
         return false;
     }
 
@@ -463,7 +463,7 @@ public class ArmorStandUtils {
 
         for (String key : getArmorStandList()) {
 
-            AdvancedArmorStands.debug("Checking armor stand key: " + key);
+            AdvancedArmorStands.debug("Checking ArmorStand key: " + key);
 
             double x = cs.getDouble(key + ".X");
 
@@ -514,19 +514,19 @@ public class ArmorStandUtils {
             }
 
             if (!foundHere) {
-                AdvancedArmorStands.debug("No armor stand found near location: " + loc);
+                AdvancedArmorStands.debug("No ArmorStands found near location: " + loc);
             }
 
 
         }
 
-        AdvancedArmorStands.debug("Total armor stands expected: " + totalArmorStands + ", Found armor stands: " + foundArmorStands);
+        AdvancedArmorStands.debug("Total ArmorStands expected: " + totalArmorStands + ", Found ArmorStands: " + foundArmorStands);
         setLoadedArmorStands(foundArmorStands);
 
         if (totalArmorStands > foundArmorStands) {
 
-            AdvancedArmorStands.warn("It looks like some armor stands haven't been loaded by the world generator. To fix this, " +
-                    "enable 'auto-load-armor-stands' in the config to automatically load all armor stands.");
+            AdvancedArmorStands.warn("It looks like some ArmorStands haven't been loaded by the world generator. To fix this, " +
+                    "enable 'auto-load-armor-stands' in the config to automatically load all ArmorStands.");
 
 
         }
