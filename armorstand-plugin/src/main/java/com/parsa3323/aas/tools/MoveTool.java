@@ -43,7 +43,7 @@ public class MoveTool extends ToolsOption {
         itemMeta.setDisplayName(ChatColor.YELLOW + "Move");
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Move the armor stand");
+        lore.add(ChatColor.GRAY + "Move the ArmorStand");
         lore.add(ChatColor.GRAY + "to where you want it");
 
         lore.add("");
@@ -65,7 +65,7 @@ public class MoveTool extends ToolsOption {
         }
 
         moveList.put(p.getUniqueId(), armorStand);
-        p.sendMessage(ChatColor.GREEN + "Break the block you want the armor stand to be on");
+        p.sendMessage(ChatColor.GREEN + "Break the block you want the ArmorStand to be on");
         p.closeInventory();
     }
 }
