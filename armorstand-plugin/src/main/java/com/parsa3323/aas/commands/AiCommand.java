@@ -44,9 +44,9 @@ public class AiCommand extends SubCommand {
 
         String exampleName = (ArmorStandUtils.getArmorStandList().get(0) == null ? "test" : ArmorStandUtils.getArmorStandList().get(0));
 
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as ai" + " make armor stand: " + exampleName + " standing");
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as ai" + " please delete armor stand '" + exampleName + "'");
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as ai" + " please create an armor stand named: '" + exampleName + "'");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as ai" + " make ArmorStand: " + exampleName + " standing");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as ai" + " please delete ArmorStand '" + exampleName + "'");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as ai" + " please create an ArmorStand named: '" + exampleName + "'");
         return lore;
     }
     @Override
