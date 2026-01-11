@@ -50,7 +50,7 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public String getSyntax() {
-        return "/as delete <name>";
+        return "/as delete <name|--all>";
     }
 
     @Override
