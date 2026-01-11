@@ -193,9 +193,9 @@ public class CommandManager implements CommandExecutor {
                     if (count == 0) {
                         String suggestion = CommandUtils.getClosestCommand(args[0], getSubCommands());
                         if (suggestion != null) {
-                            player.sendMessage(ChatColor.RED + "Command: '" + args[0] + "' is not a valid subcommand. Did you mean '/as " + suggestion + "'?");
+                            player.sendMessage(ChatColor.RED + "Command '" + args[0] + "' is not a valid subcommand. Did you mean '" + suggestion + "'?");
                         } else {
-                            player.sendMessage(ChatColor.RED + "Command: '" + args[0] + "' is not a valid subcommand.");
+                            player.sendMessage(ChatColor.RED + "Command '" + args[0] + "' is not a valid subcommand.");
                         }
                     }
                 } else if (args.length == 0) {
