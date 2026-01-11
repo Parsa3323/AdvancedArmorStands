@@ -51,7 +51,7 @@ public class CreateCommand extends SubCommand implements Listener {
 
     @Override
     public String getDescription() {
-        return "Create an armor stand";
+        return "Create an ArmorStand";
     }
 
     @Override
@@ -147,9 +147,9 @@ public class CreateCommand extends SubCommand implements Listener {
             ArmorStandUtils.saveArmorStand(armorStandName, armorStand);
 
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
-            player.sendMessage(ChatColor.GREEN + "Successfully created custom armor stand: " + armorStandName);
+            player.sendMessage(ChatColor.GREEN + "Successfully created custom ArmorStand: " + armorStandName);
             if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
-                player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
+                player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an ArmorStand to open its settings?");
                 ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
             }
 
@@ -176,9 +176,9 @@ public class CreateCommand extends SubCommand implements Listener {
             ArmorStandUtils.saveArmorStand(armorStandName, armorStand);
 
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
-            player.sendMessage(ChatColor.GREEN + "Successfully created custom armor stand: " + armorStandName);
+            player.sendMessage(ChatColor.GREEN + "Successfully created custom ArmorStand: " + armorStandName);
             if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
-                player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
+                player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an ArmorStand to open its settings?");
                 ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
             }
 
@@ -268,9 +268,9 @@ public class CreateCommand extends SubCommand implements Listener {
 
 
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
-        player.sendMessage(ChatColor.GREEN + "Successfully created an armor stand");
+        player.sendMessage(ChatColor.GREEN + "Successfully created an ArmorStand");
         if (ArmorStandUtils.isIsFirstTimeCreatingArmorStand()) {
-            player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an armorstand to open its settings?");
+            player.sendMessage(ChatColor.YELLOW + "Did you know you can shift-right click on an ArmorStand to open its settings?");
             ArmorStandUtils.setIsFirstTimeCreatingArmorStand(false);
         }
 
