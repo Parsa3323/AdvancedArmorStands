@@ -59,7 +59,7 @@ public class LoadCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Loads an as if its not loaded";
+        return "Loads an ArmorStand";
     }
 
     @Override
@@ -92,9 +92,9 @@ public class LoadCommand extends SubCommand {
             }
 
             if (loaded == 0) {
-                player.sendMessage(ChatColor.YELLOW + "No unloaded armor stands found.");
+                player.sendMessage(ChatColor.YELLOW + "No unloaded ArmorStands found.");
             } else {
-                player.sendMessage(ChatColor.GREEN + "Loaded " + loaded + " armor stands.");
+                player.sendMessage(ChatColor.GREEN + "Loaded " + loaded + " ArmorStands.");
                 SoundUtils.playSuccessSound(player);
             }
             return;
@@ -103,9 +103,9 @@ public class LoadCommand extends SubCommand {
         if (!ArmorStandsConfig.get().contains("armorstands." + args[1])) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
             }
             return;
         }
@@ -113,16 +113,16 @@ public class LoadCommand extends SubCommand {
         ArmorStand as = ArmorStandUtils.getArmorStandByName(args[1]);
 
         if (ArmorStandUtils.isLoaded(as)) {
-            player.sendMessage(ChatColor.RED + "This armor stand is already loaded");
+            player.sendMessage(ChatColor.RED + "This ArmorStand is already loaded");
             return;
         }
 
         try {
             ArmorStandUtils.loadArmorStand(args[1]);
-            player.sendMessage(ChatColor.GREEN + "Successfully loaded armor stand '" + args[1] + "'");
+            player.sendMessage(ChatColor.GREEN + "Successfully loaded ArmorStand '" + args[1] + "'");
             SoundUtils.playSuccessSound(player);
         } catch (ArmorStandLoadException e) {
-            player.sendMessage(ChatColor.RED + "Failed to load the armor stand check console for more details!");
+            player.sendMessage(ChatColor.RED + "Failed to load the ArmorStand check console for more details!");
             AdvancedArmorStands.error("Error loading an armorstand: " + e.getMessage(), true);
             e.printStackTrace();
             SoundUtils.playErrorSound(player);
