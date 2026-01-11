@@ -45,7 +45,7 @@ public class ListCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Shows a list of armor stands";
+        return "Shows a list of ArmorStands";
     }
 
     @Override
@@ -110,7 +110,7 @@ public class ListCommand extends SubCommand {
                         new ComponentBuilder(ChatColor.YELLOW  + "ArmorStand: " + name)
                                 .append("\n" + ChatColor.GRAY + "Click buttons to interact")
                                 .append(!ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name))
-                                        ? "\n" + ChatColor.RED + "This armor stand is not loaded, enable auto load in config"
+                                        ? "\n" + ChatColor.RED + "This ArmorStand is not loaded, enable auto load in config"
                                         : "")
                                 .create()));
 
