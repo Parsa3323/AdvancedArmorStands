@@ -38,7 +38,7 @@ public class DeleteTool extends ToolsOption {
         itemMeta.setDisplayName(ChatColor.YELLOW + "Delete");
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Delete this armor stand");
+        lore.add(ChatColor.GRAY + "Delete this ArmorStand");
         lore.add(ChatColor.GRAY + "this action cannot be undone");
         lore.add("");
         lore.add(ChatColor.YELLOW + "Click to delete");
