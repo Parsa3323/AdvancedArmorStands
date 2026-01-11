@@ -70,7 +70,7 @@ public class ChatListener implements Listener {
                     PlaceholderAPI.setPlaceholders(e.getPlayer(), ChatColor.translateAlternateColorCodes('&', e.getMessage())) :
                     ChatColor.translateAlternateColorCodes('&', e.getMessage()));
 
-            e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set armor stand's name to '" + e.getMessage() + "' ");
+            e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set ArmorStand's name to '" + e.getMessage() + "' ");
 
             if (!VersionSupportUtil.isHigherThan("1.8")) {
                 SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
@@ -131,7 +131,7 @@ public class ChatListener implements Listener {
             TypesConfig.save();
             TypesConfig.reload();
 
-            p.sendMessage(ChatColor.GREEN + "Created type '" + itemName + "' with this armor stand's properties");
+            p.sendMessage(ChatColor.GREEN + "Created type '" + itemName + "' with this ArmorStand's properties");
             map.remove(p.getUniqueId());
 
             return;
