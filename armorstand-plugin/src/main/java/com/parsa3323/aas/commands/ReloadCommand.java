@@ -55,7 +55,7 @@ public class ReloadCommand extends SubCommand {
 
         try {
             PluginUtils.reload();
-            player.sendMessage(ChatColor.GREEN + "✔ Successfully reloaded plugin's configs");
+            player.sendMessage(ChatColor.GREEN + "Successfully reloaded plugin's configs");
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         } catch (Exception e) {
             player.sendMessage(ChatColor.RED + "Error while reloading plugin check the console for more details");
