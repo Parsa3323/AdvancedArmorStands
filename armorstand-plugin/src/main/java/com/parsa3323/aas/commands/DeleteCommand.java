@@ -68,8 +68,8 @@ public class DeleteCommand extends SubCommand {
                 } catch (ArmorStandNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-                player.sendMessage(ChatColor.GREEN + "Deleted all ArmorStands");
             }
+            player.sendMessage(ChatColor.GREEN + "Deleted all ArmorStands");
             return;
         }
 
