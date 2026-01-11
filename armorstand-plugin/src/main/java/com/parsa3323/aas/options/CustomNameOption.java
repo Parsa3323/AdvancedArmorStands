@@ -51,7 +51,7 @@ public class CustomNameOption extends SettingsOption {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Set a custom name for");
-        lore.add(ChatColor.GRAY + "this armor stand ");
+        lore.add(ChatColor.GRAY + "this ArmorStand");
         lore.add("");
         if (currentName != null) {
             String[] words = ChatColor.stripColor(currentName).split("\\s+");
