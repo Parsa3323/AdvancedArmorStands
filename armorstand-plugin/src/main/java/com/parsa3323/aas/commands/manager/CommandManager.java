@@ -156,7 +156,7 @@ public class CommandManager implements CommandExecutor {
                                 case "accept":
                                     ArmorStandUtils.removePose(player);
                                     API.previewMap.remove(player.getUniqueId());
-                                    player.sendMessage(ChatColor.GREEN + "Accepted this position for this armor stand.");
+                                    player.sendMessage(ChatColor.GREEN + "Accepted this position for this ArmorStand.");
                                     break;
                                 case "deny":
                                     try {
