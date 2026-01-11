@@ -69,7 +69,6 @@ public class ListCommand extends SubCommand {
             player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "         * Saved ArmorStands *");
             player.sendMessage(ChatColor.YELLOW + "           Found " + ColorUtils.boldAndColor(ChatColor.YELLOW) + armorStandList.size() + ChatColor.RESET + ChatColor.YELLOW + " saved ArmorStand" + (armorStandList.size() == 1 ? "" : "s"));
 
-            TextComponent space = new TextComponent("              ");
             TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "DL All" + ChatColor.DARK_RED + "]");
             TextComponent loadAll = new TextComponent(ChatColor.DARK_GREEN + " [" + ColorUtils.boldAndColor(ChatColor.GREEN) + "LD All" + ChatColor.DARK_GREEN + "]");
 
@@ -91,9 +90,9 @@ public class ListCommand extends SubCommand {
 
             if (!ArmorStandUtils.getArmorStandList().isEmpty()){
                 if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
-                    player.spigot().sendMessage(space, deleteAll, loadAll);
+                    player.spigot().sendMessage(new TextComponent("              "), deleteAll, loadAll);
                 } else {
-                    player.spigot().sendMessage(space, deleteAll);
+                    player.spigot().sendMessage(new TextComponent("                     "), deleteAll);
                 }
 
             }
