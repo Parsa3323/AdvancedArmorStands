@@ -64,9 +64,9 @@ public class RenameCommand extends SubCommand {
         if (!ArmorStandsConfig.get().contains("armorstands." + oldName)) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
             }
             return;
         }
@@ -90,7 +90,7 @@ public class RenameCommand extends SubCommand {
             ArmorStandsConfig.get().set("armorstands." + oldName, null);
             ArmorStandsConfig.save();
 
-            player.sendMessage(ChatColor.GREEN + "Renamed armor stand from '" + oldName + "' to '" + newName + "'");
+            player.sendMessage(ChatColor.GREEN + "Renamed ArmorStand from '" + oldName + "' to '" + newName + "'");
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         }
 
