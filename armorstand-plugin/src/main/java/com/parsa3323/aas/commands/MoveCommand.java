@@ -47,7 +47,7 @@ public class MoveCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Moves armor stand to your location";
+        return "Moves an ArmorStand to your location";
     }
 
     @Override
@@ -70,9 +70,9 @@ public class MoveCommand extends SubCommand {
         if (!config.contains(path)) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
             }
             return;
         }
