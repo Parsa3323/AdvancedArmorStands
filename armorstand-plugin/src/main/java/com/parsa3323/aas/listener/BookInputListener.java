@@ -41,7 +41,7 @@ public class BookInputListener implements Listener {
         InventoryUtils.restore(e.getPlayer());
         AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(e.getPlayer()), waiting.get(p.getUniqueId()));
         aiSettingsManager.open();
-        p.sendMessage(ChatColor.GREEN + "Successfully updated armor stand's instructions");
+        p.sendMessage(ChatColor.GREEN + "Successfully updated ArmorStand's instructions");
 
         waiting.remove(p.getUniqueId());
     }
