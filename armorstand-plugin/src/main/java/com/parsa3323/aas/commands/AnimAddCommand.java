@@ -42,7 +42,7 @@ public class AnimAddCommand extends SubCommand {
     public ArrayList<String> getExampleLore() {
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation add " + TextUtils.getFirstContent(AnimationUtils.getAnimationsList(), "defualt (example)") + " " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "exampleStand"
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as animation add " + TextUtils.getFirstContent(AnimationUtils.getAnimationsList(), "default (example)") + " " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "exampleStand"
         ));
         return lore;
     }
