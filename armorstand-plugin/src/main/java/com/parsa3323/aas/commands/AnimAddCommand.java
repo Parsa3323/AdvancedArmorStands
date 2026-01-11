@@ -73,9 +73,9 @@ public class AnimAddCommand extends SubCommand {
         if (configurationSection == null) {
             String suggestion = getClosest(args[2], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
             }
             return;
         }
@@ -100,7 +100,7 @@ public class AnimAddCommand extends SubCommand {
         }
 
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
-        player.sendMessage(ChatColor.GREEN + "Successfully set the animation " + args[2] + " to armor stand " + args[3]);
+        player.sendMessage(ChatColor.GREEN + "Successfully set the animation " + args[2] + " to ArmorStand " + args[3]);
     }
 
     @Override
