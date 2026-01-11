@@ -76,7 +76,7 @@ public class AnimCreateCommand extends SubCommand {
         }
 
         if (ArmorStandUtils.hasAnimation(as)) {
-            player.sendMessage(ChatColor.RED + "Can't open the editor on an armor stand that has animation");
+            player.sendMessage(ChatColor.RED + "Can't open the editor on an ArmorStand that has animation");
             return;
         }
 
@@ -97,7 +97,7 @@ public class AnimCreateCommand extends SubCommand {
             InventoryUtils.setGameMode(player, player.getGameMode());
             player.setGameMode(GameMode.CREATIVE);
             player.sendMessage(
-                    ChatColor.GREEN + "Your gamemode has been temporarily switched to CREATIVE, " +
+                    ChatColor.GREEN + "Your GameMode has been temporarily switched to CREATIVE, " +
                             "because edit sessions do not support ADVENTURE mode. " +
                             "It will be restored automatically when you exit."
             );
