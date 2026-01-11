@@ -19,6 +19,8 @@
 package com.parsa3323.aas.options;
 
 import com.parsa3323.aas.options.manager.SettingsOption;
+import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.IconUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -44,7 +46,7 @@ public class SmallOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "small size for this ArmorStand");
         lore.add("");
-        lore.add((armorStand.isSmall()) ? ChatColor.YELLOW + "✔ Is small" : ChatColor.RED + "✘ isn't small");
+        lore.add((armorStand.isSmall()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK() + ChatColor.YELLOW + " Is small" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS() + ChatColor.RED + " isn't small");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
