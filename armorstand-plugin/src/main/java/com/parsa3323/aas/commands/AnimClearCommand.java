@@ -76,9 +76,9 @@ public class AnimClearCommand extends SubCommand {
         if (configurationSection == null) {
             String suggestion = getClosest(args[2], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
             }
             return;
         }
