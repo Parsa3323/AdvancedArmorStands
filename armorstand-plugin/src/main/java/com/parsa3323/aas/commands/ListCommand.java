@@ -68,10 +68,11 @@ public class ListCommand extends SubCommand {
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "         * Saved ArmorStands *");
             player.sendMessage(ChatColor.YELLOW + "           Found " + ColorUtils.boldAndColor(ChatColor.YELLOW) + armorStandList.size() + ChatColor.RESET + ChatColor.YELLOW + " saved ArmorStand" + (armorStandList.size() == 1 ? "" : "s"));
-            player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
             player.sendMessage("");
 
-            TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + "           [" + ColorUtils.boldAndColor(ChatColor.RED) + "DL All" + ChatColor.DARK_RED + "]");
+            TextComponent space = new TextComponent("              ");
+            TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "DL All" + ChatColor.DARK_RED + "]");
             TextComponent loadAll = new TextComponent(ChatColor.DARK_GREEN + " [" + ColorUtils.boldAndColor(ChatColor.GREEN) + "LD All" + ChatColor.DARK_GREEN + "]");
 
             deleteAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
@@ -92,13 +93,17 @@ public class ListCommand extends SubCommand {
 
             if (!ArmorStandUtils.getArmorStandList().isEmpty()){
                 if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
-                    player.spigot().sendMessage(deleteAll, loadAll);
+                    player.spigot().sendMessage(space, deleteAll, loadAll);
                 } else {
-                    player.spigot().sendMessage(deleteAll);
+                    player.spigot().sendMessage(space, deleteAll);
                 }
 
-                player.sendMessage("");
             }
+
+            player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            player.sendMessage("");
+
+
 
 
 
