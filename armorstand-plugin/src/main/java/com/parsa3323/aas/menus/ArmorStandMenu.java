@@ -215,9 +215,9 @@ public class ArmorStandMenu extends Menu {
             Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
 
             p.playSound(p.getLocation(), VersionSupportUtil.getVersionSupport().getEquipSound(), 1,  1);
-            p.sendMessage(ChatColor.GREEN + "Armor stand updated successfully!");
+            p.sendMessage(ChatColor.GREEN + "ArmorStand updated successfully!");
         } catch (Exception ex) {
-            p.sendMessage(ChatColor.RED + "Failed to update armor stand!");
+            p.sendMessage(ChatColor.RED + "Failed to update ArmorStand!");
             ex.printStackTrace();
         }
         if (!coolDownList.contains(p.getUniqueId())) {
@@ -228,14 +228,14 @@ public class ArmorStandMenu extends Menu {
     @Override
     public void setMenuItems() {
         if (armorStand == null || !armorStand.isValid()) {
-            playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "The armor stand is no longer available!");
+            playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "The ArmorStand is no longer available!");
             playerMenuUtility.getOwner().closeInventory();
             for (int i = 0; i < inventory.getSize(); i++) {
                 ItemStack grayPane = new ItemStack(XMaterial.GRAY_STAINED_GLASS_PANE.parseMaterial(), 1, (short) 7);
                 ItemMeta meta = grayPane.getItemMeta();
 
                 if (meta != null) {
-                    meta.setDisplayName(ChatColor.RED + "Armor stand is not available");
+                    meta.setDisplayName(ChatColor.RED + "ArmorStand is not available");
                     grayPane.setItemMeta(meta);
                 }
 
@@ -310,7 +310,7 @@ public class ArmorStandMenu extends Menu {
         cLore.add(ChatColor.GRAY + "Click to close this menu");
         cLore.add(ChatColor.GRAY + "Shift-click to open the ");
         cLore.add(ChatColor.GRAY + "Tools Menu for editing");
-        cLore.add(ChatColor.GRAY + "the armor stand");
+        cLore.add(ChatColor.GRAY + "the ArmorStand");
 
         cMeta.setLore(cLore);
         close.setItemMeta(cMeta);
@@ -323,7 +323,7 @@ public class ArmorStandMenu extends Menu {
         lore.add(ChatColor.GRAY + "Opens an inventory to");
         lore.add(ChatColor.GRAY + "create and delete on-click");
         lore.add(ChatColor.GRAY + "custom command actions for");
-        lore.add(ChatColor.GRAY + "your armor stand");
+        lore.add(ChatColor.GRAY + "your ArmorStand");
 
 
         ItemStack options = new ItemStack(Material.NETHER_STAR);
