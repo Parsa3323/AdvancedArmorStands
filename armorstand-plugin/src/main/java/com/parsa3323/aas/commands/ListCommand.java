@@ -71,8 +71,8 @@ public class ListCommand extends SubCommand {
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             player.sendMessage("");
 
-            TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "DL All" + ChatColor.DARK_RED + "]");
-            TextComponent loadAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "LD All" + ChatColor.DARK_RED + "]");
+            TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + "           [" + ColorUtils.boldAndColor(ChatColor.RED) + "DL All" + ChatColor.DARK_RED + "]");
+            TextComponent loadAll = new TextComponent(ChatColor.DARK_GREEN + " [" + ColorUtils.boldAndColor(ChatColor.GREEN) + "LD All" + ChatColor.DARK_GREEN + "]");
 
             deleteAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                     new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete All ArmorStands")
