@@ -39,7 +39,8 @@ public class HeadCommand extends SubCommand {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as head " + "examplePlayer");
-        return lore;    }
+        return lore;
+    }
 
     @Override
     public String getDescription() {
