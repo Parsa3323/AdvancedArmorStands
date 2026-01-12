@@ -66,8 +66,8 @@ public class HeadCommand extends SubCommand {
     public List<String> getTabComplete(Player player, String[] args) {
         ArrayList<String> players = new ArrayList<>();
 
-        Bukkit.getOnlinePlayers().forEach(player1 -> {
-            players.add(player1.getName());
+        Bukkit.getOnlinePlayers().forEach(p -> {
+            players.add(p.getName());
         });
 
         return players;
