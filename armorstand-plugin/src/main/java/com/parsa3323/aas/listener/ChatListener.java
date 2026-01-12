@@ -70,7 +70,7 @@ public class ChatListener implements Listener {
                     PlaceholderAPI.setPlaceholders(e.getPlayer(), ChatColor.translateAlternateColorCodes('&', e.getMessage())) :
                     ChatColor.translateAlternateColorCodes('&', e.getMessage()));
 
-            e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set ArmorStand's name to '" + e.getMessage() + "' ");
+            e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set ArmorStand's custom name to '" + e.getMessage() + "' ");
 
             if (!VersionSupportUtil.isHigherThan("1.8")) {
                 SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
@@ -104,6 +104,9 @@ public class ChatListener implements Listener {
                 p.sendMessage(ChatColor.RED + "This type already exists, Either chose another name or select the type in the save menu");
                 return;
             }
+
+            if (!TextUtils.checkName(itemName, p)) return;
+
 
             TypesConfig.get().set( itemName + ".arms", armorStand.hasArms());
             TypesConfig.get().set(itemName + ".basePlate", armorStand.hasBasePlate());
@@ -155,6 +158,8 @@ public class ChatListener implements Listener {
             }
 
             e.setCancelled(true);
+
+            if (!TextUtils.checkName(actions.get(p.getUniqueId()), p)) return;
 
             ActionConfig.get().set("armorstand." + actions.get(p.getUniqueId()) + "." + e.getMessage().replaceAll(" ", "-") + ".type", "player");
             ActionConfig.get().set("armorstand." + actions.get(p.getUniqueId()) + "." + e.getMessage().replaceAll(" ", "-") + ".trigger", "all");

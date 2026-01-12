@@ -18,6 +18,9 @@
 
 package com.parsa3323.aas.utils;
 
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -36,6 +39,18 @@ public class TextUtils {
         return Pattern.compile(
                 "(?i)(https?:\\/\\/|www\\.|\\.[a-z]{2,})"
         ).matcher(text).find();
+    }
+
+    public static boolean checkName(String name, Player player) {
+        if (name.contains(",") || name.contains("[") || name.contains("]") ||  name.contains(".") || name.contains("/") || name.contains(";")
+                || name.contains("'") || name.contains("{" ) || name.contains("}") || name.contains("+") || name.contains("=")
+                || name.contains("@") || name.contains("!") || name.contains("#") || name.contains("$") || name.contains("%")
+                || name.contains("^" ) || name.contains("&") || name.contains("*") || name.contains("(") || name.contains(")")
+                || name.contains(":")) {
+            player.sendMessage(ChatColor.RED + "ArmorStand name cannot contain symbols: , [ ] . / ; ' { } + = @ ! # $ % ^ & * ( ) :");
+            return false;
+        }
+        return true;
     }
 
     public static String getFirstContent(ArrayList<String> list, String placeHolder) {

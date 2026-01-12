@@ -26,6 +26,7 @@ import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.TextUtils;
 import com.parsa3323.aas.utils.TypeUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -330,6 +331,11 @@ public class CreateCommand extends SubCommand implements Listener {
 
         if (config.contains(path)) {
             event.getPlayer().sendMessage(ChatColor.RED + "An ArmorStand with this name already exists!");
+            event.setCancelled(true);
+            return;
+        }
+
+        if (!TextUtils.checkName(name, event.getPlayer())) {
             event.setCancelled(true);
             return;
         }
