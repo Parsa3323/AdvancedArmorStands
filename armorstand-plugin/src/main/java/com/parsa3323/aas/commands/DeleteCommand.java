@@ -22,6 +22,7 @@ import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.SoundUtils;
 import com.parsa3323.aas.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -83,6 +84,7 @@ public class DeleteCommand extends SubCommand {
             return;
         }
 
+        SoundUtils.playSuccessSound(player);
         ArmorStandUtils.deleteArmorStand(args[1], player);
     }
 
