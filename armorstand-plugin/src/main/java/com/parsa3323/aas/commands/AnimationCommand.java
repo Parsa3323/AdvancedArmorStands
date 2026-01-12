@@ -156,7 +156,7 @@ public class AnimationCommand extends SubCommand {
                 String suggestion = CommandUtils.getClosestCommand(args[1], animationSubCommands);
 
                 if (suggestion != null) {
-                    player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "' is not a valid subcommand" + args[0] + "'. Did you mean '/as " + suggestion + "'?");
+                    player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "' is not a valid subcommand" + args[0] + "'. Did you mean '" + suggestion + "'?");
                 } else {
                     player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
                 }
