@@ -105,9 +105,6 @@ public class ChatListener implements Listener {
                 return;
             }
 
-            if (!TextUtils.checkName(itemName, p)) return;
-
-
             TypesConfig.get().set( itemName + ".arms", armorStand.hasArms());
             TypesConfig.get().set(itemName + ".basePlate", armorStand.hasBasePlate());
             TypesConfig.get().set(itemName + ".customName", armorStand.getCustomName());
@@ -158,8 +155,6 @@ public class ChatListener implements Listener {
             }
 
             e.setCancelled(true);
-
-            if (!TextUtils.checkName(actions.get(p.getUniqueId()), p)) return;
 
             ActionConfig.get().set("armorstand." + actions.get(p.getUniqueId()) + "." + e.getMessage().replaceAll(" ", "-") + ".type", "player");
             ActionConfig.get().set("armorstand." + actions.get(p.getUniqueId()) + "." + e.getMessage().replaceAll(" ", "-") + ".trigger", "all");
