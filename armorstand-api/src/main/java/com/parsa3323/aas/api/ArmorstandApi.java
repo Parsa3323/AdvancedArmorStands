@@ -53,6 +53,7 @@ public interface ArmorstandApi  {
     PlayerManager getPlayerManager(Player player);
 
     interface PlayerManager {
+
         boolean hasAdminPermission();
 
         void restoreInventory() throws InventoryRestoreException;
