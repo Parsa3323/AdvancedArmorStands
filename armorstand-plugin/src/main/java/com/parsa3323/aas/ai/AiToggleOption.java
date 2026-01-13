@@ -44,7 +44,7 @@ public class AiToggleOption extends AiSettingsOption {
         lore.add(ChatColor.GRAY + "for this armor stand");
 
         lore.add("");
-        lore.add((ArmorStandUtils.hasAi(ArmorStandUtils.getNameByArmorStand(armorStand))) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK() + ChatColor.YELLOW + "✔ Enabled" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CHECK() + ChatColor.RED + "✘ Disabled");
+        lore.add((ArmorStandUtils.hasAi(ArmorStandUtils.getNameByArmorStand(armorStand))) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK + ChatColor.YELLOW + "✔ Enabled" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS + ChatColor.RED + "✘ Disabled");
 
         itemMeta.setLore(lore);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Toggle AI");

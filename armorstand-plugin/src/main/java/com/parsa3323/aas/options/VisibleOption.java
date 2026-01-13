@@ -46,7 +46,7 @@ public class VisibleOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "visibility for this ArmorStand");
         lore.add("");
-        lore.add((armorStand.isVisible()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK() + ChatColor.YELLOW + " Is visible" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS() + ChatColor.RED + " isn't visible");
+        lore.add((armorStand.isVisible()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK + ChatColor.YELLOW + " Is visible" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS + ChatColor.RED + " isn't visible");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

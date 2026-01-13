@@ -46,7 +46,7 @@ public class GlowingOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "glowing this ArmorStand");
         lore.add("");
-        lore.add((VersionSupportUtil.getVersionSupport().isGlowing(armorStand)) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK() + ChatColor.YELLOW + " Is glowing" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS() + ChatColor.RED + " Isn't glowing");
+        lore.add((VersionSupportUtil.getVersionSupport().isGlowing(armorStand)) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK + ChatColor.YELLOW + " Is glowing" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS + ChatColor.RED + " Isn't glowing");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

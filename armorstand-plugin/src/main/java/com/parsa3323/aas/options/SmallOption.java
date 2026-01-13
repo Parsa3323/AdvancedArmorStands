@@ -46,7 +46,7 @@ public class SmallOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "small size for this ArmorStand");
         lore.add("");
-        lore.add((armorStand.isSmall()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK() + ChatColor.YELLOW + " Is small" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS() + ChatColor.RED + " isn't small");
+        lore.add((armorStand.isSmall()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK + ChatColor.YELLOW + " Is small" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS + ChatColor.RED + " isn't small");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

@@ -46,7 +46,7 @@ public class BasePlateOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "base plate for this ArmorStand ");
         lore.add("");
-        lore.add((armorStand.hasBasePlate()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK() + ChatColor.YELLOW + " Has base plate" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS() + ChatColor.RED + " Doesn't have base plate");
+        lore.add((armorStand.hasBasePlate()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK + ChatColor.YELLOW + " Has base plate" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS + ChatColor.RED + " Doesn't have base plate");
 
 
         itemMeta.setLore(lore);

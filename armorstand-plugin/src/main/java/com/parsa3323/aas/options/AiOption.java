@@ -73,7 +73,7 @@ public class AiOption extends SettingsOption {
             lore.add(ChatColor.GRAY + "by setting your API key");
             lore.add(ChatColor.GRAY + "in the config.");
             lore.add("");
-            lore.add(ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS() + ChatColor.RED + " Not Enabled");
+            lore.add(ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS + ChatColor.RED + " Not Enabled");
 
 
             itemMeta.setLore(lore);
