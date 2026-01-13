@@ -19,11 +19,7 @@
 package com.parsa3323.aas.utils;
 
 public class IconUtils {
-    public static String CROSS() {
-        return "✘";
-    }
+    public static String CROSS = "✘";
 
-    public static String CHECK() {
-        return "✔";
-    }
+    public static String CHECK = "✔";
 }
