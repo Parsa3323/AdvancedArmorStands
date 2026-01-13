@@ -21,7 +21,6 @@ package com.parsa3323.aas.ai;
 import com.parsa3323.aas.ai.manager.AiSettingsOption;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
-import com.parsa3323.aas.utils.IconUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -44,7 +43,7 @@ public class AiToggleOption extends AiSettingsOption {
         lore.add(ChatColor.GRAY + "for this armor stand");
 
         lore.add("");
-        lore.add((ArmorStandUtils.hasAi(ArmorStandUtils.getNameByArmorStand(armorStand))) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK + ChatColor.YELLOW + "✔ Enabled" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS + ChatColor.RED + "✘ Disabled");
+        lore.add((ArmorStandUtils.hasAi(ArmorStandUtils.getNameByArmorStand(armorStand))) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + "✔ Enabled" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + "✘ Disabled");
 
         itemMeta.setLore(lore);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Toggle AI");

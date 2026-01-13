@@ -25,6 +25,10 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class TextUtils {
+    public static String CROSS = "✘";
+
+    public static String CHECK = "✔";
+
     public static String getOriginalSuffix(int value) {
         if (value >= 11 && value <= 13) return "th";
         switch (value % 10) {

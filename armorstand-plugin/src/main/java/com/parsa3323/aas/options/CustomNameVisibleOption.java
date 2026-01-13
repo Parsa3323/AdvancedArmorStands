@@ -20,7 +20,7 @@ package com.parsa3323.aas.options;
 
 import com.parsa3323.aas.options.manager.SettingsOption;
 import com.parsa3323.aas.utils.ColorUtils;
-import com.parsa3323.aas.utils.IconUtils;
+import com.parsa3323.aas.utils.TextUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -46,7 +46,7 @@ public class CustomNameVisibleOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "custom name for this ArmorStand");
         lore.add("");
-        lore.add((armorStand.isCustomNameVisible()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK + ChatColor.YELLOW + " Has custom name" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS + ChatColor.RED + " Doesn't have custom name");
+        lore.add((armorStand.isCustomNameVisible()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Has custom name" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Doesn't have custom name");
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

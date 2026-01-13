@@ -20,7 +20,7 @@ package com.parsa3323.aas.options;
 
 import com.parsa3323.aas.options.manager.SettingsOption;
 import com.parsa3323.aas.utils.ColorUtils;
-import com.parsa3323.aas.utils.IconUtils;
+import com.parsa3323.aas.utils.TextUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -46,7 +46,7 @@ public class BasePlateOption extends SettingsOption {
         lore.add(ChatColor.GRAY + "Enable and disable");
         lore.add(ChatColor.GRAY + "base plate for this ArmorStand ");
         lore.add("");
-        lore.add((armorStand.hasBasePlate()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + IconUtils.CHECK + ChatColor.YELLOW + " Has base plate" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + IconUtils.CROSS + ChatColor.RED + " Doesn't have base plate");
+        lore.add((armorStand.hasBasePlate()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Has base plate" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Doesn't have base plate");
 
 
         itemMeta.setLore(lore);
