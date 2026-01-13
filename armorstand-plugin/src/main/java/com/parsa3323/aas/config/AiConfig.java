@@ -46,6 +46,7 @@ public class AiConfig {
                 save();
             } catch (IOException e) {
                 e.printStackTrace();
+                AdvancedArmorStands.error("Failed to load " + file.getName() +  ": " + e.getMessage(), true);
             }
         } else {
             reload();
@@ -65,6 +66,8 @@ public class AiConfig {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            AdvancedArmorStands.error("Failed to save " + file.getName() +  ": " + e.getMessage(), true);
+
         }
     }
 
@@ -80,6 +83,7 @@ public class AiConfig {
         } catch (Exception e) {
             e.printStackTrace();
             fileConfiguration = new YamlConfiguration();
+            AdvancedArmorStands.error("Failed to reload " + file.getName() +  ": " + e.getMessage(), true);
         }
     }
 
