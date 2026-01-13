@@ -26,7 +26,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabComp implements TabCompleter {
+public class TabComplete implements TabCompleter {
 
     private CommandManager mainCommand;
 

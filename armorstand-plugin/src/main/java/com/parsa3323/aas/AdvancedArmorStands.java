@@ -27,7 +27,7 @@ import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.commands.manager.CommandManager;
-import com.parsa3323.aas.commands.manager.TabComp;
+import com.parsa3323.aas.commands.manager.TabComplete;
 import com.parsa3323.aas.config.*;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
 import com.parsa3323.aas.listener.*;
@@ -261,7 +261,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         status("Registering commands...");
 
         CommandManager commandManager = new CommandManager();
-        getCommand("as").setTabCompleter(new TabComp());
+        getCommand("as").setTabCompleter(new TabComplete());
         getCommand("as").setExecutor(commandManager);
 
         commandManager.getSubCommands().forEach(subCommand -> {
