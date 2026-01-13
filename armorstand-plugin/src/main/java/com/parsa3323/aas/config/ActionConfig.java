@@ -39,7 +39,7 @@ public class ActionConfig {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
-                AdvancedArmorStands.error("Error while creating file : " + e.getMessage(), true);
+                AdvancedArmorStands.error("Error while creating file " + file.getName() + ": " + e.getMessage(), true);
             }
         }
 
@@ -57,7 +57,7 @@ public class ActionConfig {
             fileConfiguration.save(file);
         } catch (IOException e) {
             e.printStackTrace();
-            AdvancedArmorStands.error("Error while saving : " + e.getMessage(), true);
+            AdvancedArmorStands.error("Error while saving " + file.getName() + ": " + e.getMessage(), true);
         }
 
     }
