@@ -19,6 +19,7 @@
 package com.parsa3323.aas.placeholderapi;
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.utils.AnimationUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.TypeUtils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
@@ -55,6 +56,8 @@ public class PapiExpansion extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("total")) return String.valueOf(ArmorStandUtils.getTotalArmorStands());
 
         if (params.equalsIgnoreCase("total_types")) return String.valueOf(TypeUtils.getTotalTypes());
+
+        if (params.equalsIgnoreCase("total_animations")) return String.valueOf(AnimationUtils.getAnimationsList().size());
 
         if (params.equalsIgnoreCase("total_loaded_armor_stands")) return String.valueOf(ArmorStandUtils.getLoadedArmorStands());
 
