@@ -85,7 +85,7 @@ public class ArmorStandMenu extends Menu {
                     InventoryUtils.setGameMode(playerMenuUtility.getOwner(), playerMenuUtility.getOwner().getGameMode());
                     playerMenuUtility.getOwner().setGameMode(GameMode.CREATIVE);
                     playerMenuUtility.getOwner().sendMessage(
-                            ChatColor.GREEN + "Your gamemode has been temporarily switched to CREATIVE, " +
+                            ChatColor.GREEN + "Your GameMode has been temporarily switched to CREATIVE, " +
                                     "because edit sessions do not support ADVENTURE mode. " +
                                     "It will be restored automatically when you exit."
                     );
