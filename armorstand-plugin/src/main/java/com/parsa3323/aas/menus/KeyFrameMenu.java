@@ -216,17 +216,17 @@ public class KeyFrameMenu extends PaginatedMenu {
 
         ItemMeta iLoop = loop.getItemMeta();
 
-        ArrayList<String> ilore = new ArrayList<>();
+        ArrayList<String> iLore = new ArrayList<>();
 
-        ilore.add(ChatColor.GRAY + "Defines whether the animation");
-        ilore.add(ChatColor.GRAY + "should loop repeat from");
-        ilore.add(ChatColor.GRAY + "the start infinitely");
+        iLore.add(ChatColor.GRAY + "Defines whether the animation");
+        iLore.add(ChatColor.GRAY + "should loop repeat from");
+        iLore.add(ChatColor.GRAY + "the start infinitely");
 
-        ilore.add("");
+        iLore.add("");
 
-        ilore.add(ChatColor.YELLOW + "Click to change");
+        iLore.add(ChatColor.YELLOW + "Click to change");
 
-        iLoop.setLore(ilore);
+        iLoop.setLore(iLore);
 
         iLoop.setDisplayName(ChatColor.YELLOW + "Loop: " + AnimationConfig.get().getBoolean("animations." + animationName + ".loop"));
 
