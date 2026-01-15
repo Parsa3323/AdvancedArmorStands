@@ -62,7 +62,7 @@ public class InventoryUtils {
 
             ItemStack itemStack = new ItemStack(Material.BARRIER);
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setDisplayName( ChatColor.RED  + "EXIT" + ChatColor.GRAY + " (Right Click)");
+            itemMeta.setDisplayName(ChatColor.GRAY + "» " + ChatColor.RED  + "EXIT" + ChatColor.GRAY + " (Right Click)");
             ArrayList<String> lore = new ArrayList<>();
 
             lore.add("");
@@ -93,7 +93,7 @@ public class InventoryUtils {
 
             ItemStack itemStack = new ItemStack(Material.BARRIER);
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setDisplayName( ChatColor.RED  + "EXIT" + ChatColor.GRAY + " (Right Click)");
+            itemMeta.setDisplayName(ChatColor.GRAY + "» " + ChatColor.RED + "EXIT" + ChatColor.GRAY + " (Right Click)");
             ArrayList<String> lore = new ArrayList<>();
 
             lore.add("");
