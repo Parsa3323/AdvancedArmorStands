@@ -38,8 +38,12 @@ public class ConfigUtils {
         File oldAsConfig = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.yml");
         File oldAiConfig = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/ai.yml");
 
+        AdvancedArmorStands.debug("Checking if " + oldAiConfig.getName() + " and " + oldAiConfig.getName() + " still exist");
+
         if (oldAsConfig.exists() && oldAiConfig.exists()) {
+            AdvancedArmorStands.debug("Renaming " + oldAiConfig.getName() + " to ai.aas");
             oldAiConfig.renameTo(new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/ai.aas"));
+            AdvancedArmorStands.debug("Renaming " + oldAsConfig.getName() + " armorstands.aas");
             oldAsConfig.renameTo(new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.aas"));
         }
     }
