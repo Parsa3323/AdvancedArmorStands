@@ -37,7 +37,7 @@ public class AiConfig {
     private static final String KEY = "1234567890123456";
 
     public static void init() {
-        file = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/ai.yml");
+        file = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/ai.aas");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
         if (!file.exists()) {
             try {

@@ -18,8 +18,10 @@
 
 package com.parsa3323.aas.utils;
 
+import com.parsa3323.aas.AdvancedArmorStands;
 import org.bukkit.util.EulerAngle;
 
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -30,5 +32,15 @@ public class ConfigUtils {
         map.put("y", angle.getY());
         map.put("z", angle.getZ());
         return map;
+    }
+
+    public static void renameOldFileIfNeeded() {
+        File oldAsConfig = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.yml");
+        File oldAiConfig = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/ai.yml");
+
+        if (oldAsConfig.exists() && oldAiConfig.exists()) {
+            oldAiConfig.renameTo(new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/ai.aas"));
+            oldAsConfig.renameTo(new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.aas"));
+        }
     }
 }

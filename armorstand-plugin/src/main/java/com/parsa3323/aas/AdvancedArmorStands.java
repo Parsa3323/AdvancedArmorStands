@@ -370,7 +370,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
             CONFIG_OUTDATED = true;
         }
 
-
+        ConfigUtils.renameOldFileIfNeeded();
     }
 
     public static boolean checkForArmorStandConflictAndDelete() {

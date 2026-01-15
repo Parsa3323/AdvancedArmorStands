@@ -20,7 +20,7 @@ public class ArmorStandsConfig {
     private static final String KEY = "1234567890123456";
 
     public static void init() {
-        file = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.yml");
+        file = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.aas");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
         moveOldFileIfNeeded();
         if (!file.exists()) {
@@ -91,6 +91,7 @@ public class ArmorStandsConfig {
             }
         }
     }
+
 
     private static byte[] encrypt(String data, String key) throws Exception {
         SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
