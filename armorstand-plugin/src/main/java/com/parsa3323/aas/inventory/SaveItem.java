@@ -49,7 +49,7 @@ public class SaveItem extends InventoryItem {
 
         ItemStack itemStack = new ItemStack(Material.NETHER_STAR);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN + "Save" + ChatColor.GRAY + " (Right Click)");
+        itemMeta.setDisplayName(ChatColor.GRAY + "» " + ChatColor.GREEN + "Save" + ChatColor.GRAY + " (Right Click)");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 

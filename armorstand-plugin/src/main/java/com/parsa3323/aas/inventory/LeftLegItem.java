@@ -50,7 +50,7 @@ public class LeftLegItem extends InventoryItem {
 
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDA4NWE2NzgwMmMwZWE0NjJmYmJhNGExZGJiNjgxNzQ4ZjVjZDAxYTMwMzQ3NjdiMWVjZjgzYWUxMjdlODUwZiJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.GREEN  +"Left leg" + ChatColor.GRAY + " (Hover)");
+        itemMeta.setDisplayName(ChatColor.GRAY + "» " + ChatColor.GREEN  +"Left leg" + ChatColor.GRAY + " (Hover)");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 
