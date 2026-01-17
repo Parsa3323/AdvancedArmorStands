@@ -85,7 +85,7 @@ public class EditorManager implements Listener {
                     new ArmorStandMenu(new PlayerMenuUtility(player), armorStand).open();
                     ArmorStandSelectionCache.removeKeyFrameSelectedArmorStand(player.getUniqueId());
 
-                    TextComponent textComponent = new TextComponent(ChatColor.GREEN + "Animation saved successfully, click to add to this armorstand");
+                    TextComponent textComponent = new TextComponent(ChatColor.GREEN + "Animation saved successfully, click to add to this ArmorStand");
                     textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to set this animation to " + ArmorStandUtils.getNameByArmorStand(armorStand)).create()));
                     textComponent.setClickEvent(new ClickEvent(
                             ClickEvent.Action.RUN_COMMAND,
