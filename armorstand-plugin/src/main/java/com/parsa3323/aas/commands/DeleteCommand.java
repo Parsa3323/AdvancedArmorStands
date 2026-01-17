@@ -70,7 +70,7 @@ public class DeleteCommand extends SubCommand {
                     throw new RuntimeException(e);
                 }
             }
-            player.sendMessage(ChatColor.GREEN + "Deleted all ArmorStands");
+            player.sendMessage(ChatColor.GREEN + "Successfully deleted all ArmorStands");
             return;
         }
 
