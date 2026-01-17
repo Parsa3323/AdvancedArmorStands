@@ -128,6 +128,10 @@ public class ArmorStandUtils {
             double z = config.getDouble(path + ".Z");
             Location configLocation = new Location(world, x, y, z);
 
+            if (!world.equals(armorStand.getWorld())) {
+                continue;
+            }
+
             if (armorStand.getLocation().distanceSquared(configLocation) < 0.01) {
                 return key;
             }
@@ -305,13 +309,18 @@ public class ArmorStandUtils {
             AdvancedArmorStands.debug("Checking ArmorStand: " + key + " at (" + x + ", " + y + ", " + z + ") in world " + worldName);
 
             if (worldName == null) {
-                AdvancedArmorStands.debug("[ERROR] Missing world name for " + key + " in config!");
+                AdvancedArmorStands.debug("Missing world name for " + key + " in config!");
                 continue;
             }
 
             World world = Bukkit.getWorld(worldName);
             if (world == null) {
-                AdvancedArmorStands.debug("[ERROR] Invalid world name: " + worldName);
+                AdvancedArmorStands.debug("Invalid world name: " + worldName);
+                continue;
+            }
+
+            if (!world.equals(entity.getWorld())) {
+                AdvancedArmorStands.debug("Skipping this ArmorStand because worlds are not the same.");
                 continue;
             }
 
