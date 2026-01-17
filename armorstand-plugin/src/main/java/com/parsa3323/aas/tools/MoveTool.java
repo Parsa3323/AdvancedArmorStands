@@ -49,7 +49,8 @@ public class MoveTool extends ToolsOption {
 
         lore.add("");
 
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "Recommended: " + ChatColor.GRAY + "use /as move command instead");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "Recommended: " + ChatColor.GRAY + "use /as move ");
+        lore.add(ChatColor.GRAY + "command instead");
 
         lore.add("");
 
