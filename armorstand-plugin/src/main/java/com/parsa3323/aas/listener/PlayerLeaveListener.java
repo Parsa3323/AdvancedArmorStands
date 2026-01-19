@@ -39,7 +39,7 @@ public class PlayerLeaveListener implements Listener {
 
         if (ArmorStandSelectionCache.isIsInEditSession(e.getPlayer())) {
             if (InventoryUtils.hasGameMode(e.getPlayer())) {
-                AdvancedArmorStands.debug("Player " + e.getPlayer().getName() + " is leaving restoring GameMode...");
+                AdvancedArmorStands.debug("Player " + e.getPlayer().getName() + " is leaving, restoring GameMode...");
                 e.getPlayer().setGameMode(InventoryUtils.getAndClearGameMode(e.getPlayer()));
             }
             ArmorStandSelectionCache.removeSelectedArmorStand(e.getPlayer().getUniqueId());
