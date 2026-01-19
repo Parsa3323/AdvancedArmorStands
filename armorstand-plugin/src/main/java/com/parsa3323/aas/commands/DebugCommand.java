@@ -46,7 +46,8 @@ public class DebugCommand extends SubCommand {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.DARK_GRAY + "This command is only for debugging");
-        return lore;    }
+        return lore;
+    }
 
     @Override
     public String getDescription() {
