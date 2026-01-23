@@ -78,6 +78,8 @@ public class LoadCommand extends SubCommand {
         if (args[1].equalsIgnoreCase("--all")) {
             List<String> names = ArmorStandUtils.getArmorStandList();
             int loaded = 0;
+            int failed = 0;
+            List<String> failedNames = new ArrayList<>();
 
             for (String name : names) {
                 try {
@@ -87,14 +89,27 @@ public class LoadCommand extends SubCommand {
                         loaded++;
                     }
                 } catch (ArmorStandLoadException e) {
+                    failed++;
+                    failedNames.add(name);
                     AdvancedArmorStands.error("Error loading " + name + ": " + e.getMessage(), true);
+                } catch (NullPointerException e) {
+                    failed++;
+                    failedNames.add(name + " [NULL]");
+                    AdvancedArmorStands.error("Null error with " + name + ": " + e.getMessage(), true);
                 }
             }
 
-            if (loaded == 0) {
+            if (loaded == 0 && failed == 0) {
                 player.sendMessage(ChatColor.YELLOW + "No unloaded ArmorStands found.");
             } else {
-                player.sendMessage(ChatColor.GREEN + "Loaded " + loaded + " ArmorStands.");
+                String message = ChatColor.GREEN + "Successfully loaded " + loaded + " ArmorStands.";
+                if (failed > 0) {
+                    message += ChatColor.RED + " Failed to load " + failed + " ArmorStands.";
+                    if (!failedNames.isEmpty()) {
+                        player.sendMessage(ChatColor.RED + "Failed: " + String.join(", ", failedNames));
+                    }
+                }
+                player.sendMessage(message);
                 SoundUtils.playSuccessSound(player);
             }
             return;

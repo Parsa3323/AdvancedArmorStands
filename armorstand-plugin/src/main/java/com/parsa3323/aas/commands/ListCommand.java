@@ -106,7 +106,7 @@ public class ListCommand extends SubCommand {
 
             int index = 1;
             for (String name : armorStandList) {
-                TextComponent indexComponent = new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.GRAY + index + ChatColor.DARK_GRAY + "] ");
+                TextComponent indexComponent = new TextComponent(ChatColor.GRAY + " " + index + ChatColor.DARK_GRAY + " » ");
                 TextComponent nameComponent = new TextComponent((ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) ? ChatColor.GREEN : ChatColor.RED) + "" + ChatColor.BOLD + name);
                 nameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.YELLOW  + "ArmorStand: " + name)
