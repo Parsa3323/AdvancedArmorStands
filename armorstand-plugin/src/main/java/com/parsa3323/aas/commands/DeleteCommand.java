@@ -42,7 +42,8 @@ public class DeleteCommand extends SubCommand {
 
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as delete " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "exampleStand"));
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as delete --all");
-        return lore;    }
+        return lore;
+    }
 
     @Override
     public String getDescription() {
