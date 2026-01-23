@@ -386,7 +386,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
                 it.remove();
 
                 try {
-                    ArmorStandUtils.deleteArmorStandNoLog(name);
+                    ArmorStandUtils.deleteArmorStand(name);
                 } catch (ArmorStandNotFoundException e) {
                     error("Error while deleting armorstand: " + e.getMessage());
                 }

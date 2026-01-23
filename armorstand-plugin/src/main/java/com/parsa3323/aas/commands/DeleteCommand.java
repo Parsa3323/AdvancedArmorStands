@@ -66,7 +66,7 @@ public class DeleteCommand extends SubCommand {
         if (args[1].equalsIgnoreCase("--all")) {
             for (String name : ArmorStandUtils.getArmorStandList()) {
                 try {
-                    ArmorStandUtils.deleteArmorStandNoLog(name);
+                    ArmorStandUtils.deleteArmorStand(name);
                 } catch (ArmorStandNotFoundException e) {
                     throw new RuntimeException(e);
                 }

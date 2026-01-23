@@ -247,7 +247,8 @@ public class ArmorStandUtils {
         player.sendMessage(ChatColor.GREEN + "Deleted ArmorStand: " + name);
     }
 
-    public static void deleteArmorStandNoLog(String name) throws ArmorStandNotFoundException {
+    @Deprecated
+    public static void deleteArmorStand(String name) throws ArmorStandNotFoundException {
         FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
 
