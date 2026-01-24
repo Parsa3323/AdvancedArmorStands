@@ -143,7 +143,7 @@ public class AnimationCommand extends SubCommand {
                         if (player.hasPermission("advanced-armorstands.admin")) {
                             cmd.perform(player, args);
                         } else {
-                            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Access Denied: " + ChatColor.RED + "You don't have permission to use this command!");
+                            player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
                         }
                     } else {
                         cmd.perform(player, args);
@@ -156,9 +156,9 @@ public class AnimationCommand extends SubCommand {
                 String suggestion = CommandUtils.getClosestCommand(args[1], animationSubCommands);
 
                 if (suggestion != null) {
-                    player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "' is not a valid subcommand" + args[0] + "'. Did you mean '" + suggestion + "'?");
+                    player.sendMessage(ChatColor.RED + "Command '" + args[0] + "' is not a valid subcommand. Did you mean '" + suggestion + "'?");
                 } else {
-                    player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Unknown Command: " + ChatColor.RED + "'" + args[0] + "' is not a valid subcommand.");
+                    player.sendMessage(ChatColor.RED + "Command '" + args[0] + "' is not a valid subcommand.");
                 }
 
             }
