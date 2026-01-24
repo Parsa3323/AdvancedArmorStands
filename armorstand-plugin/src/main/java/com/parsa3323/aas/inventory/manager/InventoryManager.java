@@ -18,6 +18,7 @@
 
 package com.parsa3323.aas.inventory.manager;
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.inventory.*;
@@ -90,6 +91,8 @@ public class InventoryManager implements Listener {
                         getInventoryItems().get(i).execute(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), action);
 
                         Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(player, ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()), ArmorStandUtils.getNameByArmorStand(ArmorStandSelectionCache.getSelectedArmorStand(player.getUniqueId()))));
+
+                        player.playSound(player.getLocation(), XSound.UI_BUTTON_CLICK.parseSound(), 1.0f, 1.0f);
 
                         InventoryUtils.sendStackingActionBar(player, ChatColor.GREEN + "Updated ArmorStand!", 60);
                     }
