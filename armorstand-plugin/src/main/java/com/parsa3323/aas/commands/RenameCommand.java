@@ -110,4 +110,9 @@ public class RenameCommand extends SubCommand {
     public boolean isForOps() {
         return true;
     }
+
+    @Override
+    public String getAlias() {
+        return "";
+    }
 }

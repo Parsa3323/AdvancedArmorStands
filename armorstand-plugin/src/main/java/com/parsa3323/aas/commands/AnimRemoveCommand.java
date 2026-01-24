@@ -95,4 +95,9 @@ public class AnimRemoveCommand extends SubCommand {
     public boolean isForOps() {
         return false;
     }
+
+    @Override
+    public String getAlias() {
+        return "";
+    }
 }

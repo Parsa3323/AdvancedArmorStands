@@ -120,4 +120,9 @@ public class AnimAddCommand extends SubCommand {
     public boolean isForOps() {
         return true;
     }
+
+    @Override
+    public String getAlias() {
+        return "";
+    }
 }

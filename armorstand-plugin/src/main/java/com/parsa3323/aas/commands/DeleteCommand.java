@@ -101,4 +101,9 @@ public class DeleteCommand extends SubCommand {
     public boolean isForOps() {
         return true;
     }
+
+    @Override
+    public String getAlias() {
+        return "dl";
+    }
 }

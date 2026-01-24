@@ -124,4 +124,9 @@ public class AnimCreateCommand extends SubCommand {
     public boolean isForOps() {
         return true;
     }
+
+    @Override
+    public String getAlias() {
+        return "";
+    }
 }

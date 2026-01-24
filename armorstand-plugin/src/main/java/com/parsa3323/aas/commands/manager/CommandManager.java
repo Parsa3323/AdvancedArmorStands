@@ -127,6 +127,14 @@ public class CommandManager implements CommandExecutor {
                                 hoverBuilder.append("\n");
                             }
 
+                            if (!cmd.getAlias().isEmpty() && cmd.getAlias() != null) {
+                                hoverBuilder.append(ChatColor.GRAY + "Aliases:")
+                                        .append("\n");
+                                hoverBuilder.append(ChatColor.DARK_GRAY + "- " + ChatColor.GRAY + cmd.getAlias())
+                                        .append("\n");
+                                hoverBuilder.append("\n");
+                            }
+
                             hoverBuilder
                                     .append(ColorUtils.boldAndColor(ChatColor.YELLOW) + "Click to suggest this command")
                                     .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + commands)
@@ -177,7 +185,7 @@ public class CommandManager implements CommandExecutor {
 
                     int count = 0;
                     for (int i = 0; i < getSubCommands().size(); i++) {
-                        if (args[0].equalsIgnoreCase(getSubCommands().get(i).getName())) {
+                        if (args[0].equalsIgnoreCase(getSubCommands().get(i).getName()) || args[0].equalsIgnoreCase(getSubCommands().get(i).getAlias())) {
                             count++;
                             if (getSubCommands().get(i).isForOps()) {
                                 if (player.hasPermission("advanced-armorstands.admin")) {

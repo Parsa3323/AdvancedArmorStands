@@ -75,4 +75,9 @@ public class ReloadCommand extends SubCommand {
     public boolean isForOps() {
         return true;
     }
+
+    @Override
+    public String getAlias() {
+        return "rld";
+    }
 }

@@ -38,7 +38,7 @@ public class TabComplete implements TabCompleter {
             Player player = (Player) commandSender;
 
             for (int i = 0; i < mainCommand.getSubCommands().size(); i++) {
-                if (strings[0].equalsIgnoreCase(mainCommand.getSubCommands().get(i).getName())) {
+                if (strings[0].equalsIgnoreCase(mainCommand.getSubCommands().get(i).getName()) || strings[0].equalsIgnoreCase(mainCommand.getSubCommands().get(i).getAlias())) {
                     List<String> subTab = mainCommand.getSubCommands().get(i).getTabComplete(player, strings);
 
                     if (subTab == null || subTab.isEmpty()) return new ArrayList<>();

@@ -78,4 +78,9 @@ public class HeadCommand extends SubCommand {
     public boolean isForOps() {
         return true;
     }
+
+    @Override
+    public String getAlias() {
+        return "hd";
+    }
 }

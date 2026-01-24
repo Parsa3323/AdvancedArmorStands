@@ -45,6 +45,8 @@ public abstract class SubCommand {
 
     public abstract boolean isForOps();
 
+    public abstract String getAlias();
+
     public void sendUsage(Player player) {
         TextComponent textComponent = new TextComponent(ChatColor.RED + "Usage: ");
         TextComponent main = new TextComponent(ChatColor.RED + getSyntax());

@@ -123,4 +123,9 @@ public class MoveCommand extends SubCommand {
     public boolean isForOps() {
         return true;
     }
+
+    @Override
+    public String getAlias() {
+        return "mv";
+    }
 }

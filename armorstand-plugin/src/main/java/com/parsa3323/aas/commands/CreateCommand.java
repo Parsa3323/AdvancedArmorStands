@@ -313,6 +313,11 @@ public class CreateCommand extends SubCommand implements Listener {
         return true;
     }
 
+    @Override
+    public String getAlias() {
+        return "cr";
+    }
+
     private double getConfigDouble(String path) {
         if (!TypesConfig.get().contains(path)) {
             AdvancedArmorStands.debug("Config path not found: " + path);

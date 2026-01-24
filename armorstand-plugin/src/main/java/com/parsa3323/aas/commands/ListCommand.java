@@ -171,7 +171,10 @@ public class ListCommand extends SubCommand {
         return true;
     }
 
-
+    @Override
+    public String getAlias() {
+        return "ls";
+    }
 
 
 }
