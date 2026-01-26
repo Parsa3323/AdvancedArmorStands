@@ -66,7 +66,7 @@ public class InventoryUtils {
             ArrayList<String> lore = new ArrayList<>();
 
             lore.add("");
-            lore.add(ColorUtils.boldAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+            lore.add(ColorUtils.italicAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
 
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -97,7 +97,7 @@ public class InventoryUtils {
             ArrayList<String> lore = new ArrayList<>();
 
             lore.add("");
-            lore.add(ColorUtils.boldAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+            lore.add(ColorUtils.italicAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
 
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
