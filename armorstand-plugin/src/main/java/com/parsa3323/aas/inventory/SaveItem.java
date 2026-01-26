@@ -45,7 +45,7 @@ public class SaveItem extends InventoryItem {
         lore.add(ChatColor.GRAY + "Click to save the ArmorStand setting ");
         lore.add(ChatColor.GRAY + "as a type, that you can use it later");
         lore.add("");
-        lore.add(ColorUtils.boldAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+        lore.add(ColorUtils.italicAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
 
         ItemStack itemStack = new ItemStack(Material.NETHER_STAR);
         ItemMeta itemMeta = itemStack.getItemMeta();
