@@ -90,6 +90,7 @@ public class AnimAddCommand extends SubCommand {
             return;
         }
 
+
         configurationSection.set(args[3] + ".animation", args[2]);
         ArmorStandsConfig.save();
 
