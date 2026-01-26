@@ -46,7 +46,7 @@ public class RightLegItem extends InventoryItem {
         lore.add(ChatColor.YELLOW + "SHIFT + RIGHT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move right leg up");
         lore.add(ChatColor.YELLOW + "SHIFT + LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move right leg down");
         lore.add("");
-        lore.add(ColorUtils.boldAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+        lore.add(ColorUtils.italicAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
 
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJhNGUxOGRhMjVlODk5ZjQ2NTQ4ZGIyMDY5MmRmNzI2MTVjYWQ3OGVkMjlkYmFkMjYzOWVkODhiZTNkZWMzYSJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
