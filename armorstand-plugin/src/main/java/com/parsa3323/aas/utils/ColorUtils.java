@@ -30,6 +30,10 @@ public class ColorUtils  {
         return c + "" + ChatColor.BOLD;
     }
 
+    public static String italicAndColor(ChatColor c) {
+        return c + "" + ChatColor.ITALIC;
+    }
+
     public static String removeColors(String r) {
         return ChatColor.stripColor(r);
     }
