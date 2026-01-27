@@ -121,10 +121,4 @@ public final class VersionSupport_1_11 implements VersionSupport {
             ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
         }
     }
-
-    @Override
-    public void openBook(ItemStack book, Player p) {
-        return;
-    }
-
 }

@@ -44,6 +44,4 @@ public interface VersionSupport {
     void sendActionBar(Player player, String message);
 
     void rotateArmorStand(ArmorStand armorStand, float deltaYaw);
-
-    void openBook(ItemStack book, Player p);
 }
