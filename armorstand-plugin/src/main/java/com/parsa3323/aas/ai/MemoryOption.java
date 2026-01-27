@@ -122,7 +122,8 @@ public class MemoryOption extends AiSettingsOption {
         meta.setDisplayName(ChatColor.GREEN + "Memory" + ChatColor.GRAY + " (Right Click)");
 
         itemStack.setItemMeta(meta);
-        player.getInventory().setItem(4, itemStack);
+
+        player.getInventory().setItem(player.getInventory().getHeldItemSlot(), itemStack);
 
         waiting.put(player.getUniqueId(), armorStand);
 
