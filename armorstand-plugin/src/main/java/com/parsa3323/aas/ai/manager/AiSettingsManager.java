@@ -106,7 +106,8 @@ public class AiSettingsManager extends PaginatedMenu {
         for (int i = 0; i < settings.size(); i++) {
 
             if (e.getCurrentItem().equals(settings.get(i).getItemStack(armorStand, playerMenuUtility.getOwner()))) {
-                settings.get(i).execute(armorStand, playerMenuUtility.getOwner());
+                settings.get(i).setManager(this);
+                settings.get(i).execute(armorStand, playerMenuUtility.getOwner(), e);
                 if (settings.get(i).updateInventory()) super.open();
 
                 return;

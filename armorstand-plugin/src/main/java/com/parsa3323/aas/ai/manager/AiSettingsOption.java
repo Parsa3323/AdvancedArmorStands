@@ -20,12 +20,19 @@ package com.parsa3323.aas.ai.manager;
 
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class AiSettingsOption {
+    protected AiSettingsManager manager;
+
+    public void setManager(AiSettingsManager manager) {
+        this.manager = manager;
+    }
+
     public abstract ItemStack getItemStack(ArmorStand armorStand, Player player);
 
-    public abstract void execute(ArmorStand armorStand, Player player);
+    public abstract void execute(ArmorStand armorStand, Player player, InventoryClickEvent event);
 
     public abstract boolean updateInventory();
 }

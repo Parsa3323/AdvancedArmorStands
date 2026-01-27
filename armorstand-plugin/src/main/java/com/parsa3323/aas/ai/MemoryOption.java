@@ -26,6 +26,8 @@ import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -69,7 +71,9 @@ public class MemoryOption extends AiSettingsOption {
 
         lore.add("");
 
-        lore.add(ChatColor.YELLOW + "Click to change");
+        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Shift-click to reset");
+
+        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Click to change");
 
         itemMeta.setLore(lore);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Memory");
@@ -80,7 +84,13 @@ public class MemoryOption extends AiSettingsOption {
     }
 
     @Override
-    public void execute(ArmorStand armorStand, Player player) {
+    public void execute(ArmorStand armorStand, Player player, InventoryClickEvent event) {
+        if (event.getClick() == ClickType.SHIFT_RIGHT || event.getClick() == ClickType.SHIFT_LEFT) {
+            AiUtils.setUserSetInstructions(armorStand, null);
+            manager.open();
+            return;
+        }
+
         player.closeInventory();
 
         InventoryUtils.save(player);

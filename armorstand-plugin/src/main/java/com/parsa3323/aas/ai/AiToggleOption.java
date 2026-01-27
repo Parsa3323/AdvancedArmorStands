@@ -26,6 +26,7 @@ import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -54,7 +55,7 @@ public class AiToggleOption extends AiSettingsOption {
         return itemStack;
     }
     @Override
-    public void execute(ArmorStand armorStand, Player player) {
+    public void execute(ArmorStand armorStand, Player player, InventoryClickEvent event) {
         ArmorStandUtils.setAi(ArmorStandUtils.getNameByArmorStand(armorStand), !ArmorStandUtils.hasAi(ArmorStandUtils.getNameByArmorStand(armorStand)));
     }
 
