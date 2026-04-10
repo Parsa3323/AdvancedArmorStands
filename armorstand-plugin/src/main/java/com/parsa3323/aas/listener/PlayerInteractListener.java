@@ -19,11 +19,13 @@
 package com.parsa3323.aas.listener;
 
 
+import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.actions.SenderType;
 import com.parsa3323.aas.api.actions.TriggerType;
 import com.parsa3323.aas.api.events.ActionTriggerEvent;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
+import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
@@ -50,7 +52,9 @@ import java.util.*;
 public class PlayerInteractListener implements Listener {
 
     private final Map<UUID, Integer> interactionCount  = new HashMap<>();
+    private final Map<UUID, Integer> deleteIntractionCount = new HashMap<>();
     private final Map<UUID, ArmorStand> selectCount = new HashMap<>();
+    private final Map<UUID, ArmorStand> deletionCount = new HashMap<>();
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerInteractAtEntityEvent(PlayerInteractAtEntityEvent e) {
@@ -80,7 +84,7 @@ public class PlayerInteractListener implements Listener {
                             if (count < 3) {
                                 selectCount.put(playerId, (ArmorStand) e.getRightClicked());
                                 interactionCount.put(playerId, count);
-                                TextComponent textComponent = new TextComponent(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this  ArmorStands.");
+                                TextComponent textComponent = new TextComponent(ChatColor.GREEN + "Do this " + (3 - count) + " more time" + ((3 - count) > 1 ? "s" : "") +  " to save this ArmorStands.");
                                 textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "You can disable this in the config.yml").create()));
 
                                 player.getBukkitPlayer().spigot().sendMessage(textComponent);
@@ -174,7 +178,57 @@ public class PlayerInteractListener implements Listener {
 
         String standName = ArmorStandUtils.getNameByArmorStand(armorStand);
         ConfigurationSection standSection = ActionConfig.get().getConfigurationSection("armorstand." + standName);
-        if (standSection == null) return;
+        if (standSection == null) {
+            if (AdvancedArmorStands.plugin.getConfig().getBoolean("shift-click-to-delete")) {
+                if (player.isSneaking()) {
+                    UUID playerId = player.getUniqueId();
+
+                    if (!deleteIntractionCount.containsKey(playerId) || deletionCount.get(playerId) != armorStand) {
+                        deleteIntractionCount.put(playerId, 0);
+                    }
+
+                    int count = deleteIntractionCount.getOrDefault(playerId, 0) + 1;
+                    System.out.println(count);
+
+                    switch (count) {
+                        case 1:
+                            player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1f, 0.8f);
+                            break;
+                        case 2:
+                            player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1f, 1.0f);
+                            break;
+                        case 3:
+                            player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1f, 1.2f);
+                            break;
+
+                    }
+
+                    if (count < 3) {
+                        deletionCount.put(playerId, armorStand);
+                        deleteIntractionCount.put(playerId, count);
+
+
+                        TextComponent textComponent = new TextComponent(ChatColor.RED + "Do this " + (3 - count) + " more time" + ((3 - count) > 1 ? "s" : "") + " to delete this ArmorStand.");
+                        textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "You can disable this in the config.yml").create()));
+
+                        player.spigot().sendMessage(textComponent);
+                    } else if (count == 3) {
+
+                        ArmorStandDeleteEvent armorStandDeleteEvent = new ArmorStandDeleteEvent(player, armorStand);
+                        Bukkit.getPluginManager().callEvent(armorStandDeleteEvent);
+
+                        if (armorStandDeleteEvent.isCancelled()) return;
+
+                        ArmorStandUtils.deleteArmorStand(standName, player);
+
+                        deleteIntractionCount.remove(playerId);
+                    }
+                }
+
+            }
+
+            return;
+        };
 
         for (String key : standSection.getKeys(false)) {
             ConfigurationSection commandSection = standSection.getConfigurationSection(key);
