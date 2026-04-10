@@ -55,7 +55,7 @@ public class AiSettingsManager extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.DARK_GRAY + "As " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "Ai Settings";
+        return ChatColor.DARK_GRAY + "as " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "ai settings";
     }
 
     @Override
