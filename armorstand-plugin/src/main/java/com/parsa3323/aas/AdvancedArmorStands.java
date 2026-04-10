@@ -55,7 +55,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static Level logLevel;
 
-    private final String CURRENT_CONFIG_VERSION = "1.0.1";
+    private final String CURRENT_CONFIG_VERSION = "1.0.2";
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
