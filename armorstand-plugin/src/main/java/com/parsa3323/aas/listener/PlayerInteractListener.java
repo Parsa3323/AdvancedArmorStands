@@ -31,6 +31,9 @@ import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -77,7 +80,10 @@ public class PlayerInteractListener implements Listener {
                             if (count < 3) {
                                 selectCount.put(playerId, (ArmorStand) e.getRightClicked());
                                 interactionCount.put(playerId, count);
-                                player.getBukkitPlayer().sendMessage(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this advanced ArmorStands.");
+                                TextComponent textComponent = new TextComponent(ChatColor.GREEN + "Do this " + (3 - count) + " more time(s) to save this  ArmorStands.");
+                                textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "You can disable this in the config.yml").create()));
+
+                                player.getBukkitPlayer().spigot().sendMessage(textComponent);
                             } else if (count == 3) {
                                 int randomSuffix = new Random().nextInt(900) + 100;
                                 String name = "SavedStand" + randomSuffix;
