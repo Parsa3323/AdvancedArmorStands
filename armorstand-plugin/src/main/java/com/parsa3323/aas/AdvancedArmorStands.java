@@ -367,6 +367,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         if (!CURRENT_CONFIG_VERSION.equals(existingVersion)) {
             debug("Old config version detected (" + existingVersion + ").");
             error("Config version is outdated! Please consider updating config.yml manually.", "https://docs.advancedarmorstands.ir/config-version-outdated/");
+            error("all unavailable values will be considered as default");
             CONFIG_OUTDATED = true;
         }
 
