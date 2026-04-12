@@ -43,9 +43,9 @@ public class TellCommand extends SubCommand {
     public ArrayList<String> getExampleLore() {
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as tell " + ((ArmorStandUtils.getArmorStandList().isEmpty()) ? "test (example" : ArmorStandUtils.getArmorStandList().get(0)) + " who are you?");
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as tell " + ((ArmorStandUtils.getArmorStandList().isEmpty()) ? "test (example" : ArmorStandUtils.getArmorStandList().get(0)) + " what is your name?");
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as tell " + ((ArmorStandUtils.getArmorStandList().isEmpty()) ? "test (example" : ArmorStandUtils.getArmorStandList().get(0)) + " whats 2 + 2?");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as tell " + ((ArmorStandUtils.getArmorStandList().isEmpty()) ? "test (example)" : ArmorStandUtils.getArmorStandList().get(0)) + " who are you?");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as tell " + ((ArmorStandUtils.getArmorStandList().isEmpty()) ? "test (example)" : ArmorStandUtils.getArmorStandList().get(0)) + " what is your name?");
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as tell " + ((ArmorStandUtils.getArmorStandList().isEmpty()) ? "test (example)" : ArmorStandUtils.getArmorStandList().get(0)) + " whats 2 + 2?");
         return lore;
     }
 
