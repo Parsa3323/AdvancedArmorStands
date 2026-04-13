@@ -418,15 +418,19 @@ public final class AdvancedArmorStands extends JavaPlugin {
         logger.info(message);
     }
 
-    public static void warn(String message) {
+    public static void warn(String message, boolean log) {
         if (logLevel.intValue() <= Level.WARNING.intValue()) {
             logger.warning("[WARNING] " + message);
-            IssueUtils.record(IssueLevel.WARNING, message, null);
+            if (log) IssueUtils.record(IssueLevel.WARNING, message, null);
         }
     }
 
     public static void error(String message) {
         error(message, null, false);
+    }
+
+    public static void error(String ... message) {
+
     }
 
     public static void error(String message, boolean sendTbLink) {
@@ -442,11 +446,11 @@ public final class AdvancedArmorStands extends JavaPlugin {
             logger.severe("[ERROR] " + message);
 
             if (readMoreLink != null) {
-                warn("Learn more: " + readMoreLink);
+                warn("Learn more: " + readMoreLink, false);
             }
 
             if (sendTbLink) {
-                warn("Troubleshooting: https://docs.advancedarmorstands.ir/troubleshooting");
+                warn("Troubleshooting: https://docs.advancedarmorstands.ir/troubleshooting", false);
             }
 
             IssueUtils.record(IssueLevel.ERROR, message, readMoreLink);

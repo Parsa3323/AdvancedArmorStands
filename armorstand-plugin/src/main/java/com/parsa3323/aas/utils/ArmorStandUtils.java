@@ -536,7 +536,7 @@ public class ArmorStandUtils {
         if (totalArmorStands > foundArmorStands) {
 
             AdvancedArmorStands.warn("It looks like some ArmorStands haven't been loaded by the world generator. To fix this, " +
-                    "enable 'auto-load-armor-stands' in the config to automatically load all ArmorStands.");
+                    "enable 'auto-load-armor-stands' in the config to automatically load all ArmorStands.", true);
 
 
         }

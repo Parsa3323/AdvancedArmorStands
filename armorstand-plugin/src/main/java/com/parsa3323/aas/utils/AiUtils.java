@@ -205,25 +205,25 @@ public class AiUtils {
             switch (action) {
                 case "create":
                     if (name == null || params == null) {
-                        AdvancedArmorStands.warn("Invalid create action from AI: missing name or params.");
+                        AdvancedArmorStands.warn("Invalid create action from AI: missing name or params.", true);
                         return;
                     }
                     ArmorStandPoseData poseDataCreate = parsePoseData(params.optJSONObject("pose"));
                     Location locCreate = parseLocation(params, player);
                     if (locCreate == null) {
-                        AdvancedArmorStands.warn("Failed to determine location for create action.");
+                        AdvancedArmorStands.warn("Failed to determine location for create action.", true);
                         return;
                     }
                     try {
                         api.getArmorStandManager().createArmorStand(name, poseDataCreate, locCreate, player);
                     } catch (ArmorStandAlreadyExistsException e) {
-                        AdvancedArmorStands.warn("ArmorStand with name " + name + " already exists.");
+                        AdvancedArmorStands.warn("ArmorStand with name " + name + " already exists.", true);
                     }
                     break;
 
                 case "remove":
                     if (name == null) {
-                        AdvancedArmorStands.warn("Invalid remove action: missing name.");
+                        AdvancedArmorStands.warn("Invalid remove action: missing name.", true);
                         return;
                     }
                     api.getArmorStandManager().removeArmorStand(realCaseName);
@@ -231,7 +231,7 @@ public class AiUtils {
 
                 case "pose":
                     if (name == null || params == null) {
-                        AdvancedArmorStands.warn("Invalid pose action: missing name or params.");
+                        AdvancedArmorStands.warn("Invalid pose action: missing name or params.", true);
                         return;
                     }
                     ArmorStandPoseData poseData = parsePoseData(params.optJSONObject("pose"));
@@ -241,10 +241,10 @@ public class AiUtils {
                             try {
                                 api.reloadPlugin();
                             } catch (ReloadException e) {
-                                AdvancedArmorStands.warn("Pose applied but failed to reload plugin: " + e.getMessage());
+                                AdvancedArmorStands.warn("Pose applied but failed to reload plugin: " + e.getMessage(), true);
                             }
                         } catch (ArmorStandNotFoundException e) {
-                            AdvancedArmorStands.warn("ArmorStand " + realCaseName + " not found.");
+                            AdvancedArmorStands.warn("ArmorStand " + realCaseName + " not found.", true);
                         }
                     }, 2L);
 
@@ -252,7 +252,7 @@ public class AiUtils {
 
                 case "none":
                 default:
-                    AdvancedArmorStands.warn("AI did not provide a valid action.");
+                    AdvancedArmorStands.warn("AI did not provide a valid action.", true);
                     break;
             }
         } catch (Exception e) {

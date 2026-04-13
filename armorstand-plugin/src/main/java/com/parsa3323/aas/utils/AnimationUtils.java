@@ -65,7 +65,7 @@ public class AnimationUtils {
                 List<Map<?, ?>> steps = cs.getMapList("steps");
 
                 if (steps == null || steps.isEmpty()) {
-                    AdvancedArmorStands.warn("Animation '" + animationName + "' has no steps defined!");
+                    AdvancedArmorStands.warn("Animation '" + animationName + "' has no steps defined!", true);
                     continue;
                 }
 

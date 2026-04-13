@@ -105,7 +105,7 @@ public class ArmorStandsConfig {
             if (oldDir.delete()) {
                 AdvancedArmorStands.debug("Removed old caches directory.");
             } else {
-                AdvancedArmorStands.warn("Could not remove old caches directory.");
+                AdvancedArmorStands.warn("Could not remove old caches directory.", true);
             }
         }
     }
