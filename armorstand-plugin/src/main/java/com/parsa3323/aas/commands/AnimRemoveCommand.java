@@ -39,7 +39,7 @@ public class AnimRemoveCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Completely remove an animation";
+        return ChatColor.GRAY + "Completely remove an animation";
     }
 
     @Override
