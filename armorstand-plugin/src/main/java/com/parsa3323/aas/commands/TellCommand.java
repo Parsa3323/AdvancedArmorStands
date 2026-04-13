@@ -51,7 +51,7 @@ public class TellCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Talk to an ArmorStand";
+        return "Talk to an " + ChatColor.GRAY + "ArmorStand";
     }
 
     @Override
