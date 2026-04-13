@@ -47,7 +47,7 @@ public class MoveCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Moves an ArmorStand to your location";
+        return "Moves an ArmorStand to " + ChatColor.GRAY + "your location";
     }
 
     @Override
