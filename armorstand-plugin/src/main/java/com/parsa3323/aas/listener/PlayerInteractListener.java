@@ -52,7 +52,7 @@ import java.util.*;
 public class PlayerInteractListener implements Listener {
 
     private final Map<UUID, Integer> interactionCount  = new HashMap<>();
-    private final Map<UUID, Integer> deleteIntractionCount = new HashMap<>();
+    private final Map<UUID, Integer> deleteInteractionCount = new HashMap<>();
     private final Map<UUID, ArmorStand> selectCount = new HashMap<>();
     private final Map<UUID, ArmorStand> deletionCount = new HashMap<>();
 
@@ -183,11 +183,11 @@ public class PlayerInteractListener implements Listener {
                 if (player.isSneaking()) {
                     UUID playerId = player.getUniqueId();
 
-                    if (!deleteIntractionCount.containsKey(playerId) || deletionCount.get(playerId) != armorStand) {
-                        deleteIntractionCount.put(playerId, 0);
+                    if (!deleteInteractionCount.containsKey(playerId) || deletionCount.get(playerId) != armorStand) {
+                        deleteInteractionCount.put(playerId, 0);
                     }
 
-                    int count = deleteIntractionCount.getOrDefault(playerId, 0) + 1;
+                    int count = deleteInteractionCount.getOrDefault(playerId, 0) + 1;
                     System.out.println(count);
 
                     switch (count) {
@@ -205,7 +205,7 @@ public class PlayerInteractListener implements Listener {
 
                     if (count < 3) {
                         deletionCount.put(playerId, armorStand);
-                        deleteIntractionCount.put(playerId, count);
+                        deleteInteractionCount.put(playerId, count);
 
 
                         TextComponent textComponent = new TextComponent(ChatColor.RED + "Do this " + (3 - count) + " more time" + ((3 - count) > 1 ? "s" : "") + " to delete this ArmorStand.");
@@ -221,7 +221,7 @@ public class PlayerInteractListener implements Listener {
 
                         ArmorStandUtils.deleteArmorStand(standName, player);
 
-                        deleteIntractionCount.remove(playerId);
+                        deleteInteractionCount.remove(playerId);
                     }
                 }
 
