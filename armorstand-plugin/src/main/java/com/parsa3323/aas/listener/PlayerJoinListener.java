@@ -54,7 +54,7 @@ public class PlayerJoinListener implements Listener {
 
                     e.getPlayer().sendMessage(ChatColor.YELLOW +
                             "AdvancedArmorStands has encountered " + totalErrors +
-                            " error(s)/warning(s) this session. Check the log file for details.");
+                            " error" + (IssueUtils.getTotalErrors() > 1 ? "s" : "") + " & warning" + (IssueUtils.getTotalWarnings() > 1 ? "s" : "") + " this session. Check the log file for details.");
                 }
 
                 if (AdvancedArmorStands.CONFIG_OUTDATED) {
