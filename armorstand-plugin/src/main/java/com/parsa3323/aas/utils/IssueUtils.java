@@ -47,7 +47,7 @@ public class IssueUtils {
     }
 
     public static void record(IssueLevel level, String message, String readMore) {
-        String key = level.name() + ":" + normalize(message) + " - " + level.toString().toLowerCase();
+        String key = level.name() + ":" + normalize(message);
 
         IssueData issue = ISSUES.get(key);
         if (issue == null) {
@@ -80,6 +80,8 @@ public class IssueUtils {
                 writer.write("- " + issue.message);
                 writer.newLine();
                 writer.write("  Occurrences: " + issue.occurrences);
+                writer.newLine();
+                writer.write("  Type: " + issue.level.toString().toLowerCase());
                 writer.newLine();
 
                 if (issue.readMore != null) {
