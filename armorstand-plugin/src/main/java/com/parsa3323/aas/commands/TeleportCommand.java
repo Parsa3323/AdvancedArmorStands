@@ -42,7 +42,7 @@ public class TeleportCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Teleport to an ArmorStand";
+        return "Teleport to an " + ChatColor.GRAY + "ArmorStand";
     }
 
     @Override
