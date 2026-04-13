@@ -190,7 +190,7 @@ public class AiUtils {
         try {
             obj = new JSONObject(aiJson);
         } catch (Exception e) {
-            AdvancedArmorStands.error("Failed to parse AI response: " + e.getMessage());
+            AdvancedArmorStands.error(null, false, "Failed to parse AI response: " + e.getMessage());
             return;
         }
 
@@ -256,7 +256,7 @@ public class AiUtils {
                     break;
             }
         } catch (Exception e) {
-            AdvancedArmorStands.error("Unexpected error handling AI action: " + e.getMessage());
+            AdvancedArmorStands.error(null, false, "Unexpected error handling AI action: " + e.getMessage());
             e.printStackTrace();
         }
     }

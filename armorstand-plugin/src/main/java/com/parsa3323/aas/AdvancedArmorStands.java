@@ -170,10 +170,11 @@ public final class AdvancedArmorStands extends JavaPlugin {
             VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTVjZWQzNTI4N2JmYTAxNjY1ZGE3MjQ3MjM5YmEyNDE0YzE5MzZjNTZkMmU1YjIwMjdkMDUzMGQ5Yjk3MjUzMCJ9fX0=");
             debug("XSeries support is available.");
         } catch (Throwable t) {
-            error("XSeries are not supported on this server: " + t.getClass().getSimpleName() + ": " + t.getMessage(),
+            error("https://docs.advancedarmorstands.ir/version-support-error",
+                    false,
+                    "XSeries are not supported on this server: " + t.getClass().getSimpleName() + ": " + t.getMessage(),
                     " ",
                     "XSeries features are not supported on this server. Please use plugin version 1.0.0-beta.15 or older (not recommended): https://github.com/Parsa3323/AdvancedArmorStands/releases/tag/v1.0.0-beta.15",
-                    "Read more: https://docs.advancedarmorstands.ir/version-support-error",
                     "Using older versions is not recommended and may lead to other issues.");
             Bukkit.getPluginManager().disablePlugin(this);
         }
@@ -365,8 +366,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         if (!CURRENT_CONFIG_VERSION.equals(existingVersion)) {
             debug("Old config version detected (" + existingVersion + ").");
-            error("Config version is outdated! Please consider updating config.yml manually.", "https://docs.advancedarmorstands.ir/config-version-outdated/");
-            error("all unavailable values will be considered as default");
+            error("https://docs.advancedarmorstands.ir/config-version-outdated/", false, "Config version is outdated! Please consider updating config.yml manually.", "all unavailable values will be considered as default");
             CONFIG_OUTDATED = true;
         }
 
@@ -388,7 +388,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
                 try {
                     ArmorStandUtils.deleteArmorStand(name);
                 } catch (ArmorStandNotFoundException e) {
-                    error("Error while deleting armorstand: " + e.getMessage());
+                    error(null, false, "Error while deleting ArmorStand: " + e.getMessage());
                 }
                 return true;
             }
@@ -424,43 +424,23 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
     }
 
-    public static void error(String message) {
-        error(message, null, false);
-    }
-
-    public static void error(String ... message) {
+    public static void error(String readMoreLink, boolean sendTbLink,  String ... message) {
         for (String text : message) {
             if (logLevel.intValue() <= Level.SEVERE.intValue()) {
                 logger.severe("[ERROR] " + text);
+
+                if (readMoreLink != null) {
+                    logger.severe("Learn more: " + readMoreLink);
+                }
+
+                if (sendTbLink) {
+                    logger.severe("Troubleshooting: https://docs.advancedarmorstands.ir/troubleshooting");
+                }
+
             }
         }
-        IssueUtils.record(IssueLevel.ERROR, Arrays.toString(message), null);
+        IssueUtils.record(IssueLevel.ERROR, Arrays.toString(message), readMoreLink);
     }
-
-    public static void error(String message, boolean sendTbLink) {
-        error(message, "https://docs.advancedarmorstands.ir/troubleshooting", sendTbLink);
-    }
-
-    public static void error(String message, String readMoreLink) {
-        error(message, readMoreLink, false);
-    }
-
-    private static void error(String message, String readMoreLink, boolean sendTbLink) {
-        if (logLevel.intValue() <= Level.SEVERE.intValue()) {
-            logger.severe("[ERROR] " + message);
-
-            if (readMoreLink != null) {
-                warn("Learn more: " + readMoreLink, false);
-            }
-
-            if (sendTbLink) {
-                warn("Troubleshooting: https://docs.advancedarmorstands.ir/troubleshooting", false);
-            }
-
-            IssueUtils.record(IssueLevel.ERROR, message, readMoreLink);
-        }
-    }
-
 
     public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
         PlayerMenuUtility playerMenuUtility;

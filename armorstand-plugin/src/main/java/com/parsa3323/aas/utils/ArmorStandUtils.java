@@ -354,7 +354,7 @@ public class ArmorStandUtils {
         String path = "armorstands." + s;
 
         if (!config.contains(path)) {
-            AdvancedArmorStands.error("ArmorStand not found!", true);
+            AdvancedArmorStands.error(null, true, "ArmorStand not found!");
             return null;
         }
 
@@ -362,7 +362,7 @@ public class ArmorStandUtils {
         World world = Bukkit.getWorld(config.getString(path + ".World"));
 
         if (world == null) {
-            AdvancedArmorStands.error("World not found!", true);
+            AdvancedArmorStands.error(null, true, "World not found!");
             return null;
         }
 

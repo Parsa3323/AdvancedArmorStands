@@ -126,7 +126,7 @@ public interface ArmorstandApi  {
         @Deprecated
         void error(String message) throws LogException;
 
-        void error(String message, String troubleShootingLink) throws LogException;
+        void error(String message, String readMoreLink) throws LogException;
 
         void error(String message, boolean b) throws LogException;
 

@@ -41,7 +41,7 @@ public class IssueUtils {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
-                AdvancedArmorStands.error("Error while creating errors.txt: " + e.getMessage(), true);
+                AdvancedArmorStands.error(null, true, "Error while creating errors.txt: " + e.getMessage());
             }
         }
     }
@@ -94,7 +94,7 @@ public class IssueUtils {
 
         } catch (IOException e) {
             e.printStackTrace();
-            AdvancedArmorStands.error("Error while saving errors.txt: " + e.getMessage(), true);
+            AdvancedArmorStands.error(null, true, "Error while saving errors.txt: " + e.getMessage());
         }
     }
 

@@ -46,7 +46,7 @@ public class AiConfig {
                 save();
             } catch (IOException e) {
                 e.printStackTrace();
-                AdvancedArmorStands.error("Error while creating file " + file.getName() + ": " + e.getMessage(), true);
+                AdvancedArmorStands.error(null, true, "Error while creating file " + file.getName() + ": " + e.getMessage());
             }
         } else {
             reload();
@@ -66,7 +66,7 @@ public class AiConfig {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            AdvancedArmorStands.error("Error while saving file " + file.getName() + ": " + e.getMessage(), true);
+            AdvancedArmorStands.error(null, true, "Error while saving file " + file.getName() + ": " + e.getMessage());
 
         }
     }
@@ -83,7 +83,7 @@ public class AiConfig {
         } catch (Exception e) {
             e.printStackTrace();
             fileConfiguration = new YamlConfiguration();
-            AdvancedArmorStands.error("Error while reloading file " + file.getName() + ": " + e.getMessage(), true);
+            AdvancedArmorStands.error(null, true, "Error while reloading file " + file.getName() + ": " + e.getMessage());
         }
     }
 

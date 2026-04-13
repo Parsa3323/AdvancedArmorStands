@@ -59,9 +59,9 @@ public class ReloadCommand extends SubCommand {
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         } catch (Exception e) {
             player.sendMessage(ChatColor.RED + "Error while reloading plugin check the console for more details");
-            AdvancedArmorStands.error("Error while reloading: " + e.getMessage(), true);
+            AdvancedArmorStands.error(null, true, "Error while reloading: " + e.getMessage());
             e.printStackTrace();
-            AdvancedArmorStands.error(ChatColor.RED + e.getMessage(), true);
+            AdvancedArmorStands.error(null, true, ChatColor.RED + e.getMessage());
         }
 
     }

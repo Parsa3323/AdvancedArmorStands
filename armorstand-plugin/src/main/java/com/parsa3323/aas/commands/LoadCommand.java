@@ -91,11 +91,11 @@ public class LoadCommand extends SubCommand {
                 } catch (ArmorStandLoadException e) {
                     failed++;
                     failedNames.add(name);
-                    AdvancedArmorStands.error("Error loading " + name + ": " + e.getMessage(), true);
+                    AdvancedArmorStands.error(null, true, "Error loading " + name + ": " + e.getMessage());
                 } catch (NullPointerException e) {
                     failed++;
                     failedNames.add(name + " [NULL]");
-                    AdvancedArmorStands.error("Null error with " + name + ": " + e.getMessage(), true);
+                    AdvancedArmorStands.error(null, true, "Null error with " + name + ": " + e.getMessage());
                 }
             }
 
@@ -138,7 +138,7 @@ public class LoadCommand extends SubCommand {
             SoundUtils.playSuccessSound(player);
         } catch (ArmorStandLoadException e) {
             player.sendMessage(ChatColor.RED + "Failed to load the ArmorStand check console for more details!");
-            AdvancedArmorStands.error("Error loading an armorstand: " + e.getMessage(), true);
+            AdvancedArmorStands.error(null, true, "Error loading an armorstand: " + e.getMessage());
             e.printStackTrace();
             SoundUtils.playErrorSound(player);
         }

@@ -96,7 +96,7 @@ public class ArmorStandsConfig {
                 Files.move(oldFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 AdvancedArmorStands.debug("Moved armorstands.yml from caches/ to cache/ folder.");
             } catch (IOException e) {
-                AdvancedArmorStands.error("Failed to move armorstands.yml to new cache folder: " + e.getMessage(), true);
+                AdvancedArmorStands.error(null, true, "Failed to move armorstands.yml to new cache folder: " + e.getMessage());
             }
         }
 
