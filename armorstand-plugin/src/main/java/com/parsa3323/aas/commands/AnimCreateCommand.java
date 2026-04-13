@@ -41,7 +41,7 @@ public class AnimCreateCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Create/edit an animation with an as";
+        return ChatColor.GRAY + "Create/edit an animation with an as";
     }
 
     @Override
@@ -55,7 +55,7 @@ public class AnimCreateCommand extends SubCommand {
     }
     @Override
     public String getSyntax() {
-        return "/as animation create <name> <animation-name>";
+        return "/as animation create <name> " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "<animation-name>";
     }
 
     @Override
