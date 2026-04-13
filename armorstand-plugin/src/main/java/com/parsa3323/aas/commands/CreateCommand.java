@@ -51,7 +51,7 @@ public class CreateCommand extends SubCommand implements Listener {
 
     @Override
     public String getDescription() {
-        return "Create an ArmorStand";
+        return "Create an " + ChatColor.GRAY + "ArmorStand";
     }
 
     @Override
