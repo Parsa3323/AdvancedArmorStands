@@ -43,7 +43,7 @@ public class RenameCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Rename an as's name";
+        return "Rename an " + ChatColor.GRAY + "as's name";
     }
 
     @Override
