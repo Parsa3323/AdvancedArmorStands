@@ -236,9 +236,9 @@ public class CommandManager implements CommandExecutor {
                 sender.sendMessage(ChatColor.GRAY + "    Author: " + ChatColor.YELLOW + "Parsa3323");
                 sender.sendMessage(
                         ChatColor.GRAY + "    Issues: " +
-                                ChatColor.RED + IssueUtils.getTotalErrors() + " issue(s) " +
+                                ChatColor.RED + IssueUtils.getTotalErrors() + " issue" + (IssueUtils.getTotalErrors() > 1 ? "s" : "") + " " +
                                 ChatColor.GRAY + "and " +
-                                ChatColor.YELLOW + IssueUtils.getTotalWarnings() + " warning(s)"
+                                ChatColor.YELLOW + IssueUtils.getTotalWarnings() + " warning" + (IssueUtils.getTotalWarnings() > 1 ? "s" : "")
                 );
                 sender.sendMessage(ChatColor.GRAY + "    Version Support: " + ChatColor.YELLOW + VersionSupportUtil.getVersionSupport().getClass().getSimpleName());
                 sender.sendMessage("");
