@@ -49,7 +49,7 @@ public class AnimAddCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Add an animation to as";
+        return ChatColor.GRAY + "Add an animation to as";
     }
 
     @Override
