@@ -425,20 +425,19 @@ public final class AdvancedArmorStands extends JavaPlugin {
     }
 
     public static void error(String readMoreLink, boolean sendTbLink,  String ... message) {
-        for (String text : message) {
-            if (logLevel.intValue() <= Level.SEVERE.intValue()) {
+        if (logLevel.intValue() <= Level.SEVERE.intValue()) {
+            for (String text : message) {
                 logger.severe("[ERROR] " + text);
+            }
+            if (readMoreLink != null) {
+                logger.severe("Learn more: " + readMoreLink);
+            }
 
-                if (readMoreLink != null) {
-                    logger.severe("Learn more: " + readMoreLink);
-                }
-
-                if (sendTbLink) {
-                    logger.severe("Troubleshooting: https://docs.advancedarmorstands.ir/troubleshooting");
-                }
-
+            if (sendTbLink) {
+                logger.severe("Troubleshooting: https://docs.advancedarmorstands.ir/troubleshooting");
             }
         }
+
         IssueUtils.record(IssueLevel.ERROR, Arrays.toString(message), readMoreLink);
     }
 
