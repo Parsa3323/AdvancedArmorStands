@@ -170,12 +170,11 @@ public final class AdvancedArmorStands extends JavaPlugin {
             VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTVjZWQzNTI4N2JmYTAxNjY1ZGE3MjQ3MjM5YmEyNDE0YzE5MzZjNTZkMmU1YjIwMjdkMDUzMGQ5Yjk3MjUzMCJ9fX0=");
             debug("XSeries support is available.");
         } catch (Throwable t) {
-            error("XSeries are not supported on this server: " + t.getClass().getSimpleName() + ": " + t.getMessage());
-            error(" ");
-            error("XSeries features are not supported on this server. Please use plugin version 1.0.0-beta.15 or older (not recommended): https://github.com/Parsa3323/AdvancedArmorStands/releases/tag/v1.0.0-beta.15");
-            warn("Read more: https://docs.advancedarmorstands.ir/version-support-error");
-            warn("Using older versions is not recommended and may lead to other issues.");
-
+            error("XSeries are not supported on this server: " + t.getClass().getSimpleName() + ": " + t.getMessage(),
+                    " ",
+                    "XSeries features are not supported on this server. Please use plugin version 1.0.0-beta.15 or older (not recommended): https://github.com/Parsa3323/AdvancedArmorStands/releases/tag/v1.0.0-beta.15",
+                    "Read more: https://docs.advancedarmorstands.ir/version-support-error",
+                    "Using older versions is not recommended and may lead to other issues.");
             Bukkit.getPluginManager().disablePlugin(this);
         }
 
@@ -430,7 +429,12 @@ public final class AdvancedArmorStands extends JavaPlugin {
     }
 
     public static void error(String ... message) {
-
+        for (String text : message) {
+            if (logLevel.intValue() <= Level.SEVERE.intValue()) {
+                logger.severe("[ERROR] " + text);
+            }
+        }
+        IssueUtils.record(IssueLevel.ERROR, Arrays.toString(message), null);
     }
 
     public static void error(String message, boolean sendTbLink) {

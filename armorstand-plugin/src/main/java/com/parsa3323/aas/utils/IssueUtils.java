@@ -47,7 +47,7 @@ public class IssueUtils {
     }
 
     public static void record(IssueLevel level, String message, String readMore) {
-        String key = level.name() + ":" + normalize(message);
+        String key = level.name() + ":" + normalize(message) + " - " + level.toString().toLowerCase();
 
         IssueData issue = ISSUES.get(key);
         if (issue == null) {
