@@ -91,7 +91,7 @@ public class CommandManager implements CommandExecutor {
 
                         int totalPages = (int) Math.ceil((double) visibleCommands.size() / COMMANDS_PER_PAGE);
                         if (page < 1 || page > totalPages) {
-                            player.sendMessage(ChatColor.RED  + "Invalid Page, Please choose a page between " + ChatColor.YELLOW + "1" + ChatColor.RED + " and " + ChatColor.YELLOW + totalPages + ChatColor.RED + ".");
+                            player.sendMessage(ChatColor.RED  + "Invalid Page, Please choose a page between 1 and " + totalPages + ".");
                             return true;
                         }
 
