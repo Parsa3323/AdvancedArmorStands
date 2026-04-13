@@ -50,7 +50,7 @@ public class AnimClearCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Clear animations of an as";
+        return "Clear " + ChatColor.GRAY + "animations of an as";
     }
 
     @Override
