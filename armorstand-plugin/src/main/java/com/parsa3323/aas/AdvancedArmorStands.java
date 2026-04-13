@@ -239,7 +239,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         ArmorStandsConfig.save();
 
         if (checkForArmorStandConflictAndDelete()) {
-            warn("ArmorStand name conflicts found. Deleting one...");
+            warn("ArmorStand name conflicts found. Deleting one...", true);
         }
 
         AiConfig.init();
