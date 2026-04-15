@@ -100,7 +100,10 @@ public class CommandManager implements CommandExecutor {
 
                         player.sendMessage("");
                         player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                        player.sendMessage("     " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands ");
+                        TextComponent textComponent = new TextComponent("     " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands ");
+                        String version = AdvancedArmorStands.plugin.getDescription().getVersion();
+                        textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "AdvancedArmorStands" + ChatColor.WHITE + " Running v" + (version.contains("dev") ? version.replaceAll("-dev\\d+", "") + ChatColor.RED + " (Developer Release)" : version)).create()));
+                        player.spigot().sendMessage(textComponent);
                         player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
                         player.sendMessage("");
                         player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + " Available Commands " + ChatColor.GRAY + "(Page " + ChatColor.WHITE + page + ChatColor.GRAY + " of " + ChatColor.WHITE + totalPages + ChatColor.GRAY + ")");
@@ -211,7 +214,8 @@ public class CommandManager implements CommandExecutor {
                     if (subCommands.stream().allMatch(SubCommand::isForOps)) {
                         if (!PlayerManager.getByBukkit(player).isAdmin()) {
                             player.sendMessage("");
-                            TextComponent textComponent = new TextComponent(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "AdvancedArmorStands " + ChatColor.GOLD + "v" + AdvancedArmorStands.plugin.getDescription().getVersion() + ChatColor.GRAY + " by " + ChatColor.GOLD + "Parsa3323");
+                            String version = AdvancedArmorStands.plugin.getDescription().getVersion();
+                            TextComponent textComponent = new TextComponent(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GRAY + "AdvancedArmorStands " + ChatColor.GOLD + "v" + (version.contains("dev") ? version.replaceAll("-dev\\d+", "") + ChatColor.RED + " (Dev)" : version) + ChatColor.GRAY + " by " + ChatColor.GOLD + "Parsa3323");
 
                             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                                     new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Visit GitHub Repository")
@@ -232,7 +236,8 @@ public class CommandManager implements CommandExecutor {
                 sender.sendMessage("");
                 sender.sendMessage(ChatColor.GOLD + "======================================");
                 sender.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "    AdvancedArmorStands Plugin");
-                sender.sendMessage(ChatColor.GRAY + "    Version: " + ChatColor.WHITE + AdvancedArmorStands.plugin.getDescription().getVersion());
+                String version = AdvancedArmorStands.plugin.getDescription().getVersion();
+                sender.sendMessage(ChatColor.GRAY + "    Version: " + ChatColor.WHITE + (version.contains("dev") ? version.replaceAll("-dev\\d+", "") + ChatColor.RED + " (Developer Release)" : version));
                 sender.sendMessage(ChatColor.GRAY + "    Author: " + ChatColor.YELLOW + "Parsa3323");
                 sender.sendMessage(
                         ChatColor.GRAY + "    Issues: " +
