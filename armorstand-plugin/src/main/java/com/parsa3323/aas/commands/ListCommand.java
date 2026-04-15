@@ -66,7 +66,7 @@ public class ListCommand extends SubCommand {
         } else {
             player.sendMessage("");
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "         * Saved ArmorStands *");
+            player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "           Saved ArmorStands  ");
             player.sendMessage(ChatColor.YELLOW + "           Found " + ColorUtils.boldAndColor(ChatColor.YELLOW) + armorStandList.size() + ChatColor.RESET + ChatColor.YELLOW + " saved ArmorStand" + (armorStandList.size() == 1 ? "" : "s"));
 
             TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "DL All" + ChatColor.DARK_RED + "]");
@@ -104,9 +104,9 @@ public class ListCommand extends SubCommand {
 
 
 
-            int index = 1;
+
             for (String name : armorStandList) {
-                TextComponent indexComponent = new TextComponent(ChatColor.GRAY + " " + index + ChatColor.DARK_GRAY + " » ");
+                TextComponent indexComponent = new TextComponent(ChatColor.GOLD + " » ");
                 TextComponent nameComponent = new TextComponent((ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) ? ChatColor.GREEN : ChatColor.RED) + "" + ChatColor.BOLD + name);
                 nameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.YELLOW  + "ArmorStand: " + name)
@@ -148,7 +148,6 @@ public class ListCommand extends SubCommand {
                 } else {
                     player.spigot().sendMessage(indexComponent, nameComponent, deleteButton, loadButton);
                 }
-                index++;
             }
 
             player.sendMessage("");
