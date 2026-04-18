@@ -423,7 +423,7 @@ public class API implements ArmorstandApi {
                 ArmorStand armorStand = ArmorStandUtils.getArmorStandByName(asName);
 
                 if (armorStand == null) {
-                    throw new ArmorStandNotFoundException("Armor stand '" + asName + "' not found!");
+                    throw new ArmorStandNotFoundException("ArmorStand '" + asName + "' not found!");
                 }
 
                 armorStand.setHeadPose(poseData.getHead());
@@ -437,7 +437,7 @@ public class API implements ArmorstandApi {
             public void previewPose(String asName, ArmorStandPoseData poseData, Player p) throws ArmorStandNotFoundException {
                 ArmorStand stand = ArmorStandUtils.getArmorStandByName(asName);
                 if (stand == null) {
-                    throw new ArmorStandNotFoundException("Armor stand '" + asName + "' not found!");
+                    throw new ArmorStandNotFoundException("ArmorStand '" + asName + "' not found!");
                 }
 
                 ArmorStandUtils.savePose(stand);
@@ -483,7 +483,7 @@ public class API implements ArmorstandApi {
                 ArmorStand stand = ArmorStandUtils.getArmorStandByName(s);
 
                 if (stand == null) {
-                    throw new ArmorStandNotFoundException("Armor stand not found: " + s);
+                    throw new ArmorStandNotFoundException("ArmorStand not found: " + s);
                 }
 
                 return ArmorStandUtils.getArmorStandByName(s);
