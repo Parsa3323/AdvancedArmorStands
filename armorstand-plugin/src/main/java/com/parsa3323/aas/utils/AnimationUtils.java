@@ -47,7 +47,7 @@ public class AnimationUtils {
         }
 
         for (String key : ArmorStandUtils.getArmorStandList()) {
-            AdvancedArmorStands.debug("Checking armor stand key: " + key);
+            AdvancedArmorStands.debug("Checking ArmorStand key: " + key);
 
             if (ArmorStandsConfig.get().contains("armorstands." + key + ".animation")) {
                 AdvancedArmorStands.debug("armorstands." + key + ".animation");
