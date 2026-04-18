@@ -39,5 +39,5 @@ ai:
 
   # Allows all players (regardless of permission) to send messages to ArmorStand AIs.
   # When enabled, players can interact using the syntax:
-  # @<armorstand-name> <message>
+  # @<ArmorStandName> <Message>
   allow-players: true
