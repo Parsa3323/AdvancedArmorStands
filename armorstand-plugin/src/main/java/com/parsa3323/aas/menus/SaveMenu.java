@@ -98,7 +98,7 @@ public class SaveMenu extends PaginatedMenu {
 
             playerList.put(player.getUniqueId(), armorStand);
             player.closeInventory();
-            player.sendMessage(ChatColor.GREEN + "Type the name of the type you want to create and copy this armor stand's properties to, Type 'exit' to exit");
+            player.sendMessage(ChatColor.GREEN + "Type the name of the type you want to create and copy this ArmorStand's properties to, Type 'exit' to exit");
         }
 
         if (clickedItem.getType() == Material.ARMOR_STAND) {
