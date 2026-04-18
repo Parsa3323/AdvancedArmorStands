@@ -47,7 +47,7 @@ public class TriggerOption extends ActionItem {
         lore.add(ChatColor.GRAY + "Select how the command");
         lore.add(ChatColor.GRAY + "will be triggered when");
         lore.add(ChatColor.GRAY + "the player interacts with");
-        lore.add(ChatColor.GRAY + "the armor stand.");
+        lore.add(ChatColor.GRAY + "the ArmorStnad.");
 
         lore.add("");
 
