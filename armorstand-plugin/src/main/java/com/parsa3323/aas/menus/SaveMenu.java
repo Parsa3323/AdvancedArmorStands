@@ -132,7 +132,7 @@ public class SaveMenu extends PaginatedMenu {
             TypesConfig.save();
             TypesConfig.reload();
 
-            player.sendMessage(ChatColor.GREEN + "Saved armor stand's properties to '" + itemName + "'");
+            player.sendMessage(ChatColor.GREEN + "Saved ArmorStand's properties to '" + itemName + "'");
             player.closeInventory();
 
         }
