@@ -183,7 +183,7 @@ public class API implements ArmorstandApi {
                 if (ArmorStandSelectionCache.isIsInEditSession(player)) {
                     if (InventoryUtils.hasGameMode(player)) {
                         player.setGameMode(InventoryUtils.getAndClearGameMode(player));
-                        AdvancedArmorStands.debug("Restored " + player.getDisplayName() + "'s gamemode");
+                        AdvancedArmorStands.debug("Restored " + player.getDisplayName() + "'s GameMode");
                     }
                     if (InventoryUtils.hasBackup(player)) {
                         InventoryUtils.restore(player);
