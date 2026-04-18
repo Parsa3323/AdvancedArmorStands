@@ -97,14 +97,14 @@ public abstract class SubCommand {
         ArmorStand as = ArmorStandUtils.getArmorStandByName(input);
         if (as == null) {
             if (ArmorStandUtils.getArmorStandList().contains(input)) {
-                player.sendMessage(ChatColor.RED + "This armor stand is not loaded");
+                player.sendMessage(ChatColor.RED + "This ArmorStand is not loaded");
                 return null;
             }
             String suggestion = getClosest(input, ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand '" + input + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + input + "'. Did you mean '" + suggestion + "'?");
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid armor stand");
+                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
             }
             return null;
         }
