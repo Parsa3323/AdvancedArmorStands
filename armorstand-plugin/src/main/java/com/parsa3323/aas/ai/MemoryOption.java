@@ -137,7 +137,7 @@ public class MemoryOption extends AiSettingsOption {
 
         waiting.put(player.getUniqueId(), armorStand);
 
-        player.sendMessage(ChatColor.GREEN + "Open the book to change the instructions of the armor stand's AI. Type 'exit' in it to exit");
+        player.sendMessage(ChatColor.GREEN + "Open the book to change the instructions of the ArmorStand's AI. Type 'exit' in it to exit");
     }
 
 
