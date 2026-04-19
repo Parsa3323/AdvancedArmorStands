@@ -42,7 +42,7 @@ public class AiToggleOption extends AiSettingsOption {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.GRAY + "Enable or disable AI");
-        lore.add(ChatColor.GRAY + "for this ArmorStnad");
+        lore.add(ChatColor.GRAY + "for this ArmorStand");
 
         lore.add("");
         lore.add((ArmorStandUtils.hasAi(ArmorStandUtils.getNameByArmorStand(armorStand))) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Enabled" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Disabled");
