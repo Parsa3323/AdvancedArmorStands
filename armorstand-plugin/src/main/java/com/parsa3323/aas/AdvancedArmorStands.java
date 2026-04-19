@@ -111,6 +111,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         getLogger().info("Loading " + getDescription().getName() + " v" + getDescription().getVersion());
 
+        status("Loading version support...");
+
         versionSupport = VersionSupportUtil.getVersionSupport();
 
         if (!getDataFolder().exists()) {
@@ -285,7 +287,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
             ArmorStandUtils.autoLoadArmorStand(key);
         }
 
-        status("Checking ArmorStands...");
+        status("Checking armor stands...");
         ArmorStandUtils.checkArmorStandsFirstTime();
         ArmorStandUtils.checkForArmorStands();
 
