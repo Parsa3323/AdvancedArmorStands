@@ -60,7 +60,7 @@ public class TeleportCommand extends SubCommand {
         ArmorStand stand = checkArmorStandAndNotify(player, args[1]);
         if (stand == null) return;
 
-        if (!(stand != null && stand.isOnGround())) {
+        if (!stand.isOnGround()) {
             if (args.length >= 3 && args[2].equalsIgnoreCase("--force")) {
                 ArmorStandUtils.teleportToArmorStand(player, args[1]);
                 player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
