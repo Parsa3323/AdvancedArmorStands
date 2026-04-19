@@ -113,7 +113,15 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         status("Loading version support...");
 
+        if (isFirstTimeRunning) {
+            status("§aThank you for installing this plugin ❤");
+            status("§e" + getDescription().getDescription());
+        }
+
         versionSupport = VersionSupportUtil.getVersionSupport();
+
+        status("Loaded " + VersionSupportUtil.getVersionSupport().getClass().getSimpleName() + ", if that's not correct contact support");
+
 
         if (!getDataFolder().exists()) {
             isFirstTimeRunning = true;
@@ -130,10 +138,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         Metrics metrics = new Metrics(this, 25568);
 
-        if (isFirstTimeRunning) {
-            status("§aThank you for installing this plugin ❤");
-            status("§e" + getDescription().getDescription());
-        }
 
         status("Registering event listeners...");
 
