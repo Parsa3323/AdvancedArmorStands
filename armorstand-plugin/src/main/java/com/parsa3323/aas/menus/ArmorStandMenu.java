@@ -160,7 +160,7 @@ public class ArmorStandMenu extends Menu {
         long now = System.currentTimeMillis();
         if (cooldownMap.containsKey(uuid) && (now - cooldownMap.get(uuid)) < 1000) {
             int rem = (int) Math.ceil((1000 - (now - cooldownMap.get(uuid))) / 1000.0);
-            p.sendMessage(ChatColor.RED + "You must wait " + rem + " seconds before placing an item");
+            p.sendMessage(ChatColor.RED + "You must wait " + rem + " second" + (rem > 1 ? "s" : "") + " before placing an item");
             return;
         }
 
