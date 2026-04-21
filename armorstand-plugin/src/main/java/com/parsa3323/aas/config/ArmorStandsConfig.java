@@ -80,6 +80,7 @@ public class ArmorStandsConfig {
             String decryptedYaml = decrypt(encryptedBytes, KEY);
             fileConfiguration = YamlConfiguration.loadConfiguration(new StringReader(decryptedYaml));
         } catch (Exception e) {
+            AdvancedArmorStands.error(null, true, "Invalid cache, did you edit cache files??", e.getMessage());
             e.printStackTrace();
             fileConfiguration = new YamlConfiguration();
         }
