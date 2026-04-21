@@ -36,6 +36,7 @@ import com.parsa3323.aas.placeholderapi.PapiExpansion;
 import com.parsa3323.aas.utils.*;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -294,6 +295,13 @@ public final class AdvancedArmorStands extends JavaPlugin {
         status("Checking armor stands...");
         ArmorStandUtils.checkArmorStandsFirstTime();
         ArmorStandUtils.checkForArmorStands();
+
+        ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands");
+
+        for (String armorstand : cs.getKeys(false)) {
+            String loadDate = cs.getString(armorstand + ".info.date_loaded");
+            if (loadDate != null) cs.set(armorstand + ".info.date_loaded", null);
+        }
 
         status("Preparing animations...");
 

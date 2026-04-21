@@ -36,10 +36,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ArmorStandUtils {
@@ -547,6 +545,11 @@ public class ArmorStandUtils {
         try {
             ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands");
             ConfigurationSection qs = ArmorStandsConfig.get().getConfigurationSection("armorstands." + name);
+
+            Date now = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = format.format(now);
+            qs.set("info.date_loaded", formattedDate);
 
             World world = Bukkit.getWorld(cs.getString(name + ".World"));
             if (world == null) {
