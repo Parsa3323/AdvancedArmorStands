@@ -30,9 +30,7 @@ import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.player.PlayerManager;
-import com.parsa3323.aas.utils.ArmorStandSelectionCache;
-import com.parsa3323.aas.utils.ArmorStandUtils;
-import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.utils.*;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -56,9 +54,12 @@ public class PlayerInteractListener implements Listener {
     private final Map<UUID, ArmorStand> selectCount = new HashMap<>();
     private final Map<UUID, ArmorStand> deletionCount = new HashMap<>();
 
+
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerInteractAtEntityEvent(PlayerInteractAtEntityEvent e) {
         IPlayer player = PlayerManager.getByBukkit(e.getPlayer());
+        Player bukkitPlayer = player.getBukkitPlayer();
         if (e.getRightClicked() instanceof ArmorStand) {
             if (player.isAdmin()) {
                 if (ArmorStandUtils.isConfiguredArmorStand(e.getRightClicked())) {
@@ -70,31 +71,61 @@ public class PlayerInteractListener implements Listener {
                     e.setCancelled(true);
                 } else {
                     if (AdvancedArmorStands.plugin.getConfig().getBoolean("shift-right-click-to-add")) {
-
                         if (player.getBukkitPlayer().isSneaking()) {
 
                             UUID playerId = player.getBukkitPlayer().getUniqueId();
 
-                            if (!selectCount.containsKey(playerId) || selectCount.get(playerId) != (ArmorStand) e.getRightClicked()) {
+                            ArmorStand clicked = (ArmorStand) e.getRightClicked();
+
+                            if (!selectCount.containsKey(playerId) || selectCount.get(playerId) != clicked) {
                                 interactionCount.put(playerId, 0);
+                                CountDownUtils.stopCountdown(playerId);
                             }
+
+                            selectCount.put(playerId, clicked);
+
+                            if (!CountDownUtils.isRunning(playerId)) {
+                                CountDownUtils.startCountdown(
+                                        bukkitPlayer,
+                                        playerId,
+                                        10,
+
+                                        (time) -> VersionSupportUtil.getVersionSupport()
+                                                .sendActionBar(bukkitPlayer, ColorUtils.boldAndColor(ChatColor.GREEN) + time + "s"),
+
+                                        () -> {
+                                            interactionCount.remove(playerId);
+                                            selectCount.remove(playerId);
+                                            VersionSupportUtil.getVersionSupport().sendActionBar(bukkitPlayer, "");
+                                            player.sendMessage(ChatColor.RED + "Creation cancelled due to inactivity.");
+                                        }
+                                );
+                            }
+
+                            CountDownUtils.resetCountdown(playerId, 10);
 
                             int count = interactionCount.getOrDefault(playerId, 0) + 1;
 
                             if (count < 3) {
-                                selectCount.put(playerId, (ArmorStand) e.getRightClicked());
                                 interactionCount.put(playerId, count);
-                                TextComponent textComponent = new TextComponent(ChatColor.GREEN + "Do this " + (3 - count) + " more time" + ((3 - count) > 1 ? "s" : "") +  " to save this ArmorStand.");
-                                textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "You can disable this in the config.yml").create()));
+                                TextComponent textComponent = new TextComponent(
+                                        ChatColor.GREEN + "Do this " + (3 - count) + " more time" +
+                                                ((3 - count) > 1 ? "s" : "") + " to save this ArmorStand."
+                                );
+                                textComponent.setHoverEvent(new HoverEvent(
+                                        HoverEvent.Action.SHOW_TEXT,
+                                        new ComponentBuilder(ChatColor.GRAY + "You can disable this in config.yml").create()
+                                ));
 
-                                player.getBukkitPlayer().spigot().sendMessage(textComponent);
+                                bukkitPlayer.spigot().sendMessage(textComponent);
+
                             } else if (count == 3) {
                                 int randomSuffix = new Random().nextInt(900) + 100;
                                 String name = "SavedStand" + randomSuffix;
 
                                 ArmorStand stand = (ArmorStand) e.getRightClicked();
-
-                                ArmorStandCreateEvent armorStandCreateEvent = new ArmorStandCreateEvent(player.getBukkitPlayer(), stand, name);
+                                ArmorStandCreateEvent armorStandCreateEvent =
+                                        new ArmorStandCreateEvent(bukkitPlayer, stand, name);
                                 Bukkit.getPluginManager().callEvent(armorStandCreateEvent);
 
                                 if (armorStandCreateEvent.isCancelled()) {
@@ -102,10 +133,13 @@ public class PlayerInteractListener implements Listener {
                                     return;
                                 }
 
-                                player.getBukkitPlayer().sendMessage(ChatColor.YELLOW + "ArmorStand saved as " + name + "!");
+                                bukkitPlayer.sendMessage(ChatColor.YELLOW + "ArmorStand saved as " + name + "!");
                                 ArmorStandUtils.saveArmorStand(name, stand);
 
                                 interactionCount.remove(playerId);
+                                selectCount.remove(playerId);
+                                CountDownUtils.stopCountdown(playerId);
+                                VersionSupportUtil.getVersionSupport().sendActionBar(bukkitPlayer, "");
                             }
 
                         }
@@ -183,37 +217,48 @@ public class PlayerInteractListener implements Listener {
                 if (player.isSneaking()) {
                     UUID playerId = player.getUniqueId();
 
-                    if (!deleteInteractionCount.containsKey(playerId) || deletionCount.get(playerId) != armorStand) {
+                    if (!deletionCount.containsKey(playerId) || deletionCount.get(playerId) != armorStand) {
                         deleteInteractionCount.put(playerId, 0);
+                        CountDownUtils.stopCountdown(playerId);
                     }
+
+                    if (!CountDownUtils.isRunning(playerId)) {
+                        CountDownUtils.startCountdown(
+                                player,
+                                playerId,
+                                10,
+                                (time) -> VersionSupportUtil.getVersionSupport()
+                                        .sendActionBar(player, ColorUtils.boldAndColor(ChatColor.RED) + time + "s"),
+                                () -> {
+                                    deleteInteractionCount.remove(playerId);
+                                    deletionCount.remove(playerId);
+                                    VersionSupportUtil.getVersionSupport().sendActionBar(player, "");
+                                    player.sendMessage(ChatColor.RED + "Deletion cancelled due to inactivity.");
+                                }
+                        );
+                    }
+                    CountDownUtils.resetCountdown(playerId, 10);
 
                     int count = deleteInteractionCount.getOrDefault(playerId, 0) + 1;
-                    System.out.println(count);
 
-                    switch (count) {
-                        case 1:
-                            player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1f, 0.8f);
-                            break;
-                        case 2:
-                            player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1f, 1.0f);
-                            break;
-                        case 3:
-                            player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1f, 1.2f);
-                            break;
-
-                    }
+                    float[] pitches = {0.8f, 1.0f, 1.2f};
+                    player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1f, pitches[Math.min(count - 1, 2)]);
 
                     if (count < 3) {
                         deletionCount.put(playerId, armorStand);
                         deleteInteractionCount.put(playerId, count);
 
-
-                        TextComponent textComponent = new TextComponent(ChatColor.RED + "Do this " + (3 - count) + " more time" + ((3 - count) > 1 ? "s" : "") + " to delete this ArmorStand.");
-                        textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "You can disable this in the config.yml").create()));
+                        TextComponent textComponent = new TextComponent(
+                                ChatColor.RED + "Do this " + (3 - count) + " more time" +
+                                        ((3 - count) > 1 ? "s" : "") + " to delete this ArmorStand."
+                        );
+                        textComponent.setHoverEvent(new HoverEvent(
+                                HoverEvent.Action.SHOW_TEXT,
+                                new ComponentBuilder(ChatColor.GRAY + "You can disable this in the config.yml").create()
+                        ));
 
                         player.spigot().sendMessage(textComponent);
                     } else if (count == 3) {
-
                         ArmorStandDeleteEvent armorStandDeleteEvent = new ArmorStandDeleteEvent(player, armorStand);
                         Bukkit.getPluginManager().callEvent(armorStandDeleteEvent);
 
@@ -222,8 +267,12 @@ public class PlayerInteractListener implements Listener {
                         ArmorStandUtils.deleteArmorStand(standName, player);
 
                         deleteInteractionCount.remove(playerId);
+                        deletionCount.remove(playerId);
+                        CountDownUtils.stopCountdown(playerId);
+                        VersionSupportUtil.getVersionSupport().sendActionBar(player, "");
                     }
                 }
+
 
             }
 
