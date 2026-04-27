@@ -165,8 +165,6 @@ public interface ArmorstandApi  {
 
         boolean exists(String name);
 
-        boolean exists(ArmorStand as);
-
         boolean isLoaded(String name);
 
         boolean isLoaded(ArmorStand armorStand);

@@ -464,11 +464,6 @@ public class API implements ArmorstandApi {
             }
 
             @Override
-            public boolean exists(ArmorStand as) {
-                return ArmorStandUtils.exists(as);
-            }
-
-            @Override
             public boolean isLoaded(String name) {
                 return ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name));
             }

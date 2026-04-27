@@ -138,7 +138,7 @@ public class LoadCommand extends SubCommand {
             SoundUtils.playSuccessSound(player);
         } catch (ArmorStandLoadException e) {
             player.sendMessage(ChatColor.RED + "Failed to load the ArmorStand check console for more details!");
-            AdvancedArmorStands.error(null, true, "Error loading an armorstand: " + e.getMessage());
+            AdvancedArmorStands.error(null, true, "Error loading an ArmorStand: " + e.getMessage());
             e.printStackTrace();
             SoundUtils.playErrorSound(player);
         }

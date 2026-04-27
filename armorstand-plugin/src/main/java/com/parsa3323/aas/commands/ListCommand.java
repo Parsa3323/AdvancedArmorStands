@@ -20,6 +20,7 @@ package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.commands.manager.SubCommand;
+import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -55,7 +56,7 @@ public class ListCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        ArrayList<String> armorStandList = ArmorStandUtils.getArmorStandList();
+        ArrayList<String> armorStandList = ArmorStandUtils.getAllArmorStandList();
 
         if (armorStandList.isEmpty()) {
             player.sendMessage("");
@@ -107,13 +108,16 @@ public class ListCommand extends SubCommand {
 
             for (String name : armorStandList) {
                 TextComponent indexComponent = new TextComponent(ChatColor.GOLD + " » ");
-                TextComponent nameComponent = new TextComponent((ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) ? ChatColor.GREEN : ChatColor.RED) + "" + ChatColor.BOLD + name);
+                System.out.println(ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)));
+                System.out.println(ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted"));
+                System.out.println(ArmorStandUtils.exists(name));
+                TextComponent nameComponent = new TextComponent((ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) ? ChatColor.GREEN : (ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted")) ?  ChatColor.DARK_RED :  ChatColor.RED) + "" + ChatColor.BOLD + name);
                 nameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.YELLOW  + "ArmorStand: " + name)
                                 .append("\n" + ChatColor.GRAY + "Click buttons to interact")
-                                .append(!ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name))
+                                .append(!ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) && ArmorStandUtils.exists(name)
                                         ? "\n" + ChatColor.RED + "This ArmorStand is not loaded, enable auto load in config"
-                                        : "")
+                                        : (!ArmorStandUtils.exists(name)) ? "\n" + ChatColor.RED + "This ArmorStand was deleted, but its still restorable" : "")
                                 .create()));
 
                 TextComponent deleteButton = new TextComponent(ChatColor.DARK_RED + " [" + ChatColor.RED + ChatColor.BOLD + "DL" + ChatColor.DARK_RED + "]");
@@ -134,6 +138,15 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 teleportButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as teleport " + name));
 
+                TextComponent restoreButton = new TextComponent(ChatColor.DARK_GRAY + " [" + ChatColor.GRAY + ChatColor.BOLD + "RS" + ChatColor.DARK_GRAY + "]");
+                restoreButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Restore AmorStand")
+                                .append("\n" + ChatColor.GRAY + "Restore this ArmorStand")
+                                .append("\n" + " ")
+                                .append("\n" + ChatColor.YELLOW + "Click to restore: " + name)
+                                .create()));
+                restoreButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as restore " + name));
+
                 TextComponent loadButton = new TextComponent(ChatColor.DARK_GREEN + " [" + ChatColor.GREEN + ChatColor.BOLD + "LD" + ChatColor.DARK_GREEN + "]");
                 loadButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Load AmorStand")
@@ -145,6 +158,8 @@ public class ListCommand extends SubCommand {
 
                 if (ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name))) {
                     player.spigot().sendMessage(indexComponent, nameComponent, teleportButton, deleteButton);
+                } else if (ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted")) {
+                    player.spigot().sendMessage(indexComponent, nameComponent, deleteButton, restoreButton);
                 } else {
                     player.spigot().sendMessage(indexComponent, nameComponent, deleteButton, loadButton);
                 }

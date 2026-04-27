@@ -189,11 +189,11 @@ public class ArmorStandUtils {
     }
 
     public static boolean exists(String name) {
-        return ArmorStandsConfig.get().contains("armorstands." + name);
-    }
-
-    public static boolean exists(ArmorStand armorStand) {
-        return getNameByArmorStand(armorStand) != null;
+        String armorStandPath = "armorstands." + name;
+        if (ArmorStandsConfig.get().contains(armorStandPath)) {
+            return !ArmorStandsConfig.get().getBoolean(armorStandPath + ".deleted", false);
+        }
+        return false;
     }
 
     public static ArrayList<String> getArmorStandList() {
@@ -204,48 +204,30 @@ public class ArmorStandUtils {
             AdvancedArmorStands.debug("'ArmorStands' section is missing in ArmorStands.yml!");
             return new ArrayList<>();
         }
-        return new ArrayList<>(section.getKeys(false));
-    }
+        ArrayList<String> armorStandNames = new ArrayList<>(section.getKeys(false));
+        ArrayList<String> filteredNames = new ArrayList<>();
 
-    public static void deleteArmorStand(String name, Player player) {
-        FileConfiguration config = ArmorStandsConfig.get();
-        String path = "armorstands." + name;
-
-        if (!config.contains(path)) {
-            player.sendMessage(ChatColor.RED + "ArmorStand not found!");
-            return;
-        }
-
-        UUID uuid = UUID.fromString(config.getString(path + ".UUID"));
-        World world = Bukkit.getWorld(config.getString(path + ".World"));
-
-        if (world == null) {
-            player.sendMessage(ChatColor.RED + "World not found!");
-            return;
-        }
-
-
-
-        for (Entity entity : world.getEntities()) {
-            if (entity instanceof ArmorStand && entity.getUniqueId().equals(uuid)) {
-                ArmorStandDeleteEvent armorStandDeleteEvent = new ArmorStandDeleteEvent(player,(ArmorStand) entity);
-                Bukkit.getPluginManager().callEvent(armorStandDeleteEvent);
-                if (armorStandDeleteEvent.isCancelled()) {
-                    return;
-                }
-                entity.remove();
-                break;
+        for (String name : armorStandNames) {
+            if (!section.getBoolean(name + ".deleted")) {
+                filteredNames.add(name);
             }
         }
 
-
-        config.set(path, null);
-        ArmorStandsConfig.save();
-
-        player.sendMessage(ChatColor.GREEN + "Deleted ArmorStand: " + name);
+        return filteredNames;
     }
 
-    @Deprecated
+    public static ArrayList<String> getAllArmorStandList() {
+        FileConfiguration config = ArmorStandsConfig.get();
+
+        ConfigurationSection section = config.getConfigurationSection("armorstands");
+        if (section == null) {
+            AdvancedArmorStands.debug("'ArmorStands' section is missing in ArmorStands.yml!");
+            return new ArrayList<>();
+        }
+
+        return new ArrayList<>(section.getKeys(false));
+    }
+
     public static void deleteArmorStand(String name) throws ArmorStandNotFoundException {
         FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
@@ -263,15 +245,20 @@ public class ArmorStandUtils {
 
 
 
+
         for (Entity entity : world.getEntities()) {
             if (entity instanceof ArmorStand && entity.getUniqueId().equals(uuid)) {
+                ArmorStandDeleteEvent armorStandDeleteEvent = new ArmorStandDeleteEvent((ArmorStand) entity);
+                Bukkit.getPluginManager().callEvent(armorStandDeleteEvent);
+                if (armorStandDeleteEvent.isCancelled()) {
+                    return;
+                }
                 entity.remove();
                 break;
             }
         }
 
-
-        config.set(path, null);
+        config.set(path + ".deleted", true);
         ArmorStandsConfig.save();
     }
 

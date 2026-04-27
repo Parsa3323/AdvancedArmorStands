@@ -334,8 +334,12 @@ public class CreateCommand extends SubCommand implements Listener {
         String path = "armorstands." + name;
 
         if (config.contains(path)) {
-            event.getPlayer().sendMessage(ChatColor.RED + "An ArmorStand with this name already exists!");
             event.setCancelled(true);
+            if (config.getBoolean(path + ".deleted")) {
+                event.getPlayer().sendMessage(ChatColor.RED + "This ArmorStand was deleted, but it is still restorable. To create an ArmorStand with the same name, please fully delete this one using the ‘/delete’ command or by restarting the server.");
+                return;
+            }
+            event.getPlayer().sendMessage(ChatColor.RED + "An ArmorStand with this name already exists!");
             return;
         }
 

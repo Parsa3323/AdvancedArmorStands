@@ -18,13 +18,12 @@
 
 package com.parsa3323.aas.commands;
 
-import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
+import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
-import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.SoundUtils;
-import com.parsa3323.aas.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -33,49 +32,31 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeleteCommand extends SubCommand {
+public class RestoreCommand extends SubCommand {
     @Override
     public String getName() {
-        return "delete";
+        return "restore";
     }
 
     @Override
     public ArrayList<String> getExampleLore() {
-        ArrayList<String> lore = new ArrayList<>();
-
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as delete " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "exampleStand"));
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as delete --all");
-        return lore;
+        return null;
     }
 
     @Override
     public String getDescription() {
-        return "Delete an ArmorStand";
+        return "Restore an ArmorStand";
     }
-
 
     @Override
     public String getSyntax() {
-        return "/as delete <name|--all>";
+        return "/as restore <name>";
     }
 
     @Override
     public void perform(Player player, String[] args) {
-
         if (args.length < 2) {
             sendUsage(player);
-            return;
-        }
-
-        if (args[1].equalsIgnoreCase("--all")) {
-            for (String name : ArmorStandUtils.getArmorStandList()) {
-                try {
-                    ArmorStandUtils.deleteArmorStand(name);
-                } catch (ArmorStandNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            player.sendMessage(ChatColor.GREEN + "Successfully deleted all ArmorStands");
             return;
         }
 
@@ -92,24 +73,37 @@ public class DeleteCommand extends SubCommand {
             return;
         }
 
-        SoundUtils.playSuccessSound(player);
 
-        if (ArmorStandsConfig.get().getBoolean("armorstands." + args[1] + ".deleted")) {
-            ArmorStandsConfig.get().set("armorstands." + args[1], null);
-            ArmorStandsConfig.save();
-            player.sendMessage(ChatColor.GREEN + "Fully deleted ArmorStand");
+        if (!ArmorStandsConfig.get().getBoolean("armorstands." + args[1] + ".deleted")) {
+            player.sendMessage(ChatColor.RED + "This ArmorStand is not deleted or its too late");
             return;
         }
-        player.sendMessage(ChatColor.GREEN + "ArmorStand has been deleted, but it can be restored using the restored command, restart the server or run this command again to fully delete");
-        ArmorStandUtils.deleteArmorStand(args[1]);
+
+        ArmorStandsConfig.get().set("armorstands." + args[1] + ".deleted", false);
+        ArmorStandsConfig.save();
+        try {
+            ArmorStandUtils.loadArmorStand(args[1]);
+        } catch (ArmorStandLoadException e) {
+            player.sendMessage(ChatColor.RED + "Unknown error, check the console for more info");
+            AdvancedArmorStands.error(null, true, "Error while restoring ArmorStand: ", e.getMessage());
+            e.printStackTrace();
+        }
+        player.sendMessage(ChatColor.GREEN + "Successfully restored the ArmorStand");
+        SoundUtils.playSuccessSound(player);
     }
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        List<String> list = new ArrayList<>(ArmorStandUtils.getArmorStandList());
-        list.add("--all");
-        return list;
+        ArrayList<String> armorStands = new ArrayList<>();
 
+        ArmorStandUtils.getArmorStandList().forEach(name -> {
+            if (ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted")) {
+                armorStands.add(name);
+            }
+        }
+        );
+
+        return armorStands;
     }
 
     @Override
@@ -119,6 +113,6 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public String getAlias() {
-        return "dl";
+        return "rest";
     }
 }

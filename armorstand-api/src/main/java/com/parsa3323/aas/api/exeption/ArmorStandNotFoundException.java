@@ -18,7 +18,7 @@
 
 package com.parsa3323.aas.api.exeption;
 
-public class ArmorStandNotFoundException extends Exception {
+public class ArmorStandNotFoundException extends RuntimeException {
 
     public ArmorStandNotFoundException(String message) {
         super(message);

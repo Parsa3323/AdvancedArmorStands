@@ -298,10 +298,15 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         ConfigurationSection cs = ArmorStandsConfig.get().getConfigurationSection("armorstands");
 
-        for (String armorstand : cs.getKeys(false)) {
-            String loadDate = cs.getString(armorstand + ".info.date_loaded");
-            if (loadDate != null) cs.set(armorstand + ".info.date_loaded", null);
+        if (cs != null){
+            for (String armorstand : cs.getKeys(false)) {
+                String loadDate = cs.getString(armorstand + ".info.date_loaded");
+                if (loadDate != null) cs.set(armorstand + ".info.date_loaded", null);
+                if (cs.getBoolean(armorstand + ".deleted", false)) cs.set(armorstand, null);
+            }
         }
+
+        ArmorStandsConfig.save();
 
         status("Preparing animations...");
 

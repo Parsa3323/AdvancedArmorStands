@@ -23,7 +23,6 @@ import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -51,6 +50,7 @@ public class DeleteTool extends ToolsOption {
 
     @Override
     public void execute(InventoryClickEvent e, ArmorStand armorStand) {
-        ArmorStandUtils.deleteArmorStand(ArmorStandUtils.getNameByArmorStand(armorStand), (Player) e.getWhoClicked());
+        ArmorStandUtils.deleteArmorStand(ArmorStandUtils.getNameByArmorStand(armorStand));
+        e.getWhoClicked().sendMessage(ChatColor.GREEN + "ArmorStand has been deleted, but it can be restored using the restored command and it will be fully deleted with server restart");
     }
 }

@@ -259,12 +259,13 @@ public class PlayerInteractListener implements Listener {
 
                         player.spigot().sendMessage(textComponent);
                     } else if (count == 3) {
-                        ArmorStandDeleteEvent armorStandDeleteEvent = new ArmorStandDeleteEvent(player, armorStand);
+                        ArmorStandDeleteEvent armorStandDeleteEvent = new ArmorStandDeleteEvent(armorStand);
                         Bukkit.getPluginManager().callEvent(armorStandDeleteEvent);
 
                         if (armorStandDeleteEvent.isCancelled()) return;
 
-                        ArmorStandUtils.deleteArmorStand(standName, player);
+                        ArmorStandUtils.deleteArmorStand(standName);
+                        player.sendMessage(ChatColor.GREEN + "ArmorStand has been deleted, but it can be restored using the restored command and it will be fully deleted with server restart");
 
                         deleteInteractionCount.remove(playerId);
                         deletionCount.remove(playerId);

@@ -19,7 +19,6 @@
 package com.parsa3323.aas.api.events;
 
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -29,20 +28,13 @@ public class ArmorStandDeleteEvent extends Event {
 
     private boolean cancelled;
 
-    Player player;
-
-    public Player getPlayer() {
-        return player;
-    }
-
     public ArmorStand getArmorStand() {
         return armorStand;
     }
 
     ArmorStand armorStand;
 
-    public ArmorStandDeleteEvent(Player player, ArmorStand armorStand) {
-        this.player = player;
+    public ArmorStandDeleteEvent(ArmorStand armorStand) {
         this.armorStand = armorStand;
     }
 
