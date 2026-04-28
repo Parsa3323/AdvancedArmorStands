@@ -64,15 +64,9 @@ public class RestoreCommand extends SubCommand {
         ConfigurationSection section = config.getConfigurationSection("armorstands");
 
         if (section == null || !section.contains(args[1])) {
-            String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
-            if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
-            } else {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
-            }
+            player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
             return;
         }
-
 
         if (!ArmorStandsConfig.get().getBoolean("armorstands." + args[1] + ".deleted")) {
             player.sendMessage(ChatColor.RED + "This ArmorStand is not deleted or its too late");
@@ -97,7 +91,7 @@ public class RestoreCommand extends SubCommand {
         ArrayList<String> armorStands = new ArrayList<>();
 
         ArmorStandUtils.getArmorStandList().forEach(name -> {
-            if (ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted")) {
+            if (ArmorStandUtils.isRestorable(name)) {
                 armorStands.add(name);
             }
         }

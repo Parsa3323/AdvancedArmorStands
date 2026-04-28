@@ -60,6 +60,10 @@ public class ArmorStandUtils {
         return armorStand != null;
     }
 
+    public static boolean isRestorable(String name) {
+        return ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted");
+    }
+
     public static boolean hasAi(String name) {
         return ArmorStandsConfig.get().getBoolean("armorstands." + name + ".ai");
     }
