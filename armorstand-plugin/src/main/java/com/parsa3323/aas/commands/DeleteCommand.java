@@ -44,6 +44,7 @@ public class DeleteCommand extends SubCommand {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as delete " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "exampleStand"));
+        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as delete " + TextUtils.getFirstContent(ArmorStandUtils.getArmorStandList(), "exampleStand") + " --full");
         lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "/as delete --all");
         return lore;
     }
@@ -56,7 +57,7 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public String getSyntax() {
-        return "/as delete <name|--all>";
+        return "/as delete <name|--all> [--full]";
     }
 
     @Override
@@ -76,6 +77,14 @@ public class DeleteCommand extends SubCommand {
                 }
             }
             player.sendMessage(ChatColor.GREEN + "Successfully deleted all ArmorStands");
+            return;
+        }
+
+        if (args[1].equalsIgnoreCase("--full")) {
+            ArmorStandUtils.deleteArmorStand(args[1]);
+            ArmorStandsConfig.get().set("armorstands." + args[1], null);
+            ArmorStandsConfig.save();
+            player.sendMessage(ChatColor.GREEN + "Fully deleted ArmorStand");
             return;
         }
 
