@@ -75,7 +75,7 @@ public class ListCommand extends SubCommand {
 
             deleteAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                     new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete All ArmorStands")
-                            .append("\n" + ChatColor.GRAY + "This action cannot be undone!")
+                            .append("\n" + ChatColor.GRAY + "This action can be undone!")
                             .append("\n" + " ")
                             .append("\n" + ChatColor.YELLOW + "Click to delete all ArmorStands ")
                             .create()));
