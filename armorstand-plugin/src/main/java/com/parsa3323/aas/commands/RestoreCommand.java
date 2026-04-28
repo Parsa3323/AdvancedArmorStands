@@ -68,6 +68,7 @@ public class RestoreCommand extends SubCommand {
             return;
         }
 
+
         if (!ArmorStandsConfig.get().getBoolean("armorstands." + args[1] + ".deleted")) {
             player.sendMessage(ChatColor.RED + "This ArmorStand is not deleted or its too late");
             return;
