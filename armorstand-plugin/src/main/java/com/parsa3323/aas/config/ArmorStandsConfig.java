@@ -39,8 +39,19 @@ public class ArmorStandsConfig {
 
     public static void init() {
         file = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.aas");
+        File oldFile = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.yml");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
         moveOldFileIfNeeded();
+
+        if (!file.exists() && oldFile.exists()) {
+            AdvancedArmorStands.setMigrating(true);
+            if (oldFile.renameTo(file)) {
+                AdvancedArmorStands.debug("Renamed armorstands.yml to armorstands.aas");
+            } else {
+                AdvancedArmorStands.error(null, true, "Failed to rename armorstands.yml to armorstands.aas");
+            }
+        }
+
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -126,4 +137,6 @@ public class ArmorStandsConfig {
         byte[] decrypted = cipher.doFinal(encrypted);
         return new String(decrypted, StandardCharsets.UTF_8);
     }
+
+
 }
