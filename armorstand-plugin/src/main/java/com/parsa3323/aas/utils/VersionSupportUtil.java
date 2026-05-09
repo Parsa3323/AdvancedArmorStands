@@ -26,7 +26,6 @@ import com.parsa3323.versionsupport_1_11.VersionSupport_1_11;
 import com.parsa3323.versionsupport_1_12.VersionSupport_1_12;
 import com.parsa3323.versionsupport_1_18.Versionsupport_1_18;
 import com.parsa3323.versionsupport_1_19.Versionsupport_1_19;
-import com.parsa3323.versionsupport_26_1.VersionSupport_26_1;
 import org.bukkit.Bukkit;
 
 import java.util.AbstractMap;
@@ -100,11 +99,10 @@ public class VersionSupportUtil {
             versionSupport = new Versionsupport_1_18();
         } else if (VersionSupportUtil.isLowerThan("1.20")) {
             versionSupport = new Versionsupport_1_19();
-        } else if (VersionSupportUtil.isLowerThan("26")) {
-            versionSupport = new VersionSupport_1_20_1();
         } else {
-            versionSupport = new VersionSupport_26_1();
+            versionSupport = new VersionSupport_1_20_1();
         }
+
 
         return versionSupport;
     }
