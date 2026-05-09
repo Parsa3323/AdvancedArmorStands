@@ -83,6 +83,8 @@ debug: false # <========== Enable & Disable debug
 
 shift-right-click-to-add: true # <========== Enable & Disable shift-right-click to add ArmorStand
 
+shift-click-to-delete: false # <========== Enable & Disable shift-right-click to delete ArmorStand
+
 auto-load-armor-stands: false # <========== Automatically reload armor stands on server restart
 
 ai:
