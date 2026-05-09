@@ -23,37 +23,24 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.parsa3323</groupId>
-  <artifactId>AdvancedArmorStands</artifactId>
+  <artifactId>versionsupport_26_1</artifactId>
   <version>1.26.0</version>
-  <packaging>pom</packaging>
-    <modules>
-        <module>armorstand-plugin</module>
-        <module>armorstand-api</module>
-        <module>versionsupport_1_20_1</module>
-        <module>versionsupport_1_18</module>
-        <module>versionsupport_1_19</module>
-        <module>versionsupport_1_17</module>
-        <module>versionsupport_1_12</module>
-        <module>versionsupport_1_16_5</module>
-        <module>versionsupport_1_8</module>
-        <module>versionsupport_1_11</module>
-        <module>versionsupport_26_1</module>
-    </modules>
+  <packaging>jar</packaging>
 
+  <name>versionsupport_26_1</name>
 
-  <name>AdvancedArmorStands</name>
   <properties>
-    <maven.deploy.skip>true</maven.deploy.skip>
-    <java.version>1.8</java.version>
+    <java.version>21</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <build>
+    <defaultGoal>clean package</defaultGoal>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.13.0</version>
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
@@ -62,7 +49,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.4</version>
+        <version>3.5.3</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -80,46 +67,35 @@
       </resource>
     </resources>
   </build>
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Parsa3323/AdvancedArmorStands</url>
-        </repository>
-    </distributionManagement>
+
   <repositories>
       <repository>
-          <id>placeholderapi</id>
-          <url>https://repo.extendedclip.com/releases/</url>
+        <id>spigotmc-repo</id>
+        <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
       </repository>
       <repository>
-          <id>spigotmc-repo</id>
-          <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        <id>sonatype</id>
+        <url>https://oss.sonatype.org/content/groups/public/</url>
       </repository>
-      <repository>
-          <id>sonatype</id>
-          <url>https://oss.sonatype.org/content/groups/public/</url>
-      </repository>
-
   </repositories>
 
   <dependencies>
-      <dependency>
-          <groupId>com.github.cryptomorin</groupId>
-          <artifactId>XSeries</artifactId>
-          <version>11.3.0</version>
-      </dependency>
-      <dependency>
-          <groupId>me.clip</groupId>
-          <artifactId>placeholderapi</artifactId>
-          <version>2.11.6</version>
-          <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>org.spigotmc</groupId>
-          <artifactId>spigot-api</artifactId>
-          <version>1.8.8-R0.1-SNAPSHOT</version>
-          <scope>provided</scope>
-      </dependency>
+    <dependency>
+      <groupId>com.parsa3323</groupId>
+      <artifactId>armorstand-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot-api</artifactId>
+      <version>26.1-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.cryptomorin</groupId>
+      <artifactId>XSeries</artifactId>
+      <version>11.3.0</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 </project>
