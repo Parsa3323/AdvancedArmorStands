@@ -120,7 +120,7 @@ public class ListCommand extends SubCommand {
                                         : (!ArmorStandUtils.exists(name)) ? "\n" + ChatColor.RED + "This ArmorStand was deleted, but its still restorable" : "")
                                 .create()));
 
-                TextComponent deleteButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " dl");
+                TextComponent deleteButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " DL");
                 deleteButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete ArmorStand")
                                 .append("\n" + ChatColor.GRAY + "This action cannot be undone!")
@@ -129,7 +129,7 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 deleteButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as delete " + name));
 
-                TextComponent teleportButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " tp");
+                TextComponent teleportButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " TP");
                 teleportButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.AQUA + "" + ChatColor.BOLD + "Teleport to ArmorStand")
                                 .append("\n" + ChatColor.GRAY + "Instantly travel to this location")
@@ -138,7 +138,7 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 teleportButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as teleport " + name));
 
-                TextComponent restoreButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " rs");
+                TextComponent restoreButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " RS");
                 restoreButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Restore AmorStand")
                                 .append("\n" + ChatColor.GRAY + "Restore this ArmorStand")
@@ -147,7 +147,7 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 restoreButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as restore " + name));
 
-                TextComponent loadButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " ld");
+                TextComponent loadButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " LD");
                 loadButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Load AmorStand")
                                 .append("\n" + ChatColor.GRAY + "Load this ArmorStand")
