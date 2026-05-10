@@ -70,8 +70,8 @@ public class ListCommand extends SubCommand {
             player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "           Saved ArmorStands  ");
             player.sendMessage(ChatColor.YELLOW + "           Found " + ColorUtils.boldAndColor(ChatColor.YELLOW) + armorStandList.size() + ChatColor.RESET + ChatColor.YELLOW + " saved ArmorStand" + (armorStandList.size() == 1 ? "" : "s"));
 
-            TextComponent deleteAll = new TextComponent(ChatColor.DARK_RED + " [" + ColorUtils.boldAndColor(ChatColor.RED) + "DL All" + ChatColor.DARK_RED + "]");
-            TextComponent loadAll = new TextComponent(ChatColor.DARK_GREEN + " [" + ColorUtils.boldAndColor(ChatColor.GREEN) + "LD All" + ChatColor.DARK_GREEN + "]");
+            TextComponent deleteAll = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " [DL All]");
+            TextComponent loadAll = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " [LD All]");
 
             deleteAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                     new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete All ArmorStands")
@@ -120,7 +120,7 @@ public class ListCommand extends SubCommand {
                                         : (!ArmorStandUtils.exists(name)) ? "\n" + ChatColor.RED + "This ArmorStand was deleted, but its still restorable" : "")
                                 .create()));
 
-                TextComponent deleteButton = new TextComponent(ChatColor.DARK_RED + " [" + ChatColor.RED + ChatColor.BOLD + "DL" + ChatColor.DARK_RED + "]");
+                TextComponent deleteButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " [DL]");
                 deleteButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete ArmorStand")
                                 .append("\n" + ChatColor.GRAY + "This action cannot be undone!")
@@ -129,7 +129,7 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 deleteButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as delete " + name));
 
-                TextComponent teleportButton = new TextComponent(ChatColor.DARK_AQUA + " [" + ChatColor.AQUA + ChatColor.BOLD + "TP" + ChatColor.DARK_AQUA + "]");
+                TextComponent teleportButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " [TP]");
                 teleportButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.AQUA + "" + ChatColor.BOLD + "Teleport to ArmorStand")
                                 .append("\n" + ChatColor.GRAY + "Instantly travel to this location")
@@ -138,7 +138,7 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 teleportButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as teleport " + name));
 
-                TextComponent restoreButton = new TextComponent(ChatColor.DARK_GRAY + " [" + ChatColor.GRAY + ChatColor.BOLD + "RS" + ChatColor.DARK_GRAY + "]");
+                TextComponent restoreButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " [RS]");
                 restoreButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Restore AmorStand")
                                 .append("\n" + ChatColor.GRAY + "Restore this ArmorStand")
@@ -147,7 +147,7 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 restoreButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as restore " + name));
 
-                TextComponent loadButton = new TextComponent(ChatColor.DARK_GREEN + " [" + ChatColor.GREEN + ChatColor.BOLD + "LD" + ChatColor.DARK_GREEN + "]");
+                TextComponent loadButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " [LD]");
                 loadButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Load AmorStand")
                                 .append("\n" + ChatColor.GRAY + "Load this ArmorStand")
