@@ -23,6 +23,7 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
+import com.parsa3323.aas.utils.TypeUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -106,31 +107,7 @@ public class SaveMenu extends PaginatedMenu {
             if (TypesConfig.get().get(itemName) == null) return;
 
 
-            TypesConfig.get().set(itemName + ".arms", armorStand.hasArms());
-            TypesConfig.get().set(itemName + ".basePlate", armorStand.hasBasePlate());
-            TypesConfig.get().set(itemName + ".customName", armorStand.getCustomName());
-            TypesConfig.get().set(itemName + ".isCustomNameVisible", armorStand.isCustomNameVisible());
-            TypesConfig.get().set(itemName + ".isVisible", armorStand.isVisible());
-            TypesConfig.get().set(itemName + ".isSmall", armorStand.isSmall());
-            TypesConfig.get().set(itemName +  ".itemInHandMaterial", armorStand.getItemInHand().getType().name());
-            TypesConfig.get().set(itemName +  ".headPos.x", Math.toDegrees(armorStand.getHeadPose().getX()));
-            TypesConfig.get().set(itemName + ".headPos.y", Math.toDegrees(armorStand.getHeadPose().getY()));
-            TypesConfig.get().set(itemName + ".headPos.z", Math.toDegrees(armorStand.getHeadPose().getZ()));
-            TypesConfig.get().set(itemName + ".rightArmPose.x", Math.toDegrees(armorStand.getRightArmPose().getX()));
-            TypesConfig.get().set(itemName + ".rightArmPose.y", Math.toDegrees(armorStand.getRightArmPose().getY()));
-            TypesConfig.get().set(itemName + ".rightArmPose.z", Math.toDegrees(armorStand.getRightArmPose().getZ()));
-            TypesConfig.get().set(itemName + ".leftArmPose.x", Math.toDegrees(armorStand.getLeftArmPose().getX()));
-            TypesConfig.get().set(itemName + ".leftArmPose.y", Math.toDegrees(armorStand.getLeftArmPose().getY()));
-            TypesConfig.get().set(itemName + ".leftArmPose.z", Math.toDegrees(armorStand.getLeftArmPose().getZ()));
-            TypesConfig.get().set(itemName + ".rightLegPose.x", Math.toDegrees(armorStand.getRightLegPose().getX()));
-            TypesConfig.get().set(itemName + ".rightLegPose.y", Math.toDegrees(armorStand.getRightLegPose().getY()));
-            TypesConfig.get().set(itemName + ".rightLegPose.z", Math.toDegrees(armorStand.getRightLegPose().getZ()));
-            TypesConfig.get().set(itemName + ".leftLegPose.x", Math.toDegrees(armorStand.getLeftLegPose().getX()));
-            TypesConfig.get().set(itemName + ".leftLegPose.y", Math.toDegrees(armorStand.getLeftLegPose().getY()));
-            TypesConfig.get().set(itemName + ".leftLegPose.z", Math.toDegrees(armorStand.getLeftLegPose().getZ()));
-
-            TypesConfig.save();
-            TypesConfig.reload();
+            TypeUtils.saveAsType(armorStand, itemName);
 
             player.sendMessage(ChatColor.GREEN + "Saved ArmorStand's properties to '" + itemName + "'");
             player.closeInventory();

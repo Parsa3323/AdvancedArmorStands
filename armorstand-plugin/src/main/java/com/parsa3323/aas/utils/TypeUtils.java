@@ -18,8 +18,10 @@
 
 package com.parsa3323.aas.utils;
 
+import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.config.TypesConfig;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
 
 import java.util.ArrayList;
 
@@ -63,4 +65,38 @@ public class TypeUtils {
             }
         }
     }
+
+    public static void saveAsType(ArmorStand armorStand, String typeName) {
+        if (TypesConfig.get().contains(typeName)) {
+            AdvancedArmorStands.warn("This type already exists, Either chose another name or select the type in the save menu",false);
+            return;
+        }
+
+        TypesConfig.get().set( typeName + ".arms", armorStand.hasArms());
+        TypesConfig.get().set(typeName + ".basePlate", armorStand.hasBasePlate());
+        TypesConfig.get().set(typeName + ".customName", armorStand.getCustomName());
+        TypesConfig.get().set(typeName + ".isCustomNameVisible", armorStand.isCustomNameVisible());
+        TypesConfig.get().set(typeName + ".isVisible", armorStand.isVisible());
+        TypesConfig.get().set(typeName + ".isSmall", armorStand.isSmall());
+        TypesConfig.get().set(typeName +  ".itemInHandMaterial", armorStand.getItemInHand().getType().name());
+        TypesConfig.get().set(typeName +  ".headPos.x", Math.toDegrees(armorStand.getHeadPose().getX()));
+        TypesConfig.get().set(typeName + ".headPos.y", Math.toDegrees(armorStand.getHeadPose().getY()));
+        TypesConfig.get().set(typeName + ".headPos.z", Math.toDegrees(armorStand.getHeadPose().getZ()));
+        TypesConfig.get().set(typeName + ".rightArmPose.x", Math.toDegrees(armorStand.getRightArmPose().getX()));
+        TypesConfig.get().set(typeName + ".rightArmPose.y", Math.toDegrees(armorStand.getRightArmPose().getY()));
+        TypesConfig.get().set(typeName + ".rightArmPose.z", Math.toDegrees(armorStand.getRightArmPose().getZ()));
+        TypesConfig.get().set(typeName + ".leftArmPose.x", Math.toDegrees(armorStand.getLeftArmPose().getX()));
+        TypesConfig.get().set(typeName + ".leftArmPose.y", Math.toDegrees(armorStand.getLeftArmPose().getY()));
+        TypesConfig.get().set(typeName + ".leftArmPose.z", Math.toDegrees(armorStand.getLeftArmPose().getZ()));
+        TypesConfig.get().set(typeName + ".rightLegPose.x", Math.toDegrees(armorStand.getRightLegPose().getX()));
+        TypesConfig.get().set(typeName + ".rightLegPose.y", Math.toDegrees(armorStand.getRightLegPose().getY()));
+        TypesConfig.get().set(typeName + ".rightLegPose.z", Math.toDegrees(armorStand.getRightLegPose().getZ()));
+        TypesConfig.get().set(typeName + ".leftLegPose.x", Math.toDegrees(armorStand.getLeftLegPose().getX()));
+        TypesConfig.get().set(typeName + ".leftLegPose.y", Math.toDegrees(armorStand.getLeftLegPose().getY()));
+        TypesConfig.get().set(typeName + ".leftLegPose.z", Math.toDegrees(armorStand.getLeftLegPose().getZ()));
+
+        TypesConfig.save();
+        TypesConfig.reload();
+    }
+
 }
