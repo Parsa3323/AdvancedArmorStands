@@ -70,8 +70,8 @@ public class ListCommand extends SubCommand {
             player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "           Saved ArmorStands  ");
             player.sendMessage(ChatColor.YELLOW + "           Found " + ColorUtils.boldAndColor(ChatColor.YELLOW) + armorStandList.size() + ChatColor.RESET + ChatColor.YELLOW + " saved ArmorStand" + (armorStandList.size() == 1 ? "" : "s"));
 
-            TextComponent deleteAll = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " [DL All]");
-            TextComponent loadAll = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " [LD All]");
+            TextComponent deleteAll = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " DL All");
+            TextComponent loadAll = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " LD All");
 
             deleteAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                     new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete All ArmorStands")
