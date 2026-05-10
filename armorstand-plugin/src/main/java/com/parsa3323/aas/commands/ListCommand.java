@@ -91,9 +91,9 @@ public class ListCommand extends SubCommand {
 
             if (!ArmorStandUtils.getArmorStandList().isEmpty()){
                 if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
-                    player.spigot().sendMessage(new TextComponent("                "), deleteAll, loadAll);
+                    player.spigot().sendMessage(new TextComponent("                 "), deleteAll, loadAll);
                 } else {
-                    player.spigot().sendMessage(new TextComponent("                       "), deleteAll);
+                    player.spigot().sendMessage(new TextComponent("                        "), deleteAll);
                 }
 
             }
