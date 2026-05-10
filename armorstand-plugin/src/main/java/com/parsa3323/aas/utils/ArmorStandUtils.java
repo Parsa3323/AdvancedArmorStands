@@ -70,7 +70,7 @@ public class ArmorStandUtils {
 
     public static void setAi(String name, boolean value) {
         ArmorStandsConfig.get().set("armorstands." + name + ".ai", value);
-
+        ArmorStandsConfig.save();
     }
 
     public static void resetArmorStandPosition(ArmorStand armorStand) {

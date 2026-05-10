@@ -76,6 +76,7 @@ public class ArmorStandsConfig {
             try (FileOutputStream fos = new FileOutputStream(file)) {
                 fos.write(encrypted);
             }
+            AdvancedArmorStands.debug("Saved cache...");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -51,6 +51,25 @@ import java.util.Map;
 
 public class AiUtils {
 
+    private static final String API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/chat/completions";
+    private static final String MODEL = "gemini-2.5-flash";
+    private static final double TEMPERATURE = 0.2;
+    private static final int MAX_TOKENS = 1024;
+    private static final int CONNECT_TIMEOUT = 30000;
+    private static final int READ_TIMEOUT = 30000;
+
+    private static class ApiResponse {
+        final String body;
+        final int code;
+        final Exception exception;
+
+        ApiResponse(String body, int code, Exception exception) {
+            this.body = body;
+            this.code = code;
+            this.exception = exception;
+        }
+    }
+
     public static String getDefaultInstructions(String name, String memory) {
         return "You are a talking armor stand in Minecraft named " + name + ". " +
                 "You can help the player with general questions, small tasks, and simple math like 2+2, " +
@@ -115,59 +134,22 @@ public class AiUtils {
 
     public static void getAssistWithAi(String apiKey, String userInput, Player p, java.util.function.Consumer<String> callback) {
         Bukkit.getScheduler().runTaskAsynchronously(AdvancedArmorStands.plugin, () -> {
-            HttpURLConnection conn = null;
+            String instructions = getAssistInstructions();
+            String userContent = userInput == null ? "" : userInput;
+            ApiResponse apiResponse = sendApiRequest(apiKey, instructions, userContent);
             String result;
-
-            try {
-                String instructions = getAssistInstructions();
-                String userContent = userInput == null ? "" : userInput;
-
-                JSONObject body = new JSONObject();
-                body.put("model", "gemini-2.5-flash");
-
-                JSONArray messages = new JSONArray();
-                messages.put(new JSONObject().put("role", "system").put("content", instructions));
-                messages.put(new JSONObject().put("role", "user").put("content", userContent));
-                body.put("messages", messages);
-
-                body.put("temperature", 0.2);
-                body.put("max_tokens", 1024);
-
-                URL url = new URL("https://generativelanguage.googleapis.com/v1beta/chat/completions");
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/json");
-                conn.setRequestProperty("Authorization", "Bearer " + apiKey);
-                conn.setDoOutput(true);
-                conn.setConnectTimeout(30000);
-                conn.setReadTimeout(30000);
-
-                try (OutputStream os = conn.getOutputStream()) {
-                    os.write(body.toString().getBytes(StandardCharsets.UTF_8));
-                }
-
-                int responseCode = conn.getResponseCode();
-                String response = responseCode == 200 ? readStream(conn.getInputStream())
-                        : readStream(conn.getErrorStream());
-
-                if (responseCode != 200) {
-                    result = "{\"response\":\"AI error: HTTP " + responseCode + "\",\"action\":\"none\"}";
-                } else {
-                    result = parseChatCompletionsResponse(response);
-                }
-
-            } catch (Exception e) {
-                result = "{\"response\":\"AI error: " + e.getMessage() + "\",\"action\":\"none\"}";
-            } finally {
-                if (conn != null) conn.disconnect();
+            if (apiResponse.exception != null) {
+                result = "{\"response\":\"AI error: " + apiResponse.exception.getMessage() + "\",\"action\":\"none\"}";
+            } else if (apiResponse.code != 200) {
+                result = "{\"response\":\"AI error: HTTP " + apiResponse.code + ", make sure you are connected to internet" + "\",\"action\":\"none\"}";
+            } else {
+                result = parseChatCompletionsResponse(apiResponse.body);
             }
 
             String finalResult = result;
-
             Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> {
                 try {
                     handleAiAction(finalResult, p);
-
                     String responseText;
                     try {
                         JSONObject json = new JSONObject(finalResult);
@@ -175,7 +157,6 @@ public class AiUtils {
                     } catch (Exception e) {
                         responseText = finalResult;
                     }
-
                     callback.accept(responseText);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -183,7 +164,6 @@ public class AiUtils {
             });
         });
     }
-
 
     public static void handleAiAction(String aiJson, Player player) {
         JSONObject obj;
@@ -247,7 +227,6 @@ public class AiUtils {
                             AdvancedArmorStands.warn("ArmorStand " + realCaseName + " not found.", true);
                         }
                     }, 2L);
-
                     break;
 
                 case "none":
@@ -260,7 +239,6 @@ public class AiUtils {
             e.printStackTrace();
         }
     }
-
 
     private static ArmorStandPoseData parsePoseData(JSONObject poseObj) {
         if (poseObj == null) return new ArmorStandPoseData(new EulerAngle(0,0,0), new EulerAngle(0,0,0), new EulerAngle(0,0,0), new EulerAngle(0,0,0), new EulerAngle(0,0,0));
@@ -305,61 +283,23 @@ public class AiUtils {
         return player.getLocation();
     }
 
-
-
     public static void getResponseAsync(String apiKey, MemoryData data, String userInput, java.util.function.Consumer<String> callback) {
         new BukkitRunnable() {
             @Override
             public void run() {
-                HttpURLConnection conn = null;
+                String instructions = data.getInstructionsData() == null ? "" : data.getInstructionsData();
+                String history = data.getHistoryData() == null ? "" : data.getHistoryData();
+                String user = userInput == null ? "" : userInput;
+                String userContent = (history.isEmpty() ? "" : (history + "\n")) + user;
+
+                ApiResponse apiResponse = sendApiRequest(apiKey, instructions, userContent);
                 String result;
-                try {
-                    String instructions = data.getInstructionsData() == null ? "" : data.getInstructionsData();
-                    String history = data.getHistoryData() == null ? "" : data.getHistoryData();
-                    String user = userInput == null ? "" : userInput;
-
-                    String userContent = (history.isEmpty() ? "" : (history + "\n")) + user;
-
-                    JSONObject body = new JSONObject();
-                    body.put("model", "gemini-2.5-flash");
-
-                    JSONArray messages = new JSONArray();
-                    messages.put(new JSONObject().put("role", "system").put("content", instructions));
-                    messages.put(new JSONObject().put("role", "user").put("content", userContent));
-                    body.put("messages", messages);
-
-                    body.put("temperature", 0.2);
-                    body.put("max_tokens", 1024);
-
-                    String endpointUrl = "https://generativelanguage.googleapis.com/v1beta/chat/completions";
-
-                    URL url = new URL(endpointUrl);
-                    conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json");
-                    conn.setRequestProperty("Authorization", "Bearer " + apiKey);
-                    conn.setDoOutput(true);
-                    conn.setConnectTimeout(30000);
-                    conn.setReadTimeout(30000);
-
-                    try (OutputStream os = conn.getOutputStream()) {
-                        os.write(body.toString().getBytes(StandardCharsets.UTF_8));
-                    }
-
-                    int responseCode = conn.getResponseCode();
-                    String response = responseCode == 200 ? readStream(conn.getInputStream())
-                            : readStream(conn.getErrorStream());
-
-                    if (responseCode != 200) {
-                        result = "AI error: HTTP " + responseCode;
-                    } else {
-                        result = parseChatCompletionsResponse(response);
-                    }
-
-                } catch (Exception e) {
-                    result = "AI error: " + e.getClass().getSimpleName() + ": " + e.getMessage();
-                } finally {
-                    if (conn != null) conn.disconnect();
+                if (apiResponse.exception != null) {
+                    result = "AI error: " + apiResponse.exception.getClass().getSimpleName() + ": " + apiResponse.exception.getMessage();
+                } else if (apiResponse.code != 200) {
+                    result = "AI error: HTTP " + apiResponse.code + ", make sure you are connected to internet";
+                } else {
+                    result = parseChatCompletionsResponse(apiResponse.body);
                 }
 
                 String finalResult = result;
@@ -368,26 +308,20 @@ public class AiUtils {
         }.runTaskAsynchronously(AdvancedArmorStands.plugin);
     }
 
-
     public static String getUserSetInstructions(ArmorStand armorStand) {
         String path = ArmorStandUtils.getNameByArmorStand(armorStand) + ".custom-instructions";
-
         return AiConfig.get().getString(path);
-
     }
 
     public static void setUserSetInstructions(ArmorStand armorStand, String value) {
         String path = ArmorStandUtils.getNameByArmorStand(armorStand) + ".custom-instructions";
-
         AiConfig.get().set(path, value);
         AiConfig.save();
     }
 
     public static void sendResponseWithHistory(Player player, String response, String armorStandName, String userInput) {
         player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GOLD + response);
-
         Bukkit.getPluginManager().callEvent(new ArmorStandAiRespondEvent(ArmorStandUtils.getArmorStandByName(armorStandName), response, userInput, player));
-
         AiUtils.addToHistory(player.getName(), armorStandName, AiRole.PLAYER, userInput);
         AiUtils.addToHistory(player.getName(), armorStandName, AiRole.AI, response);
     }
@@ -398,56 +332,50 @@ public class AiUtils {
 
     @Deprecated
     public static String getResponse(String apiKey, MemoryData data, String userInput) {
+        String instructions = data.getInstructionsData() == null ? "" : data.getInstructionsData();
+        String history = data.getHistoryData() == null ? "" : data.getHistoryData();
+        String user = userInput == null ? "" : userInput;
+        String userContent = (history.isEmpty() ? "" : (history + "\n")) + user;
+
+        ApiResponse apiResponse = sendApiRequest(apiKey, instructions, userContent);
+        if (apiResponse.exception != null) {
+            return "AI error: " + apiResponse.exception.getClass().getSimpleName() + ": " + apiResponse.exception.getMessage();
+        }
+        if (apiResponse.code != 200) {
+            return "AI error: HTTP " + apiResponse.code;
+        }
+        return parseChatCompletionsResponse(apiResponse.body);
+    }
+
+    private static ApiResponse sendApiRequest(String apiKey, String systemPrompt, String userMessage) {
         HttpURLConnection conn = null;
         try {
-            String instructions = data.getInstructionsData() == null ? "" : data.getInstructionsData();
-            String history = data.getHistoryData() == null ? "" : data.getHistoryData();
-            String user = userInput == null ? "" : userInput;
-
-            String userContent = (history.isEmpty() ? "" : (history + "\n")) + user;
-
             JSONObject body = new JSONObject();
-            body.put("model", "gemini-2.5-flash");
+            body.put("model", MODEL);
+            body.put("messages", new JSONArray()
+                    .put(new JSONObject().put("role", "system").put("content", systemPrompt))
+                    .put(new JSONObject().put("role", "user").put("content", userMessage)));
+            body.put("temperature", TEMPERATURE);
+            body.put("max_tokens", MAX_TOKENS);
 
-            JSONArray messages = new JSONArray();
-            messages.put(new JSONObject()
-                    .put("role", "system")
-                    .put("content", instructions));
-            messages.put(new JSONObject()
-                    .put("role", "user")
-                    .put("content", userContent));
-            body.put("messages", messages);
-
-            body.put("temperature", 0.2);
-            body.put("max_tokens", 1024);
-
-            String endpointUrl = "https://generativelanguage.googleapis.com/v1beta/chat/completions";
-
-            URL url = new URL(endpointUrl);
+            URL url = new URL(API_ENDPOINT);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Authorization", "Bearer " + apiKey);
             conn.setDoOutput(true);
-            conn.setConnectTimeout(30000);
-            conn.setReadTimeout(30000);
+            conn.setConnectTimeout(CONNECT_TIMEOUT);
+            conn.setReadTimeout(READ_TIMEOUT);
 
             try (OutputStream os = conn.getOutputStream()) {
                 os.write(body.toString().getBytes(StandardCharsets.UTF_8));
             }
 
-            int responseCode = conn.getResponseCode();
-            String response = responseCode == 200 ? readStream(conn.getInputStream())
-                    : readStream(conn.getErrorStream());
-
-            if (responseCode != 200) {
-                return "AI error: HTTP " + responseCode;
-            }
-
-            return parseChatCompletionsResponse(response);
-
+            int code = conn.getResponseCode();
+            String responseBody = (code == 200) ? readStream(conn.getInputStream()) : readStream(conn.getErrorStream());
+            return new ApiResponse(responseBody, code, null);
         } catch (Exception e) {
-            return "AI error: " + e.getClass().getSimpleName() + ": " + e.getMessage();
+            return new ApiResponse(null, -1, e);
         } finally {
             if (conn != null) conn.disconnect();
         }
@@ -489,8 +417,6 @@ public class AiUtils {
         AiConfig.save();
     }
 
-
-
     public static String getHistory(String playerName, String armorStandName) {
         YamlConfiguration config = AiConfig.get();
         String path = playerName + "." + armorStandName + ".conversation";
@@ -509,8 +435,6 @@ public class AiUtils {
 
         return sb.toString().trim();
     }
-
-
 
     public static void clearHistory(String playerName, String armorStandName) {
         YamlConfiguration config = AiConfig.get();
