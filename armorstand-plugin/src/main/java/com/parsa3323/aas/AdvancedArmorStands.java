@@ -23,6 +23,7 @@ import com.parsa3323.aas.animation.manager.EditorManager;
 import com.parsa3323.aas.api.ArmorstandApi;
 import com.parsa3323.aas.api.actions.IssueLevel;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
+import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
@@ -289,7 +290,14 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
 
         for (String key : ArmorStandUtils.getArmorStandList()) {
-            ArmorStandUtils.autoLoadArmorStand(key);
+            if (getConfig().getBoolean("auto-load-armor-stands")) {
+                try {
+                    ArmorStandUtils.loadArmorStand(key);
+                } catch (ArmorStandLoadException e) {
+                    error(null, true, "Failed to autoload ArmorStand '" + key + "'", e.getMessage());
+                    e.printStackTrace();
+                }
+            }
         }
 
         status("Checking armor stands...");

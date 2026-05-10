@@ -35,7 +35,7 @@ public class PluginUtils {
             ActionConfig.reload();
             if (AdvancedArmorStands.plugin.getConfig().getBoolean("auto-load-armor-stands")) {
                 for (String key : ArmorStandUtils.getArmorStandList()) {
-                    ArmorStandUtils.autoLoadArmorStand(key);
+                    ArmorStandUtils.loadArmorStand(key);
                 }
             }
         } catch (Exception e) {
