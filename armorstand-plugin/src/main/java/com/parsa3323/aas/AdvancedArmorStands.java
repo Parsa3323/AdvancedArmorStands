@@ -188,7 +188,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
 
         status("Loading configuration files...");
-
         checkConfig();
 
         api = new API();
