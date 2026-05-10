@@ -129,7 +129,7 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 deleteButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as delete " + name));
 
-                TextComponent teleportButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.WHITE) + " TP");
+                TextComponent teleportButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " TP");
                 teleportButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.AQUA + "" + ChatColor.BOLD + "Teleport to ArmorStand")
                                 .append("\n" + ChatColor.GRAY + "Instantly travel to this location")
@@ -138,7 +138,7 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 teleportButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as teleport " + name));
 
-                TextComponent restoreButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.WHITE) + " RS");
+                TextComponent restoreButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " RS");
                 restoreButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Restore AmorStand")
                                 .append("\n" + ChatColor.GRAY + "Restore this ArmorStand")
@@ -147,7 +147,7 @@ public class ListCommand extends SubCommand {
                                 .create()));
                 restoreButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as restore " + name));
 
-                TextComponent loadButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.WHITE) + " LD");
+                TextComponent loadButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " LD");
                 loadButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Load AmorStand")
                                 .append("\n" + ChatColor.GRAY + "Load this ArmorStand")
