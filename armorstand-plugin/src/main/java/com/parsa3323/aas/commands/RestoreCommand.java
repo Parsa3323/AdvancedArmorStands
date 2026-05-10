@@ -90,7 +90,7 @@ public class RestoreCommand extends SubCommand {
     public List<String> getTabComplete(Player player, String[] args) {
         ArrayList<String> armorStands = new ArrayList<>();
 
-        ArmorStandUtils.getArmorStandList().forEach(name -> {
+        ArmorStandUtils.getAllArmorStandList().forEach(name -> {
             if (ArmorStandUtils.isRestorable(name)) {
                 armorStands.add(name);
             }
