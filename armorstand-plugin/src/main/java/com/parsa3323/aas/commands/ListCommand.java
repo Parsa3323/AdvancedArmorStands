@@ -120,7 +120,7 @@ public class ListCommand extends SubCommand {
                                         : (!ArmorStandUtils.exists(name)) ? "\n" + ChatColor.RED + "This ArmorStand was deleted, but its still restorable" : "")
                                 .create()));
 
-                TextComponent deleteButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.WHITE) + " DL");
+                TextComponent deleteButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " DL");
                 deleteButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete ArmorStand")
                                 .append("\n" + ChatColor.GRAY + "This action cannot be undone!")
