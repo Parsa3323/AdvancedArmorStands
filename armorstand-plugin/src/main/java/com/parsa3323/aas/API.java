@@ -62,6 +62,7 @@ public class API implements ArmorstandApi {
         this.addonFolder = new File(AdvancedArmorStands.plugin.getDataFolder(), "addons");
         AdvancedArmorStands.debug("Checking if addons folder exists (/addons)");
         if (!addonFolder.exists()) {
+            AdvancedArmorStands.debug("Creating addon folder (/addons)");
             addonFolder.mkdirs();
         }
     }
