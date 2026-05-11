@@ -149,7 +149,7 @@ public class ListCommand extends SubCommand {
 
                 TextComponent loadButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " LD");
                 loadButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Load AmorStand")
+                        new ComponentBuilder(ChatColor.YELLOW + "" + ChatColor.BOLD + "Load AmorStand")
                                 .append("\n" + ChatColor.GRAY + "Load this ArmorStand")
                                 .append("\n" + " ")
                                 .append("\n" + ChatColor.YELLOW + "Click to load: " + name)
