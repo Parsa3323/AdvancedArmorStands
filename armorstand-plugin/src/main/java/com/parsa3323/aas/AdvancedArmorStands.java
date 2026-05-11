@@ -313,7 +313,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         status("Preparing animations...");
 
         AnimationUtils.init();
-
         AnimationUtils.getAnimationsList().forEach(s -> {
             status("Loaded '" + s + "'!");
         });
