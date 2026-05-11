@@ -121,18 +121,16 @@ public final class AdvancedArmorStands extends JavaPlugin {
         }
 
         status("Loading version support...");
-
         versionSupport = VersionSupportUtil.getVersionSupport();
 
         status("Loaded " + VersionSupportUtil.getVersionSupport().getClass().getSimpleName() + ", if that's not correct contact support");
-
 
         if (!getDataFolder().exists()) {
             isFirstTimeRunning = true;
             getDataFolder().mkdirs();
         }
-        plugin = this;
 
+        plugin = this;
 
         boolean levelName = getConfig().getBoolean("debug", false);
 
