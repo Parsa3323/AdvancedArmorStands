@@ -334,7 +334,10 @@ public class CreateCommand extends SubCommand implements Listener {
         FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
 
-        if (!TextUtils.checkName(name, event.getPlayer())) return;
+        if (!TextUtils.checkName(name, event.getPlayer())) {
+            event.setCancelled(true);
+            return;
+        }
 
         if (config.contains(path)) {
             event.setCancelled(true);
