@@ -111,7 +111,7 @@ public class ListCommand extends SubCommand {
                 System.out.println(ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)));
                 System.out.println(ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted"));
                 System.out.println(ArmorStandUtils.exists(name));
-                TextComponent nameComponent = new TextComponent((ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) ? ChatColor.GREEN : (ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted")) ?  ChatColor.GRAY :  ChatColor.RED) + "" + ChatColor.BOLD + name + ChatColor.DARK_GRAY + " |");
+                TextComponent nameComponent = new TextComponent((ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) ? ChatColor.GREEN : (ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted")) ?  ChatColor.GRAY :  ChatColor.RED) + "" + ChatColor.BOLD + name + ChatColor.GRAY + " |");
                 nameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.YELLOW  + "ArmorStand: " + name)
                                 .append("\n" + ChatColor.GRAY + "Click buttons to interact")
