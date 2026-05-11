@@ -134,7 +134,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         boolean levelName = getConfig().getBoolean("debug", false);
 
-
         logLevel = (levelName) ? Level.FINE : Level.INFO;
         logger.setLevel(logLevel);
 
