@@ -20,18 +20,12 @@ package com.parsa3323.aas;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
+import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.profiles.builder.XSkull;
 import com.cryptomorin.xseries.profiles.objects.Profileable;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
-import net.minecraft.server.v1_8_R3.ChatComponentText;
-import net.minecraft.server.v1_8_R3.EntityArmorStand;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
-import net.minecraft.server.v1_8_R3.PacketPlayOutEntityTeleport;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftArmorStand;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -91,38 +85,16 @@ public final class VersionSupport_1_8 implements VersionSupport {
         return XSound.UI_BUTTON_CLICK.parseSound();
     }
 
+
     @Override
     public void sendActionBar(Player player, String message) {
-        PacketPlayOutChat packet  = new PacketPlayOutChat(new ChatComponentText(message), (byte) 2);
-
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
-
+        ActionBar.sendActionBar(player, message);
     }
 
     @Override
     public void rotateArmorStand(ArmorStand armorStand, float deltaYaw) {
-        if (armorStand == null) return;
-
         Location loc = armorStand.getLocation();
-        float newYaw = loc.getYaw() + deltaYaw;
-
-        newYaw = (newYaw + 540) % 360 - 180;
-
-        EntityArmorStand nmsStand = ((CraftArmorStand) armorStand).getHandle();
-
-        nmsStand.yaw = newYaw;
-        nmsStand.lastYaw = newYaw;
-        nmsStand.aK = newYaw;
-        nmsStand.aI = newYaw;
-
-        nmsStand.pitch = loc.getPitch();
-        nmsStand.lastPitch = loc.getPitch();
-
-        loc.setYaw(newYaw);
-
-        PacketPlayOutEntityTeleport packet = new PacketPlayOutEntityTeleport(nmsStand);
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
-        }
+        loc.setYaw(loc.getYaw() + deltaYaw);
+        armorStand.teleport(loc);
     }
 }
