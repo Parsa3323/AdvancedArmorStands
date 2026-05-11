@@ -329,7 +329,7 @@ public class API implements ArmorstandApi {
             @Override
             public void error(String message) {
                 if (TextUtils.containsLink(message)) {
-                    throw new LogException("Message can't have links, use troubleShootingLink instead!");
+                    throw new LogException("Message can't have links, use readMoreLink instead!");
                 }
                 AdvancedArmorStands.error(null, false, message + " [NOT OFFICIAL]");
             }
