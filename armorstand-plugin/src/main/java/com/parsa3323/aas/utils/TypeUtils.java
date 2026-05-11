@@ -68,7 +68,7 @@ public class TypeUtils {
 
     public static void saveAsType(ArmorStand armorStand, String typeName) {
         if (TypesConfig.get().contains(typeName)) {
-            AdvancedArmorStands.warn("This type already exists, Either chose another name or select the type in the save menu",false);
+            AdvancedArmorStands.error(null,false, "Type already exists...", "Choose another type name");
             return;
         }
 
