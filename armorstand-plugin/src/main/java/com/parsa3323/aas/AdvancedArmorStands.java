@@ -139,7 +139,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         Metrics metrics = new Metrics(this, 25568);
 
-
         status("Registering event listeners...");
 
         PluginManager pm = getServer().getPluginManager();
