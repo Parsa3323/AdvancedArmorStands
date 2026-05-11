@@ -233,7 +233,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         TypesConfig.get().options().copyDefaults(true);
 
         TypeUtils.migrateTypes();
-
         TypesConfig.save();
 
         ArmorStandsConfig.init();
