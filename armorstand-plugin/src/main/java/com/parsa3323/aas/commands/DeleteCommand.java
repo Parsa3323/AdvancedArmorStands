@@ -79,7 +79,7 @@ public class DeleteCommand extends SubCommand {
             return;
         }
 
-        if (args[1].equalsIgnoreCase("--full")) {
+        if (args[2].equalsIgnoreCase("--full")) {
             ArmorStandUtils.deleteArmorStand(args[1]);
             ArmorStandsConfig.get().set("armorstands." + args[1], null);
             ArmorStandsConfig.save();
