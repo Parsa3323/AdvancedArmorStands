@@ -161,7 +161,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
                 new ChatTabListener()
         };
 
-
         for (Listener listener : listeners) {
             pm.registerEvents(listener, this);
             getLogger().info("Loaded listener: " + listener.getClass().getSimpleName());
