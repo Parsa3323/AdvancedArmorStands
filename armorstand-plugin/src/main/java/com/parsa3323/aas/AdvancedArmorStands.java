@@ -142,7 +142,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
         status("Registering event listeners...");
 
         PluginManager pm = getServer().getPluginManager();
-
         Listener[] listeners = new Listener[] {
                 new ChatListener(),
                 new PlayerDieListener(),
