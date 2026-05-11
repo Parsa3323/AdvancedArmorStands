@@ -84,6 +84,7 @@ public class DeleteCommand extends SubCommand {
             ArmorStandsConfig.get().set("armorstands." + args[1], null);
             ArmorStandsConfig.save();
             player.sendMessage(ChatColor.GREEN + "Fully deleted ArmorStand");
+            SoundUtils.playSuccessSound(player);
             return;
         }
 
