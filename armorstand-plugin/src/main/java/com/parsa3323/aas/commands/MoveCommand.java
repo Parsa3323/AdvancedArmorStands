@@ -105,7 +105,7 @@ public class MoveCommand extends SubCommand {
                 config.set(path + ".Z", player.getLocation().getZ());
                 ArmorStandsConfig.save();
 
-                player.sendMessage(ChatColor.GREEN + "Moved ArmorStand: " + name + " to your location.");
+                player.sendMessage(ChatColor.GREEN + "Moved " + name + " to your location.");
                 return;
             }
         }
