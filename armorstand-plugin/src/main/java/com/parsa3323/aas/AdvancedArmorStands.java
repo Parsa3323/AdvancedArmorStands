@@ -116,6 +116,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
         if (isFirstTimeRunning) {
             status("§aThank you for installing this plugin <3");
             status("§e" + getDescription().getDescription());
+            status("");
+            status("If this is not the first time you are running this plugin, contact support");
         }
 
         status("Loading version support...");
