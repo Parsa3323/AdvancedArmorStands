@@ -167,7 +167,6 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         status("Checking requirements...");
 
-
         VersionSupportUtil.getVersionSupport();
         try {
 
