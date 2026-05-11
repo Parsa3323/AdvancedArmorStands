@@ -26,6 +26,7 @@ import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
+import com.parsa3323.aas.utils.TextUtils;
 import com.parsa3323.aas.utils.TypeUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -332,6 +333,8 @@ public class CreateCommand extends SubCommand implements Listener {
         String name = event.getName();
         FileConfiguration config = ArmorStandsConfig.get();
         String path = "armorstands." + name;
+
+        if (!TextUtils.checkName(name, event.getPlayer())) return;
 
         if (config.contains(path)) {
             event.setCancelled(true);
