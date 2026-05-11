@@ -51,7 +51,7 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Delete an ArmorStand";
+        return "Delete an " + ChatColor.GRAY + "ArmorStand";
     }
 
 
