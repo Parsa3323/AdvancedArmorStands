@@ -45,10 +45,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerInteractListener implements Listener {
 
@@ -136,7 +133,9 @@ public class PlayerInteractListener implements Listener {
                                     counter++;
 
                                     if (counter > maxAttempts) {
-                                        bukkitPlayer.sendMessage(ChatColor.RED + "Too many saved stands! Max limit reached.");
+                                        bukkitPlayer.sendMessage(ChatColor.RED + "Too many saved stands! Max limit reached, creating with random suffix!");
+                                        int randomSuffix = new Random().nextInt(900) + 100;
+                                        name = "SavedStand" + randomSuffix;
                                         return;
                                     }
                                 } while (ArmorStandUtils.exists(name));
