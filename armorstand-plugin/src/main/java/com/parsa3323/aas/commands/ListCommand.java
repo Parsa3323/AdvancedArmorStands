@@ -74,7 +74,7 @@ public class ListCommand extends SubCommand {
             TextComponent loadAll = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " LD All");
 
             deleteAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                    new ComponentBuilder(ChatColor.RED + "" + ChatColor.BOLD + "Delete All ArmorStands")
+                    new ComponentBuilder(ChatColor.YELLOW + "" + ChatColor.BOLD + "Delete All ArmorStands")
                             .append("\n" + ChatColor.GRAY + "This action can be undone!")
                             .append("\n" + " ")
                             .append("\n" + ChatColor.YELLOW + "Click to delete all ArmorStands ")
@@ -82,7 +82,7 @@ public class ListCommand extends SubCommand {
             deleteAll.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as delete --all"));
 
             loadAll.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                    new ComponentBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "Load AmorStands")
+                    new ComponentBuilder(ChatColor.YELLOW + "" + ChatColor.BOLD + "Load all AmorStands")
                             .append("\n" + ChatColor.GRAY + "Load all ArmorStands")
                             .append("\n" + " ")
                             .append("\n" + ChatColor.YELLOW + "Click to load all ArmorStands")
