@@ -189,7 +189,7 @@ public class ArmorStandUtils {
         }
 
         player.teleport(new Location(world, x, y, z));
-        player.sendMessage(ChatColor.GREEN + "Teleported to ArmorStand: " + name);
+        player.sendMessage(ChatColor.GREEN + "Teleported to " + name);
     }
 
     public static boolean exists(String name) {
