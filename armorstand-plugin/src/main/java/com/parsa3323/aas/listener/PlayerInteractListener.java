@@ -45,7 +45,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class PlayerInteractListener implements Listener {
 
@@ -120,8 +123,23 @@ public class PlayerInteractListener implements Listener {
                                 bukkitPlayer.spigot().sendMessage(textComponent);
 
                             } else if (count == 3) {
-                                int randomSuffix = new Random().nextInt(900) + 100;
-                                String name = "SavedStand" + randomSuffix;
+                                String name;
+                                int counter = 0;
+                                int maxAttempts = 1000;
+
+                                do {
+                                    if (counter == 0) {
+                                        name = "SavedStand";
+                                    } else {
+                                        name = "SavedStand_" + counter;
+                                    }
+                                    counter++;
+
+                                    if (counter > maxAttempts) {
+                                        bukkitPlayer.sendMessage(ChatColor.RED + "Too many saved stands! Max limit reached.");
+                                        return;
+                                    }
+                                } while (ArmorStandUtils.exists(name));
 
                                 ArmorStand stand = (ArmorStand) e.getRightClicked();
                                 ArmorStandCreateEvent armorStandCreateEvent =
