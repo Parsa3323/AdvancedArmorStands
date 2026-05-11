@@ -114,9 +114,17 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public List<String> getTabComplete(Player player, String[] args) {
-        List<String> list = new ArrayList<>(ArmorStandUtils.getArmorStandList());
-        list.add("--all");
-        return list;
+        if (args.length == 2) {
+            List<String> list = new ArrayList<>(ArmorStandUtils.getArmorStandList());
+            list.add("--all");
+            return list;
+        }
+        if (args.length == 3) {
+            ArrayList<String> list = new ArrayList<>();
+            list.add("--full");
+            return list;
+        }
+        return null;
 
     }
 
