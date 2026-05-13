@@ -73,7 +73,6 @@ public class LoadCommand extends SubCommand {
             return;
         }
 
-
         if (args[1].equalsIgnoreCase("--all")) {
             List<String> names = ArmorStandUtils.getArmorStandList();
             int loaded = 0;
