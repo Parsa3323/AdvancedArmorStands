@@ -124,7 +124,7 @@ public class PlayerInteractListener implements Listener {
 
                             } else if (count == 3) {
                                 String name;
-                                int maxAttempts = 2;
+                                int maxAttempts = 1000;
                                 int attempts = 0;
 
                                 do {
