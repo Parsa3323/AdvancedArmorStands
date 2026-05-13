@@ -52,7 +52,6 @@ public class ReloadCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-
         try {
             PluginUtils.reload();
             player.sendMessage(ChatColor.GREEN + "Successfully reloaded AdvancedArmorStand's config");
@@ -63,7 +62,6 @@ public class ReloadCommand extends SubCommand {
             e.printStackTrace();
             AdvancedArmorStands.error(null, true, ChatColor.RED + e.getMessage());
         }
-
     }
 
     @Override
