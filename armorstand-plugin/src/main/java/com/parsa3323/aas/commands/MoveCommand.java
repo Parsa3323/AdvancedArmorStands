@@ -57,7 +57,6 @@ public class MoveCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-
         if (args.length < 2) {
             sendUsage(player);
             return;
