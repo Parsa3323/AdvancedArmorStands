@@ -255,7 +255,7 @@ public class PlayerInteractListener implements Listener {
 
                     int count = deleteInteractionCount.getOrDefault(playerId, 0) + 1;
 
-                    float[] pitches = {1.5f, 1.0f, 0.5f};
+                    float[] pitches = {1.2f, 1.0f, 0.8f};
                     player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, pitches[Math.min(3 - count, 2)]);
 
                     if (count < 3) {
