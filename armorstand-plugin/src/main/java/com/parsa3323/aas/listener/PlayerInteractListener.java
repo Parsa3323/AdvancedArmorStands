@@ -303,7 +303,6 @@ public class PlayerInteractListener implements Listener {
 
             if (trigger.equals("left-click") && isSneaking) allow = false;
 
-
             if (!allow) continue;
 
             TriggerType triggerType = (isSneaking ? TriggerType.SHIFT_LEFT_CLICK : TriggerType.LEFT_CLICK);
