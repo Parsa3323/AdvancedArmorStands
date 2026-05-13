@@ -121,22 +121,16 @@ public class PlayerInteractListener implements Listener {
 
                             } else if (count == 3) {
                                 String name;
-                                int counter = 0;
                                 int maxAttempts = 1000;
+                                int attempts = 0;
 
                                 do {
-                                    if (counter == 0) {
-                                        name = "SavedStand";
-                                    } else {
-                                        name = "SavedStand_" + counter;
-                                    }
-                                    counter++;
+                                    name = (attempts == 0) ? "SavedStand" : "SavedStand_" + attempts;
+                                    attempts++;
 
-                                    if (counter > maxAttempts) {
-                                        bukkitPlayer.sendMessage(ChatColor.RED + "Too many saved stands! Max limit reached, creating with random suffix!");
-                                        int randomSuffix = new Random().nextInt(900) + 100;
-                                        name = "SavedStand" + randomSuffix;
-                                        return;
+                                    if (attempts > maxAttempts) {
+                                        name = "SavedStand" + (new Random().nextInt(900) + 100);
+                                        break;
                                     }
                                 } while (ArmorStandUtils.exists(name));
 
