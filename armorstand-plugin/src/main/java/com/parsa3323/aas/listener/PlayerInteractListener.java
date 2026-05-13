@@ -57,8 +57,6 @@ public class PlayerInteractListener implements Listener {
     private final Map<UUID, ArmorStand> selectCount = new HashMap<>();
     private final Map<UUID, ArmorStand> deletionCount = new HashMap<>();
 
-
-
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerInteractAtEntityEvent(PlayerInteractAtEntityEvent e) {
         IPlayer player = PlayerManager.getByBukkit(e.getPlayer());
