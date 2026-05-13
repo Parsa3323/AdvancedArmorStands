@@ -206,7 +206,6 @@ public class PlayerInteractListener implements Listener {
                 e.setCancelled(true);
 
             }
-
         }
     }
 
