@@ -107,6 +107,7 @@ public class PlayerInteractListener implements Listener {
 
                             if (count < 3) {
                                 interactionCount.put(playerId, count);
+
                                 TextComponent textComponent = new TextComponent(
                                         ChatColor.GREEN + "Do this " + (3 - count) + " more time" +
                                                 ((3 - count) > 1 ? "s" : "") + " to save this ArmorStand."
