@@ -94,8 +94,7 @@ public class RestoreCommand extends SubCommand {
             if (ArmorStandUtils.isRestorable(name)) {
                 armorStands.add(name);
             }
-        }
-        );
+        });
 
         return armorStands;
     }
