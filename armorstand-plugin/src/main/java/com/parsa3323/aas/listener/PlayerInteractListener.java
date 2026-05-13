@@ -255,8 +255,8 @@ public class PlayerInteractListener implements Listener {
 
                     int count = deleteInteractionCount.getOrDefault(playerId, 0) + 1;
 
-                    float[] pitches = {1.2f, 1.0f, 0.8f};
-                    player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_PLING.parseSound(), 1f, pitches[Math.min(count - 1, 2)]);
+                    float[] pitches = {1.5f, 1.0f, 0.5f};
+                    player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, pitches[Math.min(3 - count, 2)]);
 
                     if (count < 3) {
                         deletionCount.put(playerId, armorStand);
