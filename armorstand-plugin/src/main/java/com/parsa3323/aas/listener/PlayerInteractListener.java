@@ -75,7 +75,6 @@ public class PlayerInteractListener implements Listener {
                         if (player.getBukkitPlayer().isSneaking()) {
 
                             UUID playerId = player.getBukkitPlayer().getUniqueId();
-
                             ArmorStand clicked = (ArmorStand) e.getRightClicked();
 
                             if (!selectCount.containsKey(playerId) || selectCount.get(playerId) != clicked) {
