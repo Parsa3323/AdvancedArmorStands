@@ -117,7 +117,6 @@ public class PlayerInteractListener implements Listener {
                                 ));
 
                                 bukkitPlayer.spigot().sendMessage(textComponent);
-
                             } else if (count == 3) {
                                 String name;
                                 int maxAttempts = 1000;
