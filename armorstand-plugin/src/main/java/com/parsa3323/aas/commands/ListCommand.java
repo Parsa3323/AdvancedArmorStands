@@ -101,11 +101,6 @@ public class ListCommand extends SubCommand {
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             player.sendMessage("");
 
-
-
-
-
-
             for (String name : armorStandList) {
                 TextComponent indexComponent = new TextComponent(ChatColor.GRAY + " » ");
                 System.out.println(ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)));
