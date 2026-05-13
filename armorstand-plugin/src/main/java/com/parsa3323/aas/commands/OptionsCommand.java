@@ -68,8 +68,8 @@ public class OptionsCommand extends SubCommand {
             }
             return;
         }
-        new SettingsManager(new PlayerMenuUtility(player), armorStand, false).open();
 
+        new SettingsManager(new PlayerMenuUtility(player), armorStand, false).open();
     }
 
     @Override
