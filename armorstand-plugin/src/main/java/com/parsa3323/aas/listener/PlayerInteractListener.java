@@ -82,6 +82,7 @@ public class PlayerInteractListener implements Listener {
 
                             if (!selectCount.containsKey(playerId) || selectCount.get(playerId) != clicked) {
                                 interactionCount.put(playerId, 0);
+                                deleteInteractionCount.put(playerId, 0);
                                 CountDownUtils.stopCountdown(playerId);
                             }
 
@@ -232,6 +233,7 @@ public class PlayerInteractListener implements Listener {
 
                     if (!deletionCount.containsKey(playerId) || deletionCount.get(playerId) != armorStand) {
                         deleteInteractionCount.put(playerId, 0);
+                        interactionCount.put(playerId, 0);
                         CountDownUtils.stopCountdown(playerId);
                     }
 

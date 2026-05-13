@@ -19,7 +19,6 @@
 package com.parsa3323.aas.tools;
 
 import com.parsa3323.aas.tools.manager.ToolsOption;
-import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -49,7 +48,7 @@ public class MoveTool extends ToolsOption {
 
         lore.add("");
 
-        lore.add(ColorUtils.boldAndColor(ChatColor.YELLOW) + "Recommended: " + ChatColor.GRAY + "use /as move ");
+        lore.add(ChatColor.GRAY + "Recommended: use /as move ");
         lore.add(ChatColor.GRAY + "command instead");
 
         lore.add("");
