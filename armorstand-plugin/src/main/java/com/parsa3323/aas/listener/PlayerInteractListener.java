@@ -45,7 +45,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class PlayerInteractListener implements Listener {
 
@@ -121,7 +124,7 @@ public class PlayerInteractListener implements Listener {
 
                             } else if (count == 3) {
                                 String name;
-                                int maxAttempts = 1000;
+                                int maxAttempts = 2;
                                 int attempts = 0;
 
                                 do {
@@ -129,7 +132,7 @@ public class PlayerInteractListener implements Listener {
                                     attempts++;
 
                                     if (attempts > maxAttempts) {
-                                        name = "SavedStand" + (new Random().nextInt(900) + 100);
+                                        name = "SavedStand_" + Long.toString(System.currentTimeMillis(), 36);
                                         break;
                                     }
                                 } while (ArmorStandUtils.exists(name));
