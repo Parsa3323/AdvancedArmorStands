@@ -167,7 +167,6 @@ public class ListCommand extends SubCommand {
 
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
         }
-
     }
 
     @Override
