@@ -288,7 +288,7 @@ public class PlayerInteractListener implements Listener {
             }
 
             return;
-        };
+        }
 
         for (String key : standSection.getKeys(false)) {
             ConfigurationSection commandSection = standSection.getConfigurationSection(key);
