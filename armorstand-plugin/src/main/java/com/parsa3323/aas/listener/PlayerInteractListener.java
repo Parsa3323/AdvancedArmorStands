@@ -92,7 +92,6 @@ public class PlayerInteractListener implements Listener {
                                         10,
                                         (time) -> VersionSupportUtil.getVersionSupport()
                                                 .sendActionBar(bukkitPlayer, ColorUtils.boldAndColor(ChatColor.GREEN) + time + "s"),
-
                                         () -> {
                                             interactionCount.remove(playerId);
                                             selectCount.remove(playerId);
