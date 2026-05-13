@@ -84,7 +84,6 @@ public class MoveCommand extends SubCommand {
             return;
         }
 
-
         for (Entity entity : world.getEntities()) {
             if (entity instanceof ArmorStand && entity.getUniqueId().equals(uuid)) {
                 ArmorStand armorStand = (ArmorStand) entity;
@@ -108,7 +107,6 @@ public class MoveCommand extends SubCommand {
                 return;
             }
         }
-
         player.sendMessage(ChatColor.RED + "ArmorStand not found in the world!");
     }
 
