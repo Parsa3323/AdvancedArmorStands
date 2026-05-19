@@ -76,6 +76,6 @@ public class ReloadCommand extends SubCommand {
 
     @Override
     public String getAlias() {
-        return "rld";
+        return "rl";
     }
 }
