@@ -95,4 +95,5 @@ public class AiCommand extends SubCommand {
     public String getAlias() {
         return "";
     }
+
 }
