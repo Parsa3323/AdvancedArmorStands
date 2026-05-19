@@ -128,9 +128,10 @@ public class AnimationCommand extends SubCommand {
                     player.spigot().sendMessage(component);
                 }
 
-
-
             }
+
+            player.sendMessage(" ");
+            player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             player.sendMessage(" ");
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
         } else {
