@@ -141,7 +141,7 @@ public class CommandManager implements CommandExecutor {
 
                             hoverBuilder
                                     .append(ColorUtils.boldAndColor(ChatColor.YELLOW) + "Click to suggest this command")
-                                    .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + commands)
+                                    .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + ChatColor.stripColor(commands))
                                     .append("\n" + ChatColor.GRAY + "Description: " + ChatColor.WHITE + description);
 
                             commandComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverBuilder.create()));
