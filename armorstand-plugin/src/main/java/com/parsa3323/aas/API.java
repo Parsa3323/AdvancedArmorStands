@@ -429,7 +429,7 @@ public class API implements ArmorstandApi {
 
                 armorStand.setHeadPose(poseData.getHead());
                 armorStand.setRightArmPose(poseData.getRightArm());
-                armorStand.setLeftArmPose(poseData.getRightArm());
+                armorStand.setLeftArmPose(poseData.getLeftArm());
                 armorStand.setRightLegPose(poseData.getRightLeg());
                 armorStand.setLeftLegPose(poseData.getLeftLeg());
             }
