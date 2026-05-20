@@ -103,9 +103,6 @@ public class ListCommand extends SubCommand {
 
             for (String name : armorStandList) {
                 TextComponent indexComponent = new TextComponent(ChatColor.GRAY + " » ");
-                System.out.println(ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)));
-                System.out.println(ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted"));
-                System.out.println(ArmorStandUtils.exists(name));
                 TextComponent nameComponent = new TextComponent((ArmorStandUtils.isLoaded(ArmorStandUtils.getArmorStandByName(name)) ? ChatColor.YELLOW : (ArmorStandsConfig.get().getBoolean("armorstands." + name + ".deleted")) ?  ChatColor.GRAY :  ChatColor.GOLD) + "" + ChatColor.BOLD + name + ChatColor.GRAY + " |");
                 nameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.YELLOW + name)
