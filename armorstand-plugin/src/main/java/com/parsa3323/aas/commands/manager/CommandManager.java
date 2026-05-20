@@ -33,6 +33,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -164,19 +165,20 @@ public class CommandManager implements CommandExecutor {
 
                     if (args[0].equalsIgnoreCase("preview")) {
                         if (!(args.length < 2) && API.previewMap.containsKey(player.getUniqueId())) {
+                            ArmorStand stand = API.previewMap.get(player.getUniqueId());
                             switch (args[1]) {
                                 case "accept":
-                                    ArmorStandUtils.removePose(player);
+                                    ArmorStandUtils.removePose(stand);
                                     API.previewMap.remove(player.getUniqueId());
                                     player.sendMessage(ChatColor.GREEN + "Accepted this position for this ArmorStand.");
                                     break;
                                 case "deny":
                                     try {
-                                        AdvancedArmorStands.api.getArmorStandManager().setPose(ArmorStandUtils.getNameByArmorStand(API.previewMap.get(player.getUniqueId())), ArmorStandUtils.getPose(API.previewMap.get(player.getUniqueId()).getUniqueId()));
+                                        AdvancedArmorStands.api.getArmorStandManager().setPose(ArmorStandUtils.getNameByArmorStand(stand), ArmorStandUtils.getPose(stand.getUniqueId()));
                                     } catch (ArmorStandNotFoundException e) {
                                         throw new RuntimeException(e);
                                     }
-                                    ArmorStandUtils.removePose(player);
+                                    ArmorStandUtils.removePose(stand);
                                     API.previewMap.remove(player.getUniqueId());
                                     player.sendMessage(ChatColor.GREEN + "Successfully denied the new position.");
                                     break;
