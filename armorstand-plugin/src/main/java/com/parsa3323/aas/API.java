@@ -440,17 +440,21 @@ public class API implements ArmorstandApi {
                 if (stand == null) {
                     throw new ArmorStandNotFoundException("ArmorStand '" + asName + "' not found!");
                 }
+                if (previewMap.containsKey(p.getUniqueId()) || previewMap.containsValue(stand)) {
+                    p.sendMessage(ChatColor.RED + "Either the ArmorStand or the you are already in a preview session, approve or deny that to preview this or restart the server");
+                    return;
+                }
 
                 ArmorStandUtils.savePose(stand);
                 previewMap.put(p.getUniqueId(), stand);
 
                 TextComponent textComponent = new TextComponent(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.BOLD + asName + "'s position has been changed");
 
-                TextComponent accept = new TextComponent(ColorUtils.boldAndColor(ChatColor.BOLD) + " [ACCEPT]");
+                TextComponent accept = new TextComponent(ChatColor.WHITE + " [ACCEPT]");
                 accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as preview accept"));
                 accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to accept").create()));
 
-                TextComponent deny = new TextComponent(ColorUtils.boldAndColor(ChatColor.BOLD) + " [DENY]");
+                TextComponent deny = new TextComponent(ChatColor.WHITE + " [DENY]");
                 deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/as preview deny"));
                 deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to deny").create()));
 

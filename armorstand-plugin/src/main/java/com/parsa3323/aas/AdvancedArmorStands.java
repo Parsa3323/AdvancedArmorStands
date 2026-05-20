@@ -362,6 +362,27 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         }
 
+        status("Restoring ArmorStand positions...");
+        List<String> standList = ArmorStandUtils.getArmorStandList();
+
+        if (standList.isEmpty()) {
+            debug("No armor stands found!");
+            return;
+        }
+
+        for (String stand : standList) {
+            if (stand == null) continue;
+
+            ArmorStand armorStand = ArmorStandUtils.getArmorStandByName(stand);
+            if (armorStand == null) {
+                continue;
+            }
+
+            if (API.previewMap.containsValue(armorStand)) {
+                AdvancedArmorStands.api.getArmorStandManager().setPose(stand, ArmorStandUtils.getPose(armorStand.getUniqueId()));
+            }
+        }
+
         status("Plugin has been successfully disabled!");
     }
 

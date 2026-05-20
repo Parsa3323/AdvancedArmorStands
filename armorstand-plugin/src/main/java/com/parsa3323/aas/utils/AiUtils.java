@@ -214,6 +214,7 @@ public class AiUtils {
                         AdvancedArmorStands.warn("Invalid pose action: missing name or params.", true);
                         return;
                     }
+
                     ArmorStandPoseData poseData = parsePoseData(params.optJSONObject("pose"));
                     Bukkit.getScheduler().runTaskLater(AdvancedArmorStands.plugin, () -> {
                         try {
