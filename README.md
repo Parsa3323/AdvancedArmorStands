@@ -70,7 +70,7 @@ This document contains the configuration details for AdvancedArmorStands.
 
 ## Main Configuration
 
-The `main.yml` file is the plugin's main configuration file:
+The `config.yml` file is the plugin's main configuration file:
 
 </div>
 
