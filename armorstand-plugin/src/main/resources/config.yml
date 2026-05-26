@@ -7,10 +7,13 @@
 
 # DO NOT MODIFY THIS VALUE
 # This is used internally to ensure compatibility between plugin versions and config formats.
-config-version: 1.0.2
+config-version: 1.0.3
 
 # Enable & Disable Debug
 debug: false
+
+# Default language
+language: en
 
 # Enables the feature where sneaking and right-clicking an ArmorStand
 # three times will save it as an Advanced ArmorStand, ArmorStand.

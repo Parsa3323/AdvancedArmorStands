@@ -25,6 +25,7 @@ import com.parsa3323.aas.api.actions.IssueLevel;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.aas.commands.CreateCommand;
 import com.parsa3323.aas.commands.manager.CommandManager;
@@ -57,7 +58,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static Level logLevel;
 
-    private final String CURRENT_CONFIG_VERSION = "1.0.2";
+    private final String CURRENT_CONFIG_VERSION = "1.0.3";
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
@@ -164,6 +165,12 @@ public final class AdvancedArmorStands extends JavaPlugin {
             pm.registerEvents(listener, this);
             getLogger().info("Loaded listener: " + listener.getClass().getSimpleName());
         }
+
+        status("Loading languages...");
+
+        Language.loadLanguages(this, getConfig().getString("language"));
+
+        status("Loaded '" + Language.getDefaultLanguage() + "' as the default language");
 
         status("Checking requirements...");
 
