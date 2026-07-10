@@ -21,6 +21,7 @@ package com.parsa3323.aas.menus;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.api.exeption.ConfigException;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
@@ -51,7 +52,7 @@ public class KeyFrameMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.DARK_GRAY + "as " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "keyframe editor";
+        return Language.getMsg("keyframe_menu_title");
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
@@ -61,7 +62,7 @@ public class ArmorStandMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.DARK_GRAY + "as " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "settings";
+        return Language.getMsg("armor_stand_menu_title");
     }
 
     @Override
@@ -502,7 +503,8 @@ public class ArmorStandMenu extends Menu {
         if (ArmorStandSelectionCache.isIsInEditSession(playerMenuUtility.getOwner())) {
             return;
         }
-        inventory = Bukkit.createInventory(this, getSlots(), getMenuName());
+
+        inventory = Bukkit.createInventory(this, getSlots(), Language.getMsg("menu_format").replaceAll("%section%", getMenuName()));
 
         this.setMenuItems();
 

@@ -20,6 +20,8 @@ package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ActionBarTimer;
 import com.parsa3323.aas.utils.AiUtils;
@@ -51,7 +53,7 @@ public class AiCommand extends SubCommand {
     }
     @Override
     public String getDescription() {
-        return "Ask the ai to assist you";
+        return Language.getMsg(Messages.AI_COMMAND_DESCRIPTION);
     }
 
     @Override
@@ -70,7 +72,10 @@ public class AiCommand extends SubCommand {
 
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
 
-        ActionBarTimer actionBarTimer = new ActionBarTimer(player, ChatColor.GRAY + "Thinking...");
+        ActionBarTimer actionBarTimer = new ActionBarTimer(
+                player,
+                Language.getMsg(Messages.AI_COMMAND_THINKING)
+        );
         actionBarTimer.start();
 
         AiUtils.getAssistWithAi(AdvancedArmorStands.getAiApiKey(), userInput, player, s -> {

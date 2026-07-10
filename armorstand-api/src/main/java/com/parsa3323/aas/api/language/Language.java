@@ -18,73 +18,71 @@
 
 package com.parsa3323.aas.api.language;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Language {
+public abstract class Language {
 
     private static final Map<String, Language> languages = new HashMap<>();
-
     private static Language defaultLanguage;
 
     private final Plugin plugin;
-
+    private final String iso;
     private final File configFile;
-
     private YamlConfiguration yml;
 
     private final String prefix = "";
 
-    public Language(Plugin plugin, String iso) {
+    protected Language(Plugin plugin, String iso) {
         this.plugin = plugin;
+        this.iso = iso.toLowerCase();
 
         File folder = new File(plugin.getDataFolder(), "languages");
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
 
-        if (!folder.exists()) folder.mkdirs();
-
-
-        this.configFile = new File(
-                folder,
-                "messages_" + iso + ".yml"
-        );
+        this.configFile = new File(folder, "messages_" + this.iso + ".yml");
 
         load();
-        languages.put(iso, this);
+        registerDefaults();
+        save();
+
+        languages.put(this.iso, this);
     }
 
-
-    public static Language getDefaultLanguage() {
-        return defaultLanguage;
+    protected void registerDefaults() {
     }
 
     public static void loadLanguages(Plugin plugin, String configuredLanguage) {
         File folder = new File(plugin.getDataFolder(), "languages");
-
         File[] files = folder.listFiles();
 
         if (files != null) {
             for (File file : files) {
-
-                if (!file.isFile()) continue;
-
+                if (!file.isFile()) {
+                    continue;
+                }
 
                 String name = file.getName();
-                if (!name.startsWith("messages_") || !name.endsWith(".yml")) continue;
-
-                String iso = name.replace("messages_", "").replace(".yml", "");
-
-                if (getLang(iso) == null) new Language(plugin, iso);
+                if (!name.startsWith("messages_") || !name.endsWith(".yml")) {
+                    continue;
+                }
             }
         }
 
         Language lang = getLang(configuredLanguage.toLowerCase());
-
-        if (lang == null) lang = getLang("en");
+        if (lang == null) {
+            lang = getLang("en");
+        }
 
         defaultLanguage = lang;
     }
@@ -96,23 +94,23 @@ public class Language {
             }
 
             this.yml = YamlConfiguration.loadConfiguration(configFile);
-
         } catch (IOException exception) {
             exception.printStackTrace();
+            this.yml = new YamlConfiguration();
         }
     }
 
     public void save() {
         try {
+            yml.options().copyDefaults(true);
             yml.save(configFile);
-
         } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
 
     public void reload() {
-        this.yml = YamlConfiguration.loadConfiguration(configFile);
+        load();
     }
 
     public String getString(String path) {
@@ -124,17 +122,59 @@ public class Language {
     }
 
     public static String getMsg(String path) {
-        String msg = defaultLanguage.getString(path);
+        if (defaultLanguage == null) {
+            return "Missing: " + path;
+        }
 
+        String msg = defaultLanguage.getString(path);
         if (msg == null) {
             return "Missing: " + path;
         }
 
-        return msg;
+        return ChatColor.translateAlternateColorCodes('&', msg);
     }
 
     public static Language getLang(String iso) {
-        return languages.get(iso);
+        return languages.get(iso.toLowerCase());
+    }
+
+
+    public static List<String> getLore(String path) {
+
+        List<String> lore = new ArrayList<>();
+
+        if (defaultLanguage == null || defaultLanguage.yml == null) {
+            lore.add("Missing language");
+            return lore;
+        }
+
+        Object value = defaultLanguage.yml.get(path);
+
+        if (value == null) {
+            lore.add("Missing: " + path);
+            return lore;
+        }
+
+        if (value instanceof List) {
+
+            List<?> raw = (List<?>) value;
+
+            for (Object obj : raw) {
+                lore.add(ChatColor.translateAlternateColorCodes('&', String.valueOf(obj)));
+            }
+
+            return lore;
+        }
+
+        String raw = String.valueOf(value);
+
+        String[] lines = raw.split("\\r?\\n");
+
+        for (String line : lines) {
+            lore.add(ChatColor.translateAlternateColorCodes('&', line));
+        }
+
+        return lore;
     }
 
     public static void setDefaultLanguage(Language lang) {
@@ -145,7 +185,12 @@ public class Language {
         return plugin;
     }
 
+    public String getIso() {
+        return iso;
+    }
+
     public File getConfigFile() {
         return configFile;
     }
+
 }

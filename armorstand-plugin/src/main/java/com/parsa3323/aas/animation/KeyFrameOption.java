@@ -20,11 +20,11 @@ package com.parsa3323.aas.animation;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.menus.KeyFrameMenu;
-import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
@@ -49,12 +49,8 @@ public class KeyFrameOption extends InventoryItem {
     
     @Override
     public ItemStack getItemStack() {
-        ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.GRAY + "Add a keyframe");
-        lore.add(ChatColor.YELLOW + "SHIFT RIGHT CLICK " + ChatColor.GRAY + "Open keyframe menu");
-        lore.add("");
-        lore.add(ColorUtils.boldAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+        ArrayList<String> lore = new ArrayList<>(Language.getLore("keyframe_option_lore"));
 
         ItemStack itemStack = new ItemStack(XMaterial.NETHER_STAR.parseMaterial());
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -136,7 +132,7 @@ public class KeyFrameOption extends InventoryItem {
                 config.set(path, steps);
                 AnimationConfig.save();
 
-                InventoryUtils.sendStackingActionBar(p, ChatColor.GREEN + "Added keyframe!", 60);
+                InventoryUtils.sendStackingActionBar(p, Language.getMsg("keyframe_created"), 60);
                 p.playSound(p.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
 
             }

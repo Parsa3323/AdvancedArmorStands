@@ -20,6 +20,7 @@ package com.parsa3323.aas.actions;
 
 import com.parsa3323.aas.actions.manager.ActionItem;
 import com.parsa3323.aas.api.exeption.ConfigException;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -44,58 +45,36 @@ public class TriggerOption extends ActionItem {
 
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Select how the command");
-        lore.add(ChatColor.GRAY + "will be triggered when");
-        lore.add(ChatColor.GRAY + "the player interacts with");
-        lore.add(ChatColor.GRAY + "the ArmorStand.");
+        String trigger = cs.getString("trigger");
 
-        lore.add("");
+        for (String line : Language.getLore("actions_settings_trigger_lore")) {
+            if (ChatColor.stripColor(line).trim().equals("%trigger_list%")) {
+                lore.add(( "right-click".equals(trigger)
+                        ? ChatColor.GOLD + "» " + ChatColor.YELLOW
+                        : ChatColor.GRAY + "» ") + "Right click");
 
-        switch (cs.getString("trigger")) {
-            case "all":
-                lore.add(ChatColor.GRAY + "» Right click");
-                lore.add(ChatColor.GRAY + "» Left click");
-                lore.add(ChatColor.GRAY + "» Shift right click");
-                lore.add(ChatColor.GRAY + "» Shift left click");
-                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " All");
-                break;
-            case "right-click":
-                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Right click");
-                lore.add(ChatColor.GRAY + "» Left click");
-                lore.add(ChatColor.GRAY + "» Shift right click");
-                lore.add(ChatColor.GRAY + "» Shift left click");
-                lore.add(ChatColor.GRAY + "» All");
-                break;
-            case "left-click":
-                lore.add(ChatColor.GRAY + "» Right click");
-                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Left click");
-                lore.add(ChatColor.GRAY + "» Shift right click");
-                lore.add(ChatColor.GRAY + "» Shift left click");
-                lore.add(ChatColor.GRAY + "» All");
-                break;
-            case "shift-right-click":
-                lore.add(ChatColor.GRAY + "» Right click");
-                lore.add(ChatColor.GRAY + "» Left click");
-                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Shift right click");
-                lore.add(ChatColor.GRAY + "» Shift left click");
-                lore.add(ChatColor.GRAY + "» All");
-                break;
-            case "shift-left-click":
-                lore.add(ChatColor.GRAY + "» Right click");
-                lore.add(ChatColor.GRAY + "» Left click");
-                lore.add(ChatColor.GRAY + "» Shift right click");
-                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Shift left click");
-                lore.add(ChatColor.GRAY + "» All");
-                break;
+                lore.add(( "left-click".equals(trigger)
+                        ? ChatColor.GOLD + "» " + ChatColor.YELLOW
+                        : ChatColor.GRAY + "» ") + "Left click");
 
+                lore.add(( "shift-right-click".equals(trigger)
+                        ? ChatColor.GOLD + "» " + ChatColor.YELLOW
+                        : ChatColor.GRAY + "» ") + "Shift right click");
+
+                lore.add(( "shift-left-click".equals(trigger)
+                        ? ChatColor.GOLD + "» " + ChatColor.YELLOW
+                        : ChatColor.GRAY + "» ") + "Shift left click");
+
+                lore.add("all".equals(trigger)
+                        ? ChatColor.GOLD + "» " + ChatColor.YELLOW + "All"
+                        : ChatColor.GRAY + "» All");
+            } else {
+                lore.add(ChatColor.translateAlternateColorCodes('&', line));
+            }
         }
 
-
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Click to change");
-
         itemMeta.setLore(lore);
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Trigger Type");
+        itemMeta.setDisplayName(Language.getMsg("actions_settings_trigger_name"));
 
         itemStack.setItemMeta(itemMeta);
 

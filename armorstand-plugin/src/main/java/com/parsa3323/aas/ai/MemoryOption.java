@@ -20,6 +20,7 @@ package com.parsa3323.aas.ai;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.ai.manager.AiSettingsOption;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.utils.AiUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
@@ -44,36 +45,29 @@ public class MemoryOption extends AiSettingsOption {
 
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        ArrayList<String> lore = new ArrayList<>();
+        List<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Add custom instructions");
-        lore.add(ChatColor.GRAY + "for this ArmorStand's AI");
-        lore.add(ChatColor.GRAY + "to follow when replying.");
+        for (String line : Language.getLore("ai_memory_setting")) {
 
-
-        String currentInstructions = AiUtils.getUserSetInstructions(armorStand);
-
-        lore.add("");
-
-        if (currentInstructions != null) {
-            String[] words = ChatColor.stripColor(currentInstructions).split("\\s+");
-            StringBuilder line = new StringBuilder(ChatColor.YELLOW + "Current" + ChatColor.GOLD + " » " + ChatColor.YELLOW);
-            for (int i = 0; i < words.length; i++) {
-                line.append(words[i]).append(" ");
-                if ((i + 1) % 2 == 0 || i == words.length - 1) {
-                    lore.add(line.toString().trim());
-                    line = new StringBuilder(ChatColor.YELLOW.toString());
+            if (line.equals("%current%")) {
+                String currentInstructions = AiUtils.getUserSetInstructions(armorStand);
+                if (currentInstructions != null) {
+                    String[] words = ChatColor.stripColor(currentInstructions).split("\\s+");
+                    String built = ChatColor.YELLOW + "Current" + ChatColor.GOLD + " » " + ChatColor.YELLOW;
+                    for (int i = 0; i < words.length; i++) {
+                        built += words[i] + " ";
+                        if ((i + 1) % 2 == 0 || i == words.length - 1) {
+                            lore.add(built.trim());
+                            built = ChatColor.YELLOW.toString();
+                        }
+                    }
+                } else {
+                    lore.add(ChatColor.YELLOW + "Current" + ChatColor.GOLD + " » " + ChatColor.YELLOW + "None");
                 }
+            } else {
+                lore.add(line);
             }
-        } else {
-            lore.add(ChatColor.YELLOW + "Current" + ChatColor.GOLD + " » " + ChatColor.YELLOW + "None");
         }
-
-        lore.add("");
-
-        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Shift-click to reset");
-
-        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Click to change");
 
         itemMeta.setLore(lore);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Memory");

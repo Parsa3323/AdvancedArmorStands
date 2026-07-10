@@ -21,6 +21,7 @@ package com.parsa3323.aas.ai.manager;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.ai.AiToggleOption;
 import com.parsa3323.aas.ai.MemoryOption;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.menus.ArmorStandMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.options.manager.SettingsManager;
@@ -55,7 +56,7 @@ public class AiSettingsManager extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.DARK_GRAY + "as " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "ai settings";
+        return Language.getMsg("ai_menu_title");
     }
 
     @Override

@@ -19,6 +19,7 @@
 package com.parsa3323.aas.ai;
 
 import com.parsa3323.aas.ai.manager.AiSettingsOption;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.TextUtils;
@@ -41,12 +42,21 @@ public class AiToggleOption extends AiSettingsOption {
 
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Enable or disable AI");
-        lore.add(ChatColor.GRAY + "for this ArmorStand");
+        boolean enabled = ArmorStandUtils.hasAi(
+                ArmorStandUtils.getNameByArmorStand(armorStand)
+        );
 
-        lore.add("");
-        lore.add((ArmorStandUtils.hasAi(ArmorStandUtils.getNameByArmorStand(armorStand))) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Enabled" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Disabled");
+        for (String line : Language.getLore("ai_settings_toggle_lore")) {
 
+            if ("%ai_status%".equals(ChatColor.stripColor(line).trim())) {
+                lore.add(enabled
+                        ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Enabled"
+                        : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Disabled"
+                );
+            } else {
+                lore.add(ChatColor.translateAlternateColorCodes('&', line));
+            }
+        }
         itemMeta.setLore(lore);
         itemMeta.setDisplayName(ChatColor.YELLOW + "Toggle AI");
 

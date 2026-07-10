@@ -51,7 +51,7 @@ public class ToolsManager extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.DARK_GRAY + "as " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "tools";
+        return "tools";
     }
 
     @Override

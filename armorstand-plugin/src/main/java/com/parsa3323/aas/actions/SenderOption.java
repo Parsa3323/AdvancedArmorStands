@@ -20,6 +20,7 @@ package com.parsa3323.aas.actions;
 
 import com.parsa3323.aas.actions.manager.ActionItem;
 import com.parsa3323.aas.api.exeption.ConfigException;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -43,31 +44,27 @@ public class SenderOption extends ActionItem {
 
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Select the sender of the");
-        lore.add(ChatColor.GRAY + "command. This affects how");
-        lore.add(ChatColor.GRAY + "permissions and execution work.");
-        lore.add("");
+        String sender = cs.getString(armorStandName + "." + commandPath + ".type");
 
-        switch (cs.getString(armorStandName + "." + commandPath + ".type")) {
-            case "server":
-                lore.add(ChatColor.GRAY + "» Player");
-                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Console");
-                break;
-
-            case "player":
-                lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Player");
-                lore.add(ChatColor.GRAY + "» Console");
-                break;
-
+        for (String line : Language.getLore("actions_settings_sender_lore")) {
+            String cleaned = ChatColor.stripColor(line).trim();
+            if ("%sender_list%".equals(cleaned)) {
+                if ("server".equals(sender)) {
+                    lore.add(ChatColor.GRAY + "» Player");
+                    lore.add(ChatColor.GOLD + "» " + ChatColor.YELLOW + "Console");
+                } else {
+                    lore.add(ChatColor.GOLD + "» " + ChatColor.YELLOW + "Player");
+                    lore.add(ChatColor.GRAY + "» Console");
+                }
+            } else {
+                lore.add(ChatColor.translateAlternateColorCodes('&', line));
+            }
         }
-
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Click to change");
 
 
         itemMeta.setLore(lore);
 
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Sender");
+        itemMeta.setDisplayName(Language.getMsg("actions_settings_sender_name"));
 
         itemStack.setItemMeta(itemMeta);
 

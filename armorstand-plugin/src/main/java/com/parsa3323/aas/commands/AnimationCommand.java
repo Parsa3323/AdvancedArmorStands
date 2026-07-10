@@ -19,8 +19,9 @@
 package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
-import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.CommandUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -55,7 +56,7 @@ public class AnimationCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Show animation commands";
+        return Language.getMsg(Messages.ANIMATION_COMMAND_DESCRIPTION);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class AnimationCommand extends SubCommand {
         if (args.length < 2) {
             player.sendMessage("");
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            player.sendMessage("     " + ColorUtils.boldAndColor(ChatColor.GOLD) + "Advanced " + ColorUtils.boldAndColor(ChatColor.YELLOW) + "ArmorStands " + ColorUtils.boldAndColor(ChatColor.GRAY) + "animation commands");
+            player.sendMessage(Language.getMsg(Messages.ANIMATION_COMMAND_HEADER));
             player.sendMessage(ChatColor.DARK_GRAY + "§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             player.sendMessage("");
             for (SubCommand cmd : animationSubCommands) {
@@ -107,7 +108,7 @@ public class AnimationCommand extends SubCommand {
                     ComponentBuilder hoverBuilder = new ComponentBuilder("");
 
                     if (exampleLore != null && !exampleLore.isEmpty()) {
-                        hoverBuilder.append(ChatColor.GRAY + "Examples:")
+                        hoverBuilder.append(Language.getMsg(Messages.COMMAND_EXAMPLES))
                                 .append("\n");
                         for (String example : exampleLore) {
                             hoverBuilder.append(ChatColor.YELLOW + "  " + example)
@@ -117,9 +118,11 @@ public class AnimationCommand extends SubCommand {
                     }
 
                     hoverBuilder
-                            .append(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Click to use this command")
-                            .append("\n" + ChatColor.GRAY + "Command: " + ChatColor.YELLOW + command)
-                            .append("\n" + ChatColor.GRAY + "Description: " + ChatColor.WHITE + description);
+                            .append(Language.getMsg(Messages.COMMAND_CLICK_TO_USE))
+                            .append("\n" + Language.getMsg(Messages.COMMAND_LABEL)
+                                    .replace("%command%", command))
+                            .append("\n" + Language.getMsg(Messages.COMMAND_DESCRIPTION_LABEL)
+                                    .replace("%description%", description));
 
                     component.setHoverEvent(
                             new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverBuilder.create())
@@ -144,7 +147,7 @@ public class AnimationCommand extends SubCommand {
                         if (player.hasPermission("advanced-armorstands.admin")) {
                             cmd.perform(player, args);
                         } else {
-                            player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
+                            player.sendMessage(Language.getMsg(Messages.COMMAND_NO_PERMISSION));
                         }
                     } else {
                         cmd.perform(player, args);
@@ -157,9 +160,16 @@ public class AnimationCommand extends SubCommand {
                 String suggestion = CommandUtils.getClosestCommand(args[1], animationSubCommands);
 
                 if (suggestion != null) {
-                    player.sendMessage(ChatColor.RED + "Command '" + args[0] + "' is not a valid subcommand. Did you mean '" + suggestion + "'?");
+                    player.sendMessage(
+                            Language.getMsg(Messages.COMMAND_UNKNOWN_WITH_SUGGESTION)
+                                    .replace("%command%", args[0])
+                                    .replace("%suggestion%", suggestion)
+                    );
                 } else {
-                    player.sendMessage(ChatColor.RED + "Command '" + args[0] + "' is not a valid subcommand.");
+                    player.sendMessage(
+                            Language.getMsg(Messages.COMMAND_UNKNOWN)
+                                    .replace("%command%", args[0])
+                    );
                 }
 
             }

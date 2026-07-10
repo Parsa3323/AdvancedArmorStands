@@ -32,6 +32,7 @@ import com.parsa3323.aas.commands.manager.CommandManager;
 import com.parsa3323.aas.commands.manager.TabComplete;
 import com.parsa3323.aas.config.*;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
+import com.parsa3323.aas.languages.English;
 import com.parsa3323.aas.listener.*;
 import com.parsa3323.aas.menus.manager.MenuListener;
 import com.parsa3323.aas.placeholderapi.PapiExpansion;
@@ -168,9 +169,11 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
         status("Loading languages...");
 
+        new English();
+
         Language.loadLanguages(this, getConfig().getString("language"));
 
-        status("Loaded '" + Language.getDefaultLanguage() + "' as the default language");
+    //    status("Loaded '" + Language.() + "' as the default language");
 
         status("Checking requirements...");
 

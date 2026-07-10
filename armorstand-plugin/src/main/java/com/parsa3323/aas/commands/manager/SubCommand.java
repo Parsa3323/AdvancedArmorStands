@@ -18,6 +18,8 @@
 
 package com.parsa3323.aas.commands.manager;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -51,7 +53,12 @@ public abstract class SubCommand {
         TextComponent textComponent = new TextComponent(ChatColor.RED + "Usage: ");
         TextComponent main = new TextComponent(ChatColor.RED + getSyntax());
         main.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, getSyntax()));
-        main.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to suggest").create()));
+        main.setHoverEvent(
+                new HoverEvent(
+                        HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(Language.getMsg(Messages.COMMAND_USAGE_HOVER)).create()
+                )
+        );
         player.spigot().sendMessage(textComponent, main);
     }
 
@@ -97,14 +104,18 @@ public abstract class SubCommand {
         ArmorStand as = ArmorStandUtils.getArmorStandByName(input);
         if (as == null) {
             if (ArmorStandUtils.getArmorStandList().contains(input)) {
-                player.sendMessage(ChatColor.RED + "This ArmorStand is not loaded");
+                player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_NOT_LOADED));
                 return null;
             }
             String suggestion = getClosest(input, ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + input + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(
+                        Language.getMsg(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION)
+                                .replace("%armorstand%", input)
+                                .replace("%suggestion%", suggestion)
+                );
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
+                player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_INVALID));
             }
             return null;
         }

@@ -20,6 +20,7 @@ package com.parsa3323.aas.menus.manager;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -58,7 +59,7 @@ public abstract class Menu implements InventoryHolder {
     public abstract void close(InventoryCloseEvent e);
 
     public void open() {
-        inventory = Bukkit.createInventory(this, getSlots(), getMenuName());
+        inventory = Bukkit.createInventory(this, getSlots(), Language.getMsg("menu_format").replaceAll("%section%", getMenuName()));
 
         this.setMenuItems();
 

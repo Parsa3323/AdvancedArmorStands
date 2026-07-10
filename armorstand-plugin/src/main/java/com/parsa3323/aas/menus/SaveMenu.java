@@ -20,6 +20,7 @@ package com.parsa3323.aas.menus;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
@@ -49,7 +50,7 @@ public class SaveMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.DARK_GRAY + "as " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "save menu";
+        return Language.getMsg("save_menu_title");
     }
 
     @Override

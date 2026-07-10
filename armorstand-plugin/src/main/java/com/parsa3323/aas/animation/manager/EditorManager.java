@@ -21,6 +21,7 @@ package com.parsa3323.aas.animation.manager;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.animation.KeyFrameOption;
 import com.parsa3323.aas.api.data.ArmorStandPoseData;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.inventory.*;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
@@ -85,7 +86,7 @@ public class EditorManager implements Listener {
                     new ArmorStandMenu(new PlayerMenuUtility(player), armorStand).open();
                     ArmorStandSelectionCache.removeKeyFrameSelectedArmorStand(player.getUniqueId());
 
-                    TextComponent textComponent = new TextComponent(ChatColor.GREEN + "Animation saved successfully, click to add to this ArmorStand");
+                    TextComponent textComponent = new TextComponent(Language.getMsg("animations_menu_successful_creation"));
                     textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.YELLOW + "Click to set this animation to " + ArmorStandUtils.getNameByArmorStand(armorStand)).create()));
                     textComponent.setClickEvent(new ClickEvent(
                             ClickEvent.Action.RUN_COMMAND,

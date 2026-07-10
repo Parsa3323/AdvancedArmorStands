@@ -22,6 +22,8 @@ import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.API;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.*;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.*;
@@ -79,7 +81,7 @@ public class CommandManager implements CommandExecutor {
                             try {
                                 page = Integer.parseInt(args[1]);
                             } catch (NumberFormatException e) {
-                                player.sendMessage(ChatColor.RED + "Please enter a valid page number.");
+                                player.sendMessage(Language.getMsg(Messages.COMMAND_HELP_INVALID_PAGE_NUMBER));
                                 return true;
                             }
                         }
@@ -93,7 +95,10 @@ public class CommandManager implements CommandExecutor {
 
                         int totalPages = (int) Math.ceil((double) visibleCommands.size() / COMMANDS_PER_PAGE);
                         if (page < 1 || page > totalPages) {
-                            player.sendMessage(ChatColor.RED  + "Invalid Page, Please choose a page between 1 and " + totalPages + ".");
+                            player.sendMessage(
+                                    Language.getMsg(Messages.COMMAND_HELP_INVALID_PAGE)
+                                            .replace("%pages%", String.valueOf(totalPages))
+                            );
                             return true;
                         }
 
@@ -170,7 +175,7 @@ public class CommandManager implements CommandExecutor {
                                 case "accept":
                                     ArmorStandUtils.removePose(stand);
                                     API.previewMap.remove(player.getUniqueId());
-                                    player.sendMessage(ChatColor.GREEN + "Accepted this position for this ArmorStand.");
+                                    player.sendMessage(Language.getMsg(Messages.PREVIEW_ACCEPTED));
                                     break;
                                 case "deny":
                                     try {
@@ -180,7 +185,7 @@ public class CommandManager implements CommandExecutor {
                                     }
                                     ArmorStandUtils.removePose(stand);
                                     API.previewMap.remove(player.getUniqueId());
-                                    player.sendMessage(ChatColor.GREEN + "Successfully denied the new position.");
+                                    player.sendMessage(Language.getMsg(Messages.PREVIEW_DENIED));
                                     break;
                             }
                             return true;
@@ -197,7 +202,7 @@ public class CommandManager implements CommandExecutor {
                                 if (player.hasPermission("advanced-armorstands.admin")) {
                                     getSubCommands().get(i).perform(player, args);
                                 } else {
-                                    player.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
+                                    player.sendMessage(Language.getMsg(Messages.COMMAND_NO_PERMISSION));
                                 }
                             } else {
                                 getSubCommands().get(i).perform(player, args);
@@ -207,9 +212,16 @@ public class CommandManager implements CommandExecutor {
                     if (count == 0) {
                         String suggestion = CommandUtils.getClosestCommand(args[0], getSubCommands());
                         if (suggestion != null) {
-                            player.sendMessage(ChatColor.RED + "Command '" + args[0] + "' is not a valid subcommand. Did you mean '" + suggestion + "'?");
+                            player.sendMessage(
+                                    Language.getMsg(Messages.COMMAND_UNKNOWN_WITH_SUGGESTION)
+                                            .replace("%command%", args[0])
+                                            .replace("%suggestion%", suggestion)
+                            );
                         } else {
-                            player.sendMessage(ChatColor.RED + "Command '" + args[0] + "' is not a valid subcommand.");
+                            player.sendMessage(
+                                    Language.getMsg(Messages.COMMAND_UNKNOWN)
+                                            .replace("%command%", args[0])
+                            );
                         }
                     }
                 } else if (args.length == 0) {

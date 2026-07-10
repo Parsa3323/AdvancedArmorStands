@@ -19,6 +19,8 @@
 package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
@@ -72,10 +74,15 @@ public class AnimAddCommand extends SubCommand {
 
         if (configurationSection == null) {
             String suggestion = getClosest(args[2], ArmorStandUtils.getArmorStandList());
+
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(
+                        Language.getMsg(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION)
+                                .replace("%armorstand%", args[2])
+                                .replace("%suggestion%", suggestion)
+                );
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
+                player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_INVALID));
             }
             return;
         }
@@ -83,9 +90,13 @@ public class AnimAddCommand extends SubCommand {
         if (!AnimationConfig.get().contains("animations." + args[2])) {
             String suggestion = getClosest(args[2], AnimationUtils.getAnimationsList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid animation '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(
+                        Language.getMsg(Messages.ANIMATION_INVALID_WITH_SUGGESTION)
+                                .replace("%animation%", args[2])
+                                .replace("%suggestion%", suggestion)
+                );
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid animation");
+                player.sendMessage(Language.getMsg(Messages.ANIMATION_INVALID));
             }
             return;
         }
@@ -101,7 +112,11 @@ public class AnimAddCommand extends SubCommand {
         }
 
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1, 1);
-        player.sendMessage(ChatColor.GREEN + "Successfully set the animation " + args[2] + " to ArmorStand " + args[3]);
+        player.sendMessage(
+                Language.getMsg(Messages.ANIMATION_ADD_SUCCESS)
+                        .replace("%animation%", args[2])
+                        .replace("%armorstand%", args[3])
+        );
     }
 
     @Override

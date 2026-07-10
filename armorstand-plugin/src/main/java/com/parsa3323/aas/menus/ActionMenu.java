@@ -20,6 +20,7 @@ package com.parsa3323.aas.menus;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.actions.manager.ActionManager;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.utils.ActionUtils;
@@ -55,7 +56,7 @@ public class ActionMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.DARK_GRAY + "as " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "actions";
+        return Language.getMsg("actions_menu_title");
     }
 
     @Override
@@ -107,7 +108,7 @@ public class ActionMenu extends PaginatedMenu {
         if (e.getSlot() == 50) {
             map.put(player.getUniqueId(), ArmorStandUtils.getNameByArmorStand(armorStand));
             player.closeInventory();
-            player.sendMessage(ChatColor.GREEN + "Type the command to set (no '/'), Type 'exit' to cancel.");
+            player.sendMessage(Language.getMsg("actions_creation_message"));
         }
 
         if (clickedItem.getType() != XMaterial.PLAYER_HEAD.parseMaterial()) return;
@@ -152,13 +153,10 @@ public class ActionMenu extends PaginatedMenu {
             ItemMeta itemMeta = itemStack.getItemMeta();
 
             ArrayList<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + "This means if you");
-            lore.add(ChatColor.GRAY + "click this armor");
-            lore.add(ChatColor.GRAY + "stand, command will");
-            lore.add(ChatColor.GRAY + "be run: " + key.replaceAll("-", " "));
-            lore.add("");
-            lore.add(ChatColor.GOLD + "» " + ChatColor.YELLOW + "Click to edit");
-            lore.add(ChatColor.GOLD + "» " + ChatColor.YELLOW + "Shift click to remove");
+
+            for (String line : Language.getLore("actions_menu_item_lore")) {
+                lore.add(line.replace("%command%", key.replace("-", " ")));
+            }
 
             itemMeta.setLore(lore);
             itemMeta.setDisplayName(ChatColor.YELLOW + key);

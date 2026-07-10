@@ -21,6 +21,7 @@ package com.parsa3323.aas.actions.manager;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.actions.SenderOption;
 import com.parsa3323.aas.actions.TriggerOption;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.menus.ActionMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.utils.ArmorStandUtils;
@@ -56,7 +57,7 @@ public class ActionManager extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.DARK_GRAY + "as " + ChatColor.GRAY + "» " + ChatColor.DARK_GRAY + "action Settings";
+        return Language.getMsg("actions_settings_menu_title");
     }
 
     @Override
