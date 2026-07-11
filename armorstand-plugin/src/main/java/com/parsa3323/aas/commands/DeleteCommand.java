@@ -19,6 +19,8 @@
 package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
@@ -51,7 +53,7 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Delete an " + ChatColor.GRAY + "ArmorStand";
+        return Language.getMsg(Messages.DELETE_DESCRIPTION);
     }
 
 
@@ -75,7 +77,7 @@ public class DeleteCommand extends SubCommand {
                     throw new RuntimeException(e);
                 }
             }
-            player.sendMessage(ChatColor.GREEN + "Successfully deleted all ArmorStands");
+            player.sendMessage(Language.getMsg(Messages.DELETE_ALL_SUCCESS));
             return;
         }
 
@@ -83,7 +85,7 @@ public class DeleteCommand extends SubCommand {
             ArmorStandUtils.deleteArmorStand(args[1]);
             ArmorStandsConfig.get().set("armorstands." + args[1], null);
             ArmorStandsConfig.save();
-            player.sendMessage(ChatColor.GREEN + "Fully deleted ArmorStand");
+            player.sendMessage(Language.getMsg(Messages.DELETE_SUCCESS));
             SoundUtils.playSuccessSound(player);
             return;
         }
@@ -93,10 +95,15 @@ public class DeleteCommand extends SubCommand {
 
         if (section == null || !section.contains(args[1])) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
+
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(
+                        Language.getMsg(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION)
+                                .replace("%armorstand%", args[2])
+                                .replace("%suggestion%", suggestion)
+                );
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
+                player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_INVALID));
             }
             return;
         }
@@ -106,7 +113,7 @@ public class DeleteCommand extends SubCommand {
         if (ArmorStandsConfig.get().getBoolean("armorstands." + args[1] + ".deleted")) {
             ArmorStandsConfig.get().set("armorstands." + args[1], null);
             ArmorStandsConfig.save();
-            player.sendMessage(ChatColor.GREEN + "Fully deleted ArmorStand");
+            player.sendMessage(Language.getMsg(Messages.DELETE_SUCCESS));
             return;
         }
         player.sendMessage(ChatColor.GREEN + "ArmorStand has been deleted, but it can be restored using the restored command, restart the server or run this command again to fully delete");

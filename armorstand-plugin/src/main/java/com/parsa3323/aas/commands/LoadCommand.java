@@ -20,6 +20,8 @@ package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
@@ -58,7 +60,7 @@ public class LoadCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Loads an ArmorStand";
+        return Language.getMsg(Messages.LOAD_DESCRIPTION);
     }
 
     @Override
@@ -98,13 +100,16 @@ public class LoadCommand extends SubCommand {
             }
 
             if (loaded == 0 && failed == 0) {
-                player.sendMessage(ChatColor.YELLOW + "No unloaded ArmorStands found.");
+                player.sendMessage(Language.getMsg(Messages.LOAD_NO_UNLOADED));
             } else {
                 String message = ChatColor.GREEN + "Successfully loaded " + loaded + " ArmorStands.";
                 if (failed > 0) {
                     message += ChatColor.RED + " Failed to load " + failed + " ArmorStands.";
                     if (!failedNames.isEmpty()) {
-                        player.sendMessage(ChatColor.RED + "Failed: " + String.join(", ", failedNames));
+                        player.sendMessage(
+                                Language.getMsg(Messages.LOAD_FAILED)
+                                        .replace("%failed%", String.join(", ", failedNames))
+                        );
                     }
                 }
                 player.sendMessage(message);

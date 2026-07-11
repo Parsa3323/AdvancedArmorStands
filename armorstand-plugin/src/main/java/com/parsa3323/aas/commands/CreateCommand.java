@@ -21,6 +21,8 @@ package com.parsa3323.aas.commands;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.config.TypesConfig;
@@ -52,7 +54,7 @@ public class CreateCommand extends SubCommand implements Listener {
 
     @Override
     public String getDescription() {
-        return "Create an " + ChatColor.GRAY + "ArmorStand";
+        return Language.getMsg(Messages.CREATE_DESCRIPTION);
     }
 
     @Override
@@ -83,7 +85,7 @@ public class CreateCommand extends SubCommand implements Listener {
 
         if (type.equalsIgnoreCase("custom")) {
             if (args.length < 6) {
-                player.sendMessage(ChatColor.RED + "Usage: /as create custom <name> <part> <x> <y> <z> [<part> <x> <y> <z> ...]");
+                player.sendMessage(Language.getMsg(Messages.CREATE_CUSTOM_USAGE));
                 return;
             }
 
@@ -112,7 +114,10 @@ public class CreateCommand extends SubCommand implements Listener {
                     y = Double.parseDouble(args[i + 2]);
                     z = Double.parseDouble(args[i + 3]);
                 } catch (NumberFormatException e) {
-                    player.sendMessage(ChatColor.RED + "Invalid number for part " + part + ". Usage: <part> <x> <y> <z>");
+                    player.sendMessage(
+                            Language.getMsg(Messages.CREATE_INVALID_PART_NUMBER)
+                                    .replace("%part%", part)
+                    );
                     armorStand.remove();
                     return;
                 }
@@ -140,7 +145,10 @@ public class CreateCommand extends SubCommand implements Listener {
                         armorStand.setLeftLegPose(pose);
                         break;
                     default:
-                        player.sendMessage(ChatColor.RED + "Unknown part: " + part);
+                        player.sendMessage(
+                                Language.getMsg(Messages.CREATE_UNKNOWN_PART)
+                                        .replace("%part%", part)
+                        );
                         break;
                 }
             }

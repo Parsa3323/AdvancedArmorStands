@@ -19,6 +19,8 @@
 package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
@@ -50,7 +52,7 @@ public class AnimClearCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Clear " + ChatColor.GRAY + "animations of an as";
+        return Language.getMsg(Messages.ANIMATION_CLEAR_DESCRIPTION);
     }
 
     @Override
@@ -75,11 +77,17 @@ public class AnimClearCommand extends SubCommand {
 
         if (configurationSection == null) {
             String suggestion = getClosest(args[2], ArmorStandUtils.getArmorStandList());
+
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(
+                        Language.getMsg(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION)
+                                .replace("%armorstand%", args[2])
+                                .replace("%suggestion%", suggestion)
+                );
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
+                player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_INVALID));
             }
+
             return;
         }
 
@@ -95,7 +103,7 @@ public class AnimClearCommand extends SubCommand {
 
         ArmorStandUtils.resetArmorStandPosition(as);
 
-        player.sendMessage(ChatColor.GREEN + "Successfully cleared " + args[2] + "'s animations");
+        player.sendMessage(Language.getMsg(Messages.ANIMATION_CLEAR_SUCCESS).replace("%armorstand%", args[2]));
     }
 
     @Override

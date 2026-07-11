@@ -18,11 +18,12 @@
 
 package com.parsa3323.aas.commands;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.options.manager.SettingsManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
@@ -42,7 +43,7 @@ public class OptionsCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Opens the options menu";
+        return Language.getMsg(Messages.OPTIONS_DESCRIPTION);
     }
 
     @Override
@@ -61,10 +62,15 @@ public class OptionsCommand extends SubCommand {
 
         if (null == armorStand) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
+
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(
+                        Language.getMsg(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION)
+                                .replace("%armorstand%", args[2])
+                                .replace("%suggestion%", suggestion)
+                );
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
+                player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_INVALID));
             }
             return;
         }

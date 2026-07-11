@@ -20,11 +20,12 @@ package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.api.events.ArmorStandRenameEvent;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class RenameCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Rename an " + ChatColor.GRAY + "as's name";
+        return Language.getMsg(Messages.RENAME_DESCRIPTION);
     }
 
     @Override
@@ -63,10 +64,15 @@ public class RenameCommand extends SubCommand {
 
         if (!ArmorStandsConfig.get().contains("armorstands." + oldName)) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
+
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(
+                        Language.getMsg(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION)
+                                .replace("%armorstand%", args[2])
+                                .replace("%suggestion%", suggestion)
+                );
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
+                player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_INVALID));
             }
             return;
         }
@@ -90,7 +96,11 @@ public class RenameCommand extends SubCommand {
             ArmorStandsConfig.get().set("armorstands." + oldName, null);
             ArmorStandsConfig.save();
 
-            player.sendMessage(ChatColor.GREEN + "Renamed ArmorStand from '" + oldName + "' to '" + newName + "'");
+            player.sendMessage(
+                    Language.getMsg(Messages.RENAME_SUCCESS)
+                            .replace("%old_name%", oldName)
+                            .replace("%new_name%", newName)
+            );
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         }
 

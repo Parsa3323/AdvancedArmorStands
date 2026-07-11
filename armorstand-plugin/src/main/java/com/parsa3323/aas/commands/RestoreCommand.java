@@ -20,11 +20,12 @@ package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.SoundUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -45,7 +46,7 @@ public class RestoreCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Restore an ArmorStand";
+        return Language.getMsg(Messages.RESTORE_DESCRIPTION);
     }
 
     @Override
@@ -64,12 +65,12 @@ public class RestoreCommand extends SubCommand {
         ConfigurationSection section = config.getConfigurationSection("armorstands");
 
         if (section == null || !section.contains(args[1])) {
-            player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
+            player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_INVALID));
             return;
         }
 
         if (!ArmorStandsConfig.get().getBoolean("armorstands." + args[1] + ".deleted")) {
-            player.sendMessage(ChatColor.RED + "This ArmorStand is not deleted or its too late");
+            player.sendMessage(Language.getMsg(Messages.RESTORE_NOT_DELETED));
             return;
         }
 
@@ -78,11 +79,11 @@ public class RestoreCommand extends SubCommand {
         try {
             ArmorStandUtils.loadArmorStand(args[1]);
         } catch (ArmorStandLoadException e) {
-            player.sendMessage(ChatColor.RED + "Unknown error, check the console for more info");
+            player.sendMessage(Language.getMsg(Messages.RESTORE_UNKNOWN_ERROR));
             AdvancedArmorStands.error(null, true, "Error while restoring ArmorStand: ", e.getMessage());
             e.printStackTrace();
         }
-        player.sendMessage(ChatColor.GREEN + "Successfully restored the ArmorStand");
+        player.sendMessage(Language.getMsg(Messages.RESTORE_SUCCESS));
         SoundUtils.playSuccessSound(player);
     }
 

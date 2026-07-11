@@ -22,6 +22,8 @@ import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.actions.IssueLevel;
 import com.parsa3323.aas.api.data.IssueData;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
@@ -51,7 +53,7 @@ public class DebugCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Shows debug information";
+        return Language.getMsg(Messages.DEBUG_DESCRIPTION);
     }
 
     @Override

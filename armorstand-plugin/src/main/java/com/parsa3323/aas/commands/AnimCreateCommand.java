@@ -19,6 +19,8 @@
 package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.utils.*;
@@ -41,7 +43,7 @@ public class AnimCreateCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return ChatColor.GRAY + "Create/edit an " + ChatColor.GRAY + "animation with an as";
+        return Language.getMsg(Messages.ANIMATION_CREATE_DESCRIPTION);
     }
 
     @Override
@@ -71,12 +73,12 @@ public class AnimCreateCommand extends SubCommand {
         if (as == null) return;
 
         if (args[3] == null) {
-            player.sendMessage(ChatColor.RED + "Invalid animation name");
+            player.sendMessage(Language.getMsg(Messages.ANIMATION_INVALID_NAME));
             return;
         }
 
         if (ArmorStandUtils.hasAnimation(as)) {
-            player.sendMessage(ChatColor.RED + "Can't open the editor on an ArmorStand that has animation");
+            player.sendMessage(Language.getMsg(Messages.ANIMATION_EDITOR_ALREADY_HAS_ANIMATION));
             return;
         }
 
@@ -96,14 +98,10 @@ public class AnimCreateCommand extends SubCommand {
         if (player.getGameMode() == GameMode.ADVENTURE) {
             InventoryUtils.setGameMode(player, player.getGameMode());
             player.setGameMode(GameMode.CREATIVE);
-            player.sendMessage(
-                    ChatColor.GREEN + "Your GameMode has been temporarily switched to CREATIVE, " +
-                            "because edit sessions do not support ADVENTURE mode. " +
-                            "It will be restored automatically when you exit."
-            );
+            player.sendMessage(Language.getMsg(Messages.ANIMATION_EDITOR_GAMEMODE_CHANGED));
         }
         player.closeInventory();
-        player.sendMessage(ChatColor.GREEN + "Successfully entered the animation edit/create session");
+        player.sendMessage(Language.getMsg(Messages.ANIMATION_EDITOR_ENTERED));
         player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.2f);
 
     }

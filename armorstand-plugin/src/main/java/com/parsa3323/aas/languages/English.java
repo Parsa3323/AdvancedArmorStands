@@ -72,6 +72,33 @@ public class English extends Language {
 
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&cInvalid ArmorStand '%armorstand%'. Did you mean '%suggestion%'?");
 
+        yml.addDefault(Messages.ANIMATION_CLEAR_DESCRIPTION,
+                "Clear &7animations of an as");
+
+        yml.addDefault(Messages.ANIMATION_CLEAR_SUCCESS,
+                "&aSuccessfully cleared %armorstand%'s animations");
+
+        yml.addDefault(Messages.ANIMATION_CREATE_DESCRIPTION,
+                "&7Create/edit an &7animation with an as");
+
+        yml.addDefault(Messages.ANIMATION_INVALID_NAME,
+                "&cInvalid animation name");
+
+        yml.addDefault(Messages.ANIMATION_EDITOR_ALREADY_HAS_ANIMATION,
+                "&cCan't open the editor on an ArmorStand that has animation");
+
+        yml.addDefault(Messages.ANIMATION_EDITOR_GAMEMODE_CHANGED,
+                "&aYour GameMode has been temporarily switched to CREATIVE, because edit sessions do not support ADVENTURE mode. It will be restored automatically when you exit.");
+
+        yml.addDefault(Messages.ANIMATION_EDITOR_ENTERED,
+                "&aSuccessfully entered the animation edit/create session");
+
+        yml.addDefault(Messages.ANIMATION_REMOVE_DESCRIPTION,
+                "&7Completely remove an animation");
+
+        yml.addDefault(Messages.ANIMATION_REMOVE_SUCCESS,
+                "&aSuccessfully removed animation '%animation%'");
+
         yml.addDefault(Messages.ARMOR_STAND_INVALID, "&cInvalid ArmorStand");
 
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "Ask the ai to assist you");
@@ -101,6 +128,114 @@ public class English extends Language {
 
         yml.addDefault(Messages.COMMAND_DESCRIPTION_LABEL,
                 "&7Description: &f%description%");
+
+        // 1
+        yml.addDefault(Messages.CREATE_DESCRIPTION,
+                "Create an &7ArmorStand");
+
+        yml.addDefault(Messages.CREATE_CUSTOM_USAGE,
+                "&cUsage: /as create custom <name> <part> <x> <y> <z> [<part> <x> <y> <z> ...]");
+
+        yml.addDefault(Messages.CREATE_INVALID_PART_NUMBER,
+                "&cInvalid number for part %part%. Usage: <part> <x> <y> <z>");
+
+        yml.addDefault(Messages.CREATE_UNKNOWN_PART,
+                "&cUnknown part: %part%");
+
+
+        yml.addDefault(Messages.DEBUG_DESCRIPTION,
+                "Shows debug information");
+
+
+        yml.addDefault(Messages.DELETE_DESCRIPTION,
+                "Delete an &7ArmorStand");
+
+        yml.addDefault(Messages.DELETE_ALL_SUCCESS,
+                "&aSuccessfully deleted all ArmorStands");
+
+        yml.addDefault(Messages.DELETE_SUCCESS,
+                "&aFully deleted ArmorStand");
+
+
+        yml.addDefault(Messages.HEAD_DESCRIPTION,
+                "Get a player's head");
+
+        yml.addDefault(Messages.HEAD_SUCCESS,
+                "&aSuccessfully gave you %player%'s head");
+
+
+        yml.addDefault(Messages.LIST_DESCRIPTION,
+                "Shows a list of ArmorStands");
+
+        yml.addDefault(Messages.LIST_EMPTY_TITLE,
+                "&c&l     No Saved ArmorStands Found ");
+
+        yml.addDefault(Messages.LIST_EMPTY_HINT,
+                "&7Use &e/as create <type> <name>&7 to create your first ArmorStand!");
+
+
+        yml.addDefault(Messages.LOAD_DESCRIPTION,
+                "Loads an ArmorStand");
+
+        yml.addDefault(Messages.LOAD_NO_UNLOADED,
+                "&eNo unloaded ArmorStands found.");
+
+        yml.addDefault(Messages.LOAD_FAILED,
+                "&cFailed: %failed%");
+
+
+        yml.addDefault(Messages.MOVE_DESCRIPTION,
+                "Moves an ArmorStand to your &7location");
+
+        yml.addDefault(Messages.MOVE_WORLD_NOT_FOUND,
+                "&cWorld not found!");
+
+
+        yml.addDefault(Messages.OPTIONS_DESCRIPTION,
+                "Opens the options menu");
+
+
+        yml.addDefault(Messages.RELOAD_DESCRIPTION,
+                "Reloads plugin's configs");
+
+        yml.addDefault(Messages.TELEPORT_NOT_ON_GROUND,
+                "&cThis ArmorStand is not on the ground. Are you sure you want to teleport to it?");
+
+        yml.addDefault(Messages.RELOAD_SUCCESS,
+                "&aSuccessfully reloaded AdvancedArmorStand's config");
+
+        yml.addDefault(Messages.RELOAD_ERROR,
+                "&cError while reloading plugin check the console for more details");
+
+        yml.addDefault(Messages.TELEPORT_FORCE_HINT,
+                "&cUse '/as teleport %armorstand% --force' to force teleport");
+
+        yml.addDefault(Messages.RENAME_DESCRIPTION,
+                "Rename an &7as's name");
+
+        yml.addDefault(Messages.RENAME_SUCCESS,
+                "&aRenamed ArmorStand from '%old_name%' to '%new_name%'");
+
+        yml.addDefault(Messages.RESTORE_DESCRIPTION,
+                "Restore a deleted ArmorStand");
+
+        yml.addDefault(Messages.RESTORE_NOT_DELETED,
+                "&cThis ArmorStand is not deleted or its too late");
+
+        yml.addDefault(Messages.RESTORE_UNKNOWN_ERROR,
+                "&cUnknown error, check the console for more info");
+
+        yml.addDefault(Messages.RESTORE_SUCCESS,
+                "&aSuccessfully restored the ArmorStand");
+
+
+        yml.addDefault(Messages.TELL_DESCRIPTION,
+                "Ask an ArmorStand AI a question");
+
+        yml.addDefault(Messages.TELL_AI_DISABLED,
+                "&cThis ArmorStand doesn't have AI enabled");
+
+        //-
 
         yml.options().copyDefaults(true);
         save();

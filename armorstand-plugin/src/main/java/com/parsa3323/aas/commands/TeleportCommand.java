@@ -19,6 +19,8 @@
 package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.ChatColor;
@@ -67,8 +69,11 @@ public class TeleportCommand extends SubCommand {
                 return;
             }
             if (player.getGameMode() != GameMode.CREATIVE) {
-                player.sendMessage(ChatColor.RED + "This ArmorStand is not on the ground. Are you sure you want to teleport to it?");
-                player.sendMessage(ChatColor.RED + "Use '/as teleport " + args[1] + " --force' to force teleport");
+                player.sendMessage(Language.getMsg(Messages.TELEPORT_NOT_ON_GROUND));
+                player.sendMessage(
+                        Language.getMsg(Messages.TELEPORT_FORCE_HINT)
+                                .replace("%armorstand%", args[1])
+                );
                 return;
             }
 

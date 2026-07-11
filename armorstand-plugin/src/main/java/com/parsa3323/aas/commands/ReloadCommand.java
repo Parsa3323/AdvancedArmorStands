@@ -20,6 +20,8 @@ package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.PluginUtils;
 import org.bukkit.ChatColor;
@@ -42,7 +44,7 @@ public class ReloadCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Reloads plugin's configs";
+        return Language.getMsg(Messages.RELOAD_DESCRIPTION);
     }
 
     @Override
@@ -54,10 +56,10 @@ public class ReloadCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         try {
             PluginUtils.reload();
-            player.sendMessage(ChatColor.GREEN + "Successfully reloaded AdvancedArmorStand's config");
+            player.sendMessage(Language.getMsg(Messages.RELOAD_SUCCESS));
             player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1,  1);
         } catch (Exception e) {
-            player.sendMessage(ChatColor.RED + "Error while reloading plugin check the console for more details");
+            player.sendMessage(Language.getMsg(Messages.RELOAD_ERROR));
             AdvancedArmorStands.error(null, true, "Error while reloading: " + e.getMessage());
             e.printStackTrace();
             AdvancedArmorStands.error(null, true, ChatColor.RED + e.getMessage());

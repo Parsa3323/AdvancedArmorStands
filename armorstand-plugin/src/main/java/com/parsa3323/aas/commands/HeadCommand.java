@@ -18,6 +18,8 @@
 
 package com.parsa3323.aas.commands;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.PlayerUtils;
@@ -44,7 +46,7 @@ public class HeadCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Get a player's head";
+        return Language.getMsg(Messages.HEAD_DESCRIPTION);
     }
 
     @Override
@@ -60,7 +62,10 @@ public class HeadCommand extends SubCommand {
         }
 
         player.getInventory().addItem(PlayerUtils.createSkullPlayer(args[1]));
-        player.sendMessage(ChatColor.GREEN + "Successfully gave you " + args[1] + "'s head");
+        player.sendMessage(
+                Language.getMsg(Messages.HEAD_SUCCESS)
+                        .replace("%player%", args[1])
+        );
     }
 
     @Override

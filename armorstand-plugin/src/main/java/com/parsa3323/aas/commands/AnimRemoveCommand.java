@@ -18,6 +18,8 @@
 
 package com.parsa3323.aas.commands;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
@@ -39,7 +41,7 @@ public class AnimRemoveCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return ChatColor.GRAY + "Completely remove an animation";
+        return Language.getMsg(Messages.ANIMATION_REMOVE_DESCRIPTION);
     }
 
     @Override
@@ -61,9 +63,9 @@ public class AnimRemoveCommand extends SubCommand {
         if (!AnimationConfig.get().contains("animations." + args[2])) {
             String suggestion = getClosest(args[2], AnimationUtils.getAnimationsList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid animation '" + args[2] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(Language.getMsg(Messages.ANIMATION_INVALID_WITH_SUGGESTION).replace("%animation%", args[2]).replace("%suggestion%", suggestion));
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid animation");
+                player.sendMessage(Language.getMsg(Messages.ANIMATION_INVALID));
             }
             return;
         }
@@ -82,7 +84,7 @@ public class AnimRemoveCommand extends SubCommand {
         AnimationConfig.save();
         ArmorStandsConfig.save();
 
-        player.sendMessage(ChatColor.GREEN + "Successfully removed animation '" + args[2] + "'");
+        player.sendMessage(Language.getMsg(Messages.ANIMATION_REMOVE_SUCCESS).replace("%animation%", args[2]));
 
     }
 

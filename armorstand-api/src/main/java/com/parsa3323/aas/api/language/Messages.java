@@ -79,11 +79,81 @@ public final class Messages {
 
     public static final String ANIMATION_COMMAND_HEADER = "animation_command_header";
 
+    public static final String ANIMATION_CLEAR_DESCRIPTION = "animation_clear_description";
+
+    public static final String ANIMATION_CLEAR_SUCCESS = "animation_clear_success";
+
+    public static final String ANIMATION_CREATE_DESCRIPTION = "animation_create_description";
+
+    public static final String ANIMATION_INVALID_NAME = "animation_invalid_name";
+
+    public static final String ANIMATION_EDITOR_ALREADY_HAS_ANIMATION = "animation_editor_already_has_animation";
+
+    public static final String ANIMATION_EDITOR_GAMEMODE_CHANGED = "animation_editor_gamemode_changed";
+
+    public static final String ANIMATION_EDITOR_ENTERED = "animation_editor_entered";
+
+    public static final String ANIMATION_REMOVE_DESCRIPTION = "animation_remove_description";
+
+    public static final String ANIMATION_REMOVE_SUCCESS = "animation_remove_success";
+
     public static final String COMMAND_EXAMPLES = "command_examples";
 
     public static final String COMMAND_CLICK_TO_USE = "command_click_to_use";
     public static final String COMMAND_LABEL = "command_label";
     public static final String COMMAND_DESCRIPTION_LABEL = "command_description_label";
+
+    //1
+
+    public static final String CREATE_DESCRIPTION = "create_description";
+
+    public static final String CREATE_CUSTOM_USAGE = "create_custom_usage";
+    public static final String CREATE_INVALID_PART_NUMBER = "create_invalid_part_number";
+    public static final String CREATE_UNKNOWN_PART = "create_unknown_part";
+
+    public static final String DEBUG_DESCRIPTION = "debug_description";
+
+    public static final String DELETE_DESCRIPTION = "delete_description";
+    public static final String DELETE_ALL_SUCCESS = "delete_all_success";
+    public static final String DELETE_SUCCESS = "delete_success";
+
+    public static final String HEAD_DESCRIPTION = "head_description";
+    public static final String HEAD_SUCCESS = "head_success";
+
+    public static final String LIST_DESCRIPTION = "list_description";
+    public static final String LIST_EMPTY_TITLE = "list_empty_title";
+    public static final String LIST_EMPTY_HINT = "list_empty_hint";
+
+    public static final String LOAD_DESCRIPTION = "load_description";
+    public static final String LOAD_NO_UNLOADED = "load_no_unloaded";
+    public static final String LOAD_FAILED = "load_failed";
+
+    public static final String MOVE_DESCRIPTION = "move_description";
+    public static final String MOVE_WORLD_NOT_FOUND = "move_world_not_found";
+
+    public static final String OPTIONS_DESCRIPTION = "options_description";
+
+    public static final String RELOAD_DESCRIPTION = "reload_description";
+    public static final String RELOAD_SUCCESS = "reload_success";
+    public static final String RELOAD_ERROR = "reload_error";
+
+    public static final String RENAME_DESCRIPTION = "rename_description";
+    public static final String RENAME_SUCCESS = "rename_success";
+
+    public static final String RESTORE_DESCRIPTION = "restore_description";
+
+    public static final String RESTORE_NOT_DELETED = "restore_not_deleted";
+    public static final String RESTORE_UNKNOWN_ERROR = "restore_unknown_error";
+    public static final String RESTORE_SUCCESS = "restore_success";
+
+    public static final String TELEPORT_NOT_ON_GROUND = "teleport_not_on_ground";
+    public static final String TELEPORT_FORCE_HINT = "teleport_force_hint";
+
+    public static final String TELL_DESCRIPTION = "tell_description";
+    public static final String TELL_AI_DISABLED = "tell_ai_disabled";
+
+    // -
+
 
     public static final String ARMOR_STAND_CREATE_MESSAGE = "armor_stand_create_message";
     public static final String ARMOR_STAND_DELETE_MESSAGE = "armor_stand_delete_message";

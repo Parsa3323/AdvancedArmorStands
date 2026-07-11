@@ -19,6 +19,8 @@
 package com.parsa3323.aas.commands;
 
 import com.cryptomorin.xseries.XSound;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
@@ -46,7 +48,7 @@ public class ListCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Shows a list of ArmorStands";
+        return Language.getMsg(Messages.LIST_DESCRIPTION);
     }
 
     @Override
@@ -60,8 +62,8 @@ public class ListCommand extends SubCommand {
 
         if (armorStandList.isEmpty()) {
             player.sendMessage("");
-            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "     No Saved ArmorStands Found ");
-            player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/as create <type> <name>" + ChatColor.GRAY + " to create your first ArmorStand!");
+            player.sendMessage(Language.getMsg(Messages.LIST_EMPTY_TITLE));
+            player.sendMessage(Language.getMsg(Messages.LIST_EMPTY_HINT));
             player.sendMessage("");
             player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_BASS.parseSound(), 0.8f, 0.5f);
         } else {

@@ -21,6 +21,8 @@ package com.parsa3323.aas.commands;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.data.MemoryData;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.utils.ActionBarTimer;
 import com.parsa3323.aas.utils.AiUtils;
@@ -51,7 +53,7 @@ public class TellCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Talk to an " + ChatColor.GRAY + "ArmorStand";
+        return Language.getMsg(Messages.TELL_DESCRIPTION);
     }
 
     @Override
@@ -72,7 +74,7 @@ public class TellCommand extends SubCommand {
         String name = args[1];
 
         if (!ArmorStandUtils.hasAi(name)) {
-            player.sendMessage(ChatColor.RED + "This ArmorStand doesn't have AI enabled");
+            player.sendMessage(Language.getMsg(Messages.TELL_AI_DISABLED));
             return;
         }
 

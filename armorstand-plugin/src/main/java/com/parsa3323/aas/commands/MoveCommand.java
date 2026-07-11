@@ -19,6 +19,8 @@
 package com.parsa3323.aas.commands;
 
 import com.parsa3323.aas.api.events.PlayerMoveArmorStandEvent;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
@@ -47,7 +49,7 @@ public class MoveCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Moves an ArmorStand to your " + ChatColor.GRAY + "location";
+        return Language.getMsg(Messages.MOVE_DESCRIPTION);
     }
 
     @Override
@@ -69,9 +71,13 @@ public class MoveCommand extends SubCommand {
         if (!config.contains(path)) {
             String suggestion = getClosest(args[1], ArmorStandUtils.getArmorStandList());
             if (suggestion != null) {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand '" + args[1] + "'. Did you mean '" + suggestion + "'?");
+                player.sendMessage(
+                        Language.getMsg(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION)
+                                .replace("%armorstand%", args[2])
+                                .replace("%suggestion%", suggestion)
+                );
             } else {
-                player.sendMessage(ChatColor.RED + "Invalid ArmorStand");
+                player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_INVALID));
             }
             return;
         }
@@ -80,7 +86,7 @@ public class MoveCommand extends SubCommand {
         World world = Bukkit.getWorld(config.getString(path + ".World"));
 
         if (world == null) {
-            player.sendMessage(ChatColor.RED + "World not found!");
+            player.sendMessage(Language.getMsg(Messages.MOVE_WORLD_NOT_FOUND));
             return;
         }
 
