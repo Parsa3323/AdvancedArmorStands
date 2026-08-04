@@ -23,6 +23,7 @@ import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.data.IssueData;
 import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.api.exeption.*;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -51,6 +52,12 @@ public interface ArmorstandApi  {
     String getAddonsPath();
 
     PlayerManager getPlayerManager(Player player);
+
+    LanguageManager getLanguageManager();
+
+    interface LanguageManager {
+        Language getDefaultLanguage();
+    }
 
     interface PlayerManager {
 

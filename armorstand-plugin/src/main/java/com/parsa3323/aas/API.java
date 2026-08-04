@@ -24,6 +24,7 @@ import com.parsa3323.aas.api.data.IssueData;
 import com.parsa3323.aas.api.data.MemoryData;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.api.exeption.*;
+import com.parsa3323.aas.api.language.Language;
 import com.parsa3323.aas.api.versionSupport.VersionSupport;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.config.ArmorStandsConfig;
@@ -215,6 +216,11 @@ public class API implements ArmorstandApi {
                 }
             }
         };
+    }
+
+    @Override
+    public LanguageManager getLanguageManager() {
+        return Language::getDefaultLanguage;
     }
 
 
