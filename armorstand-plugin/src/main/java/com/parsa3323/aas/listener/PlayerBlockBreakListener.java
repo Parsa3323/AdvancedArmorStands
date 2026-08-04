@@ -20,12 +20,13 @@ package com.parsa3323.aas.listener;
 
 import com.parsa3323.aas.ai.MemoryOption;
 import com.parsa3323.aas.api.events.PlayerMoveArmorStandEvent;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.tools.MoveTool;
 import com.parsa3323.aas.utils.ArmorStandSelectionCache;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -70,12 +71,12 @@ public class PlayerBlockBreakListener implements Listener {
 
             MoveTool.moveList.remove(e.getPlayer().getUniqueId());
 
-            player.sendMessage(ChatColor.GREEN + "Successfully moved the ArmorStand.");
+            player.sendMessage(Language.getMsg(Messages.ARMORSTAND_MOVE_SUCCESS));
         }
 
         if (ArmorStandSelectionCache.isIsInEditSession(e.getPlayer())) {
             if (firstTimeBreaking) {
-                e.getPlayer().sendMessage(ChatColor.RED + "You cannot break blocks in edit session.");
+                e.getPlayer().sendMessage(Language.getMsg(Messages.EDIT_SESSION_BLOCK_BREAK));
                 firstTimeBreaking = false;
             }
 
@@ -85,7 +86,7 @@ public class PlayerBlockBreakListener implements Listener {
 
         if (MemoryOption.waiting.containsKey(e.getPlayer().getUniqueId())) {
             if (firstTimeBreaking) {
-                e.getPlayer().sendMessage(ChatColor.RED + "You cannot break blocks here.");
+                e.getPlayer().sendMessage(Language.getMsg(Messages.EDIT_SESSION_BLOCK_BREAK));
                 firstTimeBreaking = false;
             }
 

@@ -18,6 +18,8 @@
 
 package com.parsa3323.aas.options;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.options.manager.SettingsOption;
 import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.TextUtils;
@@ -40,14 +42,15 @@ public class CustomNameVisibleOption extends SettingsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThiMTA5YjAyOWYzZmQ1ODAzYzIxZjFkNzE0YmU1NTE0MmRmYzAzNTJkMGM0YzY1MjZiZGI1MmU3MTg5YWFmMiJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Custom name visible");
+        itemMeta.setDisplayName(Language.getMsg(Messages.CUSTOM_NAME_VISIBLE_OPTION_NAME));
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "custom name for this ArmorStand");
-        lore.add("");
-        lore.add((armorStand.isCustomNameVisible()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Has custom name" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Doesn't have custom name");
-
+        for (String line : Language.getLore(Messages.CUSTOM_NAME_VISIBLE_OPTION_LORE)) {
+            lore.add(line.replace("%status%",
+                    armorStand.isCustomNameVisible()
+                            ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Has custom name"
+                            : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Doesn't have custom name"));
+        }
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 

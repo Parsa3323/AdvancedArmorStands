@@ -37,13 +37,19 @@ public abstract class Language {
     private final Plugin plugin;
     private final String iso;
     private final File configFile;
+    private final boolean forced;
     private YamlConfiguration yml;
 
     private final String prefix = "";
 
     protected Language(Plugin plugin, String iso) {
+        this(plugin, iso, true);
+    }
+
+    protected Language(Plugin plugin, String iso, boolean forced) {
         this.plugin = plugin;
         this.iso = iso.toLowerCase();
+        this.forced = forced;
 
         File folder = new File(plugin.getDataFolder(), "languages");
         if (!folder.exists()) {
@@ -53,8 +59,13 @@ public abstract class Language {
         this.configFile = new File(folder, "messages_" + this.iso + ".yml");
 
         load();
-        registerDefaults();
-        save();
+
+        if (forced) {
+            reset();
+        } else {
+            registerDefaults();
+            save();
+        }
 
         languages.put(this.iso, this);
     }
@@ -62,29 +73,57 @@ public abstract class Language {
     protected void registerDefaults() {
     }
 
+    public String getName() {
+        return iso;
+    }
+
     public static void loadLanguages(Plugin plugin, String configuredLanguage) {
+
         File folder = new File(plugin.getDataFolder(), "languages");
+
         File[] files = folder.listFiles();
 
         if (files != null) {
             for (File file : files) {
+
                 if (!file.isFile()) {
                     continue;
                 }
 
                 String name = file.getName();
+
                 if (!name.startsWith("messages_") || !name.endsWith(".yml")) {
                     continue;
+                }
+
+                String iso = name
+                        .substring("messages_".length(), name.length() - ".yml".length())
+                        .toLowerCase();
+
+                if (!languages.containsKey(iso)) {
+                    new YamlLanguage(plugin, iso, false);
                 }
             }
         }
 
-        Language lang = getLang(configuredLanguage.toLowerCase());
+        Language lang = getLang(configuredLanguage);
+
         if (lang == null) {
             lang = getLang("en");
         }
 
         defaultLanguage = lang;
+    }
+
+    private void reset() {
+        yml = new YamlConfiguration();
+        registerDefaults();
+
+        try {
+            yml.save(configFile);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void load() {
@@ -127,6 +166,7 @@ public abstract class Language {
         }
 
         String msg = defaultLanguage.getString(path);
+
         if (msg == null) {
             return "Missing: " + path;
         }
@@ -138,6 +178,9 @@ public abstract class Language {
         return languages.get(iso.toLowerCase());
     }
 
+    public static Language getDefaultLanguage() {
+        return defaultLanguage;
+    }
 
     public static List<String> getLore(String path) {
 
@@ -192,5 +235,4 @@ public abstract class Language {
     public File getConfigFile() {
         return configFile;
     }
-
 }

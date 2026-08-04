@@ -21,6 +21,7 @@ package com.parsa3323.aas.menus;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.actions.manager.ActionManager;
 import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.utils.ActionUtils;
@@ -56,7 +57,7 @@ public class ActionMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return Language.getMsg("actions_menu_title");
+        return Language.getMsg(Messages.ACTIONS_MENU_TITLE);
     }
 
     @Override
@@ -108,7 +109,7 @@ public class ActionMenu extends PaginatedMenu {
         if (e.getSlot() == 50) {
             map.put(player.getUniqueId(), ArmorStandUtils.getNameByArmorStand(armorStand));
             player.closeInventory();
-            player.sendMessage(Language.getMsg("actions_creation_message"));
+            player.sendMessage(Language.getMsg(Messages.ACTIONS_CREATION_MESSAGE));
         }
 
         if (clickedItem.getType() != XMaterial.PLAYER_HEAD.parseMaterial()) return;
@@ -154,7 +155,7 @@ public class ActionMenu extends PaginatedMenu {
 
             ArrayList<String> lore = new ArrayList<>();
 
-            for (String line : Language.getLore("actions_menu_item_lore")) {
+            for (String line : Language.getLore(Messages.ACTIONS_MENU_ITEM_LORE)) {
                 lore.add(line.replace("%command%", key.replace("-", " ")));
             }
 
@@ -169,16 +170,9 @@ public class ActionMenu extends PaginatedMenu {
 
         ItemStack createTypeItem = new ItemStack(XMaterial.REDSTONE_BLOCK.parseMaterial());
         ItemMeta createTypeMeta = createTypeItem.getItemMeta();
-        createTypeMeta.setDisplayName(ChatColor.YELLOW + "Create an action");
+        createTypeMeta.setDisplayName(Language.getMsg(Messages.ACTIONS_MENU_CREATE_NAME));
 
-        ArrayList<String> createLore = new ArrayList<>();
-        createLore.add(ChatColor.GRAY + "Select this to create");
-        createLore.add(ChatColor.GRAY + "an action that runs");
-        createLore.add(ChatColor.GRAY + "commands on clicks");
-        createLore.add("");
-        createLore.add(ChatColor.YELLOW + "Click to create");
-
-
+        ArrayList<String> createLore = new ArrayList<>(Language.getLore(Messages.ACTIONS_MENU_CREATE_LORE));
 
         createTypeMeta.setLore(createLore);
         createTypeItem.setItemMeta(createTypeMeta);

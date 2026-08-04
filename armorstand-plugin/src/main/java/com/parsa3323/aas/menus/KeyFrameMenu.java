@@ -22,6 +22,7 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.api.exeption.ConfigException;
 import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.commands.AnimCreateCommand;
 import com.parsa3323.aas.config.AnimationConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
@@ -52,7 +53,7 @@ public class KeyFrameMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return Language.getMsg("keyframe_menu_title");
+        return Language.getMsg(Messages.KEYFRAME_MENU_TITLE);
     }
 
     @Override
@@ -162,14 +163,12 @@ public class KeyFrameMenu extends PaginatedMenu {
 
             ArrayList<String> lore = new ArrayList<>();
 
-            lore.add(ChatColor.GRAY + "This is the " + (index + 1) + TextUtils.getOriginalSuffix(index + 1) + " step");
-            lore.add(ChatColor.GRAY + "for " + animationName + " animation that");
-            lore.add(ChatColor.GRAY + "will turn ArmorStand's position to this");
-            lore.add(ChatColor.GRAY + "on its turn");
-
-            lore.add(" ");
-
-            lore.add(ChatColor.YELLOW + "Click to remove");
+            for (String line : Language.getLore(Messages.KEYFRAME_STEP_LORE)) {
+                lore.add(line
+                        .replace("%step%", String.valueOf(index + 1))
+                        .replace("%suffix%", TextUtils.getOriginalSuffix(index + 1))
+                        .replace("%animation%", animationName));
+            }
 
             ItemStack itemStack = new ItemStack(XMaterial.GREEN_TERRACOTTA.parseMaterial());
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -186,28 +185,11 @@ public class KeyFrameMenu extends PaginatedMenu {
         ItemStack interval = new ItemStack(XMaterial.RED_STAINED_GLASS_PANE.parseMaterial());
         ItemMeta iInterval = interval.getItemMeta();
 
-        ArrayList<String> lore = new ArrayList<>();
-
-        lore.add(ChatColor.GRAY + "Sets the delay");
-        lore.add(ChatColor.GRAY + "between animation frames.");
-        lore.add(ChatColor.GRAY + "Lower value means");
-        lore.add(ChatColor.GRAY + "faster animation speed.");
-
-        lore.add("");
-
-        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Left-click to increase");
-        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Right-click to decrease.");
-        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " Hold Shift to change");
-        lore.add(ChatColor.GOLD + "»" + ChatColor.YELLOW + " by increments of 10.");
-
-
-        lore.add("");
-
-        lore.add(ChatColor.YELLOW + "Click to change");
+        ArrayList<String> lore = new ArrayList<>(Language.getLore(Messages.KEYFRAME_INTERVAL_LORE));
 
         iInterval.setLore(lore);
 
-        iInterval.setDisplayName(ChatColor.YELLOW + "Interval: " + AnimationConfig.get().getInt("animations." + animationName + ".interval"));
+        iInterval.setDisplayName(Language.getMsg(Messages.KEYFRAME_INTERVAL_NAME).replace("%interval%", String.valueOf(AnimationConfig.get().getInt("animations." + animationName + ".interval"))));
 
         interval.setItemMeta(iInterval);
 
@@ -217,19 +199,11 @@ public class KeyFrameMenu extends PaginatedMenu {
 
         ItemMeta iLoop = loop.getItemMeta();
 
-        ArrayList<String> iLore = new ArrayList<>();
-
-        iLore.add(ChatColor.GRAY + "Defines whether the animation");
-        iLore.add(ChatColor.GRAY + "should loop repeat from");
-        iLore.add(ChatColor.GRAY + "the start infinitely");
-
-        iLore.add("");
-
-        iLore.add(ChatColor.YELLOW + "Click to change");
+        ArrayList<String> iLore = new ArrayList<>(Language.getLore(Messages.KEYFRAME_LOOP_LORE));
 
         iLoop.setLore(iLore);
 
-        iLoop.setDisplayName(ChatColor.YELLOW + "Loop: " + AnimationConfig.get().getBoolean("animations." + animationName + ".loop"));
+        iLoop.setDisplayName(Language.getMsg(Messages.KEYFRAME_LOOP_NAME).replace("%loop%", String.valueOf(AnimationConfig.get().getBoolean("animations." + animationName + ".loop"))));
 
         loop.setItemMeta(iLoop);
 

@@ -19,6 +19,8 @@
 package com.parsa3323.aas.listener;
 
 import com.parsa3323.aas.AdvancedArmorStands;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.player.PlayerManager;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.IssueUtils;
@@ -45,16 +47,17 @@ public class PlayerJoinListener implements Listener {
                 if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
                     int unloaded = ArmorStandUtils.getTotalArmorStands() - ArmorStandUtils.getLoadedArmorStands();
 
-                    e.getPlayer().sendMessage(ChatColor.RED + "It looks like " + unloaded + " ArmorStands haven't been loaded by the world generator. To fix this, enable 'auto-load-armor-stands' in the config to automatically load all ArmorStands.");
+                    e.getPlayer().sendMessage(Language.getMsg(Messages.ARMORSTANDS_NOT_LOADED).replace("%amount%", String.valueOf(unloaded)));
 
                 }
 
                 if (IssueUtils.hasWarnings() || IssueUtils.hasErrors()) {
                     int totalErrors = IssueUtils.getTotalWarnings() + IssueUtils.getTotalErrors();
 
-                    e.getPlayer().sendMessage(ChatColor.YELLOW +
-                            "AdvancedArmorStands has encountered " + totalErrors +
-                            " error" + (totalErrors > 1 ? "s" : "") + " & warning" + (totalErrors > 1 ? "s" : "") + " this session. Check the log file for details.");
+                    e.getPlayer().sendMessage(
+                            Language.getMsg(Messages.ISSUES_FOUND_ON_JOIN)
+                                    .replace("%amount%", String.valueOf(totalErrors))
+                    );
                 }
 
                 if (AdvancedArmorStands.CONFIG_OUTDATED) {

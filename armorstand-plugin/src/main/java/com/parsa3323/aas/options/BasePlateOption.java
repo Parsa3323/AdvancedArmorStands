@@ -18,6 +18,8 @@
 
 package com.parsa3323.aas.options;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.options.manager.SettingsOption;
 import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.TextUtils;
@@ -41,13 +43,15 @@ public class BasePlateOption extends SettingsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmI3NzNjNGNjNjc1ODgyYjkzNmViNDgxNWQ5NGY0ZmZiNjI0MTE5YWVjOWE0Y2Q2NGExNDM0ODE1YWY4YWJjYiJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Base Plate");
+        itemMeta.setDisplayName(Language.getMsg(Messages.BASE_PLATE_OPTION_NAME));
         ArrayList<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "base plate for this ArmorStand ");
-        lore.add("");
-        lore.add((armorStand.hasBasePlate()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Has base plate" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Doesn't have base plate");
 
+        for (String line : Language.getLore(Messages.BASE_PLATE_OPTION_LORE)) {
+            lore.add(line.replace("%status%",
+                    armorStand.hasBasePlate()
+                            ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Has base plate"
+                            : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Doesn't have base plate"));
+        }
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

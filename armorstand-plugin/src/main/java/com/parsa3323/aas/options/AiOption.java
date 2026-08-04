@@ -22,19 +22,16 @@ import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.ai.manager.AiSettingsManager;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.options.manager.SettingsOption;
-import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
-import com.parsa3323.aas.utils.TextUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
 
 public class AiOption extends SettingsOption {
 
@@ -48,17 +45,10 @@ public class AiOption extends SettingsOption {
         if (AdvancedArmorStands.isIsAiEnabled()) {
             ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWI4YzYzMjA4ZTdkOWNiOTkwNDkyMDUxNmE4MWRmNmUzNWZmYTIyNjljZTAxYzYyNWQxMWE5YTM4MWVkOTNhIn19fQ==");
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
-            ArrayList<String> lore = new ArrayList<>();
-
-            lore.add(ChatColor.GRAY + "Options related to the");
-            lore.add(ChatColor.GRAY + "artificial intelligence");
-            lore.add(ChatColor.GRAY + "of this ArmorStand.");
-            lore.add("");
-            lore.add(ChatColor.YELLOW + "Click to open");
+            itemMeta.setDisplayName(Language.getMsg(Messages.AI_OPTION_NAME));
+            itemMeta.setLore(Language.getLore(Messages.AI_OPTION_ENABLED_LORE));
 
 
-            itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
 
             return itemStack;
@@ -66,17 +56,9 @@ public class AiOption extends SettingsOption {
             ItemStack itemStack = XMaterial.RED_STAINED_GLASS_PANE.parseItem();
             ItemMeta itemMeta = itemStack.getItemMeta();
 
-            itemMeta.setDisplayName(ChatColor.YELLOW + "AI Options");
+            itemMeta.setDisplayName(Language.getMsg(Messages.AI_OPTION_NAME));
 
-            ArrayList<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + "Enable AI for ArmorStands");
-            lore.add(ChatColor.GRAY + "by setting your API key");
-            lore.add(ChatColor.GRAY + "in the config.");
-            lore.add("");
-            lore.add(ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Not Enabled");
-
-
-            itemMeta.setLore(lore);
+            itemMeta.setLore(Language.getLore(Messages.AI_OPTION_DISABLED_LORE));
             itemStack.setItemMeta(itemMeta);
 
             return itemStack;

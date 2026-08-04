@@ -27,9 +27,10 @@ import com.parsa3323.aas.api.events.ArmorStandAiRespondEvent;
 import com.parsa3323.aas.api.exeption.ArmorStandAlreadyExistsException;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
 import com.parsa3323.aas.api.exeption.ReloadException;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.config.AiConfig;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -139,9 +140,9 @@ public class AiUtils {
             ApiResponse apiResponse = sendApiRequest(apiKey, instructions, userContent);
             String result;
             if (apiResponse.exception != null) {
-                result = "{\"response\":\"AI error: " + apiResponse.exception.getMessage() + "\",\"action\":\"none\"}";
+                result = "{\"response\":\"" + Language.getMsg(Messages.AI_ERROR).replace("{error}", apiResponse.exception.getMessage()) + "\",\"action\":\"none\"}";
             } else if (apiResponse.code != 200) {
-                result = "{\"response\":\"AI error: HTTP " + apiResponse.code + ", make sure you are connected to internet" + "\",\"action\":\"none\"}";
+                result = "{\"response\":\"" + Language.getMsg(Messages.AI_HTTP_ERROR_WITH_INTERNET).replace("{code}", String.valueOf(apiResponse.code)) + "\",\"action\":\"none\"}";
             } else {
                 result = parseChatCompletionsResponse(apiResponse.body);
             }
@@ -296,9 +297,9 @@ public class AiUtils {
                 ApiResponse apiResponse = sendApiRequest(apiKey, instructions, userContent);
                 String result;
                 if (apiResponse.exception != null) {
-                    result = "AI error: " + apiResponse.exception.getClass().getSimpleName() + ": " + apiResponse.exception.getMessage();
+                    result = Language.getMsg(Messages.AI_ERROR).replace("{error}", apiResponse.exception.getClass().getSimpleName() + ": " + apiResponse.exception.getMessage());
                 } else if (apiResponse.code != 200) {
-                    result = "AI error: HTTP " + apiResponse.code + ", make sure you are connected to internet";
+                    result = Language.getMsg(Messages.AI_HTTP_ERROR_WITH_INTERNET).replace("{code}", String.valueOf(apiResponse.code));
                 } else {
                     result = parseChatCompletionsResponse(apiResponse.body);
                 }
@@ -321,14 +322,14 @@ public class AiUtils {
     }
 
     public static void sendResponseWithHistory(Player player, String response, String armorStandName, String userInput) {
-        player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GOLD + response);
+        player.sendMessage(Language.getMsg(Messages.AI_PREFIX) + response);
         Bukkit.getPluginManager().callEvent(new ArmorStandAiRespondEvent(ArmorStandUtils.getArmorStandByName(armorStandName), response, userInput, player));
         AiUtils.addToHistory(player.getName(), armorStandName, AiRole.PLAYER, userInput);
         AiUtils.addToHistory(player.getName(), armorStandName, AiRole.AI, response);
     }
 
     public static void sendResponse(Player player, String response) {
-        player.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "»" + ChatColor.GRAY + "] " + ChatColor.GOLD + response);
+        player.sendMessage(Language.getMsg(Messages.AI_PREFIX) + response);
     }
 
     @Deprecated
@@ -340,10 +341,10 @@ public class AiUtils {
 
         ApiResponse apiResponse = sendApiRequest(apiKey, instructions, userContent);
         if (apiResponse.exception != null) {
-            return "AI error: " + apiResponse.exception.getClass().getSimpleName() + ": " + apiResponse.exception.getMessage();
+            return Language.getMsg(Messages.AI_ERROR).replace("{error}", apiResponse.exception.getClass().getSimpleName() + ": " + apiResponse.exception.getMessage());
         }
         if (apiResponse.code != 200) {
-            return "AI error: HTTP " + apiResponse.code;
+            return Language.getMsg(Messages.AI_HTTP_ERROR).replace("{code}", String.valueOf(apiResponse.code));
         }
         return parseChatCompletionsResponse(apiResponse.body);
     }
@@ -521,10 +522,10 @@ public class AiUtils {
                 return sb.toString();
             }
 
-            return "AI error: couldn't find assistant text in response";
+            return Language.getMsg(Messages.AI_RESPONSE_NOT_FOUND);
 
         } catch (Exception e) {
-            return "AI parse error: " + e.getClass().getSimpleName() + ": " + e.getMessage();
+            return Language.getMsg(Messages.AI_PARSE_ERROR).replace("{error}", e.getClass().getSimpleName() + ": " + e.getMessage());
         }
     }
 }

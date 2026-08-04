@@ -23,6 +23,7 @@ import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.events.ArmorStandStateChangeEvent;
 import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.menus.manager.Menu;
 import com.parsa3323.aas.options.manager.SettingsManager;
@@ -216,9 +217,9 @@ public class ArmorStandMenu extends Menu {
             Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
 
             p.playSound(p.getLocation(), VersionSupportUtil.getVersionSupport().getEquipSound(), 1,  1);
-            p.sendMessage(ChatColor.GREEN + "ArmorStand updated successfully!");
+            p.sendMessage(Language.getMsg(Messages.ARMORSTAND_UPDATED_SUCCESS));
         } catch (Exception ex) {
-            p.sendMessage(ChatColor.RED + "Failed to update ArmorStand!");
+            p.sendMessage(Language.getMsg(Messages.ARMORSTAND_UPDATED_FAILED));
             ex.printStackTrace();
         }
         if (!coolDownList.contains(p.getUniqueId())) {
@@ -229,14 +230,14 @@ public class ArmorStandMenu extends Menu {
     @Override
     public void setMenuItems() {
         if (armorStand == null || !armorStand.isValid()) {
-            playerMenuUtility.getOwner().sendMessage(ChatColor.RED + "The ArmorStand is no longer available!");
+            playerMenuUtility.getOwner().sendMessage(Language.getMsg(Messages.ARMORSTAND_UNAVAILABLE));
             playerMenuUtility.getOwner().closeInventory();
             for (int i = 0; i < inventory.getSize(); i++) {
                 ItemStack grayPane = new ItemStack(XMaterial.GRAY_STAINED_GLASS_PANE.parseMaterial(), 1, (short) 7);
                 ItemMeta meta = grayPane.getItemMeta();
 
                 if (meta != null) {
-                    meta.setDisplayName(ChatColor.RED + "ArmorStand is not available");
+                    meta.setDisplayName(Language.getMsg(Messages.ARMORSTAND_UNAVAILABLE_TITLE));
                     grayPane.setItemMeta(meta);
                 }
 

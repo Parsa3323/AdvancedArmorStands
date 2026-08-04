@@ -18,9 +18,10 @@
 
 package com.parsa3323.aas.inventory;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.menus.SaveMenu;
-import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -40,12 +41,8 @@ public class SaveItem extends InventoryItem {
 
     @Override
     public ItemStack getItemStack() {
-        ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Click to save the ArmorStand setting ");
-        lore.add(ChatColor.GRAY + "as a type, that you can use it later");
-        lore.add("");
-        lore.add(ColorUtils.italicAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+        ArrayList<String> lore = new ArrayList<>(Language.getLore(Messages.SAVE_ITEM_LORE));
 
         ItemStack itemStack = new ItemStack(Material.NETHER_STAR);
         ItemMeta itemMeta = itemStack.getItemMeta();

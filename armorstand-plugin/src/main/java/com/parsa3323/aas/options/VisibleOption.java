@@ -18,11 +18,10 @@
 
 package com.parsa3323.aas.options;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.options.manager.SettingsOption;
-import com.parsa3323.aas.utils.ColorUtils;
-import com.parsa3323.aas.utils.TextUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -40,14 +39,16 @@ public class VisibleOption extends SettingsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGJlMDBlNDI2MjYwZDVkODQxNDBkNzUzN2E0ZTc3YWI5ZGEyMmEwOTNhNjM3ZGQ3MjQ5YTVlMTUwOWFiZjhhYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Visibility");
+        itemMeta.setDisplayName(Language.getMsg(Messages.VISIBLE_OPTION_NAME));
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "visibility for this ArmorStand");
-        lore.add("");
-        lore.add((armorStand.isVisible()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Is visible" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " isn't visible");
+        String status = armorStand.isVisible()
+                ? Language.getMsg(Messages.VISIBLE_OPTION_ENABLED)
+                : Language.getMsg(Messages.VISIBLE_OPTION_DISABLED);
 
+        for (String line : Language.getLore(Messages.VISIBLE_OPTION_LORE)) {
+            lore.add(line.replace("%status%", status));
+        }
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 

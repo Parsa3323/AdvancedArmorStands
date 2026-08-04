@@ -18,11 +18,10 @@
 
 package com.parsa3323.aas.options;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.options.manager.SettingsOption;
-import com.parsa3323.aas.utils.ColorUtils;
-import com.parsa3323.aas.utils.TextUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -40,14 +39,16 @@ public class GlowingOption extends SettingsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU3YTQ3MzNjMDgzMGM4YjQyNWI2MjEzNzc4MGJkYmVmNTdiMTNhODg3YWFhZjExNzNjNmNlMGExZDc4NDFmMSJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Glowing");
+        itemMeta.setDisplayName(Language.getMsg(Messages.GLOWING_OPTION_NAME));
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "glowing this ArmorStand");
-        lore.add("");
-        lore.add((VersionSupportUtil.getVersionSupport().isGlowing(armorStand)) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Is glowing" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Isn't glowing");
+        String status = VersionSupportUtil.getVersionSupport().isGlowing(armorStand)
+                ? Language.getMsg(Messages.GLOWING_OPTION_ENABLED)
+                : Language.getMsg(Messages.GLOWING_OPTION_DISABLED);
 
+        for (String line : Language.getLore(Messages.GLOWING_OPTION_LORE)) {
+            lore.add(line.replace("%status%", status));
+        }
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
 

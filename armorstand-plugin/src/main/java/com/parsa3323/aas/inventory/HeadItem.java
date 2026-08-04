@@ -18,8 +18,9 @@
 
 package com.parsa3323.aas.inventory;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
-import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -39,14 +40,8 @@ public class HeadItem extends InventoryItem {
 
     @Override
     public ItemStack getItemStack() {
-        ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rotate head to right");
-        lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rotate head hand to left");
-        lore.add(ChatColor.YELLOW + "SHIFT + RIGHT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move head up");
-        lore.add(ChatColor.YELLOW + "SHIFT + LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move head down");
-        lore.add("");
-        lore.add(ColorUtils.italicAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+        ArrayList<String> lore = new ArrayList<>(Language.getLore(Messages.HEAD_ITEM_LORE));
 
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTJmNTA5MjUwZWM0YTExMTZjMWE1ZmE3Y2E5YTNiNDFkZTI1YWYwNjdmMGNkNmNlN2VmN2ViMTI2OTc0ZWFlYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();

@@ -86,7 +86,7 @@ public class MoveCommand extends SubCommand {
         World world = Bukkit.getWorld(config.getString(path + ".World"));
 
         if (world == null) {
-            player.sendMessage(Language.getMsg(Messages.MOVE_WORLD_NOT_FOUND));
+            player.sendMessage(Language.getMsg(Messages.WORLD_NOT_FOUND));
             return;
         }
 

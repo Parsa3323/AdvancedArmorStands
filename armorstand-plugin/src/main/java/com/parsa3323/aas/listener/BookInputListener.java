@@ -21,10 +21,11 @@ package com.parsa3323.aas.listener;
 
 import com.parsa3323.aas.ai.MemoryOption;
 import com.parsa3323.aas.ai.manager.AiSettingsManager;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.utils.AiUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -49,7 +50,7 @@ public class BookInputListener implements Listener {
 
         if (text.equalsIgnoreCase("exit")) {
             InventoryUtils.restore(e.getPlayer());
-            p.sendMessage(ChatColor.GREEN + "Successfully exited memory set session.");
+            p.sendMessage(Language.getMsg(Messages.AI_MEMORY_EXIT_SUCCESS));
             AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(e.getPlayer()), waiting.get(p.getUniqueId()));
             aiSettingsManager.open();
             return;
@@ -59,7 +60,7 @@ public class BookInputListener implements Listener {
         InventoryUtils.restore(e.getPlayer());
         AiSettingsManager aiSettingsManager = new AiSettingsManager(new PlayerMenuUtility(e.getPlayer()), waiting.get(p.getUniqueId()));
         aiSettingsManager.open();
-        p.sendMessage(ChatColor.GREEN + "Successfully updated ArmorStand's instructions");
+        p.sendMessage(Language.getMsg(Messages.AI_MEMORY_UPDATE_SUCCESS));
 
         waiting.remove(p.getUniqueId());
     }

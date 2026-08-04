@@ -18,6 +18,8 @@
 
 package com.parsa3323.aas.options;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.options.manager.SettingsOption;
 import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.TextUtils;
@@ -41,13 +43,15 @@ public class ArmsOption extends SettingsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGI2MzJiM2QwZjgyMGVjNjExNzA4ZTg5MjIyMjA1OWEzNjRkNzYyMjE3YzJjNmM5YmE3MWM1YWRiNDZmYzRiNCJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Arms");
+        itemMeta.setDisplayName(Language.getMsg(Messages.ARMS_OPTION_NAME));
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "arms for this ArmorStand ");
-        lore.add("");
-        lore.add((armorStand.hasArms()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Has arms" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Doesn't have arms");
+        for (String line : Language.getLore(Messages.ARMS_OPTION_LORE)) {
+            lore.add(line.replace("%status%",
+                    armorStand.hasArms()
+                            ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Has arms"
+                            : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " Doesn't have arms"));
+        }
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

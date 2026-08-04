@@ -26,6 +26,8 @@ import com.parsa3323.aas.api.actions.TriggerType;
 import com.parsa3323.aas.api.events.ActionTriggerEvent;
 import com.parsa3323.aas.api.events.ArmorStandCreateEvent;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.api.player.IPlayer;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.menus.ArmorStandMenu;
@@ -96,7 +98,7 @@ public class PlayerInteractListener implements Listener {
                                             interactionCount.remove(playerId);
                                             selectCount.remove(playerId);
                                             VersionSupportUtil.getVersionSupport().sendActionBar(bukkitPlayer, "");
-                                            player.sendMessage(ChatColor.RED + "Creation cancelled due to inactivity.");
+                                            player.sendMessage(Language.getMsg(Messages.CREATION_CANCELLED));
                                         }
                                 );
                             }
@@ -109,8 +111,9 @@ public class PlayerInteractListener implements Listener {
                                 interactionCount.put(playerId, count);
 
                                 TextComponent textComponent = new TextComponent(
-                                        ChatColor.GREEN + "Do this " + (3 - count) + " more time" +
-                                                ((3 - count) > 1 ? "s" : "") + " to save this ArmorStand."
+                                        Language.getMsg(Messages.ARMORSTAND_SAVE_CONFIRM)
+                                                .replace("%amount%", String.valueOf(3 - count))
+                                                .replace("%plural%", ((3 - count) > 1 ? "s" : ""))
                                 );
                                 textComponent.setHoverEvent(new HoverEvent(
                                         HoverEvent.Action.SHOW_TEXT,
@@ -143,7 +146,7 @@ public class PlayerInteractListener implements Listener {
                                     return;
                                 }
 
-                                bukkitPlayer.sendMessage(ChatColor.YELLOW + "ArmorStand saved as " + name + "!");
+                                bukkitPlayer.sendMessage(Language.getMsg(Messages.ARMORSTAND_SAVED_SUCCESS).replace("%name%", name));
                                 ArmorStandUtils.saveArmorStand(name, stand);
 
                                 interactionCount.remove(playerId);
@@ -243,7 +246,7 @@ public class PlayerInteractListener implements Listener {
                                     deleteInteractionCount.remove(playerId);
                                     deletionCount.remove(playerId);
                                     VersionSupportUtil.getVersionSupport().sendActionBar(player, "");
-                                    player.sendMessage(ChatColor.RED + "Deletion cancelled due to inactivity.");
+                                    player.sendMessage(Language.getMsg(Messages.DELETION_CANCELLED));
                                 }
                         );
                     }
@@ -259,9 +262,11 @@ public class PlayerInteractListener implements Listener {
                         deleteInteractionCount.put(playerId, count);
 
                         TextComponent textComponent = new TextComponent(
-                                ChatColor.RED + "Do this " + (3 - count) + " more time" +
-                                        ((3 - count) > 1 ? "s" : "") + " to delete this ArmorStand."
+                                Language.getMsg(Messages.ARMORSTAND_DELETE_CONFIRM)
+                                        .replace("%amount%", String.valueOf(3 - count))
+                                        .replace("%plural%", ((3 - count) > 1 ? "s" : ""))
                         );
+
                         textComponent.setHoverEvent(new HoverEvent(
                                 HoverEvent.Action.SHOW_TEXT,
                                 new ComponentBuilder(ChatColor.GRAY + "You can disable this in the config.yml").create()
@@ -275,7 +280,7 @@ public class PlayerInteractListener implements Listener {
                         if (armorStandDeleteEvent.isCancelled()) return;
 
                         ArmorStandUtils.deleteArmorStand(standName);
-                        player.sendMessage(ChatColor.GREEN + "ArmorStand has been deleted, but it can be restored using the restored command and it will be fully deleted with server restart");
+                        player.sendMessage(Language.getMsg(Messages.ARMORSTAND_DELETED_SUCCESS));
 
                         deleteInteractionCount.remove(playerId);
                         deletionCount.remove(playerId);

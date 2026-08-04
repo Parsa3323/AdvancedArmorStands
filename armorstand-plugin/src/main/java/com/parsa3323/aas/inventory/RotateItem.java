@@ -18,8 +18,9 @@
 
 package com.parsa3323.aas.inventory;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
-import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
@@ -41,16 +42,8 @@ public class RotateItem extends InventoryItem {
 
     @Override
     public ItemStack getItemStack() {
-        ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.YELLOW + "RIGHT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rotate to right");
-        lore.add(ChatColor.YELLOW + "LEFT CLICK " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rotate to left");
-        lore.add(ChatColor.YELLOW + "SHIFT + RIGHT CLICK (Block) " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Rove body up");
-        lore.add(ChatColor.YELLOW + "SHIFT + LEFT CLICK (Block) " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move body down");
-        lore.add(ChatColor.YELLOW + "SHIFT + RIGHT CLICK (Air) " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move body right");
-        lore.add(ChatColor.YELLOW + "SHIFT + LEFT CLICK (Air) " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Move body left");
-        lore.add("");
-        lore.add(ColorUtils.italicAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+        ArrayList<String> lore = new ArrayList<>(Language.getLore(Messages.ROTATE_ITEM_LORE));
 
 
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTVjZWQzNTI4N2JmYTAxNjY1ZGE3MjQ3MjM5YmEyNDE0YzE5MzZjNTZkMmU1YjIwMjdkMDUzMGQ5Yjk3MjUzMCJ9fX0=");

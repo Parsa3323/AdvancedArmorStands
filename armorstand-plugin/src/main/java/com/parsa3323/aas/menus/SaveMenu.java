@@ -21,6 +21,7 @@ package com.parsa3323.aas.menus;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
@@ -50,7 +51,7 @@ public class SaveMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return Language.getMsg("save_menu_title");
+        return Language.getMsg(Messages.SAVE_MENU_TITLE);
     }
 
     @Override
@@ -100,7 +101,7 @@ public class SaveMenu extends PaginatedMenu {
 
             playerList.put(player.getUniqueId(), armorStand);
             player.closeInventory();
-            player.sendMessage(ChatColor.GREEN + "Type the name of the type you want to create and copy this ArmorStand's properties to, Type 'exit' to exit");
+            player.sendMessage(Language.getMsg(Messages.SAVE_MENU_CREATE_MESSAGE));
         }
 
         if (clickedItem.getType() == Material.ARMOR_STAND) {
@@ -110,7 +111,7 @@ public class SaveMenu extends PaginatedMenu {
 
             TypeUtils.saveAsType(armorStand, itemName);
 
-            player.sendMessage(ChatColor.GREEN + "Saved ArmorStand's properties to '" + itemName + "'");
+            player.sendMessage(Language.getMsg(Messages.SAVE_MENU_TYPE_SAVED).replace("%type%", itemName));
             player.closeInventory();
 
         }
@@ -139,11 +140,10 @@ public class SaveMenu extends PaginatedMenu {
             ItemMeta itemMeta = itemStack.getItemMeta();
 
             ArrayList<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + "Selecting this will override");
-            lore.add(ChatColor.GRAY + "your old " + key + " config to");
-            lore.add(ChatColor.GRAY + "the current config you made");
-            lore.add("");
-            lore.add(ChatColor.YELLOW + "Click to save");
+
+            for (String line : Language.getLore(Messages.SAVE_MENU_TYPE_LORE)) {
+                lore.add(line.replace("%type%", key));
+            }
 
             itemMeta.setLore(lore);
             itemMeta.setDisplayName(ChatColor.YELLOW + key);
@@ -155,14 +155,9 @@ public class SaveMenu extends PaginatedMenu {
 
         ItemStack createTypeItem = new ItemStack(XMaterial.REDSTONE_BLOCK.parseMaterial());
         ItemMeta createTypeMeta = createTypeItem.getItemMeta();
-        createTypeMeta.setDisplayName(ChatColor.YELLOW + "Create a type");
+        createTypeMeta.setDisplayName(Language.getMsg(Messages.SAVE_MENU_CREATE_TYPE_NAME));
 
-        ArrayList<String> createLore = new ArrayList<>();
-        createLore.add(ChatColor.GRAY + "Select this to create");
-        createLore.add(ChatColor.GRAY + "a type with this armor");
-        createLore.add(ChatColor.GRAY + "stand's properties");
-        createLore.add("");
-        createLore.add(ChatColor.YELLOW + "Click to create");
+        ArrayList<String> createLore = new ArrayList<>(Language.getLore(Messages.SAVE_MENU_CREATE_TYPE_LORE));
 
         createTypeMeta.setLore(createLore);
         createTypeItem.setItemMeta(createTypeMeta);

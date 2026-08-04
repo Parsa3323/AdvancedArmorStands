@@ -21,6 +21,8 @@ package com.parsa3323.aas.listener;
 import com.cryptomorin.xseries.XSound;
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.api.data.MemoryData;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.config.ActionConfig;
 import com.parsa3323.aas.config.TypesConfig;
 import com.parsa3323.aas.menus.ActionMenu;
@@ -53,7 +55,7 @@ public class ChatListener implements Listener {
 
             if (e.getMessage().equalsIgnoreCase("exit")) {
                 e.setCancelled(true);
-                e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully quit the name set session");
+                e.getPlayer().sendMessage(Language.getMsg(Messages.CUSTOM_NAME_EXIT_SUCCESS));
                 if (!VersionSupportUtil.isHigherThan("1.8")) {
                     SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
                     settingsManager.open();
@@ -70,7 +72,7 @@ public class ChatListener implements Listener {
                     PlaceholderAPI.setPlaceholders(e.getPlayer(), ChatColor.translateAlternateColorCodes('&', e.getMessage())) :
                     ChatColor.translateAlternateColorCodes('&', e.getMessage()));
 
-            e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully set ArmorStand's custom name to '" + e.getMessage() + "' ");
+            e.getPlayer().sendMessage(Language.getMsg(Messages.CUSTOM_NAME_SET_SUCCESS).replace("%name%", e.getMessage()));
 
             if (!VersionSupportUtil.isHigherThan("1.8")) {
                 SettingsManager settingsManager = new SettingsManager(new PlayerMenuUtility(e.getPlayer()), CustomNameOption.players.get(e.getPlayer().getUniqueId()), CustomNameOption.IS_FROM_SETTINGS);
@@ -90,7 +92,7 @@ public class ChatListener implements Listener {
 
             if (e.getMessage().equalsIgnoreCase("exit")) {
                 e.setCancelled(true);
-                e.getPlayer().sendMessage(ChatColor.GREEN + "Successfully quit the type create session");
+                e.getPlayer().sendMessage(Language.getMsg(Messages.TYPE_CREATE_EXIT_SUCCESS));
                 map.remove(p.getUniqueId());
                 return;
             }
@@ -101,13 +103,13 @@ public class ChatListener implements Listener {
             String itemName = e.getMessage();
 
             if (TypesConfig.get().contains(itemName)) {
-                p.sendMessage(ChatColor.RED + "This type already exists, Either chose another name or select the type in the save menu");
+                p.sendMessage(Language.getMsg(Messages.TYPE_ALREADY_EXISTS));
                 return;
             }
 
             TypeUtils.saveAsType(armorStand, itemName);
 
-            p.sendMessage(ChatColor.GREEN + "Created type '" + itemName + "' with this ArmorStand's properties");
+            p.sendMessage(Language.getMsg(Messages.TYPE_CREATED_SUCCESS).replace("%type%", itemName));
             map.remove(p.getUniqueId());
 
             return;

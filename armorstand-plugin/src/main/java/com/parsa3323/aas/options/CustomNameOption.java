@@ -18,6 +18,8 @@
 
 package com.parsa3323.aas.options;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.options.manager.SettingsOption;
 import com.parsa3323.aas.utils.VersionSupportUtil;
 import org.bukkit.ChatColor;
@@ -47,15 +49,13 @@ public class CustomNameOption extends SettingsOption {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWRlOGQwZjNlNDIxY2NlODU1NmViOGUzZTU4MzI1OWZmNjg3MzRiYTBmNGNhYjYzOWMyMzkwN2NkMmJlNGVmYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
         String currentName = armorStand.getCustomName();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Custom name");
-        ArrayList<String> lore = new ArrayList<>();
+        itemMeta.setDisplayName(Language.getMsg(Messages.CUSTOM_NAME_OPTION_NAME));
+        ArrayList<String> lore = new ArrayList<>(Language.getLore(Messages.CUSTOM_NAME_OPTION_LORE));
 
-        lore.add(ChatColor.GRAY + "Set a custom name for");
-        lore.add(ChatColor.GRAY + "this ArmorStand");
         lore.add("");
         if (currentName != null) {
             String[] words = ChatColor.stripColor(currentName).split("\\s+");
-            StringBuilder line = new StringBuilder(ChatColor.YELLOW + "Current" + ChatColor.GOLD + " » " + ChatColor.YELLOW);
+            StringBuilder line = new StringBuilder(Language.getMsg(Messages.CUSTOM_NAME_OPTION_CURRENT_NAME));
             for (int i = 0; i < words.length; i++) {
                 line.append(words[i]).append(" ");
                 if ((i + 1) % 2 == 0 || i == words.length - 1) {
@@ -64,7 +64,7 @@ public class CustomNameOption extends SettingsOption {
                 }
             }
         } else {
-            lore.add(ChatColor.YELLOW + "Current name" + ChatColor.GOLD + " » " + ChatColor.YELLOW + "None");
+            lore.add(Language.getMsg(Messages.CUSTOM_NAME_OPTION_NO_NAME));
         }
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
@@ -78,10 +78,10 @@ public class CustomNameOption extends SettingsOption {
 
         if (!players.containsKey(p.getUniqueId())) {
             players.put(p.getUniqueId(), armorStand);
-            p.sendMessage(ChatColor.GREEN + "Type the name you want to set in the chat, To exit type 'exit'");
+            p.sendMessage(Language.getMsg(Messages.CUSTOM_NAME_OPTION_ENTER_NAME));
             p.closeInventory();
         } else {
-            p.sendMessage(ChatColor.RED + "You are already in a name set session");
+            p.sendMessage(Language.getMsg(Messages.CUSTOM_NAME_OPTION_ALREADY_EDITING));
         }
     }
 

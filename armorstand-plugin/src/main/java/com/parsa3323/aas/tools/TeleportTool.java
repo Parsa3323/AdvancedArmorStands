@@ -18,10 +18,11 @@
 
 package com.parsa3323.aas.tools;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.tools.manager.ToolsOption;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -35,13 +36,8 @@ public class TeleportTool extends ToolsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjYwN2ZhYTYxYzU5ODE2MDE0ODQyY2NmZmZhOTYxMzM5NmQ4YTk5ZWQwN2E2NTE5YTU0NGM2NTcyOWRmNTFhYyJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Teleport");
-        ArrayList<String> lore = new ArrayList<>();
-
-        lore.add(ChatColor.GRAY + "Teleport to the");
-        lore.add(ChatColor.GRAY + "ArmorStand's location");
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Click to teleport");
+        itemMeta.setDisplayName(Language.getMsg(Messages.TELEPORT_TOOL_NAME));
+        ArrayList<String> lore = new ArrayList<>(Language.getLore(Messages.TELEPORT_TOOL_LORE));
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

@@ -18,10 +18,11 @@
 
 package com.parsa3323.aas.tools;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.tools.manager.ToolsOption;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -34,13 +35,8 @@ public class DeleteTool extends ToolsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmZiNmJjMWExNjU4MTljNzRhYjIxMDMzZDRmOGIwMzlmZjg0M2M1YmZiYjJjMjQxY2ZhNDc2NDcxZWU5MWZlIn19fQ==");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Delete");
-        ArrayList<String> lore = new ArrayList<>();
-
-        lore.add(ChatColor.GRAY + "Delete this ArmorStand");
-        lore.add(ChatColor.GRAY + "this action cannot be undone");
-        lore.add("");
-        lore.add(ChatColor.YELLOW + "Click to delete");
+        itemMeta.setDisplayName(Language.getMsg(Messages.DELETE_TOOL_NAME));
+        ArrayList<String> lore = new ArrayList<>(Language.getLore(Messages.DELETE_TOOL_LORE));
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
@@ -51,6 +47,6 @@ public class DeleteTool extends ToolsOption {
     @Override
     public void execute(InventoryClickEvent e, ArmorStand armorStand) {
         ArmorStandUtils.deleteArmorStand(ArmorStandUtils.getNameByArmorStand(armorStand));
-        e.getWhoClicked().sendMessage(ChatColor.GREEN + "ArmorStand has been deleted, but it can be restored using the restored command and it will be fully deleted with server restart");
+        e.getWhoClicked().sendMessage(Language.getMsg(Messages.DELETE_TOOL_MESSAGE));
     }
 }

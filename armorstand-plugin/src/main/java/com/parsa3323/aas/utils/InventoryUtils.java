@@ -20,6 +20,8 @@ package com.parsa3323.aas.utils;
 
 import com.parsa3323.aas.AdvancedArmorStands;
 import com.parsa3323.aas.animation.manager.EditorManager;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.inventory.manager.InventoryItem;
 import com.parsa3323.aas.inventory.manager.InventoryManager;
 import org.bukkit.Bukkit;
@@ -62,11 +64,11 @@ public class InventoryUtils {
 
             ItemStack itemStack = new ItemStack(Material.BARRIER);
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.GRAY + "» " + ChatColor.RED  + "EXIT" + ChatColor.GRAY + " (Right Click)");
-            ArrayList<String> lore = new ArrayList<>();
+            itemMeta.setDisplayName(
+                    Language.getMsg(Messages.INVENTORY_EXIT_NAME)
+            );
 
-            lore.add("");
-            lore.add(ColorUtils.italicAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+            ArrayList<String> lore = new ArrayList<>(Language.getLore(Messages.INVENTORY_EXIT_LORE));
 
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -74,7 +76,9 @@ public class InventoryUtils {
             inventory.setItem(8, itemStack);
 
         }
-        p.sendMessage(ChatColor.GREEN + "Entered edit session, click the EXIT item to get back and restore your items");
+        p.sendMessage(
+                Language.getMsg(Messages.INVENTORY_ENTER_SESSION)
+        );
 
 
 
@@ -93,11 +97,8 @@ public class InventoryUtils {
 
             ItemStack itemStack = new ItemStack(Material.BARRIER);
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setDisplayName(ChatColor.GRAY + "» " + ChatColor.RED + "EXIT" + ChatColor.GRAY + " (Right Click)");
-            ArrayList<String> lore = new ArrayList<>();
-
-            lore.add("");
-            lore.add(ColorUtils.italicAndColor(ChatColor.DARK_GRAY) + "AdvancedArmorStands Editor Item");
+            itemMeta.setDisplayName(Language.getMsg(Messages.EDITOR_EXIT_NAME));
+            ArrayList<String> lore = new ArrayList<>(Language.getLore(Messages.EDITOR_EXIT_LORE));
 
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);

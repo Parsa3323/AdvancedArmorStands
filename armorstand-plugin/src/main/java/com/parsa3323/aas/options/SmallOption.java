@@ -18,11 +18,10 @@
 
 package com.parsa3323.aas.options;
 
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.options.manager.SettingsOption;
-import com.parsa3323.aas.utils.ColorUtils;
-import com.parsa3323.aas.utils.TextUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -40,13 +39,16 @@ public class SmallOption extends SettingsOption {
     public ItemStack getItemStack(ArmorStand armorStand) {
         ItemStack itemStack = VersionSupportUtil.getVersionSupport().getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzI4NTRhZjNkNDI4MTRhMmUwNjA5NDllNWE1Y2JmYWQ3M2M0YmEzZDNlNzcyODliMTJkODkwYjEyNDk0NzJlZSJ9fX0=");
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + "Small");
+        itemMeta.setDisplayName(Language.getMsg(Messages.SMALL_OPTION_NAME));
         ArrayList<String> lore = new ArrayList<>();
 
-        lore.add(ChatColor.GRAY + "Enable and disable");
-        lore.add(ChatColor.GRAY + "small size for this ArmorStand");
-        lore.add("");
-        lore.add((armorStand.isSmall()) ? ColorUtils.boldAndColor(ChatColor.GOLD) + TextUtils.CHECK + ChatColor.YELLOW + " Is small" : ColorUtils.boldAndColor(ChatColor.DARK_RED) + TextUtils.CROSS + ChatColor.RED + " isn't small");
+        String status = armorStand.isSmall()
+                ? Language.getMsg(Messages.SMALL_OPTION_ENABLED)
+                : Language.getMsg(Messages.SMALL_OPTION_DISABLED);
+
+        for (String line : Language.getLore(Messages.SMALL_OPTION_LORE)) {
+            lore.add(line.replace("%status%", status));
+        }
 
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);

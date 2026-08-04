@@ -24,8 +24,13 @@ import com.parsa3323.aas.api.data.ArmorStandPoseData;
 import com.parsa3323.aas.api.events.ArmorStandDeleteEvent;
 import com.parsa3323.aas.api.exeption.ArmorStandLoadException;
 import com.parsa3323.aas.api.exeption.ArmorStandNotFoundException;
+import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.config.ArmorStandsConfig;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
@@ -174,7 +179,7 @@ public class ArmorStandUtils {
         String path = "armorstands." + name;
 
         if (!config.contains(path)) {
-            player.sendMessage(ChatColor.RED + "ArmorStand not found!");
+            player.sendMessage(Language.getMsg(Messages.ARMORSTAND_NOT_FOUND));
             return;
         }
 
@@ -184,12 +189,12 @@ public class ArmorStandUtils {
         double z = config.getDouble(path + ".Z");
 
         if (world == null) {
-            player.sendMessage(ChatColor.RED + "World not found!");
+            player.sendMessage(Language.getMsg(Messages.WORLD_NOT_FOUND));
             return;
         }
 
         player.teleport(new Location(world, x, y, z));
-        player.sendMessage(ChatColor.GREEN + "Teleported to " + name);
+        player.sendMessage(Language.getMsg(Messages.TELEPORTED_TO_ARMORSTAND).replace("%name%", name));
     }
 
     public static boolean exists(String name) {
