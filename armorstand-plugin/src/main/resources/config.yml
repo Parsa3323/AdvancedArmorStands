@@ -9,11 +9,13 @@
 # This is used internally to ensure compatibility between plugin versions and config formats.
 config-version: 1.0.3
 
+# Default language; Changes made to built-in generated languages will be reset on restart.
+# To customize a language, copy it and rename it using the 'messages_<iso>.yml' format.
+# Then set this value to your custom language iso.
+language: en
+
 # Enable & Disable Debug
 debug: false
-
-# Default language
-language: en
 
 # Enables the feature where sneaking and right-clicking an ArmorStand
 # three times will save it as an Advanced ArmorStand, ArmorStand.
