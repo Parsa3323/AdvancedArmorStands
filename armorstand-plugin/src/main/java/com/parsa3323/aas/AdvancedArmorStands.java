@@ -176,6 +176,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         new Italian();
         new Turkish();
         new Portuguese();
+        new Bangla();
+        new Indonesian();
+        new Polish();
+        new Romanian();
 
         Language.loadLanguages(this, getConfig().getString("language"));
 
