@@ -79,6 +79,8 @@ The `config.yml` file is the plugin's main configuration file:
 
 config-version: 1.0.2 # <========== Config version (don't touch)
 
+language: en # <========== Language
+
 debug: false # <========== Enable & Disable debug
 
 shift-right-click-to-add: true # <========== Enable & Disable shift-right-click to add ArmorStand
