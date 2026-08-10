@@ -43,6 +43,9 @@ public class Polish extends Language {
         yml.addDefault(Messages.ACTIONS_SETTINGS_TRIGGER_LORE, "&7Wybierz, jak komenda\n&7będzie się uruchamiać, gdy\n&7gracz wejdzie w interakcję\n&7z ArmorStandem.\n\n%trigger_list%\n\n&eKliknij, aby zmienić");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_NAME, "&eNadawca");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_LORE, "&7Wybierz, kto wyśle\n&7komendę. Wpływa to na\n&7działanie uprawnień i wykonania.\n\n%sender_list%\n\n&eKliknij, aby zmienić");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_NAME, "&ePriorytet");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_LORE, "&7Zmień priorytet\n&7tej komendy. Gdy\n&7priorytet jest wyższy\n&7niż pozostałych, zostanie\n&7wykonana wcześniej.\n\n&6» &e%priority_number%\n\n&eKliknij, aby zmienić");
+        yml.addDefault(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN, "&eDwie lub więcej akcji ma ten sam priorytet, co może powodować ich wzajemne konflikty.");
         yml.addDefault(Messages.AI_MENU_TITLE, "ustawienia ai");
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "Poproś AI o pomoc");
         yml.addDefault(Messages.AI_COMMAND_THINKING, "&7Myśli...");
