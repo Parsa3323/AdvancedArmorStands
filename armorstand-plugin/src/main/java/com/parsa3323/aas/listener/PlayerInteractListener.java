@@ -47,10 +47,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerInteractListener implements Listener {
 
@@ -169,6 +166,11 @@ public class PlayerInteractListener implements Listener {
                 if (cs == null) return;
 
                 ArrayList<String> list = new ArrayList<>(cs.getKeys(false));
+
+                list.sort(Comparator.comparingInt(key -> {
+                    int priority = cs.getInt(key + ".priority", 0);
+                    return priority <= 0 ? Integer.MAX_VALUE : priority;
+                }));
 
                 for (int i = 0; i < list.size(); i++) {
                     Player p = e.getPlayer();
