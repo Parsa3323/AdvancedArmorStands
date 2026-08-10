@@ -43,6 +43,9 @@ public class Spanish extends Language {
         yml.addDefault(Messages.ACTIONS_SETTINGS_TRIGGER_LORE, "&7Elige cómo se activará\n&7el comando cuando\n&7el jugador interactúe con\n&7el ArmorStand.\n\n%trigger_list%\n\n&eClic para cambiar");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_NAME, "&eRemitente");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_LORE, "&7Elige quién enviará\n&7el comando. Esto afecta a\n&7cómo funcionan los permisos y la ejecución.\n\n%sender_list%\n\n&eClic para cambiar");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_NAME, "&ePrioridad");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_LORE, "&7Cambia la prioridad\n&7de este comando. Cuando\n&7la prioridad sea mayor\n&7que la de los demás, se\n&7ejecutará primero.\n\n&6» &e%priority_number%\n\n&eHaz clic para cambiar");
+        yml.addDefault(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN, "&eDos o más acciones tienen la misma prioridad, lo que puede provocar conflictos entre ellas.");
         yml.addDefault(Messages.AI_MENU_TITLE, "ajustes de ia");
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "Pide ayuda a la IA");
         yml.addDefault(Messages.AI_COMMAND_THINKING, "&7Pensando...");

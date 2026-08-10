@@ -43,6 +43,9 @@ public class Russian extends Language {
         yml.addDefault(Messages.ACTIONS_SETTINGS_TRIGGER_LORE, "&7Выбери, как будет\n&7срабатывать команда, когда\n&7игрок взаимодействует\n&7с ArmorStand.\n\n%trigger_list%\n\n&eНажми, чтобы изменить");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_NAME, "&eОтправитель");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_LORE, "&7Выбери, от чьего имени\n&7будет отправляться команда. Это влияет\n&7на права и то, как она выполняется.\n\n%sender_list%\n\n&eНажми, чтобы изменить");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_NAME, "&eПриоритет");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_LORE, "&7Измените приоритет\n&7этой команды. Если\n&7приоритет выше, чем у\n&7остальных, она будет\n&7выполнена раньше.\n\n&6» &e%priority_number%\n\n&eНажмите, чтобы изменить");
+        yml.addDefault(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN, "&eДва или более действия имеют одинаковый приоритет, что может привести к конфликтам между ними.");
         yml.addDefault(Messages.AI_MENU_TITLE, "настройки ии");
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "Попроси ИИ помочь тебе");
         yml.addDefault(Messages.AI_COMMAND_THINKING, "&7Думает...");

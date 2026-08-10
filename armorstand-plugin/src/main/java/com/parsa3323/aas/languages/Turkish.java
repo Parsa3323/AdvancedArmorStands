@@ -43,6 +43,9 @@ public class Turkish extends Language {
         yml.addDefault(Messages.ACTIONS_SETTINGS_TRIGGER_LORE, "&7Oyuncu ArmorStand ile\n&7etkileşime girdiğinde\n&7komutun nasıl tetikleneceğini\n&7seç.\n\n%trigger_list%\n\n&eDeğiştirmek için tıkla");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_NAME, "&eGönderen");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_LORE, "&7Komutu kimin göndereceğini\n&7seç. Bu, izinlerin ve\n&7çalıştırmanın nasıl işlediğini etkiler.\n\n%sender_list%\n\n&eDeğiştirmek için tıkla");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_NAME, "&eÖncelik");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_LORE, "&7Bu komutun önceliğini\n&7değiştirin. Önceliği\n&7diğerlerinden daha yüksek\n&7olduğunda, diğerlerinden\n&7daha önce çalıştırılır.\n\n&6» &e%priority_number%\n\n&eDeğiştirmek için tıklayın");
+        yml.addDefault(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN, "&eİki veya daha fazla eylem aynı önceliğe sahip, bu da birbirleriyle çakışmalarına neden olabilir.");
         yml.addDefault(Messages.AI_MENU_TITLE, "yapay zeka ayarları");
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "Yapay zekadan sana yardım etmesini iste");
         yml.addDefault(Messages.AI_COMMAND_THINKING, "&7Düşünüyor...");
