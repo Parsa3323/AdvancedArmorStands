@@ -43,6 +43,9 @@ public class Persian extends Language {
         yml.addDefault(Messages.ACTIONS_SETTINGS_TRIGGER_LORE, "&7Entekhab kon command chetori\n&7ejra beshe vaghti\n&7player ba ArmorStand\n&7interact mikone.\n\n%trigger_list%\n\n&eBezan baraye avaz kardan");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_NAME, "&eFerestande");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_LORE, "&7Ferestande command ro\n&7entekhab kon. In ru tarze\n&7karkarde permission ha tasir mizare.\n\n%sender_list%\n\n&eBezan baraye avaz kardan");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_NAME, "&eOloviyat");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_LORE, "&7Oloviyate in dastor ra\n&7taghir dahid. Vaghti\n&7oloviate an bishtar az\n&7baghie bashad, zoodtar\n&7ejra mishavad.\n\n&6» &e%priority_number%\n\n&eBaraye taghir کلیک konid");
+        yml.addDefault(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN, "&eDo ya bishtar action oloviate yeksan darand, ke momk‌en ast baes-e takhalof ya tadakhol bein anha shavad.");
         yml.addDefault(Messages.AI_MENU_TITLE, "tanzimate ai");
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "Az ai bekhah komaket kone");
         yml.addDefault(Messages.AI_COMMAND_THINKING, "&7dare fekr mikone...");
