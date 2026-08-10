@@ -69,4 +69,5 @@ public class PriorityOption extends ActionItem {
         cs.set("priority", priority);
         ActionConfig.save();
     }
+
 }

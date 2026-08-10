@@ -22,7 +22,9 @@ import com.parsa3323.aas.config.ActionConfig;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ActionUtils {
 
@@ -50,5 +52,28 @@ public class ActionUtils {
         });
 
         return keys;
+    }
+
+    public static boolean hasDuplicatePriorities(String armorStandName) {
+        ConfigurationSection section = ActionConfig.get()
+                .getConfigurationSection("armorstand." + armorStandName);
+
+        if (section == null) return false;
+
+        Set<Integer> priorities = new HashSet<>();
+
+        for (String action : ActionUtils.getTotalActionsForArmorStand(armorStandName)) {
+            ConfigurationSection actionSection = section.getConfigurationSection(action);
+
+            if (actionSection == null) continue;
+
+            int priority = actionSection.getInt("priority");
+
+            if (priority > 0 && !priorities.add(priority)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

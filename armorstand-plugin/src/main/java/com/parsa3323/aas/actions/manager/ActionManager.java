@@ -23,8 +23,10 @@ import com.parsa3323.aas.actions.PriorityOption;
 import com.parsa3323.aas.actions.SenderOption;
 import com.parsa3323.aas.actions.TriggerOption;
 import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.menus.ActionMenu;
 import com.parsa3323.aas.menus.manager.PaginatedMenu;
+import com.parsa3323.aas.utils.ActionUtils;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.PlayerMenuUtility;
 import org.bukkit.ChatColor;
@@ -45,6 +47,8 @@ public class ActionManager extends PaginatedMenu {
     private final String armorStandName;
 
     private final String commandPath;
+
+    private boolean warned = false;
 
     public ActionManager(PlayerMenuUtility playerMenuUtility, String armorStandName, String commandPath) {
         super(playerMenuUtility);
@@ -152,6 +156,9 @@ public class ActionManager extends PaginatedMenu {
 
     @Override
     public void close(InventoryCloseEvent e) {
-
+        if (ActionUtils.hasDuplicatePriorities(armorStandName) && !warned) {
+            playerMenuUtility.getOwner().sendMessage(Language.getMsg(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN));
+            warned = true;
+        }
     }
 }

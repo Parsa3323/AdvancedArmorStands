@@ -48,6 +48,7 @@ public class English extends Language {
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_LORE, "&7Select the sender of the\n&7command. This affects how\n&7permissions and execution work.\n\n%sender_list%\n\n&eClick to change");
         yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_NAME, "&ePriority");
         yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_LORE, "&7Change the priority of\n&7this command, when\n&7when the priority is higher\n&7then other, it will run sooner\n\n&6» &e%priority_number%\n\n&eClick to change");
+        yml.addDefault(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN, "&eTwo or more actions have the same priority, which may cause them to conflict with each other.");
 
         yml.addDefault(Messages.AI_MENU_TITLE, "ai settings");
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "Ask the ai to assist you");
