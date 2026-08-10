@@ -43,6 +43,9 @@ public class Romanian extends Language {
         yml.addDefault(Messages.ACTIONS_SETTINGS_TRIGGER_LORE, "&7Alege cum se va\n&7declanșa comanda când\n&7jucătorul interacționează cu\n&7ArmorStand-ul.\n\n%trigger_list%\n\n&eClic pentru a schimba");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_NAME, "&eExpeditor");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_LORE, "&7Alege cine va trimite\n&7comanda. Asta afectează\n&7cum funcționează permisiunile și execuția.\n\n%sender_list%\n\n&eClic pentru a schimba");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_NAME, "&ePrioritate");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_LORE, "&7Schimbă prioritatea\n&7acestei comenzi. Când\n&7prioritatea este mai mare\n&7decât a celorlalte, aceasta\n&7va fi executată mai întâi.\n\n&6» &e%priority_number%\n\n&eClick pentru a schimba");
+        yml.addDefault(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN, "&eDouă sau mai multe acțiuni au aceeași prioritate, ceea ce poate cauza conflicte între ele.");
         yml.addDefault(Messages.AI_MENU_TITLE, "setări ai");
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "Cere ajutor de la AI");
         yml.addDefault(Messages.AI_COMMAND_THINKING, "&7Se gândește...");
