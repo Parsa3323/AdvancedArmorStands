@@ -43,6 +43,9 @@ public class Indonesian extends Language {
         yml.addDefault(Messages.ACTIONS_SETTINGS_TRIGGER_LORE, "&7Pilih bagaimana perintah\n&7akan dipicu saat\n&7pemain berinteraksi dengan\n&7ArmorStand ini.\n\n%trigger_list%\n\n&eKlik untuk mengubah");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_NAME, "&ePengirim");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_LORE, "&7Pilih siapa yang akan mengirim\n&7perintah ini. Ini memengaruhi\n&7cara kerja izin dan eksekusinya.\n\n%sender_list%\n\n&eKlik untuk mengubah");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_NAME, "&ePrioritas");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_LORE, "&7Ubah prioritas\n&7perintah ini. Jika\n&7prioritasnya lebih tinggi\n&7dari yang lain, perintah ini\n&7akan dijalankan lebih dulu.\n\n&6» &e%priority_number%\n\n&eKlik untuk mengubah");
+        yml.addDefault(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN, "&eDua atau lebih aksi memiliki prioritas yang sama, yang dapat menyebabkan mereka saling bertentangan.");
         yml.addDefault(Messages.AI_MENU_TITLE, "pengaturan ai");
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "Minta bantuan AI");
         yml.addDefault(Messages.AI_COMMAND_THINKING, "&7Sedang berpikir...");
