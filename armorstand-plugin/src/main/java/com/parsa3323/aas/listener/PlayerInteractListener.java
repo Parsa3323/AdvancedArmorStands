@@ -47,7 +47,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class PlayerInteractListener implements Listener {
 
@@ -165,20 +167,10 @@ public class PlayerInteractListener implements Listener {
 
                 if (cs == null) return;
 
-                List<String> list = new ArrayList<>(cs.getKeys(false));
 
-                list.sort((a, b) -> {
-                    int priorityA = cs.getInt(a + ".priority", 0);
-                    int priorityB = cs.getInt(b + ".priority", 0);
 
-                    if (priorityA == 0) priorityA = Integer.MAX_VALUE;
-                    if (priorityB == 0) priorityB = Integer.MAX_VALUE;
-
-                    return Integer.compare(priorityA, priorityB);
-                });
-                for (int i = 0; i < list.size(); i++) {
+                for (String key : ActionUtils.prioritize(cs)) {
                     Player p = e.getPlayer();
-                    String key = list.get(i);
                     String path = "armorstand." + ArmorStandUtils.getNameByArmorStand((ArmorStand) e.getRightClicked()) + "." + key;
                     String trigger = ActionConfig.get().getString(path + ".trigger", "all").toLowerCase();
                     boolean isSneaking = p.isSneaking();
@@ -230,6 +222,9 @@ public class PlayerInteractListener implements Listener {
 
         String standName = ArmorStandUtils.getNameByArmorStand(armorStand);
         ConfigurationSection standSection = ActionConfig.get().getConfigurationSection("armorstand." + standName);
+
+
+
         if (standSection == null) {
             if (AdvancedArmorStands.plugin.getConfig().getBoolean("shift-click-to-delete")) {
                 if (player.isSneaking()) {
@@ -301,7 +296,7 @@ public class PlayerInteractListener implements Listener {
             return;
         }
 
-        for (String key : standSection.getKeys(false)) {
+        for (String key : ActionUtils.prioritize(standSection)) {
             ConfigurationSection commandSection = standSection.getConfigurationSection(key);
             if (commandSection == null) continue;
 

@@ -22,6 +22,7 @@ import com.parsa3323.aas.config.ActionConfig;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActionUtils {
 
@@ -33,5 +34,21 @@ public class ActionUtils {
         }
 
         return new ArrayList<>(cs.getKeys(false));
+    }
+
+    public static List<String> prioritize(ConfigurationSection section) {
+        List<String> keys = new ArrayList<>(section.getKeys(false));
+
+        keys.sort((a, b) -> {
+            int priorityA = section.getInt(a + ".priority", 0);
+            int priorityB = section.getInt(b + ".priority", 0);
+
+            if (priorityA == 0) priorityA = Integer.MAX_VALUE;
+            if (priorityB == 0) priorityB = Integer.MAX_VALUE;
+
+            return Integer.compare(priorityA, priorityB);
+        });
+
+        return keys;
     }
 }
