@@ -55,6 +55,7 @@ public class PriorityOption extends ActionItem {
 
         itemStack.setItemMeta(itemMeta);
         return itemStack;
+
     }
 
     @Override
