@@ -165,13 +165,17 @@ public class PlayerInteractListener implements Listener {
 
                 if (cs == null) return;
 
-                ArrayList<String> list = new ArrayList<>(cs.getKeys(false));
+                List<String> list = new ArrayList<>(cs.getKeys(false));
 
-                list.sort(Comparator.comparingInt(key -> {
-                    int priority = cs.getInt(key + ".priority", 0);
-                    return priority <= 0 ? Integer.MAX_VALUE : priority;
-                }));
+                list.sort((a, b) -> {
+                    int priorityA = cs.getInt(a + ".priority", 0);
+                    int priorityB = cs.getInt(b + ".priority", 0);
 
+                    if (priorityA == 0) priorityA = Integer.MAX_VALUE;
+                    if (priorityB == 0) priorityB = Integer.MAX_VALUE;
+
+                    return Integer.compare(priorityA, priorityB);
+                });
                 for (int i = 0; i < list.size(); i++) {
                     Player p = e.getPlayer();
                     String key = list.get(i);
