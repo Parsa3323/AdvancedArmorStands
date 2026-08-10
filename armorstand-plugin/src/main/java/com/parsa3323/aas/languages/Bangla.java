@@ -43,6 +43,9 @@ public class Bangla extends Language {
         yml.addDefault(Messages.ACTIONS_SETTINGS_TRIGGER_LORE, "&7প্লেয়ার যখন আর্মারস্ট্যান্ডের\n&7সাথে ইন্টার‍্যাক্ট করবে তখন\n&7কমান্ডটা কীভাবে ট্রিগার\n&7হবে সেটা বেছে নাও।\n\n%trigger_list%\n\n&eবদলাতে ক্লিক করো");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_NAME, "&eপ্রেরক");
         yml.addDefault(Messages.ACTIONS_SETTINGS_SENDER_LORE, "&7কমান্ডটা কার তরফ থেকে\n&7পাঠানো হবে সেটা বেছে নাও। এটা\n&7পারমিশন আর এক্সিকিউশন কীভাবে কাজ করে তার উপর প্রভাব ফেলে।\n\n%sender_list%\n\n&eবদলাতে ক্লিক করো");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_NAME, "&eঅগ্রাধিকার");
+        yml.addDefault(Messages.ACTIONS_SETTINGS_PRIORITY_LORE, "&7এই কমান্ডের অগ্রাধিকার\n&7পরিবর্তন করুন। যখন\n&7অগ্রাধিকার বেশি হবে,\n&7তখন এটি অন্যগুলোর চেয়ে\n&7আগে কার্যকর হবে।\n\n&6» &e%priority_number%\n\n&eপরিবর্তন করতে ক্লিক করুন");
+        yml.addDefault(Messages.ACTIONS_SETTING_PRIORITY_ALREADY_TAKEN, "&eদুই বা ততোধিক অ্যাকশনের একই অগ্রাধিকার রয়েছে, যার ফলে তারা একে অপরের সাথে সংঘর্ষ করতে পারে।");
         yml.addDefault(Messages.AI_MENU_TITLE, "এআই সেটিংস");
         yml.addDefault(Messages.AI_COMMAND_DESCRIPTION, "এআই-কে সাহায্যের জন্য বলো");
         yml.addDefault(Messages.AI_COMMAND_THINKING, "&7ভাবছে...");
