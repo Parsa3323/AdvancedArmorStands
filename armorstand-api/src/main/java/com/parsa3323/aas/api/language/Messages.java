@@ -115,6 +115,9 @@ public final class Messages {
     public static final String ACTIONS_SETTINGS_MENU_TITLE = "actions_settings_menu_title";
     public static final String ACTIONS_SETTINGS_TRIGGER_NAME = "actions_settings_trigger_name";
     public static final String ACTIONS_SETTINGS_TRIGGER_LORE = "actions_settings_trigger_lore";
+    public static final String ACTIONS_SETTINGS_PRIORITY_NAME = "actions_settings_priority_name";
+    public static final String ACTIONS_SETTINGS_PRIORITY_LORE = "actions_settings_priority_lore";
+
     public static final String ACTIONS_SETTINGS_SENDER_NAME = "actions_settings_sender_name";
     public static final String ACTIONS_SETTINGS_SENDER_LORE = "actions_settings_sender_lore";
 

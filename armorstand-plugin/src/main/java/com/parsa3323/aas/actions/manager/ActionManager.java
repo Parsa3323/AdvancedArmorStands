@@ -19,6 +19,7 @@
 package com.parsa3323.aas.actions.manager;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.parsa3323.aas.actions.PriorityOption;
 import com.parsa3323.aas.actions.SenderOption;
 import com.parsa3323.aas.actions.TriggerOption;
 import com.parsa3323.aas.api.language.Language;
@@ -53,6 +54,7 @@ public class ActionManager extends PaginatedMenu {
 
         actions.add(new SenderOption());
         actions.add(new TriggerOption());
+        actions.add(new PriorityOption());
     }
 
     @Override
