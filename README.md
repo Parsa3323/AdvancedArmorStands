@@ -32,15 +32,7 @@ English, Italian, Persian, Portuguese, Russian, Spanish, Turkish Bangla, Indones
 </div>
 <div align="center">
 
-<div  style="display: flex; align-items: center; gap: 12px;">
-
-<a href="https://github.com/Parsa3323/AdvancedArmorStands">
-<img src="https://github-stats-extended.vercel.app/api/pin?username=Parsa3323&repo=Parsa3323%2FAdvancedArmorStands&show_owner=true&theme=swift">
-</a>
-
-<img src="/images/badge1.png" width="204">
-
-</div>
+<img src="/images/badge1.png" width="204" style="vertical-align:middle;">
 
 </div>
 
