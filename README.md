@@ -4,6 +4,8 @@
 
 # Advanced Armor Stands <img src="https://github.com/user-attachments/assets/084a8def-16ee-4516-84b6-3471bf97448d" width="24" style="vertical-align:middle;" />
 
+<img src="/images/icon.png"  width="2004" style="vertical-align:middle;" >
+
 **Super lightweight, smart, ultra-efficient plugin that barely uses any server resources!**
 
 
