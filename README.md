@@ -23,8 +23,8 @@
 <div align="center">
 
 [<img src=".github/images/badge1.png" width="204" style="vertical-align:middle;">](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)
-[<img src=".github/images/badge2.png" width="204" style="vertical-align:middle;">](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)
-[<img src=".github/images/badge3.png" width="204" style="vertical-align:middle;">](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)
+[<img src=".github/images/badge2.png" width="204" style="vertical-align:middle;">](#table-of-content)
+[<img src=".github/images/badge3.png" width="204" style="vertical-align:middle;">](#supported-languages)
 
 </div>
 
