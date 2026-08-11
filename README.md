@@ -8,31 +8,21 @@
 
 ---
 
-**Super lightweight, smart, ultra-efficient plugin that barely uses any server resources!**
+[//]: # (**Super lightweight, smart, ultra-efficient plugin that barely uses any server resources!**)
 
 
-
-English, Italian, Persian, Portuguese, Russian, Spanish, Turkish Bangla, Indonesian, Polish, Romanian, Add your own
-
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/Parsa3323?label=Sponsor&logo=GitHub)]()
-[![GitHub contributors](https://img.shields.io/github/contributors/Parsa3323/AdvancedArmorStands?label=Contributors&logo=GitHub)
-](https://github.com/Parsa3323/AdvancedArmorStands/graphs/contributors)
 [![Downloads](https://img.shields.io/spiget/downloads/121022?label=Downloads&color=blue&logo=spigot)
 ](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
-[![GitHub last commit](https://img.shields.io/github/last-commit/Parsa3323/AdvancedArmorStands?label=Last%20Commit&logo=GitHub)
-]()
-[![GitHub issues](https://img.shields.io/github/issues/Parsa3323/AdvancedArmorStands?label=Open%20Issues&logo=GitHub)
-](https://github.com/Parsa3323/AdvancedArmorStands/issues)![GitHub repo size](https://img.shields.io/github/repo-size/Parsa3323/AdvancedArmorStands?color=yellow&logo=github)
+![GitHub repo size](https://img.shields.io/github/repo-size/Parsa3323/AdvancedArmorStands?color=yellow&logo=github)
 [![GitHub license](https://img.shields.io/github/license/Parsa3323/AdvancedArmorStands?color=purple&logo=github)
 ]()
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Parsa3323/AdvancedArmorStands/test.yml?logo=github)
-[![Forks](https://img.shields.io/github/forks/Parsa3323/AdvancedArmorStands?style=)
-](https://github.com/Parsa3323/AdvancedArmorStands/issues)[![CodeFactor](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands)
+
 
 </div>
 <div align="center">
 
-<img src="/images/badge1.png" width="204" style="vertical-align:middle;">
+[<img src="/images/badge1.png" width="204" style="vertical-align:middle;">](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)
 
 </div>
 
@@ -50,6 +40,7 @@ English, Italian, Persian, Portuguese, Russian, Spanish, Turkish Bangla, Indones
 - [Spigot](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
 - [Status](http://status.advancedarmorstands.ir/)
 - [Website](https://advancedarmorstands.ir/)
+- [Supported Languages](#supported-languages)
 - [FAQ](#f-a-q)
     - [What java version?](http://docs.advancedarmorstands.ir/installation#prerequisites)
     - [Docs](https://docs.advancedarmorstands.ir/)
@@ -228,6 +219,11 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 </div>
 
 <div align="center">
+
+# Supported Languages
+
+English, Italian, Persian, Portuguese, Russian, Spanish, Turkish Bangla, Indonesian, Polish, Romanian, Add your own
+
 
 # Requirements
 </div>
