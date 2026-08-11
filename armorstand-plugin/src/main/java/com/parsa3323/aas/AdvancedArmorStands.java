@@ -38,6 +38,7 @@ import com.parsa3323.aas.menus.manager.MenuListener;
 import com.parsa3323.aas.placeholderapi.PapiExpansion;
 import com.parsa3323.aas.utils.*;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -89,6 +90,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static AdvancedArmorStands plugin;
 
+    private static Metrics metrics;
+
     public static ArmorstandApi getApi() {
         return api;
     }
@@ -107,6 +110,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
 
     public static boolean isIsAiEnabled() {
         return isAiEnabled;
+    }
+
+    public static Metrics getMetrics() {
+        return metrics;
     }
 
     @Override
@@ -139,7 +146,7 @@ public final class AdvancedArmorStands extends JavaPlugin {
         logLevel = (levelName) ? Level.FINE : Level.INFO;
         logger.setLevel(logLevel);
 
-        Metrics metrics = new Metrics(this, 25568);
+        metrics = new Metrics(this, 25568);
 
         status("Registering event listeners...");
 
@@ -182,6 +189,10 @@ public final class AdvancedArmorStands extends JavaPlugin {
         new Romanian();
 
         Language.loadLanguages(this, getConfig().getString("language"));
+
+        String language = Language.getDefaultLanguage().getClass().getSimpleName();
+
+        metrics.addCustomChart(new SimplePie("language", () -> language));
 
         status("Loaded default language '" + Language.getDefaultLanguage().getIso() + "' using class '" + Language.getDefaultLanguage() + "'");
         status("Changes to default languages will be reset on plugin restart; add a custom language to keep changes");
