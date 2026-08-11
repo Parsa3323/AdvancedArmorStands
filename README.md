@@ -35,6 +35,7 @@
 > [!NOTE]
 > By using this plugin you agree to the [Terms of Service](https://github.com/Parsa3323/AdvancedArmorStands/blob/master/TERMS_OF_SERVICE.md).
 
+
 - [Requirements](#requirements)
 - [Polymart](https://www.polymart.org/product/7829/advancedarmorstands)
 - [Spigot](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
@@ -42,19 +43,24 @@
 - [Website](https://advancedarmorstands.ir/)
 - [Supported Languages](#supported-languages)
 - [FAQ](#f-a-q)
-    - [What java version?](http://docs.advancedarmorstands.ir/installation#prerequisites)
-    - [Docs](https://docs.advancedarmorstands.ir/)
-        - [Api](https://docs.advancedarmorstands.ir/api)
-            - [Introduction](https://docs.advancedarmorstands.ir/api-introduction#getting-started-with-the-api)
-            - [Events](https://docs.advancedarmorstands.ir/api-events#events)
-        - [Plugin usage](https://docs.advancedarmorstands.ir/plugin-usage)
-            - [Commands](https://docs.advancedarmorstands.ir/plugin-usage/)
-            - [Types](https://docs.advancedarmorstands.ir/plugin-usage)
-- [Configs](#Configs)
-    - [Main config](#Main-Configuration)
-    - [Types config](#Types-Configuration)
-    - [Animations config](#Animations-Configuration)
-    - [Actions config](#actions-configuration)
+    - [What Java version?](http://docs.advancedarmorstands.ir/installation#prerequisites)
+- [Documentation](https://docs.advancedarmorstands.ir/)
+    - [API](https://docs.advancedarmorstands.ir/api)
+        - [Events](https://docs.advancedarmorstands.ir/api-events)
+        - [Creating an ArmorStand](https://docs.advancedarmorstands.ir/api-creating-an-armorstand)
+        - [Opening Inventories](https://docs.advancedarmorstands.ir/api-open-inventories)
+        - [Adding Animations](https://docs.advancedarmorstands.ir/api-adding-animation)
+    - [Getting Started](https://docs.advancedarmorstands.ir/gettingstarteds)
+        - [Installation Guide](https://docs.advancedarmorstands.ir/installation)
+        - [Creating an ArmorStand](https://docs.advancedarmorstands.ir/creating-as)
+        - [Moving an ArmorStand](https://docs.advancedarmorstands.ir/moving-as)
+        - [Renaming an ArmorStand](https://docs.advancedarmorstands.ir/renaming-as)
+    - [More Documentation](https://docs.advancedarmorstands.ir/)
+- [Configuration](#Configs)
+    - [Main Config](#Main-Configuration)
+    - [Types Config](#Types-Configuration)
+    - [Animations Config](#Animations-Configuration)
+    - [Actions Config](#actions-configuration)
 
 
 <div align="center">
