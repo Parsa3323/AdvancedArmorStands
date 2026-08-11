@@ -38,6 +38,7 @@ import com.parsa3323.aas.menus.manager.MenuListener;
 import com.parsa3323.aas.placeholderapi.PapiExpansion;
 import com.parsa3323.aas.utils.*;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimpleBarChart;
 import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -279,6 +280,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
         AiConfig.get().options().copyDefaults(true);
         AiConfig.save();
 
+        metrics.addCustomChart(new SimplePie("configversion", () -> getConfig().getString("config-version", "unknown")));
+
         status("Loading Artificial Intelligence...");
 
         aiApiKey = getConfig().getString("ai.token");
@@ -289,6 +292,13 @@ public final class AdvancedArmorStands extends JavaPlugin {
         } else {
             status("Artificial Intelligence is disabled, see config for more details.");
         }
+
+        metrics.addCustomChart(new SimpleBarChart("ai", () -> {
+            Map<String, Integer> map = new HashMap<>();
+            map.put("Enabled", isAiEnabled ? 1 : 0);
+            map.put("Disabled", isAiEnabled ? 0 : 1);
+            return map;
+        }));
 
         status("Registering commands...");
 
