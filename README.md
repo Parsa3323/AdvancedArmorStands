@@ -29,8 +29,7 @@ English, Italian, Persian, Portuguese, Russian, Spanish, Turkish Bangla, Indones
 </div>
 <div align="center">
 
-[![Repo Stats](https://github-readme-stats.vercel.app/api/pin/?username=Parsa3323&repo=AdvancedArmorStands&bg_color=00000000&text_color=797c80&border_color=797c80)
-](https://github.com/Parsa3323/AdvancedArmorStands)
+[![GitHub Stats](https://github-stats-extended.vercel.app/api/pin?username=Parsa3323&repo=Parsa3323%2FAdvancedArmorStands&show_owner=true&theme=swift)](https://github.com/Parsa3323/AdvancedArmorStands)
 
 </div>
 
