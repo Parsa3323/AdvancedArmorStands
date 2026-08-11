@@ -4,12 +4,13 @@
 
 <img src="/images/icon.png"  width="2004" style="vertical-align:middle;" >
 
+`1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.20.6, 1.21, 26.1`
+
 ---
 
 **Super lightweight, smart, ultra-efficient plugin that barely uses any server resources!**
 
 
-`1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.20.6, 1.21, 26.1`
 
 English, Italian, Persian, Portuguese, Russian, Spanish, Turkish Bangla, Indonesian, Polish, Romanian, Add your own
 
