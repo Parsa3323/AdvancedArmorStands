@@ -223,7 +223,6 @@ armorstand:
 
 <div align="center">
 
-
 For more details, refer to the [official documentation](https://docs.advancedarmorstands.ir/) or community guides.
 
 </div>
