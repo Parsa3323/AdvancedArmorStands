@@ -79,7 +79,6 @@ public class ArmorStandMenu extends Menu {
         }
 
         Player p = (Player) e.getWhoClicked();
-
         switch (e.getSlot()) {
             case 33:
                 InventoryUtils.save(p);
