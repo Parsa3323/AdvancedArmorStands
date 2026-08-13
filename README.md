@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[<img src=".github/images/icon.png"  width="2004" style="vertical-align:middle;" >](#)
+[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/icon.png?raw=true"  width="2004" style="vertical-align:middle;" >](#)
 
 `1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.20.6, 1.21` <br> `26.1, 26.2`
 
@@ -22,9 +22,9 @@
 </div>
 <div align="center">
 
-[<img src=".github/images/badge1.png" width="204" style="vertical-align:middle;">](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)
-[<img src=".github/images/badge2.png" width="204" style="vertical-align:middle;">](#table-of-content)
-[<img src=".github/images/badge3.png" width="204" style="vertical-align:middle;">](#supported-languages)
+[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge1.png?raw=true" width="204" style="vertical-align:middle;">](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)
+[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge2.png?raw=true" width="204" style="vertical-align:middle;">](#table-of-content)
+[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge3.png?raw=true" width="204" style="vertical-align:middle;">](#supported-languages)
 
 </div>
 
