@@ -105,6 +105,36 @@ public class KeyFrameMenu extends PaginatedMenu {
         }
 
         if (e.getSlot() == 50) {
+            boolean current = AnimationConfig.get().getBoolean("animations." + animationName + ".realistic-animations.enabled");
+            AnimationConfig.get().set("animations." + animationName + ".realistic-animations.enabled", !current);
+
+            AnimationConfig.save();
+            super.open();
+            return;
+        }
+
+        if (e.getSlot() == 51) {
+            int currentFrames = AnimationConfig.get().getInt("animations." + animationName + ".realistic-animations.frames");
+
+            if (e.getClick() == ClickType.SHIFT_LEFT) {
+                AnimationConfig.get().set("animations." + animationName + ".realistic-animations.frames", (currentFrames + 10));
+                super.open();
+            } else if (e.getClick() == ClickType.LEFT) {
+                AnimationConfig.get().set("animations." + animationName + ".realistic-animations.frames", (currentFrames + 1));
+                super.open();
+            } else if (e.getClick() == ClickType.SHIFT_RIGHT) {
+                AnimationConfig.get().set("animations." + animationName + ".realistic-animations.frames", (currentFrames - 10));
+                super.open();
+            } else if (e.getClick() == ClickType.RIGHT) {
+                AnimationConfig.get().set("animations." + animationName + ".realistic-animations.frames", (currentFrames - 1));
+                super.open();
+            }
+
+            AnimationConfig.save();
+            return;
+        }
+
+        if (e.getSlot() == 47) {
 
             int currentInterval = AnimationConfig.get().getInt("animations." + animationName + ".interval");
 
@@ -181,6 +211,31 @@ public class KeyFrameMenu extends PaginatedMenu {
             index++;
 
         }
+        ItemStack realistic = new ItemStack(XMaterial.RED_STAINED_GLASS_PANE.parseMaterial());
+        ItemMeta iRealistic = realistic.getItemMeta();
+
+        ArrayList<String> rLore = new ArrayList<>(Language.getLore(Messages.KEYFRAME_REALISTIC_NAME_LORE));
+
+        iRealistic.setDisplayName(Language.getMsg(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY).replaceAll("%value%", AnimationConfig.get().getString("animations." + animationName + ".realistic-animations.enabled")));
+
+        iRealistic.setLore(rLore);
+
+        realistic.setItemMeta(iRealistic);
+
+        inventory.setItem(50, realistic);
+
+        ItemStack frames = new ItemStack(XMaterial.RED_STAINED_GLASS_PANE.parseMaterial());
+        ItemMeta iFrame = frames.getItemMeta();
+
+        ArrayList<String> fLore = new ArrayList<>(Language.getLore(Messages.KEYFRAME_REALISTIC_FRAMES_LORE));
+
+        iFrame.setDisplayName(Language.getMsg(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY).replaceAll("%value%", AnimationConfig.get().getString("animations." + animationName + ".realistic-animations.frames")));
+
+        iFrame.setLore(fLore);
+
+        frames.setItemMeta(iFrame);
+
+        inventory.setItem(51, frames);
 
         ItemStack interval = new ItemStack(XMaterial.RED_STAINED_GLASS_PANE.parseMaterial());
         ItemMeta iInterval = interval.getItemMeta();
@@ -193,7 +248,7 @@ public class KeyFrameMenu extends PaginatedMenu {
 
         interval.setItemMeta(iInterval);
 
-        inventory.setItem(50, interval);
+        inventory.setItem(47, interval);
 
         ItemStack loop = new ItemStack(XMaterial.RED_STAINED_GLASS_PANE.parseMaterial());
 
@@ -233,17 +288,17 @@ public class KeyFrameMenu extends PaginatedMenu {
     @Override
     public void addMenuBorder(int total) {
         if (page > 0) {
-            inventory.setItem(47, makeItem(Material.ARROW, ChatColor.GREEN + "Left"));
+            inventory.setItem(46, makeItem(Material.ARROW, ChatColor.GREEN + "Left"));
         } else {
-            inventory.setItem(47, super.FILLER_GLASS);
+            inventory.setItem(46, super.FILLER_GLASS);
         }
 
         inventory.setItem(49, makeItem(Material.BARRIER, ChatColor.RED + "Close"));
 
         if ((page + 1) * maxItemsPerPage < total) {
-            inventory.setItem(51, makeItem(Material.ARROW, ChatColor.GREEN + "Right"));
+            inventory.setItem(52, makeItem(Material.ARROW, ChatColor.GREEN + "Right"));
         } else {
-            inventory.setItem(51, super.FILLER_GLASS);
+            inventory.setItem(52, super.FILLER_GLASS);
         }
 
         for (int i = 0; i < 10; i++) {

@@ -178,6 +178,10 @@ public final class Messages {
     public static final String KEYFRAME_INTERVAL_LORE = "keyframe_interval_lore";
     public static final String KEYFRAME_LOOP_NAME = "keyframe_loop_name";
     public static final String KEYFRAME_LOOP_LORE = "keyframe_loop_lore";
+    public static final String KEYFRAME_REALISTIC_NAME_DISPLAY = "keyframe_realistic_name_display";
+    public static final String KEYFRAME_REALISTIC_NAME_LORE = "keyframe_realistic_name_lore";
+    public static final String KEYFRAME_REALISTIC_FRAMES_DISPLAY = "keyframe_realistic_frames_display";
+    public static final String KEYFRAME_REALISTIC_FRAMES_LORE = "keyframe_realistic_frames_lore";
 
     public static final String INVENTORY_EXIT_NAME = "inventory_exit_name";
     public static final String INVENTORY_EXIT_LORE = "inventory_exit_lore";

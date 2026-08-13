@@ -161,6 +161,28 @@ public class English extends Language {
                         "&7the start infinitely\n\n" +
                         "&eClick to change");
 
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY,
+                "&eRealistic: %value%");
+
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE,
+                "&7Realistic Animations smoothly interpolate\n" +
+                "&7between animation steps instead of instantly\n" +
+                "&7jumping from one pose to another.\n\n" +
+                "&7Warning: could cause lag \n\n" +
+                "&eClick to change");
+
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY,
+                "&eRealistic frames: %value%");
+
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE,
+                "&7The number of generated\n" +
+                "&7frames during the realistic animation\n\n" +
+                        "&6»&e Left-click to increase\n" +
+                        "&6»&e Right-click to decrease.\n" +
+                        "&6»&e Hold Shift to change\n" +
+                        "&6»&e by increments of 10.\n\n" +
+                        "&eClick to change");
+
         yml.addDefault(Messages.SAVE_MENU_TITLE, "save menu");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE,
                 "&aType the name of the type you want to create and copy this ArmorStand's properties to, Type 'exit' to exit");
