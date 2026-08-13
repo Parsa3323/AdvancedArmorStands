@@ -87,6 +87,10 @@ public class Polish extends Language {
         yml.addDefault(Messages.KEYFRAME_INTERVAL_LORE, "&7Ustawia opóźnienie\n&7między klatkami animacji.\n&7Im niższa wartość,\n&7tym szybsza animacja.\n\n&6»&e Lewy klik, aby zwiększyć\n&6»&e Prawy klik, aby zmniejszyć.\n&6»&e Przytrzymaj Shift, aby zmieniać\n&6»&e co 10.\n\n&eKliknij, aby zmienić");
         yml.addDefault(Messages.KEYFRAME_LOOP_NAME, "&ePętla: %loop%");
         yml.addDefault(Messages.KEYFRAME_LOOP_LORE, "&7Określa, czy animacja\n&7ma się powtarzać\n&7od początku w nieskończoność\n\n&eKliknij, aby zmienić");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY, "&eRealistyczne: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE, "&7Realistyczne animacje płynnie interpolują\n&7pomiędzy krokami animacji zamiast natychmiast\n&7przeskakiwać z jednej pozy do drugiej.\n\n&7Ostrzeżenie: może powodować lagi\n\n&eKliknij, aby zmienić");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY, "&eRealistyczne klatki: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE, "&7Liczba generowanych klatek\n&7podczas realistycznej animacji\n\n&6»&e Lewy przycisk myszy, aby zwiększyć\n&6»&e Prawy przycisk myszy, aby zmniejszyć.\n&6»&e Przytrzymaj Shift, aby zmieniać\n&6»&e co 10.\n\n&eKliknij, aby zmienić");
         yml.addDefault(Messages.SAVE_MENU_TITLE, "menu zapisu");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE, "&aWpisz nazwę typu, który chcesz stworzyć (zostaną skopiowane właściwości tego ArmorStanda). Wpisz 'exit', aby wyjść");
         yml.addDefault(Messages.SAVE_MENU_TYPE_LORE, "&7Wybranie tego nadpisze\n&7starą konfigurację %type% obecną\n&7konfiguracją, którą właśnie stworzyłeś\n\n&eKliknij, aby zapisać");

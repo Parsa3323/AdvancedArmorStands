@@ -87,6 +87,10 @@ public class Turkish extends Language {
         yml.addDefault(Messages.KEYFRAME_INTERVAL_LORE, "&7Animasyon kareleri arasındaki\n&7gecikmeyi ayarlar.\n&7Değer ne kadar düşükse\n&7animasyon o kadar hızlı olur.\n\n&6»&e Artırmak için sol tık\n&6»&e Azaltmak için sağ tık.\n&6»&e 10'ar 10'ar değiştirmek\n&6»&e için Shift'e basılı tut.\n\n&eDeğiştirmek için tıkla");
         yml.addDefault(Messages.KEYFRAME_LOOP_NAME, "&eDöngü: %loop%");
         yml.addDefault(Messages.KEYFRAME_LOOP_LORE, "&7Animasyonun baştan itibaren\n&7sonsuz döngüde tekrarlanıp\n&7tekrarlanmayacağını belirler\n\n&eDeğiştirmek için tıkla");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY, "&eGerçekçi: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE, "&7Gerçekçi animasyonlar, animasyon adımları\n&7arasında yumuşak bir geçiş sağlar ve bir pozdan\n&7diğerine anında atlamak yerine akıcı şekilde geçer.\n\n&7Uyarı: gecikmeye neden olabilir\n\n&eDeğiştirmek için tıklayın");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY, "&eGerçekçi kareler: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE, "&7Gerçekçi animasyon sırasında\n&7oluşturulan kare sayısı\n\n&6»&e Artırmak için sol tıklayın\n&6»&e Azaltmak için sağ tıklayın.\n&6»&e 10'luk artışlarla değiştirmek için\n&6»&e Shift tuşunu basılı tutun.\n\n&eDeğiştirmek için tıklayın");
         yml.addDefault(Messages.SAVE_MENU_TITLE, "kayıt menüsü");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE, "&aOluşturmak istediğin türün adını yaz, bu ArmorStand'ın özellikleri oraya kopyalanacak. Çıkmak için 'exit' yaz");
         yml.addDefault(Messages.SAVE_MENU_TYPE_LORE, "&7Bunu seçmek, eski %type%\n&7config'ini az önce yaptığın\n&7güncel config ile değiştirir\n\n&eKaydetmek için tıkla");

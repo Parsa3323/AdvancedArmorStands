@@ -87,6 +87,10 @@ public class Persian extends Language {
         yml.addDefault(Messages.KEYFRAME_INTERVAL_LORE, "&7Fasele beyne\n&7frame haye animation ro tanzim mikone.\n&7Har che adad kamtar\n&7animation sari-tar mishe.\n\n&6»&e Left-click baraye ziyad kardan\n&6»&e Right-click baraye kam kardan.\n&6»&e Shift ro negah dar ta\n&6»&e 10 ta 10 avaz beshe.\n\n&eBezan baraye avaz kardan");
         yml.addDefault(Messages.KEYFRAME_LOOP_NAME, "&eTekrar: %loop%");
         yml.addDefault(Messages.KEYFRAME_LOOP_LORE, "&7Moshakhas mikone ke animation\n&7bayad az aval bi nahayat\n&7tekrar beshe ya na\n\n&eBezan baraye avaz kardan");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY, "&eRealistic: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE, "&7Animation haye realistic be sorate narm be\n&7bein marhale haye animation interpolation mikonan، be jaye inke\n&7bedoon-e mokhalefat az yek pose be pose digar jump konan.\n\n&7Hoshdar: momkene baes-e lag beshe\n\n&eBaraye taghir کلیک konid");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY, "&eFrame haye realistic: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE, "&7Tedade frame haye تولid shode\n&7dar hengame animation realistic\n\n&6»&e Click-e chap baraye afzayesh\n&6»&e Click-e rast baraye kahesh.\n&6»&e Shift ra negah darid ta taghirat\n&6»&e be meghdar haye 10 ta 10 anjam shavad.\n\n&eBaraye taghir کلیک konid");
         yml.addDefault(Messages.SAVE_MENU_TITLE, "menuye save");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE, "&aEsme typei ke mikhay besazi va propertie in ArmorStand ro behesh copy koni benevis, baraye kharoj 'exit' benevis");
         yml.addDefault(Messages.SAVE_MENU_TYPE_LORE, "&7In ro entekhab koni config\n&7ghadimie %type% ba\n&7config alanit override mishe\n\n&eBezan baraye save");

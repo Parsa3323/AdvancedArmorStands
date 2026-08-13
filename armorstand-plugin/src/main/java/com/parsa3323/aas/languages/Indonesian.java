@@ -87,6 +87,10 @@ public class Indonesian extends Language {
         yml.addDefault(Messages.KEYFRAME_INTERVAL_LORE, "&7Mengatur jeda\n&7antar frame animasi.\n&7Semakin kecil nilainya,\n&7semakin cepat animasinya.\n\n&6»&e Klik kiri untuk menambah\n&6»&e Klik kanan untuk mengurangi.\n&6»&e Tahan Shift untuk mengubah\n&6»&e per kelipatan 10.\n\n&eKlik untuk mengubah");
         yml.addDefault(Messages.KEYFRAME_LOOP_NAME, "&ePengulangan: %loop%");
         yml.addDefault(Messages.KEYFRAME_LOOP_LORE, "&7Menentukan apakah animasi\n&7akan diulang terus-menerus\n&7dari awal\n\n&eKlik untuk mengubah");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY, "&eRealistis: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE, "&7Animasi realistis melakukan interpolasi secara halus\n&7di antara langkah-langkah animasi, bukan langsung\n&7berpindah dari satu pose ke pose lainnya.\n\n&7Peringatan: dapat menyebabkan lag\n\n&eKlik untuk mengubah");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY, "&eFrame realistis: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE, "&7Jumlah frame yang dibuat\n&7selama animasi realistis\n\n&6»&e Klik kiri untuk menambah\n&6»&e Klik kanan untuk mengurangi.\n&6»&e Tahan Shift untuk mengubah\n&6»&e dengan kelipatan 10.\n\n&eKlik untuk mengubah");
         yml.addDefault(Messages.SAVE_MENU_TITLE, "menu simpan");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE, "&aKetik nama tipe yang mau kamu buat, properti ArmorStand ini akan disalin ke sana. Ketik 'exit' untuk keluar");
         yml.addDefault(Messages.SAVE_MENU_TYPE_LORE, "&7Memilih ini akan menimpa\n&7config lama %type% dengan\n&7config yang baru saja kamu buat\n\n&eKlik untuk menyimpan");

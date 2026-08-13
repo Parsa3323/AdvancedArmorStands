@@ -87,6 +87,10 @@ public class Romanian extends Language {
         yml.addDefault(Messages.KEYFRAME_INTERVAL_LORE, "&7Setează întârzierea\n&7dintre cadrele animației.\n&7Cu cât valoarea e mai mică,\n&7cu atât animația e mai rapidă.\n\n&6»&e Clic stânga pentru a crește\n&6»&e Clic dreapta pentru a scădea.\n&6»&e Ține apăsat Shift pentru a schimba\n&6»&e din 10 în 10.\n\n&eClic pentru a schimba");
         yml.addDefault(Messages.KEYFRAME_LOOP_NAME, "&eRepetare: %loop%");
         yml.addDefault(Messages.KEYFRAME_LOOP_LORE, "&7Stabilește dacă animația\n&7trebuie să se repete în buclă\n&7de la început la infinit\n\n&eClic pentru a schimba");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY, "&eRealist: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE, "&7Animațiile realiste interpolează lin\n&7între pașii animației în loc să sară instantaneu\n&7de la o poziție la alta.\n\n&7Avertisment: poate cauza lag\n\n&eClick pentru a schimba");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY, "&eCadre realiste: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE, "&7Numărul de cadre generate\n&7în timpul animației realiste\n\n&6»&e Click stânga pentru a crește\n&6»&e Click dreapta pentru a scădea.\n&6»&e Ține apăsat Shift pentru a modifica\n&6»&e în pași de 10.\n\n&eClick pentru a schimba");
         yml.addDefault(Messages.SAVE_MENU_TITLE, "meniu de salvare");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE, "&aScrie numele tipului pe care vrei să-l creezi (proprietățile acestui ArmorStand vor fi copiate). Scrie 'exit' ca să ieși");
         yml.addDefault(Messages.SAVE_MENU_TYPE_LORE, "&7Selectând asta vei suprascrie\n&7vechea configurație a lui %type% cu\n&7configurația actuală pe care ai făcut-o\n\n&eClic pentru a salva");

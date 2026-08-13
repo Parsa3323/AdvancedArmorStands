@@ -87,6 +87,10 @@ public class Italian extends Language {
         yml.addDefault(Messages.KEYFRAME_INTERVAL_LORE, "&7Imposta il ritardo\n&7tra i fotogrammi dell'animazione.\n&7Più basso è il valore,\n&7più veloce sarà l'animazione.\n\n&6»&e Clic sinistro per aumentare\n&6»&e Clic destro per diminuire.\n&6»&e Tieni premuto Shift per cambiare\n&6»&e a incrementi di 10.\n\n&eClicca per cambiare");
         yml.addDefault(Messages.KEYFRAME_LOOP_NAME, "&eLoop: %loop%");
         yml.addDefault(Messages.KEYFRAME_LOOP_LORE, "&7Stabilisce se l'animazione\n&7deve ripetersi in loop\n&7dall'inizio all'infinito\n\n&eClicca per cambiare");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY, "&eRealistica: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE, "&7Le animazioni realistiche interpolano\n&7fluidamente tra i passaggi dell'animazione invece di\n&7passare istantaneamente da una posa all'altra.\n\n&7Attenzione: potrebbe causare lag\n\n&eClicca per modificare");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY, "&eFrame realistici: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE, "&7Il numero di frame generati\n&7durante l'animazione realistica\n\n&6»&e Clic sinistro per aumentare\n&6»&e Clic destro per diminuire.\n&6»&e Tieni premuto Shift per modificare\n&6»&e con incrementi di 10.\n\n&eClicca per modificare");
         yml.addDefault(Messages.SAVE_MENU_TITLE, "menu di salvataggio");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE, "&aScrivi il nome del tipo che vuoi creare (verranno copiate le proprietà di questo ArmorStand). Scrivi 'exit' per uscire");
         yml.addDefault(Messages.SAVE_MENU_TYPE_LORE, "&7Selezionando questo sovrascriverai\n&7la vecchia configurazione di %type% con\n&7quella attuale che hai appena creato\n\n&eClicca per salvare");

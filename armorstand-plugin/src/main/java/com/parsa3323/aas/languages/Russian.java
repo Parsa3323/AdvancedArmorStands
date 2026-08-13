@@ -87,6 +87,10 @@ public class Russian extends Language {
         yml.addDefault(Messages.KEYFRAME_INTERVAL_LORE, "&7Задаёт задержку\n&7между кадрами анимации.\n&7Чем меньше значение,\n&7тем быстрее анимация.\n\n&6»&e ЛКМ, чтобы увеличить\n&6»&e ПКМ, чтобы уменьшить.\n&6»&e Держи Shift, чтобы менять\n&6»&e шагами по 10.\n\n&eНажми, чтобы изменить");
         yml.addDefault(Messages.KEYFRAME_LOOP_NAME, "&eЗацикливание: %loop%");
         yml.addDefault(Messages.KEYFRAME_LOOP_LORE, "&7Определяет, должна ли\n&7анимация бесконечно\n&7повторяться с начала\n\n&eНажми, чтобы изменить");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY, "&eРеалистичная: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE, "&7Реалистичная анимация плавно интерполирует\n&7между этапами анимации, вместо мгновенного\n&7перехода от одной позы к другой.\n\n&7Предупреждение: может вызвать лаги\n\n&eНажмите, чтобы изменить");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY, "&eРеалистичные кадры: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE, "&7Количество созданных кадров\n&7во время реалистичной анимации\n\n&6»&e ЛКМ для увеличения\n&6»&e ПКМ для уменьшения.\n&6»&e Удерживайте Shift, чтобы изменять\n&6»&e с шагом 10.\n\n&eНажмите, чтобы изменить");
         yml.addDefault(Messages.SAVE_MENU_TITLE, "меню сохранения");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE, "&aНапиши название типа, который хочешь создать (в него скопируются свойства этого ArmorStand). Напиши 'exit', чтобы выйти");
         yml.addDefault(Messages.SAVE_MENU_TYPE_LORE, "&7Выбрав это, ты перезапишешь\n&7старый конфиг %type% текущим,\n&7который ты только что настроил\n\n&eНажми, чтобы сохранить");

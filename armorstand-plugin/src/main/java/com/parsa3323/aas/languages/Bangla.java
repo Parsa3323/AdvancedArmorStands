@@ -87,6 +87,10 @@ public class Bangla extends Language {
         yml.addDefault(Messages.KEYFRAME_INTERVAL_LORE, "&7অ্যানিমেশন ফ্রেমগুলোর মধ্যে\n&7বিরতি ঠিক করে দেয়।\n&7ভ্যালু যত কম হবে,\n&7অ্যানিমেশন তত দ্রুত চলবে।\n\n&6»&e বাড়াতে লেফট-ক্লিক করো\n&6»&e কমাতে রাইট-ক্লিক করো।\n&6»&e ১০ করে বদলাতে\n&6»&e Shift ধরে রাখো।\n\n&eবদলাতে ক্লিক করো");
         yml.addDefault(Messages.KEYFRAME_LOOP_NAME, "&eলুপ: %loop%");
         yml.addDefault(Messages.KEYFRAME_LOOP_LORE, "&7অ্যানিমেশনটা শুরু থেকে\n&7অসীমবার লুপ হয়ে\n&7চলবে কিনা সেটা ঠিক করে\n\n&eবদলাতে ক্লিক করো");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY, "&eবাস্তবসম্মত: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE, "&7বাস্তবসম্মত অ্যানিমেশনগুলো অ্যানিমেশনের ধাপগুলোর\n&7মধ্যে মসৃণভাবে ইন্টারপোলেশন করে, ফলে তাৎক্ষণিকভাবে\n&7একটি পোজ থেকে অন্য পোজে লাফ দেয় না।\n\n&7সতর্কতা: এর কারণে ল্যাগ হতে পারে\n\n&eপরিবর্তন করতে ক্লিক করুন");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY, "&eবাস্তবসম্মত ফ্রেম: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE, "&7বাস্তবসম্মত অ্যানিমেশনের সময়\n&7তৈরি হওয়া ফ্রেমের সংখ্যা\n\n&6»&e বাড়াতে বাম-ক্লিক করুন\n&6»&e কমাতে ডান-ক্লিক করুন।\n&6»&e ১০ করে পরিবর্তন করতে\n&6»&e Shift ধরে রাখুন।\n\n&eপরিবর্তন করতে ক্লিক করুন");
         yml.addDefault(Messages.SAVE_MENU_TITLE, "সেভ মেনু");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE, "&aযে টাইপটা তৈরি করতে চাও তার নাম লেখো, এই আর্মারস্ট্যান্ডের প্রপার্টিগুলো সেখানে কপি হয়ে যাবে। বেরোতে 'exit' লেখো");
         yml.addDefault(Messages.SAVE_MENU_TYPE_LORE, "&7এটা বেছে নিলে %type%-এর\n&7পুরোনো কনফিগ তুমি এখন যা\n&7সেট করেছো সেটা দিয়ে বদলে যাবে\n\n&eসেভ করতে ক্লিক করো");

@@ -87,6 +87,10 @@ public class Portuguese extends Language {
         yml.addDefault(Messages.KEYFRAME_INTERVAL_LORE, "&7Define o atraso\n&7entre os quadros da animação.\n&7Quanto menor o valor,\n&7mais rápida a animação.\n\n&6»&e Clique esquerdo para aumentar\n&6»&e Clique direito para diminuir.\n&6»&e Segure Shift para mudar\n&6»&e de 10 em 10.\n\n&eClique para mudar");
         yml.addDefault(Messages.KEYFRAME_LOOP_NAME, "&eRepetir: %loop%");
         yml.addDefault(Messages.KEYFRAME_LOOP_LORE, "&7Define se a animação\n&7deve se repetir em loop\n&7infinitamente desde o início\n\n&eClique para mudar");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_DISPLAY, "&eRealista: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_NAME_LORE, "&7As animações realistas interpolam suavemente\n&7entre as etapas da animação, em vez de\n&7pular instantaneamente de uma pose para outra.\n\n&7Aviso: pode causar lag\n\n&eClique para alterar");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_DISPLAY, "&eFrames realistas: %value%");
+        yml.addDefault(Messages.KEYFRAME_REALISTIC_FRAMES_LORE, "&7O número de frames gerados\n&7durante a animação realista\n\n&6»&e Clique esquerdo para aumentar\n&6»&e Clique direito para diminuir.\n&6»&e Segure Shift para alterar\n&6»&e em incrementos de 10.\n\n&eClique para alterar");
         yml.addDefault(Messages.SAVE_MENU_TITLE, "menu de salvamento");
         yml.addDefault(Messages.SAVE_MENU_CREATE_MESSAGE, "&aDigite o nome do tipo que você quer criar (as propriedades deste ArmorStand serão copiadas). Digite 'exit' para sair");
         yml.addDefault(Messages.SAVE_MENU_TYPE_LORE, "&7Selecionar isso vai sobrescrever\n&7a configuração antiga de %type% com\n&7a configuração atual que você fez\n\n&eClique para salvar");
