@@ -40,6 +40,7 @@ public class ConfigUtils {
 
         AdvancedArmorStands.debug("Checking if " + oldAiConfig.getName() + " and " + oldAiConfig.getName() + " still exist");
 
+
         if (oldAsConfig.exists() && oldAiConfig.exists()) {
             AdvancedArmorStands.debug("Renaming " + oldAiConfig.getName() + " to ai.aas");
             oldAiConfig.renameTo(new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/ai.aas"));
