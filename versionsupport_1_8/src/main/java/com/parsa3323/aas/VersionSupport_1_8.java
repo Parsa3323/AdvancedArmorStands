@@ -77,7 +77,6 @@ public final class VersionSupport_1_8 implements VersionSupport {
 
     @Override
     public void setItemInOffHand(ArmorStand as, ItemStack itemStack) {
-
     }
 
     @Override
