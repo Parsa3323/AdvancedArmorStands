@@ -132,6 +132,8 @@ public class Persian extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "Ye &7ArmorStand hazf kon");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aHame ArmorStand ha ba movafaghiat hazf shodan");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aArmorStand kamelan hazf shod");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aArmor Stand ba movafaghiat az AdvancedArmorStands unlink shod");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aHame Armor Stand ha ba movafaghiat az AdvancedArmorStands unlink shodand");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "Etelaate debug ro neshun mide");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "Kalleye ye player ro begir");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aKalleye %player% behet dade shod");

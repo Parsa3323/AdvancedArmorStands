@@ -132,6 +132,8 @@ public class Italian extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "Elimina un &7ArmorStand");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aTutti gli ArmorStand eliminati correttamente");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aArmorStand eliminato completamente");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aLo stand per armature è stato scollegato con successo da AdvancedArmorStands");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aTutti gli stand per armature sono stati scollegati con successo da AdvancedArmorStands");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "Mostra informazioni di debug");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "Ottieni la testa di un giocatore");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aTi è stata data la testa di %player%");

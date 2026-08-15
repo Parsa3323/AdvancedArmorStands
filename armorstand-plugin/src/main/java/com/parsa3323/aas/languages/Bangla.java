@@ -132,6 +132,8 @@ public class Bangla extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "একটা &7আর্মারস্ট্যান্ড মুছে দেয়");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aসব আর্মারস্ট্যান্ড সফলভাবে মুছে ফেলা হয়েছে");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aআর্মারস্ট্যান্ড পুরোপুরি মুছে ফেলা হয়েছে");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aআর্মারস্ট্যান্ড সফলভাবে AdvancedArmorStands থেকে আনলিংক করা হয়েছে");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aসব আর্মারস্ট্যান্ড সফলভাবে AdvancedArmorStands থেকে আনলিংক করা হয়েছে");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "ডিবাগ তথ্য দেখায়");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "একজন প্লেয়ারের মাথা নাও");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aতোমাকে %player%-এর মাথা দেওয়া হয়েছে");

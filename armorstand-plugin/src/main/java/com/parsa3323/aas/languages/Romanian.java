@@ -132,6 +132,8 @@ public class Romanian extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "Șterge un &7ArmorStand");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aToate ArmorStand-urile au fost șterse cu succes");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aArmorStand șters complet");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aSuportul de armură a fost deconectat cu succes de la AdvancedArmorStands");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aToate suporturile de armură au fost deconectate cu succes de la AdvancedArmorStands");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "Arată informații de depanare");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "Obține capul unui jucător");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aȚi-a fost dat capul lui %player%");

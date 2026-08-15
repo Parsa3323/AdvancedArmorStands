@@ -132,6 +132,8 @@ public class Polish extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "Usuwa &7ArmorStanda");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aWszystkie ArmorStandy zostały usunięte");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aArmorStand w pełni usunięty");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aStojak na zbroję został pomyślnie odłączony od AdvancedArmorStands");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aWszystkie stojaki na zbroję zostały pomyślnie odłączone od AdvancedArmorStands");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "Pokazuje informacje debugowania");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "Pobierz głowę gracza");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aOtrzymałeś głowę gracza %player%");

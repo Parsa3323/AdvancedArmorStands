@@ -132,6 +132,8 @@ public class Russian extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "Удаляет &7ArmorStand");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aВсе ArmorStand'ы успешно удалены");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aArmorStand полностью удалён");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aСтойка для брони успешно отвязана от AdvancedArmorStands");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aВсе стойки для брони успешно отвязаны от AdvancedArmorStands");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "Показывает отладочную информацию");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "Получи голову игрока");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aТебе выдана голова %player%");

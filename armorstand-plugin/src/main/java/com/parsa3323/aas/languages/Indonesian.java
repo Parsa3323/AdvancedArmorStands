@@ -132,6 +132,8 @@ public class Indonesian extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "Menghapus &7ArmorStand");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aSemua ArmorStand berhasil dihapus");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aArmorStand terhapus sepenuhnya");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aArmor Stand berhasil dilepaskan dari AdvancedArmorStands");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aSemua Armor Stand berhasil dilepaskan dari AdvancedArmorStands");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "Menampilkan informasi debug");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "Dapatkan kepala seorang pemain");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aKamu diberi kepala %player%");

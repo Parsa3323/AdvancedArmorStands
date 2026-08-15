@@ -132,6 +132,8 @@ public class Spanish extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "Elimina un &7ArmorStand");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aTodos los ArmorStands eliminados correctamente");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aArmorStand eliminado por completo");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aEl soporte para armadura se ha desvinculado correctamente de AdvancedArmorStands");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aTodos los soportes para armadura se han desvinculado correctamente de AdvancedArmorStands");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "Muestra información de depuración");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "Obtén la cabeza de un jugador");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aTe han dado la cabeza de %player%");

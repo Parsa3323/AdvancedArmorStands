@@ -132,6 +132,8 @@ public class Turkish extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "Bir &7ArmorStand siler");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aTüm ArmorStand'lar başarıyla silindi");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aArmorStand tamamen silindi");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aZırh standı AdvancedArmorStands'tan başarıyla ayrıldı");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aTüm zırh standları AdvancedArmorStands'tan başarıyla ayrıldı");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "Debug bilgilerini gösterir");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "Bir oyuncunun kafasını al");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aSana %player%'ın kafası verildi");

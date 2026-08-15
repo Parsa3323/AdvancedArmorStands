@@ -132,6 +132,8 @@ public class Portuguese extends Language {
         yml.addDefault(Messages.DELETE_DESCRIPTION, "Exclui um &7ArmorStand");
         yml.addDefault(Messages.DELETE_ALL_SUCCESS, "&aTodos os ArmorStands excluídos com sucesso");
         yml.addDefault(Messages.DELETE_SUCCESS, "&aArmorStand excluído por completo");
+        yml.addDefault(Messages.UNLINK_SUCCESS, "&aSuporte de armadura foi desvinculado com sucesso do AdvancedArmorStands");
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS, "&aTodos os suportes de armadura foram desvinculados com sucesso do AdvancedArmorStands");
         yml.addDefault(Messages.DEBUG_DESCRIPTION, "Mostra informações de depuração");
         yml.addDefault(Messages.HEAD_DESCRIPTION, "Pega a cabeça de um jogador");
         yml.addDefault(Messages.HEAD_SUCCESS, "&aVocê recebeu a cabeça de %player%");
