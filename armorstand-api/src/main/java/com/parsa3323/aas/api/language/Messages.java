@@ -46,6 +46,9 @@ public final class Messages {
     public static final String DELETE_ALL_SUCCESS = "delete_all_success";
     public static final String DELETION_CANCELLED = "deletion_cancelled_due_to_inactivity";
 
+    public static final String UNLINK_SUCCESS = "unlink_success";
+    public static final String UNLINK_ALL_SUCCESS = "unlink_all_success";
+
     public static final String LOAD_DESCRIPTION = "load_description";
     public static final String LOAD_NO_UNLOADED = "load_no_unloaded";
     public static final String LOAD_FAILED = "load_failed";

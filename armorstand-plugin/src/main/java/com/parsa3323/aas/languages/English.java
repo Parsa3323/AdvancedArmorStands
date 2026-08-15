@@ -278,6 +278,12 @@ public class English extends Language {
         yml.addDefault(Messages.DELETE_SUCCESS,
                 "&aFully deleted ArmorStand");
 
+        yml.addDefault(Messages.UNLINK_SUCCESS,
+                "&aSuccessfully unlinked ArmorStand from AdvancedArmorStands");
+
+        yml.addDefault(Messages.UNLINK_ALL_SUCCESS,
+                "&aSuccessfully unlinks all ArmorStands from AdvancedArmorStands");
+
         yml.addDefault(Messages.DEBUG_DESCRIPTION,
                 "Shows debug information");
 
