@@ -54,6 +54,7 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new LoadCommand());
         subCommands.add(new SettingsCommand());
         subCommands.add(new DeleteCommand());
+        subCommands.add(new UnlinkCommand());
         subCommands.add(new RenameCommand());
         subCommands.add(new OptionsCommand());
         subCommands.add(new HeadCommand());
