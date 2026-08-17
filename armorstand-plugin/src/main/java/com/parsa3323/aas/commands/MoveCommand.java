@@ -108,11 +108,11 @@ public class MoveCommand extends SubCommand {
                 config.set(path + ".Z", player.getLocation().getZ());
                 ArmorStandsConfig.save();
 
-                player.sendMessage(Language.getMsg(Messages.ARMORSTAND_MOVE_SUCCESS));
+                player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_MOVE_SUCCESS));
                 return;
             }
         }
-        player.sendMessage(Language.getMsg(Messages.ARMORSTAND_NOT_FOUND));
+        player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_NOT_FOUND));
     }
 
     @Override

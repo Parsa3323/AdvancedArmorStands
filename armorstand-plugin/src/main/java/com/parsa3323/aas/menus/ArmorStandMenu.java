@@ -216,9 +216,9 @@ public class ArmorStandMenu extends Menu {
             Bukkit.getPluginManager().callEvent(new ArmorStandStateChangeEvent(p, armorStand, ArmorStandUtils.getNameByArmorStand(armorStand)));
 
             p.playSound(p.getLocation(), VersionSupportUtil.getVersionSupport().getEquipSound(), 1,  1);
-            p.sendMessage(Language.getMsg(Messages.ARMORSTAND_UPDATED_SUCCESS));
+            p.sendMessage(Language.getMsg(Messages.ARMOR_STAND_UPDATED_SUCCESS));
         } catch (Exception ex) {
-            p.sendMessage(Language.getMsg(Messages.ARMORSTAND_UPDATED_FAILED));
+            p.sendMessage(Language.getMsg(Messages.ARMOR_STAND_UPDATED_FAILED));
             ex.printStackTrace();
         }
         if (!coolDownList.contains(p.getUniqueId())) {
@@ -229,14 +229,14 @@ public class ArmorStandMenu extends Menu {
     @Override
     public void setMenuItems() {
         if (armorStand == null || !armorStand.isValid()) {
-            playerMenuUtility.getOwner().sendMessage(Language.getMsg(Messages.ARMORSTAND_UNAVAILABLE));
+            playerMenuUtility.getOwner().sendMessage(Language.getMsg(Messages.ARMOR_STAND_UNAVAILABLE));
             playerMenuUtility.getOwner().closeInventory();
             for (int i = 0; i < inventory.getSize(); i++) {
                 ItemStack grayPane = new ItemStack(XMaterial.GRAY_STAINED_GLASS_PANE.parseMaterial(), 1, (short) 7);
                 ItemMeta meta = grayPane.getItemMeta();
 
                 if (meta != null) {
-                    meta.setDisplayName(Language.getMsg(Messages.ARMORSTAND_UNAVAILABLE_TITLE));
+                    meta.setDisplayName(Language.getMsg(Messages.ARMOR_STAND_UNAVAILABLE_TITLE));
                     grayPane.setItemMeta(meta);
                 }
 

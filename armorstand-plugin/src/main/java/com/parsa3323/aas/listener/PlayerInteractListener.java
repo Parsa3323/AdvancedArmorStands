@@ -110,7 +110,7 @@ public class PlayerInteractListener implements Listener {
                                 interactionCount.put(playerId, count);
 
                                 TextComponent textComponent = new TextComponent(
-                                        Language.getMsg(Messages.ARMORSTAND_SAVE_CONFIRM)
+                                        Language.getMsg(Messages.ARMOR_STAND_SAVE_CONFIRM)
                                                 .replace("%amount%", String.valueOf(3 - count))
                                                 .replace("%plural%", ((3 - count) > 1 ? "s" : ""))
                                 );
@@ -145,7 +145,7 @@ public class PlayerInteractListener implements Listener {
                                     return;
                                 }
 
-                                bukkitPlayer.sendMessage(Language.getMsg(Messages.ARMORSTAND_SAVED_SUCCESS).replace("%name%", name));
+                                bukkitPlayer.sendMessage(Language.getMsg(Messages.ARMOR_STAND_SAVED_SUCCESS).replace("%name%", name));
                                 ArmorStandUtils.saveArmorStand(name, stand);
 
                                 interactionCount.remove(playerId);
@@ -263,7 +263,7 @@ public class PlayerInteractListener implements Listener {
                         deleteInteractionCount.put(playerId, count);
 
                         TextComponent textComponent = new TextComponent(
-                                Language.getMsg(Messages.ARMORSTAND_DELETE_CONFIRM)
+                                Language.getMsg(Messages.ARMOR_STAND_DELETE_CONFIRM)
                                         .replace("%amount%", String.valueOf(3 - count))
                                         .replace("%plural%", ((3 - count) > 1 ? "s" : ""))
                         );
@@ -281,7 +281,7 @@ public class PlayerInteractListener implements Listener {
                         if (armorStandDeleteEvent.isCancelled()) return;
 
                         ArmorStandUtils.deleteArmorStand(standName);
-                        player.sendMessage(Language.getMsg(Messages.ARMORSTAND_DELETED_SUCCESS));
+                        player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_DELETED_SUCCESS));
 
                         deleteInteractionCount.remove(playerId);
                         deletionCount.remove(playerId);

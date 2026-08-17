@@ -84,22 +84,22 @@ public final class Messages {
     public static final String ARMOR_STAND_INVALID = "armor_stand_invalid";
     public static final String ARMOR_STAND_INVALID_WITH_SUGGESTION = "armor_stand_invalid_with_suggestion";
 
-    public static final String ARMORSTAND_NOT_FOUND = "armorstand_not_found";
+    public static final String ARMOR_STAND_NOT_FOUND = "armor_stand_not_found";
     public static final String WORLD_NOT_FOUND = "world_not_found";
-    public static final String TELEPORTED_TO_ARMORSTAND = "teleported_to_armorstand";
+    public static final String TELEPORTED_TO_ARMOR_STAND = "teleported_to_armor_stand";
 
-    public static final String ARMORSTAND_UPDATED_SUCCESS = "armorstand_updated_success";
-    public static final String ARMORSTAND_UPDATED_FAILED = "armorstand_updated_failed";
-    public static final String ARMORSTAND_UNAVAILABLE = "armorstand_unavailable";
-    public static final String ARMORSTAND_UNAVAILABLE_TITLE = "armorstand_unavailable_title";
+    public static final String ARMOR_STAND_UPDATED_SUCCESS = "armor_stand_updated_success";
+    public static final String ARMOR_STAND_UPDATED_FAILED = "armor_stand_updated_failed";
+    public static final String ARMOR_STAND_UNAVAILABLE = "armor_stand_unavailable";
+    public static final String ARMOR_STAND_UNAVAILABLE_TITLE = "armor_stand_unavailable_title";
 
-    public static final String ARMORSTAND_MOVE_SUCCESS = "armorstand_move_success";
+    public static final String ARMOR_STAND_MOVE_SUCCESS = "armor_stand_move_success";
 
-    public static final String ARMORSTAND_SAVE_CONFIRM = "armorstand_save_confirm";
-    public static final String ARMORSTAND_SAVED_SUCCESS = "armorstand_saved_success";
+    public static final String ARMOR_STAND_SAVE_CONFIRM = "armor_stand_save_confirm";
+    public static final String ARMOR_STAND_SAVED_SUCCESS = "armor_stand_saved_success";
 
-    public static final String ARMORSTAND_DELETE_CONFIRM = "armorstand_delete_confirm";
-    public static final String ARMORSTAND_DELETED_SUCCESS = "armorstand_deleted_success";
+    public static final String ARMOR_STAND_DELETE_CONFIRM = "armor_stand_delete_confirm";
+    public static final String ARMOR_STAND_DELETED_SUCCESS = "armor_stand_deleted_success";
 
     public static final String ARMOR_STAND_MENU_TITLE = "armor_stand_menu_title";
     public static final String SAVE_MENU_TITLE = "save_menu_title";
@@ -266,6 +266,6 @@ public final class Messages {
     public static final String PREVIEW_ACCEPTED = "preview_accepted";
     public static final String PREVIEW_DENIED = "preview_denied";
 
-    public static final String MESSAGES_NOT_LOADED = "armorstands_not_loaded";
+    public static final String MESSAGES_NOT_LOADED = "messages_not_loaded";
     public static final String ISSUES_FOUND_ON_JOIN = "issues_found_on_join";
 }

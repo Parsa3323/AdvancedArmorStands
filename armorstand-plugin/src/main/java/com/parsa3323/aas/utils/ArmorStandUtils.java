@@ -194,7 +194,7 @@ public class ArmorStandUtils {
         }
 
         player.teleport(new Location(world, x, y, z));
-        player.sendMessage(Language.getMsg(Messages.TELEPORTED_TO_ARMORSTAND).replace("%name%", name));
+        player.sendMessage(Language.getMsg(Messages.TELEPORTED_TO_ARMOR_STAND).replace("%name%", name));
     }
 
     public static boolean exists(String name) {

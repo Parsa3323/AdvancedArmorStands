@@ -227,24 +227,24 @@ public class English extends Language {
 
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&cInvalid ArmorStand '%armorstand%'. Did you mean '%suggestion%'?");
 
-        yml.addDefault(Messages.ARMORSTAND_NOT_FOUND,
+        yml.addDefault(Messages.ARMOR_STAND_NOT_FOUND,
                 "&cArmorStand not found!");
         yml.addDefault(Messages.WORLD_NOT_FOUND,
                 "&cWorld not found!");
-        yml.addDefault(Messages.TELEPORTED_TO_ARMORSTAND,
+        yml.addDefault(Messages.TELEPORTED_TO_ARMOR_STAND,
                 "&aTeleported to %name%");
 
-        yml.addDefault(Messages.ARMORSTAND_UPDATED_SUCCESS,
+        yml.addDefault(Messages.ARMOR_STAND_UPDATED_SUCCESS,
                 "&aArmorStand updated successfully!");
-        yml.addDefault(Messages.ARMORSTAND_UPDATED_FAILED,
+        yml.addDefault(Messages.ARMOR_STAND_UPDATED_FAILED,
                 "&cFailed to update ArmorStand!");
 
-        yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE,
+        yml.addDefault(Messages.ARMOR_STAND_UNAVAILABLE,
                 "&cThe ArmorStand is no longer available!");
-        yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE_TITLE,
+        yml.addDefault(Messages.ARMOR_STAND_UNAVAILABLE_TITLE,
                 "&cArmorStand is not available");
 
-        yml.addDefault(Messages.ARMORSTAND_MOVE_SUCCESS,
+        yml.addDefault(Messages.ARMOR_STAND_MOVE_SUCCESS,
                 "&aSuccessfully moved the ArmorStand.");
 
         yml.addDefault(Messages.MESSAGES_NOT_LOADED,
@@ -252,14 +252,14 @@ public class English extends Language {
         yml.addDefault(Messages.ISSUES_FOUND_ON_JOIN,
                 "&eAdvancedArmorStands has encountered %amount% error(s) and warning(s) this session. Check the log file for details.");
 
-        yml.addDefault(Messages.ARMORSTAND_SAVE_CONFIRM,
+        yml.addDefault(Messages.ARMOR_STAND_SAVE_CONFIRM,
                 "&aDo this %amount% more time%plural% to save this ArmorStand.");
-        yml.addDefault(Messages.ARMORSTAND_SAVED_SUCCESS,
+        yml.addDefault(Messages.ARMOR_STAND_SAVED_SUCCESS,
                 "&eArmorStand saved as %name%!");
 
-        yml.addDefault(Messages.ARMORSTAND_DELETE_CONFIRM,
+        yml.addDefault(Messages.ARMOR_STAND_DELETE_CONFIRM,
                 "&cDo this %amount% more time%plural% to delete this ArmorStand.");
-        yml.addDefault(Messages.ARMORSTAND_DELETED_SUCCESS,
+        yml.addDefault(Messages.ARMOR_STAND_DELETED_SUCCESS,
                 "&aArmorStand has been deleted, but it can be restored using the restored command and it will be fully deleted with server restart");
 
         yml.addDefault(Messages.COMMAND_NO_PERMISSION, "&cYou don't have permission to use this command!");
