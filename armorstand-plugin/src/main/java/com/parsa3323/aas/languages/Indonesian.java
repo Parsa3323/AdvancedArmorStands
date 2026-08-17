@@ -99,6 +99,11 @@ public class Indonesian extends Language {
         yml.addDefault(Messages.SAVE_MENU_CREATE_TYPE_LORE, "&7Pilih ini untuk membuat\n&7tipe dengan properti\n&7armor stand ini\n\n&eKlik untuk membuat");
         yml.addDefault(Messages.ARMOR_STAND_MENU_TITLE, "pengaturan");
         yml.addDefault(Messages.ARMOR_STAND_NOT_LOADED, "&cArmorStand ini belum dimuat");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_SUCCESS, "&aArmor Stand '%name%' berhasil dimuat");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_FAILED, "&cGagal memuat Armor Stand. Periksa konsol untuk detail lebih lanjut!");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_LOADED, "&cArmor Stand ini sudah dimuat");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_SUCCESS, "&a%loaded% Armor Stand berhasil dimuat.");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_FAILED, "&c%failed% Armor Stand gagal dimuat.");
         yml.addDefault(Messages.ARMOR_STAND_INVALID, "&cArmorStand tidak valid");
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&cArmorStand '%armorstand%' tidak valid. Maksud kamu '%suggestion%'?");
         yml.addDefault(Messages.ARMORSTAND_NOT_FOUND, "&cArmorStand tidak ditemukan!");
@@ -109,7 +114,7 @@ public class Indonesian extends Language {
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE, "&cArmorStand ini sudah tidak ada!");
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE_TITLE, "&cArmorStand tidak tersedia");
         yml.addDefault(Messages.ARMORSTAND_MOVE_SUCCESS, "&aArmorStand berhasil dipindahkan.");
-        yml.addDefault(Messages.ARMORSTANDS_NOT_LOADED, "&cSepertinya %amount% ArmorStand belum dimuat oleh world generator. Untuk memperbaikinya, aktifkan 'auto-load-armor-stands' di config supaya semua ArmorStand dimuat otomatis.");
+        yml.addDefault(Messages.MESSAGES_NOT_LOADED, "&cSepertinya %amount% ArmorStand belum dimuat oleh world generator. Untuk memperbaikinya, aktifkan 'auto-load-armor-stands' di config supaya semua ArmorStand dimuat otomatis.");
         yml.addDefault(Messages.ISSUES_FOUND_ON_JOIN, "&eAdvancedArmorStands menemukan %amount% error/peringatan di sesi ini. Cek file log untuk detailnya.");
         yml.addDefault(Messages.ARMORSTAND_SAVE_CONFIRM, "&aLakukan ini %amount% kali lagi untuk menyimpan ArmorStand ini.");
         yml.addDefault(Messages.ARMORSTAND_SAVED_SUCCESS, "&eArmorStand disimpan sebagai %name%!");

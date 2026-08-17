@@ -99,6 +99,11 @@ public class Persian extends Language {
         yml.addDefault(Messages.SAVE_MENU_CREATE_TYPE_LORE, "&7In ro bezan ta ye type\n&7ba propertie in armor\n&7stand besazi\n\n&eBezan baraye sakht");
         yml.addDefault(Messages.ARMOR_STAND_MENU_TITLE, "tanzimat");
         yml.addDefault(Messages.ARMOR_STAND_NOT_LOADED, "&cIn ArmorStand load nashode");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_SUCCESS, "&aArmor Stand '%name%' ba movafaghiat load shod");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_FAILED, "&cLoad kardane Armor Stand namovafagh bood. Baraye jozeyate bishtar console ra check konid!");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_LOADED, "&cIn Armor Stand ghablan load shode ast");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_SUCCESS, "&a%loaded% ta Armor Stand ba movafaghiat load shodand.");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_FAILED, "&c%failed% ta Armor Stand load nashodand.");
         yml.addDefault(Messages.ARMOR_STAND_INVALID, "&cArmorStand nadorost");
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&cArmorStand '%armorstand%' nadorost. Manzuret '%suggestion%' bud?");
         yml.addDefault(Messages.ARMORSTAND_NOT_FOUND, "&cArmorStand peida nashod!");
@@ -109,7 +114,7 @@ public class Persian extends Language {
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE, "&cIn ArmorStand digge mojud nist!");
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE_TITLE, "&cArmorStand mojud nist");
         yml.addDefault(Messages.ARMORSTAND_MOVE_SUCCESS, "&aArmorStand ba movafaghiat jabeja shod.");
-        yml.addDefault(Messages.ARMORSTANDS_NOT_LOADED, "&cBe nazar mirese %amount% ta ArmorStand tavassote world generator load nashodan. Baraye dorost kardanesh, 'auto-load-armor-stands' ro too config faal kon ta hamashun khodkar load beshan.");
+        yml.addDefault(Messages.MESSAGES_NOT_LOADED, "&cBe nazar mirese %amount% ta ArmorStand tavassote world generator load nashodan. Baraye dorost kardanesh, 'auto-load-armor-stands' ro too config faal kon ta hamashun khodkar load beshan.");
         yml.addDefault(Messages.ISSUES_FOUND_ON_JOIN, "&eAdvancedArmorStands too in session be %amount% ta error ya warning barkhord karde. Baraye jozeiyat log file ro check kon.");
         yml.addDefault(Messages.ARMORSTAND_SAVE_CONFIRM, "&aIn karo %amount% bar%plural% dige anjam bede ta in ArmorStand save beshe.");
         yml.addDefault(Messages.ARMORSTAND_SAVED_SUCCESS, "&eArmorStand ba esme %name% save shod!");

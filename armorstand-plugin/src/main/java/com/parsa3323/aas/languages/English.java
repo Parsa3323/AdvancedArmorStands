@@ -206,7 +206,25 @@ public class English extends Language {
         yml.addDefault(Messages.ARMOR_STAND_MENU_TITLE, "settings");
 
         yml.addDefault(Messages.ARMOR_STAND_NOT_LOADED, "&cThis ArmorStand is not loaded");
+
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_SUCCESS,
+                "&aSuccessfully loaded ArmorStand '%name%'");
+
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_FAILED,
+                "&cFailed to load the ArmorStand check console for more details!");
+
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_LOADED,
+                "&cThis ArmorStand is already loaded");
+
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_SUCCESS,
+                "&aSuccessfully loaded %loaded% ArmorStands.");
+
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_FAILED,
+                "&c Failed to load %failed% ArmorStands.");
+
+
         yml.addDefault(Messages.ARMOR_STAND_INVALID, "&cInvalid ArmorStand");
+
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&cInvalid ArmorStand '%armorstand%'. Did you mean '%suggestion%'?");
 
         yml.addDefault(Messages.ARMORSTAND_NOT_FOUND,
@@ -229,7 +247,7 @@ public class English extends Language {
         yml.addDefault(Messages.ARMORSTAND_MOVE_SUCCESS,
                 "&aSuccessfully moved the ArmorStand.");
 
-        yml.addDefault(Messages.ARMORSTANDS_NOT_LOADED,
+        yml.addDefault(Messages.MESSAGES_NOT_LOADED,
                 "&cIt looks like %amount% ArmorStands haven't been loaded by the world generator. To fix this, enable 'auto-load-armor-stands' in the config to automatically load all ArmorStands.");
         yml.addDefault(Messages.ISSUES_FOUND_ON_JOIN,
                 "&eAdvancedArmorStands has encountered %amount% error(s) and warning(s) this session. Check the log file for details.");

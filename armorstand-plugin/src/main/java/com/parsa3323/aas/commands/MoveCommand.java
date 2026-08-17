@@ -25,7 +25,6 @@ import com.parsa3323.aas.commands.manager.SubCommand;
 import com.parsa3323.aas.config.ArmorStandsConfig;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
@@ -109,11 +108,11 @@ public class MoveCommand extends SubCommand {
                 config.set(path + ".Z", player.getLocation().getZ());
                 ArmorStandsConfig.save();
 
-                player.sendMessage(ChatColor.GREEN + "Moved " + name + " to your location.");
+                player.sendMessage(Language.getMsg(Messages.ARMORSTAND_MOVE_SUCCESS));
                 return;
             }
         }
-        player.sendMessage(ChatColor.RED + "ArmorStand not found in the world!");
+        player.sendMessage(Language.getMsg(Messages.ARMORSTAND_NOT_FOUND));
     }
 
     @Override

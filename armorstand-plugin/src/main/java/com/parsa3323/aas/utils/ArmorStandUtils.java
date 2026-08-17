@@ -179,7 +179,7 @@ public class ArmorStandUtils {
         String path = "armorstands." + name;
 
         if (!config.contains(path)) {
-            player.sendMessage(Language.getMsg(Messages.ARMORSTAND_NOT_FOUND));
+            player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_INVALID));
             return;
         }
 

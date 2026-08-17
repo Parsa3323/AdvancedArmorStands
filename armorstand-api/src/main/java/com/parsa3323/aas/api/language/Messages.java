@@ -76,6 +76,11 @@ public final class Messages {
     public static final String TELL_AI_DISABLED = "tell_ai_disabled";
 
     public static final String ARMOR_STAND_NOT_LOADED = "armor_stand_not_loaded";
+    public static final String ARMOR_STAND_LOAD_SUCCESS = "armor_stand_load_success";
+    public static final String ARMOR_STAND_LOAD_FAILED = "armor_stand_load_failed";
+    public static final String ARMOR_STAND_LOAD_LOADED = "armor_stand_load_loaded";
+    public static final String ARMOR_STANDS_LOAD_SUCCESS = "armor_stands_load_success";
+    public static final String ARMOR_STANDS_LOAD_FAILED = "armor_stands_load_failed";
     public static final String ARMOR_STAND_INVALID = "armor_stand_invalid";
     public static final String ARMOR_STAND_INVALID_WITH_SUGGESTION = "armor_stand_invalid_with_suggestion";
 
@@ -261,6 +266,6 @@ public final class Messages {
     public static final String PREVIEW_ACCEPTED = "preview_accepted";
     public static final String PREVIEW_DENIED = "preview_denied";
 
-    public static final String ARMORSTANDS_NOT_LOADED = "armorstands_not_loaded";
+    public static final String MESSAGES_NOT_LOADED = "armorstands_not_loaded";
     public static final String ISSUES_FOUND_ON_JOIN = "issues_found_on_join";
 }

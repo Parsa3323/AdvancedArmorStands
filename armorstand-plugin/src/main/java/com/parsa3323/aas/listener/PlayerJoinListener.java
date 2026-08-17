@@ -47,7 +47,7 @@ public class PlayerJoinListener implements Listener {
                 if (ArmorStandUtils.getLoadedArmorStands() < ArmorStandUtils.getTotalArmorStands()) {
                     int unloaded = ArmorStandUtils.getTotalArmorStands() - ArmorStandUtils.getLoadedArmorStands();
 
-                    e.getPlayer().sendMessage(Language.getMsg(Messages.ARMORSTANDS_NOT_LOADED).replace("%amount%", String.valueOf(unloaded)));
+                    e.getPlayer().sendMessage(Language.getMsg(Messages.MESSAGES_NOT_LOADED).replace("%amount%", String.valueOf(unloaded)));
 
                 }
 

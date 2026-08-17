@@ -99,6 +99,11 @@ public class Spanish extends Language {
         yml.addDefault(Messages.SAVE_MENU_CREATE_TYPE_LORE, "&7Selecciona esto para crear\n&7un tipo con las propiedades\n&7de este armor stand\n\n&eClic para crear");
         yml.addDefault(Messages.ARMOR_STAND_MENU_TITLE, "ajustes");
         yml.addDefault(Messages.ARMOR_STAND_NOT_LOADED, "&cEste ArmorStand no está cargado");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_SUCCESS, "&aEl soporte para armadura '%name%' se ha cargado correctamente");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_FAILED, "&cNo se pudo cargar el soporte para armadura. ¡Revisa la consola para obtener más detalles!");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_LOADED, "&cEste soporte para armadura ya está cargado");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_SUCCESS, "&aSe cargaron correctamente %loaded% soportes para armadura.");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_FAILED, "&cNo se pudieron cargar %failed% soportes para armadura.");
         yml.addDefault(Messages.ARMOR_STAND_INVALID, "&cArmorStand no válido");
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&cArmorStand '%armorstand%' no válido. ¿Quisiste decir '%suggestion%'?");
         yml.addDefault(Messages.ARMORSTAND_NOT_FOUND, "&c¡ArmorStand no encontrado!");
@@ -109,7 +114,7 @@ public class Spanish extends Language {
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE, "&c¡El ArmorStand ya no está disponible!");
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE_TITLE, "&cEl ArmorStand no está disponible");
         yml.addDefault(Messages.ARMORSTAND_MOVE_SUCCESS, "&aArmorStand movido correctamente.");
-        yml.addDefault(Messages.ARMORSTANDS_NOT_LOADED, "&cParece que %amount% ArmorStands no han sido cargados por el generador del mundo. Para solucionarlo, activa 'auto-load-armor-stands' en la configuración para cargarlos todos automáticamente.");
+        yml.addDefault(Messages.MESSAGES_NOT_LOADED, "&cParece que %amount% ArmorStands no han sido cargados por el generador del mundo. Para solucionarlo, activa 'auto-load-armor-stands' en la configuración para cargarlos todos automáticamente.");
         yml.addDefault(Messages.ISSUES_FOUND_ON_JOIN, "&eAdvancedArmorStands ha encontrado %amount% error(es) y advertencia(s) en esta sesión. Revisa el archivo de registro para más detalles.");
         yml.addDefault(Messages.ARMORSTAND_SAVE_CONFIRM, "&aHaz esto %amount% vez%plural% más para guardar este ArmorStand.");
         yml.addDefault(Messages.ARMORSTAND_SAVED_SUCCESS, "&e¡ArmorStand guardado como %name%!");

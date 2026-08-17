@@ -99,6 +99,11 @@ public class Russian extends Language {
         yml.addDefault(Messages.SAVE_MENU_CREATE_TYPE_LORE, "&7Выбери это, чтобы создать\n&7тип со свойствами\n&7этого армор стенда\n\n&eНажми, чтобы создать");
         yml.addDefault(Messages.ARMOR_STAND_MENU_TITLE, "настройки");
         yml.addDefault(Messages.ARMOR_STAND_NOT_LOADED, "&cЭтот ArmorStand не загружен");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_SUCCESS, "&aСтойка для брони '%name%' успешно загружена");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_FAILED, "&cНе удалось загрузить стойку для брони. Проверьте консоль для получения дополнительной информации!");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_LOADED, "&cЭта стойка для брони уже загружена");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_SUCCESS, "&aУспешно загружено стоек для брони: %loaded%.");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_FAILED, "&cНе удалось загрузить стоек для брони: %failed%.");
         yml.addDefault(Messages.ARMOR_STAND_INVALID, "&cНеверный ArmorStand");
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&cНеверный ArmorStand '%armorstand%'. Может, ты имел в виду '%suggestion%'?");
         yml.addDefault(Messages.ARMORSTAND_NOT_FOUND, "&cArmorStand не найден!");
@@ -109,7 +114,7 @@ public class Russian extends Language {
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE, "&cArmorStand больше недоступен!");
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE_TITLE, "&cArmorStand недоступен");
         yml.addDefault(Messages.ARMORSTAND_MOVE_SUCCESS, "&aArmorStand успешно перемещён.");
-        yml.addDefault(Messages.ARMORSTANDS_NOT_LOADED, "&cПохоже, %amount% ArmorStand(ов) не были загружены генератором мира. Чтобы исправить это, включи 'auto-load-armor-stands' в конфиге, чтобы все ArmorStand'ы загружались автоматически.");
+        yml.addDefault(Messages.MESSAGES_NOT_LOADED, "&cПохоже, %amount% ArmorStand(ов) не были загружены генератором мира. Чтобы исправить это, включи 'auto-load-armor-stands' в конфиге, чтобы все ArmorStand'ы загружались автоматически.");
         yml.addDefault(Messages.ISSUES_FOUND_ON_JOIN, "&eAdvancedArmorStands столкнулся с %amount% ошибкой/предупреждением за эту сессию. Проверь лог-файл для подробностей.");
         yml.addDefault(Messages.ARMORSTAND_SAVE_CONFIRM, "&aСделай это ещё %amount% раз%plural%, чтобы сохранить этот ArmorStand.");
         yml.addDefault(Messages.ARMORSTAND_SAVED_SUCCESS, "&eArmorStand сохранён как %name%!");

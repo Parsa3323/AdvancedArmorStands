@@ -99,6 +99,11 @@ public class Turkish extends Language {
         yml.addDefault(Messages.SAVE_MENU_CREATE_TYPE_LORE, "&7Bu armor stand'ın\n&7özellikleriyle bir tür\n&7oluşturmak için bunu seç\n\n&eOluşturmak için tıkla");
         yml.addDefault(Messages.ARMOR_STAND_MENU_TITLE, "ayarlar");
         yml.addDefault(Messages.ARMOR_STAND_NOT_LOADED, "&cBu ArmorStand yüklü değil");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_SUCCESS, "&aZırh standı '%name%' başarıyla yüklendi");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_FAILED, "&cZırh standı yüklenemedi. Daha fazla ayrıntı için konsolu kontrol edin!");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_LOADED, "&cBu zırh standı zaten yüklü");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_SUCCESS, "&a%loaded% zırh standı başarıyla yüklendi.");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_FAILED, "&c%failed% zırh standı yüklenemedi.");
         yml.addDefault(Messages.ARMOR_STAND_INVALID, "&cGeçersiz ArmorStand");
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&c'%armorstand%' geçersiz ArmorStand. '%suggestion%'ı mi demek istedin?");
         yml.addDefault(Messages.ARMORSTAND_NOT_FOUND, "&cArmorStand bulunamadı!");
@@ -109,7 +114,7 @@ public class Turkish extends Language {
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE, "&cArmorStand artık mevcut değil!");
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE_TITLE, "&cArmorStand mevcut değil");
         yml.addDefault(Messages.ARMORSTAND_MOVE_SUCCESS, "&aArmorStand başarıyla taşındı.");
-        yml.addDefault(Messages.ARMORSTANDS_NOT_LOADED, "&c%amount% ArmorStand'ın dünya oluşturucu tarafından yüklenmediği görünüyor. Bunu düzeltmek için, hepsinin otomatik yüklenmesi adına config'te 'auto-load-armor-stands'i etkinleştir.");
+        yml.addDefault(Messages.MESSAGES_NOT_LOADED, "&c%amount% ArmorStand'ın dünya oluşturucu tarafından yüklenmediği görünüyor. Bunu düzeltmek için, hepsinin otomatik yüklenmesi adına config'te 'auto-load-armor-stands'i etkinleştir.");
         yml.addDefault(Messages.ISSUES_FOUND_ON_JOIN, "&eAdvancedArmorStands bu oturumda %amount% hata/uyarıyla karşılaştı. Detaylar için log dosyasını kontrol et.");
         yml.addDefault(Messages.ARMORSTAND_SAVE_CONFIRM, "&aBu ArmorStand'ı kaydetmek için bunu %amount% kez daha yap.");
         yml.addDefault(Messages.ARMORSTAND_SAVED_SUCCESS, "&eArmorStand %name% olarak kaydedildi!");

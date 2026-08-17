@@ -99,6 +99,11 @@ public class Romanian extends Language {
         yml.addDefault(Messages.SAVE_MENU_CREATE_TYPE_LORE, "&7Selectează asta pentru a crea\n&7un tip cu proprietățile\n&7acestui armor stand\n\n&eClic pentru a crea");
         yml.addDefault(Messages.ARMOR_STAND_MENU_TITLE, "setări");
         yml.addDefault(Messages.ARMOR_STAND_NOT_LOADED, "&cAcest ArmorStand nu este încărcat");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_SUCCESS, "&aSuportul de armură '%name%' a fost încărcat cu succes");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_FAILED, "&cNu s-a putut încărca suportul de armură. Verifică consola pentru mai multe detalii!");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_LOADED, "&cAcest suport de armură este deja încărcat");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_SUCCESS, "&aAu fost încărcate cu succes %loaded% suporturi de armură.");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_FAILED, "&cNu s-au putut încărca %failed% suporturi de armură.");
         yml.addDefault(Messages.ARMOR_STAND_INVALID, "&cArmorStand invalid");
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&cArmorStand '%armorstand%' invalid. Ai vrut să spui '%suggestion%'?");
         yml.addDefault(Messages.ARMORSTAND_NOT_FOUND, "&cArmorStand negăsit!");
@@ -109,7 +114,7 @@ public class Romanian extends Language {
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE, "&cArmorStand-ul nu mai este disponibil!");
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE_TITLE, "&cArmorStand-ul nu este disponibil");
         yml.addDefault(Messages.ARMORSTAND_MOVE_SUCCESS, "&aArmorStand mutat cu succes.");
-        yml.addDefault(Messages.ARMORSTANDS_NOT_LOADED, "&cSe pare că %amount% ArmorStand-uri nu au fost încărcate de generatorul de lume. Pentru a repara asta, activează 'auto-load-armor-stands' în configurație ca să se încarce toate automat.");
+        yml.addDefault(Messages.MESSAGES_NOT_LOADED, "&cSe pare că %amount% ArmorStand-uri nu au fost încărcate de generatorul de lume. Pentru a repara asta, activează 'auto-load-armor-stands' în configurație ca să se încarce toate automat.");
         yml.addDefault(Messages.ISSUES_FOUND_ON_JOIN, "&eAdvancedArmorStands a întâmpinat %amount% eroare/avertisment în această sesiune. Verifică fișierul de log pentru detalii.");
         yml.addDefault(Messages.ARMORSTAND_SAVE_CONFIRM, "&aFă asta încă %amount% dată%plural% ca să salvezi acest ArmorStand.");
         yml.addDefault(Messages.ARMORSTAND_SAVED_SUCCESS, "&eArmorStand salvat ca %name%!");

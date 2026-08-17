@@ -102,9 +102,9 @@ public class LoadCommand extends SubCommand {
             if (loaded == 0 && failed == 0) {
                 player.sendMessage(Language.getMsg(Messages.LOAD_NO_UNLOADED));
             } else {
-                String message = ChatColor.GREEN + "Successfully loaded " + loaded + " ArmorStands.";
+                String message = Language.getMsg(Messages.ARMOR_STANDS_LOAD_SUCCESS.replaceAll("%loaded%", String.valueOf(loaded)));
                 if (failed > 0) {
-                    message += ChatColor.RED + " Failed to load " + failed + " ArmorStands.";
+                    message += Language.getMsg(Messages.ARMOR_STANDS_LOAD_FAILED).replaceAll("%failed%", String.valueOf(failed));
                     if (!failedNames.isEmpty()) {
                         player.sendMessage(
                                 Language.getMsg(Messages.LOAD_FAILED)
@@ -131,13 +131,13 @@ public class LoadCommand extends SubCommand {
         ArmorStand as = ArmorStandUtils.getArmorStandByName(args[1]);
 
         if (ArmorStandUtils.isLoaded(as)) {
-            player.sendMessage(ChatColor.RED + "This ArmorStand is already loaded");
+            player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_LOAD_LOADED));
             return;
         }
 
         try {
             ArmorStandUtils.loadArmorStand(args[1]);
-            player.sendMessage(ChatColor.GREEN + "Successfully loaded ArmorStand '" + args[1] + "'");
+            player.sendMessage(Language.getMsg(Messages.ARMOR_STAND_LOAD_SUCCESS.replaceAll("%name%", args[1])));
             SoundUtils.playSuccessSound(player);
         } catch (ArmorStandLoadException e) {
             player.sendMessage(ChatColor.RED + "Failed to load the ArmorStand check console for more details!");

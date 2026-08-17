@@ -99,6 +99,11 @@ public class Bangla extends Language {
         yml.addDefault(Messages.SAVE_MENU_CREATE_TYPE_LORE, "&7এই আর্মার স্ট্যান্ডের\n&7প্রপার্টি দিয়ে একটা টাইপ\n&7তৈরি করতে এটা বেছে নাও\n\n&eতৈরি করতে ক্লিক করো");
         yml.addDefault(Messages.ARMOR_STAND_MENU_TITLE, "সেটিংস");
         yml.addDefault(Messages.ARMOR_STAND_NOT_LOADED, "&cএই আর্মারস্ট্যান্ডটা লোড হয়নি");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_SUCCESS, "&aআর্মারস্ট্যান্ড '%name%' সফলভাবে লোড হয়েছে");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_FAILED, "&cআর্মারস্ট্যান্ড লোড করা যায়নি। আরও বিস্তারিত জানতে কনসোল চেক করো!");
+        yml.addDefault(Messages.ARMOR_STAND_LOAD_LOADED, "&cএই আর্মারস্ট্যান্ডটি ইতিমধ্যেই লোড করা আছে");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_SUCCESS, "&a%loaded% টি আর্মারস্ট্যান্ড সফলভাবে লোড হয়েছে।");
+        yml.addDefault(Messages.ARMOR_STANDS_LOAD_FAILED, "&c%failed% টি আর্মারস্ট্যান্ড লোড করা যায়নি।");
         yml.addDefault(Messages.ARMOR_STAND_INVALID, "&cআর্মারস্ট্যান্ডটা সঠিক না");
         yml.addDefault(Messages.ARMOR_STAND_INVALID_WITH_SUGGESTION, "&cআর্মারস্ট্যান্ড '%armorstand%' সঠিক না। তুমি কি '%suggestion%' বলতে চেয়েছিলে?");
         yml.addDefault(Messages.ARMORSTAND_NOT_FOUND, "&cআর্মারস্ট্যান্ড খুঁজে পাওয়া যায়নি!");
@@ -109,7 +114,7 @@ public class Bangla extends Language {
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE, "&cআর্মারস্ট্যান্ডটা আর নেই!");
         yml.addDefault(Messages.ARMORSTAND_UNAVAILABLE_TITLE, "&cআর্মারস্ট্যান্ডটা পাওয়া যাচ্ছে না");
         yml.addDefault(Messages.ARMORSTAND_MOVE_SUCCESS, "&aআর্মারস্ট্যান্ড সফলভাবে সরানো হয়েছে।");
-        yml.addDefault(Messages.ARMORSTANDS_NOT_LOADED, "&cমনে হচ্ছে %amount% টা আর্মারস্ট্যান্ড ওয়ার্ল্ড জেনারেটর লোড করেনি। ঠিক করতে, সবগুলো অটোমেটিক লোড করতে কনফিগে 'auto-load-armor-stands' চালু করো।");
+        yml.addDefault(Messages.MESSAGES_NOT_LOADED, "&cমনে হচ্ছে %amount% টা আর্মারস্ট্যান্ড ওয়ার্ল্ড জেনারেটর লোড করেনি। ঠিক করতে, সবগুলো অটোমেটিক লোড করতে কনফিগে 'auto-load-armor-stands' চালু করো।");
         yml.addDefault(Messages.ISSUES_FOUND_ON_JOIN, "&eAdvancedArmorStands এই সেশনে %amount% টা এরর/ওয়ার্নিং পেয়েছে। বিস্তারিত জানতে লগ ফাইল চেক করো।");
         yml.addDefault(Messages.ARMORSTAND_SAVE_CONFIRM, "&aএই আর্মারস্ট্যান্ডটা সেভ করতে এটা আরও %amount% বার করো।");
         yml.addDefault(Messages.ARMORSTAND_SAVED_SUCCESS, "&eআর্মারস্ট্যান্ড %name% নামে সেভ হয়েছে!");
