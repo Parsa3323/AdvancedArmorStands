@@ -16,7 +16,6 @@ language: en
 
 # Hide the cache folder on Windows only
 # This only changes the folder's hidden attribute in Windows
-# It does not hide or rename the folder on Linux or macOS
 # Disable this if you want the cache folder to remain visible
 hide-cache-folder: true
 

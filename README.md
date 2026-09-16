@@ -83,6 +83,8 @@ config-version: 1.0.2 # <========== Config version (don't touch)
 
 language: en # <========== Language
 
+hide-cache-folder: true # <========== Hide the cache folder (windows only)
+
 debug: false # <========== Enable & Disable debug
 
 shift-right-click-to-add: true # <========== Enable & Disable shift-right-click to add ArmorStand
