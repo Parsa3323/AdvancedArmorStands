@@ -242,7 +242,7 @@ English, Italian, Persian, Portuguese, Russian, Spanish, Turkish Bangla, Indones
 
 AdvancedArmorStands uses XSeries for cross-version compatibility.
 
-Your server must be running a Bukkit-based server software, such as Spigot, Paper, Purpur, or another compatible Bukkit/Paper fork.
+Your server must be running a Bukkit-based server software, such as Spigot, Paper, Purpur, or another compatible Bukkit/Paper fork
 
 ## Optional Dependencies
 
