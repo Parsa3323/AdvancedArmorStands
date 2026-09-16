@@ -37,12 +37,14 @@
 > By using this plugin you agree to the [Terms of Service](https://github.com/Parsa3323/AdvancedArmorStands/blob/master/TERMS_OF_SERVICE.md).
 
 
-- [Requirements](#requirements)
 - [Polymart](https://www.polymart.org/product/7829/advancedarmorstands)
 - [Spigot](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
 - [Status](http://status.advancedarmorstands.ir/)
 - [Website](https://advancedarmorstands.ir/)
 - [Supported Languages](#supported-languages)
+- [Requirements](#requirements)
+    - [Server Requirements](#server-requirements)
+    - [Optional Requirements](#optional-dependencies)
 - [FAQ](https://docs.advancedarmorstands.ir/faq)
     - [General Questions](https://docs.advancedarmorstands.ir/faq#general-questions)
 - [Documentation](https://docs.advancedarmorstands.ir/)
@@ -235,11 +237,22 @@ English, Italian, Persian, Portuguese, Russian, Spanish, Turkish Bangla, Indones
 
 
 # Requirements
+
+## Server Requirements
+
+AdvancedArmorStands uses XSeries for cross-version compatibility.
+
+Your server must be running a Bukkit-based server software, such as Spigot, Paper, Purpur, or another compatible Bukkit/Paper fork.
+
+## Optional Dependencies
+
 </div>
 
-- [PlaceHolderApi](https://www.spigotmc.org/resources/placeholderapi.6245/) (Optional)
+* [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) (Optional)
 
 <div align="center">
+
+
 
 # Contributors
 
