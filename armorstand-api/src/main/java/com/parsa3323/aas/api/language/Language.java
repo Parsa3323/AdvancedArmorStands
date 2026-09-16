@@ -115,11 +115,31 @@ public abstract class Language {
         defaultLanguage = lang;
     }
 
+    private void addComments() {
+        yml.options().header("AdvancedArmorStands - " + iso +
+                "\n" +
+                "All languages except English are written entirely by AI." +
+                "\n" +
+                "Therefore, any mistakes or issues are expected and should be reported on GitHub." +
+                "\n" +
+                "They are not intended to have any real meaning or make any demands." +
+                "\n" +
+                "Editing this file will result in a complete reset after a restart." +
+                "\n" +
+                "Create another language and edit that instead if you want your changes to be saved." +
+                "\n" +
+                "Please note that adding language support is a very difficult process," +
+                "\n" +
+                "so it is being gradually rolled out. It is not fully supported yet, and some texts may not be translated."
+        );
+    }
+
     private void reset() {
         yml = new YamlConfiguration();
         registerDefaults();
 
         try {
+            addComments();
             yml.save(configFile);
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -142,6 +162,7 @@ public abstract class Language {
     public void save() {
         try {
             yml.options().copyDefaults(true);
+            addComments();
             yml.save(configFile);
         } catch (IOException exception) {
             exception.printStackTrace();

@@ -218,6 +218,8 @@ public final class AdvancedArmorStands extends JavaPlugin {
         status("Loading configuration files...");
         checkConfig();
 
+        ConfigUtils.createCacheFolder(getConfig().getBoolean("hide-cache-folder", true));
+
         api = new API();
         getServer().getServicesManager().register(ArmorstandApi.class, api, this, ServicePriority.Normal);
 

@@ -6,20 +6,26 @@
 # Docs: http://docs.advancedarmorstands.ir/
 
 # DO NOT MODIFY THIS VALUE
-# This is used internally to ensure compatibility between plugin versions and config formats.
+# This is used internally to ensure compatibility between plugin versions and config formats
 config-version: 1.0.3
 
-# Default language; Changes made to built-in generated languages will be reset on restart.
-# To customize a language, copy it and rename it using the 'messages_<iso>.yml' format.
-# Then set this value to your custom language iso.
+# Default language; Changes made to built-in generated languages will be reset on restart
+# To customize a language, copy it and rename it using the 'messages_<iso>.yml' format
+# Then set this value to your custom language iso
 language: en
+
+# Hide the cache folder on Windows only
+# This only changes the folder's hidden attribute in Windows
+# It does not hide or rename the folder on Linux or macOS
+# Disable this if you want the cache folder to remain visible
+hide-cache-folder: true
 
 # Enable & Disable Debug
 debug: false
 
 # Enables the feature where sneaking and right-clicking an ArmorStand
-# three times will save it as an Advanced ArmorStand, ArmorStand.
-# If set to false, this will be disabled.
+# three times will save it as an Advanced ArmorStand, ArmorStand
+# If set to false, this will be disabled
 shift-right-click-to-add: true
 
 
@@ -29,20 +35,20 @@ shift-right-click-to-add: true
 shift-click-to-delete: false
 
 # Armor stands may disappear on server start,
-# if not stopped correctly.
-# so enable this for the plugin to automatically restore the ArmorStands.
+# if not stopped correctly
+# so enable this for the plugin to automatically restore the ArmorStands
 auto-load-armor-stands: false
 
-# Artificial Intelligence feature for the plugin.
-# Talk to ArmorStands that have AI enabled.
+# Artificial Intelligence feature for the plugin
+# Talk to ArmorStands that have AI enabled
 ai:
-  # Place your Gemini AI API token here to enable all AI-related features.
+  # Place your Gemini AI API token here to enable all AI-related features
   # You can generate a token at: https://aistudio.google.com/api-keys
-  # Leave this blank or do not modify it to disable the AI functionality.
+  # Leave this blank or do not modify it to disable the AI functionality
   token: 'PLACE_YOUR_TOKEN_HERE'
 
 
-  # Allows all players (regardless of permission) to send messages to ArmorStand AIs.
+  # Allows all players (regardless of permission) to send messages to ArmorStand AIs
   # When enabled, players can interact using the syntax:
   # @<ArmorStandName> <Message>
   allow-players: true

@@ -22,6 +22,8 @@ import com.parsa3323.aas.AdvancedArmorStands;
 import org.bukkit.util.EulerAngle;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -46,6 +48,21 @@ public class ConfigUtils {
             oldAiConfig.renameTo(new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/ai.aas"));
             AdvancedArmorStands.debug("Renaming " + oldAsConfig.getName() + " armorstands.aas");
             oldAsConfig.renameTo(new File(AdvancedArmorStands.plugin.getDataFolder(), "cache/armorstands.aas"));
+        }
+    }
+
+    public static void createCacheFolder(boolean hidden) {
+        File cacheFolder = new File(AdvancedArmorStands.plugin.getDataFolder(), "cache");
+
+        if (!cacheFolder.exists() && !cacheFolder.mkdirs()) {
+            AdvancedArmorStands.error(null, true, "Failed to create cache folder");
+            return;
+        }
+
+        try {
+            Files.setAttribute(cacheFolder.toPath(), "dos:hidden", hidden);
+        } catch (IOException e) {
+            AdvancedArmorStands.warn("Could not update cache folder hidden state", true);
         }
     }
 }
