@@ -48,5 +48,6 @@ public class DeleteTool extends ToolsOption {
     public void execute(InventoryClickEvent e, ArmorStand armorStand) {
         ArmorStandUtils.deleteArmorStand(ArmorStandUtils.getNameByArmorStand(armorStand));
         e.getWhoClicked().sendMessage(Language.getMsg(Messages.DELETE_TOOL_MESSAGE));
+        e.getWhoClicked().closeInventory();
     }
 }
