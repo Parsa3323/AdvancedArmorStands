@@ -90,6 +90,10 @@ public class AnimCreateCommand extends SubCommand {
 
         AnimationConfig.get().addDefault("animations." + args[3] + ".loop", true);
 
+        AnimationConfig.get().addDefault("animations." + args[3] + ".realistic-animations.enabled", false);
+
+        AnimationConfig.get().addDefault("animations." + args[3] + ".realistic-animations.frames", 0);
+
         AnimationConfig.save();
 
         animationNames.put(player.getUniqueId(), args[3]);
