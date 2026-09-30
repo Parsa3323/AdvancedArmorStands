@@ -413,7 +413,9 @@ public class ArmorStandUtils {
     public static boolean canBeHelmet(Material mat) {
         return mat.name().endsWith("_HELMET") ||
                 mat == XMaterial.PUMPKIN.parseMaterial() ||
-                mat == XMaterial.PLAYER_HEAD.parseMaterial();
+                mat == XMaterial.PLAYER_HEAD.parseMaterial() ||
+                mat == XMaterial.GLASS.parseMaterial() ||
+                mat == XMaterial.CACTUS.parseMaterial();
     }
 
     public static void saveArmorStand(String name, ArmorStand armorStand) {
