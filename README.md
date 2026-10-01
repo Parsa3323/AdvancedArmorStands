@@ -1,8 +1,6 @@
-
-
 <div align="center">
 
-[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/icon.png?raw=true"  width="2004" style="vertical-align:middle;" >](#)
+[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/icon.png?raw=true" width="2004" style="vertical-align:middle;" >](#)
 
 `1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.20.6, 1.21` <br> `26.1, 26.2`
 
@@ -10,41 +8,53 @@
 
 [//]: # (**Super lightweight, smart, ultra-efficient plugin that barely uses any server resources!**)
 
-
-[![Downloads](https://img.shields.io/spiget/downloads/121022?label=Downloads&color=blue&logo=spigot)
-](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
+[![Downloads](https://img.shields.io/spiget/downloads/121022?label=Downloads&color=blue&logo=spigot)](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Parsa3323/AdvancedArmorStands?color=yellow&logo=github)
-[![GitHub license](https://img.shields.io/github/license/Parsa3323/AdvancedArmorStands?color=purple&logo=github)
-]()
+[![GitHub license](https://img.shields.io/github/license/Parsa3323/AdvancedArmorStands?color=purple&logo=github)]()
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Parsa3323/AdvancedArmorStands/compile.yml?logo=github)
 
 </div>
+
 <div align="center">
 
 [<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge1.png?raw=true" width="204" style="vertical-align:middle;">](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)
-[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge2.png?raw=true" width="204" style="vertical-align:middle;">](#table-of-content)
+[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge2.png?raw=true" width="204" style="vertical-align:middle;">](#table-of-contents)
 [<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge3.png?raw=true" width="204" style="vertical-align:middle;">](#supported-languages)
 
 </div>
 
 <div align="center">
 
-# Table of Content
+**[Polymart](https://www.polymart.org/product/7829/advancedarmorstands)** •
+**[Spigot](https://www.spigotmc.org/resources/advancedarmorstands.121022/)** •
+**[Documentation](https://docs.advancedarmorstands.ir/)** •
+**[Website](https://advancedarmorstands.ir/)** •
+**[Status](http://status.advancedarmorstands.ir/)**
 
 </div>
 
 > [!NOTE]
 > By using this plugin you agree to the [Terms of Service](https://github.com/Parsa3323/AdvancedArmorStands/blob/master/TERMS_OF_SERVICE.md).
 
+---
 
-- [Polymart](https://www.polymart.org/product/7829/advancedarmorstands)
-- [Spigot](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
-- [Status](http://status.advancedarmorstands.ir/)
-- [Website](https://advancedarmorstands.ir/)
+## About
+
+**AdvancedArmorStands** lets you create, customize, animate and manage armor stands on your server, with in-game menus, reusable types, animations, click actions and a developer API. It is built with [XSeries](https://github.com/CryptoMorin/XSeries) for cross-version compatibility, so one jar works from 1.8 all the way up to the latest versions.
+
+---
+
+<div align="center">
+
+# Table of Contents
+
+</div>
+
+- [Links](#links)
 - [Supported Languages](#supported-languages)
 - [Requirements](#requirements)
     - [Server Requirements](#server-requirements)
-    - [Optional Requirements](#optional-dependencies)
+    - [Optional Dependencies](#optional-dependencies)
 - [FAQ](https://docs.advancedarmorstands.ir/faq)
     - [General Questions](https://docs.advancedarmorstands.ir/faq#general-questions)
 - [Documentation](https://docs.advancedarmorstands.ir/)
@@ -59,12 +69,45 @@
         - [Moving an ArmorStand](https://docs.advancedarmorstands.ir/moving-as)
         - [Renaming an ArmorStand](https://docs.advancedarmorstands.ir/renaming-as)
     - [More Documentation](https://docs.advancedarmorstands.ir/)
-- [Configuration](#Configs)
-    - [Main Config](#Main-Configuration)
-    - [Types Config](#Types-Configuration)
-    - [Animations Config](#Animations-Configuration)
+- [Configuration](#configs)
+    - [Main Config](#main-configuration)
+    - [Types Config](#types-configuration)
+    - [Animations Config](#animations-configuration)
     - [Actions Config](#actions-configuration)
+- [Contributors](#contributors)
 - [Donate](#donate)
+
+---
+
+## Links
+
+| Platform | Link |
+|----------|------|
+| Polymart | [advancedarmorstands](https://www.polymart.org/product/7829/advancedarmorstands) |
+| Spigot | [advancedarmorstands.121022](https://www.spigotmc.org/resources/advancedarmorstands.121022/) |
+| Website | [advancedarmorstands.ir](https://advancedarmorstands.ir/) |
+| Documentation | [docs.advancedarmorstands.ir](https://docs.advancedarmorstands.ir/) |
+| Status | [status.advancedarmorstands.ir](http://status.advancedarmorstands.ir/) |
+
+---
+
+## Supported Languages
+
+English, Italian, Persian, Portuguese, Russian, Spanish, Turkish, Bangla, Indonesian, Polish, Romanian, and more. **Add your own!**
+
+---
+
+## Requirements
+
+### Server Requirements
+
+- A Bukkit-based server such as **Spigot**, **Paper**, **Purpur**, or another compatible Bukkit/Paper fork.
+
+### Optional Dependencies
+
+- [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/)
+
+---
 
 <div align="center">
 
@@ -136,11 +179,12 @@ default: # <====== Name of the type
     y: 0
     z: 0
 ```
-> [!IMPORTANT]  
-> Modify `itemInHandMaterial` to any valid Minecraft material (on your minecraft version).
 
-> [!NOTE]  
-> Players can create as many types as they want, but they must change the names and </br> each type can be used in the game using the `create` sub-command
+> [!IMPORTANT]
+> Modify `itemInHandMaterial` to any valid Minecraft material (on your Minecraft version).
+
+> [!NOTE]
+> Players can create as many types as they want, but each type must have a unique name. <br> Each type can be used in-game with the `create` sub-command.
 
 <div align="center">
 
@@ -197,12 +241,11 @@ animations:
           y: 0   # <====== Right leg Y rotation
           z: 0   # <====== Right leg Z rotation
 ```
->[!TIP]
-> Or you can use the [in-game animation creator](https://docs.advancedarmorstands.ir/animations) or the [online editor](https://advancedarmorstands.ir/animate)
+
+> [!TIP]
+> Prefer a visual approach? Use the [in-game animation creator](https://docs.advancedarmorstands.ir/animations) or the [online editor](https://advancedarmorstands.ir/animate).
 
 <div align="center">
-
-[//]: # (sdsd)
 
 ## Actions Configuration
 
@@ -217,7 +260,8 @@ armorstand:
       type: player # <====== Command executor ('player' or 'server')
       trigger: all # <====== Interaction that triggers the action
 ```
-> [!TIP]  
+
+> [!TIP]
 > Use the Armor Stand menu to create or delete actions easily.
 
 > [!CAUTION]
@@ -229,30 +273,9 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 
 </div>
 
-<div align="center">
-
-# Supported Languages
-
-English, Italian, Persian, Portuguese, Russian, Spanish, Turkish Bangla, Indonesian, Polish, Romanian, Add your own
-
-
-# Requirements
-
-## Server Requirements
-
-AdvancedArmorStands uses XSeries for cross-version compatibility.
-
-Your server must be running a Bukkit-based server software, such as Spigot, Paper, Purpur, or another compatible Bukkit/Paper fork
-
-## Optional Dependencies
-
-</div>
-
-* [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) (Optional)
+---
 
 <div align="center">
-
-
 
 # Contributors
 
@@ -261,13 +284,14 @@ Your server must be running a Bukkit-based server software, such as Spigot, Pape
 </a>
 
 # Donate
+
 </div>
 
-AdvancedArmorStands is a completely independent project that I have built and maintained entirely on my own, i’ve put a lot of time and effort into the plugin, even though it currently has a relatively small user base
+AdvancedArmorStands is a completely independent project that I have built and maintained entirely on my own. I've put a lot of time and effort into the plugin, even though it currently has a relatively small user base.
 
-I’m always doing my best to improve AdvancedArmorStands, fix issues, add new features, and make the experience as smooth and enjoyable as possible for everyone who uses it
+I'm always doing my best to improve AdvancedArmorStands, fix issues, add new features, and make the experience as smooth and enjoyable as possible for everyone who uses it.
 
-If you find the project useful and would like to support its development, you can make a donation below, every bit of support is greatly appreciated and helps me keep working on the project
+If you find the project useful and would like to support its development, you can make a donation below. Every bit of support is greatly appreciated and helps me keep working on the project.
 
 <div align="center">
 <a href="https://plisio.net/donate/nG4Or43y" target="_blank"><img src="https://plisio.net/img/donate/donate_dark_icons_no.png" alt="Donate Crypto on Plisio" width="240" height="48" /></a>
