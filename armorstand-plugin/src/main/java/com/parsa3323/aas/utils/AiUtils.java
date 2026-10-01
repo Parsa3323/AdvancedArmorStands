@@ -36,7 +36,6 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.EulerAngle;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -49,11 +48,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class AiUtils {
 
-    private static final String API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/chat/completions";
-    private static final String MODEL = "gemini-2.5-flash";
+    private static final String API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
+    private static final String MODEL = "gemini-3.5-flash-lite";
     private static final double TEMPERATURE = 0.2;
     private static final int MAX_TOKENS = 1024;
     private static final int CONNECT_TIMEOUT = 30000;
@@ -68,6 +68,10 @@ public class AiUtils {
             this.body = body;
             this.code = code;
             this.exception = exception;
+        }
+
+        boolean isSuccess() {
+            return exception == null && code == 200;
         }
     }
 
@@ -133,58 +137,112 @@ public class AiUtils {
                 "Always obey these rules exactly.\n";
     }
 
-    public static void getAssistWithAi(String apiKey, String userInput, Player p, java.util.function.Consumer<String> callback) {
-        Bukkit.getScheduler().runTaskAsynchronously(AdvancedArmorStands.plugin, () -> {
-            String instructions = getAssistInstructions();
-            String userContent = userInput == null ? "" : userInput;
-            ApiResponse apiResponse = sendApiRequest(apiKey, instructions, userContent);
-            String result;
-            if (apiResponse.exception != null) {
-                result = "{\"response\":\"" + Language.getMsg(Messages.AI_ERROR).replace("{error}", apiResponse.exception.getMessage()) + "\",\"action\":\"none\"}";
-            } else if (apiResponse.code != 200) {
-                result = "{\"response\":\"" + Language.getMsg(Messages.AI_HTTP_ERROR_WITH_INTERNET).replace("{code}", String.valueOf(apiResponse.code)) + "\",\"action\":\"none\"}";
-            } else {
-                result = parseChatCompletionsResponse(apiResponse.body);
+    public static void getAssistWithAi(String apiKey, String userInput, Player p, Consumer<String> callback) {
+        requestAsync(apiKey, getAssistInstructions(), nullToEmpty(userInput), Messages.AI_HTTP_ERROR_WITH_INTERNET, true, finalResult -> {
+            try {
+                handleAiAction(finalResult, p);
+            } catch (Exception ex) {
+                AdvancedArmorStands.error(null, false, "Unexpected error handling AI action: " + ex.getMessage());
+                ex.printStackTrace();
             }
 
-            String finalResult = result;
-            Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> {
-                try {
-                    handleAiAction(finalResult, p);
-                    String responseText;
-                    try {
-                        JSONObject json = new JSONObject(finalResult);
-                        responseText = json.optString("response", "");
-                    } catch (Exception e) {
-                        responseText = finalResult;
-                    }
-                    callback.accept(responseText);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            });
+            String responseText;
+            try {
+                responseText = new JSONObject(extractJson(finalResult)).optString("response", "");
+            } catch (Exception e) {
+                responseText = finalResult;
+            }
+            callback.accept(responseText);
         });
+    }
+
+    public static void getResponseAsync(String apiKey, MemoryData data, String userInput, Consumer<String> callback) {
+        String instructions = nullToEmpty(data.getInstructionsData());
+        String userContent = buildUserContent(data, userInput);
+        requestAsync(apiKey, instructions, userContent, Messages.AI_HTTP_ERROR_WITH_INTERNET, false, callback);
+    }
+
+    @Deprecated
+    public static String getResponse(String apiKey, MemoryData data, String userInput) {
+        String instructions = nullToEmpty(data.getInstructionsData());
+        String userContent = buildUserContent(data, userInput);
+        return resolveResult(sendApiRequest(apiKey, instructions, userContent), Messages.AI_HTTP_ERROR, false);
+    }
+
+    private static void requestAsync(String apiKey, String systemPrompt, String userContent,
+                                     String httpErrorMessage, boolean jsonReply, Consumer<String> onResult) {
+        Bukkit.getScheduler().runTaskAsynchronously(AdvancedArmorStands.plugin, () -> {
+            String result = resolveResult(sendApiRequest(apiKey, systemPrompt, userContent), httpErrorMessage, jsonReply);
+
+            if (!AdvancedArmorStands.plugin.isEnabled()) return; // plugin shut down while waiting
+            Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> onResult.accept(result));
+        });
+    }
+
+    private static String resolveResult(ApiResponse apiResponse, String httpErrorMessage, boolean jsonReply) {
+        if (apiResponse.exception != null) {
+            String msg = Language.getMsg(Messages.AI_ERROR).replace("{error}", describe(apiResponse.exception));
+            return jsonReply ? errorJson(msg) : msg;
+        }
+        if (apiResponse.code != 200) {
+            String msg = Language.getMsg(httpErrorMessage).replace("{code}", String.valueOf(apiResponse.code));
+            return jsonReply ? errorJson(msg) : msg;
+        }
+        return parseChatCompletionsResponse(apiResponse.body);
+    }
+
+    private static String errorJson(String message) {
+        return new JSONObject().put("response", message).put("action", "none").toString();
+    }
+
+    private static String describe(Exception e) {
+        return e.getClass().getSimpleName() + ": " + e.getMessage();
+    }
+
+    private static String nullToEmpty(String s) {
+        return s == null ? "" : s;
+    }
+
+    private static String buildUserContent(MemoryData data, String userInput) {
+        String history = nullToEmpty(data.getHistoryData());
+        return (history.isEmpty() ? "" : history + "\n") + nullToEmpty(userInput);
+    }
+
+    private static String extractJson(String raw) {
+        if (raw == null) return "";
+        String t = raw.trim();
+        if (t.startsWith("```")) {
+            int nl = t.indexOf('\n');
+            if (nl != -1) t = t.substring(nl + 1);
+            if (t.endsWith("```")) t = t.substring(0, t.length() - 3);
+            t = t.trim();
+        }
+        int start = t.indexOf('{');
+        int end = t.lastIndexOf('}');
+        if (start > 0 || (end != -1 && end < t.length() - 1)) {
+            if (start != -1 && end > start) t = t.substring(start, end + 1);
+        }
+        return t;
     }
 
     public static void handleAiAction(String aiJson, Player player) {
         JSONObject obj;
         try {
-            obj = new JSONObject(aiJson);
+            obj = new JSONObject(extractJson(aiJson));
         } catch (Exception e) {
             AdvancedArmorStands.error(null, false, "Failed to parse AI response: " + e.getMessage());
             return;
         }
 
         String action = obj.optString("action", "none");
-        String name = obj.optString("name", null);
-        String realCaseName = ArmorStandUtils.findRealCase(name);
+        String name = obj.isNull("name") ? null : obj.optString("name", null);
         JSONObject params = obj.optJSONObject("params");
 
         ArmorstandApi api = AdvancedArmorStands.getApi();
 
         try {
             switch (action) {
-                case "create":
+                case "create": {
                     if (name == null || params == null) {
                         AdvancedArmorStands.warn("Invalid create action from AI: missing name or params.", true);
                         return;
@@ -201,22 +259,25 @@ public class AiUtils {
                         AdvancedArmorStands.warn("ArmorStand with name " + name + " already exists.", true);
                     }
                     break;
+                }
 
-                case "remove":
+                case "remove": {
                     if (name == null) {
                         AdvancedArmorStands.warn("Invalid remove action: missing name.", true);
                         return;
                     }
-                    api.getArmorStandManager().removeArmorStand(realCaseName);
+                    api.getArmorStandManager().removeArmorStand(ArmorStandUtils.findRealCase(name));
                     break;
+                }
 
-                case "pose":
+                case "pose": {
                     if (name == null || params == null) {
                         AdvancedArmorStands.warn("Invalid pose action: missing name or params.", true);
                         return;
                     }
 
-                    ArmorStandPoseData poseData = parsePoseData(params.optJSONObject("pose"));
+                    final String realCaseName = ArmorStandUtils.findRealCase(name);
+                    final ArmorStandPoseData poseData = parsePoseData(params.optJSONObject("pose"));
                     Bukkit.getScheduler().runTaskLater(AdvancedArmorStands.plugin, () -> {
                         try {
                             api.getArmorStandManager().previewPose(realCaseName, poseData, player);
@@ -230,6 +291,7 @@ public class AiUtils {
                         }
                     }, 2L);
                     break;
+                }
 
                 case "none":
                 default:
@@ -243,7 +305,9 @@ public class AiUtils {
     }
 
     private static ArmorStandPoseData parsePoseData(JSONObject poseObj) {
-        if (poseObj == null) return new ArmorStandPoseData(new EulerAngle(0,0,0), new EulerAngle(0,0,0), new EulerAngle(0,0,0), new EulerAngle(0,0,0), new EulerAngle(0,0,0));
+        if (poseObj == null) {
+            return new ArmorStandPoseData(zero(), zero(), zero(), zero(), zero());
+        }
         return new ArmorStandPoseData(
                 parseEuler(poseObj.optJSONArray("rightArm")),
                 parseEuler(poseObj.optJSONArray("leftArm")),
@@ -253,61 +317,38 @@ public class AiUtils {
         );
     }
 
+    private static EulerAngle zero() {
+        return new EulerAngle(0, 0, 0);
+    }
+
     private static EulerAngle parseEuler(JSONArray arr) {
-        if (arr == null || arr.length() != 3) return new EulerAngle(0,0,0);
+        if (arr == null || arr.length() != 3) return zero();
         return new EulerAngle(
-                Math.toRadians(arr.getDouble(0)),
-                Math.toRadians(arr.getDouble(1)),
-                Math.toRadians(arr.getDouble(2))
+                Math.toRadians(arr.optDouble(0, 0)),
+                Math.toRadians(arr.optDouble(1, 0)),
+                Math.toRadians(arr.optDouble(2, 0))
         );
     }
 
     private static Location parseLocation(JSONObject params, Player player) {
         if (params == null) return null;
-        if (params.has("location")) {
-            Object locObj = params.get("location");
-            if (locObj instanceof String && ((String) locObj).equalsIgnoreCase("player")) {
-                return player.getLocation();
-            } else if (locObj instanceof JSONObject) {
-                JSONObject locJson = (JSONObject) locObj;
-                World world = Bukkit.getWorld(locJson.optString("world", "world"));
-                if (world == null) world = player.getWorld();
-                return new Location(
-                        world,
-                        locJson.optDouble("x", player.getLocation().getX()),
-                        locJson.optDouble("y", player.getLocation().getY()),
-                        locJson.optDouble("z", player.getLocation().getZ()),
-                        (float) locJson.optDouble("yaw", player.getLocation().getYaw()),
-                        (float) locJson.optDouble("pitch", player.getLocation().getPitch())
-                );
-            }
+        Location base = player.getLocation();
+        Object locObj = params.opt("location");
+
+        if (locObj instanceof JSONObject) {
+            JSONObject locJson = (JSONObject) locObj;
+            World world = Bukkit.getWorld(locJson.optString("world", "world"));
+            if (world == null) world = player.getWorld();
+            return new Location(
+                    world,
+                    locJson.optDouble("x", base.getX()),
+                    locJson.optDouble("y", base.getY()),
+                    locJson.optDouble("z", base.getZ()),
+                    (float) locJson.optDouble("yaw", base.getYaw()),
+                    (float) locJson.optDouble("pitch", base.getPitch())
+            );
         }
-        return player.getLocation();
-    }
-
-    public static void getResponseAsync(String apiKey, MemoryData data, String userInput, java.util.function.Consumer<String> callback) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                String instructions = data.getInstructionsData() == null ? "" : data.getInstructionsData();
-                String history = data.getHistoryData() == null ? "" : data.getHistoryData();
-                String user = userInput == null ? "" : userInput;
-                String userContent = (history.isEmpty() ? "" : (history + "\n")) + user;
-
-                ApiResponse apiResponse = sendApiRequest(apiKey, instructions, userContent);
-                String result;
-                if (apiResponse.exception != null) {
-                    result = Language.getMsg(Messages.AI_ERROR).replace("{error}", apiResponse.exception.getClass().getSimpleName() + ": " + apiResponse.exception.getMessage());
-                } else if (apiResponse.code != 200) {
-                    result = Language.getMsg(Messages.AI_HTTP_ERROR_WITH_INTERNET).replace("{code}", String.valueOf(apiResponse.code));
-                } else {
-                    result = parseChatCompletionsResponse(apiResponse.body);
-                }
-
-                String finalResult = result;
-                Bukkit.getScheduler().runTask(AdvancedArmorStands.plugin, () -> callback.accept(finalResult));
-            }
-        }.runTaskAsynchronously(AdvancedArmorStands.plugin);
+        return base;
     }
 
     public static String getUserSetInstructions(ArmorStand armorStand) {
@@ -322,31 +363,56 @@ public class AiUtils {
     }
 
     public static void sendResponseWithHistory(Player player, String response, String armorStandName, String userInput) {
-        player.sendMessage(Language.getMsg(Messages.AI_PREFIX) + response);
+        sendResponse(player, response);
         Bukkit.getPluginManager().callEvent(new ArmorStandAiRespondEvent(ArmorStandUtils.getArmorStandByName(armorStandName), response, userInput, player));
-        AiUtils.addToHistory(player.getName(), armorStandName, AiRole.PLAYER, userInput);
-        AiUtils.addToHistory(player.getName(), armorStandName, AiRole.AI, response);
+        addToHistory(player.getName(), armorStandName, AiRole.PLAYER, userInput);
+        addToHistory(player.getName(), armorStandName, AiRole.AI, response);
     }
 
     public static void sendResponse(Player player, String response) {
         player.sendMessage(Language.getMsg(Messages.AI_PREFIX) + response);
     }
 
-    @Deprecated
-    public static String getResponse(String apiKey, MemoryData data, String userInput) {
-        String instructions = data.getInstructionsData() == null ? "" : data.getInstructionsData();
-        String history = data.getHistoryData() == null ? "" : data.getHistoryData();
-        String user = userInput == null ? "" : userInput;
-        String userContent = (history.isEmpty() ? "" : (history + "\n")) + user;
+    public static void addToHistory(String playerName, String armorStandName, AiRole role, String content) {
+        YamlConfiguration config = AiConfig.get();
+        String path = playerName + "." + armorStandName + ".conversation";
 
-        ApiResponse apiResponse = sendApiRequest(apiKey, instructions, userContent);
-        if (apiResponse.exception != null) {
-            return Language.getMsg(Messages.AI_ERROR).replace("{error}", apiResponse.exception.getClass().getSimpleName() + ": " + apiResponse.exception.getMessage());
+        List<Map<String, Object>> conversation = new ArrayList<>();
+        for (Map<?, ?> entry : config.getMapList(path)) {
+            Map<String, Object> map = new HashMap<>();
+            for (Map.Entry<?, ?> e : entry.entrySet()) {
+                map.put(String.valueOf(e.getKey()), e.getValue());
+            }
+            conversation.add(map);
         }
-        if (apiResponse.code != 200) {
-            return Language.getMsg(Messages.AI_HTTP_ERROR).replace("{code}", String.valueOf(apiResponse.code));
+
+        Map<String, Object> newEntry = new HashMap<>();
+        newEntry.put("role", role.name().toLowerCase());
+        newEntry.put("content", content);
+        conversation.add(newEntry);
+
+        config.set(path, conversation);
+        AiConfig.save();
+    }
+
+    public static String getHistory(String playerName, String armorStandName) {
+        List<Map<?, ?>> rawList = AiConfig.get().getMapList(playerName + "." + armorStandName + ".conversation");
+        if (rawList.isEmpty()) return "";
+
+        StringBuilder sb = new StringBuilder();
+        for (Map<?, ?> entry : rawList) {
+            Object role = entry.get("role");
+            Object content = entry.get("content");
+            if (role != null && content != null) {
+                sb.append(role).append(": ").append(content).append("\n");
+            }
         }
-        return parseChatCompletionsResponse(apiResponse.body);
+        return sb.toString().trim();
+    }
+
+    public static void clearHistory(String playerName, String armorStandName) {
+        AiConfig.get().set(playerName + "." + armorStandName, null);
+        AiConfig.save();
     }
 
     private static ApiResponse sendApiRequest(String apiKey, String systemPrompt, String userMessage) {
@@ -360,8 +426,7 @@ public class AiUtils {
             body.put("temperature", TEMPERATURE);
             body.put("max_tokens", MAX_TOKENS);
 
-            URL url = new URL(API_ENDPOINT);
-            conn = (HttpURLConnection) url.openConnection();
+            conn = (HttpURLConnection) new URL(API_ENDPOINT).openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Authorization", "Bearer " + apiKey);
@@ -374,7 +439,7 @@ public class AiUtils {
             }
 
             int code = conn.getResponseCode();
-            String responseBody = (code == 200) ? readStream(conn.getInputStream()) : readStream(conn.getErrorStream());
+            String responseBody = readStream(code == 200 ? conn.getInputStream() : conn.getErrorStream());
             return new ApiResponse(responseBody, code, null);
         } catch (Exception e) {
             return new ApiResponse(null, -1, e);
@@ -385,147 +450,94 @@ public class AiUtils {
 
     private static String readStream(InputStream inputStream) throws IOException {
         if (inputStream == null) return "";
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = br.readLine()) != null) sb.append(line);
-        br.close();
-        return sb.toString();
-    }
-
-    public static void addToHistory(String playerName, String armorStandName, AiRole role, String content) {
-        YamlConfiguration config = AiConfig.get();
-        String path = playerName + "." + armorStandName + ".conversation";
-
-        List<Map<?, ?>> rawList = config.getMapList(path);
-        List<Map<String, Object>> conversation = new ArrayList<>();
-
-        if (rawList != null) {
-            for (Map<?, ?> entry : rawList) {
-                Map<String, Object> map = new HashMap<>();
-                for (Map.Entry<?, ?> e : entry.entrySet()) {
-                    map.put(e.getKey().toString(), e.getValue());
-                }
-                conversation.add(map);
-            }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) sb.append(line).append('\n');
+            return sb.toString();
         }
-
-        Map<String, Object> newEntry = new HashMap<>();
-        newEntry.put("role", role.name().toLowerCase());
-        newEntry.put("content", content);
-
-        conversation.add(newEntry);
-        config.set(path, conversation);
-        AiConfig.save();
-    }
-
-    public static String getHistory(String playerName, String armorStandName) {
-        YamlConfiguration config = AiConfig.get();
-        String path = playerName + "." + armorStandName + ".conversation";
-
-        List<Map<?, ?>> rawList = config.getMapList(path);
-        if (rawList == null || rawList.isEmpty()) return "";
-
-        StringBuilder sb = new StringBuilder();
-        for (Map<?, ?> entry : rawList) {
-            Object roleObj = entry.get("role");
-            Object contentObj = entry.get("content");
-            if (roleObj != null && contentObj != null) {
-                sb.append(roleObj.toString()).append(": ").append(contentObj.toString()).append("\n");
-            }
-        }
-
-        return sb.toString().trim();
-    }
-
-    public static void clearHistory(String playerName, String armorStandName) {
-        YamlConfiguration config = AiConfig.get();
-        String path = playerName + "." + armorStandName;
-        config.set(path, null);
-        AiConfig.save();
     }
 
     private static String parseChatCompletionsResponse(String json) {
         try {
             JSONObject obj = new JSONObject(json);
 
-            if (obj.has("choices")) {
-                JSONArray choices = obj.getJSONArray("choices");
-                if (choices.length() > 0) {
-                    JSONObject first = choices.getJSONObject(0);
-                    if (first.has("message")) {
-                        JSONObject message = first.getJSONObject("message");
-                        if (message.has("content")) {
-                            Object contentObj = message.get("content");
-                            if (contentObj instanceof String) {
-                                return (String) contentObj;
-                            }
-                            if (contentObj instanceof JSONObject) {
-                                JSONObject c = (JSONObject) contentObj;
-                                if (c.has("text")) return c.getString("text");
-                                if (c.has("parts")) {
-                                    JSONArray parts = c.getJSONArray("parts");
-                                    if (parts.length() > 0) {
-                                        JSONObject p0 = parts.getJSONObject(0);
-                                        if (p0.has("text")) return p0.getString("text");
-                                    }
-                                }
-                            }
-                            if (contentObj instanceof JSONArray) {
-                                JSONArray carr = (JSONArray) contentObj;
-                                if (carr.length() > 0) {
-                                    Object firstContent = carr.get(0);
-                                    if (firstContent instanceof String) return (String) firstContent;
-                                    if (firstContent instanceof JSONObject) {
-                                        JSONObject fc = (JSONObject) firstContent;
-                                        if (fc.has("text")) return fc.getString("text");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (first.has("text")) return first.getString("text");
+            JSONArray choices = obj.optJSONArray("choices");
+            if (choices != null && !choices.isEmpty()) {
+                JSONObject first = choices.getJSONObject(0);
+                JSONObject message = first.optJSONObject("message");
+                if (message != null && message.has("content")) {
+                    String text = extractText(message.get("content"));
+                    if (text != null) return text;
+                }
+                if (first.has("text")) return first.getString("text");
+            }
+
+            JSONArray candidates = obj.optJSONArray("candidates");
+            if (candidates != null && !candidates.isEmpty()) {
+                JSONObject content = candidates.getJSONObject(0).optJSONObject("content");
+                if (content != null) {
+                    String text = extractText(content);
+                    if (text != null) return text;
                 }
             }
 
-            if (obj.has("candidates")) {
-                JSONArray candidates = obj.getJSONArray("candidates");
-                if (candidates.length() > 0) {
-                    JSONObject content = candidates.getJSONObject(0).optJSONObject("content");
-                    if (content != null && content.has("parts")) {
-                        JSONArray parts = content.getJSONArray("parts");
-                        if (parts.length() > 0) return parts.getJSONObject(0).getString("text");
-                    }
-                }
-            }
-
-            String asString = obj.toString();
-            int idx = asString.indexOf("\"text\":\"");
-            if (idx != -1) {
-                idx += 8;
-                StringBuilder sb = new StringBuilder();
-                boolean esc = false;
-                for (int i = idx; i < asString.length(); i++) {
-                    char c = asString.charAt(i);
-                    if (esc) {
-                        if (c == 'n') sb.append('\n');
-                        else if (c == 'r') sb.append('\r');
-                        else if (c == 't') sb.append('\t');
-                        else sb.append(c);
-                        esc = false;
-                    } else if (c == '\\') {
-                        esc = true;
-                    } else if (c == '"') {
-                        break;
-                    } else sb.append(c);
-                }
-                return sb.toString();
-            }
+            String scraped = scrapeFirstText(obj.toString());
+            if (scraped != null) return scraped;
 
             return Language.getMsg(Messages.AI_RESPONSE_NOT_FOUND);
 
         } catch (Exception e) {
-            return Language.getMsg(Messages.AI_PARSE_ERROR).replace("{error}", e.getClass().getSimpleName() + ": " + e.getMessage());
+            return Language.getMsg(Messages.AI_PARSE_ERROR).replace("{error}", describe(e));
         }
+    }
+
+    private static String extractText(Object content) {
+        if (content instanceof String) return (String) content;
+
+        if (content instanceof JSONObject) {
+            JSONObject c = (JSONObject) content;
+            if (c.has("text")) return c.optString("text", null);
+            JSONArray parts = c.optJSONArray("parts");
+            if (parts != null && !parts.isEmpty()) {
+                JSONObject p0 = parts.optJSONObject(0);
+                if (p0 != null && p0.has("text")) return p0.optString("text", null);
+            }
+        }
+
+        if (content instanceof JSONArray) {
+            JSONArray arr = (JSONArray) content;
+            if (!arr.isEmpty()) {
+                return extractText(arr.get(0));
+            }
+        }
+        return null;
+    }
+
+    private static String scrapeFirstText(String raw) {
+        int idx = raw.indexOf("\"text\":\"");
+        if (idx == -1) return null;
+
+        StringBuilder sb = new StringBuilder();
+        boolean esc = false;
+        for (int i = idx + 8; i < raw.length(); i++) {
+            char c = raw.charAt(i);
+            if (esc) {
+                switch (c) {
+                    case 'n': sb.append('\n'); break;
+                    case 'r': sb.append('\r'); break;
+                    case 't': sb.append('\t'); break;
+                    default: sb.append(c);
+                }
+                esc = false;
+            } else if (c == '\\') {
+                esc = true;
+            } else if (c == '"') {
+                break;
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }
