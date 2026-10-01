@@ -45,7 +45,7 @@ public interface ArmorstandApi  {
 
     EditSessionManager getEditSessionManager();
 
-    boolean reloadPlugin() throws ReloadException;
+    void reloadPlugin() throws ReloadException;
 
     boolean isMigrating();
 

@@ -148,11 +148,9 @@ public class API implements ArmorstandApi {
     }
 
     @Override
-    public boolean reloadPlugin() throws ReloadException {
+    public void reloadPlugin() throws ReloadException {
         try {
-
             PluginUtils.reload();
-            return true;
         } catch (Exception e) {
             e.printStackTrace();
             throw new ReloadException(ChatColor.RED + e.getMessage());
