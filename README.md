@@ -261,7 +261,14 @@ Your server must be running a Bukkit-based server software, such as Spigot, Pape
 </a>
 
 # Donate
+</div>
 
+AdvancedArmorStands is a completely independent project that I have built and maintained entirely on my own, i’ve put a lot of time and effort into the plugin, even though it currently has a relatively small user base
+
+I’m always doing my best to improve AdvancedArmorStands, fix issues, add new features, and make the experience as smooth and enjoyable as possible for everyone who uses it
+
+If you find the project useful and would like to support its development, you can make a donation below, every bit of support is greatly appreciated and helps me keep working on the project
+
+<div align="center">
 <a href="https://plisio.net/donate/nG4Or43y" target="_blank"><img src="https://plisio.net/img/donate/donate_dark_icons_no.png" alt="Donate Crypto on Plisio" width="240" height="48" /></a>
-
 </div>
