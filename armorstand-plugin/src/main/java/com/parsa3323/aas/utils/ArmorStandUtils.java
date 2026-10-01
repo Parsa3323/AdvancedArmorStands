@@ -428,10 +428,6 @@ public class ArmorStandUtils {
         qs.set("equipment.boots", (armorStand.getBoots() != null) ? armorStand.getBoots() : XMaterial.AIR.parseMaterial());
         qs.set("equipment.hand", (armorStand.getItemInHand() != null) ? armorStand.getItemInHand() : XMaterial.AIR.parseMaterial());
 
-        Location loc = armorStand.getLocation();
-//            cs.set(name + ".yaw", loc.getYaw());
-//            cs.set(name + ".pitch", loc.getPitch());
-
         if (VersionSupportUtil.getVersionSupport().canGlow()) {
 
             cs.set(name + ".glowing", VersionSupportUtil.getVersionSupport().isGlowing(armorStand));
