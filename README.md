@@ -64,7 +64,7 @@
     - [Types Config](#Types-Configuration)
     - [Animations Config](#Animations-Configuration)
     - [Actions Config](#actions-configuration)
-
+- [Donate](#donate)
 
 <div align="center">
 
@@ -259,5 +259,9 @@ Your server must be running a Bukkit-based server software, such as Spigot, Pape
 <a href="https://github.com/Parsa3323/AdvancedArmorStands/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Parsa3323/AdvancedArmorStands" />
 </a>
+
+# Donate
+
+<a href="https://plisio.net/donate/nG4Or43y" target="_blank"><img src="https://plisio.net/img/donate/donate_dark_icons_no.png" alt="Donate Crypto on Plisio" width="240" height="48" /></a>
 
 </div>
