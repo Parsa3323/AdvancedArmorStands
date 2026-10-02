@@ -21,6 +21,7 @@ package com.parsa3323.aas.ai;
 import com.cryptomorin.xseries.XMaterial;
 import com.parsa3323.aas.ai.manager.AiSettingsOption;
 import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.utils.AiUtils;
 import com.parsa3323.aas.utils.InventoryUtils;
 import com.parsa3323.aas.utils.VersionSupportUtil;
@@ -47,7 +48,7 @@ public class MemoryOption extends AiSettingsOption {
 
         List<String> lore = new ArrayList<>();
 
-        for (String line : Language.getLore("ai_memory_setting")) {
+        for (String line : Language.getLore(Messages.AI_SETTINGS_MEMORY_LORE)) {
 
             if (line.equals("%current%")) {
                 String currentInstructions = AiUtils.getUserSetInstructions(armorStand);

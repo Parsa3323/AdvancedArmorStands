@@ -20,6 +20,7 @@ package com.parsa3323.aas.ai;
 
 import com.parsa3323.aas.ai.manager.AiSettingsOption;
 import com.parsa3323.aas.api.language.Language;
+import com.parsa3323.aas.api.language.Messages;
 import com.parsa3323.aas.utils.ArmorStandUtils;
 import com.parsa3323.aas.utils.ColorUtils;
 import com.parsa3323.aas.utils.TextUtils;
@@ -46,7 +47,7 @@ public class AiToggleOption extends AiSettingsOption {
                 ArmorStandUtils.getNameByArmorStand(armorStand)
         );
 
-        for (String line : Language.getLore("ai_settings_toggle_lore")) {
+        for (String line : Language.getLore(Messages.AI_SETTINGS_TOGGLE_LORE)) {
 
             if ("%ai_status%".equals(ChatColor.stripColor(line).trim())) {
                 lore.add(enabled
