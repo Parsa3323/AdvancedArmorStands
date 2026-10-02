@@ -117,7 +117,7 @@ public class ListCommand extends SubCommand {
                 TextComponent deleteButton = new TextComponent(ColorUtils.boldAndColor(ChatColor.GRAY) + " DL");
                 deleteButton.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(ChatColor.YELLOW + "" + ChatColor.BOLD + "Delete ArmorStand")
-                                .append("\n" + ChatColor.GRAY + "This action cannot be undone!")
+                                .append("\n" + ChatColor.GRAY + "This action can be undone!")
                                 .append("\n" + " ")
                                 .append("\n" + ChatColor.YELLOW + "Click to delete: " + name)
                                 .create()));
