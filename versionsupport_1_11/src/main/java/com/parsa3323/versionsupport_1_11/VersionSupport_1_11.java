@@ -36,13 +36,10 @@ public final class VersionSupport_1_11 implements VersionSupport {
     @Override
     public ItemStack getSkull(String base64) {
         ItemStack head = XMaterial.PLAYER_HEAD.parseItem();
-
         if(head == null) throw new RuntimeException("Failed to get skull");
 
         ItemMeta itemMeta = head.getItemMeta();
-
         if(itemMeta == null) return head;
-
         itemMeta = XSkull.of(itemMeta).profile(Profileable.detect(base64)).lenient().apply();
 
         head.setItemMeta(itemMeta);
