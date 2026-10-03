@@ -293,16 +293,22 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 
 Since [v1.26.0](https://github.com/Parsa3323/AdvancedArmorStands/releases), AdvancedArmorStands includes AI features powered by **Google Gemini**.
 
+</div>
+
 > [!NOTE]
 > AI is **disabled by default**. You need to add your own API token before it will work.
 
 ---
+
+<div align="center">
 
 ## How to set it up
 
 **1.** Get a free API key from [Google AI Studio](https://aistudio.google.com/api-keys).
 
 **2.** Open your plugin's `config.yml` and find the `ai` section. Replace the placeholder with your key:
+
+</div>
 
 ```diff
  ai:
@@ -316,6 +322,8 @@ Since [v1.26.0](https://github.com/Parsa3323/AdvancedArmorStands/releases), Adva
 
 > [!WARNING]
 > Never share your token or post your `config.yml` publicly. Anyone with your key can use your Google quota.
+
+<div align="center">
 
 **3.** Restart the server. The AI options will now be unlocked.
 
