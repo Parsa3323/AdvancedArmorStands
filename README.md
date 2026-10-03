@@ -287,7 +287,68 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 </div>
 
 ---
+<div align="center">
 
+# Artificial Intelligence
+
+Since [v1.26.0](https://github.com/Parsa3323/AdvancedArmorStands/releases), AdvancedArmorStands includes AI features powered by **Google Gemini**.
+
+> [!NOTE]
+> AI is **disabled by default**. You need to add your own API token before it will work.
+
+---
+
+## How to set it up
+
+**1.** Get a free API key from [Google AI Studio](https://aistudio.google.com/api-keys).
+
+**2.** Open your plugin's `config.yml` and find the `ai` section. Replace the placeholder with your key:
+
+```diff
+ ai:
+-  token: 'PLACE_YOUR_TOKEN_HERE' # <========== Token for AI integration
++  token: 'AIzaSy...your-real-key' # <========== Paste your Google AI Studio key here
+   allow-players: true            # <========== Allow players to interact with the AI system
+```
+
+> [!IMPORTANT]
+> The AI features will not work until you replace the placeholder with a valid token.
+
+> [!WARNING]
+> Never share your token or post your `config.yml` publicly. Anyone with your key can use your Google quota.
+
+**3.** Restart the server. The AI options will now be unlocked.
+
+| Option | Description |
+|--------|-------------|
+| `token` | Your Google AI Studio API key |
+| `allow-players` | Set to `false` if only admins should be able to use the AI |
+
+---
+
+## How it works
+
+When someone asks the AI for help, the plugin sends the request to Gemini in the background, so your server never freezes while waiting. Gemini answers with a structured command, and the plugin carries it out.
+
+```mermaid
+flowchart LR
+    A[Player asks AI] --> B[Plugin sends request<br/>to Google Gemini]
+    B --> C[Gemini replies with<br/>an action]
+    C --> D{Which action?}
+    D -- create --> E[Spawns an armor stand]
+    D -- remove --> F[Deletes an armor stand]
+    D -- pose --> G[Changes the pose]
+    D -- none --> H[Nothing happens]
+    E --> I[Reply is sent to the player]
+    F --> I
+    G --> I
+    H --> I
+```
+
+<details>
+<summary>Technical details (for developers)</summary>
+
+&nbsp;
 
 ```mermaid
 sequenceDiagram
@@ -330,6 +391,8 @@ sequenceDiagram
 
     AU->>P: callback sends the "response" text from the JSON
 ```
+
+</details>
 
 <div align="center">
 
