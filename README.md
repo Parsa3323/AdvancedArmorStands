@@ -96,6 +96,8 @@
 
 ---
 
+
+
 ## Supported Languages
 
 English, Italian, Persian, Portuguese, Russian, Spanish, Turkish, Bangla, Indonesian, Polish, Romanian, and more. **Add your own[^2]!**
@@ -285,6 +287,14 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 </div>
 
 ---
+
+
+```mermaid
+graph TD
+    A[Start] --> B{Works?}
+    B -->|Yes| C[Ship]
+    B -->|No| D[Debug]
+```
 
 <div align="center">
 
