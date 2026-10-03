@@ -44,6 +44,9 @@
 
 **AdvancedArmorStands** lets you create, customize, animate and manage armor stands on your server, with in-game menus, reusable types, animations, click actions and a developer API. It is built with [XSeries](https://github.com/CryptoMorin/XSeries)[^1] for cross-version compatibility, so one jar works from 1.8 all the way up to the latest versions.
 
+
+[^1]: XSeries is a Minecraft library that makes it possible to support different Minecraft versions with the same code
+
 ---
 
 <div align="center">
@@ -300,4 +303,3 @@ If you find the project useful and would like to support its development, you ca
 <a href="https://nowpayments.io/donation?api_key=acb39f10-bbaa-42fc-8265-ce4016e2af7a" target="_blank" rel="noreferrer noopener"><img src="https://nowpayments.io/images/embeds/donation-button-black.svg" alt="Donate Crypto on NOWPayments" width="240" height="48" /></a>
 </div>
 
-[^1]: XSeries is a Minecraft library that makes it possible to support different Minecraft versions with the same code
