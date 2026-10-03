@@ -98,7 +98,7 @@
 
 ## Supported Languages
 
-English, Italian, Persian, Portuguese, Russian, Spanish, Turkish, Bangla, Indonesian, Polish, Romanian, and more. **Add your own!**[^2]
+English, Italian, Persian, Portuguese, Russian, Spanish, Turkish, Bangla, Indonesian, Polish, Romanian, and more. **Add your own[^2]!**
 
 [^2]: To customize a language, copy it and rename it using the 'messages_<iso>.yml' format, then set this value to your custom language iso
 
