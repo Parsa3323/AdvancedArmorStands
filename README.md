@@ -25,6 +25,7 @@
 
 <div align="center">
 
+
 **[Polymart](https://www.polymart.org/product/7829/advancedarmorstands)** •
 **[Spigot](https://www.spigotmc.org/resources/advancedarmorstands.121022/)** •
 **[Documentation](https://docs.advancedarmorstands.ir/)** •
@@ -212,9 +213,9 @@ animations:
           x: -30 # <====== Right arm X rotation
           y: 0   # <====== Right arm Y rotation
           z: 10  # <====== Right arm Z rotation
-        left_leg: # <====== Left leg pose for this step
-          x: 10  # <====== Left leg X rotation
-          y: 0   # <====== Left leg Y rotation
+        left_leg: #<====== Left leg X rotation
+          y: 0   #  <====== Left leg pose for this step
+          x: 10  # <====== Left leg Y rotation
           z: 0   # <====== Left leg Z rotation
         right_leg: # <====== Right leg pose for this step
           x: -10 # <====== Right leg X rotation
