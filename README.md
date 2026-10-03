@@ -296,7 +296,7 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 
 [^6]: AI is technology that enables computers to learn, understand information, and perform tasks that normally require human intelligence
 
-Since [v1.26.0](https://github.com/Parsa3323/AdvancedArmorStands/releases), AdvancedArmorStands includes AI features powered by **Google Gemini**.
+Since [v1.26.0](https://github.com/Parsa3323/AdvancedArmorStands/releases#release-v1.26.0), AdvancedArmorStands includes AI features powered by **Google Gemini**.
 
 </div>
 
