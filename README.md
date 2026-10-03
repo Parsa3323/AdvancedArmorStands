@@ -108,7 +108,11 @@ English, Italian, Persian, Portuguese, Russian, Spanish, Turkish, Bangla, Indone
 
 ### Server Requirements
 
-- A Bukkit-based server such as **Spigot**, **Paper**, **Purpur**, or another compatible Bukkit/Paper fork.
+- A Bukkit-based server such as **Spigot**[^3], **Paper**[^4], **Purpur**[^5], or another compatible Bukkit/Paper fork.
+
+[^3]: Spigot is a minecraft server software based on Bukkit that supports plugins
+[^4]: Paper minecraft server software based on Spigot with improved performance and additional features
+[^5]: Purpur minecraft server software based on Paper with extra configuration options and features
 
 ### Optional Dependencies
 
