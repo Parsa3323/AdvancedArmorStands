@@ -290,10 +290,45 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 
 
 ```mermaid
-graph TD
-    A[Start] --> B{Works?}
-    B -->|Yes| C[Ship]
-    B -->|No| D[Debug]
+sequenceDiagram
+    autonumber
+    actor P as Player
+    participant AU as AiUtils (main thread)
+    participant AS as Async Thread
+    participant G as Google Gemini API
+    participant AA as handleAiAction
+    participant API as ArmorstandApi
+
+    P->>AU: Asks the AI for help
+    AU->>AU: getAssistInstructions() builds system prompt
+    AU->>AS: requestAsync(apiKey, instructions, userInput)
+
+    Note over AS,G: model gemini-3.5-flash-lite<br/>temperature 0.2, max 1024 tokens<br/>30s connect and read timeout
+
+    AS->>G: POST /v1beta/openai/chat/completions<br/>system = instructions, user = player message
+    G-->>AS: JSON reply (action, name, params, response)
+
+    alt Network error or HTTP code not 200
+        AS->>AS: resolveResult builds errorJson (action = none)
+    else HTTP 200
+        AS->>AS: parseChatCompletionsResponse extracts the text
+    end
+
+    AS->>AU: runTask back on the main thread
+    AU->>AA: handleAiAction(finalResult, player)
+    AA->>AA: extractJson strips markdown fences and parses JSON
+
+    alt action = create
+        AA->>API: createArmorStand(name, pose, location, player)
+    else action = remove
+        AA->>API: removeArmorStand(name)
+    else action = pose
+        AA->>API: previewPose(name, pose, player) then reloadPlugin()
+    else action = none or unknown
+        AA->>AA: warn "AI did not provide a valid action"
+    end
+
+    AU->>P: callback sends the "response" text from the JSON
 ```
 
 <div align="center">
