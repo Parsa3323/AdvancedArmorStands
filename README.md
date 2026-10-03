@@ -79,6 +79,9 @@
     - [Types Config](#types-configuration)
     - [Animations Config](#animations-configuration)
     - [Actions Config](#actions-configuration)
+- [Artificial Intelligence](#artificial-intelligence)
+    - [How to set it up](#how-to-set-it-up)
+    - [How it works](#how-it-works)
 - [Contributors](#contributors)
 - [Donate](#donate)
 
@@ -289,7 +292,9 @@ For more details, refer to the [official documentation](https://docs.advancedarm
 ---
 <div align="center">
 
-# Artificial Intelligence
+# Artificial Intelligence [^6]
+
+[^6]: AI is technology that enables computers to learn, understand information, and perform tasks that normally require human intelligence
 
 Since [v1.26.0](https://github.com/Parsa3323/AdvancedArmorStands/releases), AdvancedArmorStands includes AI features powered by **Google Gemini**.
 
