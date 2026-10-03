@@ -26,6 +26,7 @@
 <div align="center">
 
 
+
 **[Polymart](https://www.polymart.org/product/7829/advancedarmorstands)** •
 **[Spigot](https://www.spigotmc.org/resources/advancedarmorstands.121022/)** •
 **[Documentation](https://docs.advancedarmorstands.ir/)** •
@@ -41,7 +42,7 @@
 
 ## About
 
-**AdvancedArmorStands** lets you create, customize, animate and manage armor stands on your server, with in-game menus, reusable types, animations, click actions and a developer API. It is built with [XSeries](https://github.com/CryptoMorin/XSeries) for cross-version compatibility, so one jar works from 1.8 all the way up to the latest versions.
+**AdvancedArmorStands** lets you create, customize, animate and manage armor stands on your server, with in-game menus, reusable types, animations, click actions and a developer API. It is built with [XSeries](https://github.com/CryptoMorin/XSeries)[^1] for cross-version compatibility, so one jar works from 1.8 all the way up to the latest versions.
 
 ---
 
@@ -102,7 +103,7 @@ English, Italian, Persian, Portuguese, Russian, Spanish, Turkish, Bangla, Indone
 
 ### Server Requirements
 
-- A Bukkit-based server such as **Spigot**, **Paper**, **Purpur**, or another compatible Bukkit/Paper fork.
+- [^1]: A Bukkit-based server such as **Spigot**, **Paper**, **Purpur**, or another compatible Bukkit/Paper fork.
 
 ### Optional Dependencies
 
