@@ -103,7 +103,7 @@ English, Italian, Persian, Portuguese, Russian, Spanish, Turkish, Bangla, Indone
 
 ### Server Requirements
 
-- [^1]: A Bukkit-based server such as **Spigot**, **Paper**, **Purpur**, or another compatible Bukkit/Paper fork.
+- A Bukkit-based server such as **Spigot**, **Paper**, **Purpur**, or another compatible Bukkit/Paper fork.
 
 ### Optional Dependencies
 
