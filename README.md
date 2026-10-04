@@ -35,9 +35,6 @@
 
 </div>
 
-> [!NOTE]
-> By using this plugin you agree to the [Terms of Service](https://github.com/Parsa3323/AdvancedArmorStands/blob/master/TERMS_OF_SERVICE.md).
-
 ---
 
 ## About
@@ -84,6 +81,9 @@
     - [How it works](#how-it-works)
 - [Contributors](#contributors)
 - [Donate](#donate)
+
+<sub>By using this plugin, you agree to the <a href="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/TERMS_OF_SERVICE.md">Terms of Service</a>.</sub>
+
 
 ---
 
