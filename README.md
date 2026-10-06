@@ -18,7 +18,7 @@
 <div align="center">
 
 [<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge1.png?raw=true" width="204" style="vertical-align:middle;">](https://www.codefactor.io/repository/github/parsa3323/advancedarmorstands/badge)
-[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge2.png?raw=true" width="204" style="vertical-align:middle;">](#table-of-contents)
+[<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge2.png?raw=true" width="204" style="vertical-align:middle;">](#)
 [<img src="https://github.com/Parsa3323/AdvancedArmorStands/blob/master/.github/images/badge3.png?raw=true" width="204" style="vertical-align:middle;">](#supported-languages)
 
 </div>
