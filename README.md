@@ -11,7 +11,7 @@
 [![Downloads](https://img.shields.io/spiget/downloads/121022?label=Downloads&color=blue&logo=spigot)](https://www.spigotmc.org/resources/advancedarmorstands.121022/)
 [![GitHub repo size](https://img.shields.io/github/repo-size/Parsa3323/AdvancedArmorStands?color=yellow&logo=github)](#)
 [![GitHub license](https://img.shields.io/github/license/Parsa3323/AdvancedArmorStands?color=purple&logo=github)](#)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Parsa3323/AdvancedArmorStands/compile.yml?logo=github)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Parsa3323/AdvancedArmorStands/compile.yml?logo=github)](#)
 
 </div>
 
